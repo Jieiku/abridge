@@ -1,0 +1,35 @@
+main {
+  .toc {
+    max-width: 260px;
+    min-width: 240px;
+  }
+  .toc-item {
+    padding: 10px 20px;
+    color: var(--f1);
+  }
+  .toc-item a, .toc-item-child a {
+    color: var(--f1);
+    &:hover {
+      cursor: pointer;
+      color: var(--a2);
+      text-decoration: underline;
+    }
+  }
+  .toc-item a.active, .toc-item-child a.active {
+    color: var(--a2);
+  }
+  .toc-item-child {
+    padding: 0 30px 5px;
+    color: var(--f1);
+  }
+}
+.toc-sticky {
+  border-radius: var(--br);
+  border-top: 5px solid var(--a1);
+  background-color: var(--c2);
+  position: sticky;
+  top: 10px;
+  padding: 10px 0 20px;
+  max-height: 100vh;
+  overflow: auto;
+}

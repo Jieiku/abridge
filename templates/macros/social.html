@@ -1,0 +1,23 @@
+{% macro social_links(social_config) %}<span>{% set base_url = get_url(path="", lang=lang) %}
+{% if config.generate_feed %}      <a href="{{ get_url(path="atom.xml") }}" target="_blank"><span class="svg rss" title="Rss"></span></a>{% endif %}
+
+{% if social_config.mail %}      <a href="mailto:{{ social_config.mail }}" target="_blank"><span class="svg mail" title="Mail"></span></a>{% endif %}
+{% if social_config.mastodon %}      <a href="https://mastodon.social/{{ social_config.mastodon }}/" target="_blank"><span class="svg mastodon" title="Mastodon"></span></a>{% endif %}
+{% if social_config.element %}      <a href="https://{{ social_config.element }}/" target="_blank"><span class="svg element" title="Element"></span></a>{% endif %}
+{% if social_config.matrix %}      <a href="https://{{ social_config.matrix }}/" target="_blank"><span class="svg matrix" title="Matrix"></span></a>{% endif %}
+{% if social_config.twitter %}      <a href="https://twitter.com/{{ social_config.twitter }}/" target="_blank"><span class="svg twitter" title="Twitter"></span></a>{% endif %}
+{% if social_config.facebook %}      <a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><span class="svg facebook" title="Facebook"></span></a>{% endif %}
+{% if social_config.linkedin %}      <a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><span class="svg linkedin" title="LinkedIn"></span></a>{% endif %}
+
+{% if social_config.gitlab %}      <a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><span class="svg gitlab" title="Gitlab"></span></a>{% endif %}
+{% if social_config.github %}      <a href="https://github.com/{{ social_config.github }}/" target="_blank"><span class="svg github" title="Github"></span></a>{% endif %}
+{% if social_config.bitbucket %}      <a href="https://bitbucket.org/{{ social_config.bitbucket }}/" target="_blank"><span class="svg bitbucket" title="Bitbucket"></span></a>{% endif %}
+{% if social_config.python %}      <a href="https://pypi.org/user/{{ social_config.python }}/" target="_blank"><span class="svg python" title="Python"></span></a>{% endif %}
+{% if social_config.docker %}      <a href="https://hub.docker.com/u/{{ social_config.docker }}/" target="_blank"><span class="svg docker" title="Docker"></span></a>{% endif %}
+{% if social_config.stack %}      <a href="https://stackoverflow.com/users/{{ social_config.stack }}/" target="_blank"><span class="svg stack" title="Stack"></span></a>{% endif %}
+
+{% if social_config.instagram %}      <a href="https://www.instagram.com/{{ social_config.instagram }}/" target="_blank"><span class="svg instagram" title="Instagram"></span></a>{% endif %}
+{% if social_config.pinterest %}      <a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank"><span class="svg pinterest" title="Pinterest"></span></a>{% endif %}
+{% if social_config.twitch %}      <a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><span class="svg twitch" title="Twitch"></span></a>{% endif %}
+{% if social_config.youtube %}      <a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><span class="svg youtube" title="YouTube"></span></a>{% endif %}
+    </span>{% endmacro %}

@@ -1,0 +1,17 @@
+{% import "macros/page.html" as page_macros %}
+{% import "macros/macros.html" as macros %}
+{% extends "base.html" %}{% block content %}
+  <div>{% for page in paginator.pages %}
+    <article>
+{{ macros::title(page=page) }}      <p>{{ page.summary | markdown(inline=true) | safe }} <a href="{{ page.permalink | safe }}">...more</a></p>
+    </article>{% endfor %}
+    <nav>
+      {% if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %}{% if paginator.next %}<a href="{{ paginator.next | safe }}">Next &#62;</a>{% endif %}
+    </nav>
+  </div>{% set section_item = get_section(path="_index.md") %}
+  <div class="toc">
+    <div class="toc-sticky">
+      <h3>Recent Posts</h3>{% for page in section_item.pages | slice(end=config.extra.recent_items) %}
+{{ page_macros::page_listing(page=page) }}{% endfor %}
+    </div>
+  </div>{% endblock content %}

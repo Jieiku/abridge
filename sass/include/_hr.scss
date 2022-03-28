@@ -1,0 +1,15 @@
+/**
+ * HR
+ * https://github.com/picocss/pico
+ */
+
+// 1. Add the correct box sizing in Firefox
+// 2. Show the overflow in Edge and IE
+hr {
+  box-sizing: content-box; // 1
+  height: 0; // 1
+  overflow: visible; // 2
+  border: none;
+  border-top: 1px solid var(--f1)
+}
+header hr, footer hr {border-top: 1px solid var(--c4)}

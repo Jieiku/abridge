@@ -1,0 +1,128 @@
+{% import "macros/social.html" as social_macros %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% block title %}<title>{% if page.title %}{{ page.title }} | {% endif %}{{ config.title }}</title>{% endblock title %}
+
+  {% block description %}
+    {% if page.description %}
+      <meta name="description" content="{{ page.description }}" />
+      <meta name="twitter:description" content="{{ page.description }}">
+      <meta property="og:description" content="{{ page.description }}">
+    {% else %}
+      <meta name="description" content="{{ config.description }}" />
+      <meta name="twitter:description" content="{{ config.description}}">
+      <meta property="og:description" content="{{ config.description }}">
+    {% endif %}
+  {% endblock description %}
+
+  {% if page.extra.keywords %}
+    <meta name="keywords" content="{{ page.extra.keywords }}, {{ config.extra.keywords }}">
+  {% else %}
+    <meta name="keywords" content="{{ config.extra.keywords }}">
+  {% endif %}
+
+  <meta name="author" content="{{ config.extra.author }}">
+  <meta name="copyright" content="{{ config.title }}">
+
+  {% if config.extra.google %}<meta name="google-site-verification" content="{{ config.extra.google | safe }}">{% endif %}
+  {% if config.extra.bing %}<meta name="msvalidate.01" content="{{ config.extra.bing | safe}}">{% endif %}
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index,follow">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  {% block css %}<link rel="stylesheet" href="{{ get_url(path="abridge.css", trailing_slash=false, cachebust=true) }}">{% endblock css %}
+  <link rel="shortcut icon" href="/favicon.png" sizes="16x16" type="image/png"/>
+  <link rel="canonical" href="{{ get_url(path="/") }}">
+  {% if config.generate_feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="atom.xml") }}">{% endif %}
+  {% block ogp_head %}
+
+  {% if page.title %}
+    <meta property="og:title" content="{{ page.title }} | {{ config.title }}">
+    <meta name="twitter:title" content="{{ page.title }} | {{ config.title }}">
+  {% else %}
+    <meta property="og:title" content="{{ config.title }}">
+    <meta name="twitter:title" content="{{ config.title }}">
+  {% endif %}
+
+  <meta property="og:site_name" content="{{ config.title }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:updated_time" content="{{ now() }}">{% endblock ogp_head %}
+
+  {% block current_url %}<meta property="og:url" content="{{ current_url | safe }}">
+  <meta name="twitter:url" content="{{ current_url | safe }}">{% endblock current_url %}
+
+  {% if config.extra.social.twitter %}
+  <meta name="twitter:site" content="@{{ config.extra.social.twitter }}">
+  <meta name="twitter:creator" content="@{{ config.extra.social.twitter }}">
+  {% endif %}
+
+  {% if page.extra.thumbnail %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}">
+    <meta property="og:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}">
+  {% elif page.extra.static_thumbnail %}
+    {%if page.extra.static_thumbnail is matching("^http[s]?://") %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ page.extra.static_thumbnail }}">
+      <meta property="og:image" content="{{ page.extra.static_thumbnail }}">
+    {% else %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}">
+      <meta property="og:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}">
+    {% endif %}
+  {% elif config.extra.default_og_image %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
+      <meta property="og:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
+  {% elif config.extra.banner %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
+      <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
+  {% else %}
+      <meta name="twitter:card" content="summary">
+  {% endif %}
+
+{% block extra_head %}{% endblock extra_head %}
+</head>
+<body>
+{% block header %}<header>
+  <nav>
+    <header>
+      <h1><a href="{{ get_url(path="/", trailing_slash=true) }}">{{ config.extra.textlogo | safe }}</a></h1>
+    </header>
+    <div overflow>
+      <ul>
+        {% for i in config.extra.menu %}<li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a></h2></li>{% endfor %}
+      </ul>
+    </div>
+  </nav>
+  {% if config.extra.sitedesc %}{% if config.description %}<div>{{ config.description }}</div>{% endif %}{% endif %}
+  <hr>
+</header>{% endblock header %}
+<main>{% block content %}
+{% endblock content %}
+</main>
+{% block footer %}<footer>
+  <hr>
+  <center>
+    <p>{{ social_macros::social_links(social_config=config.extra.social) }}</p>
+    {# Copyright #}<p>Copyright &copy; 2019-{{ now() | date(format="%Y") }} {{ config.title }}</p>
+    <p>{% for i in config.extra.menu_footer %}<a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp; {% endfor %}</p>
+    {# Optional footer credit #}
+    {% if config.extra.footer_credit %}
+    <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+    {% endif %}
+  </center>
+</footer>{% endblock footer %}
+</body>
+</html>

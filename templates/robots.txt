@@ -1,0 +1,4 @@
+Sitemap: {{ get_url(path="sitemap.xml", trailing_slash=false) }}
+User-Agent: *
+Allow: /
+Host: {{ get_url(path="/", trailing_slash=false) }}

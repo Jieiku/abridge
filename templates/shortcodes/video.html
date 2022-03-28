@@ -1,0 +1,7 @@
+<video controls>
+  {% for source in sources -%}
+    {% set type = source | split(pat=".") | last -%}
+    <source src="{{ config.base_url | safe }}{{ page.path | safe }}{{ source | safe }}" type="{{ 'video/' ~ type }}">
+  {% endfor -%}
+  Your browser doesn't support the video tag and/or the video formats in use here – sorry!
+</video>

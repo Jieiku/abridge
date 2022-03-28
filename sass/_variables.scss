@@ -1,0 +1,88 @@
+// Config
+// ––––––––––––––––––––
+
+// Enable <header>, <main>, <footer> inside <body> as a container
+$enable-semantic-container: true !default;
+
+// Enable responsive typography
+// Fixed root element size if disabled
+$enable-responsive-typography: true !default;
+
+// Enable responsive spacings for <header>, <main>, <footer>, <section>
+// Fixed spacings if disabled
+$enable-responsive-spacings: false !default;
+
+// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+// Fluid layout until it reaches a defined size, then becomes a centered viewport
+$enable-maxwidth: true !default;
+$mw:60% !default;// max-width
+$mb:1200px !default;// value at which to switch from fluid layout to using max-width
+
+// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+// This option will only work if $enable-maxwidth: false
+$enable-viewport: false !default;
+
+// xs: Extra small (portrait phones)
+// sm: Small(landscape phones)
+// md: Medium(tablets)
+// lg: Large(desktops)
+// xl: Extra large (large desktops)
+
+// Breakpoints
+$breakpoints: (
+  // 'null' disable the breakpoint
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// Viewports
+$viewports: (
+  // 'null' disable the viewport on a breakpoint
+  sm: 510px,
+  md: 700px,
+  lg: 920px,
+  xl: 1130px
+) !default;
+
+// Enable svg css icons
+$enable-icons: true !default; // setting this to false disables ALL icons, to use icons set to true.
+$ic: true !default; // icon color - set to true for colorized icons, otherwise a neutral gray #888 is used.
+// to use icons set enable-icons:true above and also enable individual icons that you need below.  https://deepthought-theme.netlify.app/
+$icon-rss: true !default;
+$icon-mail: true !default;// email mail envelope
+$icon-mastodon: true !default;
+$icon-element: true !default;
+$icon-matrix: false !default;
+$icon-twitter: true !default;
+$icon-facebook: true !default;
+$icon-linkedin: true !default;
+$icon-gitlab: true !default;
+$icon-github: true !default;
+$icon-bitbucket: true !default;
+$icon-python: true !default;
+$icon-docker: true !default;
+$icon-stack: true !default;
+$icon-instagram: true !default;
+$icon-pinterest: true !default;
+$icon-twitch: true !default;
+$icon-youtube: true !default;
+
+$icon-search: false !default;
+$icon-ffolder: false !default;
+$icon-folder: false !default;// categories folder
+$icon-ftag: false !default;
+$icon-tag: false !default;// tag
+$icon-check: false !default;// check mark
+$icon-chevron: false !default;// chevron down
+$icon-clock: false !default;// time analog clock
+$icon-date: false !default;// calendar
+$icon-globe: false !default;
+$icon-home: false !default;
+$icon-minus: false !default;// minus symbol
+$icon-moon: false !default;// dark moon
+$icon-sun: false !default;// light sun
+$icon-x: false !default;// x symbol
+// add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>

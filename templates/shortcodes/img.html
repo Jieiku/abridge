@@ -1,0 +1,42 @@
+{# {{ img(path="", alt="", caption="", extended_width_pct=1.3, quality=90) }} #}
+
+{# container_width = (pixel size, px) * (.container's max-width) #}
+{% set container_width = 16 * 42 %}
+
+{# figure_width = container_width - (figure margin_blocks) #}
+{% set figure_width = container_width - (40 * 2) %}
+
+{% if path is starting_with("./") %}
+    {% set relative_path = page.relative_path | split(pat="/") | slice(end=-1) | join(sep="/") %}
+    {% set img_path = path | trim_start_matches(pat="./") %}
+    {% set img_path = relative_path ~ "/" ~ img_path %}
+{% else %}
+    {% set img_path = path %}
+{% endif %}
+
+{% if path is not ending_with(".svg") %}
+    {% set resize = true %}
+    {% set image_quality = 90 %}
+    {% if quality %}
+        {% set image_quality = quality %}
+    {% endif %}
+
+    {% if extended_width_pct %}
+        {% if extended_width_pct == -1 %}
+            {# adjust extended width to container width #}
+            {% set extended_width_pct = 0.042 %}
+        {% endif %}
+        {% set _width = config.extra.images.max_width - figure_width %}
+        {% set extended_width = (extended_width_pct * _width + figure_width) | round | int %}
+        {% if extended_width > config.extra.images.max_width %}
+            {% set extended_width = config.extra.images.max_width %}
+        {% endif %}
+        {% set resized_image = resize_image(path=img_path, width=extended_width, op="fit_width", quality=image_quality) %}
+    {% else %}
+        {% set resized_image = resize_image(path=img_path, width=figure_width, op="fit_width", quality=image_quality) %}
+    {% endif %}
+{% endif %}
+<figure>
+    <img src="{% if resize %}{{ resized_image.url }}{% else %}{{ path }}{% endif %}" {% if alt %}alt="{{alt}}"{% endif %}/>
+    {% if caption %}<figcaption>{{ caption | safe }}</figcaption>{% endif %}
+</figure>

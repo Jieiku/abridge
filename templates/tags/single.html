@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+  <h2>{{ term.name }}</h2>
+  {% for year, posts in term.pages | group_by(attribute="year") %}<h3>{{ year }}</h3>
+  {% for page in term.pages %}<p><a href="{{ page.permalink | safe }}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format=config.extra.timeformat | default(value="%B %e, %Y")) }}</time></p>
+  {% endfor %}{% endfor %}</div>{% endblock content %}

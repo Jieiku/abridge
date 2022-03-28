@@ -1,0 +1,12 @@
+name = "abridge"
+description = "A fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
+license = "MIT"
+homepage = "https://github.com/jieiku/abridge"
+min_version = "0.14.1"
+demo = "https://jieiku.github.io/abridge/"
+
+[extra]
+
+[author]
+name = "Jake G (jieiku)"
+homepage = "https://github.com/jieiku"

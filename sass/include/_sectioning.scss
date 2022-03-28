@@ -1,0 +1,87 @@
+/**
+ * Sectioning: Container and responsive spacings for header, main, footer
+ * https://github.com/picocss/pico
+ */
+
+// Render the `main` element consistently in IE
+main {
+  display: flex;
+  // should always have a single div that holds all content below main.
+  // TOC or Recent Posts are the only other sections that would be directly under main.
+  article, div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+body {
+  width: 100%;
+  margin: 0;
+
+  > header,
+  > main,
+  > footer {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    // Semantic container
+    @if $enable-semantic-container {
+      padding: var(--s1);
+
+      // Centered viewport max-width only
+      @if $enable-maxwidth {
+        @media (min-width: $mb) {
+            min-width: $mb;
+            max-width: $mw;
+        }
+      }
+      // Centered viewport
+      @else if $enable-viewport {
+        @if map-get($breakpoints, "sm") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "sm")) {
+            max-width: map-get($viewports, "sm");
+            //padding-right: 0;
+            //padding-left: 0;
+            .toc {
+              display: none;
+            }
+          }
+        }
+        @if map-get($breakpoints, "md") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "md")) {
+            max-width: map-get($viewports, "md");
+          }
+        }
+        @if map-get($breakpoints, "lg") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "lg")) {
+            max-width: map-get($viewports, "lg");
+          }
+        }
+        @if map-get($breakpoints, "xl") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "xl")) {
+            max-width: map-get($viewports, "xl");
+          }
+        }
+      }
+    }
+    // Semantic container
+    @else {
+      padding: var(--s1) 0;
+    }
+  }
+  header, main {
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    hr {
+      margin:0.1rem 0
+    }
+  }
+  footer{
+    hr {
+      margin:0.5rem 0
+    }
+  }
+}

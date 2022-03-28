@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{# Title #}
+{% block title %}<title>Sorry! the page doesn't exist</title>{% endblock title %}
+{% block current_url %}
+<meta property="og:url" content="{{ get_url(path='/') }}">
+<meta name="twitter:url" content="{{ get_url(path='/') }}">
+{% endblock current_url %}
+{# Page heading #}
+
+{% block content %}<div>
+
+<h1>404 Error</h1>
+<h2>Sorry</h2>
+<p>The requested page does not exist or has been moved to another address.</p>
+<p>Please go back to <a href="{{ get_url(path="/", trailing_slash=true) }}">home</a>.</p>
+
+</div>{% endblock content %}

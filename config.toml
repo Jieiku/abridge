@@ -1,0 +1,78 @@
+base_url = "https://jieiku.github.io/abridge/"
+title = "abridge - Zola Theme"
+description = "abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
+default_language = "en"
+#theme = "abridge"
+
+output_dir = "public"
+compile_sass = true
+build_search_index = false
+minify_html = false
+generate_feed = true
+feed_filename = "atom.xml"
+#ignored_content = ["*.{graphml,xlsx}", "temp.*"]
+#hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
+[markdown]
+extra_syntaxes_and_themes = ["highlight_themes"]
+highlight_code = true
+highlight_theme = "material-dark" # OneHalfDark, material-dark, ayu-dark, Midnight.dark
+#highlight_theme = "css" # use css classes - https://www.getzola.org/documentation/content/syntax-highlighting/#inline-vs-classed-highlighting
+render_emoji = false
+external_links_target_blank = true # rel="noopener"
+external_links_no_follow = false   # rel="nofollow"
+external_links_no_referrer = false # rel="noreferrer"
+smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
+
+[extra]
+katex_enable = false # used to to render mathematical notations, requires js
+recent = true
+recent_items = 9
+footer_credit = true
+#google = "Your Google Site verification code."
+#bing = "Your Bing Site verification code."
+textlogo = '<font color="#f90">A</font>bridge'
+sitedesc = false # This enables or disables the display of the site description below the logo.
+author = "Your Name"
+keywords = "Whatever, SEO, keywords, you want"
+banner = "banner.png"
+menu = [
+    {url = "/", name = "Home", slash = true},
+    {url = "/about/", name = "About", slash = true},
+    {url = "/posts/", name = "Posts", slash = true},
+    {url = "/categories/", name = "Categories", slash = true},
+    {url = "/tags/", name = "Tags", slash = true},
+]
+menu_footer = [
+    {url = "/", name = "Home", slash = true},
+    {url = "/about/", name = "About", slash = true},
+    {url = "/contact/", name = "Contact", slash = true},
+    {url = "/privacy/", name = "Privacy", slash = true},
+    {url = "/sitemap.xml", name = "Sitemap", slash = false},
+]
+
+# Footer social links; full options listed in macros/social.html
+[extra.social]
+mail = "name@example.com"
+mastodon = "@your-user-name"
+element = "matrix.example.com"
+#matrix = "matrix.example.com"
+twitter = "your-user-name"
+facebook = "your-user-name"
+linkedin = "your-user-name"
+
+gitlab = "your-user-name"
+github = "your-user-name"
+bitbucket = "your-user-name"
+python = "your-user-name"
+docker = "your-user-name"
+stack = "your-user-name"
+
+instagram = "your-user-name"
+pinterest = "your-user-name"
+twitch = "your-user-name"
+youtube = "your-channel-id"

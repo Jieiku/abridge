@@ -1,0 +1,14 @@
+/* Infinity Grid
+ * https://github.com/vladocar/Basic.css
+ */
+
+[style*="--c:"],section>section{
+color: var(--f2);
+padding: var(--s1);
+margin: var(--s1);
+text-align: center;
+}
+
+section {display: flex; flex-flow: row wrap}
+
+[style*="--c:"], section>section {flex:var(--c,1); margin:var(--s1)}

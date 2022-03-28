@@ -159,7 +159,6 @@ If a link should have a trailing slash at the end of the url set `slash = true`.
 # This is the default menu
 menu = [
     {url = "/", name = "Home", slash = true},
-    {url = "/abridge-css/", name = "Abridge.css", slash = true},
     {url = "/about/", name = "About", slash = true},
     {url = "/posts/", name = "Posts", slash = true},
     {url = "/categories/", name = "Categories", slash = true},

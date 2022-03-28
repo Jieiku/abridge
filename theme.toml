@@ -3,7 +3,7 @@ description = "A fast and lightweight Zola theme using semantic html, abridge.cs
 license = "MIT"
 homepage = "https://github.com/jieiku/abridge"
 min_version = "0.14.1"
-demo = "https://jieiku.github.io/abridge/"
+demo = "https://jieiku.github.io/abridge-demo/"
 
 [extra]
 

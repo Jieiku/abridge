@@ -1,4 +1,4 @@
-base_url = "https://jieiku.github.io/abridge/"
+base_url = "https://jieiku.github.io/abridge-demo/"
 title = "abridge - Zola Theme"
 description = "abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"

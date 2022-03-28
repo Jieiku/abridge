@@ -1,6 +1,6 @@
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, class-light [abridge.css](https://github.com/jieiku/abridge-css), and No JS.
+Abridge is a fast and lightweight Zola theme using semantic html, class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS.
 
 ## Demo
 

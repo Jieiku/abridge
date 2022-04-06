@@ -4,11 +4,11 @@
  */
 main nav a,
 main nav a:visited {
-	font-weight: var(--fh);
+  font-weight: var(--fh);
   border: .1rem solid var(--f2);
   border-radius: var(--br);
   padding: .3rem var(--s1);
-	margin: var(--s1);
+  margin: var(--s1);
 }
 main nav a:hover {
   border-color: var(--a3);
@@ -18,11 +18,11 @@ nav {
   display: flex;
   justify-content: space-between;
   div {
-		ul {
-			line-height: 0;
-			margin-top: 0;
-			padding-bottom: var(--s1);
-		}
+    ul {
+      line-height: 0;
+      margin-top: 0;
+      padding-bottom: var(--s1);
+    }
     display: block;
     margin-left: auto
   }

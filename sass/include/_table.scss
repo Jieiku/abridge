@@ -1,21 +1,21 @@
 // Table
 table {
-	border-collapse: collapse;
-	width: 100%;
-	text-indent: 0; /* Remove text indentation from table contents in Chrome, Edge, and Safari. */
+  border-collapse: collapse;
+  width: 100%;
+  text-indent: 0; /* Remove text indentation from table contents in Chrome, Edge, and Safari. */
 }
 table caption {
-	margin-bottom: .5rem;
+  margin-bottom: .5rem;
 }
 tr {
-	border-bottom: var(--bw) solid var(--c3);
+  border-bottom: var(--bw) solid var(--c3);
 }
 td,
 th {
-	padding: var(--s1);
+  padding: var(--s1);
 }
 th {
-	text-align: left;
+  text-align: left;
 }
 
 // Striped
@@ -24,7 +24,7 @@ table {
     background-color: var(--c2);
   }
   thead tr {
-		border-top: var(--bw) solid var(--c3);
+    border-top: var(--bw) solid var(--c3);
     background-color: var(--c2);
   }
 }

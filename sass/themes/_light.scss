@@ -3,22 +3,23 @@
   --ff: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
   --fm: Menlo, Consolas, "Roboto Mono", "Ubuntu Monospace", "Noto Mono", "Oxygen Mono", "Liberation Mono", monospace;
   --lh: 1.5; //line-height
+  --lhh: 1.2; //line-height headers
   --fs: 1rem; //font-size
   --fw: 400; //font-weight
   --fh: 700; //font-weight h1-h6
 
   // Colors
-	--f1: #555; //font color 1 bbb ccc
-	--f2: #333; //font color 2 fff eee
+  --f1: #555; //font color 1 bbb ccc
+  --f2: #333; //font color 2 fff eee
 
-	--c1: #fff; //color 1 111
+  --c1: #fff; //color 1 111
   --c2: #eee; //color 2 222
   --c3: #ddd; //color 3 333
   --c4: #777; //color 4 888
 
-	--a1: #f90; //accent color 1 link
-	--a2: #fb0; //accent color 2 hover,focus
-	--a3: #fb0; //accent color 3 h1-h2 hover,focus
+  --a1: #f90; //accent color 1 link
+  --a2: #fb0; //accent color 2 hover,focus
+  --a3: #fb0; //accent color 3 h1-h2 hover,focus
 
   --cg: #483; //ins green
   --cr: #d33; //del red

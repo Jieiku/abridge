@@ -57,6 +57,8 @@ menu_footer = [
 # meta tags
 twitter = "your-user-name"
 
+# favicon = images/favicon.png  # override default favicon
+
 # Footer social links; full options listed in macros/social.html
 [extra.social]
 feed = true

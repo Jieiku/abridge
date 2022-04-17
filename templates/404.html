@@ -2,10 +2,13 @@
 
 {# Title #}
 {% block title %}<title>Sorry! Page not found.</title>{% endblock title %}
-{% block current_url %}
-<meta property="og:url" content="{{ get_url(path='/') }}">
-<meta name="twitter:url" content="{{ get_url(path='/') }}">
-{% endblock current_url %}
+
+{% if config.extra.seo | default(value=true) %}
+  {% block current_url %}
+  <meta property="og:url" content="{{ get_url(path='/') }}">
+  <meta name="twitter:url" content="{{ get_url(path='/') }}">
+  {% endblock current_url %}
+{% endif %}
 {# Page heading #}
 
 {% block content %}<div>

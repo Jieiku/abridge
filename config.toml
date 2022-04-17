@@ -81,3 +81,5 @@ instagram = "your-user-name"
 pinterest = "your-user-name"
 twitch = "your-user-name"
 youtube = "your-channel-id"
+
+# seo = true  # enable or disable seo-related tags, defaults to true

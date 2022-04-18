@@ -83,3 +83,6 @@ twitch = "your-user-name"
 youtube = "your-channel-id"
 
 # seo = true  # enable or disable seo-related tags, defaults to true
+
+# start_year = 2019  # optional, copyright start year
+# end_year = 2022  # optional, copyright end year, defaults to current year if unset

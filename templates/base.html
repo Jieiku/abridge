@@ -129,7 +129,13 @@
   <hr>
   <center>
     <p>{{ social_macros::social_links(social_config=config.extra.social) }}</p>
-    {# Copyright #}<p>Copyright &copy; 2019-{{ now() | date(format="%Y") }} {{ config.title }}</p>
+
+    {# Copyright #}
+    {% set start_year=config.extra.start_year | default(value="") %}
+    {% if start_year %}{% set start_year=start_year ~ "-" %}{% endif %}
+    {% set end_year=config.extra.end_year | default(value=now() | date(format="%Y")) %}
+    <p>Copyright &copy; {{ start_year ~ end_year}} {{ config.title }}</p>
+
     <p>{% for i in config.extra.menu_footer %}<a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp; {% endfor %}</p>
     {# Optional footer credit #}
     {% if config.extra.footer_credit %}

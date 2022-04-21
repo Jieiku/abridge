@@ -51,8 +51,6 @@
 
   {% if config.extra.favicon %}
     <link rel="shortcut icon" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}" sizes="16x16" type="image/png"/>
-  {% else %}
-    <link rel="shortcut icon" href="{{ get_url(path="favicon.png", trailing_slash=false) }}" sizes="16x16" type="image/png"/>
   {% endif %}
 
   <link rel="canonical" href="{{ get_url(path="/") }}">

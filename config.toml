@@ -38,6 +38,7 @@ footer_credit = true
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # This enables or disables the display of the site description below the logo.
 author = "Your Name"
+favicon = "favicon.png"  # override default favicon
 keywords = "Whatever, SEO, keywords, you want"
 banner = "banner.png"
 menu = [
@@ -57,7 +58,10 @@ menu_footer = [
 # meta tags
 twitter = "your-user-name"
 
-# favicon = images/favicon.png  # override default favicon
+#start_year = 2019  # optional, copyright start year
+#end_year = 2022  # optional, copyright end year, defaults to current year if unset
+
+seo = true  # enable or disable seo-related tags
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]
@@ -81,8 +85,3 @@ instagram = "your-user-name"
 pinterest = "your-user-name"
 twitch = "your-user-name"
 youtube = "your-channel-id"
-
-# seo = true  # enable or disable seo-related tags, defaults to true
-
-# start_year = 2019  # optional, copyright start year
-# end_year = 2022  # optional, copyright end year, defaults to current year if unset

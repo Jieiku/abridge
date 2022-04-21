@@ -3,12 +3,13 @@
 {# Title #}
 {% block title %}<title>Sorry! Page not found.</title>{% endblock title %}
 
+{% block current_url %}
 {% if config.extra.seo | default(value=true) %}
-  {% block current_url %}
-  <meta property="og:url" content="{{ get_url(path='/') }}">
-  <meta name="twitter:url" content="{{ get_url(path='/') }}">
-  {% endblock current_url %}
+<meta property="og:url" content="{{ get_url(path='/') }}">
+<meta name="twitter:url" content="{{ get_url(path='/') }}">
 {% endif %}
+{% endblock current_url %}
+
 {# Page heading #}
 
 {% block content %}<div>
@@ -17,5 +18,4 @@
 <h2>Sorry</h2>
 <p>The requested page does not exist or has been moved to another address.</p>
 <p>Please go back to <a href="{{ get_url(path="/", trailing_slash=true) }}">home</a>.</p>
-
 </div>{% endblock content %}

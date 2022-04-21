@@ -36,7 +36,7 @@ footer_credit = true
 #google = "Your Google Site verification code."
 #bing = "Your Bing Site verification code."
 textlogo = '<font color="#f90">A</font>bridge'
-sitedesc = false # This enables or disables the display of the site description below the logo.
+sitedesc = false # enables or disables the display of the site description below the logo.
 author = "Your Name"
 favicon = "favicon.png"
 banner = "banner.png"

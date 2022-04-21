@@ -11,16 +11,20 @@
   {% block description %}
     {% if page.description %}
       <meta name="description" content="{{ page.description }}" />
+
       {% if config.extra.seo | default(value=true) %}
-      <meta name="twitter:description" content="{{ page.description }}">
-      <meta property="og:description" content="{{ page.description }}">
+        <meta name="twitter:description" content="{{ page.description }}">
+        <meta property="og:description" content="{{ page.description }}">
       {% endif %}
+
     {% else %}
       <meta name="description" content="{{ config.description }}" />
+
       {% if config.extra.seo | default(value=true) %}
-      <meta name="twitter:description" content="{{ config.description}}">
-      <meta property="og:description" content="{{ config.description }}">
+        <meta name="twitter:description" content="{{ config.description}}">
+        <meta property="og:description" content="{{ config.description }}">
       {% endif %}
+
     {% endif %}
   {% endblock description %}
 
@@ -44,11 +48,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   {% block css %}<link rel="stylesheet" href="{{ get_url(path="abridge.css", trailing_slash=false, cachebust=true) }}">{% endblock css %}
+
   {% if config.extra.favicon %}
-  <link rel="shortcut icon" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}" sizes="16x16" type="image/png"/>
+    <link rel="shortcut icon" href="{{ get_url(path=config.extra.favicon, trailing_slash=false) }}" sizes="16x16" type="image/png"/>
   {% else %}
-  <link rel="shortcut icon" href="{{ get_url(path="favicon.png", trailing_slash=false) }}" sizes="16x16" type="image/png"/>
+    <link rel="shortcut icon" href="{{ get_url(path="favicon.png", trailing_slash=false) }}" sizes="16x16" type="image/png"/>
   {% endif %}
+
   <link rel="canonical" href="{{ get_url(path="/") }}">
   {% if config.generate_feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="atom.xml") }}">{% endif %}
 
@@ -74,8 +80,8 @@
     {% endblock current_url %}
 
     {% if config.extra.social.twitter %}
-    <meta name="twitter:site" content="@{{ config.extra.twitter }}">
-    <meta name="twitter:creator" content="@{{ config.extra.twitter }}">
+      <meta name="twitter:site" content="@{{ config.extra.twitter }}">
+      <meta name="twitter:creator" content="@{{ config.extra.twitter }}">
     {% endif %}
 
     {% if page.extra.thumbnail %}
@@ -93,55 +99,64 @@
         <meta property="og:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}">
       {% endif %}
     {% elif config.extra.default_og_image %}
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
-        <meta property="og:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
+      <meta property="og:image" content="{{ get_url(path=config.extra.default_og_image, trailing_slash=false) }}">
     {% elif config.extra.banner %}
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
-        <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
+      <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
     {% else %}
-        <meta name="twitter:card" content="summary">
+      <meta name="twitter:card" content="summary">
     {% endif %}
   {% endif %}
 
 {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
-{% block header %}<header>
-  <nav>
-    <header>
-      <h1><a href="{{ get_url(path="/", trailing_slash=true) }}">{{ config.extra.textlogo | safe }}</a></h1>
-    </header>
-    <div overflow>
-      <ul>
-        {% for i in config.extra.menu %}<li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a></h2></li>{% endfor %}
-      </ul>
-    </div>
-  </nav>
-  {% if config.extra.sitedesc %}{% if config.description %}<div>{{ config.description }}</div>{% endif %}{% endif %}
-  <hr>
-</header>{% endblock header %}
-<main>{% block content %}
+{% block header %}
+  <header>
+    <nav>
+      <header>
+        <h1><a href="{{ get_url(path="/", trailing_slash=true) }}">{{ config.extra.textlogo | safe }}</a></h1>
+      </header>
+      <div overflow>
+        <ul>
+          {% for i in config.extra.menu %}<li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a></h2></li>{% endfor %}
+        </ul>
+      </div>
+    </nav>
+    {% if config.extra.sitedesc %}
+      {% if config.description %}
+        <div>{{ config.description }}</div>
+      {% endif %}
+    {% endif %}
+    <hr>
+  </header>
+{% endblock header %}
+<main>
+{% block content %}
 {% endblock content %}
 </main>
-{% block footer %}<footer>
-  <hr>
-  <center>
-    <p>{{ social_macros::social_links(social_config=config.extra.social) }}</p>
+{% block footer %}
+  <footer>
+    <hr>
+    <center>
+      <p>{{ social_macros::social_links(social_config=config.extra.social) }}</p>
 
-    {# Copyright #}
-    {% set start_year=config.extra.start_year | default(value="") %}
-    {% if start_year %}{% set start_year=start_year ~ "-" %}{% endif %}
-    {% set end_year=config.extra.end_year | default(value=now() | date(format="%Y")) %}
-    <p>Copyright &copy; {{ start_year ~ end_year}} {{ config.title }}</p>
+      {# Copyright #}
+      {% set start_year=config.extra.start_year | default(value="") %}
+      {% if start_year %}{% set start_year=start_year ~ "-" %}{% endif %}
+      {% set end_year=config.extra.end_year | default(value=now() | date(format="%Y")) %}
+      <p>Copyright &copy; {{ start_year ~ end_year}} {{ config.title }}</p>
 
-    <p>{% for i in config.extra.menu_footer %}<a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp; {% endfor %}</p>
-    {# Optional footer credit #}
-    {% if config.extra.footer_credit %}
-    <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
-    {% endif %}
-  </center>
-</footer>{% endblock footer %}
+      <p>{% for i in config.extra.menu_footer %}<a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp; {% endfor %}</p>
+      {# Optional footer credit #}
+      {% if config.extra.footer_credit | default(value=true) %}
+        <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+      {% endif %}
+    </center>
+  </footer>
+{% endblock footer %}
 </body>
 </html>

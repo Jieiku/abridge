@@ -2,39 +2,39 @@
 {% import "macros/macros.html" as macros %}
 {{config.title}} - {{page.title}}
 {% block content %}
-<article>
-  {{ macros::title(page=page) }}
-  {{ page.content | safe }}
-  {% block page_before_footer %}
-  {% endblock page_before_footer %}
-  {% block page_footer %}
-    {{ macros::footer(page=page) }}
-  {% endblock page_footer %}
-  {% block page_after_footer %}
-  {% endblock page_after_footer %}
-</article>
-{% block toc %}
-  {% if page.extra.toc %}
-    {% set toc = page.toc %}
-  {% endif %}
-  {% if toc %}
-  <div class="toc">
-    <div class="toc-sticky">
-      <h3>Index</h3>
-      {% for h in toc %}
-      <div class="toc-item">
-          <a class="subtext" href="{{h.permalink | safe}}">{{ h.title }}</a>
+  <article>
+    {{ macros::title(page=page) }}
+    {{ page.content | safe }}
+    {% block page_before_footer %}
+    {% endblock page_before_footer %}
+    {% block page_footer %}
+      {{ macros::footer(page=page) }}
+    {% endblock page_footer %}
+    {% block page_after_footer %}
+    {% endblock page_after_footer %}
+  </article>
+  {% block toc %}
+    {% if page.extra.toc %}
+      {% set toc = page.toc %}
+    {% endif %}
+    {% if toc %}
+      <div class="toc">
+        <div class="toc-sticky">
+          <h3>Index</h3>
+          {% for h in toc %}
+            <div class="toc-item">
+              <a class="subtext" href="{{h.permalink | safe}}">{{ h.title }}</a>
+            </div>
+            {% if h.children %}
+              {% for h2 in h.children %}
+                <div class="toc-item-child">
+                  <a class="subtext" href="{{h2.permalink | safe}}"><small>- {{ h2.title }}</small></a>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
-      {% if h.children %}
-      {% for h2 in h.children %}
-      <div class="toc-item-child">
-          <a class="subtext" href="{{h2.permalink | safe}}"><small>- {{ h2.title }}</small></a>
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-{% endblock toc %}
+    {% endif %}
+  {% endblock toc %}
 {% endblock content %}

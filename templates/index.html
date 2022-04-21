@@ -14,7 +14,7 @@
     </nav>
   </div>
   {% set section_item = get_section(path="_index.md") %}
-  {% if recent %}
+  {% if config.extra.recent | default(value=true) %}
     <div class="toc">
       <div class="toc-sticky">
         <h3>Recent Posts</h3>

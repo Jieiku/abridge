@@ -8,6 +8,24 @@
 
   {% block title %}<title>{% if page.title %}{{ page.title }} | {% endif %}{{ config.title }}</title>{% endblock title %}
 
+  {% if is_404 %}
+    <meta name="robots" content="noindex, follow">
+  {% else %}
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  {% endif %}
+  {% if current_url %}
+      {% set page_url = current_url %}
+  {% else %}
+      {% set page_url = get_url(path="404.html") %}
+  {% endif %}
+  {% if current_path %}
+      {% set page_path = current_path %}
+  {% else %}
+      {% set page_path = "/404.html" %}
+  {% endif %}
+
   {% block description %}
     {% if page.description %}
       <meta name="description" content="{{ page.description }}" />
@@ -40,8 +58,7 @@
   {% if config.extra.google %}<meta name="google-site-verification" content="{{ config.extra.google | safe }}">{% endif %}
   {% if config.extra.bing %}<meta name="msvalidate.01" content="{{ config.extra.bing | safe}}">{% endif %}
   <meta name="referrer" content="no-referrer-when-downgrade">
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index,follow">
+
   <meta name="HandheldFriendly" content="True">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -109,6 +126,12 @@
     {% endif %}
   {% endif %}
 
+  {% if config.build_search_index %}
+    <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js", trailing_slash=false) | safe }}" defer></script>
+    <script type="text/javascript" src="{{ get_url(path="search_index.en.js", trailing_slash=false, cachebust=true) | safe }}" defer></script>
+    <script type="text/javascript" src="{{ get_url(path="search.js", trailing_slash=false) | safe }}" defer></script>
+  {% endif %}
+
 {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
@@ -118,11 +141,19 @@
       <header>
         <h1><a href="{{ get_url(path="/", trailing_slash=true) }}">{{ config.extra.textlogo | safe }}</a></h1>
       </header>
-      <div overflow>
+      <div>
         <ul>
           {% for i in config.extra.menu %}<li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a></h2></li>{% endfor %}
         </ul>
       </div>
+      {% if config.build_search_index %}
+        <div>
+          <form>
+            <input id="userinput" type="search" placeholder="Search" autocomplete="off">
+            <div><div id="suggestions"></div></div>
+          </form>
+        </div>
+      {% endif %}
     </nav>
     {% if config.extra.sitedesc %}
       {% if config.description %}

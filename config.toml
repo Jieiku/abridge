@@ -6,7 +6,7 @@ default_language = "en"
 
 output_dir = "public"
 compile_sass = true
-build_search_index = false
+build_search_index = true
 minify_html = false
 generate_feed = true
 feed_filename = "atom.xml"

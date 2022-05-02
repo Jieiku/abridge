@@ -16,7 +16,9 @@ main nav a:hover {
 nav {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  div:first-of-type {
+    margin-left: auto
+  }
   div {
     ul {
       line-height: 0;
@@ -24,7 +26,7 @@ nav {
       padding-bottom: var(--s1);
     }
     display: block;
-    margin-left: auto
+    margin-left: var(--s1);
   }
   div h2 {
     font-size: 1rem;
@@ -43,6 +45,10 @@ nav {
     margin: 0 0.2rem;
     position: relative;
     text-align: left;
+  }
+  div div {
+    display: inline-block;
+    position: relative;
   }
 }
 

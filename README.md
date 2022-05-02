@@ -117,10 +117,11 @@ Use search function for the content.
 build_search_index = true
 ```
 
-Currently this theme has not yet implemented a search, there are however several themes that have.
-For the moment you can look at how those other themes have implemented their search.
-I plan to implement a search field eventually, but am still weighing my options.
-I would prefer a self hosted search method that works even if javascript is disabled in the browser. (open an issue report if you know of one.)
+​The search is the only thing that requires javascript in this this theme.
+
+If you set `build_search_index` to false then the javascript files will no longer be loaded.
+
+The default elasticlunr search is currently used, I may eventually switch this out for something else.
 
 #### Configuration options under the `extra`
 

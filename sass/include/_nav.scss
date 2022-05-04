@@ -13,21 +13,21 @@ main nav a:visited {
 main nav a:hover {
   border-color: var(--a3);
 }
+nav > div:first-of-type {
+  margin-left: auto
+}
+nav > div {
+  ul {
+    line-height: 0;
+    margin-top: 0;
+    padding-bottom: var(--s1);
+  }
+  display: block;
+  margin-left: var(--s1);
+}
 nav {
   align-items: center;
   display: flex;
-  div:first-of-type {
-    margin-left: auto
-  }
-  div {
-    ul {
-      line-height: 0;
-      margin-top: 0;
-      padding-bottom: var(--s1);
-    }
-    display: block;
-    margin-left: var(--s1);
-  }
   div h2 {
     font-size: 1rem;
     &:hover {

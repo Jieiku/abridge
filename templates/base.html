@@ -127,9 +127,8 @@
   {% endif %}
 
   {% if config.build_search_index %}
-    <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js", trailing_slash=false) | safe }}" defer></script>
     <script type="text/javascript" src="{{ get_url(path="search_index.en.js", trailing_slash=false, cachebust=true) | safe }}" defer></script>
-    <script type="text/javascript" src="{{ get_url(path="search.js", trailing_slash=false) | safe }}" defer></script>
+    <script type="text/javascript" src="{{ get_url(path="search.min.js", trailing_slash=false, cachebust=true) | safe }}" defer></script>
   {% endif %}
 
 {% block extra_head %}{% endblock extra_head %}

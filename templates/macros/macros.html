@@ -1,6 +1,6 @@
 {% macro title(page) %}
 <h1><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h1>
-<span>{{ page.date | date(format="%B %d, %Y") }}{% if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}] </span> {% endif %}
+<span>{{ page.date | date(format="%B %d, %Y") }}{% if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}</span>
 {% if page.taxonomies.tags %}
   <span>{% for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a> {% endfor %}</span>
 {% endif %}

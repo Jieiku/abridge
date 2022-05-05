@@ -6,7 +6,7 @@
     {% for page in paginator.pages %}
       <article>
         {{ macros::title(page=page) }}
-        <p>{{ page.summary | markdown(inline=true) | safe }} <a href="{{ page.permalink | safe }}">...more</a></p>
+        <p>{% if page.summary %}{{ page.summary | markdown(inline=true) | safe }}{% endif -%} <a href="{{ page.permalink | safe }}">...more</a></p>
       </article>
     {% endfor %}
     <nav>

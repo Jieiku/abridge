@@ -97,10 +97,12 @@ To change the number of items per page edit: `abridge/content/_index.md`
 
 As you can see below the default is set to 3 items per page:
 
+```toml
 +++
 paginate_by = 3
 sort_by = "date"
 +++
+```
 
 ### Colors and Styles
 

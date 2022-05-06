@@ -2,6 +2,12 @@
  * Horizontal Nav
  * https://github.com/raj457036/attriCSS
  */
+.cnav {
+  color: var(--a3);
+}
+main nav {
+  margin-top: var(--s2);
+}
 main nav a,
 main nav a:visited {
   font-weight: var(--fh);

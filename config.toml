@@ -63,6 +63,15 @@ keywords = "Whatever, SEO, keywords, you want"
 twitter = "your-user-name"
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 
+# For externally loaded fonts make sure the include the FULL url including the http/https prefix
+fonts_load = false
+fonts = [
+    {url = "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro"},
+    {url = "https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"},
+    {url = "FiraCode-Bold.woff2"},
+    {url = "FiraCode-Regular.woff2"},
+]
+
 katex_enable = false # used to to render mathematical notations, requires js
 katex_auto_render = false
 

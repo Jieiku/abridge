@@ -126,6 +126,16 @@
     {% endif %}
   {% endif %}
 
+  {% if config.extra.fonts_load %}
+    {% for i in config.extra.fonts %}
+      {% if 'http' in i.url %}
+        <link rel="preload" href="{{ i.url | safe }}" as="style">
+      {% else %}
+        <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="style">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
   {% if config.build_search_index %}
     <script defer type="text/javascript" src="{{ get_url(path="search_index.en.js", trailing_slash=false, cachebust=true) | safe }}"></script>
     <script defer type="text/javascript" src="{{ get_url(path="search.min.js", trailing_slash=false, cachebust=true) | safe }}"></script>

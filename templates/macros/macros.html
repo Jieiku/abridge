@@ -9,7 +9,7 @@
     {% set_global author_flag = true %}
   {% endfor %}
 {% elif config.extra.author and config.extra.author_show %}
- by {{ config.extra.author }}</a>
+ by {{ config.extra.author }}
 {% endif %}
 
 {% if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}</span>

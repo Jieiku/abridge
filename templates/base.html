@@ -131,7 +131,7 @@
       {% if 'http' in i.url %}
         <link rel="preload" href="{{ i.url | safe }}" as="style">
       {% else %}
-        <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="style">
+        <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false, cachebust=true) }}" as="style">
       {% endif %}
     {% endfor %}
   {% endif %}

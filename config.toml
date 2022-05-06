@@ -15,7 +15,6 @@ feed_filename = "atom.xml"
 taxonomies = [
     {name = "categories", feed = true},
     {name = "tags", feed = true},
-    {name = "authors", feed = true},
 ]
 
 [markdown]
@@ -31,7 +30,7 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 author = "Your Name"
-author_show = false # displays the author name below the title after the date, tags, categories
+author_show = true # displays the author name below the title after the date, tags, categories
 readtime = true # displays the read time below the title after the date, tags, categories
 recent = true
 recent_items = 9

@@ -5,7 +5,7 @@
 {% if page.taxonomies.authors and config.taxonomies %} by
   {% for author in page.taxonomies.authors %}
     {% if author_flag %} and {% endif %}
-    <a class="stretched-link position-relative" href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}">{{ author }}</a>
+    <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}">{{ author }}</a>
     {% set_global author_flag = true %}
   {% endfor %}
 {% elif config.extra.author and config.extra.author_show %}

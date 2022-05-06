@@ -1,10 +1,28 @@
 {% macro title(page) %}
 <h1><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h1>
-<span>{{ page.date | date(format="%B %d, %Y") }}{% if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}</span>
+<span>{{ page.date | date(format="%B %d, %Y") }}
+
+{% if page.taxonomies.authors and config.taxonomies %} by
+  {% for author in page.taxonomies.authors %}
+    {% if author_flag %} and {% endif %}
+    <a class="stretched-link position-relative" href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}">{{ author }}</a>
+    {% set_global author_flag = true %}
+  {% endfor %}
+{% elif config.extra.author and config.extra.author_show %}
+ by {{ config.extra.author }}</a>
+{% endif %}
+
+{% if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}</span>
 {% if page.taxonomies.tags %}
   <span>{% for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a> {% endfor %}</span>
 {% endif %}
+
+{% if config.extra.readtime | default(value=true) %}
+ - {{ page.reading_time }} min
+{% endif %}
 {% endmacro title %}
+
+
 {% macro footer(page) %}
 <h3><a href="#">Back to top</a></h3>
 {% endmacro footer %}

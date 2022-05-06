@@ -15,6 +15,7 @@ feed_filename = "atom.xml"
 taxonomies = [
     {name = "categories", feed = true},
     {name = "tags", feed = true},
+    {name = "authors", feed = true},
 ]
 
 [markdown]
@@ -29,8 +30,9 @@ external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 [extra]
-katex_enable = false # used to to render mathematical notations, requires js
-katex_auto_render = false
+author = "Your Name"
+author_show = false # displays the author name below the title after the date, tags, categories
+readtime = true # displays the read time below the title after the date, tags, categories
 recent = true
 recent_items = 9
 footer_credit = true
@@ -38,7 +40,6 @@ footer_credit = true
 #bing = "Your Bing Site verification code."
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
-author = "Your Name"
 favicon = "favicon.png"
 banner = "banner.png"
 menu = [
@@ -62,6 +63,9 @@ menu_footer = [
 keywords = "Whatever, SEO, keywords, you want"
 twitter = "your-user-name"
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+
+katex_enable = false # used to to render mathematical notations, requires js
+katex_auto_render = false
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]

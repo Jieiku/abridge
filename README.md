@@ -95,6 +95,15 @@ repo for an idea.
 
 To change the number of items per page edit: `abridge/content/_index.md` and change the value for `paginate_by`
 
+### Page width
+
+You can set the overal page width by editing `themes\abridge\sass\_variables.scss` file, and adjusting these two lines:
+
+```scss
+$mw:50% !default;// max-width
+$mb:1200px !default;// value at which to switch from fluid layout to using max-width
+```
+
 ### Colors and Styles
 
 Colors and style are handled by the sass files of [abridge.css](https://github.com/jieiku/abridge.css)

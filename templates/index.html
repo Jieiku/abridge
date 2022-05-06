@@ -19,6 +19,7 @@
         </p>
       </article>
     {% endfor %}
+    {% if paginator.previous or paginator.next %}
     <nav>
       <div>{% if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %} </div>
       <div>
@@ -40,6 +41,7 @@
       </div>
       <div>{% if paginator.next %}<a href="{{ paginator.next | safe }}">Next &#62;</a>{% endif %} </div>
     </nav>
+    {% endif -%}
   </div>
   {% set section_item = get_section(path="_index.md") %}
   {% if config.extra.recent | default(value=true) %}

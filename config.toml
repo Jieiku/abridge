@@ -35,6 +35,7 @@ readtime = true # displays the read time below the title after the date, tags, c
 recent = true
 recent_items = 9
 footer_credit = true
+#footer_credit_override = '<p>Powered by <a href="https://github.com/Jieiku/abridge">the Rust community</a></p>'
 #google = "Your Google Site verification code."
 #bing = "Your Bing Site verification code."
 textlogo = '<font color="#f90">A</font>bridge'

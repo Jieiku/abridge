@@ -79,10 +79,15 @@
         <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp;
         {%- endfor %}
       </p>
-
-      {%- if config.extra.footer_credit | default(value=true) %}
-      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
-      {%- endif %}
+      <p>{% for i in config.extra.menu_footer %}<a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp; {% endfor %}</p>
+      {# Optional footer credit #}
+      {% if config.extra.footer_credit | default(value=true) %}
+        {% if config.extra.footer_credit_override %}
+          {{ config.extra.footer_credit_override | safe }}
+        {% else %}
+          <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+        {% endif %}
+      {% endif %}
     </center>
   </footer>
 {%- endblock footer %}

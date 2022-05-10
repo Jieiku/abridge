@@ -95,8 +95,8 @@
   @if $icon-youtube {.youtube { background-image: icon(youtube, "%23f00", 2, "none") }}
   @if $icon-researchgate {.researchgate { background-image: icon(researchgate, "none", 2, "%2300d0b0") }}
   .svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     overflow: hidden;
     vertical-align: middle

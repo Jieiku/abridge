@@ -78,6 +78,9 @@ small {
   font-size: .875rem;
 }
 
+.footnote-definition sup, .footnote-definition p {
+  display: inline;
+}
 /* Prevent `sub` and `sup` elements from affecting the line height in all browsers. */
 sub,
 sup {

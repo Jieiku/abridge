@@ -1,0 +1,25 @@
+// Config
+@import "variables";
+
+// Includes - Sorted by importance/category (includes at top are needed most frequently)
+@import "include/document"; // html
+@import "include/typography"; // a, headings, p, ul, blockquote, ...
+@import "include/sectioning"; // body, header, main, footer
+@import "include/nav"; // Nav
+
+@import "include/embedded"; // iframe(youtube/vimeo), audio, canvas, img, svg, video
+@import "include/table"; // table, tr, td, ...
+@import "include/code"; // pre, code, ...
+@import "include/hr"; // hr
+
+@import "include/search"; // Zola Search - elasticlunr site-wide search
+
+@import "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
+
+//@import "include/scroller"; // figure
+//@import "include/button"; // button, a[role=button], type=button, type=submit ...
+//@import "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
+
+@import "include/icons"; // svg icons
+//@import "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow
+//@import "include/misc"; // template, [hidden], dialog, canvas

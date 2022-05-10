@@ -1,4 +1,6 @@
 {% extends "base.html" %}
-{% block content %}
-  <div>{{ page.content | safe }}</div>
-{% endblock content %}
+{%- block content %}
+    <div>
+      {{ page.content | safe }}
+    </div>
+{%- endblock content %}

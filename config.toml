@@ -29,18 +29,19 @@ external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 [extra]
+language_code = "en-US"
 author = "Your Name"
-author_show = true # displays the author name below the title after the date, tags, categories
-readtime = true # displays the read time below the title after the date, tags, categories
+author_show = true # displays the author name on line with date, tags, categories
+readtime = true # displays the read time on line with date, tags, categories
+readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read
 recent = true
 recent_items = 9
 footer_credit = true
-#google = "Your Google Site verification code."
-#bing = "Your Bing Site verification code."
+
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
-favicon = "favicon.png"
-banner = "banner.png"
+#copyright_start_year = 2019  # optional
+#copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default
 menu = [
     {url = "/", name = "Home", slash = true},
     {url = "/about/", name = "About", slash = true},
@@ -55,25 +56,50 @@ menu_footer = [
     {url = "/privacy/", name = "Privacy", slash = true},
     {url = "/sitemap.xml", name = "Sitemap", slash = false},
 ]
-#copyright_start_year = 2019  # optional
-#copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default
 
-# meta tags
-keywords = "Whatever, SEO, keywords, you want"
-twitter = "your-user-name"
-seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+
+#################
+# Resource Files
+#################
+banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
+js_search_index ="search_index.en.js"
+js_search = "search.min.js"
+rss_atom_feed = "atom.xml"
+stylesheet = "abridge.css" # location and file to use for stylesheet:
+#       abridge.css - Automatic Dark/Light Theme based on browser/system preference.
+#  abridge-dark.css - Dark Theme
+# abridge-light.css - Light Theme
 
 # For externally loaded fonts make sure the include the FULL url including the http/https prefix
 fonts_load = false
 fonts = [
     {url = "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro"},
     {url = "https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"},
-    {url = "FiraCode-Bold.woff2"},
-    {url = "FiraCode-Regular.woff2"},
+    {url = "font/FiraCode-Bold.woff2"},
+    {url = "font/FiraCode-Regular.woff2"},
 ]
+
+# favicons, comment out a line to disable loading some or all of these.
+favicon_theme_color = "#333333"
+favicon_ms_color = "#333333"
+favicon_webmanifest = "site.webmanifest" # Used for android-chrome-512x512.png and android-chrome-192x192.png
+favicon_mask = "safari-pinned-tab.svg" # safari-pinned-tab.svg
+favicon_mask_color = "#ff9900"
+favicon180 = "apple-touch-icon.png" # apple-touch-icon.png
+favicon32 = "favicon-32x32.png" # favicon-32x32.png
+favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 katex_enable = false # used to to render mathematical notations, requires js
 katex_auto_render = false
+
+##########################
+# meta/seo/analytic tags
+##########################
+keywords = "Whatever, SEO, keywords, you want" # used for the primary site index
+twitter = "your-user-name" # used for twitter related
+#google = "Your Google Site verification code."
+#bing = "Your Bing Site verification code."
+seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]

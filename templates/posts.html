@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block content %}
-  {% set section_item = get_section(path="_index.md") %}
-  <div>
-    {% for year, posts in section_item.pages | group_by(attribute="year") %}
+{%- block content %}
+{%- set section_item = get_section(path="_index.md") %}
+    <div>
+      {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       <h2>{{ year }}</h2>
-      {% for post in posts %}
-        <p><a href="{{ post.permalink | safe }}" title="{{ post.title }}">{{ post.title }}</a> - {{ post.date | date(format="%F") }}</p>
-      {% endfor %}
-    {% endfor %}
-  </div>
-{% endblock content %}
+      {%- for post in posts %}
+      <p><a href="{{ post.permalink | safe }}" title="{{ post.title }}">{{ post.title }}</a> - {{ post.date | date(format="%F") }}</p>
+      {%- endfor %}
+      {%- endfor %}
+    </div>
+{%- endblock content %}

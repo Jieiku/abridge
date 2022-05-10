@@ -81,7 +81,11 @@
       </p>
 
       {%- if config.extra.footer_credit | default(value=true) %}
+      {%- if config.extra.footer_credit_override %}
+      {{ config.extra.footer_credit_override | safe }}
+      {%- else %}    
       <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+      {%- endif %}
       {%- endif %}
     </center>
   </footer>

@@ -62,10 +62,13 @@ menu_footer = [
 # Resource Files
 #################
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-stylesheet = "abridge.css" # location and file to use for stylesheet
 js_search_index ="search_index.en.js"
 js_search = "search.min.js"
 rss_atom_feed = "atom.xml"
+stylesheet = "abridge.css" # location and file to use for stylesheet:
+#       abridge.css - Automatic Dark/Light Theme based on browser/system preference.
+#  abridge-dark.css - Dark Theme
+# abridge-light.css - Light Theme
 
 # For externally loaded fonts make sure the include the FULL url including the http/https prefix
 fonts_load = false

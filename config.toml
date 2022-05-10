@@ -37,7 +37,7 @@ readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 
 recent = true
 recent_items = 9
 footer_credit = true
-#footer_credit_override = '<p>Powered by <a href="https://github.com/Jieiku/abridge">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge">Abridge</a></p>'
+#footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>'
 #google = "Your Google Site verification code."
 #bing = "Your Bing Site verification code."
 

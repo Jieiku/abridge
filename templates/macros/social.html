@@ -17,6 +17,8 @@
           <a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><span class="svg facebook" title="Facebook"></span></a>{% endif %}
           {%- if social_config.linkedin %}
           <a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><span class="svg linkedin" title="LinkedIn"></span></a>{% endif %}
+          {%- if social_config.researchgate %}
+          <a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><span class="svg researchgate" title="ResearchGate"></span></a>{% endif %}
           {%- if social_config.gitlab %}
           <a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><span class="svg gitlab" title="Gitlab"></span></a>{% endif %}
           {%- if social_config.github %}
@@ -37,8 +39,6 @@
           <a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><span class="svg twitch" title="Twitch"></span></a>{% endif %}
           {%- if social_config.youtube %}
           <a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><span class="svg youtube" title="YouTube"></span></a>{% endif %}
-          {%- if social_config.researchgate %}
-          <a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><span class="svg researchgate" title="ResearchGate"></span></a>{% endif %}
           {%- if social_config.buymeacoffee %}
           <a href="https://www.buymeacoffee.com/{{ social_config.buymeacoffee }}" target="_blank"><span class="svg buymeacoffee" title="Buy Me A Coffee"></span></a>{% endif %}
           {%- if social_config.github_sponsor %}

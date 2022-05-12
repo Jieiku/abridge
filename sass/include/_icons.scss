@@ -61,7 +61,7 @@
 }
 @if $enable-icons {
   @if $icon-bitbucket {.bitbucket { background-image: icon(bitbucket, "%2328f", 2, "none") }}
-  @if $icon-buymeacoffee {.buymeacoffee { background-image: icon(buymeacoffee, "%23000", 1, "%23fd0") }}
+  @if $icon-buymeacoffee {.buymeacoffee { background-image: icon(buymeacoffee, "%23777", 1, "%23fd0") }}
   @if $icon-check {.check { background-image: icon(check, "%23888", 2, "none") }}
   @if $icon-chevron {.chevron { background-image: icon(chevron, "%23888", 2, "none") }}
   @if $icon-clock {.clock { background-image: icon(clock, "%23888", 2, "none") }}

@@ -52,12 +52,7 @@ nav {
     position: relative;
     text-align: left;
   }
-  div div {
-    display: inline-block;
-    position: relative;
-  }
 }
-
 @if map-get($breakpoints, "md") {
   @media (max-width: map-get($breakpoints, "md")) {
     header nav {

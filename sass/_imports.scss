@@ -17,7 +17,7 @@
 @import "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
 
 //@import "include/scroller"; // figure
-//@import "include/button"; // button, a[role=button], type=button, type=submit ...
+@import "include/button"; // button, a[role=button], type=button, type=submit ...
 //@import "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
 
 @import "include/icons"; // svg icons

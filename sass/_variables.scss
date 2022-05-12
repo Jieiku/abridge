@@ -73,7 +73,7 @@ $icon-twitch: true !default;
 $icon-youtube: true !default;
 $icon-researchgate: true !default;
 
-$icon-search: false !default;
+$icon-search: true !default;
 $icon-ffolder: false !default;
 $icon-folder: false !default;// categories folder
 $icon-ftag: false !default;
@@ -87,5 +87,5 @@ $icon-home: false !default;
 $icon-minus: false !default;// minus symbol
 $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
-$icon-x: false !default;// x symbol
+$icon-x: true !default;// x symbol
 // add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>

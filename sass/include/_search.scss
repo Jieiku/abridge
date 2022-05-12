@@ -12,30 +12,48 @@ div:empty {
   max-height: 500px;
   overflow: auto;
 }
-#suggestions a {
+#suggestions a, #results a {
   display: block;
   text-decoration: none;
   padding: var(--s1);
   margin: 0 var(--s1);
 }
 #suggestions a:hover,
-#suggestions a:focus {
+#suggestions a:focus,
+#results a:hover,
+#results a:focus {
   background: var(--c2);
 }
-#suggestions span {
+#suggestions span, #results span {
   line-height: 1.5;
   display: block;
 }
-#suggestions span:first-child {
+#suggestions span:first-child, #results span:first-child {
   font-weight: var(--fh);
 }
-#suggestions span:nth-child(2) {
+#suggestions span:nth-child(2), #results span:nth-child(2) {
   color: var(--f1);
+}
+nav > div > form > div:last-of-type {//parent div of suggestions div
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.searchd > input {
+  max-width: 14rem;
+  padding-right:2.4rem;//inlayed search icon
+}
+.searchd > button {
+  margin-left: -2.4rem;//inlayed search icon
 }
 @if map-get($breakpoints, "md") {
   @media (max-width: map-get($breakpoints, "md")) {
-    nav div:last-of-type, input {
-      width: 100%;
+    .searchd {
+      display: flex;
+    }
+    .searchd > input {
+      max-width: 100%;
+      flex-grow: 1;
     }
     #suggestions {
       position: static;

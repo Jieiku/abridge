@@ -41,8 +41,11 @@
       </div>
       {%- if config.build_search_index %}
       <div>
-        <form>
-          <input id="userinput" type="search" placeholder="Search" autocomplete="off">
+        <form onsubmit="return goSearch()">
+          <div class="searchd">
+            <input id="userinput" type="search" placeholder="Search" autocomplete="off">
+            <button type="submit"><i class="svgs search"></i></button>
+          </div>
           <div><div id="suggestions"></div></div>
         </form>
       </div>

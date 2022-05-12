@@ -1,0 +1,97 @@
+:root {
+    // Typography
+    --ff: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+    --fm: Menlo, Consolas, "Roboto Mono", "Ubuntu Monospace", "Noto Mono", "Oxygen Mono", "Liberation Mono", monospace;
+    --lh: 1.5; //line-height
+    --lhh: 1.2; //line-height headers
+    --fs: 1rem; //font-size
+    --fw: 400; //font-weight
+    --fh: 700; //font-weight h1-h6
+
+    // Colors
+    --f1: #1a1a1a; //font color 1 bbb ccc
+    --f2: #1a2050; //font color 2 fff eee
+
+    --c1: #eeeeee; //color 1
+    --c2: #cae1f0; //color 2
+    --c3: #062671; //color 3
+    --c4: #03143c; //color 4
+
+    --a1: #1b549a; //accent color 1 link
+    --a2: #2a50a0; //accent color 2 hover,focus
+    --a3: #3a50a0; //accent color 3 h1-h2 hover,focus
+
+    --cg: #483; //ins green
+    --cr: #d33; //del red
+
+    // Spacings
+    --s1: .5rem;
+    --s2: 1rem;
+    --rc: .5rem; //radius corners
+
+    // Borders
+    --br: 0.25rem; //border radius
+    --bw: 0.0625rem; //border width
+    --ow: 0.1875rem; //outline width
+
+    // Responsive typography
+    @if $enable-responsive-typography {
+        @if map-get($breakpoints, "sm") {
+            @media (min-width: map-get($breakpoints, "sm")) {
+                --fs: 1rem;
+            }
+        }
+
+        @if map-get($breakpoints, "md") {
+            @media (min-width: map-get($breakpoints, "md")) {
+                --fs: 1.04rem;
+            }
+        }
+
+        @if map-get($breakpoints, "lg") {
+            @media (min-width: map-get($breakpoints, "lg")) {
+                --fs: 1.08rem;
+            }
+        }
+
+        @if map-get($breakpoints, "xl") {
+            @media (min-width: map-get($breakpoints, "xl")) {
+                --fs: 1.12rem;
+            }
+        }
+    }
+}
+
+// Responsives spacings
+@if $enable-responsive-spacings {
+
+    // Sectionning
+    body>header,
+    body>main,
+    body>footer,
+    section {
+        @if map-get($breakpoints, "sm") {
+            @media (min-width: map-get($breakpoints, "sm")) {
+                --s1: .5rem;
+            }
+        }
+
+        @if map-get($breakpoints, "md") {
+            @media (min-width: map-get($breakpoints, "md")) {
+                --s1: .6rem;
+            }
+        }
+
+        @if map-get($breakpoints, "lg") {
+            @media (min-width: map-get($breakpoints, "lg")) {
+                --s1: .7rem;
+            }
+        }
+
+        @if map-get($breakpoints, "xl") {
+            @media (min-width: map-get($breakpoints, "xl")) {
+                --s1: .8rem;
+            }
+        }
+    }
+}

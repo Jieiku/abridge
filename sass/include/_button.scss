@@ -8,7 +8,9 @@ textarea {
   max-width: 100%;
   background: var(--c2);
   border: 0;
+  border-radius: .25rem;
   font: inherit;
+  line-height: var(--fs);
   color: var(--f1);
 }
 button,

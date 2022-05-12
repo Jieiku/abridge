@@ -18,7 +18,7 @@
 
 //@import "include/scroller"; // figure
 @import "include/button"; // button, a[role=button], type=button, type=submit ...
-//@import "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
+@import "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
 
 @import "include/icons"; // svg icons
 //@import "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow

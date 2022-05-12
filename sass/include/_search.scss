@@ -39,6 +39,9 @@ nav > div > form > div:last-of-type {//parent div of suggestions div
   position: relative;
   width: 100%;
 }
+.searchd {
+  white-space: nowrap;
+}
 .searchd > input {
   max-width: 15rem;
   padding-right:2.4rem;//inlayed search icon

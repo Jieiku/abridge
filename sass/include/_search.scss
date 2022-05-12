@@ -40,6 +40,8 @@ nav > div > form > div:last-of-type {//parent div of suggestions div
   width: 100%;
 }
 .searchd {
+  display: flex;
+  align-items: center;
   white-space: nowrap;
 }
 .searchd > input {
@@ -51,9 +53,6 @@ nav > div > form > div:last-of-type {//parent div of suggestions div
 }
 @if map-get($breakpoints, "md") {
   @media (max-width: map-get($breakpoints, "md")) {
-    .searchd {
-      display: flex;
-    }
     .searchd > input {
       max-width: 100%;
       flex-grow: 1;

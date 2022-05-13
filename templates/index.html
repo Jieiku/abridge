@@ -48,9 +48,9 @@
             {%- for pager in range(start=1, end=paginator.number_pagers+1) %}
             <li>
               {%- if pager == 1 %}
-              <a class="pag {% if paginator.current_index == pager %}cnav{% endif %}" href='{{ get_url(path="/", trailing_slash=true) }}'>{{pager}}</a>
+              <a class="pag{% if paginator.current_index == pager %} cnav{% endif %}" href='{{ get_url(path="/", trailing_slash=true) }}'>{{pager}}</a>
               {%- else %}
-              <a class="pag {% if paginator.current_index == pager %}cnav{% endif %}" href='{{ paginator.base_url }}{{pager}}'>{{pager}}</a>
+              <a class="pag{% if paginator.current_index == pager %} cnav{% endif %}" href='{{ paginator.base_url }}{{pager ~ "/"}}'>{{pager}}</a>
               {%- endif %}
             </li>
             {%- endfor %}

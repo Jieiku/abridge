@@ -13,7 +13,7 @@
 {%- endfor %}{%- endif %}
 
 {%- if config.extra.fontawesome %}
-  <link rel="preload" href="{{ config.extra.fontawesome | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="{{ config.extra.fontawesome | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
 {%- endif %}
 
 {%- if config.build_search_index %}

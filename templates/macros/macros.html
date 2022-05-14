@@ -26,15 +26,15 @@
       <nav>
         <div>{%- if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %} </div>
         <div>
-          <ul class="pagination">
+          <ul>
             {%- for i in range(start=1, end=paginator.number_pagers+1) %}
             <li>
               {%- if i == paginator.current_index %}
               <a class="pag cnav">{{i}}</a>
               {%- elif i > 1 %}
-              <a class="pag" href="{{paginator.base_url}}{{i ~ '/'}}">{{i}}</a>
+              <a class="pag" href="{{paginator.base_url | safe }}{{i ~ '/'}}">{{i}}</a>
               {%- else %}
-              <a class="pag" href="{{paginator.first}}">{{i}}</a>
+              <a class="pag" href="{{paginator.first | safe }}">{{i}}</a>
               {%- endif %}
             </li>
             {%- endfor %}

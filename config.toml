@@ -75,7 +75,7 @@ stylesheet = "abridge.css" # location and file to use for stylesheet:
 fonts_load = true
 fonts = [
     {url = "https://fonts.googleapis.com/css?family=Merriweather|Montserrat"},
-    {url = "font/FiraCode.woff2"},
+    {url = "fonts.css"},
 ]
 # Uncomment below line to load fontawesome, eg: <i class="fa-solid fa-heart"></i>
 #fontawesome = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"

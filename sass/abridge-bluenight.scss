@@ -1,0 +1,19 @@
+/*
+ * Forked from Bamboo: https://github.com/rilwis/bamboo (MIT)
+ * which was forked from new.css (MIT)
+ * Supplemented code from Pico.css: https://github.com/picocss/pico (MIT)
+ * Supplemented code from Basic.css: https://github.com/vladocar/Basic.css (MIT)
+ * Supplemented code from AttriCSS: https://github.com/raj457036/attriCSS (MIT)
+ * Feather Icons: https://github.com/feathericons/feather (MIT)
+ * Tabler Icons: https://github.com/tabler/tabler-icons/find/master (MIT)
+ *
+ * Bamboo, New, Pico: based on Normalize.css & Sanitize.css
+ *  Normalize: https://github.com/necolas/normalize.css (MIT)
+ *  Sanitize: https://github.com/csstools/sanitize.css (CC0 1.0 Universal)
+ */
+
+@import "variables"; //config
+
+@import "skins/bluenight"; // Light Theme
+
+@import "imports"; // html

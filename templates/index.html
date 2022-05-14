@@ -40,8 +40,7 @@
         </p>
       </article>
     {%- endfor %}
-    {{macros::pagination(paginator=paginator)}}
-
+    {{- macros::pagination(paginator=paginator) }}
     </div>
   {%- set section_item = get_section(path="_index.md") %}
   {%- if config.extra.recent | default(value=true) %}

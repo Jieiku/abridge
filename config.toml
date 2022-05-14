@@ -72,7 +72,7 @@ stylesheet = "abridge.css" # location and file to use for stylesheet:
 # abridge-light.css - Light Theme
 
 # For externally loaded fonts make sure the include the FULL url including the http/https prefix
-fonts_load = true
+fonts_load = false
 fonts = [
     {url = "https://fonts.googleapis.com/css?family=Merriweather|Montserrat"},
     {url = "fonts.css"},

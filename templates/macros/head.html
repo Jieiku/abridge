@@ -8,7 +8,7 @@
   {%- if i.url is matching("^http[s]?://") %}
   <link rel="preload" href="{{ i.url | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
   {%- else %}
-  <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="font">
+  <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="font" type="font/woff2" crossorigin="anonymous">
   {%- endif %}
 {%- endfor %}{%- endif %}
 

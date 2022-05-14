@@ -35,7 +35,7 @@
       <div>
         <ul>
           {%- for i in config.extra.menu %}
-          <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a></h2></li>
+          <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name | safe }}</a></h2></li>
           {%- endfor %}
         </ul>
       </div>
@@ -79,7 +79,7 @@
       {#- Copyright END #}
       <p>
         {%- for i in config.extra.menu_footer %}
-        <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name }}</a> &nbsp;
+        <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}">{{ i.name | safe }}</a> &nbsp;
         {%- endfor %}
       </p>
 

@@ -6,9 +6,9 @@
 {%- macro resource() %}
 {%- if config.extra.fonts_load and config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
-  <link rel="preload" as="style" href="{{ i.url | safe }}">
+  <link rel="preload" href="{{ i.url | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
   {%- else %}
-  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false, cachebust=true) }}">
+  <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="font">
   {%- endif %}
 {%- endfor %}{%- endif %}
 

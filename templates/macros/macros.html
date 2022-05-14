@@ -30,7 +30,7 @@
             {%- for i in range(start=1, end=paginator.number_pagers+1) %}
             <li>
               {%- if i == paginator.current_index %}
-              <a class="cnav">{{i}}</a>
+              <a class="cnav" href="" onclick="return false;">{{i}}</a>
               {%- elif i > 1 %}
               <a href="{{paginator.base_url | safe }}{{i ~ '/'}}">{{i}}</a>
               {%- else %}

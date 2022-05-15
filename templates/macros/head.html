@@ -194,6 +194,14 @@
 {#- Extra SEO END #}
 {%- endmacro %}
 
+{%- macro security() %}
+  {%- if config.extra.security_headers %}
+  <meta name="referrer" content="strict-origin-when-cross-origin">{#- options: no-referrer, same-origin, strict-origin, strict-origin-when-cross-origin #}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self'; style-src 'self'; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com">
+  {%- endif %}
+{%- endmacro %}
+
+
 {%- macro math() %}
   {%- if config.extra.katex_enabled %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">

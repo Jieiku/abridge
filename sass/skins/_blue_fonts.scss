@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Fira Code"),
+    url("font/FiraCode-latin-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "PT Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("PT Sans"),
+    url("font/PTSans-latin-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "PT Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("PT Sans"),
+    url("font/PTSans-latin-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "PT Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("PT Sans"),
+    url("font/PTSans-latin-italic.woff2") format("woff2");
+}

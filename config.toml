@@ -44,7 +44,7 @@ footer_credit = true
 # There are many other security related headers most of which can only be set by the webserver method.
 security_headers = false
 
-textlogo = '<font color="#f90">A</font>bridge'
+textlogo = '<img src="/abridge.png" style="height: 1em; position: relative; top: 10px; left: 7.5px;">bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
 #copyright_start_year = 2019  # optional
 #copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default

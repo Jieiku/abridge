@@ -37,7 +37,7 @@ readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 
 recent = true
 recent_items = 9
 footer_credit = true
-footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
+#footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
 
 # Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org
 # Set this to true if you are unable to load your security headers with your webserver, this will load a couple of them as meta tags.

@@ -44,7 +44,13 @@
         <form onsubmit="return goSearch()">
           <div class="searchd">
             <input id="userinput" type="search" placeholder="Search" autocomplete="off">
-            <button type="submit" title="Search"><i class="svgs search"></i></button>
+            <button type="submit" title="Search">
+              {%- if config.extra.fontawesome %}
+                <i class="svgs fa-solid fa-magnifying-glass"></i>
+              {%- else %}
+                <i class="svgs search"></i>
+              {%- endif %}
+            </button>
           </div>
           <div><div id="suggestions"></div></div>
         </form>

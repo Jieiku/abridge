@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'PTSansNarrow';
+    src: local("PTSansNarrow"), url("/font/PTSansNarrow.woff2");//latin regular
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PTSansNarrow';
+    src: local("PTSansNarrow"), url("/font/PTSansNarrow-Bold.woff2");//latin bold
+    font-weight: bold;
+    font-display: swap;
+}

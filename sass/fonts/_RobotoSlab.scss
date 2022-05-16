@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'RobotoSlab';
+    src: local("RobotoSlab"), url("/font/RobotoSlab.woff2");//latin regular
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RobotoSlab';
+    src: local("RobotoSlab"), url("/font/RobotoSlab-Bold.woff2");//latin bold
+    font-weight: bold;
+    font-display: swap;
+}

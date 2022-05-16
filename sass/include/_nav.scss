@@ -3,33 +3,33 @@
  * https://github.com/raj457036/attriCSS
  */
 .cnav {
-  color: var(--a3);
+  color: var(--a3);//pagination color current page
 }
 main nav {
-  margin-top: var(--s2);
+  margin-top: var(--s2);//pagination margin
 }
 main nav a,
-main nav a:visited {
+main nav a:visited {//pagination link styling
   font-weight: var(--fh);
   border: .1rem solid var(--f2);
   border-radius: var(--br);
-  padding: .3rem var(--s1);
-  margin: var(--s1);
+  padding: .1rem var(--s1);
+  margin: .1rem;
 }
-main nav a:hover {
+main nav a:hover {//makes border of pagination links hover color
   border-color: var(--a3);
 }
-nav > div:first-of-type {
+header > nav > div:first-of-type {//puts logo on left and menu/search on right
   margin-left: auto
 }
 nav > div {
   ul {
-    line-height: 0;
+    line-height: 2;
     margin-top: 0;
     padding-bottom: var(--s1);
   }
   display: block;
-  margin-left: var(--s1);
+  margin-left: var(--s1);//add some spacing between nav divs
 }
 nav {
   align-items: center;
@@ -53,6 +53,7 @@ nav {
     text-align: left;
   }
 }
+// breakpoint makes header responsive for mobile layouts
 @if map-get($breakpoints, "md") {
   @media (max-width: map-get($breakpoints, "md")) {
     header nav {
@@ -62,7 +63,7 @@ nav {
         text-align: center
       }
       div {
-        margin: auto
+        margin: auto // keeps top menu/search centered in mobile view
       }
     }
   }

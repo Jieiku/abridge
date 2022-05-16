@@ -1,25 +1,29 @@
 {%- set_global bg = " " %}
+{%- set_global bgname = " " %}
 {%- for source in sources %}
-  {%- if not loop.first %}
-    ## {{ source | safe }}
-    <div id="hoverimage{{loop.index}}"> </div>
+  {%- set sourcename = source | split(pat=".") | first %}
+  {%- if loop.first %}
+    {%- set_global bg = source %}
+    {%- set_global bgname = source | split(pat=".") | first %}
   {%- else %}
-    {% set_global bg = source %}
+
+    <div id="{{ sourcename }}">## {{ sourcename }} </div>
+    <a onmouseover="document.getElementById('{{ sourcename }}').innerHTML='{{ bgname }}';" onmouseout="document.getElementById('{{ sourcename }}').innerHTML='{{ sourcename }}';" href="#"><div id="{{ sourcename }}image"> </div></a>
+
   {%- endif %}
 {%- endfor %}
 
 <style>
   {%- for source in sources %}
+    {%- set sourcename = source | split(pat=".") | first %}
     {%- if not loop.first %}
-      #hoverimage{{loop.index}} {
+      #{{ sourcename | safe }}image {
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
         width: 560px;
         height: 650px;
       }
-      #hoverimage{{loop.index}}:hover {
+      #{{ sourcename | safe }}image:hover {
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
-        width: 560px;
-        height: 650px;
       }
     {%- endif %}
   {%- endfor %}

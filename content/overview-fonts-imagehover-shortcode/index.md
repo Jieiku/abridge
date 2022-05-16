@@ -1,5 +1,5 @@
 +++
-title = "Image Comparison imagehover shortcode"
+title = "Image Comparison imagehover Shortcode"
 date = 2022-05-15
 
 [taxonomies]

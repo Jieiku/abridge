@@ -195,9 +195,11 @@
 {%- endmacro %}
 
 {%- macro security() %}
-  {%- if config.extra.security_headers %}
-  <meta name="referrer" content="strict-origin-when-cross-origin">{#- options: no-referrer, same-origin, strict-origin, strict-origin-when-cross-origin #}
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com">
+  {%- if config.extra.security_header_referrer %}
+  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}">
+  {%- endif %}
+  {%- if config.extra.security_header_csp %}
+  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}">
   {%- endif %}
 {%- endmacro %}
 

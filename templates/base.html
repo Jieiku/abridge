@@ -62,7 +62,9 @@
     <div>{{ config.description }}</div>
     {%- endif %}
     {%- endif %}
+    {%- if config.extra.headhr %}
     <hr>
+    {%- endif %}
   </header>
 {%- endblock header %}
   <main>
@@ -71,7 +73,9 @@
   </main>
 {%- block footer %}
   <footer>
+    {%- if config.extra.foothr %}
     <hr>
+    {%- endif %}
     <center>
       <p>
         {{- social_macros::social_links(social_config=config.extra.social) }}

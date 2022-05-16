@@ -43,6 +43,9 @@ textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
 #copyright_start_year = 2019  # optional
 #copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default
+
+headhr = false # show or hide horizontal rule below header
+foothr = true # show or hide horizontal rule above footer
 menu = [
     {url = "/", name = "Home", slash = true},
     {url = "/about/", name = "About", slash = true},

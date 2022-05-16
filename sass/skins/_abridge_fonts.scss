@@ -1,39 +1,22 @@
 @font-face {
-  font-family: "Fira Code";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Fira Code"),
-    url("font/FiraCode-latin-400.woff2") format("woff2");
+    font-family: 'Fira Code';
+    src: url("/font/FiraCode.woff2");//latin regular
+    font-display: swap;
 }
-
 @font-face {
-  font-family: "Jost";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Jost"),
-    url("font/Jost-v13-latin-400.woff2") format("woff2");
+    font-family: 'Montserrat';
+    src: url("/font/Montserrat.woff2");//latin regular
+    font-display: swap;
 }
-
 @font-face {
-  font-family: "Jost";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local("Jost"),
-    url("font/Jost-v13-latin-700.woff2") format("woff2");
+    font-family: 'Montserrat';
+    src: url("/font/Montserrat-italic.woff2");//latin italic
+    font-style: italic;
+    font-display: swap;
 }
-
 @font-face {
-  font-family: "Jost";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Jost"),
-    url("font/Jost-v13-latin-italic.woff2") format("woff2");
+    font-family: 'Montserrat';
+    src: url("/font/Montserrat-Bold.woff2");//latin bold
+    font-weight: bold;
+    font-display: swap;
 }

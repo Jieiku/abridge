@@ -39,11 +39,6 @@ recent_items = 9
 footer_credit = true
 #footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
 
-# Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org
-# Set this to true if you are unable to load your security headers with your webserver, this will load a couple of them as meta tags.
-# There are many other security related headers most of which can only be set by the webserver method.
-security_headers = false
-
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
 #copyright_start_year = 2019  # optional
@@ -62,6 +57,16 @@ menu_footer = [
     {url = "/privacy/", name = "Privacy", slash = true},
     {url = "/sitemap.xml", name = "Sitemap", slash = false},
 ]
+
+# Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org
+# If you are unable to load your security headers with your webserver, this will load a couple of them as meta tags.
+# There are many other security related headers most of which can only be set by the webserver method.
+# Comment out either of these meta headers and they wont be used.
+
+security_header_referrer = "strict-origin-when-cross-origin"
+
+security_header_csp = "default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
+
 
 
 #################

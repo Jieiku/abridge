@@ -1,22 +1,22 @@
 @font-face {
     font-family: 'Fira Code';
-    src: url("/font/FiraCode.woff2");//latin regular
+    src: local("Fira Code"), url("/font/FiraCode.woff2");//latin regular
     font-display: swap;
 }
 @font-face {
     font-family: 'Montserrat';
-    src: url("/font/Montserrat.woff2");//latin regular
+    src: local("Montserrat"), url("/font/Montserrat.woff2");//latin regular
     font-display: swap;
 }
 @font-face {
     font-family: 'Montserrat';
-    src: url("/font/Montserrat-italic.woff2");//latin italic
+    src: local("Montserrat"), url("/font/Montserrat-italic.woff2");//latin italic
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'Montserrat';
-    src: url("/font/Montserrat-Bold.woff2");//latin bold
+    src: local("Montserrat"), url("/font/Montserrat-Bold.woff2");//latin bold
     font-weight: bold;
     font-display: swap;
 }

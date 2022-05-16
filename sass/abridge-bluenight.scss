@@ -14,25 +14,7 @@
 
 @import "variables"; //config
 
-@import "skins/blue-dark"; // Dark Theme
+@import "skins/blue-dark"; // Blue Dark Theme
+@import "skins/abridge_fonts.scss"; // Local Fonts
 
 @import "imports"; // html
-
-// ## Local Fonts ##
-//@import "fonts/Arimo";
-//@import "fonts/Bitter";
-//@import "fonts/DroidSans";
-//@import "fonts/Lato";
-//@import "fonts/Montserrat";
-//@import "fonts/OpenSans";
-//@import "fonts/OpenSansCondensed";
-//@import "fonts/PTSans";
-//@import "fonts/PTSansNarrow";
-//@import "fonts/Roboto";
-//@import "fonts/RobotoCondensed";
-//@import "fonts/RobotoSlab";
-//@import "fonts/SourceSansPro";
-//@import "fonts/Ubuntu";
-
-// ## Local Fonts Monospaced ##
-//@import "fonts/FiraCode";

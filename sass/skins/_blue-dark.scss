@@ -1,22 +1,25 @@
 :root {
-    // Regular Fonts used by default:
-    --ff: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
-    // Monospace Fonts used for code:
-    --fm: "Fira Code", Menlo, Consolas, "Roboto Mono", "Ubuntu Monospace", "Noto Mono", "Oxygen Mono", "Liberation Mono", monospace;
+  // Regular Fonts used by default:
+  --ff: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif;
+  // Arimo, Bitter, DroidSans, Lato, Montserrat, OpenSans, OpenSansCondensed, PTSans, PTSansNarrow, Roboto, RobotoCondensed, RobotoSlab, SourceSansPro, Ubuntu, Jost
 
-    // Colors
-    --f1: #ccc; //font color 1
-    --f2: #ddd; //font color 2
+  // Monospace Fonts used for code:
+  --fm: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace;
+  // https://qwtel.com/posts/software/the-monospaced-system-ui-css-font-stack/
 
-    --c1: #111; //color 1
-    --c2: #1a274a; //color 2
-    --c3: #404d69; //color 3
-    --c4: #2c3957; //color 4
+  // Colors
+  --f1: #ccc; //font color 1
+  --f2: #ddd; //font color 2
 
-    --a1: #2f7ddb; //accent color 1 link
-    --a2: #4d9dff; //accent color 2 hover,focus
-    --a3: #4d9dff; //accent color 3 h1-h2 hover,focus
+  --c1: #111; //color 1
+  --c2: #1a274a; //color 2
+  --c3: #404d69; //color 3
+  --c4: #2c3957; //color 4
 
-    --cg: #483; //ins green
-    --cr: #d33; //del red
+  --a1: #2f7ddb; //accent color 1 link
+  --a2: #4d9dff; //accent color 2 hover,focus
+  --a3: #4d9dff; //accent color 3 h1-h2 hover,focus
+
+  --cg: #483; //ins green
+  --cr: #d33; //del red
 }

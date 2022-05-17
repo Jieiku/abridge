@@ -7,6 +7,21 @@
 }
 main nav {
   margin-top: var(--s2);//pagination margin
+  ul li:nth-child(-n+2) {
+    width: 3.5rem; //pagination stabilize horizontally center
+  }
+  ul li:nth-last-child(-n+2) {
+    width: 3.5rem; //pagination stabilize horizontally center
+    text-align: right;
+  }
+}
+.off {
+  color: var(--c3);
+  font-weight: var(--fh);
+  border: .1rem solid var(--c3);
+  border-radius: var(--br);
+  padding: .1rem var(--s1);
+  margin: .1rem;
 }
 main nav a,
 main nav a:visited {//pagination link styling

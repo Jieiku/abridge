@@ -66,7 +66,7 @@ menu_footer = [
 # There are many other security related headers most of which can only be set by the webserver method.
 # Comment out either of these meta headers and they wont be used.
 
-security_header_referrer = "strict-origin-when-cross-origin"
+#security_header_referrer = "strict-origin-when-cross-origin"
 
 #security_header_csp = "default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
 

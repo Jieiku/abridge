@@ -53,7 +53,7 @@
       <nav>
           <ul>
             {%- if paginator.previous %}<li><a href="{{ paginator.first | safe }}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
-            {%- if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60; &#60;</a></li>{% else %}<li><span class="off">&#60; &#60;</span></li>{% endif %}
+            {%- if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
             {%- for i in range(start=start, end=end+1) %}
                 <li>
                   {%- if i == paginator.current_index %}
@@ -65,7 +65,7 @@
                   {%- endif %}
                 </li>
             {%- endfor %}
-            {%- if paginator.next %}<li><a href="{{ paginator.next | safe }}">&#62; &#62;</a></li>{% else %}<li><span class="off">&#62; &#62;</span></li>{% endif %}
+            {%- if paginator.next %}<li><a href="{{ paginator.next | safe }}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
             {%- if paginator.next %}<li><a href="{{ paginator.last | safe }}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
           </ul>
       </nav>

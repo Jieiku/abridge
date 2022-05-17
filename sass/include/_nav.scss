@@ -8,11 +8,10 @@
 main nav {
   margin-top: var(--s2);//pagination margin
   ul li:nth-child(-n+2) {
-    width: 3.5rem; //pagination stabilize horizontally center
+    margin-right: var(--s2); //pagination prev/first padding
   }
   ul li:nth-last-child(-n+2) {
-    width: 3.5rem; //pagination stabilize horizontally center
-    text-align: right;
+    margin-left: var(--s2); //pagination next/last padding
   }
 }
 .off {

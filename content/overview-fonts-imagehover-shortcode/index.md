@@ -1,6 +1,6 @@
 +++
 title = "Image Comparison imagehover Shortcode"
-date = 2022-05-15
+date = 2021-05-04
 
 [taxonomies]
 categories = ["Features"]

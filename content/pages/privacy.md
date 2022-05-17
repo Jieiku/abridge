@@ -4,8 +4,10 @@ path = "privacy"
 template = "pages.html"
 +++
 
-We do not use cookies and we do not collect any personal data.
+## Privacy
 
-No personal information is collected, stored in the browser, shared, sent, or sold to third-parties.
+- This site does not set or use cookies.
+- This site does not store data in the browser to be shared, sent, or sold to third-parties.
+- No personal information is shared, sent, or sold to third-parties.
 
-Effective Date: _1st Jan 2022_
+**Effective Date:** _1st Jan 2022_

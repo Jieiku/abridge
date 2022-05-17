@@ -1,5 +1,35 @@
+{# This Page Shows the Individual Blog Posts#}
+
 {% extends "base.html" %}
-{% import "macros/macros.html" as macros %}
+
+{%- block seo %}
+  {{- super() }}
+  {%- set title_addition = "" %}
+  {%- if page.title and config.title %}
+    {%- set title = page.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- elif page.title %}
+    {%- set title = page.title %}
+  {%- else %}
+    {%- set title = config.title %}
+  {%- endif %}
+
+  {%- if page.description %}
+    {%- set description = page.description %}
+  {%- else %}
+    {%- set description = config.description %}
+  {%- endif %}
+  {%- set created_time = page.date %}
+  {%- set updated_time = page.updated %}
+  {%- if current_section %}
+    {%- set page_section = current_section %}
+  {%- else %}
+    {%- set page_section = "" %}
+  {%- endif %}
+
+  {{- macros_head::seo(title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
+{%- endblock seo %}
+
 {%- block content %}
     <article>
     {{- macros::title(page=page) }}

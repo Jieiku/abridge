@@ -1,4 +1,28 @@
+{# This Page Shows the contact page eg: example.com/contact/ #}
+
 {% extends "base.html" %}
+
+{%- block seo %}
+  {{- super() }}
+  {%- set title_addition = "" %}
+
+  {%- if page.title and config.title %}
+    {%- set title = page.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- elif page.title %}
+    {%- set title = page.title %}
+  {%- else %}
+    {%- set title = config.title %}
+  {%- endif %}
+
+  {%- if page.description %}
+    {%- set description = page.description %}
+  {%- else %}
+    {%- set description = config.description %}
+  {%- endif %}
+
+  {{- macros_head::seo(title=title, title_addition=title_addition, description=description) }}
+{%- endblock seo %}
 
 {%- block content %}
   <div>

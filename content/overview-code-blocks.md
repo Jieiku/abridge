@@ -18,13 +18,11 @@ Code blocks.. ❤️ with automatic syntax highlighting ✨‍
 
 See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting/) for options.
 
-#### Inline Code block
+### Inline Code block
 
 If we want, we can also `specify inline code` which is useful for `the small stuff`.
 
-#### Code block with backticks
-
-##### rust
+### rust
 ```rust
 //! jelly-actix-web-starter - A starter template for actix-web projects that feels very Django-esque. Avoid the boring stuff and move faster.
 
@@ -38,7 +36,7 @@ async fn main() -> io::Result<()> {
 }
 ```
 
-##### html
+### html
 ```html
 <!doctype html>
 <html lang="en">
@@ -53,7 +51,7 @@ async fn main() -> io::Result<()> {
 </html>
 ```
 
-##### javascript
+### javascript
 ```javascript
 function closeSearch() {//close the search displaying the regular page.
     const e = document.querySelector("main");
@@ -72,7 +70,7 @@ function goSearch() {// on enter key or search icon click display results to the
 }
 ```
 
-##### php
+### php
 ```php
 <?php
 /**
@@ -97,7 +95,7 @@ $_SESSION['PFA_token'] = md5(uniqid("pfa" . rand(), true));
 ```
 
 
-##### json
+### json
 ```json
 {
     "name": "Abridge Zola Theme",

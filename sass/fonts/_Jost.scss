@@ -5,13 +5,13 @@
 }
 @font-face {
     font-family: 'Jost';
-    src: local("Jost"), url("/font/Jost-italic.woff2");//latin italic
+    src: local("Jost-Italic"), url("/font/Jost-Italic.woff2");//latin italic
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'Jost';
-    src: local("Jost"), url("/font/Jost-Bold.woff2");//latin bold
+    src: local("Jost-Bold"), url("/font/Jost-Bold.woff2");//latin bold
     font-weight: bold;
     font-display: swap;
 }

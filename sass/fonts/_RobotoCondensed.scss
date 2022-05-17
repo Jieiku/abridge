@@ -5,13 +5,13 @@
 }
 @font-face {
     font-family: 'RobotoCondensed';
-    src: local("RobotoCondensed"), url("/font/RobotoCondensed-italic.woff2");//latin italic
+    src: local("RobotoCondensed-Italic"), url("/font/RobotoCondensed-Italic.woff2");//latin italic
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'RobotoCondensed';
-    src: local("RobotoCondensed"), url("/font/RobotoCondensed-Bold.woff2");//latin bold
+    src: local("RobotoCondensed-Bold"), url("/font/RobotoCondensed-Bold.woff2");//latin bold
     font-weight: bold;
     font-display: swap;
 }

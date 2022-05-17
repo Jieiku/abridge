@@ -5,13 +5,13 @@
 }
 @font-face {
     font-family: 'PTSans';
-    src: local("PTSans"), url("/font/PTSans-italic.woff2");//latin italic
+    src: local("PTSans-Italic"), url("/font/PTSans-Italic.woff2");//latin italic
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'PTSans';
-    src: local("PTSans"), url("/font/PTSans-Bold.woff2");//latin bold
+    src: local("PTSans-Bold"), url("/font/PTSans-Bold.woff2");//latin bold
     font-weight: bold;
     font-display: swap;
 }

@@ -1,6 +1,12 @@
 {
-    "short_name": "Abridge",
     "name": "Abridge Zola Theme",
+    "short_name": "Abridge",
+    "start_url": "https://jieiku.github.io/abridge-demo/",
+    "description": "Semantic, Lightweight, and Fast Zola Theme!",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#222222",
+    "background_color": "#111111",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -18,10 +24,5 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ],
-    "theme_color": "#222222",
-    "background_color": "#111111",
-    "start_url": "/?source=pwa",
-    "scope": "/",
-    "display": "standalone"
+    ]
 }

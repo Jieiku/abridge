@@ -30,7 +30,7 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 language_code = "en-US"
-author = "Jake G (Jieiku)" # Put Your Name here
+author = "Jake G" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
 readtime = true # displays the read time on line with date, tags, categories
 readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read

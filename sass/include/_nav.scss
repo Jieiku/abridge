@@ -33,6 +33,7 @@ nav > div {
 }
 nav {
   align-items: center;
+  justify-content: center;//center pagination horizontally
   display: flex;
   div h2 {
     font-size: 1rem;

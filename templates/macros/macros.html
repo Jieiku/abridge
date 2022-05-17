@@ -24,9 +24,8 @@
 {%- macro pagination(paginator)%}
   {%- if paginator.number_pagers > 1 %}
       <nav>
-        <div>{%- if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %} </div>
-        <div>
           <ul>
+            {%- if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60; Previous</a></li>{% endif %}
             {%- for i in range(start=1, end=paginator.number_pagers+1) %}
             <li>
               {%- if i == paginator.current_index %}
@@ -38,9 +37,8 @@
               {%- endif %}
             </li>
             {%- endfor %}
+            {%- if paginator.next %}<li><a href="{{ paginator.next | safe }}">Next &#62;</a></li>{% endif %}
           </ul>
-        </div>
-        <div>{%- if paginator.next %}<a href="{{ paginator.next | safe }}">Next &#62;</a>{% endif %} </div>
       </nav>
   {%- endif %}
 {%- endmacro %}

@@ -80,7 +80,7 @@ security_header_referrer = "strict-origin-when-cross-origin"
 # Resource Files
 #################
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-js_search_index ="search_index.en.js"
+#js_search_index ="search_index.en.js"
 js_search = "search.min.js"
 rss_atom_feed = "atom.xml"
 stylesheet = "abridge.css" # location and file to use for stylesheet:

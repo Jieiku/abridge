@@ -12,12 +12,12 @@ Zola has many shortcodes, and new are easily added, this example shows vimeo and
 
 ## Vimeo
 
-with `vm(id="id_here")`
+with `vm(id="id_here" title="Youtube - Safe Systems Programming in Rust")`
 
-{{ vm(id="514402648") }}
+{{ vm(id="514402648" title="Youtube - Safe Systems Programming in Rust") }}
 
 ## Youtube
 
-with `yt(id="the_id_here")`
+with `yt(id="the_id_here" title="Vimeo - Gnome vs KDE")`
 
-{{ yt(id="32gyFIWecuw") }}
+{{ yt(id="32gyFIWecuw" title="Vimeo - Gnome vs KDE") }}

@@ -9,11 +9,13 @@ tags = ["images"]
 
 Images can be embed using direct or relative paths.
 <!-- more -->
-Use `img()` to specify the relative path of image:
+Use `img(path="./image.jpg", alt="Papaya")` to specify the relative path of image:
 
 {{ img(path="./image.jpg", alt="Papaya") }}
 
 This is an example note with direct image, without using shortcode:
+
+`![Rust](rust.png)`
 
 ![Rust](rust.png)
 

@@ -8,7 +8,7 @@
   {%- else %}
 
     <div id="{{ sourcename }}">## {{ sourcename }} </div>
-    <a onmouseover="document.getElementById('{{ sourcename }}').innerHTML='{{ bgname }}';" onmouseout="document.getElementById('{{ sourcename }}').innerHTML='{{ sourcename }}';" href="#"><div id="{{ sourcename }}image"> </div></a>
+    <div id="{{ sourcename }}image" alt="{{ sourcename }}"> </div>
 
   {%- endif %}
 {%- endfor %}

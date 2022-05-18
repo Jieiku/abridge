@@ -11,7 +11,7 @@ Images can be embed using direct or relative paths.
 <!-- more -->
 Use `img()` to specify the relative path of image:
 
-{{ img(path="./image.jpg", alt="") }}
+{{ img(path="./image.jpg", alt="Papaya") }}
 
 This is an example note with direct image, without using shortcode:
 

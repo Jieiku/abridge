@@ -18,8 +18,8 @@ taxonomies = [
 ]
 
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # Copy themes to site root "highlight_themes" bug: https://github.com/getzola/zola/issues/1865
-#extra_syntaxes_and_themes = ["themes/abridge/highlight_themes","highlight_themes"]
+extra_syntaxes_and_themes = ["highlight_themes"] # extra_syntaxes_and_themes bug: https://github.com/getzola/zola/issues/1865
+#extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"]
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"
 # ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge

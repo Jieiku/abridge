@@ -34,6 +34,8 @@ use std::io;
 async fn main() -> io::Result<()> {
     mainlib::main().await
 }
+
+let context = Context::new();
 ```
 
 ### TOML
@@ -199,9 +201,11 @@ print(getPlayerInformation())
 ```c
 #include <stdio.h>
 int main() {
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
+    int a;
+    /* actual initialization */
+    a = 10;
+    printf("Hello, World!");
+    return 0;
 }
 ```
 
@@ -212,6 +216,9 @@ int main() {
 #include <iostream>
 
 int main() {
+    int a;
+    /* actual initialization */
+    a = 10;
     std::cout << "Hello World!";
     return 0;
 }
@@ -224,6 +231,8 @@ package main
 import "fmt"
 
 func main() {
+    var myvariable1 = 20
+    var myvariable2 = "hello world"
     fmt.Println("hello world")
 }
 ```

@@ -21,12 +21,12 @@ taxonomies = [
 extra_syntaxes_and_themes = ["highlight_themes"]
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"
-#highlight_theme = "ayu-light-abridge"
-#highlight_theme = "material-dark-abridge"
-#highlight_theme = "material-light-abridge"
+# ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge
+# ayu-light-abridge ayu-mirage-light-abridge charcoal-light-abridge dracula-light-abridge material-light-abridge
 
-# xx-abridge themes are a copy of themes xx with contrast/color tweaks for 100 score on google lighthouse
-# https://github.com/getzola/zola/tree/master/sublime/themes
+# xx-abridge themes are a copy of themes xx with contrast/color tweaks for 100 score on google lighthouse https://learnui.design/tools/accessible-color-generator.html
+# https://www.getzola.org/documentation/content/syntax-highlighting/#inline-vs-classed-highlighting
+
 render_emoji = false
 external_links_target_blank = true # rel="noopener"
 external_links_no_follow = false   # rel="nofollow"

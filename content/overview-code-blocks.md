@@ -240,69 +240,8 @@ func main() {
 ### Python
 ```python
 #!/usr/bin/env python3
-# Python BME280 script to monitor Temperature/Humidity/Pressure, log to influxdb, send email alerts
-import time
 import smtplib, socket
-import board
-import busio
-import basic
 from influxdb import InfluxDBClient
-
-SMTP_SERVER = '192.168.1.39'
-SMTP_PORT = 587
-USERNAME = 'no-reply@example.com'
-PASSWORD = 'VeryLongExamplePassword'
-
-class Emailer:
-    def sendmail(self, recipient, subject, content):
-        #Create Headers
-        headers = ["From: " + USERNAME, "Subject: " + subject, "To: " + recipient,
-                   "MIME-Version: 1.0", "Content-Type: text/html"]
-        headers = "\r\n".join(headers)
-
-        #Connect to Mail Server
-        session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        session.ehlo()
-        session.starttls()
-        session.ehlo()
-
-        #Login to mail account
-        session.login(USERNAME, PASSWORD)
-
-        #Send Email & Exit
-        session.sendmail(USERNAME, recipient, headers + "\r\n\r\n" + content)
-        session.quit
-
-sender = Emailer()
-
-# Create library object using our Bus I2C port
-i2c = busio.I2C(board.SCL, board.SDA)
-#bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c, 0x76)
-bme280 = basic.Adafruit_BME280_I2C(i2c, 0x76)
-
-# InfluxDB:
-host = "192.168.1.40"
-port = 8086
-user = "bme280"
-password = "VeryLongExamplePassword"
-dbname = "bme280"
-interval = 60 # Sample period in seconds
-
-client = InfluxDBClient(host, port, user, password, dbname)
-
-measurement = "ServerRoom1"
-location = "DataCenter1"
-
-# change this to match the location's pressure (hPa) at sea level
-bme280.sea_level_pressure = 1024.6
-
-#initialize variable epoch timestamp
-lastEmailTime = 0.11
-
-#initialize variable frequency of emails in seconds
-emailInterval = 3600
-lastTemp = 1
-lastHumidity = 1
 
 while True:
     send = 1
@@ -311,12 +250,6 @@ while True:
     tempF = round(bme280.temperature * 1.8 + 29, 3) #C to F formula is +32, difference is to correct bme280 temperature offset
     humidity = round(bme280.humidity, 3)
     pressure = round(bme280.pressure, 3)
-    #print(iso)
-    #print("\nTemperature: %0.2f C" % tempF)
-    #print("Humidity: %0.2f %%" % humidity)
-    #print("Pressure: %0.2f hPa" % pressure)
-    #print("Altitude = %0.2f meters" % bme280.altitude)
-
     # serialize data as JSON
     data = [
         {

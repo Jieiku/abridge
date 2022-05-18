@@ -1,5 +1,5 @@
 +++
-title = "Mathematical Notations Support"
+title = "Mathematical Notations"
 date = 2021-05-05
 updated = 2022-01-01
 [taxonomies]

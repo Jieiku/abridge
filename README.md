@@ -64,6 +64,12 @@ cp themes/abridge/config.toml config.toml
 sed -i 's/^#theme = "abridge"/theme = "abridge"/' config.toml
 ```
 
+Also point extra_syntaxes_and_themes at the correct directory:
+
+```
+extra_syntaxes_and_themes = ["themes/abridge/highlight_themes"]
+```
+
 ### Step 4: Add new content
 
 You can copy the content from the theme directory to your project:

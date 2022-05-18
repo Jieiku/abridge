@@ -1,7 +1,7 @@
 +++
 title = "Code Blocks and Themes"
 description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-date = 2022-05-17
+date = 2022-05-16
 
 [taxonomies]
 categories = ["Features"]

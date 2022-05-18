@@ -1,7 +1,7 @@
 +++
 title = "Markdown Syntax Guide"
 description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
-date = 2021-05-09
+date = 2022-05-15
 
 [taxonomies]
 categories = ["Features"]

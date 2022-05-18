@@ -20,7 +20,11 @@ taxonomies = [
 [markdown]
 extra_syntaxes_and_themes = ["highlight_themes"]
 highlight_code = true
-highlight_theme = "material-dark" # material-dark, OneHalfDark, ayu-dark, Midnight.dark
+highlight_theme = "ayu-dark-abridge"
+#highlight_theme = "ayu-light-abridge"
+#highlight_theme = "material-dark-abridge"
+#highlight_theme = "material-light-abridge"
+
 # xx-abridge themes are a copy of themes xx with contrast/color tweaks for 100 score on google lighthouse
 # https://github.com/getzola/zola/tree/master/sublime/themes
 render_emoji = false

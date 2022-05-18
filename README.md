@@ -68,7 +68,8 @@ Copy Theme Files from `themes/abridge/highlight_themes` to your root site direct
 
 ```toml
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # Copy themes to site root "highlight_themes" bug: https://github.com/getzola/zola/issues/1865
+extra_syntaxes_and_themes = ["highlight_themes"] # Copy themes to site root "highlight_themes"
+# extra_syntaxes_and_themes bug: https://github.com/getzola/zola/issues/1865
 #extra_syntaxes_and_themes = ["themes/abridge/highlight_themes","highlight_themes"]
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"

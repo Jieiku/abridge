@@ -14,9 +14,9 @@
 {%- endfor %}
 
 {%- if w and h and p %}
-  {%- set padding = h/w*p %}
-{%- elif w and h%}
-  {%- set padding = w/h*50 %}
+  {%- set padding = h / w * p %}
+{%- elif w and h %}
+  {%- set padding = h / w * 50 %}
 {%- else %}
   {%- set padding = 50 %}
 {%- endif %}
@@ -29,7 +29,7 @@
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
         background-size: contain;
         background-repeat: no-repeat;
-        width: {{ size | default(value=50) }}%;
+        width: {{ p | default(value=50) }}%;
         height: 0;
         padding-top: {{ padding }}%;
       }

@@ -19,8 +19,11 @@
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
-        width: 560px;
-        height: 650px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: {{ size | default(value=50) }}%;
+        height: 0;
+        padding-top: {{ size | default(value=50) }}%;
       }
       #{{ sourcename | safe }}image:hover {
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');

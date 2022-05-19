@@ -13,7 +13,7 @@ Use `img(path="./rustacean-flat-noshadow-525.png", alt="Ferris the crab, unoffic
 
 {{ img(path="./rustacean-flat-noshadow-525.png", alt="Ferris the crab, unofficial mascot for Rust") }}
 
-This is an example note with direct image, without using shortcode:
+This is an direct image example with note, without using shortcode:
 
 `![Happy](rustacean-flat-happy-525.png)`
 

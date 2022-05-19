@@ -19,7 +19,7 @@
     <div>
       <center>
         <h1>{{ terms | length }} Categories</h1>
-        <p>{%- for term in terms %}[<a href="#{{ term.name }}">{{ term.name }}</a>] &nbsp; {%- endfor %}</p>
+        <p>{% for term in terms %} [<a href="#{{ term.name }}">{{ term.name }}</a>] {% endfor %}</p>
       </center>
       {%- for term in terms %}
       <h2 id="{{ term.name }}"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></h2>

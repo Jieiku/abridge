@@ -24,8 +24,10 @@
       {%- for term in terms %}
       <h2 id="{{ term.name }}"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></h2>
       {%- for page in term.pages %}
-      <p><a href="{{ page.permalink | safe }}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format=config.extra.timeformat |	default(value="%B %e, %Y")) }}</time></p>
+      <p><a href="{{ page.permalink | safe }}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
       {%- endfor %}
       {%- endfor %}
     </div>
 {%- endblock content %}
+
+

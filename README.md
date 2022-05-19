@@ -56,25 +56,24 @@ Enable the theme in your `config.toml` in the site directory:
 theme = "abridge"
 ```
 
-Or copy the `config.toml` from the theme directory to your project's
-root directory, and uncomment the theme line:
+Or copy the `config.toml` from the theme directory to your project's root directory:
 
 ```bash
 cp themes/abridge/config.toml config.toml
+```
+
+Uncomment the theme line, and point extra_syntaxes_and_themes at the correct directory:
+```bash
 sed -i 's/^#theme = "abridge"/theme = "abridge"/' config.toml
+sed -i 's/^extra_syntaxes_and_themes = \["highlight_themes"\]/extra_syntaxes_and_themes = \["highlight_themes", "themes\/abridge\/highlight_themes"\]/' config.toml
 ```
 
-Copy Theme Files from `themes/abridge/highlight_themes` to your root site directory `highlight_themes`
-
+The result should be:
 ```toml
+theme = "abridge"
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # Copy themes to site root "highlight_themes"
-# extra_syntaxes_and_themes bug: https://github.com/getzola/zola/issues/1865
-#extra_syntaxes_and_themes = ["themes/abridge/highlight_themes","highlight_themes"]
-highlight_code = true
-highlight_theme = "ayu-dark-abridge"
+extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"]
 ```
-
 
 ### Step 4: Add new content
 

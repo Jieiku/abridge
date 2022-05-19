@@ -2,8 +2,6 @@ base_url = "https://jieiku.github.io/abridge-demo/"
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
-#theme = "abridge"
-
 output_dir = "public"
 compile_sass = true
 build_search_index = true
@@ -17,9 +15,10 @@ taxonomies = [
     {name = "tags", feed = true},
 ]
 
+#theme = "abridge"
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # running theme directly, this should ALWAYS be what is set in the THEME'S config.toml
-#extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"] # Use in YOUR SITE'S config.toml when running abridge as a theme
+extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"] # Abridge's config.toml
+# In YOUR SITE'S config.toml set to: ["highlight_themes", "themes/abridge/highlight_themes"]
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"
 # ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge

@@ -18,8 +18,8 @@ taxonomies = [
 ]
 
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # extra_syntaxes_and_themes bug: https://github.com/getzola/zola/issues/1865
-#extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"]
+extra_syntaxes_and_themes = ["highlight_themes"] # running theme directly, this should ALWAYS be what is set in the THEME'S config.toml
+#extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"] # Use in YOUR SITE'S config.toml when running abridge as a theme
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"
 # ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge

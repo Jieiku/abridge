@@ -12,6 +12,6 @@ Zola has many shortcodes, and new are easily added, this example shows youtube.
 
 ## Youtube
 
-with `yt(id="the_id_here" title="Vimeo - Gnome vs KDE")`
+with `yt(id="the_id_here" nocookie=true title="Youtube - Gnome vs KDE")`
 
-{{ yt(id="32gyFIWecuw" title="Vimeo - Gnome vs KDE") }}
+{{ yt(id="32gyFIWecuw" nocookie=true title="Youtube - Gnome vs KDE") }}

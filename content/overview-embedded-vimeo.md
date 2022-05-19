@@ -12,6 +12,6 @@ Zola has many shortcodes, and new are easily added, this example shows vimeo.
 
 ## Vimeo
 
-with `vm(id="id_here" title="Youtube - Safe Systems Programming in Rust")`
+with `vm(id="id_here" nocookie=true title="Vimeo - Safe Systems Programming in Rust")`
 
-{{ vm(id="514402648" title="Youtube - Safe Systems Programming in Rust") }}
+{{ vm(id="514402648" nocookie=true title="Vimeo - Safe Systems Programming in Rust") }}

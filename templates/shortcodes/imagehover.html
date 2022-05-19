@@ -13,10 +13,10 @@
   {%- endif %}
 {%- endfor %}
 
-{%- if width and height and size %}
-  {%- set padding = height/width*size %}
-{%- elif width and height%}
-  {%- set padding = width/height*50 %}
+{%- if w and h and p %}
+  {%- set padding = h/w*p %}
+{%- elif w and h%}
+  {%- set padding = w/h*50 %}
 {%- else %}
   {%- set padding = 50 %}
 {%- endif %}
@@ -31,7 +31,7 @@
         background-repeat: no-repeat;
         width: {{ size | default(value=50) }}%;
         height: 0;
-        padding-top: {{ padding }}%; {# width/height*size #}
+        padding-top: {{ padding }}%;
       }
       #{{ sourcename | safe }}image:hover {
         background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');

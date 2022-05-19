@@ -12,10 +12,16 @@ This shortcode accepts an array of images, the first element is the one you are 
 The first image in the array is displayed, hover you mouse over the image to display the one your comparing to.
 <!-- more -->
 
-with `imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] width=560 height=650 size=45`
+This can also be used to compare just one picture with another by passing only two files in the array:
 
-- width is the width of the image.
-- height is the height of the image.
-- size is the percent size that you want the image to use on the page.(50 is the default)
+`imagehover(sources=["regular.png", "hover.png"] w=560 h=650 p=45`
 
-{{ imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] width=560 height=650 size=45) }}
+To Compare many images just add more images to the array:
+
+`imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] w=560 h=650 p=45`
+
+- w is the width of the image.
+- h is the height of the image.
+- p is the percent size that you want the image to use on the page.(50 is the default)
+
+{{ imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] w=560 h=650 p=45) }}

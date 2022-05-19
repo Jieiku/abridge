@@ -9,11 +9,13 @@ tags = ["shortcodes","image"]
 
 This shortcode accepts an array of images, the first element is the one you are comparing to all the others.
 
-When you hover your mouse over an image, it will display the first image in the array.
-
-Size is a percent value (50 is the default).
+The first image in the array is displayed, hover you mouse over the image to display the one your comparing to.
 <!-- more -->
 
-with `imagehover(sources=["file1.jpg", "file2.jpg", "file3.jpg"] size=50)`
+with `imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] width=560 height=650 size=45`
 
-{{ imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] size=50) }}
+- width is the width of the image.
+- height is the height of the image.
+- size is the percent size that you want the image to use on the page.(50 is the default)
+
+{{ imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] width=560 height=650 size=45) }}

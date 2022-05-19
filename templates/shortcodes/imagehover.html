@@ -13,20 +13,28 @@
   {%- endif %}
 {%- endfor %}
 
+{%- if width and height and size %}
+  {%- set padding = height/width*size %}
+{%- elif width and height%}
+  {%- set padding = width/height*50 %}
+{%- else %}
+  {%- set padding = 50 %}
+{%- endif %}
+
 <style>
   {%- for source in sources %}
     {%- set sourcename = source | split(pat=".") | first %}
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {
-        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
         background-size: contain;
         background-repeat: no-repeat;
         width: {{ size | default(value=50) }}%;
         height: 0;
-        padding-top: {{ size | default(value=50) }}%;
+        padding-top: {{ padding }}%; {# width/height*size #}
       }
       #{{ sourcename | safe }}image:hover {
-        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
       }
     {%- endif %}
   {%- endfor %}

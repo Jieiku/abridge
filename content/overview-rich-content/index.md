@@ -79,12 +79,12 @@ audio file of a different type (`wav`, `ogg`, `mp3`, etc).
 
 ### Usage
 ```rs
-{{/* audio(sources=["example.wav", "example.ogg", "example.mp3"]) */}}
+{{/* audio(sources=["example.mp3", "example.ogg", "example.flac", "example.wav"]) */}}
 ```
 ### Output
 ```html
-{{ audio(sources=["example.wav", "example.ogg", "example.mp3"]) }}
+{{ audio(sources=["example.mp3", "example.ogg", "example.flac", "example.wav"]) }}
 ```
+{{ audio(sources=["over9000.mp3", "over9000.ogg", "over9000.flac", "over9000.wav"]) }}
 
 [built-in]: https://www.getzola.org/documentation/content/shortcodes/#built-in-shortcodes
-[video]: @/overview-rich-content.md#video

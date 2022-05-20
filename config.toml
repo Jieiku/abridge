@@ -1,4 +1,4 @@
-base_url = "https://jieiku.github.io/abridge-demo/"
+base_url = "https://jieiku.github.io/abridge-demo" # do NOT include a trailing slash on the base URL
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"

@@ -10,7 +10,7 @@ tags = ["video", "audio", "images", "shortcodes"]
 toc = true
 +++
 
-Several custom shortcodes are included to augment CommonMark (courtesy of d3c3nt theme), in addition to those [already provided by Zola][built-in]. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
+Several custom shortcodes are included to augment CommonMark (courtesy of [d3c3nt theme](https://d3c3nt.figbert.com/posts/rich-content/)), in addition to those [already provided by Zola][built-in]. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
 
 <!-- more -->
 
@@ -24,12 +24,13 @@ element is returned.
 
 ### Usage
 ```rs
-{{/* video(sources=["example.webm", "example.mp4"]) */}}
+{{/* video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) */}}
 ```
 ### Output
 ```html
-{{ video(sources=["example.webm", "example.mp4"]) }}
+{{ video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
 ```
+{{ video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
 
 ## Image
 
@@ -44,12 +45,13 @@ back on if the other formats aren't yet supported.
 
 ### Usage
 ```rs
-{{/* image(sources=["example.webp", "example.jpg", "example.png"], fallback_path="example.png", fallback_alt="Lorem Ipsum") */}}
+{{/* image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") */}}
 ```
 ### Output
 ```html
-{{ image(sources=["example.webp", "example.jpg", "example.png"], fallback_path="example.png", fallback_alt="Lorem Ipsum") }}
+{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") }}
 ```
+{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") }}
 
 ## GIF
 
@@ -64,27 +66,30 @@ less reliable.
 
 ### Usage
 ```rs
-{{/* gif(sources=["example.webm", "example.mp4"]) */}}
+{{/* gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) */}}
 ```
 ### Output
 ```html
-{{ gif(sources=["example.webm", "example.mp4"]) }}
+{{ gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
 ```
+{{ gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
 
 ## Audio
 
 The `audio` shortcode takes a `sources` array of strings and returns an
 `<audio>` tag. Each string in the `sources` array should be a path to an
-audio file of a different type (`wav`, `ogg`, `mp3`, etc).
+audio file of a different type (`ogg`, `mp3`, `flac`, `wav`, etc).
+The browser will play the first type it supports, so placing them in order of size smallest to largest will use the least bandwidth if that is your goal.
 
 ### Usage
 ```rs
-{{/* audio(sources=["example.mp3", "example.ogg", "example.flac", "example.wav"]) */}}
+{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) */}}
 ```
 ### Output
 ```html
-{{ audio(sources=["example.mp3", "example.ogg", "example.flac", "example.wav"]) }}
+{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) }}
 ```
-{{ audio(sources=["over9000.mp3", "over9000.ogg", "over9000.flac", "over9000.wav"]) }}
+{{ audio(sources=["over9000.ogg", "over9000.mp3"]) }}
 
 [built-in]: https://www.getzola.org/documentation/content/shortcodes/#built-in-shortcodes
+[video]: @/overview-rich-content/index.md#video

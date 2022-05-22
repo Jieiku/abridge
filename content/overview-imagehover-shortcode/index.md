@@ -12,16 +12,38 @@ This shortcode accepts an array of images, the first element is the one you are 
 The first image in the array is displayed, hover you mouse over the image to display the one your comparing to.
 <!-- more -->
 
-This can also be used to compare just one picture with another by passing only two files in the array:
-
-`imagehover(sources=["regular.png", "hover.png"] w=560 h=650 p=45`
-
-To Compare many images just add more images to the array:
-
-`imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] w=560 h=650 p=45`
+This can also be used to compare just one picture with another by passing only two files in the array.
 
 - w is the width of the image.
 - h is the height of the image.
 - p is the percent size that you want the image to use on the page.(50 is the default)
 
-{{ imagehover(sources=["System.png", "DroidSans.png", "Roboto.png", "Arimo.png", "Lato.png", "Ubuntu.png"] w=560 h=650 p=45) }}
+### Usage (same path)
+```rs
+{{/* imagehover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=640 h=480 p=40) */}}
+```
+### Output
+```html
+{{ imagehover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=640 h=480 p=40) }}
+```
+{{ imagehover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=640 h=480 p=40) }}
+
+### Usage (root path /)
+```rs
+{{/* imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg", "/overview-images/ferris-happy.svg"] w=640 h=480 p=40) */}}
+```
+### Output
+```html
+{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}
+```
+{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}
+
+### Usage (relative path ./)
+```rs
+{{/* imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) */}}
+```
+### Output
+```html
+{{ imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) }}
+```
+{{ imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) }}

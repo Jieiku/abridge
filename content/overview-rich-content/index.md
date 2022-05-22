@@ -24,13 +24,13 @@ element is returned.
 
 ### Usage
 ```rs
-{{/* video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) */}}
+{{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
 ```
 ### Output
 ```html
-{{ video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
-{{ video(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 
 ## Image
 
@@ -66,13 +66,13 @@ less reliable.
 
 ### Usage
 ```rs
-{{/* gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) */}}
+{{/* gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
 ```
 ### Output
 ```html
-{{ gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
+{{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
-{{ gif(sources=["over9000_av1.mp4", "over9000_webm.webm"]) }}
+{{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 
 ## Audio
 

@@ -4,8 +4,8 @@
 
   {%- if source is starting_with("./") %} {# Relative Path #}
     {%- set pathtype = "rel-" %}
-    {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
-    {%- set path = p ~ "/"  %}
+    {%- set path = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+    {%- set path = path ~ "/"  %}
 
   {%- elif source is starting_with("/") %} {# Root Path #}
     {%- set pathtype = "root-" %}
@@ -42,8 +42,8 @@
 
     {%- if source is starting_with("./") %} {# Relative Path #}
       {%- set pathtype = "rel-" %}
-      {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
-      {%- set path = p ~ "/"  %}
+      {%- set path = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+      {%- set path = path ~ "/"  %}
 
     {%- elif source is starting_with("/") %} {# Root Path #}
       {%- set pathtype = "root-" %}

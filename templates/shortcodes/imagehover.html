@@ -1,37 +1,32 @@
 {%- set_global bg = "" %}
-{%- set_global bgname = "" %}
 
 {%- for source in sources %}
 
   {%- if source is starting_with("./") %} {# Relative Path #}
-    {%- set_global pathtype = "rel" %}
-    {%- set relative_path = page.relative_path | split(pat="/") | slice(end=-1) | join(sep="/") %}
-    {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") %}
-    {%- set_global path = "/" ~ relative_path ~ "/" ~ p ~ "/"  %}
+    {%- set pathtype = "rel-" %}
+    {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+    {%- set path = p ~ "/"  %}
 
   {%- elif source is starting_with("/") %} {# Root Path #}
-    {%- set_global pathtype = "root" %}
+    {%- set pathtype = "root-" %}
     {%- set rootpath = source | split(pat="/") | slice(end=-1) | join(sep="/") %}
-    {%- set_global path = rootpath ~ "/"  %}
+    {%- set path = config.base_url ~ rootpath ~ "/"  %}
 
   {%- else %} {# Same Directory Path #}
-    {%- set_global pathtype = "same" %}
-    {%- set_global path = "" %}
+    {%- set pathtype = "same-" %}
+    {%- set path = "" %}
   {%- endif %}
 
   {%- set sourcepath = source | split(pat="/") | last %}
-  {%- set sourcename = sourcepath | split(pat=".") | first %}
-  {%- set sourcename = sourcename ~ pathtype %}
+  {%- set sourcename = pathtype ~ sourcepath | split(pat=".") | first %}
 
   {%- if loop.first %}
     {%- set_global bg = source | split(pat="/") | last %}
-    {%- set_global bgname = source | split(pat=".") | first %}
   {%- else %}
-
     <div id="{{ sourcename }}"><b>{{ sourcename }} on hover</b></div>
     <div id="{{ sourcename }}image" alt="{{ sourcename }}"> </div>
-
   {%- endif %}
+
 {%- endfor %}
 
 {%- if w and h and p %}
@@ -46,24 +41,22 @@
   {%- for source in sources %}
 
     {%- if source is starting_with("./") %} {# Relative Path #}
-      {%- set_global pathtype = "rel" %}
-      {%- set relative_path = page.relative_path | split(pat="/") | slice(end=-1) | join(sep="/") %}
-      {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") %}
-      {%- set_global path = "/" ~ relative_path ~ "/" ~ p ~ "/"  %}
+      {%- set pathtype = "rel-" %}
+      {%- set p = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+      {%- set path = p ~ "/"  %}
 
     {%- elif source is starting_with("/") %} {# Root Path #}
-      {%- set_global pathtype = "root" %}
+      {%- set pathtype = "root-" %}
       {%- set rootpath = source | split(pat="/") | slice(end=-1) | join(sep="/") %}
-      {%- set_global path = rootpath ~ "/"  %}
+      {%- set path = config.base_url ~ rootpath ~ "/"  %}
 
     {%- else %} {# Same Directory Path #}
-      {%- set_global pathtype = "same" %}
-      {%- set_global path = "" %}
+      {%- set pathtype = "same-" %}
+      {%- set path = "" %}
     {%- endif %}
 
     {%- set sourcepath = source | split(pat="/") | last %}
-    {%- set sourcename = sourcepath | split(pat=".") | first %}
-    {%- set sourcename = sourcename ~ pathtype %}
+    {%- set sourcename = pathtype ~ sourcepath | split(pat=".") | first %}
 
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {

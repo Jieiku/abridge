@@ -28,16 +28,6 @@ This can also be used to compare just one picture with another by passing only t
 ```
 {{ imagehover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=640 h=480 p=40) }}
 
-### Usage (root path /)
-```rs
-{{/* imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg", "/overview-images/ferris-happy.svg"] w=640 h=480 p=40) */}}
-```
-### Output
-```html
-{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}
-```
-{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}
-
 ### Usage (relative path ./)
 ```rs
 {{/* imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) */}}
@@ -47,3 +37,13 @@ This can also be used to compare just one picture with another by passing only t
 {{ imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) }}
 ```
 {{ imagehover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=640 h=480 p=40) }}
+
+### Usage (root path /)
+```rs
+{{/* imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg", "/overview-images/ferris-happy.svg"] w=640 h=480 p=40) */}}
+```
+### Output
+```html
+{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}
+```
+{{ imagehover(sources=["/overview-images/ferris.svg", "/overview-images/ferris-gesture.svg"] w=640 h=480 p=40) }}

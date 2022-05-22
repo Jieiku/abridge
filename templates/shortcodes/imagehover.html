@@ -22,8 +22,8 @@
   {%- endif %}
 
   {%- set sourcepath = source | split(pat="/") | last %}
-  {%- set sourcename = pathtype ~ sourcepath %}
   {%- set sourcename = sourcepath | split(pat=".") | first %}
+  {%- set sourcename = sourcename ~ pathtype %}
   {%- if loop.first %}
     {%- set_global bg = source | split(pat="/") | last %}
     {%- set_global bgname = source | split(pat=".") | first %}
@@ -48,6 +48,7 @@
 
     {%- set sourcepath = source | split(pat="/") | last %}
     {%- set sourcename = sourcepath | split(pat=".") | first %}
+    {%- set sourcename = sourcename ~ pathtype %}
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {
         background-image: url('{{ path | safe }}{{ bg | safe }}');

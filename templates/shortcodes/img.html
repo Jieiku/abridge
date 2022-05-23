@@ -1,0 +1,18 @@
+{# {{ img(src="ferris.svg" class="" alt="" w=600 h=400) }} #}
+
+{%- if src is starting_with("./") %} {# Relative Path #}
+  {%- set path = src | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+  {%- set path = path ~ "/"  %}
+
+{%- elif src is starting_with("/") %} {# Root Path #}
+  {%- set rootpath = src | split(pat="/") | slice(end=-1) | join(sep="/") %}
+  {%- set path = config.base_url ~ rootpath ~ "/"  %}
+
+{%- else %} {# Same Directory Path #}
+  {%- set path = "" %}
+
+{%- endif %}
+
+{%- set img = src | split(pat="/") | last %}
+{%- set name = img | split(pat=".") | first %}
+<img src="{{ path | safe }}{{ img | safe }}" {% if class %}class="{{class}}" {% endif %}{% if alt %}alt="{{alt}}" {% endif %}{% if w %}width="{{w}}" {% endif %}{% if h %}height="{{h}}" {% endif %}/>

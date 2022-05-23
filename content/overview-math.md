@@ -89,7 +89,6 @@ Some Mathematics in display mode is fair enough:
 
 
 ### Auto Render Inline Example
-
 ```
 $ e^{i\pi}+1=0 $
 ```
@@ -97,7 +96,6 @@ $ e^{i\pi}+1=0 $
 $ e^{i\pi}+1=0 $
 
 ### Auto Render Block Example
-
 ```
 $$
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi

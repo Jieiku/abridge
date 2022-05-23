@@ -14,6 +14,8 @@ The first image in the array is displayed and the image changes to the one your 
 
 This can also be used to compare just one picture with another by passing only two files in the array.
 
+## Shortcode Parameters
+
 - w is the width of the image.
 - h is the height of the image.
 - p is the percent size that you want the image to use on the page. (50 is the default)

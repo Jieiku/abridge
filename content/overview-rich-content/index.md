@@ -39,19 +39,19 @@ parameters: `sources` (an array of strings), `fallback_path`, and
 `fallback_alt` (both strings).
 
 Each string in the `sources` array should be a path to an image file of
-a different type (`webp`, `png`, `jpg`, etc). `fallback_path` and
-`fallback_alt` are used to create an `<img>` tag for the browser to fall
-back on if the other formats aren't yet supported.
+a different type (`webp`, `png`, `jpg`, etc). `fpath` and
+`falt` are used to create an `<img>` tag for the browser to fall
+back on if the other formats aren't yet supported, fw and fh set the width and height of the fallback
 
 ### Usage
 ```rs
-{{/* image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") */}}
+{{/* image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") */}}
 ```
 ### Output
 ```html
-{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
 ```
-{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fallback_path="over9000-640.webp", fallback_alt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
 
 ## GIF
 

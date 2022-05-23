@@ -1,7 +1,7 @@
 +++
 title = "Rich Content"
 description = "A brief description of Zola Shortcodes"
-date = 2021-05-06
+date = 2021-05-18
 
 [taxonomies]
 categories = ["Features"]

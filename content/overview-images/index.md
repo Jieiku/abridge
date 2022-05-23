@@ -22,33 +22,33 @@ This post covers the **imghover and img shortcodes**. Images can also be embeded
 
 ## Usage (same path)
 ```rs
-{{/* img(src="ferris-happy.svg" alt="Ferris says Hello" w=600 h=400) */}}
+{{/* img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" alt="Ferris says Hello" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
 ```
-{{ img(src="ferris-happy.svg" alt="Ferris says Hello" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
 
 ## Usage (relative path ./)
 ```rs
-{{/* img(src="./img/ferris-gesture.svg" alt="Ferris is Happy" w=600 h=400) */}}
+{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) */}}
 ```
 **Output**
 ```html
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris is Happy" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
 ```
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris is Happy" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
 
 ## Usage (root path /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris" w=600 h=400) */}}
+{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) */}}
 ```
 **Output**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
 
 # SVG image directly in code:
 ```html

@@ -70,6 +70,8 @@ This can be used to compare only one image with another by passing only two sour
 - h is the height of the image.
 - p is the percent size that you want the image to use on the page. (50 is the default)
 
+*w and h are used only to calculate the aspect ratio, overall size is set by p*
+
 ## Usage (same path)
 ```rs
 {{/* imghover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) */}}

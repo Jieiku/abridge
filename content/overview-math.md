@@ -45,6 +45,7 @@ frontmatter. Now this page will load the $\KaTeX$ [autorender extension](https:/
 +++
 [extra]
 math = true
+math_auto_render = true
 +++
 ```
 
@@ -61,27 +62,33 @@ Mathematics and `$$...$$` for block Mathematics.
 
 This is the most beautiful equation I've ever seen:
 
+### Usage
+```rs
+{%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
 ```
-$e^{i\pi}+1=0$
+### Output
+```html
+{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 ```
+{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 
-$e^{i\pi}+1=0$
 
 ### Block Mathematics
 
 Some Mathematics in display mode is fair enough:
 
+### Usage
+```rs
+{%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
 ```
-$$
-\int_0^1 x^2 dx
-$$
+### Output
+```html
+{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 ```
+{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
-$$
-\int_0^1 x^2 dx
-$$
 
-### Another Example
+### Auto Render Block Example
 
 ```
 $$

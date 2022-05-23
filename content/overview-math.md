@@ -17,17 +17,20 @@ You can enable the $\KaTeX$ support globally, per-section or per-page basis.
 ## Enable Globally
 
 To enable the $\KaTeX$ support globally, add `math = true` under `[extra]` of the `config.toml`
-at your site root. Now every section and page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
+at your site root. Now the katex shortcode will be rendered, you can also add `math_auto_render = true`
+and every section and page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
 
 ```toml
 [extra]
 math = true
+math_auto_render = true
 ```
 
 ## Per-section Basis
 
-To enable the $\KaTeX$ support in a particular section, add `math = true` under `[extra]` in the `[SECTION_NAME]/_index.md`. Now every page under this section will load the KaTeX
-[autorender extension](https://katex.org/docs/autorender.html).
+To enable the $\KaTeX$ support in a particular section, add `math = true` under `[extra]` in the `[SECTION_NAME]/_index.md`.
+Now the katex shortcode will be rendered, you can also add `math_auto_render = true`
+and the section of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
 
 ```toml
 +++
@@ -39,7 +42,8 @@ math = true
 ## Per-page Basis
 
 To enable the $\KaTeX$ support in a particular page, add `math = true` under `[extra]` in the page's
-frontmatter. Now this page will load the $\KaTeX$ [autorender extension](https://katex.org/docs/autorender.html).
+frontmatter. Now the katex shortcode will be rendered, you can also add `math_auto_render = true`
+and the page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
 
 ```toml
 +++
@@ -72,7 +76,6 @@ This is the most beautiful equation I've ever seen:
 ```
 {% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 
-
 ### Block Mathematics
 
 Some Mathematics in display mode is fair enough:
@@ -86,7 +89,6 @@ Some Mathematics in display mode is fair enough:
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 ```
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
-
 
 ### Auto Render Inline Example
 ```

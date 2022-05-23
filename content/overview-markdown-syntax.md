@@ -62,7 +62,7 @@ and optionally with in-line changes such as annotations and abbreviations.
 ## Blockquote with author
 
 > Power comes in response to a need, not a desire.<br>
-> — Goku
+> — *Goku*
 
 # Tables
 

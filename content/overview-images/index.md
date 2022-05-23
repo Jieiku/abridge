@@ -7,7 +7,7 @@ categories = ["Features"]
 tags = ["images"]
 +++
 
-Images can be embed direct using markdown.
+Images can be embeded directly using markdown.
 <!-- more -->
 
 ### PNG image with alt note:

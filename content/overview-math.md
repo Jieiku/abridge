@@ -7,6 +7,7 @@ categories = ["Features"]
 tags = ["KaTeX", "Mathematics"]
 [extra]
 math = true
+math_auto_render = true
 +++
 
 You can use [$\KaTeX$](https://katex.org) to render mathematical notations.
@@ -28,7 +29,7 @@ math = true
 To enable the $\KaTeX$ support in a particular section, add `math = true` under `[extra]` in the `[SECTION_NAME]/_index.md`. Now every page under this section will load the KaTeX
 [autorender extension](https://katex.org/docs/autorender.html).
 
-```md
+```toml
 +++
 [extra]
 math = true
@@ -40,7 +41,7 @@ math = true
 To enable the $\KaTeX$ support in a particular page, add `math = true` under `[extra]` in the page's
 frontmatter. Now this page will load the $\KaTeX$ [autorender extension](https://katex.org/docs/autorender.html).
 
-```markdown
+```toml
 +++
 [extra]
 math = true
@@ -63,6 +64,7 @@ This is the most beautiful equation I've ever seen:
 ```
 $e^{i\pi}+1=0$
 ```
+
 $e^{i\pi}+1=0$
 
 ### Block Mathematics
@@ -74,6 +76,7 @@ $$
 \int_0^1 x^2 dx
 $$
 ```
+
 $$
 \int_0^1 x^2 dx
 $$

@@ -125,8 +125,8 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 #    {url = "font/Jost-Bold.woff2"},
 #]
 
-katex_enable = false # used to to render mathematical notations, requires js
-katex_auto_render = false
+math = false # katex math js library, used to to render mathematical notations, requires javascript
+math_auto_render = false
 
 ##########################
 # meta/seo/analytic tags

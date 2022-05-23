@@ -2,7 +2,12 @@
 
 {%- for source in sources %}
 
-  {%- if source is starting_with("./") %} {# Relative Path #}
+  {%- set dirtest = source | trim_start_matches(pat="./") %}
+  {%- if dirtest is containing("/") %}
+    {%- set reldir = true %}
+  {%- endif %}
+
+  {%- if source is starting_with("./") and reldir %} {# Relative Path #}
     {%- set pathtype = "rel-" %}
     {%- set path = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
     {%- set path = path ~ "/"  %}
@@ -40,7 +45,12 @@
 <style>
   {%- for source in sources %}
 
-    {%- if source is starting_with("./") %} {# Relative Path #}
+    {%- set dirtest = source | trim_start_matches(pat="./") %}
+    {%- if dirtest is containing("/") %}
+      {%- set reldir = true %}
+    {%- endif %}
+
+    {%- if source is starting_with("./") and reldir %} {# Relative Path #}
       {%- set pathtype = "rel-" %}
       {%- set path = source | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
       {%- set path = path ~ "/"  %}

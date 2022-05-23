@@ -46,7 +46,7 @@ The blockquote element represents content that is quoted from another source,
 optionally with a citation which must be within a `footer` or `cite` element,
 and optionally with in-line changes such as annotations and abbreviations.
 
-## Blockquote without attribution
+## Blockquote no attribution
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use *Markdown syntax* within a blockquote.
@@ -58,6 +58,11 @@ and optionally with in-line changes such as annotations and abbreviations.
 
 > All men by nature desire to know.<br>
 > ― <cite>Aristotle[^2]</cite>
+
+## Blockquote with author
+
+> Power comes in response to a need, not a desire.<br>
+> — Goku
 
 # Tables
 
@@ -72,11 +77,24 @@ out-of-the-box.
    John | 59
   Kerry | 23
 
-## Inline Markdown within tables
+## Table with Inline Markdown
 
 | Italics   | Bold     | Code   | StrikeThrough     |
 | --------  | -------- | ------ | ----------------- |
 | *italics* | **bold** | `code` | ~~strikethrough~~ |
+
+
+## Large table within figure tag
+
+Surround very Large tables with `<figure></figure>` so they can scroll horizontally.
+<figure>
+
+| **Manufacturer** | Volkswagen | Toyota | Ford | Honda | Chevrolet | BMW | Hyundai | Audi | Nissan | Kia | Mercedes | Tesla | Mitsubishi | Suzuki | Volvo | Subaru | Mazda | Jaguar | Buick | Lexus | GMC | Porsche | Cadillac |
+| ---------- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Revenue $B** | $254 | $249 | $127 | $124 | $123 | $113 | $88 | $83 | $74 | $61 | $55 | $54 | $38 | $31 | $30 | $28 | $27 | $22 | $21 | $19 | $17 | $16 | $12 |
+
+</figure>
+*revenue values found by searching google and have not been verified, for figure scroller table demonstration purposes only.*
 
 # Foldable Text
 

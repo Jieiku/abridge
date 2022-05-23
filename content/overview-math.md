@@ -4,7 +4,7 @@ date = 2021-05-05
 updated = 2022-01-01
 [taxonomies]
 categories = ["Features"]
-tags = ["KaTeX", "Mathematics"]
+tags = ["shortcodes","Mathematics"]
 [extra]
 math = true
 math_auto_render = true

@@ -4,7 +4,7 @@ date = 2022-05-17
 
 [taxonomies]
 categories = ["Features"]
-tags = ["theme","config"]
+tags = ["config"]
 +++
 
 For quick setup copy the config.toml from the abridge theme into the root of your zola site, this will give you a base configuration with all config values used.

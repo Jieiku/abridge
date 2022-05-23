@@ -4,7 +4,7 @@ date = 2021-05-17
 
 [taxonomies]
 categories = ["Features"]
-tags = ["shortcodes","image"]
+tags = ["shortcodes","images"]
 +++
 
 This shortcode accepts an array of images, the first element is the one you are comparing to all the others.

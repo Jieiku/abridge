@@ -10,7 +10,7 @@ math = true
 math_auto_render = true
 +++
 
-You can use [$\KaTeX$](https://katex.org) to render mathematical notations.
+You can use [KaTeX](https://katex.org) to render mathematical notations.
 
 You can enable the $\KaTeX$ support globally, per-section or per-page basis.
 <!-- more -->

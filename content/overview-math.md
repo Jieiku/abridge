@@ -88,6 +88,14 @@ Some Mathematics in display mode is fair enough:
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
 
+### Auto Render Inline Example
+
+```
+$ e^{i\pi}+1=0 $
+```
+
+$ e^{i\pi}+1=0 $
+
 ### Auto Render Block Example
 
 ```

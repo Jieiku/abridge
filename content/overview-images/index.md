@@ -59,13 +59,13 @@ This post covers the **imghover and img shortcodes**. Images can also be embeded
 
 # imghover Shortcode
 
-The first image in the sources array is the one compared to all the others.
+The first image in the src array is the one compared to all the others.
 
 When you hover your mouse over an image it will display the image to compare.
 
-This can be used to compare only one image with another by passing only two sources in the array.
+This can be used to compare only one image with another by passing only two src in the array.
 
-- sources is an array of paths and filenames for the images. (mandatory)
+- src is an array of paths and filenames for the images. (mandatory)
 - w is the width of the image.
 - h is the height of the image.
 - p is the percent size that you want the image to use on the page. (50 is the default)
@@ -74,31 +74,31 @@ This can be used to compare only one image with another by passing only two sour
 
 ## Usage (same path)
 ```rs
-{{/* imghover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) */}}
+{{/* imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) */}}
 ```
 **Output**
 ```html
-{{ imghover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
 ```
-{{ imghover(sources=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
 
 ## Usage (relative path ./)
 ```rs
-{{/* imghover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) */}}
+{{/* imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) */}}
 ```
 **Output**
 ```html
-{{ imghover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
 ```
-{{ imghover(sources=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
 
 ## Usage (root path /)
 ```rs
-{{/* imghover(sources=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) */}}
+{{/* imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) */}}
 ```
 **Output**
 ```html
-{{ imghover(sources=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
 ```
-{{ imghover(sources=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
 

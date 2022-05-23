@@ -1,6 +1,6 @@
 {%- set_global bg = "" %}
 
-{%- for source in sources %}
+{%- for source in src %}
 
   {%- set dirtest = source | trim_start_matches(pat="./") %}
   {%- if dirtest is containing("/") %}
@@ -43,7 +43,7 @@
 {%- endif %}
 
 <style>
-  {%- for source in sources %}
+  {%- for source in src %}
 
     {%- set dirtest = source | trim_start_matches(pat="./") %}
     {%- if dirtest is containing("/") %}

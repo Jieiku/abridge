@@ -94,7 +94,7 @@ Surround very Large tables with `<figure></figure>` so they can scroll horizonta
 | **Revenue $B** | $254 | $249 | $127 | $124 | $123 | $113 | $88 | $83 | $74 | $61 | $55 | $54 | $38 | $31 | $30 | $28 | $27 | $22 | $21 | $19 | $17 | $16 | $12 |
 
 </figure>
-*revenue values found by searching google and have not been verified, for figure scroller table demonstration purposes only.*
+*revenue values found on search engine and not verified, for figure scroller table demonstration purposes only.*
 
 # Foldable Text
 

@@ -31,11 +31,11 @@
     <nav>
       <header>
         {%- if config.extra.logo %}
-          <h1><a href="{{ config.base_url }}">{%- if config.extra.logo.file %}<img src="{{ config.base_url }}/{{ config.extra.logo.file }}" {%- if config.extra.logo.alt %}alt="{{ config.extra.logo.alt }}" {%- endif %}{%- if config.extra.logo.width %}width="{{ config.extra.logo.width }}" {%- endif %}{%- if config.extra.logo.height %}height="{{ config.extra.logo.height }}"{%- endif %}/>{%- endif %}{%- if config.extra.logo.text %}{{ config.extra.logo.text }}{%- endif %}</a></h1>
+          <h1><a href="{{ config.base_url | safe }}">{%- if config.extra.logo.file %}<img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}" {%- if config.extra.logo.alt %}alt="{{ config.extra.logo.alt | safe }}" {%- endif %}{%- if config.extra.logo.width %}width="{{ config.extra.logo.width | safe }}" {%- endif %}{%- if config.extra.logo.height %}height="{{ config.extra.logo.height | safe }}"{%- endif %}/>{%- endif %}{%- if config.extra.logo.text %}{{ config.extra.logo.text | safe }}{%- endif %}</a></h1>
         {%- elif config.extra.textlogo %}
-          <h1><a href="{{ config.base_url }}">{{ config.extra.textlogo }}</a></h1>
+          <h1><a href="{{ config.base_url | safe }}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title %}
-          <h1><a href="{{ config.base_url }}">{{ config.title }}</a></h1>
+          <h1><a href="{{ config.base_url | safe }}">{{ config.title | safe }}</a></h1>
         {%- endif %}
       </header>
       <div>

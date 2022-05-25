@@ -73,7 +73,7 @@ menu_footer = [
     {url = "/sitemap.xml", name = "Sitemap", slash = false},
 ]
 
-# Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org
+# Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org  https://csp-evaluator.withgoogle.com/
 # If you are unable to load your security headers with your webserver, this will load a couple of them as meta tags.
 # There are many other security related headers most of which can only be set by the webserver method.
 # Comment out either of these meta headers and they wont be used.

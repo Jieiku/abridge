@@ -80,7 +80,7 @@ menu_footer = [
 
 security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
+#security_header_csp = "default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'none'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
 
 
 #################

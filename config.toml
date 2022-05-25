@@ -80,7 +80,8 @@ menu_footer = [
 
 security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
+#security_header_csp = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; frame-src 'self' *.youtube.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; img-src 'self' data: cdn.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com"
+
 
 #################
 # Resource Files

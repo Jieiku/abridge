@@ -1,8 +1,15 @@
+<div align="center">
+<img src="abridge.svg"/>
+
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS.
+Abridge is a fast and lightweight Zola theme using semantic html, a class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS.
 
 ![abridge](screenshot.png)
+
+</div>
+
+---
 
 ## Demo
 

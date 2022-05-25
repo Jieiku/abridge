@@ -30,7 +30,13 @@
   <header>
     <nav>
       <header>
-        <h1><a href="{{ get_url(path="/", trailing_slash=true) }}">{{ config.extra.textlogo | safe }}</a></h1>
+        {%- if config.extra.logo %}
+          <h1><a href="{{ config.base_url }}"><img src="{{ config.base_url }}/{{ config.extra.logo.file }}" width="{{ config.extra.logo.width }}" height="{{ config.extra.logo.height }}"/>{%- if config.extra.logo.text %}{{ config.extra.logo.text }}{%- endif %}</a></h1>
+        {%- elif config.extra.textlogo %}
+          <h1><a href="{{ config.base_url }}">{{ config.extra.textlogo }}</a></h1>
+        {%- elif config.title %}
+          <h1><a href="{{ config.base_url }}">{{ config.title }}</a></h1>
+        {%- endif %}
       </header>
       <div>
         <ul>

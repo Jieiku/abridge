@@ -50,7 +50,7 @@ recent_items = 9
 footer_credit = true
 #footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
 
-logo = { file="logo.svg", width="42", height="42", text="bridge" }
+logo = { file="logo.svg", width="42", height="42", alt="Abridge", text="bridge" }
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
 #copyright_start_year = 2019  # optional

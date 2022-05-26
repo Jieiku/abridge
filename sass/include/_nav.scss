@@ -68,6 +68,9 @@ nav {
     header nav {
       display: flex;
       flex-direction: column;
+      header h1, div ul {
+        margin-top: var(--s1);
+      }
       header {
         text-align: center
       }

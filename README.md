@@ -13,7 +13,7 @@ Abridge is a fast and lightweight Zola theme using semantic html, a class-light 
 
 ## Demo
 
-[https://jieiku.github.io/abridge-demo/](https://jieiku.github.io/abridge-demo/)
+[https://abridge.netlify.app/](https://abridge.netlify.app/)
 
 ## Requirements
 
@@ -22,7 +22,7 @@ This theme requires version 0.14.1 or later of [Zola](https://www.getzola.org/do
 ## Quick Start
 
 ```bash
-git clone https://github.com/jieiku/abridge
+git clone https://github.com/jieiku/abridge.git
 cd abridge
 zola serve
 # open http://127.0.0.1:1111/ in the browser
@@ -130,7 +130,7 @@ Colors and style are handled by the sass files of [abridge.css](https://github.c
 Abridge comes with two "Skins" each with their own auto, dark, and light modes.
 Auto mode automatically displays a dark or light version depending on browser/OS settings.
 
-The skin used on [the Demo](https://jieiku.github.io/abridge-demo/) uses primarily orange colors.
+The skin used on [the Demo](https://abridge.netlify.app/) uses primarily orange colors.
 It is defined here: `/themes/abridge/sass/abridge.scss` and imports: `/themes/abridge/sass/skins/_abridge-auto.scss`
 
 There is also other variations, that you will see defined in these same directories.
@@ -203,7 +203,7 @@ The following options should be under the `[extra]` in `config.toml`
 - `stylesheet = "abridge.css"` - The stylesheet file to include in the header.
 - `fontawesome =` - Uncomment to enable fontawesome library, this will include the file in the header.
 - `fonts =` - Uncomment to load external fonts, they will be loaded in the header.
-- `math` - Set to true to load the Katex library, enabling the use of the [katex shortcode](https://jieiku.github.io/abridge-demo/overview-math/)
+- `math` - Set to true to load the Katex library, enabling the use of the [katex shortcode](https://abridge.netlify.app/overview-math/)
 - `math_auto_render` - This allows you to define a section of math notation using only $$ $$ symbols instead of using the katex shortcode directly.
 
 - `keywords =` - This is used for SEO.

@@ -7,7 +7,7 @@ categories = ["Features"]
 tags = ["config"]
 +++
 
-Abridge is a fast and lightweight Zola theme using semantic html (~6kb css before svg icons), and no JS required apart from the search. Abridge get a perfect score on [Google's Lighthouse audit](https://web.dev/measure/).
+Abridge is a fast and lightweight Zola theme using semantic html (~6kb css before svg icons), and no JS required apart from the search. Perfect score on [Google's Lighthouse audit](https://web.dev/measure/).
 <!-- more -->
 For quick setup copy the config.toml from the abridge theme into the root of your zola site, this will give you a base configuration with all config values used.
 

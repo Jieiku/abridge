@@ -67,7 +67,7 @@
 {#- page_images:   using for the blog single template page -#}
 {#- page_section:  the blog single template page have to pass the parameter -#}
 {#- is_404:        using for the 404.html template -#}
-{%- macro seo( title="",title_addition="",description="",type="website",is_home=false,is_404=false,is_page=false,page_images="",page_section="",created_time="2021-05-01T08:08:00+08:00",  updated_time="2021-05-01T08:08:08+08:00" ) %}
+{%- macro seo( title="",title_addition="",description="",type="website",is_home=false,is_404=false,is_page=false,page_images="",page_section="",created_time="2021-07-04T07:07:00-07:00",  updated_time="2021-07-04T07:07:00-07:00" ) %}
 {%- if is_404 -%}
   <meta name="robots" content="noindex, follow">
 {%- else -%}
@@ -180,7 +180,13 @@
   <meta property="og:site_name" content="{{ title }}">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
-  <meta property="og:updated_time" content="{{ now() }}">
+{%- if page.updated %}
+  <meta property="og:updated_time" content="{{ page.updated | date(format='%F') }}">
+{%- elif page.date %}
+  <meta property="og:updated_time" content="{{ page.date | date(format='%F') }}">
+{%- else %}
+  <meta property="og:updated_time" content="{{ updated_time }}">
+{%- endif %}
 
 {%- if config.extra.social.twitter %}
   <meta name="twitter:site" content="@{{ config.extra.twitter }}">

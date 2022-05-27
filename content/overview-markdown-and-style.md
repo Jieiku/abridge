@@ -179,7 +179,7 @@ during Gopherfest, November 18, 2015.
 [^2]: The quote is the first sentence of Aristotle's [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics_(Aristotle)).
 
 
-# Forms:
+## Forms:
 
 <form name="contact" method="POST" >
     <p><label>Name</label>
@@ -271,7 +271,7 @@ during Gopherfest, November 18, 2015.
     </label>
 </form>
 
-# Navs
+## Navs
 
 Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example.
 
@@ -287,9 +287,9 @@ If the nav tag is under the main tag instead of the header tag then the links wi
 </header>
 
 
-# Infinity Flex Grid
+## Infinity Flex Grid
 
-## Simple Grid
+### Simple Grid
 
 <section>
     <section> 1 </section>
@@ -310,7 +310,7 @@ If the nav tag is under the main tag instead of the header tag then the links wi
     <section> 5 </section>
 </section>
 
-## Complex grid
+### Complex grid
 
 <section>
     <section> 1 </section>

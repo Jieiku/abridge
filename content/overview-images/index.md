@@ -74,13 +74,13 @@ This can be used to compare only one image with another by passing only two src 
 
 ## Usage (same path)
 ```rs
-{{/* imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) */}}
+{{/* imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] p=45) */}}
 ```
 **Output**
 ```html
-{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] p=45) }}
 ```
-{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] p=45) }}
 
 ## Usage (relative path ./)
 ```rs

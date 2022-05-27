@@ -34,14 +34,6 @@
 
 {%- endfor %}
 
-{%- if w and h and p %}
-  {%- set padding = h / w * p %}
-{%- elif w and h %}
-  {%- set padding = h / w * 50 %}
-{%- else %}
-  {%- set padding = 50 %}
-{%- endif %}
-
 <style>
   {%- for source in src %}
 
@@ -68,6 +60,21 @@
     {%- set sourcepath = source | split(pat="/") | last %}
     {%- set sourcename = pathtype ~ sourcepath | split(pat=".") | first %}
 
+    {%- if w and h and p %}
+      {%- set padding = h / w * p %}
+    {%- elif w and h %}
+      {%- set padding = h / w * 50 %}
+    {%- elif p %}
+      {%- set metafile = page.path ~ path ~ sourcepath %}
+      {%- set meta = get_image_metadata(path=metafile) %}
+      {%- set padding = meta.height / meta.width * p %}
+      /* height={{meta.height}} width={{meta.width}} (THIS IS BACKWARDS!?) */
+    {%- else %}
+      {%- set padding = 50 %}
+    {%- endif %}
+
+
+
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {
         background-image: url('{{ path | safe }}{{ bg | safe }}');
@@ -76,6 +83,7 @@
         width: {{ p | default(value=50) }}%;
         height: 0;
         padding-top: {{ padding }}%;
+
       }
       #{{ sourcename | safe }}image:hover {
         background-image: url('{{ path | safe }}{{ sourcepath | safe }}');

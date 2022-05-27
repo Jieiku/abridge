@@ -39,7 +39,7 @@
     {%- endblock page_footer %}
     </article>
     {%- block toc %}
-    {%- if page.extra.toc %}
+    {%- if page.extra.toc and config.extra.recent %}
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc %}

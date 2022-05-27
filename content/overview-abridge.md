@@ -1,5 +1,5 @@
 +++
-title = "Abridge Zola Theme and css Framework"
+title = "Abridge Zola Theme"
 date = 2022-05-17
 
 [taxonomies]

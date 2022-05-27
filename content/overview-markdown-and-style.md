@@ -1,5 +1,5 @@
 +++
-title = "Markdown Syntax Guide"
+title = "Markdown and Style Guide"
 description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 date = 2022-05-15
 
@@ -177,3 +177,174 @@ other small creatures.
 during Gopherfest, November 18, 2015.
 
 [^2]: The quote is the first sentence of Aristotle's [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics_(Aristotle)).
+
+
+# Forms:
+
+<form name="contact" method="POST" >
+    <p><label>Name</label>
+        <input type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+    </p>
+    <p><label>Email Address</label>
+        <input type="email" placeholder="name@example.com" id="email" required data-validation-required-message="Please enter your email address.">
+    </p>
+    <p><label>Message</label>
+        <textarea rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+    </p>
+    <div id="success"></div>
+    <p><button type="submit" id="sendMessageButton">Send</button></p>
+    <br>
+    <!-- Select -->
+    <label for="fruit">Fruit</label>
+    <select id="fruit" required>
+        <option value="" selected>Select a fruit…</option>
+        <option>Banana</option>
+        <option>Watermelon</option>
+        <option>Apple</option>
+        <option>Orange</option>
+        <option>Mango</option>
+    </select>
+    <!-- Radios -->
+    <fieldset>
+        <legend>Size</legend>
+        <label for="small">
+        <input type="radio" id="small" name="size" value="small" checked>
+        Small
+        </label>
+        <label for="medium">
+        <input type="radio" id="medium" name="size" value="medium">
+        Medium
+        </label>
+        <label for="large">
+        <input type="radio" id="large" name="size" value="large">
+        Large
+        </label>
+        <label for="extralarge">
+        <input type="radio" id="extralarge" name="size" value="extralarge" disabled>
+        Extra Large
+        </label>
+    </fieldset>
+    <!-- Checkboxes -->
+    <fieldset>
+        <label for="terms">
+        <input type="checkbox" id="terms" name="terms">
+        I agree to the Terms and Conditions
+        </label>
+        <label for="terms_sharing">
+        <input type="checkbox" id="terms_sharing" name="terms_sharing" disabled checked>
+        I agree to share my information with partners
+        </label>
+    </fieldset>
+    <!-- Switches -->
+    <fieldset>
+        <label for="switch">
+        <input type="checkbox" id="switch" name="switch" role="switch">
+        Publish on my profile
+        </label>
+        <label for="switch_disabled">
+        <input type="checkbox" id="switch_disabled" name="switch_disabled" role="switch_disabled" disabled checked>
+        Publish on my profile my accomplishments
+        </label>
+    </fieldset>
+    <br>
+    <!-- Search -->
+    <input type="search" id="search" name="search" placeholder="Search">
+    <!-- File browser -->
+    <label for="file">File browser
+    <input type="file" id="file" name="file">
+    </label>
+    <!-- Range slider -->
+    <label for="range">Range slider
+    <input type="range" min="0" max="100" value="50" id="range" name="range">
+    </label>
+    <!-- Date -->
+    <label for="date">Date
+    <input type="date" id="date" name="date">
+    </label>
+    <!-- Time -->
+    <label for="time">Time
+    <input type="time" id="time" name="time">
+    </label>
+    <!-- Color -->
+    <label for="color">Color
+    <input type="color" id="color" name="color" value="#0eaaaa">
+    </label>
+</form>
+
+# Navs
+
+Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example.
+
+If the nav tag is under the main tag instead of the header tag then the links will have a border:
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">&#60; Previous</a></li>
+            <li><a href="#">Next &#62;</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+# Infinity Flex Grid
+
+## Simple Grid
+
+<section>
+    <section> 1 </section>
+    <section> 2 </section>
+    <section> 3 </section>
+</section>
+<section>
+    <section>1</section>
+    <section>2</section>
+    <section>3</section>
+    <section>4</section>
+</section>
+<section>
+    <section> 1 </section>
+    <section> 2 </section>
+    <section> 3 </section>
+    <section> 4 </section>
+    <section> 5 </section>
+</section>
+
+## Complex grid
+
+<section>
+    <section> 1 </section>
+    <section> 2 </section>
+    <section> 3 </section>
+</section>
+<section>
+    <section style = "--c:2">Merge the first 2 columns</section>
+    <section>2</section>
+    <section>3</section>
+    <section>4</section>
+</section>
+<section>
+    <section> 1 </section>
+    <section style = "--c:3"> Merge 3 columns </section>
+    <section> 3 </section>
+</section>
+<section>
+    <section>1</section>
+    <section style = "--c:2">Merge 2</section>
+    <section style = "--c:3">Merge 3</section>
+    <section>4</section>
+    <section>5</section>
+    <section>6</section>
+    <section>7</section>
+</section>
+<section>
+    <div style = "--c:1"> 1 </div>
+    <div style = "--c:2"> Merge 2 columns</div>
+    <div style = "--c:1"> 3 </div>
+</section>
+
+<style>
+    [style*="--c:"],section>section{
+    background-color:#777;
+    }
+</style>

@@ -45,7 +45,7 @@ author = "Jake G" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
 readtime = true # displays the read time on line with date, tags, categories
 readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read
-recent = true
+recent = true # TOC / index
 recent_items = 9
 footer_credit = true
 #footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>

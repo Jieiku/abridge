@@ -59,6 +59,7 @@
 
     {%- set sourcepath = source | split(pat="/") | last %}
     {%- set sourcename = pathtype ~ sourcepath | split(pat=".") | first %}
+    {%- set sourcetype = pathtype ~ sourcepath | split(pat=".") | last %}
 
     {%- if w and h and p %}
       {%- set padding = h / w * p %}

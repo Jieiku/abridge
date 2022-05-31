@@ -12,6 +12,14 @@ Zola has many shortcodes, and new are easily added, this example shows vimeo.
 
 ## Vimeo
 
-with `vm(id="id_here" title="Youtube - Safe Systems Programming in Rust")`
+with `vm(id="id_here")`
 
-{{ vm(id="514402648" title="Youtube - Safe Systems Programming in Rust") }}
+- `id`: the video id (mandatory)
+- `class`: a class to add to the <div> surrounding the iframe (optional)
+- `autoplay`: when set to "true", the video autoplays on load (optional)
+- `loop`: when set to "true", the video plays on a loop (optional)
+- `noautopause`: when set to "true", the video will not autopause (optional)
+- `title` - set alt title for the iframe (optional, defaults to "Youtube")
+- `cookie` - set to "true" if you want tracking cookies, otherwise it defaults to false.
+
+{{ vm(id="514402648") }}

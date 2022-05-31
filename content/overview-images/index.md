@@ -1,28 +1,104 @@
 +++
-title = "Image Examples"
-date = 2021-05-09
+title = "Image Shortcodes"
+date = 2021-05-19
 
 [taxonomies]
 categories = ["Features"]
-tags = ["images"]
+tags = ["shortcodes","images"]
+[extra]
+toc = true
 +++
 
-Images can be embed using direct or relative paths.
+This post covers the **imghover and img shortcodes**. Images can also be embeded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.
 <!-- more -->
-Use `img(path="./image.jpg", alt="Papaya")` to specify the relative path of image:
 
-{{ img(path="./image.jpg", alt="Papaya") }}
+# img Shortcode
 
-This is an example note with direct image, without using shortcode:
+- src is the path and filename of the image. (mandatory)
+- class sets a class for the image. (optional)
+- alt sets the alt note for the image. (recommended for google lighthouse)
+- w is the width of the image. (recommended for google lighthouse)
+- h is the height of the image. (recommended for google lighthouse)
 
-`![Rust](rust.png)`
+## Usage (same path)
+```rs
+{{/* img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) */}}
+```
+**Output**
+```html
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
+```
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
 
-![Rust](rust.png)
+## Usage (relative path ./)
+```rs
+{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) */}}
+```
+**Output**
+```html
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
+```
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
 
-This is an svg image:
+## Usage (root path /)
+```rs
+{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) */}}
+```
+**Output**
+```html
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
+```
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
 
-<svg class="canon" xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 496 373" height="373" width="496"><g fill="none"><path stroke="#000" stroke-width=".75" d="M.599 372.348L495.263 1.206M.312.633l494.95 370.853M.312 372.633L247.643.92M248.502.92l246.76 370.566M330.828 123.869V1.134M330.396 1.134L165.104 124.515"></path><path stroke="#ED1C24" stroke-width=".75" d="M275.73 41.616h166.224v249.05H275.73zM54.478 41.616h166.225v249.052H54.478z"></path><path stroke="#000" stroke-width=".75" d="M.479.375h495v372h-495zM247.979.875v372"></path><ellipse cx="498.729" cy="177.625" rx=".75" ry="1.25"></ellipse><ellipse cx="247.229" cy="377.375" rx=".75" ry="1.25"></ellipse></g></svg>
+# SVG image directly in code:
+```html
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 489" width="600" height="489"><g fill="#8f1f1d"><path d="M70 324c1 3 3 4 6 4l24 4 2 5-10 20v5l7 4 24-1 4 4-7 21c0 2 0 4 3 6 1 2 4 2 7 2l24-5 4 4-1 22c-1 2 0 4 3 5h6l23-8 6 3 4 22c0 2 1 3 3 4h7l21-13 6 2 8 20 5 5c3 0 5 0 7-2l18-15h5l13 18c1 2 3 4 6 4l5-3 14-18h6l17 16c1 1 4 2 6 1 3 0 5-1 6-3l9-21 6-1 19 14h7c3 0 5-3 5-5l4-21 6-2 22 9 7-1c2-1 3-2 3-5v-21l5-4 24 6c3 0 5 0 6-2 2-2 3-4 2-6l-4-21 3-5 24 2c4 0 6 0 7-3v-5l-9-21 3-5 25-2 5-5-1-5-14-18c0-1-1-19-12-33v-1c-26-36-106-64-201-65-100-2-184 26-206 64-10 10-12 26-11 26l-15 17c-1 3-2 5-1 7z"/><path d="M565 247c-1-3-12-2-14-3l-38 1-4-7 26-38c1-2 7-7 6-9-3-3-12 1-14 1l-39 7-4-6 22-49c0-3 7-15 5-18-2-2-11 6-13 6l-43 28-4-5 11-43c0-3 7-18 5-19-2-2-9 5-12 6l-38 30-5-4 9-51c0-3 3-18 1-19s-15 13-17 14l-30 38-6-3-3-56c0-3 0-14-3-14-3-1-5 8-8 11l-25 50-7-1-13-57c-1-3-2-12-4-12-4 0-5 10-7 13l-15 56-7 1-22-52c-1-2-4-12-7-12-3 1-2 9-3 12l-7 61-6 3-19-27c-3-1-15-19-18-18-2 1 0 21-1 23l1 40-6 4-36-35c-3-1-7-7-10-5-2 2 0 10 0 13l13 53-4 5-41-26c-2-1-10-7-12-4-2 2 3 4 3 7l22 56-5 6-65-22c-3-1-10-5-12-1-1 2 5 6 6 9l49 53-3 7-47-6c-3 0-9-1-11 1-1 4 6 7 7 9l36 40a116 116 0 0 0 14 46c27 50 110 87 209 87 105 0 193-41 214-95 11-15 13-37 12-38l29-31c2-4 9-9 8-11z"/><path d="m99 289-67 10c-13 3-5 5 0 6 14 2 84 3 85 4zm402 3 67 10c13 4 5 6 0 6-14 2-84 5-86 5z"/></g><path d="M227 293s-24-26-47 0c0 0-18 35 0 52 0 0 30 24 47 0 0 0 21-20 0-52z"/><path fill="#fff" d="M200 302c0 11 6 19 14 19 7 0 12-8 12-19 0-10-5-18-12-18-8 0-14 8-14 18z"/><path d="M360 283s-40-17-52 22c0 0-11 47 33 49 0 0 58-10 19-71z"/><path fill="#fff" d="M339 299c0 10 7 20 14 20 8 0 14-10 14-20s-6-18-14-18c-7 0-14 8-14 18z"/></svg>
+```
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 489" width="600" height="489"><g fill="#8f1f1d"><path d="M70 324c1 3 3 4 6 4l24 4 2 5-10 20v5l7 4 24-1 4 4-7 21c0 2 0 4 3 6 1 2 4 2 7 2l24-5 4 4-1 22c-1 2 0 4 3 5h6l23-8 6 3 4 22c0 2 1 3 3 4h7l21-13 6 2 8 20 5 5c3 0 5 0 7-2l18-15h5l13 18c1 2 3 4 6 4l5-3 14-18h6l17 16c1 1 4 2 6 1 3 0 5-1 6-3l9-21 6-1 19 14h7c3 0 5-3 5-5l4-21 6-2 22 9 7-1c2-1 3-2 3-5v-21l5-4 24 6c3 0 5 0 6-2 2-2 3-4 2-6l-4-21 3-5 24 2c4 0 6 0 7-3v-5l-9-21 3-5 25-2 5-5-1-5-14-18c0-1-1-19-12-33v-1c-26-36-106-64-201-65-100-2-184 26-206 64-10 10-12 26-11 26l-15 17c-1 3-2 5-1 7z"/><path d="M565 247c-1-3-12-2-14-3l-38 1-4-7 26-38c1-2 7-7 6-9-3-3-12 1-14 1l-39 7-4-6 22-49c0-3 7-15 5-18-2-2-11 6-13 6l-43 28-4-5 11-43c0-3 7-18 5-19-2-2-9 5-12 6l-38 30-5-4 9-51c0-3 3-18 1-19s-15 13-17 14l-30 38-6-3-3-56c0-3 0-14-3-14-3-1-5 8-8 11l-25 50-7-1-13-57c-1-3-2-12-4-12-4 0-5 10-7 13l-15 56-7 1-22-52c-1-2-4-12-7-12-3 1-2 9-3 12l-7 61-6 3-19-27c-3-1-15-19-18-18-2 1 0 21-1 23l1 40-6 4-36-35c-3-1-7-7-10-5-2 2 0 10 0 13l13 53-4 5-41-26c-2-1-10-7-12-4-2 2 3 4 3 7l22 56-5 6-65-22c-3-1-10-5-12-1-1 2 5 6 6 9l49 53-3 7-47-6c-3 0-9-1-11 1-1 4 6 7 7 9l36 40a116 116 0 0 0 14 46c27 50 110 87 209 87 105 0 193-41 214-95 11-15 13-37 12-38l29-31c2-4 9-9 8-11z"/><path d="m99 289-67 10c-13 3-5 5 0 6 14 2 84 3 85 4zm402 3 67 10c13 4 5 6 0 6-14 2-84 5-86 5z"/></g><path d="M227 293s-24-26-47 0c0 0-18 35 0 52 0 0 30 24 47 0 0 0 21-20 0-52z"/><path fill="#fff" d="M200 302c0 11 6 19 14 19 7 0 12-8 12-19 0-10-5-18-12-18-8 0-14 8-14 18z"/><path d="M360 283s-40-17-52 22c0 0-11 47 33 49 0 0 58-10 19-71z"/><path fill="#fff" d="M339 299c0 10 7 20 14 20 8 0 14-10 14-20s-6-18-14-18c-7 0-14 8-14 18z"/></svg>
 
-<style>
-.canon { background: white; width: 50%; height: auto; }
-</style>
+
+# imghover Shortcode
+
+The first image in the src array is the one compared to all the others.
+
+When you hover your mouse over an image it will display the image to compare.
+
+This can be used to compare only one image with another by passing only two src in the array.
+
+- src is an array of paths and filenames for the images. (mandatory)
+- w is the width of the image.
+- h is the height of the image.
+- p is the percent size that you want the image to use on the page. (50 is the default)
+
+*w and h are used only to calculate the aspect ratio, overall size is set by p*
+
+## Usage (same path)
+```rs
+{{/* imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) */}}
+```
+**Output**
+```html
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+```
+{{ imghover(src=["ferris.svg", "ferris-gesture.svg", "ferris-happy.svg"] w=600 h=400 p=45) }}
+
+## Usage (relative path ./)
+```rs
+{{/* imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) */}}
+```
+**Output**
+```html
+{{ imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
+```
+{{ imghover(src=["./img/ferris.svg", "./img/ferris-gesture.svg"] w=600 h=400 p=45) }}
+
+## Usage (root path /)
+```rs
+{{/* imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) */}}
+```
+**Output**
+```html
+{{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
+```
+{{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
+

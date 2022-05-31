@@ -57,7 +57,6 @@ theme = "abridge"
 ```
 
 Or copy the `config.toml` from the theme directory to your project's root directory:
-(This will give you a base configuration with all config values used)
 
 ```bash
 cp themes/abridge/config.toml config.toml

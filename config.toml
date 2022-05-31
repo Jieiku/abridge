@@ -1,9 +1,7 @@
-base_url = "https://jieiku.github.io/abridge-demo/"
+base_url = "https://jieiku.github.io/abridge-demo" # do NOT include a trailing slash on the base URL
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
-#theme = "abridge"
-
 output_dir = "public"
 compile_sass = true
 build_search_index = true
@@ -17,6 +15,7 @@ taxonomies = [
     {name = "tags", feed = true},
 ]
 
+#theme = "abridge"
 [markdown]
 extra_syntaxes_and_themes = ["highlight_themes"] # Abridge's config.toml
 # In YOUR SITE'S config.toml set to: ["highlight_themes", "themes/abridge/highlight_themes"]
@@ -126,8 +125,8 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 #    {url = "font/Jost-Bold.woff2"},
 #]
 
-katex_enable = false # used to to render mathematical notations, requires js
-katex_auto_render = false
+math = false # katex math js library, used to to render mathematical notations, requires javascript
+math_auto_render = false
 
 ##########################
 # meta/seo/analytic tags

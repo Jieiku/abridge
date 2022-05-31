@@ -1,45 +1,23 @@
-{# {{ img(path="", alt="", caption="", extended_width_pct=1.3, quality=90) }} #}
+{# {{ img(src="ferris.svg" class="" alt="" w=600 h=400) }} #}
 
-{# container_width = (pixel size, px) * (.container's max-width) #}
-{% set container_width = 16 * 42 %}
+{%- set dirtest = src | trim_start_matches(pat="./") %}
+{%- if dirtest is containing("/") %}
+  {%- set reldir = true %}
+{%- endif %}
 
-{# figure_width = container_width - (figure margin_blocks) #}
-{% set figure_width = container_width - (40 * 2) %}
+{%- if src is starting_with("./") and reldir %} {# Relative Path #}
+  {%- set path = src | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+  {%- set path = path ~ "/"  %}
 
-{% if path is starting_with("./") %}
-  {% set relative_path = page.relative_path | split(pat="/") | slice(end=-1) | join(sep="/") %}
-  {% set img_path = path | trim_start_matches(pat="./") %}
-  {% set img_path = relative_path ~ "/" ~ img_path %}
-{% else %}
-  {% set img_path = path %}
-{% endif %}
+{%- elif src is starting_with("/") %} {# Root Path #}
+  {%- set rootpath = src | split(pat="/") | slice(end=-1) | join(sep="/") %}
+  {%- set path = config.base_url ~ rootpath ~ "/"  %}
 
-{% if path is not ending_with(".svg") %}
+{%- else %} {# Same Directory Path #}
+  {%- set path = "" %}
 
-  {% set resize = true %}
-  {% set image_quality = 90 %}
-  {% if quality %}
-    {% set image_quality = quality %}
-  {% endif %}
+{%- endif %}
 
-  {% if extended_width_pct %}
-
-    {% if extended_width_pct == -1 %}
-      {# adjust extended width to container width #}
-      {% set extended_width_pct = 0.042 %}
-    {% endif %}
-    {% set _width = config.extra.images.max_width - figure_width %}
-    {% set extended_width = (extended_width_pct * _width + figure_width) | round | int %}
-    {% if extended_width > config.extra.images.max_width %}
-      {% set extended_width = config.extra.images.max_width %}
-    {% endif %}
-    {% set resized_image = resize_image(path=img_path, width=extended_width, op="fit_width", quality=image_quality) %}
-
-  {% else %}
-    {% set resized_image = resize_image(path=img_path, width=figure_width, op="fit_width", quality=image_quality) %}
-  {% endif %}
-{% endif %}
-<figure>
-  <img src="{% if resize %}{{ resized_image.url }}{% else %}{{ path }}{% endif %}" {% if alt %}alt="{{alt}}"{% endif %}/>
-  {% if caption %}<figcaption>{{ caption | safe }}</figcaption>{% endif %}
-</figure>
+{%- set img = src | split(pat="/") | last %}
+{%- set name = img | split(pat=".") | first %}
+<img src="{{ path | safe }}{{ img | safe }}" {% if class %}class="{{class}}" {% endif %}{% if alt %}alt="{{alt}}" {% endif %}{% if w %}width="{{w}}" {% endif %}{% if h %}height="{{h}}" {% endif %}/>

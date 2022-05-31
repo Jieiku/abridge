@@ -1,6 +1,6 @@
 +++
 title = "Rich Content"
-description = "A brief description of Zola Shortcodes"
+description = "A brief description of custom Shortcodes for Zola that implement modern html elements: video, image, gif, audio."
 date = 2021-05-18
 
 [taxonomies]
@@ -8,6 +8,7 @@ categories = ["Features"]
 tags = ["video", "audio", "images", "shortcodes"]
 [extra]
 toc = true
+keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
 +++
 
 Several custom shortcodes are included to augment CommonMark (courtesy of [d3c3nt theme](https://d3c3nt.figbert.com/posts/rich-content/)), in addition to those [already provided by Zola][built-in]. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.

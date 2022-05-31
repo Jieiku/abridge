@@ -259,9 +259,32 @@ menu_footer = [
 
 Most SEO Tags have been added as well as some important head tags for browser compatibility.
 
-you can review them in the head section of `templates/macros/head.html`, all configurable values should be in config.toml under config.extra
+You can review the SEO tags in the head macro located at `templates/macros/head.html`, all configurable values should be in config.toml under config.extra or in the content markdown files.
 
-SEO is still a work in progress, will be performing more testing and updates as time allows.
+In your post markdown file you should set a title less than 60 characters and a description between 80 and 160 characters in length. The description is what is displayed in search results below the page title. Anywhere that you do not set a page description, the primary site config.description will be used instead.
+
+You should also set page specific keywords unless your keywords defined in config.toml suffice, any keywords that you add to the page are in addition to the ones defined in config.toml, so do not add those same keywords to your page keywords.
+
+You can optionally also set a page specific image for search results by using page.extra.thumbnail. OpenGraph recommends 1200 x 630 (1.9:1). Twitter recommends 2:1 for large and 1:1 for small. If you do not set a page specific thumbnail then the banner defined in config.toml will be used instead.
+
+Refer to [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) for an example:
+```md
++++
+title = "Image Shortcodes"
+description = "Images can be embeded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
+date = 2021-05-19
+
+[taxonomies]
+categories = ["Features"]
+tags = ["shortcodes","images"]
+[extra]
+toc = true
+keywords = "Image, Markdown, Shortcodes, Hover"
+thumbnail = "ferris-gesture.png"
++++
+```
+
+There are tools you can use to test your page SEO metadata, such as: [smallseotools.com](https://smallseotools.com/meta-tags-analyzer/)
 
 ### Templates
 

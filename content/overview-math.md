@@ -1,5 +1,6 @@
 +++
 title = "Mathematical Notations"
+description = "Sample article showcasing the display of Mathematical Notations, made possible by the KaTeX library."
 date = 2021-05-05
 updated = 2022-01-01
 [taxonomies]
@@ -8,6 +9,7 @@ tags = ["shortcodes","Mathematics"]
 [extra]
 math = true
 math_auto_render = true
+keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
 +++
 
 You can use [KaTeX](https://katex.org) to render mathematical notations.

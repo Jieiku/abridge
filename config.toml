@@ -136,7 +136,7 @@ math_auto_render = false
 ##########################
 # meta/seo/analytic tags
 ##########################
-keywords = "Whatever, SEO, keywords, you want" # used for the primary site index
+keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
 twitter = "your-user-name" # used for twitter related
 #google = "Your Google Site verification code."
 #bing = "Your Bing Site verification code."

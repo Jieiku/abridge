@@ -89,7 +89,7 @@
 {%- if config.extra.facebook_publisher %}
   <meta property="article:publisher" content="https://www.facebook.com/{{ config.extra.facebook_publisher }}" />
 {%- endif %}
-  <meta name="copyright" content="{{ title }}" />
+  <meta name="copyright" content="{{ config.title }}" />
 {%- if config.extra.facebook_author %}
   <meta property="article:author" content="https://www.facebook.com/{{ config.extra.facebook_author }}" />
 {%- endif %}
@@ -128,11 +128,11 @@
 {%- endif %}
 
 {%- if page.title %}
-  <meta property="og:title" content="{{ page.title }} | {{ title }}" />
-  <meta name="twitter:title" content="{{ page.title }} | {{ title }}" />
+  <meta property="og:title" content="{{ page.title }} | {{ config.title }}" />
+  <meta name="twitter:title" content="{{ page.title }} | {{ config.title }}" />
 {%- else %}
-  <meta property="og:title" content="{{ title }}" />
-  <meta name="twitter:title" content="{{ title }}" />
+  <meta property="og:title" content="{{ config.title }}" />
+  <meta name="twitter:title" content="{{ config.title }}" />
 {%- endif %}
 
 
@@ -177,7 +177,7 @@
 {%- endif %}
 
 {#- SEO MEDIA END #}
-  <meta property="og:site_name" content="{{ title }}" />
+  <meta property="og:site_name" content="{{ config.title }}" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
 {%- if page.updated %}

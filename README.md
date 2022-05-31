@@ -271,11 +271,11 @@ All pages extend to `base.html`, and you can customize them as need.
 
 ### Optimize PNG files:
 
-All png files under the static directory can be optimized using optipng, this usually results in files 1/2 the size:
+All png files can be optimized using [oxipng](https://github.com/shssoichiro/oxipng), this usually results in files 1/2 the size:
 
 ```bash
 cd static
-optipng -o7 -zm1-9 -strip all *.png
+oxipng -o max --strip all -a -Z *.png
 ```
 
 ### Consolidate two search js files into one:

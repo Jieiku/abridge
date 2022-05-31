@@ -1,12 +1,12 @@
 {
     "name": "Abridge Zola Theme",
     "short_name": "Abridge",
-    "start_url": "https://abridge.netlify.app/",
     "description": "Fast & Lightweight Zola Theme",
-    "scope": "/",
-    "display": "standalone",
-    "theme_color": "#222222",
+    "start_url": "https://abridge.netlify.app/",
+    "scope": "https://abridge.netlify.app/",
     "background_color": "#111111",
+    "theme_color": "#222222",
+    "display": "standalone",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

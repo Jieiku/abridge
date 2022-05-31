@@ -30,6 +30,7 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 katex_enable = false # used to to render mathematical notations, requires js
+katex_auto_render = false
 recent = true
 recent_items = 9
 footer_credit = true

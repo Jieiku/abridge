@@ -30,7 +30,7 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 language_code = "en-US"
-author = "Jake" # Put Your Name here
+author = "Jake G" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
 readtime = true # displays the read time on line with date, tags, categories
 readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read
@@ -71,7 +71,6 @@ security_header_referrer = "strict-origin-when-cross-origin"
 #security_header_csp = "default-src 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.jsdelivr.net fonts.googleapis.com; object-src 'self'; frame-src 'self' *.youtube.com; img-src 'self' data: cdn.cloudflare.com; script-src 'self' 'unsafe-inline' *.youtube.com maps.gstatic.com *.googleapis.com *.google-analytics.com cdnjs.cloudflare.com"
 
 
-
 #################
 # Resource Files
 #################
@@ -105,7 +104,7 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 # For Locally loaded fonts review: abridge/sass/skins/_abridge_fonts.scss
 
 # For externally loaded Fonts, make sure to include the FULL url including the http/https prefix
-#fonts = [ {url = "https://fonts.googleapis.com/css?family=Fira+Code:400,italic|Montserrat:400,700,italic"} ]
+#fonts = [ {url = "https://fonts.googleapis.com/css?family=Montserrat:400,700,italic|Fira+Code:400,italic"} ]
 
 # Local fonts are defined in the css, defining them here only adds the preload tag to the head.
 # preload will eliminate Content Layout Shift, but will hurt with page load time.

@@ -5,13 +5,13 @@
 }
 @font-face {
     font-family: 'SourceSansPro';
-    src: local("SourceSansPro"), url("/font/SourceSansPro-italic.woff2");//latin italic
+    src: local("SourceSansPro-Italic"), url("/font/SourceSansPro-Italic.woff2");//latin italic
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'SourceSansPro';
-    src: local("SourceSansPro"), url("/font/SourceSansPro-Bold.woff2");//latin bold
+    src: local("SourceSansPro-Bold"), url("/font/SourceSansPro-Bold.woff2");//latin bold
     font-weight: bold;
     font-display: swap;
 }

@@ -1,4 +1,15 @@
 // Embedded content
+.yvi {
+  position: absolute;
+  top: 0;
+  left: 0
+}
+.yv {//youtube and vimeo
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden
+}
 img,
 video,
 svg {

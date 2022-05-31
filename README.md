@@ -3,7 +3,9 @@
 
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, a class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy).
+Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before svg icons, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://web.dev/measure/?url=https%3A%2F%2Fabridge.netlify.app) and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
+
+There is also an [Abridge-minimal](https://github.com/jieiku/abridge.css) Theme which is used to showcase the [abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)
 
 Maintainence of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
 

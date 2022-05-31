@@ -40,7 +40,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   {% block css %}<link rel="stylesheet" href="{{ get_url(path="abridge.css", trailing_slash=false, cachebust=true) }}">{% endblock css %}
-  <link rel="shortcut icon" href="/favicon.png" sizes="16x16" type="image/png"/>
+  <link rel="shortcut icon" href="{{ get_url(path="favicon.png", trailing_slash=false) }}" sizes="16x16" type="image/png"/>
   <link rel="canonical" href="{{ get_url(path="/") }}">
   {% if config.generate_feed %}<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="atom.xml") }}">{% endif %}
   {% block ogp_head %}
@@ -62,8 +62,8 @@
   <meta name="twitter:url" content="{{ current_url | safe }}">{% endblock current_url %}
 
   {% if config.extra.social.twitter %}
-  <meta name="twitter:site" content="@{{ config.extra.social.twitter }}">
-  <meta name="twitter:creator" content="@{{ config.extra.social.twitter }}">
+  <meta name="twitter:site" content="@{{ config.extra.twitter }}">
+  <meta name="twitter:creator" content="@{{ config.extra.twitter }}">
   {% endif %}
 
   {% if page.extra.thumbnail %}

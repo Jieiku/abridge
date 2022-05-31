@@ -1,5 +1,5 @@
 {% macro social_links(social_config) %}<span>{% set base_url = get_url(path="", lang=lang) %}
-{% if config.generate_feed %}      <a href="{{ get_url(path="atom.xml") }}" target="_blank"><span class="svg rss" title="Rss"></span></a>{% endif %}
+{% if config.generate_feed %}{% if config.extra.social.feed %}      <a href="{{ get_url(path="atom.xml") }}" target="_blank"><span class="svg rss" title="Rss"></span></a>{% endif %}{% endif %}
 
 {% if social_config.mail %}      <a href="mailto:{{ social_config.mail }}" target="_blank"><span class="svg mail" title="Mail"></span></a>{% endif %}
 {% if social_config.mastodon %}      <a href="https://mastodon.social/{{ social_config.mastodon }}/" target="_blank"><span class="svg mastodon" title="Mastodon"></span></a>{% endif %}

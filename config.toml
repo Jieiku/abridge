@@ -1,4 +1,4 @@
-base_url = "https://jieiku.github.io/abridge/"
+base_url = "https://jieiku.github.io/abridge-demo/"
 title = "abridge - Zola Theme"
 description = "abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
@@ -54,9 +54,12 @@ menu_footer = [
     {url = "/privacy/", name = "Privacy", slash = true},
     {url = "/sitemap.xml", name = "Sitemap", slash = false},
 ]
+# meta tags
+twitter = "your-user-name"
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]
+feed = true
 mail = "name@example.com"
 mastodon = "@your-user-name"
 element = "matrix.example.com"

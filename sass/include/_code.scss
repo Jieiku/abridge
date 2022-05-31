@@ -5,22 +5,22 @@ kbd,
 samp,
 tt,
 var {
-	border-radius: var(--br);
-	background: var(--c2);
-	font-family: var(--fm);
-	line-height: initial;
-	font-size: .8rem;
-	padding: .3rem .2rem;
+  border-radius: var(--br);
+  background: var(--c2);
+  font-family: var(--fm);
+  line-height: initial;
+  font-size: .8rem;
+  padding: .3rem .2rem;
 }
 pre {
   display: block;
-	overflow-x: auto;
+  overflow-x: auto;
   -ms-overflow-style: scrollbar;
-	white-space: pre;
+  white-space: pre;
   > code {
-		display: block;
-		background: transparent;
-	}
+    display: block;
+    background: transparent;
+  }
 }
 
 // kbd
@@ -28,6 +28,6 @@ kbd {
   background-color: var(--f2);
   color: var(--c1);
   vertical-align: baseline;
-	font-size: 1rem;
-	padding: .2rem;
+  font-size: 1rem;
+  padding: .2rem;
 }

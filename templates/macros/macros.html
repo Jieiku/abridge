@@ -19,3 +19,28 @@
 {%- macro footer(page) %}
 <h3><a href="#">Back to top</a></h3>
 {%- endmacro footer %}
+
+
+{%- macro pagination(paginator)%}
+  {%- if paginator.number_pagers > 1 %}
+      <nav>
+        <div>{%- if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %} </div>
+        <div>
+          <ul>
+            {%- for i in range(start=1, end=paginator.number_pagers+1) %}
+            <li>
+              {%- if i == paginator.current_index %}
+              <a class="cnav" href="#">{{i}}</a>
+              {%- elif i > 1 %}
+              <a href="{{paginator.base_url | safe }}{{i ~ '/'}}">{{i}}</a>
+              {%- else %}
+              <a href="{{paginator.first | safe }}">{{i}}</a>
+              {%- endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+        </div>
+        <div>{%- if paginator.next %}<a href="{{ paginator.next | safe }}">Next &#62;</a>{% endif %} </div>
+      </nav>
+  {%- endif %}
+{%- endmacro %}

@@ -6,9 +6,9 @@
 {%- macro resource() %}
 {%- if config.extra.fonts_load and config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
-  <link rel="preload" as="style" href="{{ i.url | safe }}">
+  <link rel="preload" href="{{ i.url | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
   {%- else %}
-  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false, cachebust=true) }}">
+  <link rel="preload" href="{{ get_url(path=i.url, trailing_slash=false) }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
   {%- endif %}
 {%- endfor %}{%- endif %}
 
@@ -17,8 +17,12 @@
 {%- endif %}
 
 {%- if config.build_search_index %}
+  {%- if config.extra.js_search_index %}
   <script defer type="text/javascript" src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"></script>
+  {%- endif %}
+  {%- if config.extra.js_search %}
   <script defer type="text/javascript" src="{{ get_url(path=config.extra.js_search, trailing_slash=false, cachebust=true) | safe }}"></script>
+  {%- endif %}
 {%- endif %}
 
 {%- if config.generate_feed %}

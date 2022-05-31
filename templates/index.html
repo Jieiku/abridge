@@ -40,25 +40,7 @@
         </p>
       </article>
     {%- endfor %}
-    {%- if paginator.previous or paginator.next %}
-      <nav>
-        <div>{%- if paginator.previous %}<a href="{{ paginator.previous | safe }}">&#60; Previous</a> {% endif %} </div>
-        <div>
-          <ul>
-            {%- for pager in range(start=1, end=paginator.number_pagers+1) %}
-            <li>
-              {%- if pager == 1 %}
-              <a class="pag {% if paginator.current_index == pager %}cnav{% endif %}" href='{{ get_url(path="/", trailing_slash=true) }}'>{{pager}}</a>
-              {%- else %}
-              <a class="pag {% if paginator.current_index == pager %}cnav{% endif %}" href='{{ paginator.base_url }}{{pager}}'>{{pager}}</a>
-              {%- endif %}
-            </li>
-            {%- endfor %}
-          </ul>
-        </div>
-        <div>{%- if paginator.next %}<a href="{{ paginator.next | safe }}">Next &#62;</a>{% endif %} </div>
-      </nav>
-    {%- endif %}
+    {{- macros::pagination(paginator=paginator) }}
     </div>
   {%- set section_item = get_section(path="_index.md") %}
   {%- if config.extra.recent | default(value=true) %}

@@ -1,32 +1,32 @@
 {%- macro stylesheet() %}
-  <link rel="stylesheet" href="{{ get_url(path=config.extra.stylesheet, trailing_slash=false, cachebust=true) | safe }}">
+  <link rel="stylesheet" href="{{ get_url(path=config.extra.stylesheet, trailing_slash=false, cachebust=true) | safe }}" />
 {%- endmacro %}
 
 
 {%- macro resource() %}
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
-  <link rel="preload" as="style" href="{{ i.url | safe }}" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+  <link rel="preload" as="style" href="{{ i.url | safe }}" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
   {%- else %}
-  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" crossorigin />
   {%- endif %}
 {%- endfor %}{%- endif %}
 
 {%- if config.extra.fontawesome %}
-  <link rel="preload" href="{{ config.extra.fontawesome | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+  <link rel="preload" href="{{ config.extra.fontawesome | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
 {%- endif %}
 
 {%- if config.build_search_index %}
   {%- if config.extra.js_search_index %}
-  <script defer type="text/javascript" src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"></script>
+  <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"></script>
   {%- endif %}
   {%- if config.extra.js_search %}
-  <script defer type="text/javascript" src="{{ get_url(path=config.extra.js_search, trailing_slash=false, cachebust=true) | safe }}"></script>
+  <script defer src="{{ get_url(path=config.extra.js_search, trailing_slash=false, cachebust=true) | safe }}"></script>
   {%- endif %}
 {%- endif %}
 
 {%- if config.generate_feed %}
-  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}">
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" />
 {%- endif %}
 
 {%- endmacro %}
@@ -34,19 +34,19 @@
 
 {%- macro favicons() %}
   {%- if config.extra.favicon_theme_color %}
-  <meta name="theme-color" content="{{ config.extra.favicon_theme_color }}">
+  <meta name="theme-color" content="{{ config.extra.favicon_theme_color }}" />
   {%- endif %}
 
   {%- if config.extra.favicon_ms_color %}
-  <meta name="msapplication-TileColor" content="{{ config.extra.favicon_ms_color }}">
+  <meta name="msapplication-TileColor" content="{{ config.extra.favicon_ms_color }}" />
   {%- endif %}
 
   {%- if config.extra.favicon_webmanifest %}
-  <link rel="manifest" href="{{ get_url(path=config.extra.favicon_webmanifest, trailing_slash=false) | safe }}">
+  <link rel="manifest" href="{{ get_url(path=config.extra.favicon_webmanifest, trailing_slash=false) | safe }}" />
   {%- endif %}
 
   {%- if config.extra.favicon_mask and config.extra.favicon_mask_color %}
-  <link rel="mask-icon" href="{{ get_url(path=config.extra.favicon_mask, trailing_slash=false) | safe }}" color="{{ config.extra.favicon_mask_color }}">
+  <link rel="mask-icon" href="{{ get_url(path=config.extra.favicon_mask, trailing_slash=false) | safe }}" color="{{ config.extra.favicon_mask_color }}" />
   {%- endif %}
 
   {%- if config.extra.favicon180 %}
@@ -69,11 +69,11 @@
 {#- is_404:        using for the 404.html template -#}
 {%- macro seo( title="",title_addition="",description="",type="website",is_home=false,is_404=false,is_page=false,page_images="",page_section="",created_time="2021-07-04T07:07:00-07:00",  updated_time="2021-07-04T07:07:00-07:00" ) %}
 {%- if is_404 -%}
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="noindex, follow" />
 {%- else -%}
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 {%- endif -%}
 
 {%- if current_url %}
@@ -84,25 +84,25 @@
   <title>{{ title ~ title_addition }}</title>
 
 {%- if config.extra.author %}
-  <meta name="author" content="{{ config.extra.author }}">
+  <meta name="author" content="{{ config.extra.author }}" />
 {%- endif %}
 {%- if config.extra.facebook_publisher %}
-  <meta property="article:publisher" content="https://www.facebook.com/{{ config.extra.facebook_publisher }}">
+  <meta property="article:publisher" content="https://www.facebook.com/{{ config.extra.facebook_publisher }}" />
 {%- endif %}
-  <meta name="copyright" content="{{ title }}">
+  <meta name="copyright" content="{{ title }}" />
 {%- if config.extra.facebook_author %}
-  <meta property="article:author" content="https://www.facebook.com/{{ config.extra.facebook_author }}">
+  <meta property="article:author" content="https://www.facebook.com/{{ config.extra.facebook_author }}" />
 {%- endif %}
 {%- if page.description %}
   <meta name="description" content="{{ page.description }}" />
 {%- else %}
   <meta name="description" content="{{ config.description }}" />
 {%- endif %}
-  <link rel="canonical" href="{{ page_url | safe }}">
+  <link rel="canonical" href="{{ page_url | safe }}" />
 {%- if page.extra.keywords %}
-  <meta name="keywords" content="{{ page.extra.keywords }}, {{ config.extra.keywords }}">
+  <meta name="keywords" content="{{ page.extra.keywords }}, {{ config.extra.keywords }}" />
 {%- else %}
-  <meta name="keywords" content="{{ config.extra.keywords }}">
+  <meta name="keywords" content="{{ config.extra.keywords }}" />
 {%- endif %}
 
 {#- Extra SEO START #}
@@ -110,87 +110,87 @@
 {%- if not is_404 %}
 
 {%- if config.extra.google %}
-  <meta name="google-site-verification" content="{{ config.extra.google | safe }}">
+  <meta name="google-site-verification" content="{{ config.extra.google | safe }}" />
 {%- endif %}
 
 {%- if config.extra.bing %}
-  <meta name="msvalidate.01" content="{{ config.extra.bing | safe}}">
+  <meta name="msvalidate.01" content="{{ config.extra.bing | safe}}" />
 {%- endif %}
-  <meta property="og:url" content="{{ page_url | safe }}">
-  <meta name="twitter:url" content="{{ page_url | safe }}">
+  <meta property="og:url" content="{{ page_url | safe }}" />
+  <meta name="twitter:url" content="{{ page_url | safe }}" />
 
 {%- if page.description %}
-  <meta property="og:description" content="{{ page.description }}">
-  <meta name="twitter:description" content="{{ page.description }}">
+  <meta property="og:description" content="{{ page.description }}" />
+  <meta name="twitter:description" content="{{ page.description }}" />
 {%- else %}
-  <meta property="og:description" content="{{ config.description }}">
-  <meta name="twitter:description" content="{{ config.description}}">
+  <meta property="og:description" content="{{ config.description }}" />
+  <meta name="twitter:description" content="{{ config.description}}" />
 {%- endif %}
 
 {%- if page.title %}
-  <meta property="og:title" content="{{ page.title }} | {{ title }}">
-  <meta name="twitter:title" content="{{ page.title }} | {{ title }}">
+  <meta property="og:title" content="{{ page.title }} | {{ title }}" />
+  <meta name="twitter:title" content="{{ page.title }} | {{ title }}" />
 {%- else %}
-  <meta property="og:title" content="{{ title }}">
-  <meta name="twitter:title" content="{{ title }}">
+  <meta property="og:title" content="{{ title }}" />
+  <meta name="twitter:title" content="{{ title }}" />
 {%- endif %}
 
 
 {#- SEO MEDIA START #}
 {%- if page.extra.thumbnail %}
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}">
-  <meta property="og:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}" />
 
 {%- elif page.extra.static_thumbnail %}
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_large_image" />
   {%- if page.extra.static_thumbnail is matching("^http[s]?://") %}
-  <meta name="twitter:image" content="{{ page.extra.static_thumbnail }}">
-  <meta property="og:image" content="{{ page.extra.static_thumbnail }}">
+  <meta name="twitter:image" content="{{ page.extra.static_thumbnail }}" />
+  <meta property="og:image" content="{{ page.extra.static_thumbnail }}" />
   {%- else %}
-  <meta name="twitter:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}">
-  <meta property="og:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}">
+  <meta name="twitter:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}" />
   {%- endif %}
 
 {%- elif config.extra.banner %}
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
-  <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}" />
 
 {%- else %}
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary" />
 
 {%- endif %}
 
 {%- if config.extra.open.audio %}
-  <meta property="og:audio" content="{{ config.extra.open.audio }}">
+  <meta property="og:audio" content="{{ config.extra.open.audio }}" />
 {%- endif %}
 
 {%- if config.extra.open.locale %}
-  <meta property="og:locale" content="{{ config.extra.open.locale }}">
+  <meta property="og:locale" content="{{ config.extra.open.locale }}" />
 {%- endif %}
 
 {%- if config.extra.open.videos %}
   {%- for video in config.extra.open.videos %}
-  <meta property="og:video" content="{{ get_url(path=video) }}">
+  <meta property="og:video" content="{{ get_url(path=video) }}" />
   {%- endfor %}
 {%- endif %}
 
 {#- SEO MEDIA END #}
-  <meta property="og:site_name" content="{{ title }}">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ title }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
 {%- if page.updated %}
-  <meta property="og:updated_time" content="{{ page.updated | date(format='%F') }}">
+  <meta property="og:updated_time" content="{{ page.updated | date(format='%F') }}" />
 {%- elif page.date %}
-  <meta property="og:updated_time" content="{{ page.date | date(format='%F') }}">
+  <meta property="og:updated_time" content="{{ page.date | date(format='%F') }}" />
 {%- else %}
-  <meta property="og:updated_time" content="{{ updated_time }}">
+  <meta property="og:updated_time" content="{{ updated_time }}" />
 {%- endif %}
 
 {%- if config.extra.social.twitter %}
-  <meta name="twitter:site" content="@{{ config.extra.twitter }}">
-  <meta name="twitter:creator" content="@{{ config.extra.twitter }}">
+  <meta name="twitter:site" content="@{{ config.extra.twitter }}" />
+  <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
 {%- endif %}
 
 
@@ -202,10 +202,10 @@
 
 {%- macro security() %}
   {%- if config.extra.security_header_referrer %}
-  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}">
+  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}" />
   {%- endif %}
   {%- if config.extra.security_header_csp %}
-  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}" />
   {%- endif %}
 {%- endmacro %}
 
@@ -214,7 +214,7 @@
 {# https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
 {%- macro math() %}
   {%- if config.extra.math or page.extra.math %}
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
   {%- if config.extra.math_auto_render or page.extra.math_auto_render %}

@@ -103,3 +103,75 @@ $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
 $icon-x: true !default;// x symbol
 // add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>
+
+:root {
+  // Spacings
+  --s1: .5rem;
+  --s2: 1rem;
+  --rc: .5rem; //radius corners
+
+  // Borders
+  --br: 0.25rem; //border radius
+  --bw: 0.0625rem; //border width
+  --ow: 0.1875rem; //outline width
+
+  --fs: 1rem; //font-size
+  --lh: 1.5; //line-height
+  --lhh: 1.2; //line-height headers
+  --fw: 400; //font-weight
+  --fh: 700; //font-weight h1-h6
+
+  // Responsive typography
+  @if $enable-responsive-typography {
+    @if map-get($breakpoints, "sm") {
+      @media (min-width: map-get($breakpoints, "sm")) {
+        --fs: 1rem;
+      }
+    }
+    @if map-get($breakpoints, "md") {
+      @media (min-width: map-get($breakpoints, "md")) {
+        --fs: 1.04rem;
+      }
+    }
+    @if map-get($breakpoints, "lg") {
+      @media (min-width: map-get($breakpoints, "lg")) {
+        --fs: 1.08rem;
+      }
+    }
+    @if map-get($breakpoints, "xl") {
+      @media (min-width: map-get($breakpoints, "xl")) {
+        --fs: 1.12rem;
+      }
+    }
+  }
+
+  // Responsives spacings
+  @if $enable-responsive-spacings {
+    // Sectionning
+    body > header,
+    body > main,
+    body > footer,
+    section {
+      @if map-get($breakpoints, "sm") {
+        @media (min-width: map-get($breakpoints, "sm")) {
+          --s1: .5rem;
+        }
+      }
+      @if map-get($breakpoints, "md") {
+        @media (min-width: map-get($breakpoints, "md")) {
+          --s1: .6rem;
+        }
+      }
+      @if map-get($breakpoints, "lg") {
+        @media (min-width: map-get($breakpoints, "lg")) {
+          --s1: .7rem;
+        }
+      }
+      @if map-get($breakpoints, "xl") {
+        @media (min-width: map-get($breakpoints, "xl")) {
+          --s1: .8rem;
+        }
+      }
+    }
+  }
+}

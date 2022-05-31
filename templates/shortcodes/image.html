@@ -1,7 +1,7 @@
 <picture>
   {% for source in sources -%}
     {% set type = source | split(pat=".") | last -%}
-    <source srcset="{{ config.base_url | safe}}{{ page.path | safe }}{{ source | safe }}" type="{{ 'img/' ~ type }}">
+    <source srcset="{{ config.base_url | safe}}{{ page.path | safe }}{{ source | safe }}" type="{{ 'img/' ~ type }}" />
   {% endfor -%}
-  <img src="{{ fpath }}" alt="{{ falt | default(value='Image') }}" {% if fw %}width="{{fw}}" {% endif %}{% if fh %}height="{{fh}}" {% endif %}/>
+  <img src="{{ fpath }}" alt="{{ falt | default(value='Image') }}"{% if fw %} width="{{fw}}"{% endif %}{% if fh %} height="{{fh}}"{% endif %} />
 </picture>

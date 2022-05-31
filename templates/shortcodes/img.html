@@ -1,5 +1,3 @@
-{# {{ img(src="ferris.svg" class="" alt="" w=600 h=400) }} #}
-
 {%- set dirtest = src | trim_start_matches(pat="./") %}
 {%- if dirtest is containing("/") %}
   {%- set reldir = true %}
@@ -20,4 +18,4 @@
 
 {%- set img = src | split(pat="/") | last %}
 {%- set name = img | split(pat=".") | first %}
-<img src="{{ path | safe }}{{ img | safe }}" {% if class %}class="{{class}}" {% endif %}{% if alt %}alt="{{alt}}" {% endif %}{% if w %}width="{{w}}" {% endif %}{% if h %}height="{{h}}" {% endif %}/>
+<img src="{{ path | safe }}{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />

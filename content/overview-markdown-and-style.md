@@ -178,8 +178,22 @@ during Gopherfest, November 18, 2015.
 
 [^2]: The quote is the first sentence of Aristotle's [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics_(Aristotle)).
 
+## Navs
 
-## Forms:
+Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example.
+
+If the nav tag is under the main tag instead of the header tag then the links will have a border:
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">&#60; Previous</a></li>
+            <li><a href="#">Next &#62;</a></li>
+        </ul>
+    </nav>
+</header>
+
+## Forms
 
 <form name="contact" method="POST" >
     <p><label>Name</label>
@@ -242,7 +256,7 @@ during Gopherfest, November 18, 2015.
         Publish on my profile
         </label>
         <label for="switch_disabled">
-        <input type="checkbox" id="switch_disabled" name="switch_disabled" role="switch_disabled" disabled checked>
+        <input type="checkbox" id="switch_disabled" name="switch_disabled" disabled checked>
         Publish on my profile my accomplishments
         </label>
     </fieldset>
@@ -270,81 +284,3 @@ during Gopherfest, November 18, 2015.
     <input type="color" id="color" name="color" value="#0eaaaa">
     </label>
 </form>
-
-## Navs
-
-Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example.
-
-If the nav tag is under the main tag instead of the header tag then the links will have a border:
-
-<header>
-    <nav>
-        <ul>
-            <li><a href="#">&#60; Previous</a></li>
-            <li><a href="#">Next &#62;</a></li>
-        </ul>
-    </nav>
-</header>
-
-
-## Infinity Flex Grid
-
-### Simple Grid
-
-<section>
-    <section> 1 </section>
-    <section> 2 </section>
-    <section> 3 </section>
-</section>
-<section>
-    <section>1</section>
-    <section>2</section>
-    <section>3</section>
-    <section>4</section>
-</section>
-<section>
-    <section> 1 </section>
-    <section> 2 </section>
-    <section> 3 </section>
-    <section> 4 </section>
-    <section> 5 </section>
-</section>
-
-### Complex grid
-
-<section>
-    <section> 1 </section>
-    <section> 2 </section>
-    <section> 3 </section>
-</section>
-<section>
-    <section style = "--c:2">Merge the first 2 columns</section>
-    <section>2</section>
-    <section>3</section>
-    <section>4</section>
-</section>
-<section>
-    <section> 1 </section>
-    <section style = "--c:3"> Merge 3 columns </section>
-    <section> 3 </section>
-</section>
-<section>
-    <section>1</section>
-    <section style = "--c:2">Merge 2</section>
-    <section style = "--c:3">Merge 3</section>
-    <section>4</section>
-    <section>5</section>
-    <section>6</section>
-    <section>7</section>
-</section>
-<section>
-    <div style = "--c:1"> 1 </div>
-    <div style = "--c:2"> Merge 2 columns</div>
-    <div style = "--c:1"> 3 </div>
-</section>
-
-<style>
-    [style*="--c:"],section>section{
-    background-color:#777;
-    }
-</style>

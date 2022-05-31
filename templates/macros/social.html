@@ -1,47 +1,45 @@
 {%- macro social_links(social_config) %}
 {%- set base_url = get_url(path="", lang=lang) %}
-        <span>
-          {%- if config.generate_feed %}{%- if config.extra.social.feed %}
-          <a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank"><span class="svg rss" title="Atom/RSS Feed"></span></a>{% endif %}{% endif %}
-          {%- if social_config.mail %}
-          <a href="mailto:{{ social_config.mail }}" target="_blank"><span class="svg mail" title="Mail"></span></a>{% endif %}
-          {%- if social_config.mastodon %}
-          <a href="{{ social_config.mastodon }}/" target="_blank"><span class="svg mastodon" title="Mastodon"></span></a>{% endif %}
-          {%- if social_config.element %}
-          <a href="https://{{ social_config.element }}/" target="_blank"><span class="svg element" title="Element"></span></a>{% endif %}
-          {%- if social_config.matrix %}
-          <a href="https://{{ social_config.matrix }}/" target="_blank"><span class="svg matrix" title="Matrix"></span></a>{% endif %}
-          {%- if social_config.twitter %}
-          <a href="https://twitter.com/{{ social_config.twitter }}/" target="_blank"><span class="svg twitter" title="Twitter"></span></a>{% endif %}
-          {%- if social_config.facebook %}
-          <a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><span class="svg facebook" title="Facebook"></span></a>{% endif %}
-          {%- if social_config.linkedin %}
-          <a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><span class="svg linkedin" title="LinkedIn"></span></a>{% endif %}
-          {%- if social_config.researchgate %}
-          <a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><span class="svg researchgate" title="ResearchGate"></span></a>{% endif %}
-          {%- if social_config.gitlab %}
-          <a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><span class="svg gitlab" title="Gitlab"></span></a>{% endif %}
-          {%- if social_config.github %}
-          <a href="https://github.com/{{ social_config.github }}/" target="_blank"><span class="svg github" title="Github"></span></a>{% endif %}
-          {%- if social_config.bitbucket %}
-          <a href="https://bitbucket.org/{{ social_config.bitbucket }}/" target="_blank"><span class="svg bitbucket" title="Bitbucket"></span></a>{% endif %}
-          {%- if social_config.python %}
-          <a href="https://pypi.org/user/{{ social_config.python }}/" target="_blank"><span class="svg python" title="Python"></span></a>{% endif %}
-          {%- if social_config.docker %}
-          <a href="https://hub.docker.com/u/{{ social_config.docker }}/" target="_blank"><span class="svg docker" title="Docker"></span></a>{% endif %}
-          {%- if social_config.stack %}
-          <a href="https://stackoverflow.com/users/{{ social_config.stack }}/" target="_blank"><span class="svg stack" title="Stack"></span></a>{% endif %}
-          {%- if social_config.instagram %}
-          <a href="https://www.instagram.com/{{ social_config.instagram }}/" target="_blank"><span class="svg instagram" title="Instagram"></span></a>{% endif %}
-          {%- if social_config.pinterest %}
-          <a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank"><span class="svg pinterest" title="Pinterest"></span></a>{% endif %}
-          {%- if social_config.twitch %}
-          <a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><span class="svg twitch" title="Twitch"></span></a>{% endif %}
-          {%- if social_config.youtube %}
-          <a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><span class="svg youtube" title="YouTube"></span></a>{% endif %}
-          {%- if social_config.buymeacoffee %}
-          <a href="https://www.buymeacoffee.com/{{ social_config.buymeacoffee }}/" target="_blank"><span class="svg buymeacoffee" title="Buy Me A Coffee"></span></a>{% endif %}
-          {%- if social_config.github_sponsor %}
-          <a href="https://github.com/sponsors/{{ social_config.github_sponsor }}/" target="_blank"><span class="svg github-sponsor" title="GitHub Sponsor"></span></a>{% endif %}
-        </span>
+        {%- if config.generate_feed %}{%- if config.extra.social.feed %}
+        <a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank"><i class="svg rss" title="Atom/RSS Feed"></i></a>{% endif %}{% endif %}
+        {%- if social_config.mail %}
+        <a href="mailto:{{ social_config.mail }}" target="_blank"><i class="svg mail" title="Mail"></i></a>{% endif %}
+        {%- if social_config.mastodon %}
+        <a href="{{ social_config.mastodon }}/" target="_blank"><i class="svg mastodon" title="Mastodon"></i></a>{% endif %}
+        {%- if social_config.element %}
+        <a href="https://{{ social_config.element }}/" target="_blank"><i class="svg element" title="Element"></i></a>{% endif %}
+        {%- if social_config.matrix %}
+        <a href="https://{{ social_config.matrix }}/" target="_blank"><i class="svg matrix" title="Matrix"></i></a>{% endif %}
+        {%- if social_config.twitter %}
+        <a href="https://twitter.com/{{ social_config.twitter }}/" target="_blank"><i class="svg twitter" title="Twitter"></i></a>{% endif %}
+        {%- if social_config.facebook %}
+        <a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><i class="svg facebook" title="Facebook"></i></a>{% endif %}
+        {%- if social_config.linkedin %}
+        <a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><i class="svg linkedin" title="LinkedIn"></i></a>{% endif %}
+        {%- if social_config.researchgate %}
+        <a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><i class="svg researchgate" title="ResearchGate"></i></a>{% endif %}
+        {%- if social_config.gitlab %}
+        <a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><i class="svg gitlab" title="Gitlab"></i></a>{% endif %}
+        {%- if social_config.github %}
+        <a href="https://github.com/{{ social_config.github }}/" target="_blank"><i class="svg github" title="Github"></i></a>{% endif %}
+        {%- if social_config.bitbucket %}
+        <a href="https://bitbucket.org/{{ social_config.bitbucket }}/" target="_blank"><i class="svg bitbucket" title="Bitbucket"></i></a>{% endif %}
+        {%- if social_config.python %}
+        <a href="https://pypi.org/user/{{ social_config.python }}/" target="_blank"><i class="svg python" title="Python"></i></a>{% endif %}
+        {%- if social_config.docker %}
+        <a href="https://hub.docker.com/u/{{ social_config.docker }}/" target="_blank"><i class="svg docker" title="Docker"></i></a>{% endif %}
+        {%- if social_config.stack %}
+        <a href="https://stackoverflow.com/users/{{ social_config.stack }}/" target="_blank"><i class="svg stack" title="Stack"></i></a>{% endif %}
+        {%- if social_config.instagram %}
+        <a href="https://www.instagram.com/{{ social_config.instagram }}/" target="_blank"><i class="svg instagram" title="Instagram"></i></a>{% endif %}
+        {%- if social_config.pinterest %}
+        <a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank"><i class="svg pinterest" title="Pinterest"></i></a>{% endif %}
+        {%- if social_config.twitch %}
+        <a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><i class="svg twitch" title="Twitch"></i></a>{% endif %}
+        {%- if social_config.youtube %}
+        <a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><i class="svg youtube" title="YouTube"></i></a>{% endif %}
+        {%- if social_config.buymeacoffee %}
+        <a href="https://www.buymeacoffee.com/{{ social_config.buymeacoffee }}/" target="_blank"><i class="svg buymeacoffee" title="Buy Me A Coffee"></i></a>{% endif %}
+        {%- if social_config.github_sponsor %}
+        <a href="https://github.com/sponsors/{{ social_config.github_sponsor }}/" target="_blank"><i class="svg github-sponsor" title="GitHub Sponsor"></i></a>{% endif %}
 {%- endmacro %}

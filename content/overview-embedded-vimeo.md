@@ -15,7 +15,7 @@ Zola has many shortcodes, and new are easily added, this example shows vimeo.
 with `vm(id="id_here")`
 
 - `id`: the video id (mandatory)
-- `class`: a class to add to the <div> surrounding the iframe (optional)
+- `class`: a class to add to the &lt;div&gt; surrounding the iframe (optional)
 - `autoplay`: when set to "true", the video autoplays on load (optional)
 - `loop`: when set to "true", the video plays on a loop (optional)
 - `noautopause`: when set to "true", the video will not autopause (optional)

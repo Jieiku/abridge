@@ -45,7 +45,7 @@ title_addition = "Fast & Lightweight Zola Theme" # a default value for title add
 
 author = "Jake G" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
-readtime = true # displays the read time on line with date, tags, categories
+readtime = false # displays the read time on line with date, tags, categories
 readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read
 recent = true # TOC / index
 recent_items = 9

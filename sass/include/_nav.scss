@@ -27,17 +27,23 @@ main nav a:visited {//pagination link styling
 main nav a:hover {//makes border of pagination links hover color
   border-color: var(--a3);
 }
-header > nav > div:first-of-type {//puts logo on left and menu/search on right
-  margin-left: auto
+header > nav > div:first-of-type {//Keep the logo from wrapping
+  display: inline;
+  min-width: fit-content;
+  padding-right: var(--s1);//add some spacing between nav divs
+}
+header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
+  margin-left: auto;
+  padding-right: var(--s1);//add some spacing between nav divs
 }
 nav > div {
-  ul {
+  ul, h2 {
     line-height: 2;
-    margin-top: 0;
-    padding-bottom: var(--s1);
+    margin: 0;
+    padding: 0;
   }
+  margin: var(--s1) 0;
   display: block;
-  margin-left: var(--s1);//add some spacing between nav divs
 }
 nav {
   align-items: center;
@@ -49,11 +55,9 @@ nav {
       color: var(--a3);
     }
   }
-  header {
-    display: inline;
-  }
-  header h1, div ul {
-    margin-bottom: 0
+  h1, h2, div ul {
+    margin-bottom: 0;
+    margin-top: 0.2rem;
   }
   ul li {
     display: inline-block;
@@ -68,11 +72,8 @@ nav {
     header nav {
       display: flex;
       flex-direction: column;
-      header h1 {
-        margin-top: var(--s2);
-      }
-      header {
-        text-align: center
+      h1 {
+        margin: var(--s2) 0 var(--s1);
       }
       div {
         margin: auto // keeps top menu/search centered in mobile view

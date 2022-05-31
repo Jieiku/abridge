@@ -29,7 +29,7 @@
     {%- set_global bg = source | split(pat="/") | last %}
   {%- else %}
     <div id="{{ sourcename }}"><b>{{ sourcename }} on hover</b></div>
-    <div id="{{ sourcename }}image" alt="{{ sourcename }}"> </div>
+    <div id="{{ sourcename }}image" title="{{ sourcename }}"> </div>
   {%- endif %}
 
 {%- endfor %}

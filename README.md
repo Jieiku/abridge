@@ -3,9 +3,11 @@
 
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, a class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS.
+Abridge is a fast and lightweight Zola theme using semantic html, a class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy).
 
-![abridge](screenshot.png)
+Maintainence of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
+
+<!-- sponsors --><a href="https://github.com/yugfletcher"><img src="https://github.com/yugfletcher.png" width="60px" alt="" /></a><!-- sponsors -->
 
 </div>
 
@@ -279,7 +281,7 @@ optipng -o7 -zm1-9 -strip all *.png
 ### Consolidate two search js files into one:
 
 Optionally you can serve a single js file for the search instead of a separate index by combining the two:
-(although I am not sure how to accomplish this if your using the theme as a submodule)
+(although I am not sure how to accomplish this if your using the theme as a submodule, maybe you can use a git action for this command depending on your hosting provider.)
 
 First comment out this line in config.toml:
 
@@ -327,11 +329,15 @@ Please search [existing issues](https://github.com/jieiku/abridge/issues).
 It’s possible someone has already reported the same problem.
 If your problem or idea is not addressed yet, [open a new issue](https://github.com/jieiku/abridge/issues/new).
 
-## Contributing
+## Contributing and Philosophy
 
 We'd love your help! Especially with fixes to issues.
-The overall idea behind abridge is to be lightweight and fast, and to use zero javascript other than the search.
-If javascript is an absolute requirement for a feature to work then it may be added as disabled by default.
+
+The overall idea behind abridge is to be lightweight and fast, and to work properly even if javascript is disabled.
+
+The only feature that some people may consider a necessity that relies on javascript is the Search.
+
+Any feature added to abridge that relies on javascript will do so with it disabled by default.
 
 ## License
 

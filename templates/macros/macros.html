@@ -11,8 +11,7 @@
         {%- endif %}
 {%- if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}
 {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a> {% endfor -%}{%- endif %}
-{%- if config.extra.readtime %} - {{ page.reading_time }} {{ config.extra.readtime_string | default(value="min") }} {% endif %}
-        </span>
+{%- if config.extra.readtime %} - {{ page.reading_time }} {{ config.extra.readtime_string | default(value="min") }} {% endif %}</span>
 {%- endmacro title %}
 
 
@@ -51,23 +50,23 @@
                 {%- endif %}
             {%- endif %}
       <nav>
-          <ul>
-            {%- if paginator.previous %}<li><a href="{{ paginator.first | safe }}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
-            {%- if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
-            {%- for i in range(start=start, end=end+1) %}
-                <li>
-                  {%- if i == paginator.current_index %}
-                  <a class="cnav" href="#">{{i}}</a>
-                  {%- elif i > 1 %}
-                  <a href="{{ paginator.base_url | safe }}{{ i ~ '/' }}">{{i}}</a>
-                  {%- else %}
-                  <a href="{{ paginator.first | safe }}">{{ i }}</a>
-                  {%- endif %}
-                </li>
-            {%- endfor %}
-            {%- if paginator.next %}<li><a href="{{ paginator.next | safe }}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
-            {%- if paginator.next %}<li><a href="{{ paginator.last | safe }}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
-          </ul>
+        <ul>
+          {% if paginator.previous %}<li><a href="{{ paginator.first | safe }}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
+          {% if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
+          {%- for i in range(start=start, end=end+1) %}
+          <li>
+            {%- if i == paginator.current_index -%}
+            <a class="cnav" href="#">{{i}}</a>
+            {%- elif i > 1 -%}
+            <a href="{{ paginator.base_url | safe }}{{ i ~ '/' }}">{{i}}</a>
+            {%- else -%}
+            <a href="{{ paginator.first | safe }}">{{ i }}</a>
+            {%- endif -%}
+          </li>
+          {%- endfor %}
+          {% if paginator.next %}<li><a href="{{ paginator.next | safe }}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
+          {% if paginator.next %}<li><a href="{{ paginator.last | safe }}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
+        </ul>
       </nav>
   {%- endif %}
 {%- endmacro %}

@@ -91,6 +91,10 @@ You can customize your configurations, templates and content for yourself. Look
 at the `config.toml`, `content` files, and templates files in this
 repo for an idea.
 
+### Number of Items per page for pagination
+
+To change the number of items per page edit: `abridge/content/_index.md` and change the value for `paginate_by`
+
 ### Colors and Styles
 
 Colors and style are handled by the sass files of [abridge.css](https://github.com/jieiku/abridge.css)

@@ -36,7 +36,7 @@
           {{ page.content | safe | striptags | truncate(length=150) }}
         {%- elif page.extra.static_thumbnail %}
         {%- endif %}
-          <a href="{{ page.permalink | safe }}">...more</a>
+          <a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">...more</a>
         </p>
       </article>
     {%- endfor %}

@@ -1,5 +1,5 @@
 {%- macro page_listing(page) %}
         <div class="toc-item">
-          <a href="{{ page.permalink | safe}}" title="{{ page.title }}">{{ page.title }}</a>
+          <a href="{{ page.permalink | safe}}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="{{ page.title }}">{{ page.title }}</a>
         </div>
 {%- endmacro page_listing %}

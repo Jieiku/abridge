@@ -19,6 +19,6 @@
     <div>
       <h1>Page not found :(</h1>
       <p>The page you are looking for doesn't exist or has been moved.</p>
-      <p>Try using the search, or <a href="{{ config.base_url | safe }}">go home</a>.</p>
+      <p>Try using the search, or <a href="{{ config.base_url | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">go home</a>.</p>
     </div>
 {%- endblock content %}

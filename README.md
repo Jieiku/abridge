@@ -133,9 +133,9 @@ Abridge comes with two "Skins" each with their own auto, dark, and light modes.
 Auto mode automatically displays a dark or light version depending on browser/OS settings.
 
 The skin used on [the Demo](https://abridge.netlify.app/) uses primarily orange colors.
-It is defined here: `/themes/abridge/sass/abridge.scss` and imports: `/themes/abridge/sass/skins/_abridge-auto.scss`
+It is defined here: `/themes/abridge/sass/abridge.scss`
 
-There is also other variations, that you will see defined in these same directories.
+There is also other variations, that you will see defined in this same directory.
 
 To change colors or fonts all you need to do is edit these files or duplicate them and create your own skin.
 Then in the root of your site type `zola build` which will regenerate your site, this is similar to what zola serve does, except it does not facilitate serving the site.

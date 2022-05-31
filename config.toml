@@ -1,4 +1,5 @@
-base_url = "https://abridge.netlify.app" # do NOT include a trailing slash on the base URL
+base_url = "https://abridge.netlify.app" # do NOT include a trailing slash on the base URL for web urls
+#base_url = "/home/jieiku/.dev/abridge/public/" # used for locally usable build directly from disk, also set below extra.uglyurls = true
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
@@ -35,6 +36,7 @@ external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 [extra]
+uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 language_code = "en-US"
 title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
 # To disable title_addition but keep built in page additions eg, Posts page: "Posts | Abridge" set title_addition to an empty string

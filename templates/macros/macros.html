@@ -1,16 +1,16 @@
 {%- macro title(page) %}
-        <h1><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h1>
+        <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
         <span>{{ page.date | date(format="%B %d, %Y") }}
         {%- if page.taxonomies.authors and config.taxonomies %} by
           {%- for author in page.taxonomies.authors %}
           {%- if author_flag %} and {% endif %}
-          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}">{{ author }}</a>
+          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.author_show %} by {{ config.extra.author }}
         {%- endif %}
-{%- if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind="categories", name=cat) | safe }}">{{ cat }}</a>{% endfor %}]{% endif %}
-{%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">{{ tag }}</a> {% endfor -%}{%- endif %}
+{%- if page.taxonomies.categories %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+{%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}
 {%- if config.extra.readtime %} - {{ page.reading_time }} {{ config.extra.readtime_string | default(value="min") }} {% endif %}</span>
 {%- endmacro title %}
 
@@ -51,21 +51,21 @@
             {%- endif %}
       <nav>
         <ul>
-          {% if paginator.previous %}<li><a href="{{ paginator.first | safe }}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
-          {% if paginator.previous %}<li><a href="{{ paginator.previous | safe }}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
+          {% if paginator.previous %}<li><a href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
+          {% if paginator.previous %}<li><a href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
           {%- for i in range(start=start, end=end+1) %}
           <li>
             {%- if i == paginator.current_index -%}
             <a class="cnav" href="#">{{i}}</a>
             {%- elif i > 1 -%}
-            <a href="{{ paginator.base_url | safe }}{{ i ~ '/' }}">{{i}}</a>
+            <a href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{i}}</a>
             {%- else -%}
-            <a href="{{ paginator.first | safe }}">{{ i }}</a>
+            <a href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ i }}</a>
             {%- endif -%}
           </li>
           {%- endfor %}
-          {% if paginator.next %}<li><a href="{{ paginator.next | safe }}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
-          {% if paginator.next %}<li><a href="{{ paginator.last | safe }}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
+          {% if paginator.next %}<li><a href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
+          {% if paginator.next %}<li><a href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
         </ul>
       </nav>
   {%- endif %}

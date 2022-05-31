@@ -40,7 +40,7 @@ let context = Context::new();
 
 ### TOML
 ```toml
-base_url = "https://jieiku.github.io/abridge-demo/"
+base_url = "https://abridge.netlify.app/"
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
@@ -119,7 +119,7 @@ $_SESSION['PFA_token'] = md5(uniqid("pfa" . rand(), true));
 {
     "name": "Abridge Zola Theme",
     "short_name": "Abridge",
-    "start_url": "https://jieiku.github.io/abridge-demo/",
+    "start_url": "https://abridge.netlify.app/",
     "description": "Fast & Lightweight Zola Theme",
     "scope": "/",
     "display": "standalone",

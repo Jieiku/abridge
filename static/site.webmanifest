@@ -1,7 +1,7 @@
 {
     "name": "Abridge Zola Theme",
     "short_name": "Abridge",
-    "start_url": "https://jieiku.github.io/abridge-demo/",
+    "start_url": "https://abridge.netlify.app/",
     "description": "Fast & Lightweight Zola Theme",
     "scope": "/",
     "display": "standalone",

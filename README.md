@@ -2,6 +2,8 @@
 
 Abridge is a fast and lightweight Zola theme using semantic html, class-light [abridge.css](https://github.com/jieiku/abridge.css), and No JS.
 
+![abridge](screenshot.png)
+
 ## Demo
 
 [https://jieiku.github.io/abridge-demo/](https://jieiku.github.io/abridge-demo/)
@@ -117,10 +119,11 @@ Use search function for the content.
 build_search_index = true
 ```
 
-Currently this theme has not yet implemented a search, there are however several themes that have.
-For the moment you can look at how those other themes have implemented their search.
-I plan to implement a search field eventually, but am still weighing my options.
-I would prefer a self hosted search method that works even if javascript is disabled in the browser. (open an issue report if you know of one.)
+​The search is the only thing that requires javascript in this this theme.
+
+If you set `build_search_index` to false then the javascript file will no longer be loaded.
+
+The default elasticlunr search is currently used, I may eventually switch this out for something else.
 
 #### Configuration options under the `extra`
 
@@ -204,8 +207,7 @@ If your problem or idea is not addressed yet, [open a new issue](https://github.
 ## Contributing
 
 We'd love your help! Especially with fixes to issues.
-The overall idea behind abridge is to be lightweight and fast, and to use zero javascript.
-The only place that I may eventually add javascript will be for the site search, but hopefully I can find another way.
+The overall idea behind abridge is to be lightweight and fast, and to use zero javascript other than the search.
 
 ## License
 

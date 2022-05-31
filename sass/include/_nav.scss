@@ -13,19 +13,21 @@ main nav a:visited {
 main nav a:hover {
   border-color: var(--a3);
 }
+nav > div:first-of-type {
+  margin-left: auto
+}
+nav > div {
+  ul {
+    line-height: 0;
+    margin-top: 0;
+    padding-bottom: var(--s1);
+  }
+  display: block;
+  margin-left: var(--s1);
+}
 nav {
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  div {
-    ul {
-      line-height: 0;
-      margin-top: 0;
-      padding-bottom: var(--s1);
-    }
-    display: block;
-    margin-left: auto
-  }
   div h2 {
     font-size: 1rem;
     &:hover {
@@ -43,6 +45,10 @@ nav {
     margin: 0 0.2rem;
     position: relative;
     text-align: left;
+  }
+  div div {
+    display: inline-block;
+    position: relative;
   }
 }
 

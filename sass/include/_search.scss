@@ -1,0 +1,46 @@
+div:empty {
+  display: none;
+}
+#suggestions {
+  z-index: 9;
+  background: var(--c1);
+  border: 2px solid var(--c3);
+  position: absolute;
+  right: 0;
+  margin-top: var(--s1);
+  width: 500px;
+  max-height: 500px;
+  overflow: auto;
+}
+#suggestions a {
+  display: block;
+  text-decoration: none;
+  padding: var(--s1);
+  margin: 0 var(--s1);
+}
+#suggestions a:hover,
+#suggestions a:focus {
+  background: var(--c2);
+}
+#suggestions span {
+  line-height: 1.5;
+  display: block;
+}
+#suggestions span:first-child {
+  font-weight: var(--fh);
+}
+#suggestions span:nth-child(2) {
+  color: var(--f1);
+}
+@if map-get($breakpoints, "md") {
+  @media (max-width: map-get($breakpoints, "md")) {
+    nav div:last-of-type, input {
+      width: 100%;
+    }
+    #suggestions {
+      position: static;
+      left: 0;
+      width: 100%;
+    }
+  }
+}

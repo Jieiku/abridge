@@ -15,8 +15,8 @@ $enable-responsive-spacings: false !default;
 // Enable a centered viewport for <header>, <main>, <footer> inside <body>
 // Fluid layout until it reaches a defined size, then becomes a centered viewport
 $enable-maxwidth: true !default;
-$mw:60% !default;// max-width
-$mb:1200px !default;// value at which to switch from fluid layout to using max-width
+$mw:50% !default;// max-width
+$mb:1000px !default;// value at which to switch from fluid layout to using max-width
 
 // Enable a centered viewport for <header>, <main>, <footer> inside <body>
 // This option will only work if $enable-maxwidth: false

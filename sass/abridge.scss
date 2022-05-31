@@ -31,6 +31,8 @@
 @import "include/code"; // pre, code, ...
 @import "include/hr"; // hr
 
+@import "include/search"; // Zola Search - elasticlunr site-wide search
+
 @import "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
 
 //@import "include/scroller"; // figure

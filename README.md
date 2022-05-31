@@ -265,6 +265,61 @@ SEO is still a work in progress, will be performing more testing and updates as 
 
 All pages extend to `base.html`, and you can customize them as need.
 
+## Optional Optimizations:
+
+### Optimize PNG files:
+
+All png files under the static directory can be optimized using optipng, this usually results in files 1/2 the size:
+
+```bash
+cd static
+optipng -o7 -zm1-9 -strip all *.png
+```
+
+### Consolidate two search js files into one:
+
+Optionally you can serve a single js file for the search instead of a separate index by combining the two:
+(although I am not sure how to accomplish this if your using the theme as a submodule)
+
+First comment out this line in config.toml:
+
+```toml
+#js_search_index ="search_index.en.js
+```
+
+Then build and uglifyjs:
+```bash
+zola build
+uglifyjs search_index.en.js search.min.js -o search.min.js -c -m
+```
+
+### Pre gzip content to serve with nginx:
+
+If you are serving your site with nginx, you can pre gzip your content.
+
+First configure nginx:
+
+```bash
+sudo nano /etc/nginx/nginx.conf
+
+gzip on;
+gzip_vary on;
+gzip_proxied expired no-cache no-store private auth;
+#gzip_proxied any;
+gzip_comp_level 9;
+gzip_buffers 64 16k;
+#gzip_buffers 16 8k;
+gzip_http_version 1.1;
+gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml application/xhtml+xml application/x-javascript application/x-font-ttf application/vnd.ms-fontobject font/opentype font/ttf font/eot font/otf;
+#gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+```
+
+Then you can gzip your files:
+```bash
+zola build
+find ./public -type f -regextype posix-extended -regex '.*\.(htm|html|css|js|xml|xsl|txt|woff|woff2|svg|otf|eot|ttf)' -exec gzip -k -9 -f {} \;
+```
+
 ## Reporting Issues
 
 We use GitHub Issues as the official bug tracker for **abridge**.

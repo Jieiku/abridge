@@ -7,6 +7,20 @@
 }
 main nav {
   margin-top: var(--s2);//pagination margin
+  ul li:nth-child(-n+2) {
+    margin-right: var(--s2); //pagination prev/first padding
+  }
+  ul li:nth-last-child(-n+2) {
+    margin-left: var(--s2); //pagination next/last padding
+  }
+}
+.off {
+  color: var(--c4);
+  font-weight: var(--fh);
+  border: .1rem solid var(--c4);
+  border-radius: var(--br);
+  padding: .1rem var(--s1);
+  margin: .1rem;
 }
 main nav a,
 main nav a:visited {//pagination link styling

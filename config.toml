@@ -20,8 +20,13 @@ taxonomies = [
 [markdown]
 extra_syntaxes_and_themes = ["highlight_themes"]
 highlight_code = true
-highlight_theme = "material-dark" # OneHalfDark, material-dark, ayu-dark, Midnight.dark
-#highlight_theme = "css" # use css classes - https://www.getzola.org/documentation/content/syntax-highlighting/#inline-vs-classed-highlighting
+highlight_theme = "ayu-dark-abridge"
+# ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge
+# ayu-light-abridge ayu-mirage-light-abridge charcoal-light-abridge dracula-light-abridge material-light-abridge
+
+# xx-abridge themes are a copy of themes xx with contrast/color tweaks for 100 score on google lighthouse https://learnui.design/tools/accessible-color-generator.html
+# https://www.getzola.org/documentation/content/syntax-highlighting/#inline-vs-classed-highlighting
+
 render_emoji = false
 external_links_target_blank = true # rel="noopener"
 external_links_no_follow = false   # rel="nofollow"
@@ -31,8 +36,8 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 [extra]
 language_code = "en-US"
 title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
-# To disable title_addition but keep built in page additions eg, Posts page: "Abridge | Posts" set title_addition to an empty string
-# To alwyas set the page title exactly eg "Abridge" then comment out the below line
+# To disable title_addition but keep built in page additions eg, Posts page: "Posts | Abridge" set title_addition to an empty string
+# To always set the page title exactly eg "Abridge" then comment out the below line (not recommend, bad for SEO)
 title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
 
 author = "Jake G" # Put Your Name here

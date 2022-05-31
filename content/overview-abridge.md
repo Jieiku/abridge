@@ -1,6 +1,6 @@
 +++
 title = "Abridge Zola Theme and css Framework"
-date = 2021-05-16
+date = 2022-05-17
 
 [taxonomies]
 categories = ["Features"]

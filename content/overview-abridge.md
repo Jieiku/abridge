@@ -7,8 +7,10 @@ categories = ["Features"]
 tags = ["config"]
 +++
 
-For quick setup copy the config.toml from the abridge theme into the root of your zola site, this will give you a base configuration with all config values used.
+Abridge is a fast and lightweight Zola theme using semantic html (~6kb css before svg icons), and no JS required apart from the search. Perfect score on [Google's Lighthouse audit](https://web.dev/measure/).
 <!-- more -->
+For quick setup copy the config.toml from the abridge theme into the root of your zola site, this will give you a base configuration with all config values used.
+
 You can then edit or comment out the values in this file as necessary.
 
 You should also uncomment out the line #theme = "abridge" in your root zola config.toml file. This tells your root zola site to use the abridge theme in the themes folder.

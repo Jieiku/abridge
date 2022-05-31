@@ -213,13 +213,36 @@
 {# https://github.com/KaTeX/KaTeX/ #}
 {# https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
 {%- macro math() %}
-  {%- if config.extra.math or page.extra.math %}
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/mathtex-script-type.min.js" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
-  {%- if config.extra.math_auto_render or page.extra.math_auto_render %}
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+{%- if config.extra.math or page.extra.math %}
+
+  {%- if config.extra.katex_css %}{%- if config.extra.katex_css is matching("^http[s]?://") %}
+  <link rel="preload" href="{{ config.extra.katex_css | safe }}" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
+  {%- else %}
+  <link rel="preload" href="{{ get_url(path=config.extra.katex_css, trailing_slash=false) }}" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
+  {%- endif %}{%- endif %}
+
+  {%- if config.extra.katex_js %}{%- if config.extra.katex_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.katex_js | safe }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.katex_js, trailing_slash=false) }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
+  {%- endif %}{%- endif %}
+
+  {%- if config.extra.mathtex_js %}{%- if config.extra.mathtex_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.mathtex_js | safe }}" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.mathtex_js, trailing_slash=false) }}" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  {%- endif %}{%- endif %}
+
+{%- if config.extra.math_auto_render or page.extra.math_auto_render %}
+  {%- if config.extra.katex_autorender_js %}
+  {%- if config.extra.katex_autorender_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.katex_autorender_js | safe }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.katex_autorender_js, trailing_slash=false) }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  {%- endif %}
+  {%- endif %}
   <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})});</script>
-  {%- endif %}
-  {%- endif %}
+{%- endif %}
+
+{%- endif %}
 {%- endmacro %}

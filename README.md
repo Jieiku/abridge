@@ -286,6 +286,14 @@ thumbnail = "ferris-gesture.png"
 
 There are tools you can use to test your page SEO metadata, such as: [smallseotools.com](https://smallseotools.com/meta-tags-analyzer/)
 
+### KaTeX and CSP
+
+KaTeX unfortunately requires `script-src 'unsafe-inline'` in the Content Security Policy. This is a security vulnerability, so the demo site will not render KaTeX correctly because the demo site uses best security practices.
+
+KaTeX js is designed to work even with dynamic content, but because Zola is a SSG it seems to me the best solution is to avoid using this javascript all-together, process our markdown files similar to how KaTeX autorender does, but do it during zola build. insert some `<span class="KaTeX_Main">` ...etc so that we basically render it during the build process. If complex mathematics were part of my daily life then I might be motivated to write such code for Zola.
+
+You will also see [this page](https://abridge.netlify.app/overview-math/) rendered correctly if you git clone this repo and use zola serve because then there will be no Content Security Policy in place.
+
 ### Templates
 
 All pages extend to `base.html`, and you can customize them as need.

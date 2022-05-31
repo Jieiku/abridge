@@ -37,7 +37,12 @@ readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 
 recent = true
 recent_items = 9
 footer_credit = true
-#footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>'
+#footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
+
+# Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org
+# Set this to true if you are unable to load your security headers with your webserver, this will load a couple of them as meta tags.
+# There are many other security related headers most of which can only be set by the webserver method.
+security_headers = false
 
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
@@ -67,9 +72,13 @@ js_search_index ="search_index.en.js"
 js_search = "search.min.js"
 rss_atom_feed = "atom.xml"
 stylesheet = "abridge.css" # location and file to use for stylesheet:
-#       abridge.css - Automatic Dark/Light Theme based on browser/system preference.
-#  abridge-dark.css - Dark Theme
-# abridge-light.css - Light Theme
+#            abridge.css - Orange Automatic Dark/Light Theme based on browser/system preference.
+#       abridge-dark.css - Orange Dark Theme
+#      abridge-light.css - Orange Light Theme
+#      abridge-blue.scss - Blue Automatic Night/Light Theme based on browser/system preference.
+# abridge-bluelight.scss - Blue Light Theme
+# abridge-bluenight.scss - Blue Dark Theme
+
 
 # For externally loaded fonts make sure the include the FULL url including the http/https prefix
 fonts_load = false

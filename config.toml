@@ -29,8 +29,9 @@ external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 [extra]
-katex_enable = false # used to to render mathematical notations, requires js
-katex_auto_render = false
+author = "Your Name"
+author_show = true # displays the author name below the title after the date, tags, categories
+readtime = true # displays the read time below the title after the date, tags, categories
 recent = true
 recent_items = 9
 footer_credit = true
@@ -38,7 +39,6 @@ footer_credit = true
 #bing = "Your Bing Site verification code."
 textlogo = '<font color="#f90">A</font>bridge'
 sitedesc = false # enables or disables the display of the site description below the logo.
-author = "Your Name"
 favicon = "favicon.png"
 banner = "banner.png"
 menu = [
@@ -62,6 +62,18 @@ menu_footer = [
 keywords = "Whatever, SEO, keywords, you want"
 twitter = "your-user-name"
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+
+# For externally loaded fonts make sure the include the FULL url including the http/https prefix
+fonts_load = false
+fonts = [
+    {url = "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro"},
+    {url = "https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"},
+    {url = "FiraCode-Bold.woff2"},
+    {url = "FiraCode-Regular.woff2"},
+]
+
+katex_enable = false # used to to render mathematical notations, requires js
+katex_auto_render = false
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]

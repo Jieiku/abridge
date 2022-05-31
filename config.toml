@@ -1,6 +1,6 @@
 base_url = "https://jieiku.github.io/abridge-demo/"
-title = "abridge - Zola Theme"
-description = "abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
+title = "Abridge"
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
 #theme = "abridge"
 
@@ -30,6 +30,11 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 language_code = "en-US"
+title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
+# To disable title_addition but keep built in page additions eg, Posts page: "Abridge | Posts" set title_addition to an empty string
+# To alwyas set the page title exactly eg "Abridge" then comment out the below line
+title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
+
 author = "Jake G" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
 readtime = true # displays the read time on line with date, tags, categories

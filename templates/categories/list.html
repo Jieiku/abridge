@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 
+{%- block seo %}
+  {{- super() }}
+  {%- set title = "Categories" %}
+
+  {%- if config.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- else %}
+    {%- set title_addition = "" %}
+  {%- endif %}
+
+  {%- set description = config.description %}
+
+  {{- macros_head::seo(title=title, title_addition=title_addition, description=description, is_home=true) }}
+{%- endblock seo %}
+
 {%- block content %}
     <div>
       <center>

@@ -12,7 +12,7 @@ toc = true
 
 This article offers a sample of basic Markdown syntax that can be used in Zola content files, also it shows if basic HTML elements are decorated with CSS in a Zola theme.
 <!-- more -->
-## Headings
+# Headings
 
 The following HTML `<h1>`—`<h6>` elements represent six levels of section
 headings. `<h1>` is the highest section level while `<h6>` is the lowest.
@@ -24,7 +24,7 @@ headings. `<h1>` is the highest section level while `<h6>` is the lowest.
 ##### H5
 ###### H6
 
-## Paragraph
+# Paragraph
 
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum,
 voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma
@@ -40,18 +40,18 @@ tiustia prat.
 Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne
 sapicia is sinveli squiatum, core et que aut hariosam ex eat.
 
-## Blockquotes
+# Blockquotes
 
 The blockquote element represents content that is quoted from another source,
 optionally with a citation which must be within a `footer` or `cite` element,
 and optionally with in-line changes such as annotations and abbreviations.
 
-#### Blockquote without attribution
+## Blockquote without attribution
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use *Markdown syntax* within a blockquote.
 
-#### Blockquote with attribution
+## Blockquote with attribution
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
@@ -59,7 +59,7 @@ and optionally with in-line changes such as annotations and abbreviations.
 > All men by nature desire to know.<br>
 > ― <cite>Aristotle[^2]</cite>
 
-## Tables
+# Tables
 
 Tables aren't part of the core Markdown spec, but Zola supports them
 out-of-the-box.
@@ -72,13 +72,13 @@ out-of-the-box.
    John | 59
   Kerry | 23
 
-#### Inline Markdown within tables
+## Inline Markdown within tables
 
 | Italics   | Bold     | Code   | StrikeThrough     |
 | --------  | -------- | ------ | ----------------- |
 | *italics* | **bold** | `code` | ~~strikethrough~~ |
 
-## Foldable Text
+# Foldable Text
 
 <details>
     <summary>Title 1</summary>
@@ -90,13 +90,13 @@ out-of-the-box.
     <p>Stay awhile, and listen!</p>
 </details>
 
-## Code Blocks
+# Code Blocks
 
 Code blocks.. ❤️ with automatic syntax highlighting ✨‍
 
 See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting/) for options.
 
-#### Code block with backticks
+## Code block with backticks
 
 ```html
 <!doctype html>
@@ -111,25 +111,25 @@ See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting
 </html>
 ```
 
-#### Inline Code block
+## Inline Code block
 
 If we want, we can also `specify inline code` which is useful for `the small stuff`.
 
-## List Types
+# List Types
 
-#### Ordered List
+## Ordered List
 
 1. First item
 2. Second item
 3. Third item
 
-#### Unordered List
+## Unordered List
 
 - List item
 - Another item
 - And another item
 
-#### Nested list
+## Nested list
 
 - Fruit
   - Apple
@@ -139,7 +139,7 @@ If we want, we can also `specify inline code` which is useful for `the small stu
   - Milk
   - Cheese
 
-## Other Elements — abbr, sub, sup, kbd, mark, link
+# Other Elements — abbr, sub, sup, kbd, mark, link
 
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 

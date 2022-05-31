@@ -18,7 +18,8 @@ taxonomies = [
 ]
 
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"]
+extra_syntaxes_and_themes = ["highlight_themes"] # Abridge's config.toml
+# In YOUR SITE'S config.toml set to: ["highlight_themes", "themes/abridge/highlight_themes"]
 highlight_code = true
 highlight_theme = "ayu-dark-abridge"
 # ayu-dark-abridge ayu-mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge

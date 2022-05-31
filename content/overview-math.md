@@ -1,5 +1,5 @@
 +++
-title = "Mathematical Notations Support"
+title = "Mathematical Notations"
 date = 2021-05-05
 updated = 2022-01-01
 [taxonomies]
@@ -13,7 +13,7 @@ You can use [$\KaTeX$](https://katex.org) to render mathematical notations.
 
 You can enable the $\KaTeX$ support globally, per-section or per-page basis.
 <!-- more -->
-### Enable Globally
+## Enable Globally
 
 To enable the $\KaTeX$ support globally, add `math = true` under `[extra]` of the `config.toml`
 at your site root. Now every section and page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
@@ -23,7 +23,7 @@ at your site root. Now every section and page of your site will load the KaTeX [
 math = true
 ```
 
-### Per-section Basis
+## Per-section Basis
 
 To enable the $\KaTeX$ support in a particular section, add `math = true` under `[extra]` in the `[SECTION_NAME]/_index.md`. Now every page under this section will load the KaTeX
 [autorender extension](https://katex.org/docs/autorender.html).
@@ -35,7 +35,7 @@ math = true
 +++
 ```
 
-### Per-page Basis
+## Per-page Basis
 
 To enable the $\KaTeX$ support in a particular page, add `math = true` under `[extra]` in the page's
 frontmatter. Now this page will load the $\KaTeX$ [autorender extension](https://katex.org/docs/autorender.html).

@@ -8,22 +8,33 @@
   {%- else %}
 
     <div id="{{ sourcename }}">## {{ sourcename }} </div>
-    <a onmouseover="document.getElementById('{{ sourcename }}').innerHTML='{{ bgname }}';" onmouseout="document.getElementById('{{ sourcename }}').innerHTML='{{ sourcename }}';" href="#"><div id="{{ sourcename }}image"> </div></a>
+    <div id="{{ sourcename }}image" alt="{{ sourcename }}"> </div>
 
   {%- endif %}
 {%- endfor %}
+
+{%- if w and h and p %}
+  {%- set padding = h / w * p %}
+{%- elif w and h %}
+  {%- set padding = h / w * 50 %}
+{%- else %}
+  {%- set padding = 50 %}
+{%- endif %}
 
 <style>
   {%- for source in sources %}
     {%- set sourcename = source | split(pat=".") | first %}
     {%- if not loop.first %}
       #{{ sourcename | safe }}image {
-        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
-        width: 560px;
-        height: 650px;
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: {{ p | default(value=50) }}%;
+        height: 0;
+        padding-top: {{ padding }}%;
       }
       #{{ sourcename | safe }}image:hover {
-        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
       }
     {%- endif %}
   {%- endfor %}

@@ -56,18 +56,24 @@ Enable the theme in your `config.toml` in the site directory:
 theme = "abridge"
 ```
 
-Or copy the `config.toml` from the theme directory to your project's
-root directory, and uncomment the theme line:
+Or copy the `config.toml` from the theme directory to your project's root directory:
+(This will give you a base configuration with all config values used)
 
 ```bash
 cp themes/abridge/config.toml config.toml
+```
+
+Uncomment the theme line, and point extra_syntaxes_and_themes at the correct directory:
+```bash
 sed -i 's/^#theme = "abridge"/theme = "abridge"/' config.toml
+sed -i 's/^extra_syntaxes_and_themes = \["highlight_themes"\]/extra_syntaxes_and_themes = \["highlight_themes", "themes\/abridge\/highlight_themes"\]/' config.toml
 ```
 
-Also point extra_syntaxes_and_themes at the correct directory:
-
-```
-extra_syntaxes_and_themes = ["themes/abridge/highlight_themes"]
+The result should be:
+```toml
+theme = "abridge"
+[markdown]
+extra_syntaxes_and_themes = ["highlight_themes", "themes/abridge/highlight_themes"]
 ```
 
 ### Step 4: Add new content

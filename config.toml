@@ -91,7 +91,6 @@ security_header_referrer = "strict-origin-when-cross-origin"
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
 js_search_index = "search_index.en.js"
 js_search = "search.min.js"
-rss_atom_feed = "atom.xml"
 stylesheet = "abridge.css" # location and file to use for stylesheet:
 #           abridge.css - Orange Automatic Dark/Light Theme based on browser/system preference.
 #      abridge-dark.css - Orange Dark Theme

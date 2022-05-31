@@ -26,7 +26,7 @@
 {%- endif %}
 
 {%- if config.generate_feed %}
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path=config.extra.rss_atom_feed, trailing_slash=false) }}">
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}">
 {%- endif %}
 
 {%- endmacro %}

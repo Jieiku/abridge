@@ -89,6 +89,14 @@ You can customize your configurations, templates and content for yourself. Look
 at the `config.toml`, `content` files, and templates files in this
 repo for an idea.
 
+### Colors and Styles
+
+Colors and style are handled by the sass files of [abridge.css](https://github.com/jieiku/abridge.css)
+
+To change colors of this theme all you need to do is edit `/themes/abridge/sass/themes/_auto.scss`
+then in the root of your site type `zola build` which will regenerate your site, this is similar to what zola serve does, except it does not facilitate serving the site.
+This is also the way you should generate your site to serve it by a real webserver such as nginx.
+
 ### Global Configuration
 
 There are some configuration options that you can customize in `config.toml`.

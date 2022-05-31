@@ -36,9 +36,9 @@ footer_credit = true
 #google = "Your Google Site verification code."
 #bing = "Your Bing Site verification code."
 textlogo = '<font color="#f90">A</font>bridge'
-sitedesc = false # This enables or disables the display of the site description below the logo.
+sitedesc = false # enables or disables the display of the site description below the logo.
 author = "Your Name"
-keywords = "Whatever, SEO, keywords, you want"
+favicon = "favicon.png"
 banner = "banner.png"
 menu = [
     {url = "/", name = "Home", slash = true},
@@ -54,10 +54,13 @@ menu_footer = [
     {url = "/privacy/", name = "Privacy", slash = true},
     {url = "/sitemap.xml", name = "Sitemap", slash = false},
 ]
-# meta tags
-twitter = "your-user-name"
+#copyright_start_year = 2019  # optional
+#copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default
 
-# favicon = images/favicon.png  # override default favicon
+# meta tags
+keywords = "Whatever, SEO, keywords, you want"
+twitter = "your-user-name"
+seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 
 # Footer social links; full options listed in macros/social.html
 [extra.social]
@@ -69,20 +72,13 @@ element = "matrix.example.com"
 twitter = "your-user-name"
 facebook = "your-user-name"
 linkedin = "your-user-name"
-
 gitlab = "your-user-name"
 github = "your-user-name"
 bitbucket = "your-user-name"
 python = "your-user-name"
 docker = "your-user-name"
 stack = "your-user-name"
-
 instagram = "your-user-name"
 pinterest = "your-user-name"
 twitch = "your-user-name"
 youtube = "your-channel-id"
-
-# seo = true  # enable or disable seo-related tags, defaults to true
-
-# start_year = 2019  # optional, copyright start year
-# end_year = 2022  #optional, copyright end year, defaults to current year if unset

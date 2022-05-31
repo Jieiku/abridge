@@ -96,7 +96,7 @@
  color: #89ddff;
 }
 .z-*url*, .z-*link*, .z-*uri* {
- font-style: underline;
+ text-decoration: underline;
 }
 .z-constant.z-numeric.z-line-number.z-find-in-files {
  color: #d89385;
@@ -165,7 +165,7 @@ font-weight: bold;
 }
 .z-markup.z-underline {
  color: #f78c6c;
- font-style: underline;
+ text-decoration: underline;
 }
 .z-markup.z-quote .z-punctuation.z-definition.z-blockquote.z-markdown {
  color: #65737e;

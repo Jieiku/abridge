@@ -48,15 +48,15 @@
 }
 .z-entity.z-name.z-class {
  color: #007d90;
- font-style: underline;
+ text-decoration: underline;
 }
 .z-meta.z-path {
  color: #007f93;
- font-style: underline;
+ text-decoration: underline;
 }
 .z-entity.z-other.z-inherited-class {
  color: #007d90;
- font-style: underline;
+ text-decoration: underline;
  font-style: italic;
 }
 .z-entity.z-name.z-function {
@@ -182,7 +182,7 @@ font-weight: bold;
 }
 .z-markup.z-underline {
  color: #8660c1;
- font-style: underline;
+ text-decoration: underline;
 }
 .z-markup.z-raw.z-block {
  color: #747469;

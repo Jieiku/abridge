@@ -1,23 +1,24 @@
 {% extends "base.html" %}
-{# Title #}
-{% block title %}
-  <title>Sorry! Page not found.</title>
-{% endblock title %}
 
-{% block current_url %}
-  {% if config.extra.seo | default(value=true) %}
-    <meta property="og:url" content="{{ get_url(path='/') }}">
-    <meta name="twitter:url" content="{{ get_url(path='/') }}">
-  {% endif %}
-{% endblock current_url %}
+{%- block seo %}
+  {{ super() }}
+  {%- set title = "404 Page not found" %}
 
-{# Page heading #}
+  {%- if config.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- else %}
+    {%- set title_addition = "" %}
+  {%- endif %}
 
-{% block content %}
-  <div>
-    <h1>404 Error</h1>
-    <h2>Sorry</h2>
-    <p>The requested page does not exist or has been moved to another address.</p>
-    <p>Please go back to <a href="{{ get_url(path="/", trailing_slash=true) }}">home</a>.</p>
-  </div>
-{% endblock content %}
+  {%- set description = config.description %}
+
+  {{- macros_head::seo(title=title, title_addition=title_addition, description=description, is_404=true) }}
+{%- endblock seo %}
+
+{%- block content %}
+    <div>
+      <h1>Page not found :(</h1>
+      <p>The page you are looking for doesn't exist or has been moved.</p>
+      <p>Try using the search, or <a href="{{ get_url(path="/", trailing_slash=true) }}">go home</a>.</p>
+    </div>
+{%- endblock content %}

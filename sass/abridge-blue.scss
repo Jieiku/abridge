@@ -14,6 +14,7 @@
 
 @import "variables"; //config
 
-@import "skins/blueauto"; // Light Theme
+@import "skins/blue-auto"; // Blue Automatic Dark/Light Theme based on browser/system preference
+@import "skins/abridge_fonts.scss"; // Local Fonts
 
 @import "imports"; // html

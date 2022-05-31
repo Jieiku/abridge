@@ -30,7 +30,7 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 language_code = "en-US"
-author = "Your Name"
+author = "Jake" # Put Your Name here
 author_show = true # displays the author name on line with date, tags, categories
 readtime = true # displays the read time on line with date, tags, categories
 readtime_string = "min" # read time indication eg "min": - 1 min  "min read": - 1 min read
@@ -72,22 +72,12 @@ js_search_index ="search_index.en.js"
 js_search = "search.min.js"
 rss_atom_feed = "atom.xml"
 stylesheet = "abridge.css" # location and file to use for stylesheet:
-#            abridge.css - Orange Automatic Dark/Light Theme based on browser/system preference.
-#       abridge-dark.css - Orange Dark Theme
-#      abridge-light.css - Orange Light Theme
-#      abridge-blue.scss - Blue Automatic Night/Light Theme based on browser/system preference.
-# abridge-bluelight.scss - Blue Light Theme
-# abridge-bluenight.scss - Blue Dark Theme
-
-
-# For externally loaded fonts make sure the include the FULL url including the http/https prefix
-fonts_load = false
-fonts = [
-    {url = "https://fonts.googleapis.com/css?family=Merriweather|Montserrat"},
-    {url = "fonts.css"},
-]
-# Uncomment below line to load fontawesome, eg: <i class="fa-solid fa-heart"></i>
-#fontawesome = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+#           abridge.css - Orange Automatic Dark/Light Theme based on browser/system preference.
+#      abridge-dark.css - Orange Dark Theme
+#     abridge-light.css - Orange Light Theme
+#      abridge-blue.css - Blue Automatic Night/Light Theme based on browser/system preference.
+# abridge-bluelight.css - Blue Light Theme
+# abridge-bluenight.css - Blue Dark Theme
 
 # favicons, comment out a line to disable loading some or all of these.
 favicon_theme_color = "#333333"
@@ -98,6 +88,25 @@ favicon_mask_color = "#ff9900"
 favicon180 = "apple-touch-icon.png" # apple-touch-icon.png
 favicon32 = "favicon-32x32.png" # favicon-32x32.png
 favicon16 = "favicon-16x16.png" # favicon-16x16.png
+
+# Uncomment below line to load fontawesome, eg: <i class="fa-solid fa-heart"></i>
+#fontawesome = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+
+# Externally using googleapis for fonts gets you a Free CDN, AND may already be cached by the end user.
+# Sometimes the font you want is not available by googleapis, or you only want to load local resources.
+# For Locally loaded fonts review: abridge/sass/skins/_abridge_fonts.scss
+
+# For externally loaded Fonts, make sure to include the FULL url including the http/https prefix
+#fonts = [ {url = "https://fonts.googleapis.com/css?family=Fira+Code:400,italic|Montserrat:400,700,italic"} ]
+
+# Local fonts are defined in the css, defining them here only adds the preload tag to the head.
+# preload will eliminate Content Layout Shift, but will hurt with page load time.
+#fonts = [
+#    {url = "font/FiraCode.woff2"},
+#    {url = "font/Jost.woff2"},
+#    {url = "font/Jost-italic.woff2"},
+#    {url = "font/Jost-Bold.woff2"},
+#]
 
 katex_enable = false # used to to render mathematical notations, requires js
 katex_auto_render = false

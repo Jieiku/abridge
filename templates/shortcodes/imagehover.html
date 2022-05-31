@@ -1,0 +1,26 @@
+{%- set_global bg = " " %}
+{%- for source in sources %}
+  {%- if not loop.first %}
+    ## {{ source | safe }}
+    <div id="hoverimage{{loop.index}}"> </div>
+  {%- else %}
+    {% set_global bg = source %}
+  {%- endif %}
+{%- endfor %}
+
+<style>
+  {%- for source in sources %}
+    {%- if not loop.first %}
+      #hoverimage{{loop.index}} {
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ source | safe }}');
+        width: 560px;
+        height: 650px;
+      }
+      #hoverimage{{loop.index}}:hover {
+        background-image: url('{{ get_url(path="/", trailing_slash=false) }}{{ page.path | safe }}{{ bg | safe }}');
+        width: 560px;
+        height: 650px;
+      }
+    {%- endif %}
+  {%- endfor %}
+</style>

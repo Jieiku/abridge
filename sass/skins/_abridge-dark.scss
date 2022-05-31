@@ -1,0 +1,26 @@
+:root {
+  // Regular Fonts used by default:
+  --ff: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif;
+  //GOOD CLS: DroidSans(0), Roboto(0.002), Lato(0.002), Arimo(0.002), Ubuntu(0.004)
+  //BAD CLS: PTSans(0.08), RobotoCondensed(0.074), SourceSansPro(0.075), PTSansNarrow(0.131), Montserrat(0.251), OpenSansCondensed(0.319), RobotoSlab(0.388), OpenSans(0.389), Jost(0.401)
+
+  // Monospace Fonts used for code:
+  --fm: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace;
+  // https://qwtel.com/posts/software/the-monospaced-system-ui-css-font-stack/
+
+  // Colors
+  --f1: #ccc; //font color 1
+  --f2: #ddd; //font color 2
+
+  --c1: #111; //color 1
+  --c2: #222; //color 2
+  --c3: #333; //color 3
+  --c4: #888; //color 4
+
+  --a1: #f90; //accent color 1 link
+  --a2: #fb0; //accent color 2 hover,focus
+  --a3: #fb0; //accent color 3 h1-h2 hover,focus
+
+  --cg: #483; //ins green
+  --cr: #d33; //del red
+}

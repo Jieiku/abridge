@@ -21,7 +21,9 @@ taxonomies = [
 extra_syntaxes_and_themes = ["highlight_themes"] # Abridge's config.toml
 # In YOUR SITE'S config.toml set to: ["highlight_themes", "themes/abridge/highlight_themes"]
 highlight_code = true
-highlight_theme = "abridge-dark"
+#highlight_theme = "abridge-dark"
+highlight_theme = "css"
+
 # abridge-dark ayu-dark-abridge ayu_mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge
 # abridge-light ayu-light-abridge ayu_mirage-light-abridge charcoal-light-abridge dracula-light-abridge material-light-abridge
 # abridge-white ayu-white-abridge ayu_mirage-white-abridge charcoal-white-abridge dracula-white-abridge material-white-abridge

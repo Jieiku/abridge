@@ -4,13 +4,13 @@ input,
 select,
 textarea {
   margin: 0;
-  padding: .5rem .75rem;
+  padding: .2rem var(--s1);
   max-width: 100%;
   background: var(--c2);
   border: 0;
   border-radius: .25rem;
   font: inherit;
-  line-height: 1.125;
+  line-height: var(--fs);
   color: var(--f1);
 }
 button,

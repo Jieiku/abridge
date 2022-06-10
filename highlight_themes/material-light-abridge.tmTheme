@@ -18,7 +18,7 @@
 				<key>activeGuide</key>
 				<string>#00000070</string>
 				<key>background</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 				<key>caret</key>
 				<string>#27272790</string>
 				<key>findHighlight</key>
@@ -34,7 +34,7 @@
 				<key>lineHighlight</key>
 				<string>#62757f20</string>
 				<key>popupCss</key>
-				<string><![CDATA[ html { background-color: #fafafa; color: #317e78; padding: 16px; } a { color: #64738c; line-height: 16px; } .error, .deleted { color: #d92d2d; } .success, .inserted { color: #587f22; } .warning, .modified { color: #a16700; } .type { color: #008088; font-style: italic; } .param { color: #c94625; } .current { text-decoration: underline; } ]]></string>
+				<string><![CDATA[ html { background-color: #ffffff; color: #317e78; padding: 16px; } a { color: #64738c; line-height: 16px; } .error, .deleted { color: #d92d2d; } .success, .inserted { color: #587f22; } .warning, .modified { color: #a16700; } .type { color: #008088; font-style: italic; } .param { color: #c94625; } .current { text-decoration: underline; } ]]></string>
 				<key>selection</key>
 				<string>#317e7840</string>
 				<key>selectionBorder</key>
@@ -77,7 +77,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -90,7 +90,7 @@
 				<key>background</key>
 				<string>#d92d2d</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -103,7 +103,7 @@
 				<key>background</key>
 				<string>#587f22</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -116,7 +116,7 @@
 				<key>background</key>
 				<string>#7C4DFF</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -830,7 +830,7 @@
 				<key>background</key>
 				<string>#5274a9</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -843,7 +843,7 @@
 				<key>background</key>
 				<string>#587f22</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -856,7 +856,7 @@
 				<key>background</key>
 				<string>#c94625</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -869,7 +869,7 @@
 				<key>background</key>
 				<string>#7C4DFF</string>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -891,7 +891,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>

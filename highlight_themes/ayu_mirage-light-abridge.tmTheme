@@ -20,23 +20,23 @@
 				<key>activeGuide</key>
 				<string>#515C69</string>
 				<key>background</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 				<key>caret</key>
 				<string>#926b00</string>
 				<key>findHighlight</key>
 				<string>#926b00</string>
 				<key>findHighlightForeground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 				<key>foreground</key>
 				<string>#76736d</string>
 				<key>guide</key>
 				<string>#363E4A</string>
 				<key>gutter</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 				<key>gutterForeground</key>
 				<string>#39424E</string>
 				<key>inactiveBackground</key>
-				<string>#fafafa</string>
+				<string>#ffffff</string>
 				<key>inactiveSelection</key>
 				<string>#283543</string>
 				<key>invisibles</key>
@@ -415,7 +415,7 @@ a {
 				<key>background</key>
 				<string>#aa5f0f</string>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -930,7 +930,7 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -943,7 +943,7 @@ a {
 				<key>background</key>
 				<string>#007f95</string>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -956,7 +956,7 @@ a {
 				<key>background</key>
 				<string>#547f1c</string>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -969,7 +969,7 @@ a {
 				<key>background</key>
 				<string>#aa5f0f</string>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -982,7 +982,7 @@ a {
 				<key>background</key>
 				<string>#b75349</string>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1004,7 +1004,7 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FAFAFA</string>
+				<string>#ffffff</string>
 			</dict>
 		</dict>
 		<dict>

@@ -17,11 +17,11 @@ button,
 [type="button" i],
 [type="submit" i],
 [type="reset" i] {
-  -webkit-appearance: button;
+  //-webkit-appearance: button;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
-  background: var(--c2);
+  //background: var(--c2);
   color: var(--f1);
   border: 0;
   cursor: pointer;

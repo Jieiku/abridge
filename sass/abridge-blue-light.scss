@@ -1,0 +1,22 @@
+@import "imports";
+@import "syntax/syntax-abridge-light";
+//@import "fonts/Arimo";
+//@import "fonts/Lato";
+@import "fonts/Roboto";
+//@import "fonts/FiraCode"; // Monospaced
+
+:root {
+  --ff: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif;
+  --fm: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace;
+  --f1: #444;// Font Color Primary
+  --f2: #333;// Font color Headers
+  --c1: #fff;// Background Color Primary
+  --c2: #eee;// Background Color Secondary
+  --c3: #ddd;// Table Rows, Block quote edge, Borders
+  --c4: #677;// Disabled Buttons, Borders, mark background
+  --a1: #06e;// link color
+  --a2: #09f;// link hover/focus color
+  --a3: #07f;// link h1-h2 hover/focus color
+  --cg: #483; // ins green, success
+  --cr: #d33; // del red, errors
+}

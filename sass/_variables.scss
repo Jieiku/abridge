@@ -88,6 +88,8 @@ $icon-youtube: true !default;
 $icon-researchgate: true !default;
 
 $icon-search: true !default;
+$icon-x: true !default;// x symbol
+$icon-contrast: true !default;// dark/light mode
 $icon-ffolder: false !default;
 $icon-folder: false !default;// categories folder
 $icon-ftag: false !default;
@@ -101,7 +103,6 @@ $icon-home: false !default;
 $icon-minus: false !default;// minus symbol
 $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
-$icon-x: true !default;// x symbol
 // add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>
 
 :root {

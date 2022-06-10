@@ -120,12 +120,12 @@ $_SESSION['PFA_token'] = md5(uniqid("pfa" . rand(), true));
 {
     "name": "Abridge Zola Theme",
     "short_name": "Abridge",
-    "start_url": "https://abridge.netlify.app/",
     "description": "Fast & Lightweight Zola Theme",
+    "start_url": "/index.html",
     "scope": "/",
-    "display": "standalone",
-    "theme_color": "#222222",
     "background_color": "#111111",
+    "theme_color": "#222222",
+    "display": "standalone",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -138,7 +138,7 @@ $_SESSION['PFA_token'] = md5(uniqid("pfa" . rand(), true));
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-192x192x128m.png",
+            "src": "/android-chrome-192x192m.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"

@@ -1,35 +1,162 @@
-{%- macro stylesheet() %}
-  <link rel="stylesheet" href="{{ get_url(path=config.extra.stylesheet, trailing_slash=false, cachebust=true) | safe }}" />
+{%- macro theme() %}
+  {%- if config.extra.js_theme %}
+  {%- if config.extra.js_themeButton or config.extra.js_bundle %}
+  <script src="{{ get_url(path=config.extra.js_theme, trailing_slash=false) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_theme, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
 {%- endmacro %}
 
+{%- macro stylesheets() %}
 
-{%- macro resource() %}
+  {%- if config.extra.stylesheets %}{%- for i in config.extra.stylesheets %}
+  <link rel="stylesheet" href="{{ get_url(path=i, trailing_slash=false, cachebust=true) | safe }}" />
+  {%- endfor %}{%- endif %}
+
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
-  <link rel="preload" as="style" href="{{ i.url | safe }}" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
+  <link rel="preload" as="style" class="preStyle" href="{{ i.url | safe }}" crossorigin="anonymous" />
   {%- else %}
-  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" crossorigin="anonymous" />
   {%- endif %}
 {%- endfor %}{%- endif %}
 
 {%- if config.extra.fontawesome %}
-  <link rel="preload" href="{{ config.extra.fontawesome | safe }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
+  <link rel="preload" as="style" class="preStyle" href="{{ config.extra.fontawesome | safe }}" crossorigin="anonymous" />
 {%- endif %}
 
-{%- if config.build_search_index %}
-  {%- if config.extra.js_search_index %}
-  <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"></script>
-  {%- endif %}
-  {%- if config.extra.js_search %}
-  <script defer src="{{ get_url(path=config.extra.js_search, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_search, sha_type=384, base64=true) | safe }}"></script>
-  {%- endif %}
-{%- endif %}
+{%- if config.extra.math or page.extra.math %}
 
-{%- if config.generate_feed %}
-  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" />
+  {%- if config.extra.katex_css %}{%- if config.extra.katex_css is matching("^http[s]?://") %}
+  <link rel="preload" as="style" class="preStyle" href="{{ config.extra.katex_css | safe }}" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" crossorigin="anonymous" />
+  {%- else %}
+  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=config.extra.katex_css, trailing_slash=false) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_css, sha_type=384, base64=true) | safe }}" crossorigin="anonymous" />
+  {%- endif %}{%- endif %}
+
 {%- endif %}
 
 {%- endmacro %}
+
+
+
+{%- macro feed() %}
+  {%- if config.generate_feed %}
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" />
+  {%- endif %}
+{%- endmacro %}
+
+
+
+{%- macro js() %}
+
+  {%- set preStyle = false %}
+
+  {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
+    {%- if i.url is matching("^http[s]?://") %}
+      {%- set preStyle = true %}
+    {%- endif %}
+  {%- endfor %}{%- endif %}
+
+  {%- if config.extra.fontawesome %}
+    {%- set preStyle = true %}
+  {%- endif %}
+
+  {%- if config.extra.math or page.extra.math %}
+    {%- if config.extra.katex_css %}
+      {%- set preStyle = true %}
+    {%- endif %}
+  {%- endif %}
+
+{%- if config.build_search_index and config.extra.js_bundle %}
+
+  {%- if config.extra.js_search_index %}
+  <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+
+  {%- if config.extra.js_bundle %}
+  <script defer src="{{ get_url(path=config.extra.js_bundle, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_bundle, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+
+{%- elif config.build_search_index %}
+
+  {#- no bundle #}
+
+  {%- if preStyle == true %}
+  {%- if config.extra.js_prestyle %}
+  <script defer src="{{ get_url(path=config.extra.js_prestyle, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_prestyle, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
+
+  {%- if config.extra.js_theme %}
+  {%- if config.extra.js_themeButton %}
+  <script defer src="{{ get_url(path=config.extra.js_themeButton, trailing_slash=false) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_themeButton, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
+
+  {%- if config.extra.js_search_index %}
+  <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- if config.extra.js_search %}{%- for i in config.extra.js_search %}
+  <script defer src="{{ get_url(path=i, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=i, sha_type=384, base64=true) | safe }}"></script>
+  {%- endfor %}{%- endif %}
+
+{%- elif config.extra.js_bundle %}
+
+  {#- no search #}
+
+  <script defer src="{{ get_url(path=config.extra.js_bundle, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_bundle, sha_type=384, base64=true) | safe }}"></script>
+
+{%- else %}
+
+  {#- no bundle or search #}
+
+  {%- if preStyle == true %}
+  {%- if config.extra.js_prestyle %}
+  <script defer src="{{ get_url(path=config.extra.js_prestyle, trailing_slash=false, cachebust=true) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_prestyle, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
+
+  {%- if config.extra.js_theme %}
+  {%- if config.extra.js_themeButton or config.extra.js_bundle %}
+  <script defer src="{{ get_url(path=config.extra.js_themeButton, trailing_slash=false) | safe }}" integrity="sha384-{{ get_file_hash(path=config.extra.js_themeButton, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
+
+
+{%- endif %}
+
+
+{#- https://katex.org/docs/autorender.html #}
+{#- https://github.com/KaTeX/KaTeX/ #}
+{#- https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
+{%- if config.extra.math or page.extra.math %}
+
+  {%- if config.extra.katex_js %}{%- if config.extra.katex_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.katex_js | safe }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.katex_js, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_js, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}{%- endif %}
+
+  {%- if config.extra.mathtex_js %}{%- if config.extra.mathtex_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.mathtex_js | safe }}" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.mathtex_js, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.mathtex_js, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}{%- endif %}
+
+{%- if config.extra.math_auto_render or page.extra.math_auto_render %}
+  {%- if config.extra.katex_autorender_js %}
+  {%- if config.extra.katex_autorender_js is matching("^http[s]?://") %}
+  <script defer src="{{ config.extra.katex_autorender_js | safe }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  {%- else %}
+  <script defer src="{{ get_url(path=config.extra.katex_autorender_js, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_autorender_js, sha_type=384, base64=true) | safe }}"></script>
+  {%- endif %}
+  {%- endif %}
+  <script defer src="{{ get_url(path=config.extra.katex_options, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_options, sha_type=384, base64=true) | safe }}"></script>
+{%- endif %}
+
+{%- endif %}
+
+{%- endmacro %}
+
 
 
 {%- macro favicons() %}
@@ -61,6 +188,18 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path=config.extra.favicon16, trailing_slash=false) | safe }}" />
   {%- endif %}
 {%- endmacro %}
+
+
+
+{%- macro security() %}
+  {%- if config.extra.security_header_referrer %}
+  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}" />
+  {%- endif %}
+  {%- if config.extra.security_header_csp %}
+  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}" />
+  {%- endif %}
+{%- endmacro %}
+
 
 
 {#- type:          website or article, generally setting article for blog articles -#}
@@ -198,51 +337,4 @@
 {%- endif %}
 {%- endif %}
 {#- Extra SEO END #}
-{%- endmacro %}
-
-{%- macro security() %}
-  {%- if config.extra.security_header_referrer %}
-  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}" />
-  {%- endif %}
-  {%- if config.extra.security_header_csp %}
-  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}" />
-  {%- endif %}
-{%- endmacro %}
-
-{# https://katex.org/docs/autorender.html #}
-{# https://github.com/KaTeX/KaTeX/ #}
-{# https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
-{%- macro math() %}
-{%- if config.extra.math or page.extra.math %}
-
-  {%- if config.extra.katex_css %}{%- if config.extra.katex_css is matching("^http[s]?://") %}
-  <link rel="preload" href="{{ config.extra.katex_css | safe }}" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
-  {%- else %}
-  <link rel="preload" href="{{ get_url(path=config.extra.katex_css, trailing_slash=false) }}" as="style" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" />
-  {%- endif %}{%- endif %}
-
-  {%- if config.extra.katex_js %}{%- if config.extra.katex_js is matching("^http[s]?://") %}
-  <script defer src="{{ config.extra.katex_js | safe }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
-  {%- else %}
-  <script defer src="{{ get_url(path=config.extra.katex_js, trailing_slash=false) }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
-  {%- endif %}{%- endif %}
-
-  {%- if config.extra.mathtex_js %}{%- if config.extra.mathtex_js is matching("^http[s]?://") %}
-  <script defer src="{{ config.extra.mathtex_js | safe }}" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
-  {%- else %}
-  <script defer src="{{ get_url(path=config.extra.mathtex_js, trailing_slash=false) }}" integrity="sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT" crossorigin="anonymous"></script>
-  {%- endif %}{%- endif %}
-
-{%- if config.extra.math_auto_render or page.extra.math_auto_render %}
-  {%- if config.extra.katex_autorender_js %}
-  {%- if config.extra.katex_autorender_js is matching("^http[s]?://") %}
-  <script defer src="{{ config.extra.katex_autorender_js | safe }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-  {%- else %}
-  <script defer src="{{ get_url(path=config.extra.katex_autorender_js, trailing_slash=false) }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-  {%- endif %}
-  {%- endif %}
-  <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})});</script>
-{%- endif %}
-
-{%- endif %}
 {%- endmacro %}

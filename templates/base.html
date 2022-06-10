@@ -3,13 +3,15 @@
 {%- import "macros/page.html" as page_macros %}
 {%- import "macros/macros.html" as macros %}
 <!DOCTYPE html>
-<html lang="{{ config.extra.language_code | default(value="en-US") }}">
+<html lang="{{ config.extra.language_code | default(value='en-US') }}">
 <head>
+  {{- macros_head::theme() }}
+  {{- macros_head::stylesheets() }}
+  {{- macros_head::js() }}
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  {{- macros_head::resource() }}
-  {{- macros_head::stylesheet() }}
+  {{- macros_head::feed() }}
   {%- block seo %}
     {%- if config.extra.title_separator %}
       {%- set title_separator = " " ~ config.extra.title_separator ~ " " -%}
@@ -17,14 +19,15 @@
       {%- set title_separator = " | " -%}
     {%- endif %}
   {%- endblock seo %}
-  {{- macros_head::favicons() }}
-  {{- macros_head::security() }}
   <meta name="HandheldFriendly" content="True" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  {{- macros_head::math() }}
-  <noscript><style>.searchd{display:none}</style></noscript>
+  {{- macros_head::security() }}
+  {{- macros_head::favicons() }}
+  {%- if config.build_search_index %}
+  <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
+  {%- endif %}
 </head>
 <body>
 {%- block header %}
@@ -32,11 +35,11 @@
     <nav>
       <div>
         {%- if config.extra.logo %}
-        <h1><a href="{{ config.base_url | safe }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{%- if config.extra.logo.file %}<img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />{%- endif %}{%- if config.extra.logo.text %}{{ config.extra.logo.text | safe }}{%- endif %}</a></h1>
+        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.logo.file %}<img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />{%- endif %}{%- if config.extra.logo.text %}{{ config.extra.logo.text | safe }}{%- endif %}</a></h1>
         {%- elif config.extra.textlogo %}
-        <h1><a href="{{ config.base_url | safe }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
+        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title %}
-        <h1><a href="{{ config.base_url | safe }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
+        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.title | safe }}</a></h1>
         {%- endif %}
       </div>
       <div>
@@ -44,13 +47,17 @@
           {%- for i in config.extra.menu %}
           <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
           {%- endfor %}
+          {%- if config.extra.js_theme %}
+          <li class="js"><i type="reset" id="mode" class="svgs contrast"></i>
+          {%- endif %}
+          </li>
         </ul>
       </div>
       {%- if config.build_search_index %}
       <div>
-        <form name="goSearch">
+        <form class="js" name="goSearch">
           <div class="searchd">
-            <input id="userinput" type="search" placeholder="Search" autocomplete="off" />
+            <input id="userinput" type="text" placeholder="Search" autocomplete="off" />
             <button type="submit" title="Search">{%- if config.extra.fontawesome %}<i class="svgs fa-solid fa-magnifying-glass"></i>{%- else %}<i class="svgs search"></i>{%- endif %}</button>
           </div>
           <div><div id="suggestions"></div></div>

@@ -65,14 +65,12 @@ headhr = false # show or hide horizontal rule below header
 foothr = true # show or hide horizontal rule above footer
 
 menu = [
-    {url = "/", name = "Home", slash = true},
     {url = "/about/", name = "About", slash = true},
     {url = "/posts/", name = "Posts", slash = true},
     {url = "/categories/", name = "Categories", slash = true},
     {url = "/tags/", name = "Tags", slash = true},
 ]
 menu_footer = [
-    {url = "/", name = "Home", slash = true},
     {url = "/about/", name = "About", slash = true},
     {url = "/contact/", name = "Contact", slash = true},
     {url = "/privacy/", name = "Privacy", slash = true},
@@ -86,22 +84,47 @@ menu_footer = [
 
 #security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; img-src 'self' data: cdn.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com; script-src 'self' www.youtube-nocookie.com player.vimeo.com"
+#security_header_csp = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' 'unsafe-inline' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
 
 #################
 # Resource Files
 #################
-banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-js_search_index = "search_index.en.js"
-js_search = "search.min.js"
-stylesheet = "abridge.css" # location and file to use for stylesheet:
-#           abridge.css - Orange Automatic Dark/Light Theme based on browser/system preference.
-#      abridge-dark.css - Orange Dark Theme
-#     abridge-light.css - Orange Light Theme
-#      abridge-blue.css - Blue Automatic Night/Light Theme based on browser/system preference.
-# abridge-bluelight.css - Blue Light Theme
-# abridge-bluenight.css - Blue Dark Theme
+js_search_index = "search_index.en.js" # Separate Always, generated each build
+js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
+js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
 
+########## Switcher ########## (comment this block out if NOT using switcher):
+js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
+js_themeButton = "theme_button.js"# Bundleable
+js_bundle = "abridge-switcher.min.js"# Bundle JS File, comment out to disable (includes switcher)
+stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
+#stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
+#stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
+
+########## No Switcher ##########
+#js_bundle = "search.min.js"# Bundle JS File, comment out to disable (search only: no switcher/prestyle)
+#js_bundle = "abridge.min.js"# Bundle JS File, comment out to disable (no switcher)
+#stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-blue.css" ] # Blue Automatic Night/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-blueshade.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-dark.css" ] # Orange Dark Theme
+#stylesheets = [ "abridge-light.css" ] # Orange Light Theme
+#stylesheets = [ "abridge-blue-dark.css" ] # Blue Dark Theme
+#stylesheets = [ "abridge-blue-light.css" ] # Blue Light Theme
+#stylesheets = [ "abridge-blueshade-dark.css" ] # BlueShade Dark Theme
+#stylesheets = [ "abridge-blueshade-light.css" ] # BlueShade Light Theme
+#stylesheets = [ "abridge.css", "extra.css" ] # example loading extra css
+
+
+# If you have js_bundle set, then Bundleable js files are ignored (it's assumed you bundled them).
+# You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:
+#             cd mysite/themes/abridge/static
+# search:     uglifyjs elasticlunr.min.js search.js -o search.min.js -c -m
+# noswitcher: uglifyjs prestyle.js elasticlunr.min.js search.js -o abridge.min.js -c -m
+# ALL:        uglifyjs prestyle.js theme_button.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
+# theme:      uglifyjs theme.js -o theme.min.js -c -m
+
+banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
 # favicons, comment out a line to disable loading some or all of these.
 favicon_theme_color = "#333333"
 favicon_ms_color = "#333333"
@@ -115,20 +138,16 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 # Uncomment below line to load fontawesome, eg: <i class="fa-solid fa-heart"></i>
 #fontawesome = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
 
-# Externally using googleapis for fonts gets you a Free CDN, AND may already be cached by the end user.
-# Sometimes the font you want is not available by googleapis, or you only want to load local resources.
-# For Locally loaded fonts review: abridge/sass/skins/_abridge_fonts.scss
-
 # For externally loaded Fonts, make sure to include the FULL url including the http/https prefix
 #fonts = [ {url = "https://fonts.googleapis.com/css?family=Montserrat:400,700,italic|Fira+Code:400,italic"} ]
 
 # Local fonts are defined in the css, defining them here only adds the preload tag to the head.
-# preload will eliminate Content Layout Shift, but will hurt with page load time.
+# preload will eliminate Content Layout Shift, but will hurt with page load time. (not recommended)
 #fonts = [
 #    {url = "font/FiraCode.woff2"},
-#    {url = "font/Jost.woff2"},
-#    {url = "font/Jost-italic.woff2"},
-#    {url = "font/Jost-Bold.woff2"},
+#    {url = "font/Roboto.woff2"},
+#    {url = "font/Roboto-Italic.woff2"},
+#    {url = "font/Roboto-Bold.woff2"},
 #]
 
 math = false # katex math js library, used to to render mathematical notations, requires javascript
@@ -143,7 +162,7 @@ katex_css = "katex.min.css" # Fonts - to load the css locally, you also need to 
 katex_js = "katex.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
 mathtex_js = "mathtex-script-type.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
 katex_autorender_js = "auto-render.min.js"
-
+katex_options = "katexoptions.js"
 
 ##########################
 # meta/seo/analytic tags

@@ -34,7 +34,7 @@ header > nav > div:first-of-type {//Keep the logo from wrapping
 }
 header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
   margin-left: auto;
-  padding-right: var(--s1);//add some spacing between nav divs
+  padding-right: var(--s2);//add some spacing between nav divs
 }
 nav > div {
   ul, h2 {

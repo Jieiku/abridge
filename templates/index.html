@@ -26,8 +26,8 @@
     <div>
     {%- for page in paginator.pages %}
       <article>
-        {{- macros::title(page=page) }}
-        <p>
+        <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
+        <p class="sum">
         {%- if page.summary %}
           {{ page.summary | markdown(inline=true) | safe }}
         {%- elif page.description %}
@@ -38,6 +38,17 @@
         {%- endif %}
           <a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">...more</a>
         </p>
+        <span class="info">
+          {%- if page.taxonomies.authors and config.taxonomies %}
+          <span class="rpad">{%- for author in page.taxonomies.authors %}
+          {%- if author_flag %} and {% endif %}
+          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          {%- set_global author_flag = true %}
+          {%- endfor %}</span>
+          {%- elif config.extra.author and config.extra.author_show %}<span class="rpad">{{ config.extra.author }}</span>
+          {%- endif %} <span class="rpad">{{ page.date | date(format="%Y %B %d") }}</span>{%- if config.extra.readtime %}<span class="rpad"> {{ page.reading_time }} {{ config.extra.readtime_string | default(value="min") }} </span>{% endif %}
+{%- if page.taxonomies.categories %}<span class="rpad"> [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]</span>{% endif %}
+{%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
       </article>
     {%- endfor %}
     {{- macros::pagination(paginator=paginator) }}

@@ -1,5 +1,5 @@
 <div align="center">
-<img src="abridge.svg"/>
+<img src="https://raw.githubusercontent.com/Jieiku/abridge/master/abridge.svg"/>
 
 # Abridge Zola Theme
 
@@ -118,8 +118,6 @@ You can customize your configurations, templates and content for yourself. Look
 at the `config.toml`, `content` files, and templates files in this
 repo for an idea.
 
-Abridge does support a theme switcher for dark/light mode, but it is disabled by default because it reuires additional javascript.
-
 ### Number of Items per page for pagination
 
 To change the number of items per page edit: `abridge/content/_index.md` and change the value for `paginate_by`
@@ -141,10 +139,10 @@ Abridge comes with "Skins" each with their own auto, dark, light and switcher mo
 Auto mode automatically displays a dark or light version depending on browser/OS settings.
 Switcher mode automatically displays a dark or light version depending on browser/OS settings, and has a user clickable theme switcher, but it requires additional javascript.
 
-The skin used on [the Demo](https://abridge.netlify.app/) uses primarily orange colors, it the auto without the switcher.
-It is defined here: `/themes/abridge/sass/abridge.scss`
+The skin used on [the Demo](https://abridge.netlify.app/) uses primarily orange colors.
+It is defined here: `/themes/abridge/sass/abridge-switcher.scss`
 
-There is also other variations, that you will see defined in this same directory.
+There is also other variations, that you will see defined in this same directory, they are also all defined in config.toml
 
 To change colors or fonts all you need to do is edit these files or duplicate them and create your own skin.
 Then in the root of your site type `zola build` which will regenerate your site, this is similar to what zola serve does, except it does not facilitate serving the site.
@@ -189,7 +187,7 @@ Use search function for the content.
 build_search_index = true
 ```
 
-​The search is the only thing that requires javascript in this this theme.
+​The search is the only essential thing that requires javascript in this this theme.
 
 If you set `build_search_index` to false then the javascript file will no longer be loaded.
 
@@ -201,6 +199,7 @@ Most Options in the config.toml are self documenting, meaning between the name o
 
 The following options should be under the `[extra]` in `config.toml`
 
+- `uglyurls` - Set to true, as well as set a file path for base_url to support a local offline mode of your site, you can then browse your site directly from disk.
 - `language_code` - Set the site language_code.
 - `title_separator` - Separator between title and title_addition, eg "|": "Abridge | Fast & Lightweight Zola Theme"
 - `title_addition` - a default value for title addition, used at the index.
@@ -216,7 +215,7 @@ The following options should be under the `[extra]` in `config.toml`
 
 - `logo = { file="logo.svg", width="42", height="42", alt="Abridge", text="bridge" }` - Defines the graphical logo with optional text to follow the logo.
 - `textlogo` - A purely Text based logo, this will be used if logo is commented out, if both are commented out then config.title is used.
-- `sitedesc` - This add the site description just below the text based logo.
+- `sitedesc` - This adds the site description just below the text based logo.
 - `copyright_start_year` - Optionally define a start year for the copyright, otherwise the current year is used.
 - `copyright_end_year` - Optionally set the copyright end year, recommend leaving unset, zola build will set this to current year by default
 - `headhr` - Display a horizontal rule below header
@@ -225,17 +224,26 @@ The following options should be under the `[extra]` in `config.toml`
 - `menu_footer` - This is an array of links to display in the footer of the page
 
 - `security_header_referrer` - This is mostly used for tracking, the default is set to "strict-origin-when-cross-origin" [info](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
-- `security_header_csp` - Content Security policy, to enfore security rules: [observatory](https://observatory.mozilla.org) [csp-google](https://csp-evaluator.withgoogle.com/)
+- `security_header_csp` - Content Security policy, to enfore security rules: [observatory](https://observatory.mozilla.org), [csp-google](https://csp-evaluator.withgoogle.com/)
 
-- `banner` - Image to use in seo related cards, this will be the fallback image if the individual articles does not provide one, still a work in progress.
-- `js_search_index = "search_index.en.js"` - The search index file to include in the header, comment out to disable.
-- `js_search = "search.min.js"` - The search script file to include in the header, comment out to disable.
-- `rss_atom_feed = "atom.xml"` - The atom.xml rss file to include in the header.
+- `js_search_index` - The search index file to include in the header, comment out to disable.
+- `prestyle` - The script file used to preload: FontAwesome, Katex, external Google Fonts.
+- `js_search` - The search script file to include in the header, comment out to disable.
+
+- `js_theme` - Used for the Theme Switcher, to facilitate localstorage.
+- `js_themeButton` - Used for the Theme Switcher.
+- `js_bundle` - Used to define a javascript bundle, [more information](https://github.com/Jieiku/abridge#javascript-files-js_bundle-and-options).
 - `stylesheets = [ "abridge.css" ]` - The stylesheet file(s) to include in the header.
+
+- `banner` - Image to use in seo related cards, this will be the fallback image if the individual articles does not provide one.
+- `favicon_..` - Used to set the various favicons (displayed in bookmarks and active browser tab)
 - `fontawesome =` - Uncomment to enable fontawesome library, this will include the file in the header.
 - `fonts =` - Uncomment to load external fonts, they will be loaded in the header.
-- `math` - Set to true to load the Katex library, enabling the use of the [katex shortcode](https://abridge.netlify.app/overview-math/)
-- `math_auto_render` - This allows you to define a section of math notation using only $$ $$ symbols instead of using the katex shortcode directly.
+- `math` - Set to true to load the Katex library, enabling the use of the [katex shortcode](https://abridge.netlify.app/overview-math/) (recommend setting on a per page basis instead.)
+- `math_auto_render` - This allows you to define a section of math notation using only $$ $$ symbols instead of using the katex shortcode directly. (recommend setting on a per page basis instead.)
+
+- `katex_css`, `katex_js`, `mathtex_js`, `katex_autorender_js`, `katex_options` - Used for Math Notation.
+- `katex_bundle` - Used to bundle all of the math related js.
 
 - `keywords =` - This is used for SEO.
 - `seo =` - This is used for SEO, for the social media related tags, eg: opengraph, facebook, twitter if set to false it disables them all.
@@ -319,7 +327,7 @@ There are tools you can use to test your page SEO metadata, such as: [smallseoto
 
 KaTeX can be used to display complex mathematics, it is a "Fast math typesetting for the web."
 
-You can see a demo of this here [this page](https://abridge.netlify.app/overview-math/).
+You can see a demo on [this page](https://abridge.netlify.app/overview-math/).
 
 I recommend only enabling math on a per page bases in your post.md files, instead of in your main config.toml file.
 
@@ -331,7 +339,7 @@ All pages extend to `base.html`, and you can customize them as need.
 
 ### Theme-Switcher
 
-The theme switcher relies on javascript to work, it applies the .light class to the root documentElement. The file that handles this (theme.js) is tiny and optimized and it is the first file loaded in the head, so the performance hit is minimal, but it does still exist. Without the Theme switcher you can still use The automatic Theme, it works by using Browser/OS preference and works well enough for me, you can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two. By default the demo has the theme switcher enabled so that it can be evaluated.
+The theme switcher relies on javascript to work, it applies the .light class to the root documentElement. The file that handles this (theme.js) is tiny and optimized and it is the first file loaded in the head, so the performance hit is minimal, but it does still exist. Without the Theme switcher you can still use The automatic Theme, it works by using Browser/OS preference, you can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two. By default the demo has the theme switcher enabled so that it can be evaluated.
 
 With the growing number of options and configuration it can get confusing. To disable the Theme Switcher, you would comment out the Switcher section and enable your choice in the No switcher section, for example:
 
@@ -361,15 +369,19 @@ oxipng -o max --strip all -a -Z *.png
 
 You can go even farther if you use leanify:
 
+```bash
 git clone https://github.com/JayXon/Leanify
 cd Leanify
 make
 sudo cp leanify /usr/local/bin/leanify
 exit  #launch new terminal
-leanify -i 7777 *.{png,ico}
+leanify -i 7777 *.png
+leanify -i 7777 *.ico
+```
 
-Here is the results of using leanify on files previously processed with oxipng:
+Results of using leanify on files previously processed with oxipng (smaller favicons compressed a lot more):
 
+```bash
 Processing: android-chrome-192x192m.png
 2.23 KB -> 2.22 KB      Leanified: 11 B (0.48%)
 Processing: android-chrome-192x192.png
@@ -388,11 +400,12 @@ Processing: favicon-32x32.png
 969 B -> 663 B  Leanified: 306 B **(31.58%)**
 Processing: favicon.ico
 2.59 KB -> 1.90 KB      Leanified: 703 B **(26.53%)**
+```
 
 Google lighthouse will often notice when your pictures could be more compressed, this may even help SEO.
 
 
-### Pre gzip content to serve with nginx:
+### Pre gzip/brotli content to serve with nginx:
 
 If you are serving your site with nginx, you can pre gzip your content.
 

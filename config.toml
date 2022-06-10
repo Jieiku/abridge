@@ -119,11 +119,12 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 
 # If you have js_bundle set, then Bundleable js files are ignored (it's assumed you bundled them).
 # You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:
-#             cd mysite/themes/abridge/static
-# search:     uglifyjs elasticlunr.min.js search.js -o search.min.js -c -m
-# noswitcher: uglifyjs prestyle.js elasticlunr.min.js search.js -o abridge.min.js -c -m
-# ALL:        uglifyjs prestyle.js theme_button.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
-# theme:      uglifyjs theme.js -o theme.min.js -c -m
+#               cd mysite/themes/abridge/static
+# search:       uglifyjs elasticlunr.min.js search.js -o search.min.js -c -m
+# noswitcher:   uglifyjs prestyle.js elasticlunr.min.js search.js -o abridge.min.js -c -m
+# ALL:          uglifyjs prestyle.js theme_button.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
+# theme:        uglifyjs theme.js -o theme.min.js -c -m
+# katex_bundle: uglifyjs katex.min.js mathtex-script-type.min.js auto-render.min.js katexoptions.js -o katexbundle.min.js -c -m
 
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
 # favicons, comment out a line to disable loading some or all of these.
@@ -164,6 +165,9 @@ katex_js = "katex.min.js" # use local js, so that we dont have to whitelist cdn.
 mathtex_js = "mathtex-script-type.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
 katex_autorender_js = "auto-render.min.js"
 katex_options = "katexoptions.js"
+katex_bundle = "katexbundle.min.js"
+
+
 
 ##########################
 # meta/seo/analytic tags

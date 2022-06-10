@@ -16,7 +16,7 @@
   {%- if i.url is matching("^http[s]?://") %}
   <link rel="preload" as="style" class="preStyle" href="{{ i.url | safe }}" crossorigin="anonymous" />
   {%- else %}
-  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" />
   {%- endif %}
 {%- endfor %}{%- endif %}
 
@@ -29,7 +29,7 @@
   {%- if config.extra.katex_css %}{%- if config.extra.katex_css is matching("^http[s]?://") %}
   <link rel="preload" as="style" class="preStyle" href="{{ config.extra.katex_css | safe }}" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" crossorigin="anonymous" />
   {%- else %}
-  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=config.extra.katex_css, trailing_slash=false) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_css, sha_type=384, base64=true) | safe }}" crossorigin="anonymous" />
+  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=config.extra.katex_css, trailing_slash=false) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_css, sha_type=384, base64=true) | safe }}" />
   {%- endif %}{%- endif %}
 
 {%- endif %}
@@ -130,6 +130,10 @@
 {#- https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
 {%- if config.extra.math or page.extra.math %}
 
+{%- if config.extra.katex_bundle %}
+  <script defer src="{{ get_url(path=config.extra.katex_bundle, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_bundle, sha_type=384, base64=true) | safe }}"></script>
+{%- else %}
+
   {%- if config.extra.katex_js %}{%- if config.extra.katex_js is matching("^http[s]?://") %}
   <script defer src="{{ config.extra.katex_js | safe }}" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
   {%- else %}
@@ -142,7 +146,7 @@
   <script defer src="{{ get_url(path=config.extra.mathtex_js, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.mathtex_js, sha_type=384, base64=true) | safe }}"></script>
   {%- endif %}{%- endif %}
 
-{%- if config.extra.math_auto_render or page.extra.math_auto_render %}
+ {%- if config.extra.math_auto_render or page.extra.math_auto_render %}
   {%- if config.extra.katex_autorender_js %}
   {%- if config.extra.katex_autorender_js is matching("^http[s]?://") %}
   <script defer src="{{ config.extra.katex_autorender_js | safe }}" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
@@ -151,6 +155,7 @@
   {%- endif %}
   {%- endif %}
   <script defer src="{{ get_url(path=config.extra.katex_options, trailing_slash=false, cachebust=true) }}" integrity="sha384-{{ get_file_hash(path=config.extra.katex_options, sha_type=384, base64=true) | safe }}"></script>
+ {%- endif %}
 {%- endif %}
 
 {%- endif %}

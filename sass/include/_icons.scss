@@ -66,7 +66,7 @@
   @if $icon-check {.check { background-image: icon(check, "%23888", 2, "none") }}
   @if $icon-chevron {.chevron { background-image: icon(chevron, "%23888", 2, "none") }}
   @if $icon-clock {.clock { background-image: icon(clock, "%23888", 2, "none") }}
-  @if $icon-contrast {.contrast { background-image: icon(contrast, "none", 1, "%23888") }}
+  @if $icon-contrast {.contrast { mask: icon(contrast, "none", 1, "%23000") ; background: var(--f2)}}
   @if $icon-date {.date { background-image: icon(date, "%23888", 2, "none") }}
   @if $icon-docker {.docker { background-image: icon(docker, "%2329e", 2, "none") }}
   @if $icon-element {.element { background-image: icon(element, "none", 1, "%231c8") }}

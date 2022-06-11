@@ -48,7 +48,7 @@
           <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
           {%- endfor %}
           {%- if config.extra.js_theme %}
-          <li class="js">{%- if config.extra.fontawesome %}<i type="reset" id="mode" class="svgs fa-solid fa-circle-half-stroke"></i>{%- else %}<i type="reset" id="mode" class="svgs contrast"></i>{%- endif %}
+          <li class="js">{%- if config.extra.fontawesome %}<i type="reset" id="mode" class="svgs fa-solid fa-circle-half-stroke"></i>{%- else %}<i type="reset" id="mode" class="svgh svgs contrast"></i>{%- endif %}
           {%- endif %}
           </li>
         </ul>

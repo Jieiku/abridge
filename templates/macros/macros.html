@@ -1,18 +1,85 @@
 {%- macro title(page) %}
-        <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
-        <span>
-          {%- if page.taxonomies.authors and config.taxonomies %}
-          <span class="hpad"><b>{%- for author in page.taxonomies.authors %}
+        <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
+
+        {#- Author #}
+        {%- if page.taxonomies.authors and config.taxonomies %}
+          {%- for author in page.taxonomies.authors %}
           {%- if author_flag %} and {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
           {%- set_global author_flag = true %}
-          {%- endfor %}</b></span>
-          {%- elif config.extra.author and config.extra.author_show %}<span class="hpad"><b>{{ config.extra.author }}</b></span>
-          {%- endif %}<span class="rpad"> {{ page.date | date(format="%B %d, %Y") }}</span>
-{%- if page.taxonomies.categories %}<span class="rpad"> [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]</span>{% endif %}
-{%- if page.taxonomies.tags %}<span class="rpad"> {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}</span>{%- endif %}
-{%- if config.extra.readtime %}<span class="rpad"> {{ page.reading_time }} {{ config.extra.readtime_string | default(value="min") }} </span>{% endif %}</span>
+          {%- endfor %}
+        {%- elif config.extra.author and config.extra.meta_post.author %}
+          {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i>{%- endif %}{{ config.extra.author }}
+        {%- endif %}
+
+          {#- divider #}
+          {%- if config.extra.meta_post.author %}
+          {%- if config.extra.meta_post.readtime or config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}
+          {%- endif %}
+          {%- endif %}
+
+        {#- ReadTime #}
+          {%- if config.extra.meta_post.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i>{%- endif %}{{ page.reading_time }} {{ config.extra.meta_post.readstring | default(value="min") }}
+          {#- divider #}
+          {%- if config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{%- endif %}
+
+        {#- Date #}
+          {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i>{%- endif %}{{ page.date | date(format="%B %d, %Y") }}
+          {#- divider #}
+          {%- if config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{% endif %}
+
+        {#- Categories #}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i>{%- endif %}[{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+
+        {#- Tags #}
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro title %}
+
+
+{%- macro title_index(page) %}
+        <span{%- if config.extra.meta_index.size %} class="{{ config.extra.meta_index.size }}"{% endif %}>
+
+        {#- Author #}
+        {%- if page.taxonomies.authors and config.taxonomies %}
+          {%- for author in page.taxonomies.authors %}
+          {%- if author_flag %} and {% endif %}
+          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          {%- set_global author_flag = true %}
+          {%- endfor %}
+        {%- elif config.extra.author and config.extra.meta_index.author %}
+          {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i>{%- endif %}{{ config.extra.author }}
+        {%- endif %}
+
+          {#- divider #}
+          {%- if config.extra.meta_index.author %}
+          {%- if config.extra.meta_index.readtime or config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}
+          {%- endif %}
+          {%- endif %}
+
+        {#- ReadTime #}
+          {%- if config.extra.meta_index.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i>{%- endif %}{{ page.reading_time }} {{ config.extra.meta_index.readstring | default(value="min") }}
+          {#- divider #}
+          {%- if config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{%- endif %}
+
+        {#- Date #}
+          {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i>{%- endif %}{{ page.date | date(format="%B %d, %Y") }}
+          {#- divider #}
+          {%- if config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{% endif %}
+
+        {#- Categories #}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i>{%- endif %}[{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+
+        {#- Tags #}
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
+{%- endmacro title %}
+
+
 
 
 {%- macro footer(page) %}

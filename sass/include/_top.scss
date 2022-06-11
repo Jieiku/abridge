@@ -1,0 +1,17 @@
+.top {
+  position: sticky;
+  bottom: 9px;
+  padding: 9px;
+  place-self: end;
+  margin-top: 109vh;
+
+  font-weight:700;
+  border-radius: 9px;
+  color: var(--a1);
+  background: var(--c2);
+}
+.top:hover {
+  color: var(--c2);
+  background: var(--a1);
+  text-decoration: none;
+}

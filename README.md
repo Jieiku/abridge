@@ -203,16 +203,22 @@ The following options should be under the `[extra]` in `config.toml`
 - `language_code` - Set the site language_code.
 - `title_separator` - Separator between title and title_addition, eg "|": "Abridge | Fast & Lightweight Zola Theme"
 - `title_addition` - a default value for title addition, used at the index.
-
-- `author` - Used for articles to denote the author.
-- `author_show = true` - Displays the author name on line with date, tags, categories
-- `readtime = true` - Displays the read time on line with date, tags, categories.
-- `readtime_string` - The word following the read time, you can set this to "min", "minutes", "min read", etc.
 - `recent = true` - This enabled the Recent posts box visible on the top right.
 - `recent_items = 9` - The number of items to display in the recent posts box
+- `author` - Used for articles to denote the author.
+
+- `meta_index / meta_post`
+    * `position` - top, bottom, both, false(hidden), Where to display the meta info in relation to the summary.
+    * `size` - s95, s90, s85, s80, false(full size). The size of the font for the meta info
+    * `author` - true/false, Display the author in the meta info.
+    * `readtime` - true/false, Display the read time in the meta info.
+    * `readstring` - "min", "min read", "minutes read". The string to display after the read time.
+    * `date` - true/false, Display the date in the meta info.
+    * `categories_tags` - true/false, Display the categores and tags in the meta info.
+    * `divider` - `"&middot;"`   `"&bull;"`   `" "`  divider to display between meta info elements.
+
 - `footer_credit = true` - This enables the powered by zola and abridge line in the footer.
 - `footer_credit_override` - Can be used to customize the footer credit, useful to add icons to the text, etc.
-
 - `logo = { file="logo.svg", width="42", height="42", alt="Abridge", text="bridge" }` - Defines the graphical logo with optional text to follow the logo.
 - `textlogo` - A purely Text based logo, this will be used if logo is commented out, if both are commented out then config.title is used.
 - `sitedesc` - This adds the site description just below the text based logo.
@@ -238,6 +244,11 @@ The following options should be under the `[extra]` in `config.toml`
 - `banner` - Image to use in seo related cards, this will be the fallback image if the individual articles does not provide one.
 - `favicon_..` - Used to set the various favicons (displayed in bookmarks and active browser tab)
 - `fontawesome =` - Uncomment to enable fontawesome library, this will include the file in the header.
+    * `icon_read` - icon to display in meta info on index and posts, comment out to disable
+    * `icon_date` - icon to display in meta info on index and posts, comment out to disable
+    * `icon_info` - icon to display in meta info on index and posts, comment out to disable
+    * `icon_author` - icon to display in meta info on index and posts, comment out to disable
+
 - `fonts =` - Uncomment to load external fonts, they will be loaded in the header.
 - `math` - Set to true to load the Katex library, enabling the use of the [katex shortcode](https://abridge.netlify.app/overview-math/) (recommend setting on a per page basis instead.)
 - `math_auto_render` - This allows you to define a section of math notation using only $$ $$ symbols instead of using the katex shortcode directly. (recommend setting on a per page basis instead.)

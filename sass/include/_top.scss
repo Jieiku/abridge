@@ -1,10 +1,12 @@
 .top {
   position: sticky;
   bottom: 9px;
-  padding: 9px;
+  right: 9px;
+
   place-self: end;
   margin-top: 109vh;
 
+  padding: 9px;
   font-weight:700;
   border-radius: 9px;
   color: var(--a1);

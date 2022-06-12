@@ -66,5 +66,11 @@
 {%- endblock content %}
 
 {%- block gotop %}
+
+{%- if page.reading_time %}
+{%- if page.reading_time > 1 %}
 <a href="#" class="top">&cuwed;</a>
+{%- endif %}
+{%- endif %}
+
 {%- endblock gotop %}

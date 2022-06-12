@@ -48,12 +48,13 @@ recent = true # TOC / index
 recent_items = 9
 author = "Jake G" # Put Your Name here
 
+title_size_index = "s75" # size: s95, s90, s85, s80, s75, s70, false(full size)
 meta_index = { position="bottom", size="s90", author=true, readtime=false, readstring="min", date=true, categories_tags=true, divider=" " }
 meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, categories_tags=true, divider=" " }
-## position: top, bottom, both, false(hidden) ## size: s95, s90, s85, s80, false(full size)
+## position: top, bottom, both, false(hidden) ## size: s95, s90, s85, s80, s75, s70, false(full size)
 ## divider:    "&middot;"    "&bull;"    " "
 
-footer_size = "s90" # size: s95, s90, s85, s80, false(full size)
+footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
 footer_credit = true
 #footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>'
 #uncomment one of the two lines, or neither, depending on which type of logo you want to use:

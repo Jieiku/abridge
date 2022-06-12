@@ -28,10 +28,10 @@
     <div>
     {%- for page in paginator.pages %}
       <article>
-        <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
+        {{- macros::title_index(page=page) }}
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "top" or config.extra.meta_index.position == "both" %}
-        {{- macros::title_index(page=page) }}
+        {{- macros::meta_index(page=page) }}
         {%- endif %}{%- endif %}
         <p class="sum">
         {%- if page.summary %}
@@ -46,7 +46,7 @@
         </p>
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}
-        {{- macros::title_index(page=page) }}
+        {{- macros::meta_index(page=page) }}
         {%- endif %}
         {%- endif %}
       </article>

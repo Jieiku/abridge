@@ -32,9 +32,20 @@
 
 {%- block content %}
     <article>
-    <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
-    {{- macros::title(page=page) }}
+    {{- macros::title_post(page=page) }}
+
+    {%- if config.extra.meta_post.position %}
+    {%- if config.extra.meta_post.position == "top" or config.extra.meta_post.position == "both" %}
+    {{- macros::meta_post(page=page) }}
+    {%- endif %}{%- endif %}
+
     {{ page.content | safe }}
+
+    {%- if config.extra.meta_post.position %}
+    {%- if config.extra.meta_post.position == "bottom" or config.extra.meta_post.position == "both" %}
+    {{- macros::meta_post(page=page) }}
+    {%- endif %}{%- endif %}
+
     {%- block page_footer %}
     {{- macros::footer(page=page) }}
     {%- endblock page_footer %}
@@ -63,6 +74,7 @@
     </div>
     {%- endif %}
     {%- endblock toc %}
+
 {%- endblock content %}
 
 {%- block gotop %}

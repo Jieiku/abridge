@@ -93,9 +93,9 @@
       {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}
       {%- if copyright_start_year %}{%- set copyright_start_year=copyright_start_year ~ "-" %}{%- endif %}
       {%- set copyright_end_year=config.extra.copyright_end_year | default(value=now() | date(format="%Y")) %}
-      <p>Copyright &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Copyright &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
       {#- Copyright END #}
-      <p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>
         {%- for i in config.extra.menu_footer %}
         <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a> &nbsp;
         {%- endfor %}
@@ -105,8 +105,8 @@
       {%- if config.extra.footer_credit | default(value=true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
-      {%- else %}    
-      <p>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+      {%- else %}
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

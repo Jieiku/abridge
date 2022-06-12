@@ -7,6 +7,9 @@
 }
 main nav {
   margin-top: var(--s2);//pagination margin
+    ul li {
+    margin: 0;
+  }
 }
 .off {
   color: var(--c4);
@@ -22,7 +25,6 @@ main nav a:visited {//pagination link styling
   border: .1rem solid var(--c4);
   border-radius: var(--br);
   padding: .1rem var(--s1);
-  margin: .1rem;
 }
 main nav a:hover {//makes border of pagination links hover color
   border-color: var(--a3);

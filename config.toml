@@ -53,6 +53,7 @@ meta_post = { position="top", size="s95", author=true, readtime=false, readstrin
 ## position: top, bottom, both, false(hidden) ## size: s95, s90, s85, s80, false(full size)
 ## divider:    "&middot;"    "&bull;"    " "
 
+footer_size = "s90" # size: s95, s90, s85, s80, false(full size)
 footer_credit = true
 #footer_credit_override = '<p>Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>' # <i class="fa-solid fa-heart"></i>
 #uncomment one of the two lines, or neither, depending on which type of logo you want to use:

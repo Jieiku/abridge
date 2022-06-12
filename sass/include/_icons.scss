@@ -111,7 +111,11 @@
     vertical-align: middle
   }
   .svgh:hover {
-      background: var(--a3);
-      opacity: 1;
+    background: var(--a3);
+    opacity: 1;
+  }
+  .fa-a:hover {
+    color: var(--a3);
+    opacity: 1;
   }
 }

@@ -1,11 +1,17 @@
-.top {
+.topout {
+  display: flex;
   position: sticky;
-  bottom: 9px;
-  right: 9px;
-
+  bottom: 1px;
+  padding: 20px;
   place-self: end;
   margin-top: 109vh;
-
+  pointer-events: none;
+}
+.topin {
+  margin-left: auto;
+  pointer-events: all;
+}
+.top {
   padding: 9px;
   font-weight:700;
   border-radius: 9px;

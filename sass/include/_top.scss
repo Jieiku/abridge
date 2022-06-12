@@ -1,25 +1,24 @@
 .topout {
-  display: flex;
   position: sticky;
   bottom: 1px;
   padding: 20px;
   place-self: end;
-  margin-top: 101vh;
+  margin-top: 110vh;
   pointer-events: none;
 }
-.topin {
-  margin-left: auto;
-  pointer-events: all;
+.topleft {
+  margin-left: calc(100% - 80px);
 }
 .top {
+  pointer-events: all;
   padding: 9px;
-  font-weight:700;
   border-radius: 9px;
+  font-weight:700;
   color: var(--a1);
   background: var(--c2);
 }
 .top:hover {
+  text-decoration: none;
   color: var(--c2);
   background: var(--a1);
-  text-decoration: none;
 }

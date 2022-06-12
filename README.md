@@ -207,6 +207,7 @@ The following options should be under the `[extra]` in `config.toml`
 - `recent_items = 9` - The number of items to display in the recent posts box
 - `author` - Used for articles to denote the author.
 
+- `title_size_index` - Size of the Titles Font on the Index: s95, s90, s85, s80, s75, s70, false(full size)
 - `meta_index / meta_post`
     * `position` - top, bottom, both, false(hidden), Where to display the meta info in relation to the summary.
     * `size` - s95, s90, s85, s80, false(full size). The size of the font for the meta info
@@ -217,6 +218,7 @@ The following options should be under the `[extra]` in `config.toml`
     * `categories_tags` - true/false, Display the categores and tags in the meta info.
     * `divider` - `"&middot;"`   `"&bull;"`   `" "`  divider to display between meta info elements.
 
+- `footer_size` - Size of the Footer Font: s95, s90, s85, s80, s75, s70, false(full size)
 - `footer_credit = true` - This enables the powered by zola and abridge line in the footer.
 - `footer_credit_override` - Can be used to customize the footer credit, useful to add icons to the text, etc.
 - `logo = { file="logo.svg", width="42", height="42", alt="Abridge", text="bridge" }` - Defines the graphical logo with optional text to follow the logo.
@@ -233,7 +235,7 @@ The following options should be under the `[extra]` in `config.toml`
 - `security_header_csp` - Content Security policy, to enfore security rules: [observatory](https://observatory.mozilla.org), [csp-google](https://csp-evaluator.withgoogle.com/)
 
 - `js_search_index` - The search index file to include in the header, comment out to disable.
-- `prestyle` - The script file used to preload: FontAwesome, Katex, external Google Fonts.
+- `js_prestyle` - The script file used to preload: FontAwesome, Katex, external Google Fonts.
 - `js_search` - The search script file to include in the header, comment out to disable.
 
 - `js_theme` - Used for the Theme Switcher, to facilitate localstorage.
@@ -242,7 +244,7 @@ The following options should be under the `[extra]` in `config.toml`
 - `stylesheets = [ "abridge.css" ]` - The stylesheet file(s) to include in the header.
 
 - `banner` - Image to use in seo related cards, this will be the fallback image if the individual articles does not provide one.
-- `favicon_..` - Used to set the various favicons (displayed in bookmarks and active browser tab)
+- `favicon_...` - Used to set the various favicons (displayed in bookmarks and active browser tab)
 - `fontawesome =` - Uncomment to enable fontawesome library, this will include the file in the header.
     * `icon_read` - icon to display in meta info on index and posts, comment out to disable
     * `icon_date` - icon to display in meta info on index and posts, comment out to disable

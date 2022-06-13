@@ -7,10 +7,11 @@
 <head>
   {{- macros_head::theme() }}
   {{- macros_head::stylesheets() }}
-  {{- macros_head::js() }}
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  {{- macros_head::stylesheets_preload() }}
+  {{- macros_head::js() }}
   {{- macros_head::feed() }}
   {%- block seo %}
     {%- if config.extra.title_separator %}

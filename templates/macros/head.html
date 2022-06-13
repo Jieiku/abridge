@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="{{ get_url(path=i, trailing_slash=false, cachebust=true) | safe }}" />
   {%- endfor %}{%- endif %}
 
+{%- endmacro %}
+
+{%- macro stylesheets_preload() %}
+
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
   <link rel="preload" as="style" class="preStyle" href="{{ i.url | safe }}" crossorigin="anonymous" />

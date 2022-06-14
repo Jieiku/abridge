@@ -19,7 +19,7 @@
           {#- divider #}
           {%- if config.extra.meta_post.author %}
           {%- if config.extra.meta_post.readtime or config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
           {%- endif %}
           {%- endif %}
 
@@ -27,13 +27,13 @@
           {%- if config.extra.meta_post.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_post.readstring | default(value="min") }}
           {#- divider #}
           {%- if config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{%- endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
           {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %} {{ page.date | date(format="%B %d, %Y") }}
           {#- divider #}
           {%- if config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
           {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
@@ -64,7 +64,7 @@
           {#- divider #}
           {%- if config.extra.meta_index.author %}
           {%- if config.extra.meta_index.readtime or config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
           {%- endif %}
           {%- endif %}
 
@@ -72,13 +72,13 @@
           {%- if config.extra.meta_index.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_index.readstring | default(value="min") }}
           {#- divider #}
           {%- if config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{%- endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
           {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %} {{ page.date | date(format="%B %d, %Y") }}
           {#- divider #}
           {%- if config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
           {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}

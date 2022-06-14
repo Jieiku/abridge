@@ -7,3 +7,19 @@
 .s70 {font-size: .70em}
 .hpad {padding: 0 .2rem}
 .rpad {padding-right: .2rem}
+pre code[data-lang]::before {
+    content: ' ' attr(data-lang) ': ' "
+";
+	color: var(--a1);
+}
+// code copy wrapper
+.ccw {
+  position: relative;
+}
+// code copy button
+.cc {
+  z-index: 9;
+  position: absolute;
+  right: 0px;
+  font-size: .8rem;
+}

@@ -92,9 +92,11 @@ menu_footer = [
 #################
 # Resource Files
 #################
+integrity = true # setting this to false is useful for developing, should normally be true.
 js_search_index = "search_index.en.js" # Separate Always, generated each build
 js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
 js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
+js_codecopy = "codecopy.js"# Bundleable
 
 ########## Switcher ########## (comment this block out if NOT using switcher):
 js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
@@ -123,8 +125,8 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 # You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:
 #               cd mysite/themes/abridge/static
 # search:       uglifyjs elasticlunr.min.js search.js -o search.min.js -c -m
-# noswitcher:   uglifyjs prestyle.js elasticlunr.min.js search.js -o abridge.min.js -c -m
-# ALL:          uglifyjs prestyle.js theme_button.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
+# noswitcher:   uglifyjs prestyle.js codecopy.js elasticlunr.min.js search.js -o abridge.min.js -c -m
+# ALL:          uglifyjs prestyle.js codecopy.js theme_button.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
 # theme:        uglifyjs theme.js -o theme.min.js -c -m
 # katex_bundle: uglifyjs katex.min.js mathtex-script-type.min.js auto-render.min.js katexoptions.js -o katexbundle.min.js -c -m
 

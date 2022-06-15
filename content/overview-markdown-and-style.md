@@ -60,8 +60,6 @@ and optionally with in-line changes such as annotations and abbreviations.
 > All men by nature desire to know.<br>
 > ― <cite>Aristotle[^2]</cite>
 
-## Blockquote with author
-
 > Power comes in response to a need, not a desire.<br>
 > — *Goku*
 
@@ -118,6 +116,21 @@ See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting
 ## Code block with backticks
 
 ```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Example HTML5 Document</title>
+</head>
+<body>
+  <p>Test</p>
+</body>
+</html>
+```
+
+## Line Numbers, Highlighting
+
+```html,linenos,hl_lines=5 7-9
 <!doctype html>
 <html lang="en">
 <head>

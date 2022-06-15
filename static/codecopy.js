@@ -1,4 +1,5 @@
 // https://aaronluna.dev/blog/add-copy-button-to-code-blocks-hugo-chroma/
+// Further modified for Zola by Jieiku: https://github.com/Jieiku
 
 // create copy button
 function ccb(highlightDiv) {
@@ -20,8 +21,18 @@ function ccb(highlightDiv) {
 
 // copy code clipboard
 async function ccc(button, highlightDiv) {
-  const codeToCopy = highlightDiv.querySelector(":last-child > code")
-    .innerText;
+  //look for table, if so do it different
+  const { length } = highlightDiv.querySelectorAll("table");
+  let codeToCopy = "";
+  if (length > 0) {
+    const items = highlightDiv.querySelectorAll(":last-child > tr > td:last-child");
+    items.forEach(item => {
+      codeToCopy = codeToCopy + item.innerText;
+      console.log(codeToCopy);
+    });
+  } else {
+    const codeToCopy = highlightDiv.querySelector(":last-child > code").innerText;
+  }
   try {
     result = await navigator.permissions.query({ name: "clipboard-write" });
     if (result.state == "granted" || result.state == "prompt") {
@@ -33,7 +44,7 @@ async function ccc(button, highlightDiv) {
     cce(codeToCopy, highlightDiv);//copyCodeBlockExecCommand
   } finally {
     //codeWasCopied
-    button.blur();
+    //button.blur();
     button.innerHTML = "Copied";
     setTimeout(function () {
       button.innerHTML = "Copy";

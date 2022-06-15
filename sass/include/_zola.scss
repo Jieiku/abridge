@@ -24,6 +24,12 @@ pre code[data-lang]::before {
   font-size: .8rem;
 }
 
+// Mark Override, this is used for Zola's linenos and hl_lines
+:root:not(.light) code table {
+  mark {
+    filter: brightness(120%);
+  }
+}
 // Table Override, this is used for Zola's linenos and hl_lines
 code table {
   font-size: .8rem;

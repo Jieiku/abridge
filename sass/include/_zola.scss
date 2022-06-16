@@ -40,6 +40,7 @@ code table {
   tbody tr td:first-child {
     text-align: center;
     user-select: none;
+    min-width: 60px;
   }
   tbody tr:nth-child(even), thead tr {
     background-color: unset;

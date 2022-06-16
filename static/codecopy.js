@@ -28,10 +28,10 @@ async function ccc(button, highlightDiv) {
     const items = highlightDiv.querySelectorAll(":last-child > tr > td:last-child");
     items.forEach(item => {
       codeToCopy = codeToCopy + item.innerText;
-      console.log(codeToCopy);
+      //console.log(codeToCopy);
     });
   } else {
-    const codeToCopy = highlightDiv.querySelector(":last-child > code").innerText;
+    codeToCopy = highlightDiv.querySelector(":last-child > code").innerText;
   }
   try {
     result = await navigator.permissions.query({ name: "clipboard-write" });

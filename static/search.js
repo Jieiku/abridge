@@ -1,7 +1,7 @@
 // in page results when press enter or click search icon from search box
 function closeSearchNow() {
     const main = document.querySelector("main");
-    main.innerHTML = window.main;
+    main.innerHTML = window.main
 }
 function goSearchNow() {
     const main = document.querySelector("main");
@@ -24,12 +24,11 @@ function goSearchNow() {
     main.innerHTML = ResultsClone.outerHTML;//display ResultsClone.outerHTML as the page
     results.innerHTML = "";// clear the suggestions div popup
     document.getElementById("userinput").value = "";// clear the search input box
-
+    document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
     return false
 }
 window.onload = function() {
-    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() }),
-    document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
+    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
 };
 
 // Everything Below this line For Suggestsions as you type in search box

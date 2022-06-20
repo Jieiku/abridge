@@ -8,7 +8,7 @@
 main nav {
   margin-top: var(--s2);//pagination margin
     ul li {
-    margin: 0;
+    margin: .1rem;
   }
 }
 .off {
@@ -17,7 +17,6 @@ main nav {
   border: .1rem solid var(--c3);
   border-radius: var(--br);
   padding: .1rem var(--s1);
-  margin: .1rem;
 }
 main nav a,
 main nav a:visited {//pagination link styling
@@ -64,8 +63,8 @@ nav {
   ul li {
     display: inline-block;
     margin: 0 0.2rem;
-    position: relative;
-    text-align: left;
+    //position: relative;
+    //text-align: left;
   }
 }
 // breakpoint makes header responsive for mobile layouts

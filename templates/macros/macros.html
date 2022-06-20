@@ -126,8 +126,8 @@
             {%- endif %}
       <nav>
         <ul>
-          {% if paginator.previous %}<li><a href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#124; &#60;</a></li>{% else %}<li><span class="off">&#124; &#60;</span></li>{% endif %}
-          {% if paginator.previous %}<li><a href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#60;</a></li>{% else %}<li><span class="off">&#60;</span></li>{% endif %}
+          {% if paginator.previous %}<li><a href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.icon_first %}<i class="{{ config.extra.icon_first }}"></i>{%- else %}&laquo;{%- endif %}</a></li>{% else %}<li><span class="off">{%- if config.extra.icon_first %}<i class="{{ config.extra.icon_first }}"></i>{%- else %}&laquo;{%- endif %}</span></li>{% endif %}
+          {% if paginator.previous %}<li><a href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.icon_prev %}<i class="{{ config.extra.icon_prev }}"></i>{%- else %}&lsaquo;{%- endif %}</a></li>{% else %}<li><span class="off">{%- if config.extra.icon_prev %}<i class="{{ config.extra.icon_prev }}"></i>{%- else %}&lsaquo;{%- endif %}</span></li>{% endif %}
           {%- for i in range(start=start, end=end+1) %}
           <li>
             {%- if i == paginator.current_index -%}
@@ -139,8 +139,8 @@
             {%- endif -%}
           </li>
           {%- endfor %}
-          {% if paginator.next %}<li><a href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#62;</a></li>{% else %}<li><span class="off">&#62;</span></li>{% endif %}
-          {% if paginator.next %}<li><a href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">&#62; &#124;</a></li>{% else %}<li><span class="off">&#62; &#124;</span></li>{% endif %}
+          {% if paginator.next %}<li><a href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.icon_next %}<i class="{{ config.extra.icon_next }}"></i>{%- else %}&rsaquo;{%- endif %}</a></li>{% else %}<li><span class="off">{%- if config.extra.icon_next %}<i class="{{ config.extra.icon_next }}"></i>{%- else %}&rsaquo;{%- endif %}</span></li>{% endif %}
+          {% if paginator.next %}<li><a href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.icon_last %}<i class="{{ config.extra.icon_last }}"></i>{%- else %}&raquo;{%- endif %}</a></li>{% else %}<li><span class="off">{%- if config.extra.icon_last %}<i class="{{ config.extra.icon_last }}"></i>{%- else %}&raquo;{%- endif %}</span></li>{% endif %}
         </ul>
       </nav>
   {%- endif %}

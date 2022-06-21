@@ -49,9 +49,8 @@
           <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
           {%- endfor %}
           {%- if config.extra.js_theme %}
-          <li class="js">{%- if config.extra.icon_contrast %}<i type="reset" id="mode" class="{{ config.extra.icon_contrast }}"></i>{%- else %}<i type="reset" id="mode" class="svgh svgs contrast"></i>{%- endif %}
+          <li class="js">{%- if config.extra.icon_contrast %}<i type="reset" id="mode" class="{{ config.extra.icon_contrast }}"></i>{%- else %}<i type="reset" id="mode" class="svgh svgs contrast"></i>{%- endif %}</li>
           {%- endif %}
-          </li>
         </ul>
       </div>
       {%- if config.build_search_index %}
@@ -86,9 +85,7 @@
     <hr />
     {%- endif %}
     <div class="c">
-      <p>
-        {{- social_macros::social_links(social_config=config.extra.social) }}
-      </p>
+      {{- social_macros::social_links(social_config=config.extra.social) }}
 
       {#- Copyright START #}
       {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}
@@ -96,13 +93,13 @@
       {%- set copyright_end_year=config.extra.copyright_end_year | default(value=now() | date(format="%Y")) %}
       <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Copyright &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
       {#- Copyright END #}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>
-        {%- for i in config.extra.menu_footer %}
-        <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a> &nbsp;
-        {%- endfor %}
-      </p>
-
-
+      <nav>
+        <ul>
+          {%- for i in config.extra.menu_footer %}
+          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a> </li>
+          {%- endfor %}
+        </ul>
+      </nav>
       {%- if config.extra.footer_credit | default(value=true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}

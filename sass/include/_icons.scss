@@ -97,8 +97,8 @@
   @if $icon-x {.x { background-image: icon(x, "%23f00", 2, "none") }}
   @if $icon-youtube {.youtube { background-image: icon(youtube, "%23f00", 2, "none") }}
   .svg {
-    width: 48px;
-    height: 48px;
+    width: 1.8rem;
+    height: 1.8rem;
     display: inline-block;
     overflow: hidden;
     vertical-align: middle

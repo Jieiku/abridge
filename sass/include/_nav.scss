@@ -5,12 +5,6 @@
 .cnav {
   color: var(--a3);//pagination color current page
 }
-main nav {
-  margin-top: var(--s2);//pagination margin
-    ul li {
-    margin: .1rem;
-  }
-}
 .off {
   color: var(--c4);
   font-weight: var(--fh);
@@ -39,12 +33,11 @@ header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
 }
 nav > div {
   ul, h2 {
-    line-height: 2;
+    line-height: 1.9;
     margin: 0;
     padding: 0;
   }
   margin: var(--s1) 0;
-  display: block;
 }
 nav {
   align-items: center;
@@ -60,11 +53,24 @@ nav {
     margin-bottom: 0;
     margin-top: 0.2rem;
   }
-  ul li {
+  li {
     display: inline-block;
-    margin: 0 0.2rem;
-    //position: relative;
-    //text-align: left;
+    margin: 0 .2rem;
+  }
+}
+main nav {
+  margin-top: var(--s2);//pagination margin
+    li {
+    margin: .1rem;
+  }
+}
+footer nav {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0 .2rem .4rem;
   }
 }
 // breakpoint makes header responsive for mobile layouts

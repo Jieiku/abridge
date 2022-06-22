@@ -49,7 +49,7 @@
           <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
           {%- endfor %}
           {%- if config.extra.js_theme %}
-          <li class="js">{%- if config.extra.icon_contrast %}<i type="reset" id="mode" class="{{ config.extra.icon_contrast }}"></i>{%- else %}<i type="reset" id="mode" class="svgh svgs contrast"></i>{%- endif %}</li>
+          <li class="js">{%- if config.extra.icon_contrast %}<i type="reset" id="mode" class="{{ config.extra.icon_contrast }}"></i>{%- else %}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif %}</li>
           {%- endif %}
         </ul>
       </div>
@@ -58,7 +58,7 @@
         <form class="js" name="goSearch">
           <div class="searchd">
             <input id="userinput" type="text" placeholder="Search" autocomplete="off" />
-            <button type="submit" title="Search">{%- if config.extra.icon_search %}<i class="{{ config.extra.icon_search }}"></i>{%- else %}<i class="svgs search"></i>{%- endif %}</button>
+            <button type="submit" title="Search">{%- if config.extra.icon_search %}<i class="{{ config.extra.icon_search }}"></i>{%- else %}<span class="si">&#8981;</span>{%- endif %}</button>
           </div>
           <div><div id="suggestions"></div></div>
         </form>

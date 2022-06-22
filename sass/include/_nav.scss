@@ -2,16 +2,7 @@
  * Horizontal Nav
  * https://github.com/raj457036/attriCSS
  */
-.cnav {
-  color: var(--a3);//pagination color current page
-}
-.off {
-  color: var(--c4);
-  font-weight: var(--fh);
-  border: .1rem solid var(--c3);
-  border-radius: var(--br);
-  padding: .1rem var(--s1);
-}
+
 main nav a,
 main nav a:visited {//pagination link styling
   font-weight: var(--fh);
@@ -59,10 +50,33 @@ nav {
   }
 }
 main nav {
+  ul {
+    display: flex;
+  }
   margin-top: var(--s2);//pagination margin
-    li {
+  li {
     margin: .1rem;
   }
+  li.inp {
+    padding-top: .1rem;
+  }
+}
+.outp {
+  padding: 0 .34rem .2rem;
+}
+.off {
+  color: var(--c4);
+  font-weight: var(--fh);
+  border: .1rem solid var(--c3);
+  border-radius: var(--br);
+}
+.on {
+  font-weight: var(--fh);
+  border: .1rem solid var(--c4);
+  border-radius: var(--br);
+}
+.mode:hover, .cnav {
+  color: var(--a3);//pagination color current page
 }
 footer nav {
   ul {

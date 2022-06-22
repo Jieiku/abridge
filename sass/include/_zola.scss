@@ -7,6 +7,9 @@
 .s70 {font-size: .70em}
 .hpad {padding: 0 .2rem}
 .rpad {padding-right: .2rem}
+.si {
+  font-size: 1.5em
+}
 pre code[data-lang]::before {
     content: ' ' attr(data-lang) ': ' "
 ";

@@ -1,49 +1,49 @@
 {%- macro social_links(social_config) %}
       <nav>
         <ul>
-{%- set base_url = get_url(path="", lang=lang) %}
-          {%- if config.generate_feed %}{%- if config.extra.social.feed %}
-          <li><a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank"><i type="Button" class="svg rss" title="Atom/RSS Feed"></i></a></li>{% endif %}{% endif %}
-          {%- if social_config.mail %}
-          <li><a href="mailto:{{ social_config.mail }}" target="_blank"><i type="Button" class="svg mail" title="Mail"></i></a></li>{% endif %}
-          {%- if social_config.mastodon %}
-          <li><a href="{{ social_config.mastodon }}/" target="_blank"><i type="Button" class="svg mastodon" title="Mastodon"></i></a></li>{% endif %}
-          {%- if social_config.element %}
-          <li><a href="https://{{ social_config.element }}/" target="_blank"><i type="Button" class="svg element" title="Element"></i></a></li>{% endif %}
-          {%- if social_config.matrix %}
-          <li><a href="https://{{ social_config.matrix }}/" target="_blank"><i type="Button" class="svg matrix" title="Matrix"></i></a></li>{% endif %}
-          {%- if social_config.twitter %}
-          <li><a href="https://twitter.com/{{ social_config.twitter }}/" target="_blank"><i type="Button" class="svg twitter" title="Twitter"></i></a></li>{% endif %}
-          {%- if social_config.facebook %}
-          <li><a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><i type="Button" class="svg facebook" title="Facebook"></i></a></li>{% endif %}
-          {%- if social_config.linkedin %}
-          <li><a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><i type="Button" class="svg linkedin" title="LinkedIn"></i></a></li>{% endif %}
-          {%- if social_config.researchgate %}
-          <li><a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><i type="Button" class="svg researchgate" title="ResearchGate"></i></a></li>{% endif %}
-          {%- if social_config.gitlab %}
-          <li><a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><i type="Button" class="svg gitlab" title="Gitlab"></i></a></li>{% endif %}
-          {%- if social_config.github %}
-          <li><a href="https://github.com/{{ social_config.github }}/" target="_blank"><i type="Button" class="svg github" title="Github"></i></a></li>{% endif %}
-          {%- if social_config.bitbucket %}
-          <li><a href="https://bitbucket.org/{{ social_config.bitbucket }}/" target="_blank"><i type="Button" class="svg bitbucket" title="Bitbucket"></i></a></li>{% endif %}
-          {%- if social_config.python %}
-          <li><a href="https://pypi.org/user/{{ social_config.python }}/" target="_blank"><i type="Button" class="svg python" title="Python"></i></a></li>{% endif %}
-          {%- if social_config.docker %}
-          <li><a href="https://hub.docker.com/u/{{ social_config.docker }}/" target="_blank"><i type="Button" class="svg docker" title="Docker"></i></a></li>{% endif %}
-          {%- if social_config.stack %}
-          <li><a href="https://stackoverflow.com/users/{{ social_config.stack }}/" target="_blank"><i type="Button" class="svg stack" title="Stack"></i></a></li>{% endif %}
-          {%- if social_config.instagram %}
-          <li><a href="https://www.instagram.com/{{ social_config.instagram }}/" target="_blank"><i type="Button" class="svg instagram" title="Instagram"></i></a></li>{% endif %}
-          {%- if social_config.pinterest %}
-          <li><a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank"><i type="Button" class="svg pinterest" title="Pinterest"></i></a></li>{% endif %}
-          {%- if social_config.twitch %}
-          <li><a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><i type="Button" class="svg twitch" title="Twitch"></i></a></li>{% endif %}
-          {%- if social_config.youtube %}
-          <li><a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><i type="Button" class="svg youtube" title="YouTube"></i></a></li>{% endif %}
-          {%- if social_config.buymeacoffee %}
-          <li><a href="https://www.buymeacoffee.com/{{ social_config.buymeacoffee }}/" target="_blank"><i type="Button" class="svg buymeacoffee" title="Buy Me A Coffee"></i></a></li>{% endif %}
-          {%- if social_config.github_sponsor %}
-          <li><a href="https://github.com/sponsors/{{ social_config.github_sponsor }}/" target="_blank"><i type="Button" class="svg github-sponsor" title="GitHub Sponsor"></i></a></li>{% endif %}
+{%- set base_url = get_url(path="", lang=lang) -%}
+          {%- if config.generate_feed -%}{%- if config.extra.social.feed -%}
+          <li><a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank"><i type="Button" class="svg rss" title="Atom/RSS Feed"></i></a></li>{% endif -%}{% endif -%}
+          {%- if social_config.mail -%}
+          <li><a href="mailto:{{ social_config.mail }}" target="_blank"><i type="Button" class="svg mail" title="Mail"></i></a></li>{% endif -%}
+          {%- if social_config.mastodon -%}
+          <li><a href="{{ social_config.mastodon }}/" target="_blank"><i type="Button" class="svg mastodon" title="Mastodon"></i></a></li>{% endif -%}
+          {%- if social_config.element -%}
+          <li><a href="https://{{ social_config.element }}/" target="_blank"><i type="Button" class="svg element" title="Element"></i></a></li>{% endif -%}
+          {%- if social_config.matrix -%}
+          <li><a href="https://{{ social_config.matrix }}/" target="_blank"><i type="Button" class="svg matrix" title="Matrix"></i></a></li>{% endif -%}
+          {%- if social_config.twitter -%}
+          <li><a href="https://twitter.com/{{ social_config.twitter }}/" target="_blank"><i type="Button" class="svg twitter" title="Twitter"></i></a></li>{% endif -%}
+          {%- if social_config.facebook -%}
+          <li><a href="https://www.facebook.com/{{ social_config.facebook }}/" target="_blank"><i type="Button" class="svg facebook" title="Facebook"></i></a></li>{% endif -%}
+          {%- if social_config.linkedin -%}
+          <li><a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank"><i type="Button" class="svg linkedin" title="LinkedIn"></i></a></li>{% endif -%}
+          {%- if social_config.researchgate -%}
+          <li><a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank"><i type="Button" class="svg researchgate" title="ResearchGate"></i></a></li>{% endif -%}
+          {%- if social_config.gitlab -%}
+          <li><a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank"><i type="Button" class="svg gitlab" title="Gitlab"></i></a></li>{% endif -%}
+          {%- if social_config.github -%}
+          <li><a href="https://github.com/{{ social_config.github }}/" target="_blank"><i type="Button" class="svg github" title="Github"></i></a></li>{% endif -%}
+          {%- if social_config.bitbucket -%}
+          <li><a href="https://bitbucket.org/{{ social_config.bitbucket }}/" target="_blank"><i type="Button" class="svg bitbucket" title="Bitbucket"></i></a></li>{% endif -%}
+          {%- if social_config.python -%}
+          <li><a href="https://pypi.org/user/{{ social_config.python }}/" target="_blank"><i type="Button" class="svg python" title="Python"></i></a></li>{% endif -%}
+          {%- if social_config.docker -%}
+          <li><a href="https://hub.docker.com/u/{{ social_config.docker }}/" target="_blank"><i type="Button" class="svg docker" title="Docker"></i></a></li>{% endif -%}
+          {%- if social_config.stack -%}
+          <li><a href="https://stackoverflow.com/users/{{ social_config.stack }}/" target="_blank"><i type="Button" class="svg stack" title="Stack"></i></a></li>{% endif -%}
+          {%- if social_config.instagram -%}
+          <li><a href="https://www.instagram.com/{{ social_config.instagram }}/" target="_blank"><i type="Button" class="svg instagram" title="Instagram"></i></a></li>{% endif -%}
+          {%- if social_config.pinterest -%}
+          <li><a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank"><i type="Button" class="svg pinterest" title="Pinterest"></i></a></li>{% endif -%}
+          {%- if social_config.twitch -%}
+          <li><a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank"><i type="Button" class="svg twitch" title="Twitch"></i></a></li>{% endif -%}
+          {%- if social_config.youtube -%}
+          <li><a href="https://www.youtube.com/channel/{{ social_config.youtube }}/" target="_blank"><i type="Button" class="svg youtube" title="YouTube"></i></a></li>{% endif -%}
+          {%- if social_config.buymeacoffee -%}
+          <li><a href="https://www.buymeacoffee.com/{{ social_config.buymeacoffee }}/" target="_blank"><i type="Button" class="svg buymeacoffee" title="Buy Me A Coffee"></i></a></li>{% endif -%}
+          {%- if social_config.github_sponsor -%}
+          <li><a href="https://github.com/sponsors/{{ social_config.github_sponsor }}/" target="_blank"><i type="Button" class="svg github-sponsor" title="GitHub Sponsor"></i></a></li>{% endif -%}
         </ul>
       </nav>
 {%- endmacro %}

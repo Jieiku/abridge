@@ -48,13 +48,13 @@
     python: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='#{map-get($p, f)}' d='M17 6c0 4-1 5-6 5-4 0-5 1-5 6-4 0-5-1-5-6 0-3 1-4.5 4-4.5h7c0-.5 0-.5-1-.5H6c0-3 0-5 6-5 5 0 5 2 5 5ZM9 3C7.5 3 7.5 5 9 5s1.5-2 0-2Z'/%3E%3Cpath fill='#{map-get($p, s)}' d='M23 12c0 3-1 4.6-4 4.5h-7v.5h6c0 4 0 6-6 6-5 0-5-2-5-6s1-5 6-5c4 0 5-1 5-6 4 0 5 1 5 6Zm-8 7c-1.5 0-1.5 2 0 2s1.5-2 0-2Z' /%3E%3C/svg%3E",
     researchgate: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M16 5c0 3.5.7 5 3 5s3.7-1.3 3.3-5h-3v1.3H21c0 1.9-.7 2.7-2 2.5-1.3 0-1.8-.7-1.8-3.2 0-2.4.4-3.3 1.5-3.4 1-.2 1.7.2 2.2 1.1L22 3c-.4-1.3-1.4-2-2.9-2C17.2 1 16 2 16 5ZM8 6.2l-6 .2v.9c1 .3 2 0 2 2.2v11C4 22 3 22 2 22.2v.8h6.6v-.8C7 22 6 22 6 20.5v-5.2h2a46 46 0 0 0 4 5.7 5 5 0 0 0 5 2v-1c-3 0-5-5-7-7 6-1 6-10-2-8.8ZM6 14V7.6C14 6 13 14 8 14Z'/%3E%3C/svg%3E",
     rss: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16'/%3E%3Ccircle cx='5' cy='19' r='1'/%3E%3C/svg%3E",
-    search: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E",
+    search: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' stroke-linecap='round' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Ccircle cx='9' cy='9' r='7'/%3E%3Cpath d='m21 21-7-7'/%3E%3C/svg%3E",
     stack: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M4 17v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1M8 16h8m-7.7-3.4 8 .8M8.8 9.2l7.8 1.6m-6.5-5 7.6 2.4'/%3E%3C/svg%3E",
     sun: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8 1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4'/%3E%3C/svg%3E",
     tag: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='m20.6 13.4-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8zM7 7h.01'/%3E%3C/svg%3E",
     twitch: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7'/%3E%3C/svg%3E",
     twitter: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M23 3a10.9 10.9 0 0 1-3.1 1.5 4.5 4.5 0 0 0-7.9 3v1A10.7 10.7 0 0 1 3 4s-4 9 5 13a11.6 11.6 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0 0-.8A7.7 7.7 0 0 0 23 3z'/%3E%3C/svg%3E",
-    x: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E",
+    x: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='M21 3 3 21M3 3l18 18'/%3E%3C/svg%3E",
     youtube: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{map-get($p, s)}' stroke-width='#{map-get($p, sw)}' fill='#{map-get($p, f)}' viewBox='0 0 24 24'%3E%3Cpath d='m9.8 15 5.7-3.3-5.8-3.2V15Zm12.7-8.6a2.8 2.8 0 0 0-1.9-2C18.9 4 12 4 12 4s-6.9 0-8.6.5a2.8 2.8 0 0 0-2 2 29 29 0 0 0-.4 5.3 29 29 0 0 0 .5 5.3A2.8 2.8 0 0 0 3.4 19c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .4-5.3 29 29 0 0 0-.5-5.3z'/%3E%3C/svg%3E"
   );
   $icon: map-get($icons, $icon-name);
@@ -88,13 +88,13 @@
   @if $icon-python {.python { background-image: icon(python, "%23fc1", 2, "%2326a") }}
   @if $icon-researchgate {.researchgate { background-image: icon(researchgate, "none", 2, "%230db") }}
   @if $icon-rss {.rss { background-image: icon(rss, "%23e94", 2, "none") }}
-  @if $icon-search {.search { background-image: icon(search, "%23888", 2, "none") }}
+  @if $icon-search {.search { background-image: icon(search, "%23888", 3, "none") }}
   @if $icon-stack {.stack { background-image: icon(stack, "%23e72", 2, "none") }}
   @if $icon-sun {.sun { background-image: icon(sun, "%23888", 2, "none") }}
   @if $icon-tag {.tag { background-image: icon(tag, "%23888", 2, "none") }}
   @if $icon-twitch {.twitch { background-image: icon(twitch, "%23a7f", 2, "none") }}
   @if $icon-twitter {.twitter { background-image: icon(twitter, "%232ad", 2, "none") }}
-  @if $icon-x {.x { background-image: icon(x, "%23f00", 2, "none") }}
+  @if $icon-x {.x { background-image: icon(x, "%23f00", 3, "none") }}
   @if $icon-youtube {.youtube { background-image: icon(youtube, "%23f00", 2, "none") }}
   .svg {
     width: 1.8rem;
@@ -113,7 +113,9 @@
     vertical-align: middle
   }
   .svgh:hover {
-    background: var(--a3);
+    //background: var(--a3);
+    //opacity: 1;
+    color: var(--a3);
     opacity: 1;
   }
   .fa-a:hover {

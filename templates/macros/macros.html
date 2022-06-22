@@ -127,7 +127,7 @@
       <nav>
         <ul>
         {%- if paginator.previous -%}
-          <li><a class="on outp" href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
+          <li><a class="on outp" href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="First Page">
           {%- if config.extra.icon_first -%}<i class="{{ config.extra.icon_first }}" alt="First Page"></i>
           {%- else -%}&#10096;
           {%- endif -%}
@@ -141,7 +141,7 @@
         {%- endif -%}
 
         {%- if paginator.previous -%}
-          <li><a class="on outp" href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
+          <li><a class="on outp" href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Previous Page">
           {%- if config.extra.icon_prev -%}<i class="{{ config.extra.icon_prev }}" alt="Previous Page"></i>
           {%- else -%}&#10092;
           {%- endif -%}
@@ -167,7 +167,7 @@
         {%- endfor -%}
 
         {%- if paginator.next -%}
-          <li><a class="on outp" href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
+          <li><a class="on outp" href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Next Page">
           {%- if config.extra.icon_next -%}<i class="{{ config.extra.icon_next }}" alt="Next Page"></i>
           {%- else -%}&#10093;
           {%- endif -%}
@@ -181,7 +181,7 @@
         {%- endif -%}
 
         {%- if paginator.next -%}
-          <li><a class="on outp" href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
+          <li><a class="on outp" href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Last Page">
           {%- if config.extra.icon_last -%}<i class="{{ config.extra.icon_last }}" alt="Last Page"></i>
           {%- else -%}&#10097;
           {%- endif -%}

@@ -35,22 +35,27 @@
   <header>
     <nav>
       <div>
-        {%- if config.extra.logo %}
-        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{%- if config.extra.logo.file %}<img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />{%- endif %}{%- if config.extra.logo.text %}{{ config.extra.logo.text | safe }}{%- endif %}</a></h1>
-        {%- elif config.extra.textlogo %}
+        {%- if config.extra.logo -%}
+        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">
+        {%- if config.extra.logo.file -%}
+        <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
+        {%- endif -%}
+        {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
+        </a></h1>
+        {%- elif config.extra.textlogo -%}
         <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
-        {%- elif config.title %}
+        {%- elif config.title -%}
         <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.title | safe }}</a></h1>
-        {%- endif %}
+        {%- endif -%}
       </div>
       <div>
         <ul>
-          {%- for i in config.extra.menu %}
-          <li><h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
-          {%- endfor %}
-          {%- if config.extra.js_theme %}
-          <li class="js">{%- if config.extra.icon_contrast %}<i type="reset" id="mode" class="{{ config.extra.icon_contrast }}"></i>{%- else %}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif %}</li>
-          {%- endif %}
+          {%- for i in config.extra.menu -%}
+          <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
+          {%- endfor -%}
+          {%- if config.extra.js_theme -%}
+          <li class="js">{%- if config.extra.icon_adjust -%}<i type="reset" id="mode" class="{{ config.extra.icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
+          {%- endif -%}
         </ul>
       </div>
       {%- if config.build_search_index %}
@@ -58,7 +63,7 @@
         <form class="js" name="goSearch">
           <div class="searchd">
             <input id="userinput" type="text" placeholder="Search" autocomplete="off" />
-            <button type="submit" title="Search">{%- if config.extra.icon_search %}<i class="{{ config.extra.icon_search }}"></i>{%- else %}<span class="si">&#8981;</span>{%- endif %}</button>
+            <button type="submit" title="Search">{%- if config.extra.icon_search -%}<i class="{{ config.extra.icon_search }}"></i>{%- else -%}<span class="si">&#8981;</span>{%- endif -%}</button>
           </div>
           <div><div id="suggestions"></div></div>
         </form>
@@ -95,9 +100,9 @@
       {#- Copyright END #}
       <nav>
         <ul>
-          {%- for i in config.extra.menu_footer %}
-          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a> </li>
-          {%- endfor %}
+          {%- for i in config.extra.menu_footer -%}
+          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"> {{ i.name | safe }} </a> </li>
+          {%- endfor -%}
         </ul>
       </nav>
       {%- if config.extra.footer_credit | default(value=true) %}

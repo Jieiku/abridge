@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Abridge';
+  src: url('font/Abridge.woff2') format('woff2');
+}
+
+[class^="i-"]:before, [class*=" i-"]:before {
+  font-family: "Abridge";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;// reset parent styles that can break glyph codes
+  text-transform: none;// reset parent styles that can break glyph codes
+  line-height: 1em;// fix buttons height
+  width: 1em;// fix buttons width
+  vertical-align: 1em;// fix buttons alignment
+  text-align: center;
+  display: inline-block;
+  //text-decoration: inherit;
+}
+
+.i-up:before { content: '\e801'; } /* '' */
+.i-adjust:before { content: '\e803'; } /* '' */
+.i-first:before { content: '\f100'; } /* '' */
+.i-last:before { content: '\f101'; } /* '' */
+.i-prev:before { content: '\f104'; } /* '' */
+.i-next:before { content: '\f105'; } /* '' */

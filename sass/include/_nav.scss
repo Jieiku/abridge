@@ -20,7 +20,7 @@ header > nav > div:first-of-type {//Keep the logo from wrapping
 }
 header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
   margin-left: auto;
-  padding-right: var(--s2);//add some spacing between nav divs
+  padding-right: var(--s1);//add some spacing between nav divs
 }
 nav > div {
   ul, h2 {
@@ -46,23 +46,24 @@ nav {
   }
   li {
     display: inline-block;
-    margin: 0 .2rem;
+    margin: 0 .3rem;
   }
 }
 main nav {
   ul {
     display: flex;
+    padding-left: 0;
   }
   margin-top: var(--s2);//pagination margin
   li {
-    margin: .1rem;
+    margin: .2rem;
   }
   li.inp {
     padding-top: .1rem;
   }
 }
 .outp {
-  padding: 0 .34rem .2rem;
+  padding: 0 .26rem .2rem;
 }
 .off {
   color: var(--c4);

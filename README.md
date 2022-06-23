@@ -352,6 +352,21 @@ All pages extend to `base.html`, and you can customize them as need.
 
 ## Optional Performance Optimizations:
 
+### Abridge.woff2 Icon Font
+
+The Abridge.woff2 Icon Font is a subset of Font Awesome.
+
+This file can be overridden just like any other Zola theme file, by placing your own Abridge.woff2 in your sites root eg: `mysite/static/font/Abridge.woff2`
+
+To create your own Icon Font with other/more icons you can use the repository here: https://github.com/Jieiku/fontsubset
+
+You will also need to add the additional icon entries to `abridge/sass/fonts/_Abridge.scss`
+
+If you are running Abridge as a submodule, what you can do instead is copy `_Abridge.scss` as your own `mysite/sass/myfont.scss`, and then adjust your config.toml:
+
+instead of this: `stylesheets = [ "abridge-switcher.css" ]` do this: `stylesheets = [ "abridge-switcher.css", "myfont.css" ]`
+
+
 ### Theme-Switcher
 
 The theme switcher relies on javascript to work, it applies the .light class to the root documentElement. The file that handles this (theme.js) is tiny and optimized and it is the first file loaded in the head, so the performance hit is minimal, but it does still exist. Without the Theme switcher you can still use The automatic Theme, it works by using Browser/OS preference, you can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two. By default the demo has the theme switcher enabled so that it can be evaluated.

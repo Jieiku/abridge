@@ -107,6 +107,7 @@ js_bundle = "abridge-switcher.min.js"# Bundle JS File, comment out to disable (i
 stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
+#stylesheets = [ "abridge-switcher.css", "myfont.css" ] # include your own font icons!
 
 ########## No Switcher ##########
 #js_bundle = "search.min.js"# Bundle JS File, comment out to disable (search only: no switcher/prestyle)
@@ -143,8 +144,8 @@ favicon180 = "apple-touch-icon.png" # apple-touch-icon.png
 favicon32 = "favicon-32x32.png" # favicon-32x32.png
 favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
-icon_search = "svgs search" # Search button in search box.
-icon_adjust = "svgs svgh i-adjust" # Theme Switcher button in top menu.
+icon_search = "svgs i-search" # Search button in search box.
+icon_adjust = "svgs i-adjust" # Theme Switcher button in top menu. (add class svgh to change colors on hover)
 icon_top = "svgs i-up" # Back to Top Button.
 icon_first = "svgs i-first" # Pagination First Page.
 icon_prev = "svgs i-prev" # Pagination Previous Page.

@@ -17,9 +17,10 @@
   //text-decoration: inherit;
 }
 
-.i-up:before { content: '\e801'; } /* '' */
-.i-adjust:before { content: '\e803'; } /* '' */
-.i-first:before { content: '\f100'; } /* '' */
-.i-last:before { content: '\f101'; } /* '' */
-.i-prev:before { content: '\f104'; } /* '' */
-.i-next:before { content: '\f105'; } /* '' */
+.i-search:before { content: '\f002'; } // search box button
+.i-adjust:before { content: '\f042'; } // theme switcher button
+.i-first:before { content: '\f100'; } // pagination first page
+.i-last:before { content: '\f101'; } // pagination last page
+.i-prev:before { content: '\f104'; } // pagination previous page
+.i-next:before { content: '\f105'; } // pagination next page
+.i-up:before { content: '\f106'; } // back to top button

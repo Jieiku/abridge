@@ -11,22 +11,30 @@
   font-size: 1.5em
 }
 pre code[data-lang]::before {
-    content: ' ' attr(data-lang) ': ' "
+  color: var(--f1);
+  text-transform: uppercase;
+  content: ' [' attr(data-lang) '] ' "
+
 ";
-	color: var(--a1);
 }
 // code copy wrapper
 .ccw {
   position: relative;
 }
+.ccw:hover {
+  .cc {
+    opacity: 1;
+  }
+}
 // code copy button
 .cc {
+  opacity: 0;
   z-index: 9;
   position: absolute;
-  right: 0px;
+  right: 9px;
+  top: 9px;
   font-size: .8rem;
 }
-
 // Mark Override, this is used for Zola's linenos and hl_lines
 :root:not(.light) code table {
   mark {
@@ -36,6 +44,7 @@ pre code[data-lang]::before {
 // Table Override, this is used for Zola's linenos and hl_lines
 code table {
   font-size: .8rem;
+  margin: 0;
   td, th, tr {
     padding: 0;
     border-bottom: none;

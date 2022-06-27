@@ -91,7 +91,11 @@
 
 
 {%- macro footer(page) %}
+{%- if page.reading_time %}
+{%- if page.reading_time > 1 %}
 <p><b><a href="#">Back to top</a></b></p>
+{%- endif %}
+{%- endif %}
 {%- endmacro footer %}
 
 

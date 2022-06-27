@@ -124,7 +124,7 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 #stylesheets = [ "abridge-blueshade-dark.css" ] # BlueShade Dark Theme
 #stylesheets = [ "abridge-blueshade-light.css" ] # BlueShade Light Theme
 #stylesheets = [ "abridge.css", "extra.css" ] # example loading extra css
-
+#stylesheets = [ "abridge.css", "syntax/syntax-abridge.css" ]
 
 # If you have js_bundle set, then Bundleable js files are ignored (it's assumed you bundled them).
 # You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:

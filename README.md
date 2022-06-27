@@ -354,9 +354,15 @@ All pages extend to `base.html`, and you can customize them as need.
 
 ### Abridge.woff2 Icon Font
 
-The Abridge.woff2 Icon Font is a subset of Font Awesome.
+By default Abridge uses SVG icons directly in CSS, `abridge/sass/include/_icons.scss`, this very efficient and results in the least requests, additionally noscript does not block these resources.
 
-This file can be overridden just like any other Zola theme file, by placing your own Abridge.woff2 in your sites root eg: `mysite/static/font/Abridge.woff2`
+The Abridge.woff2 Icon Font is a subset of Font Awesome, it is still included but not used by default because noscript addon blocks loading of font resources.
+
+If you still want to use font icons continue reading:
+
+Abridge.woff2 Icon Font is a subset of Font Awesome, and can be loaded like any other font by uncommenting the font in the `abridge/sass/font.scss` and including the font.css file in your stylesheet array defined in config.toml: `stylesheets = [ "abridge-switcher.css", "font.css", "iconfont.css" ]`
+
+Abridge.woff2 file can be overridden just like any other Zola theme file, by placing your own Abridge.woff2 in your sites root eg: `mysite/static/font/Abridge.woff2`
 
 To create your own Icon Font with other/more icons you can use the repository here: https://github.com/Jieiku/fontsubset
 

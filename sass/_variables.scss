@@ -88,8 +88,14 @@ $icon-youtube: true !default;
 $icon-researchgate: true !default;
 
 $icon-x: true !default;// x symbol
-$icon-search: false !default;
-$icon-contrast: false !default;
+$icon-search: true !default;//search
+$icon-adjust: true !default;//theme switcher
+$icon-angll: true !default;//first page
+$icon-angl: true !default;//previous page
+$icon-angr: true !default;//next page
+$icon-angrr: true !default;//last page
+$icon-angu: true !default;//back to top
+
 $icon-ffolder: false !default;
 $icon-folder: false !default;// categories folder
 $icon-ftag: false !default;

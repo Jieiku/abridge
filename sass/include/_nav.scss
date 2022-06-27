@@ -12,6 +12,10 @@ main nav a:visited {//pagination link styling
 }
 main nav a:hover {//makes border of pagination links hover color
   border-color: var(--a3);
+  .svgh {
+    background: var(--a3);
+    opacity: 1;
+  }
 }
 header > nav > div:first-of-type {//Keep the logo from wrapping
   display: inline;
@@ -70,6 +74,10 @@ main nav {
   font-weight: var(--fh);
   border: .1rem solid var(--c3);
   border-radius: var(--br);
+  .svgh {
+    background: var(--c3);
+    opacity: 1;
+  }
 }
 .on {
   font-weight: var(--fh);

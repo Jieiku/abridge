@@ -210,13 +210,13 @@ If the nav tag is under the main tag instead of the header tag then the links wi
 ## Forms
 
 <form name="contact" method="POST" >
-    <p><label>Name</label>
-        <input type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+    <p><label for="name">Name</label>
+        <input type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name." />
     </p>
-    <p><label>Email Address</label>
-        <input type="email" placeholder="name@example.com" id="email" required data-validation-required-message="Please enter your email address.">
+    <p><label for="email">Email Address</label>
+        <input type="email" placeholder="name@example.com" id="email" required data-validation-required-message="Please enter your email address." />
     </p>
-    <p><label>Message</label>
+    <p><label for="message">Message</label>
         <textarea rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
     </p>
     <div id="success"></div>
@@ -276,7 +276,7 @@ If the nav tag is under the main tag instead of the header tag then the links wi
     </fieldset>
     <br>
     <!-- Search -->
-    <input type="search" id="search" name="search" placeholder="Search">
+    <input type="search" id="search" name="search" placeholder="Search" title="Search">
     <!-- File browser -->
     <label for="file">File browser
     <input type="file" id="file" name="file">

@@ -55,7 +55,7 @@
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc %}
-    <div class="toc">
+    <div class="toc" aria-hidden="true">
       <div class="toc-sticky">
         <h3>Index</h3>
         {%- for h in toc %}

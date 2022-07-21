@@ -12,7 +12,7 @@ Some fun facts about the theme:
 
 * Perfect score on Google's Lighthouse audit
 * Only ~6 KB of CSS before enabling the SVG CSS icons.
-* No JavaScript (except the search which can be disabled)
+* No mandatory JavaScript.
 * Now with SEO!
 
 Nearly half of the existing Zola MIT themes were inspiration for features and design of this theme.

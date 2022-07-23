@@ -7,7 +7,7 @@ Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css 
 
 There is also [Abridge-minimal](https://github.com/jieiku/abridge.css) Theme which is used to showcase the [abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)
 
-Maintainence of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
+Maintenance of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
 
 <!-- sponsors --><!-- sponsors -->
 
@@ -323,7 +323,7 @@ Refer to [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/mast
 ```md
 +++
 title = "Image Shortcodes"
-description = "Images can be embeded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
+description = "Images can be embedded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
 date = 2021-05-19
 
 [taxonomies]

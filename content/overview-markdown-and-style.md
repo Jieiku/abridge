@@ -186,7 +186,7 @@ Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and
 other small creatures.
 
 ---
-<!-- Note: There must be a blank line between every two lines of the footnote difinition.  -->
+<!-- Note: There must be a blank line between every two lines of the footnote definition.  -->
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c)
 during Gopherfest, November 18, 2015.
 

@@ -1,6 +1,6 @@
 +++
 title = "Image Shortcodes"
-description = "Images can be embeded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
+description = "Images can be embedded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
 date = 2021-05-19
 
 [taxonomies]
@@ -12,7 +12,7 @@ keywords = "Image, Markdown, Shortcodes, Hover"
 thumbnail = "ferris-gesture.png"
 +++
 
-This post covers the **imghover and img shortcodes**. Images can also be embeded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.
+This post covers the **imghover and img shortcodes**. Images can also be embedded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.
 <!-- more -->
 
 # img Shortcode
@@ -104,4 +104,3 @@ This can be used to compare only one image with another by passing only two src 
 {{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
 ```
 {{ imghover(src=["/overview-rich-content/ferris.svg", "/overview-rich-content/ferris-gesture.svg"] w=600 h=400 p=45) }}
-

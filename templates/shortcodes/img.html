@@ -16,6 +16,13 @@
 
 {%- endif %}
 
+{%- if not w or not h %}
+  {%- set metafile = page.path ~ path ~ src %}
+  {%- set meta = get_image_metadata(path=metafile) %}
+  {%- set w = meta.width %}
+  {%- set h = meta.height %}
+{%- endif %}
+
 {%- set img = src | split(pat="/") | last %}
 {%- set name = img | split(pat=".") | first %}
 <img src="{{ path | safe }}{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />

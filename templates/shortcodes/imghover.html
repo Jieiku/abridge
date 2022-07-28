@@ -69,9 +69,10 @@
       {%- set metafile = page.path ~ path ~ sourcepath %}
       {%- set meta = get_image_metadata(path=metafile) %}
       {%- set padding = meta.height / meta.width * p %}
-      /* height={{meta.height}} width={{meta.width}} (THIS IS BACKWARDS!?) */
     {%- else %}
-      {%- set padding = 50 %}
+      {%- set metafile = page.path ~ path ~ sourcepath %}
+      {%- set meta = get_image_metadata(path=metafile) %}
+      {%- set padding = meta.height / meta.width * 50 %}
     {%- endif %}
 
 

@@ -106,6 +106,10 @@
   <script defer src="{{ get_url(path=config.extra.js_codecopy, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_codecopy, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
+  {%- if config.extra.js_search_facade %}
+  <script defer src="{{ get_url(path='search_facade.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path='search_facade.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
   {%- if config.extra.js_search_index %}
   <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}

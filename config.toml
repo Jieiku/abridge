@@ -94,18 +94,18 @@ menu_footer = [
 #################
 # Resource Files
 #################
-integrity = false # setting this to false is useful for developing, should normally be true.
-#js_search_index = "search_index.en.js" # Separate Always, generated each build
+integrity = true # setting this to false is useful for developing, should normally be true.
+js_search_index = "search_index.en.js" # Separate Always, generated each build
 js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
-#js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
-js_search_facade = true # Do not load search until user interaction with search.
+js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
+js_search_facade = "search_facade.js" # Do not load search until user interaction with search. [comment out to disable]
 js_codecopy = "codecopy.js"# Bundleable
 js_email = "email.js"# Bundleable
 
 ########## Switcher ########## (comment this block out if NOT using switcher):
 js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
 js_themeButton = "theme_button.js"# Bundleable
-#js_bundle = "abridge-switcher.min.js"# Bundle JS File, comment out to disable (includes switcher)
+js_bundle = "abridge-bundle.min.js"# Bundle JS File, comment out to disable (includes switcher)
 stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
@@ -137,7 +137,10 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 # theme:        uglifyjs theme.js -o theme.min.js -c -m
 # katex_bundle: uglifyjs katex.min.js mathtex-script-type.min.js auto-render.min.js katexoptions.js -o katexbundle.min.js -c -m
 
-# single search file bundle deffered by facade:
+# Search Facade (Abridge Default):
+# ALL:          uglifyjs prestyle.js theme_button.js search_facade.js email.js codecopy.js -o abridge-bundle.min.js -c -m
+
+# single search file bundle deferred by facade:
 # zola build
 # uglifyjs public/search_index.en.js public/elasticlunr.min.js public/search.js -o static/search_bundle.min.js -c -m
 

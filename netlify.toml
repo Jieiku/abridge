@@ -1,12 +1,12 @@
 [build]
 publish = "public"
-command = "zola build"
+command = "zola build && npm run abridge-demo && zola build"
 
 [build.environment]
-ZOLA_VERSION = "0.15.3"
+ZOLA_VERSION = "0.16.0"
 
 [context.deploy-preview]
-command = "zola build --base-url $DEPLOY_PRIME_URL"
+command = "zola build --base-url $DEPLOY_PRIME_URL && npm run abridge-demo && zola build --base-url $DEPLOY_PRIME_URL"
 
 [[headers]]
   for = "/*"

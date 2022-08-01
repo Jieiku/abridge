@@ -333,4 +333,5 @@ Source:
     teaser.push("…");
     return teaser.join("");
   }
+document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
 }());

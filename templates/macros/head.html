@@ -72,7 +72,9 @@
 
 {%- if config.build_search_index and config.extra.js_bundle %}
 
-  {%- if config.extra.js_search_index %}
+  {%- if config.extra.js_search_facade %}
+    {# dont load the index #}
+  {%- elif config.extra.js_search_index %}
   <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
@@ -106,10 +108,18 @@
   <script defer src="{{ get_url(path=config.extra.js_codecopy, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_codecopy, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
-  {%- if config.extra.js_search_index %}
+  {%- if config.extra.js_search_facade %}
+  <script defer src="{{ get_url(path='search_facade.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path='search_facade.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
+  {%- if config.extra.js_search_facade %}
+  <script defer src="{{ get_url(path=config.extra.js_search_facade, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_search_facade, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- elif config.extra.js_search_index %}
   <script defer src="{{ get_url(path=config.extra.js_search_index, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_search_index, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
-  {%- if config.extra.js_search %}{%- for i in config.extra.js_search %}
+  {%- if config.extra.js_search_facade %}
+    {# dont load the index/search #}
+  {%- elif config.extra.js_search %}{%- for i in config.extra.js_search %}
   <script defer src="{{ get_url(path=i, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=i, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endfor %}{%- endif %}
 

@@ -11,7 +11,7 @@ Abridge was created by [Jake G (jieiku)](https://github.com/Jieiku) to be fast a
 Some fun facts about the theme:
 
 * Perfect score on Google's Lighthouse audit
-* Only ~6 KB of CSS before enabling the SVG CSS icons.
+* Only ~6 KB of CSS before enabling the SVG CSS icons and syntax highlighting.
 * No mandatory JavaScript.
 * Now with SEO!
 

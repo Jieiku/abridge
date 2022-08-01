@@ -98,13 +98,14 @@ integrity = true # setting this to false is useful for developing, should normal
 js_search_index = "search_index.en.js" # Separate Always, generated each build
 js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
 js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
+js_search_facade = "search_facade.js" # Do not load search until user interaction with search. [comment out to disable]
 js_codecopy = "codecopy.js"# Bundleable
 js_email = "email.js"# Bundleable
 
 ########## Switcher ########## (comment this block out if NOT using switcher):
 js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
 js_themeButton = "theme_button.js"# Bundleable
-js_bundle = "abridge-switcher.min.js"# Bundle JS File, comment out to disable (includes switcher)
+js_bundle = "abridge-bundle.min.js"# Bundle JS File, comment out to disable (includes switcher)
 stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
@@ -130,11 +131,9 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 # If you have js_bundle set, then Bundleable js files are ignored (it's assumed you bundled them).
 # You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:
 #               cd mysite/themes/abridge/static
-# search:       uglifyjs elasticlunr.min.js search.js -o search.min.js -c -m
-# noswitcher:   uglifyjs prestyle.js email.js codecopy.js elasticlunr.min.js search.js -o abridge.min.js -c -m
-# ALL:          uglifyjs prestyle.js theme_button.js email.js codecopy.js elasticlunr.min.js search.js -o abridge-switcher.min.js -c -m
-# theme:        uglifyjs theme.js -o theme.min.js -c -m
-# katex_bundle: uglifyjs katex.min.js mathtex-script-type.min.js auto-render.min.js katexoptions.js -o katexbundle.min.js -c -m
+# searchonly:   uglifyjs elasticlunr.min.js search.js -c -m -o abridge-searchonly.min.js
+# noswitcher:   uglifyjs prestyle.js email.js codecopy.js elasticlunr.min.js search.js -c -m -o abridge-noswitcher.min.js
+# nofacade:     uglifyjs prestyle.js theme_button.js email.js codecopy.js elasticlunr.min.js search.js -c -m -o abridge-nofacade.min.js
 
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
 # favicons, comment out a line to disable loading some or all of these.

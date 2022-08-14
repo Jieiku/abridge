@@ -83,8 +83,8 @@ function goSearch() {// on enter key or search icon click display results to the
     window.main || (window.main = e.innerHTML);
     var t = document.getElementById("suggestions"),
         n = ((ResultsClone = t.cloneNode(!0)).id = "results", document.createElement("div")),
-        o = '<h2><button type="button" title="Close Search" onclick="closeSearch()"><i class="svgs x"></i></button> Results For: '.concat(document.getElementById("userinput").value, "</h2>");
-    return n.innerHTML = o, ResultsClone.insertBefore(n, ResultsClone.firstChild), e.innerHTML = ResultsClone.outerHTML, t.innerHTML = "", document.getElementById("userinput").value = "", !1
+        o = '<h2><button type="button" title="Close Search" onclick="closeSearch()"><i class="svgs x"></i></button> Results For: '.concat(document.getElementById("searchinput").value, "</h2>");
+    return n.innerHTML = o, ResultsClone.insertBefore(n, ResultsClone.firstChild), e.innerHTML = ResultsClone.outerHTML, t.innerHTML = "", document.getElementById("searchinput").value = "", !1
 }! function() {
   // search function code goes here
 }

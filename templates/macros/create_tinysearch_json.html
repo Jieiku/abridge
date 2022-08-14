@@ -1,0 +1,26 @@
+{%- macro from_section(section) -%}
+{%- set section = get_section(path=section) -%}
+{%- for post in section.pages -%}
+{%- if not post.draft -%}
+{
+"title": {{ post.title | striptags | json_encode | safe }},
+"url": {{ post.permalink | json_encode | safe }},
+"meta": {% if post.summary %}
+          {{- post.summary | striptags | truncate(length=150) | json_encode | safe }}
+        {%- elif post.description %}
+          {{- post.description | striptags | truncate(length=150) | json_encode | safe }}
+        {%- elif post.content %}
+          {{- post.content | striptags | truncate(length=150) | json_encode | safe }}
+        {%- endif %},
+"body": {{ post.content | striptags | json_encode | safe }}
+}
+{%- if not loop.last -%},{%- endif %}
+{%- endif -%}
+{%- endfor -%}
+{%- if section.subsections -%}
+,
+{%- for subsection in section.subsections -%}
+{{ self::from_section(section=subsection) }}
+{%- endfor -%}
+{%- endif -%}
+{%- endmacro from_section -%}

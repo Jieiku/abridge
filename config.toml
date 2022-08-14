@@ -1,11 +1,11 @@
-base_url = "https://abridge.netlify.app" # do NOT include a trailing slash on the base URL for web urls
-#base_url = "/home/jieiku/.dev/abridge/public/" # used for locally usable build directly from disk, also set below extra.uglyurls = true
+# do NOT include a trailing slash on the base URL for web urls
+base_url = "https://abridge.netlify.app"
+#base_url = "/home/jieiku/.dev/abridge/public/" # for locally usable build directly from disk, also set in [extra] section uglyurls = true
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
 default_language = "en"
 output_dir = "public"
 compile_sass = true
-build_search_index = true
 minify_html = false
 generate_feed = true
 feed_filename = "atom.xml"
@@ -17,19 +17,18 @@ taxonomies = [
 ]
 
 #theme = "abridge"
+
+build_search_index = true
+[search]                # Options specific to elasticlunr search.
+include_title = true        # include title of page/section in index
+include_description = false # include description of page/section in index
+include_content = true      # include rendered content of page/section in index
+# Truncate content at nth character. Useful if index size significantly slows down the site.
+# truncate_content_length = 100
+
 [markdown]
-extra_syntaxes_and_themes = ["highlight_themes"] # Abridge's config.toml
-# In YOUR SITE'S config.toml set to: ["highlight_themes", "themes/abridge/highlight_themes"]
 highlight_code = true
-#highlight_theme = "abridge-dark"
 highlight_theme = "css"
-
-# abridge-dark ayu-dark-abridge ayu_mirage-dark-abridge charcoal-dark-abridge dracula-dark-abridge material-dark-abridge
-# abridge-light ayu-light-abridge ayu_mirage-light-abridge charcoal-light-abridge dracula-light-abridge material-light-abridge
-# abridge-white ayu-white-abridge ayu_mirage-white-abridge charcoal-white-abridge dracula-white-abridge material-white-abridge
-
-# xx-abridge themes are a copy of themes xx with contrast/color tweaks for 100 score on google lighthouse https://learnui.design/tools/accessible-color-generator.html
-# https://www.getzola.org/documentation/content/syntax-highlighting/#inline-vs-classed-highlighting
 
 render_emoji = false
 external_links_target_blank = true # rel="noopener"
@@ -95,17 +94,20 @@ menu_footer = [
 # Resource Files
 #################
 integrity = true # setting this to false is useful for developing, should normally be true.
+js_bundle = true # multiple javascript files combined into a single file
+js_switcher = true
+js_search_facade = true # Do not load search until user interaction with search.
+# search library to use, valid values are: false, elasticlunr, tinysearch, stork
+search_library = false
+
 js_search_index = "search_index.en.js" # Separate Always, generated each build
 js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
-js_search = [ "elasticlunr.min.js", "search.js" ]# Bundleable
-js_search_facade = "search_facade.js" # Do not load search until user interaction with search. [comment out to disable]
 js_codecopy = "codecopy.js"# Bundleable
 js_email = "email.js"# Bundleable
-
-########## Switcher ########## (comment this block out if NOT using switcher):
 js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
 js_themeButton = "theme_button.js"# Bundleable
-js_bundle = "abridge-bundle.min.js"# Bundle JS File, comment out to disable (includes switcher)
+
+########## Switcher ########## (comment this block out if NOT using switcher):
 stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
@@ -114,8 +116,6 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 #stylesheets = [ "abridge-switcher.css", "font.css", "iconfont.css" ] # include your own font, and font icons!
 
 ########## No Switcher ##########
-#js_bundle = "search.min.js"# Bundle JS File, comment out to disable (search only: no switcher/prestyle)
-#js_bundle = "abridge.min.js"# Bundle JS File, comment out to disable (no switcher)
 #stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference
 #stylesheets = [ "abridge-blue.css" ] # Blue Automatic Night/Light Theme based on browser/system preference
 #stylesheets = [ "abridge-blueshade.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference
@@ -127,13 +127,6 @@ stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme bas
 #stylesheets = [ "abridge-blueshade-light.css" ] # BlueShade Light Theme
 #stylesheets = [ "abridge.css", "extra.css" ] # example loading extra css
 #stylesheets = [ "abridge.css", "syntax/syntax-abridge.css" ]
-
-# If you have js_bundle set, then Bundleable js files are ignored (it's assumed you bundled them).
-# You can include whatever js you want in your bundle. just generate your file like below and place in your sites root static directory:
-#               cd mysite/themes/abridge/static
-# searchonly:   uglifyjs elasticlunr.min.js search.js -c -m -o abridge-searchonly.min.js
-# noswitcher:   uglifyjs prestyle.js email.js codecopy.js elasticlunr.min.js search.js -c -m -o abridge-noswitcher.min.js
-# nofacade:     uglifyjs prestyle.js theme_button.js email.js codecopy.js elasticlunr.min.js search.js -c -m -o abridge-nofacade.min.js
 
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
 # favicons, comment out a line to disable loading some or all of these.

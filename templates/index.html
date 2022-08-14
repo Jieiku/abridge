@@ -33,17 +33,18 @@
         {%- if config.extra.meta_index.position == "top" or config.extra.meta_index.position == "both" %}
         {{- macros::meta_index(page=page) }}
         {%- endif %}{%- endif %}
-        <p class="sum">
+        <div class="sum">
+        <p>
         {%- if page.summary %}
           {{ page.summary | markdown(inline=true) | safe }}
         {%- elif page.description %}
           {{ page.description | safe }}
         {%- elif page.content %}
-          {{ page.content | safe | striptags | truncate(length=150) }}
+          {{ page.content | striptags | truncate(length=150) | safe }}
         {%- elif page.extra.static_thumbnail %}
         {%- endif %}
           <a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">...more</a>
-        </p>
+        </div>
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}
         {{- macros::meta_index(page=page) }}

@@ -15,7 +15,7 @@ function goSearchNow() {
 
     var headerDiv = document.createElement("div");// create a div element
 
-    var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> Results For: '.concat(document.getElementById("userinput").value, "</h2></form>");// header to use at top of results page
+    var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> Results For: '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
 
     headerDiv.innerHTML = headerContent;// document element div (headerDiv), set the inner contents to our header html (headerContent)
 
@@ -23,7 +23,7 @@ function goSearchNow() {
 
     main.innerHTML = ResultsClone.outerHTML;//display ResultsClone.outerHTML as the page
     results.innerHTML = "";// clear the suggestions div popup
-    document.getElementById("userinput").value = "";// clear the search input box
+    document.getElementById("searchinput").value = "";// clear the search input box
     document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
     return false
 }
@@ -33,25 +33,32 @@ window.onload = function() {
 
 // Everything Below this line For Suggestsions as you type in search box
 var suggestions = document.getElementById("suggestions");
-var userinput = document.getElementById("userinput");
+var searchinput = document.getElementById("searchinput");
+
+/* Close search suggestion popup list */
+function closeAllLists(elmnt) {
+    var suggestions = document.getElementById("suggestions");
+    while (suggestions.firstChild) {
+        suggestions.removeChild(suggestions.firstChild);
+    }
+}
 
 function inputFocus(e) {
 
-  if (e.keyCode === 191
+  if (e.keyCode === 191//forward slash
       && document.activeElement.tagName !== "INPUT"
       && document.activeElement.tagName !== "TEXTAREA") {
     e.preventDefault();
-    userinput.focus();
+    searchinput.focus();
+    suggestions.classList.remove('d-none');
   }
 
-  if (e.keyCode === 27 ) {
-    userinput.blur();
+  if (e.keyCode === 27 ) {//escape
+    searchinput.blur();
     suggestions.classList.add('d-none');
+    closeAllLists();
   }
 
-}
-
-function suggestionFocus(e) {
   const focusableSuggestions= suggestions.querySelectorAll('a');
   if (suggestions.classList.contains('d-none')
       || focusableSuggestions.length === 0) {
@@ -62,12 +69,12 @@ function suggestionFocus(e) {
 
   let nextIndex = 0;
 
-  if (e.keyCode === 38) {
+  if (e.keyCode === 38) {//up arrow
     e.preventDefault();
     nextIndex= index > 0 ? index-1 : 0;
     focusableSuggestions[nextIndex].focus();
   }
-  else if (e.keyCode === 40) {
+  else if (e.keyCode === 40) {//down arrow
     e.preventDefault();
     nextIndex= index+1 < focusable.length ? index+1 : index;
     focusableSuggestions[nextIndex].focus();
@@ -77,7 +84,6 @@ function suggestionFocus(e) {
 
 document.addEventListener("keydown", inputFocus);
 document.addEventListener("click", function(event) {suggestions.contains(event.target) || suggestions.classList.add("d-none")});
-document.addEventListener("keydown", suggestionFocus);
 
 // Get substring by bytes
 // If using JavaScript inline substring method, it will return error codes
@@ -160,7 +166,7 @@ Source:
 */
 (function(){
   var index = elasticlunr.Index.load(window.searchIndex);
-  userinput.addEventListener('input', show_results, true);
+  searchinput.addEventListener('input', show_results, true);
   suggestions.addEventListener('click', accept_suggestion, true);
 
   function show_results(){

@@ -1,0 +1,19 @@
+{# cargo install stork-search --locked #}
+{# cd .dev/abridge #}
+{# zola build #}
+{# /home/jieiku/.cargo/bin/stork build --input public/data_stork/index.html --output static/stork.st #}
+
+{%- macro from_section(section) -%}
+{%- set section = get_section(path=section) -%}
+{%- for post in section.pages -%}
+{%- if not post.draft %}    {path = {{ '.' ~ post.path ~ 'index.html' | json_encode | safe }}, url = {{ post.permalink | json_encode | safe }}, title = {{ post.title | striptags | json_encode | safe }}}
+{%- if not loop.last -%},
+{% endif -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if section.subsections -%},
+{% for subsection in section.subsections -%}
+{{ self::from_section(section=subsection) }}
+{%- endfor -%}
+{%- endif -%}
+{%- endmacro from_section -%}

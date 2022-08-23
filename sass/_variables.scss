@@ -112,6 +112,9 @@ $icon-sun: false !default;// light sun
 // add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>
 
 :root {
+  --ff: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif;
+  --fm: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace;
+
   // Spacings
   --s1: .5rem;
   --s2: 1rem;
@@ -155,9 +158,7 @@ $icon-sun: false !default;// light sun
   // Responsives spacings
   @if $enable-responsive-spacings {
     // Sectionning
-    body > header,
-    body > main,
-    body > footer,
+    header, main, footer,
     section {
       @if map-get($breakpoints, "sm") {
         @media (min-width: map-get($breakpoints, "sm")) {

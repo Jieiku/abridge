@@ -19,7 +19,7 @@
 
   {%- set description = config.description %}
 
-  {{- macros_head::seo(title=title, title_addition=title_addition, description=description, is_home=true) }}
+  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
 {%- endblock seo %}
 
 
@@ -28,10 +28,10 @@
     <div>
     {%- for page in paginator.pages %}
       <article>
-        {{- macros::title_index(page=page) }}
+        {{- macros::title_index(page=page, config=config) }}
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "top" or config.extra.meta_index.position == "both" %}
-        {{- macros::meta_index(page=page) }}
+        {{- macros::meta_index(page=page, config=config) }}
         {%- endif %}{%- endif %}
         <div class="sum">
         <p>
@@ -47,12 +47,12 @@
         </div>
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}
-        {{- macros::meta_index(page=page) }}
+        {{- macros::meta_index(page=page, config=config) }}
         {%- endif %}
         {%- endif %}
       </article>
     {%- endfor %}
-    {{- macros::pagination(paginator=paginator) }}
+    {{- macros::pagination(paginator=paginator, config=config) }}
     </div>
   {%- set section_item = get_section(path="_index.md") %}
   {%- if config.extra.recent | default(value=true) %}
@@ -60,7 +60,7 @@
       <div class="toc-sticky">
         <h1><span class="s75">Recent Posts</span></h1>
         {%- for page in section_item.pages | slice(end=config.extra.recent_items) %}
-          {{- page_macros::page_listing(page=page) }}
+          {{- page_macros::page_listing(page=page, config=config) }}
         {%- endfor %}
       </div>
     </div>

@@ -6,7 +6,7 @@ template = "pages.html"
 
 This site provides a demo for the [abridge theme](https://github.com/Jieiku/abridge) for [Zola](https://www.getzola.org/) the static site generator.
 
-Abridge was created by [Jake G (jieiku)](https://github.com/Jieiku) to be fast and lightweight, using semantic html, a class-light [abridge.css](https://github.com/Jieiku/abridge.css), and No JS.
+Abridge was created by [Jake G (jieiku)](https://github.com/Jieiku) to be fast and lightweight, using semantic html, a class-light [abridge.css](https://github.com/Jieiku/abridge.css), and No Mandatory JS.
 
 Some fun facts about the theme:
 

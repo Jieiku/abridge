@@ -1,8 +1,8 @@
-{%- macro title_post(page) %}
+{%- macro title_post(page, config) %}
         <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
 {%- endmacro title_post %}
 
-{%- macro meta_post(page) %}
+{%- macro meta_post(page, config) %}
         <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
 
         {#- Author #}
@@ -42,12 +42,12 @@
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_post %}
 
-{%- macro title_index(page) %}
+{%- macro title_index(page, config) %}
         <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
 {%- endmacro title_index %}
 
 
-{%- macro meta_index(page) %}
+{%- macro meta_index(page, config) %}
         <span{%- if config.extra.meta_index.size %} class="{{ config.extra.meta_index.size }}"{% endif %}>
 
         {#- Author #}
@@ -99,7 +99,7 @@
 {%- endmacro footer %}
 
 
-{%- macro pagination(paginator)%}
+{%- macro pagination(paginator, config)%}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}

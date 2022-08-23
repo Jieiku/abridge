@@ -1,4 +1,4 @@
-{%- macro page_listing(page) %}
+{%- macro page_listing(page, config) %}
         <div class="toc-item">
           <a href="{{ page.permalink | safe}}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a>
         </div>

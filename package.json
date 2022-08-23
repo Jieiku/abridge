@@ -1,6 +1,6 @@
 {
   "name": "abridge-bundle",
-  "version": "1.1.0",
+  "version": "1.2.2",
   "description": "Abridge - bundle and minify js",
   "author": "Jake G <106644+Jieiku@users.noreply.github.com>",
   "license": "MIT",

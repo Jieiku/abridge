@@ -2,7 +2,7 @@
 base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public/" # for locally usable build directly from disk, also set in [extra] section uglyurls = true
 title = "Abridge"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No JS."
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 default_language = "en"
 output_dir = "public"
 compile_sass = true
@@ -97,7 +97,7 @@ integrity = true # setting this to false is useful for developing, should normal
 js_bundle = true # multiple javascript files combined into a single file
 js_switcher = true
 js_search_facade = true # Do not load search until user interaction with search.
-# search library to use, valid values are: false, elasticlunr, tinysearch, stork
+# search library to use, valid values are: false, "elasticlunr", "tinysearch", "stork"
 search_library = false
 
 js_search_index = "search_index.en.js" # Separate Always, generated each build

@@ -1,7 +1,3 @@
-var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
-if (baseUrl.slice(-1) == "/") {
-    baseUrl = baseUrl.slice(0, -1);
-}
 // in page results when press enter or click search icon from search box
 function closeSearchNow() {
     const main = document.querySelector("main");
@@ -36,6 +32,10 @@ window.onload = function() {
 };
 
 async function lazyLoad() {
+    var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
+    if (baseUrl.slice(-1) == "/") {
+        baseUrl = baseUrl.slice(0, -1);
+    }
     await init(baseUrl + "/tinysearch_engine_bg.wasm")
 }
 
@@ -223,6 +223,10 @@ async function load(e, t) {
     } : n
 }
 async function init(e) {
+    var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
+    if (baseUrl.slice(-1) == "/") {
+        baseUrl = baseUrl.slice(0, -1);
+    }
     void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm", import.meta.url));
     const t = {
         wbg: {}

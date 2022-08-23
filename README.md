@@ -3,7 +3,7 @@
 
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before the svg icons and syntax highlighting css, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://web.dev/measure/?url=https%3A%2F%2Fabridge.netlify.app) and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
+Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before the svg icons and syntax highlighting css, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://web.dev/measure/?url=https%3A%2F%2Fabridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
 
 There is also [Abridge-minimal](https://github.com/jieiku/abridge.css) Theme which is used to showcase the [abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)
 
@@ -152,6 +152,10 @@ command = "zola build && npm run abridge && zola build"
 ### Step 7: Switch Search library (optional)
 
 Abridge by default uses elasticlunr for the search library (zola's default), but both tinysearch and stork are supported search libraries.
+
+tinysearch demo: https://jieiku.github.io/abridge-tinysearch/
+
+stork demo: https://jieiku.github.io/abridge-stork/
 
 **Switch to tinysearch:**
 

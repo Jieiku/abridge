@@ -6,23 +6,22 @@ table {
   caption {
     margin-bottom: .5rem;
   }
-  tr {
-    border-bottom: var(--bw) solid var(--c3);
-  }
-  td,
-  th {
-    padding: var(--s1);
-  }
-  th {
-    text-align: left;
-  }
-
-  // Striped
-  tbody tr:nth-child(even) {
-    background-color: var(--c2);
-  }
-  thead tr {
-    border-top: var(--bw) solid var(--c3);
-    background-color: var(--c2);
-  }
+}
+tr {
+  border-bottom: var(--bw) solid var(--c3);
+}
+td,
+th {
+  padding: var(--s1);
+}
+th {
+  text-align: left;
+}
+// Striped
+tbody tr:nth-child(even) {
+  background-color: var(--c2);
+}
+thead tr {
+  border-top: var(--bw) solid var(--c3);
+  background-color: var(--c2);
 }

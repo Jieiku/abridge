@@ -1,4 +1,4 @@
-{%- macro social_links(social_config) %}
+{%- macro social_links(social_config, config) %}
       <nav>
         <ul>
 {%- set base_url = get_url(path="", lang=lang) -%}
@@ -6,8 +6,8 @@
           <li><a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank" title="Atom/RSS Feed"><i type="Button" class="svg rss" title="Atom/RSS Feed"></i></a></li>{% endif -%}{% endif -%}
           {%- if social_config.mail -%}
           {%- if social_config.mail_encode -%}
-          {%- set base64_email = "abridge" ~ social_config.mail -%}
-          <li class="js"><a class="m-protected" href="#" target="_blank" title="{{ base64_email | base64_encode }}"><i type="Button" class="svg mail" title="Mail"></i></a></li>
+          {%- set base64_email = social_config.mail -%}
+          <li class="js"><a class="m-protected" href="#{{ base64_email | base64_encode }}" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a></li>
           {%- else -%}
           <li><a href="mailto:{{ social_config.mail }}" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a></li>
           {%- endif -%}

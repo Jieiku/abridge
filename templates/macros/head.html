@@ -1,5 +1,5 @@
 {#- Theme Switcher Button to toggle between dark/light #}
-{%- macro theme() %}
+{%- macro theme(config) %}
   {%- if config.extra.js_theme %}
   {%- if config.extra.js_themeButton or config.extra.js_bundle %}
   <script src="{{ get_url(path=config.extra.js_theme, trailing_slash=false) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path=config.extra.js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
@@ -7,7 +7,7 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro stylesheets() %}
+{%- macro stylesheets(config) %}
 
   {%- if config.extra.stylesheets %}{%- for i in config.extra.stylesheets %}
   <link rel="stylesheet" href="{{ get_url(path=i, trailing_slash=false, cachebust=true) | safe }}" />
@@ -15,7 +15,7 @@
 
 {%- endmacro %}
 
-{%- macro stylesheets_preload() %}
+{%- macro stylesheets_preload(config) %}
 
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
@@ -43,7 +43,7 @@
 
 
 
-{%- macro feed() %}
+{%- macro feed(config) %}
   {%- if config.generate_feed %}
   <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" />
   {%- endif %}
@@ -51,7 +51,7 @@
 
 
 
-{%- macro js() %}
+{%- macro js(config) %}
 
   {%- set preStyle = false %}
 
@@ -228,7 +228,7 @@
 
 
 
-{%- macro favicons() %}
+{%- macro favicons(config) %}
   {%- if config.extra.favicon_theme_color %}
   <meta name="theme-color" content="{{ config.extra.favicon_theme_color }}" />
   {%- endif %}
@@ -260,7 +260,7 @@
 
 
 
-{%- macro security() %}
+{%- macro security(config) %}
   {%- if config.extra.security_header_referrer %}
   <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}" />
   {%- endif %}
@@ -275,7 +275,7 @@
 {#- page_images:   using for the blog single template page -#}
 {#- page_section:  the blog single template page have to pass the parameter -#}
 {#- is_404:        using for the 404.html template -#}
-{%- macro seo( title="",title_addition="",description="",type="website",is_home=false,is_404=false,is_page=false,page_images="",page_section="",created_time="2021-07-04T07:07:00-07:00",  updated_time="2021-07-04T07:07:00-07:00" ) %}
+{%- macro seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2021-07-04T07:07:00-07:00", updated_time="2021-07-04T07:07:00-07:00" ) %}
 {%- if is_404 -%}
   <meta name="robots" content="noindex, follow" />
 {%- else -%}

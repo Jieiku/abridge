@@ -27,23 +27,23 @@
     {%- set page_section = "" %}
   {%- endif %}
 
-  {{- macros_head::seo(title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
+  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
 {%- endblock seo %}
 
 {%- block content %}
     <article>
-    {{- macros::title_post(page=page) }}
+    {{- macros::title_post(page=page, config=config) }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "top" or config.extra.meta_post.position == "both" %}
-    {{- macros::meta_post(page=page) }}
+    {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
     {{ page.content | safe }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "bottom" or config.extra.meta_post.position == "both" %}
-    {{- macros::meta_post(page=page) }}
+    {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
     {%- block page_footer %}

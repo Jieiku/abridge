@@ -42,26 +42,28 @@ pre code[data-lang]::before {
   }
 }
 // Table Override, this is used for Zola's linenos and hl_lines
-code table {
-  font-size: .8rem;
-  margin: 0;
+code {
+  table {
+    font-size: .8rem;
+    margin: 0;
+    // Highlighted text
+    mark {
+      display: block;
+      background-color: var(--c2);
+      color: unset;
+      padding: 0;
+    }
+  }
   td, th, tr {
     padding: 0;
     border-bottom: none;
   }
-  tbody tr td:first-child {
+  tbody td:first-child {
     text-align: center;
     user-select: none;
     min-width: 60px;
   }
   tbody tr:nth-child(even), thead tr {
     background-color: unset;
-  }
-  // Highlighted text
-  mark {
-    display: block;
-    background-color: var(--c2);
-    color: unset;
-    padding: 0;
   }
 }

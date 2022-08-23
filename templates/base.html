@@ -5,15 +5,15 @@
 <!DOCTYPE html>
 <html lang="{{ config.extra.language_code | default(value='en-US') }}">
 <head>
-  {{- macros_head::theme() }}
-  {{- macros_head::stylesheets() }}
+  {{- macros_head::theme(config=config) }}
+  {{- macros_head::stylesheets(config=config) }}
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  {{- macros_head::stylesheets_preload() }}
-  {{- macros_head::js() }}
+  {{- macros_head::stylesheets_preload(config=config) }}
+  {{- macros_head::js(config=config) }}
   <meta name="base" content="{{ config.base_url | safe }}" />
-  {{- macros_head::feed() }}
+  {{- macros_head::feed(config=config) }}
   {%- block seo %}
     {%- if config.extra.title_separator %}
       {%- set title_separator = " " ~ config.extra.title_separator ~ " " -%}
@@ -25,8 +25,8 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  {{- macros_head::security() }}
-  {{- macros_head::favicons() }}
+  {{- macros_head::security(config=config) }}
+  {{- macros_head::favicons(config=config) }}
   {%- if config.build_search_index %}
   <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
   {%- endif %}
@@ -91,7 +91,7 @@
     <hr />
     {%- endif %}
     <div class="c">
-      {{- social_macros::social_links(social_config=config.extra.social) }}
+      {{- social_macros::social_links(social_config=config.extra.social, config=config) }}
 
       {#- Copyright START #}
       {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}

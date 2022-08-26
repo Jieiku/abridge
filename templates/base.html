@@ -52,7 +52,7 @@
       <div>
         <ul>
           {%- for i in config.extra.menu -%}
-          <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}">{{ i.name | safe }}</a></h2> </li>
+          <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
           {%- endfor -%}
           {%- if config.extra.js_theme -%}
           <li class="js">{%- if config.extra.icon_adjust -%}<i type="reset" id="mode" class="{{ config.extra.icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
@@ -102,7 +102,7 @@
       <nav>
         <ul>
           {%- for i in config.extra.menu_footer -%}
-          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"> {{ i.name | safe }} </a> </li>
+          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {{ i.name | safe }} </a> </li>
           {%- endfor -%}
         </ul>
       </nav>
@@ -110,7 +110,7 @@
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Powered by <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/jieiku/abridge/">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> and <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

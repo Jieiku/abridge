@@ -55,7 +55,7 @@ meta_post = { position="top", size="s95", author=true, readtime=false, readstrin
 
 footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
 footer_credit = true
-#footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/">Abridge</a></p>'
+#footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank">Abridge</a></p>'
 
 #uncomment one of the two lines, or neither, depending on which type of logo you want to use:
 #logo = { file="logo.svg", width="32", height="32", alt="Abridge", text="bridge" }
@@ -69,16 +69,16 @@ headhr = false # show or hide horizontal rule below header
 foothr = true # show or hide horizontal rule above footer
 
 menu = [
-    {url = "/about/", name = "About", slash = true},
-    {url = "/posts/", name = "Posts", slash = true},
-    {url = "/categories/", name = "Categories", slash = true},
-    {url = "/tags/", name = "Tags", slash = true},
+    {url = "/about/", name = "About", slash = true, blank = false},
+    {url = "/posts/", name = "Posts", slash = true, blank = false},
+    {url = "/categories/", name = "Categories", slash = true, blank = false},
+    {url = "/tags/", name = "Tags", slash = true, blank = false},
 ]
 menu_footer = [
-    {url = "/about/", name = "About", slash = true},
-    {url = "/contact/", name = "Contact", slash = true},
-    {url = "/privacy/", name = "Privacy", slash = true},
-    {url = "/sitemap.xml", name = "Sitemap", slash = false},
+    {url = "/about/", name = "About", slash = true, blank = false},
+    {url = "/contact/", name = "Contact", slash = true, blank = false},
+    {url = "/privacy/", name = "Privacy", slash = true, blank = false},
+    {url = "/sitemap.xml", name = "Sitemap", slash = false, blank = true},
 ]
 
 # Security Headers should preferably be set by your webserver (Nginx, Apache) https://observatory.mozilla.org  https://csp-evaluator.withgoogle.com/

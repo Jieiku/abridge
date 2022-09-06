@@ -504,21 +504,28 @@ instead of this: `stylesheets = [ "abridge-switcher.css" ]` do this: `stylesheet
 
 The theme switcher relies on javascript to work, it applies the .light class to the root documentElement. The file that handles this (theme.js) is tiny and optimized and it is the first file loaded in the head, so the performance hit is minimal, but it does still exist. Without the Theme switcher you can still use The automatic Theme, it works by using Browser/OS preference, you can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two. By default the demo has the theme switcher enabled so that it can be evaluated.
 
-With the growing number of options and configuration it can get confusing. To disable the Theme Switcher, you would comment out the Switcher section and enable your choice in the No switcher section, for example:
+With the growing number of options and configuration it can get confusing. To disable the Theme Switcher, you would set `js_switcher = false` and comment out the Switcher section and enable your choice in the No switcher section, for example:
 
 ```toml
+#################
+# Resource Files
+#################
+js_switcher = false
+
 ########## Switcher ########## (comment this block out if NOT using switcher):
-#js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
-#js_themeButton = "theme_button.js"# Bundleable
-#js_bundle = "abridge-switcher.min.js"# Bundle JS File, comment out to disable (includes switcher)
 #stylesheets = [ "abridge-switcher.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blue-switcher.css" ] # Blue Automatic Night/Light Theme based on browser/system preference with switcher
 #stylesheets = [ "abridge-blueshade-switcher.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference with switcher
+#stylesheets = [ "abridge-switcher.css", "font.css" ] # include your own font!
+#stylesheets = [ "abridge-switcher.css", "iconfont.css" ] # include your own font icons!
+#stylesheets = [ "abridge-switcher.css", "font.css", "iconfont.css" ] # include your own font, and font icons!
 
 ########## No Switcher ##########
-#js_bundle = "search.min.js"# Bundle JS File, comment out to disable (search only: no switcher/prestyle)
-js_bundle = "abridge.min.js"# Bundle JS File, comment out to disable (no switcher)
 stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-blue.css" ] # Blue Automatic Night/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-blueshade.css" ] # BlueShade Automatic Night/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-dark.css" ] # Orange Dark Theme
+#stylesheets = [ "abridge-light.css" ] # Orange Light Theme
 ```
 
 ### Optimize PNG files:

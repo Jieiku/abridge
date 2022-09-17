@@ -8,8 +8,14 @@
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %} and {% endif %}
+          {%- if author_flag %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          {%- set_global author_flag = true %}
+          {%- endfor %}
+        {%- elif page.extra.authors and config.extra.meta_post.author %}
+          {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
+          {%- for author in page.extra.authors %}
+          {%- if author_flag %}, {% endif %} {{ author }}
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_post.author %}
@@ -53,8 +59,14 @@
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %} and {% endif %}
+          {%- if author_flag %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          {%- set_global author_flag = true %}
+          {%- endfor %}
+        {%- elif page.extra.authors and config.extra.meta_index.author %}
+          {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
+          {%- for author in page.extra.authors %}
+          {%- if author_flag %}, {% endif %} {{ author }}
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_index.author %}
@@ -92,7 +104,7 @@
 
 {%- macro footer(page) %}
 {%- if page.reading_time %}
-{%- if page.reading_time > 1 %}
+{%- if page.reading_time > 2 %}
 <p><b><a href="#">Back to top</a></b></p>
 {%- endif %}
 {%- endif %}

@@ -52,8 +52,24 @@
       <div>
         <ul>
           {%- for i in config.extra.menu -%}
-          <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
+
+          {%- if i.md -%}{# check if page is draft #}
+
+            {%- set pagecheck = get_page(path=i.md, metadata_only=true) -%}
+            {%- if pagecheck.draft -%}
+            {%- else -%}
+              <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
+            {%- endif -%}
+
+          {%- else -%}
+
+            <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
+
+          {%- endif -%}{# end check if page is draft #}
+
           {%- endfor -%}
+
+
           {%- if config.extra.js_theme -%}
           <li class="js">{%- if config.extra.icon_adjust -%}<i type="reset" id="mode" class="{{ config.extra.icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
           {%- endif -%}

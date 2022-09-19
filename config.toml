@@ -69,15 +69,15 @@ headhr = false # show or hide horizontal rule below header
 foothr = true # show or hide horizontal rule above footer
 
 menu = [
-    {url = "/about/", name = "About", slash = true, blank = false},
+    {url = "/about/", name = "About", slash = true, blank = false, md = "pages/about.md"},
     {url = "/posts/", name = "Posts", slash = true, blank = false},
     {url = "/categories/", name = "Categories", slash = true, blank = false},
     {url = "/tags/", name = "Tags", slash = true, blank = false},
 ]
 menu_footer = [
-    {url = "/about/", name = "About", slash = true, blank = false},
-    {url = "/contact/", name = "Contact", slash = true, blank = false},
-    {url = "/privacy/", name = "Privacy", slash = true, blank = false},
+    {url = "/about/", name = "About", slash = true, blank = false, md = "pages/about.md"},
+    {url = "/contact/", name = "Contact", slash = true, blank = false, md = "pages/contact.md"},
+    {url = "/privacy/", name = "Privacy", slash = true, blank = false, md = "pages/privacy.md"},
     {url = "/sitemap.xml", name = "Sitemap", slash = false, blank = true},
 ]
 

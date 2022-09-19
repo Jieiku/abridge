@@ -1,6 +1,7 @@
 +++
 title = "About"
 path = "about"
+draft = false
 template = "pages.html"
 +++
 

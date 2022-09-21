@@ -1,6 +1,7 @@
 +++
 title = "Abridge Zola Theme"
 date = 2022-05-17
+draft = false
 
 [taxonomies]
 categories = ["Features"]

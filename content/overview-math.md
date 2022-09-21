@@ -3,6 +3,8 @@ title = "Mathematical Notations"
 description = "Sample article showcasing the display of Mathematical Notations, made possible by the KaTeX library."
 date = 2021-05-05
 updated = 2022-01-01
+draft = false
+
 [taxonomies]
 categories = ["Features"]
 tags = ["shortcodes","Mathematics"]

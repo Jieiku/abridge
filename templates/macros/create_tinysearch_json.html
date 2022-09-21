@@ -2,6 +2,7 @@
 {%- set section = get_section(path=section) -%}
 {%- for post in section.pages -%}
 {%- if not post.draft -%}
+{%- set found = true -%}
 {
 "title": {{ post.title | striptags | json_encode | safe }},
 "url": {{ post.permalink | json_encode | safe }},
@@ -17,10 +18,10 @@
 {%- if not loop.last -%},{%- endif %}
 {%- endif -%}
 {%- endfor -%}
-{%- if section.subsections -%}
+{%- if found -%}{%- if section.subsections -%}
 ,
 {%- for subsection in section.subsections -%}
 {{ self::from_section(section=subsection) }}
 {%- endfor -%}
-{%- endif -%}
+{%- endif -%}{%- endif -%}
 {%- endmacro from_section -%}

@@ -2,6 +2,7 @@
 title = "About"
 path = "about"
 template = "pages.html"
+draft = false
 +++
 
 This site provides a demo for the [abridge theme](https://github.com/Jieiku/abridge) for [Zola](https://www.getzola.org/) the static site generator.

@@ -2,6 +2,7 @@
 title = "Embedded Youtube Videos"
 description = "Sample article showcasing a custom Zola shortcode for embedding Youtube Videos into your pages."
 date = 2021-05-08
+draft = false
 
 [taxonomies]
 categories = ["Features"]

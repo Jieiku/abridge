@@ -2,6 +2,7 @@
 title = "Embedded Vimeo Videos"
 description = "Sample article showcasing a custom Zola shortcode for embedding Vimeo Videos into your pages."
 date = 2021-05-07
+draft = false
 
 [taxonomies]
 categories = ["Features"]

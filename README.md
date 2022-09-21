@@ -19,7 +19,7 @@ Maintenance of this project is made possible by all the <a href="https://github.
 
 ## Requirements
 
-This theme requires version 0.16.0 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+This theme requires version 0.16.1 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ## Quick Start
 

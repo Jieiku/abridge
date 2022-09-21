@@ -3,7 +3,7 @@ publish = "public"
 command = "zola build && npm run abridge-demo && zola build"
 
 [build.environment]
-ZOLA_VERSION = "0.16.0"
+ZOLA_VERSION = "0.16.1"
 
 [context.deploy-preview]
 command = "zola build --base-url $DEPLOY_PRIME_URL && npm run abridge-demo && zola build --base-url $DEPLOY_PRIME_URL"

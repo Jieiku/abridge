@@ -174,6 +174,8 @@ Switch abridge to tinysearch:
 ```shell
 cd ~/.dev/abridge
 sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
+sed -i 's/^draft =.*/draft = true/' content/static/stork_toml.md
+sed -i 's/^draft =.*/draft = false/' content/static/tinysearch_json.md
 zola build
 tinysearch --optimize --path static public/data_tinysearch/index.html
 # zola serve
@@ -196,6 +198,8 @@ Switch abridge to stork:
 ```shell
 cd ~/.dev/abridge
 sed -i 's/^search_library =.*/search_library = "stork"/' config.toml
+sed -i 's/^draft =.*/draft = false/' content/static/stork_toml.md
+sed -i 's/^draft =.*/draft = true/' content/static/tinysearch_json.md
 zola build
 stork build --input public/data_stork/index.html --output static/stork.st
 # zola serve
@@ -207,6 +211,8 @@ abridge as a theme:
 ```shell
 cd ~/.dev/abridge
 sed -i 's/^search_library =.*/search_library = false/' config.toml
+sed -i 's/^draft =.*/draft = true/' themes/abridge/content/static/stork_toml.md
+sed -i 's/^draft =.*/draft = true/' themes/abridge/content/static/tinysearch_json.md
 zola build
 npm run abridge
 zola build
@@ -217,6 +223,8 @@ abridge theme directly:
 ```shell
 cd ~/.dev/abridge
 sed -i 's/^search_library =.*/search_library = false/' config.toml
+sed -i 's/^draft =.*/draft = true/' content/static/stork_toml.md
+sed -i 's/^draft =.*/draft = true/' content/static/tinysearch_json.md
 zola build
 npm run abridge-demo
 zola build

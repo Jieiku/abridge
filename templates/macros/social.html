@@ -13,7 +13,7 @@
           {%- endif -%}
           {% endif -%}
           {%- if social_config.mastodon -%}
-          <li><a href="{{ social_config.mastodon | safe }}/" target="_blank" title="Mastodon" rel="me"><i type="Button" class="svg mastodon" title="Mastodon"></i></a></li>{% endif -%}
+          <li><a href="{{ social_config.mastodon | safe }}" target="_blank" title="Mastodon" rel="me"><i type="Button" class="svg mastodon" title="Mastodon"></i></a></li>{% endif -%}
           {%- if social_config.element -%}
           <li><a href="https://{{ social_config.element }}/" target="_blank" title="Element"><i type="Button" class="svg element" title="Element"></i></a></li>{% endif -%}
           {%- if social_config.matrix -%}

@@ -26,6 +26,8 @@
           <li><a href="https://www.linkedin.com/in/{{ social_config.linkedin }}/" target="_blank" title="LinkedIn"><i type="Button" class="svg linkedin" title="LinkedIn"></i></a></li>{% endif -%}
           {%- if social_config.researchgate -%}
           <li><a href="https://www.researchgate.net/profile/{{ social_config.researchgate }}/" target="_blank" title="ResearchGate"><i type="Button" class="svg researchgate" title="ResearchGate"></i></a></li>{% endif -%}
+          {%- if social_config.codeberg -%}
+          <li><a href="https://codeberg.org/{{ social_config.codeberg }}/" target="_blank" title="Codeberg"><i type="Button" class="svg codeberg" title="Codeberg"></i></a></li>{% endif -%}
           {%- if social_config.gitlab -%}
           <li><a href="https://gitlab.com/{{ social_config.gitlab }}/" target="_blank" title="Gitlab"><i type="Button" class="svg gitlab" title="Gitlab"></i></a></li>{% endif -%}
           {%- if social_config.github -%}
@@ -44,6 +46,8 @@
           <li><a href="https://www.pinterest.com/{{ social_config.pinterest }}/" target="_blank" title="Pinterest"><i type="Button" class="svg pinterest" title="Pinterest"></i></a></li>{% endif -%}
           {%- if social_config.twitch -%}
           <li><a href="https://www.twitch.tv/{{ social_config.twitch }}/" target="_blank" title="Twitch"><i type="Button" class="svg twitch" title="Twitch"></i></a></li>{% endif -%}
+          {%- if social_config.discord -%}
+          <li><a href="https://discord.com/{{ social_config.discord }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a></li>{% endif -%}
           {%- if social_config.youtube -%}
           <li><a href="https://www.youtube.com/{{ social_config.youtube }}" target="_blank" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a></li>{% endif -%}
           {%- if social_config.buymeacoffee -%}

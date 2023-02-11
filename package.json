@@ -8,6 +8,8 @@
   "scripts": {
     "searchonly": "uglifyjs static/elasticlunr.min.js static/search.js -c -m -o static/abridge-searchonly.min.js",
     "noswitcher": "uglifyjs static/prestyle.js static/email.js static/codecopy.js static/elasticlunr.min.js static/search.js -c -m -o static/abridge-bundle-noswitcher.min.js",
+    "nosearch": "uglifyjs static/prestyle.js static/theme_button.js static/email.js static/codecopy.js -c -m -o static/abridge-bundle-nosearch.min.js",
+    "noswitchernosearch": "uglifyjs static/prestyle.js static/email.js static/codecopy.js -c -m -o static/abridge-bundle-noswitchernosearch.min.js",
     "nofacade": "uglifyjs static/prestyle.js static/theme_button.js static/email.js static/codecopy.js static/elasticlunr.min.js static/search.js -c -m -o static/abridge-bundle-nofacade.min.js",
     "theme": "uglifyjs static/theme.js -c -m -o static/theme.min.js",
     "katex-bundle": "uglifyjs static/katex.min.js static/mathtex-script-type.min.js static/auto-render.min.js static/katexoptions.js -c -m -o static/katexbundle.min.js",

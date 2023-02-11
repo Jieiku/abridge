@@ -159,6 +159,14 @@
 
   {#- no search #}
 
+  {%- if config.extra.js_switcher %}
+
+  <script defer src="{{ get_url(path='abridge-bundle-nosearch.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path='abridge-bundle-nosearch.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- else %}
+
+  <script defer src="{{ get_url(path='abridge-bundle-noswitchernosearch.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity %} integrity="sha384-{{ get_file_hash(path='abridge-bundle-noswitchernosearch.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
 {%- else %}
 
   {#- no bundle or search #}

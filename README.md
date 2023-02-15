@@ -284,13 +284,21 @@ js_bundle is set to a javascript file with a bundle of multiple javascript files
 
 `uglifyjs prestyle.js theme_button.js elasticlunr.min.js search.js -c -m -o abridge-nofacade.min.js`
 
+All Bundles are defined in [package.json](https://github.com/Jieiku/abridge/blob/master/package.json)
+
+A Bundle can be generated from the package.json scripts using npm, for example:
+
+`npm run noswitchernosearch`
+
 Abridge Default Bundle:
 - abridge-bundle.min.js: includes: prestyle, theme_button, search_facade, email, codecopy
 
 Abridge Alternate Bundles:
+- abridge-bundle-nofacade.min.js: includes: prestyle, theme_button, email, codecopy, elasticlunr, search
+- abridge-bundle-noswitcher.min.js - includes: prestyle, email, codecopy, elasticlunr, search
+- abridge-bundle-nosearch.min.js - includes: prestyle, theme_button, email, codecopy
+- abridge-bundle-noswitchernosearch.min.js - includes: prestyle, email, codecopy
 - abridge-searchonly.min.js - includes: elasticlunr, search
-- abridge-noswitcher.min.js - includes: prestyle, email, codecopy, elasticlunr, search
-- abridge-nofacade.min.js: includes: prestyle, theme_button, email, codecopy, elasticlunr, search
 
 Support Files:
 - theme.min.js (not a bundle, just a minification of theme.js)

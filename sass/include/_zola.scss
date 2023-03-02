@@ -13,9 +13,7 @@
 pre code[data-lang]::before {
   color: var(--f1);
   text-transform: uppercase;
-  content: ' [' attr(data-lang) '] ' "
-
-";
+  content: ' [' attr(data-lang) '] ' "\a\a";
 }
 // code copy wrapper
 .ccw {

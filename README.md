@@ -3,7 +3,7 @@
 
 # Abridge Zola Theme
 
-Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before the svg icons and syntax highlighting css, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://web.dev/measure/?url=https%3A%2F%2Fabridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
+Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before the svg icons and syntax highlighting css, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
 
 There is also [Abridge-minimal](https://github.com/jieiku/abridge.css) Theme which is used to showcase the [abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)
 
@@ -294,6 +294,7 @@ Abridge Default Bundle:
 - abridge-bundle.min.js: includes: prestyle, theme_button, search_facade, email, codecopy
 
 Abridge Alternate Bundles:
+- abridge.min.js: includes: prestyle, search_facade, email, codecopy (same as default but without the theme switcher)
 - abridge-bundle-nofacade.min.js: includes: prestyle, theme_button, email, codecopy, elasticlunr, search
 - abridge-bundle-noswitcher.min.js - includes: prestyle, email, codecopy, elasticlunr, search
 - abridge-bundle-nosearch.min.js - includes: prestyle, theme_button, email, codecopy

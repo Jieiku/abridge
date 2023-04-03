@@ -51,20 +51,27 @@
       </div>
       <div>
         <ul>
+          {%- set js_theme=config.extra.js_theme | default(value=true) -%}
+          {%- if config.extra.menu or js_theme %}
+          {%- if config.extra.menu %}
           {%- for i in config.extra.menu -%}
           <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
           {%- endfor -%}
-          {%- if config.extra.js_theme -%}
-          <li class="js">{%- if config.extra.icon_adjust -%}<i type="reset" id="mode" class="{{ config.extra.icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
+          {%- endif -%}
+          {%- if js_theme -%}
+          {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+          <li class="js">{%- if icon_adjust -%}<i type="reset" id="mode" class="{{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
+          {%- endif -%}
           {%- endif -%}
         </ul>
       </div>
       {%- if config.build_search_index %}
+      {%- set icon_search=config.extra.icon_search | default(value="svgs search") -%}
       <div>
         <form autocomplete=off class="js" name="goSearch" id="searchbox">
           <div class="searchd">
             <input id="searchinput" type="text" placeholder="Search" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
-            <button type="submit" title="Search">{%- if config.extra.icon_search -%}<i class="{{ config.extra.icon_search }}"></i>{%- else -%}<span class="si">&#8981;</span>{%- endif -%}</button>
+            <button type="submit" title="Search">{%- if icon_search -%}<i class="{{ icon_search }}"></i>{%- else -%}<span class="si">&#8981;</span>{%- endif -%}</button>
           </div>
           <div><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
         </form>
@@ -91,7 +98,9 @@
     <hr />
     {%- endif %}
     <div class="c">
+      {%- if config.extra.social %}
       {{- social_macros::social_links(social_config=config.extra.social, config=config) }}
+      {%- endif %}
 
       {#- Copyright START #}
       {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}
@@ -99,6 +108,7 @@
       {%- set copyright_end_year=config.extra.copyright_end_year | default(value=now() | date(format="%Y")) %}
       <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Copyright &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
       {#- Copyright END #}
+      {%- if config.extra.menu_footer %}
       <nav>
         <ul>
           {%- for i in config.extra.menu_footer -%}
@@ -106,6 +116,7 @@
           {%- endfor -%}
         </ul>
       </nav>
+      {%- endif %}
       {%- if config.extra.footer_credit | default(value=true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}

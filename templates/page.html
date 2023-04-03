@@ -81,8 +81,9 @@
 
 {%- if page.reading_time %}
 {%- if page.reading_time > 2 %}
+{%- set icon_top=config.extra.icon_top | default(value="svgs svgh angu") -%}
 <span class="topout">
-<span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if config.extra.icon_top %}<i class="{{ config.extra.icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
+<span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if icon_top %}<i class="{{ icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
 </span>
 {%- endif %}
 {%- endif %}

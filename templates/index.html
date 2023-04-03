@@ -59,7 +59,8 @@
     <div class="toc">
       <div class="toc-sticky">
         <h1><span class="s75">Recent Posts</span></h1>
-        {%- for page in section_item.pages | slice(end=config.extra.recent_items) %}
+        {%- set recent_items=config.extra.recent_items | default(value=9) -%}
+        {%- for page in section_item.pages | slice(end=recent_items) %}
           {{- page_macros::page_listing(page=page, config=config) }}
         {%- endfor %}
       </div>

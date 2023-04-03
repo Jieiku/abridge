@@ -1,16 +1,6 @@
 @import "imports";
 @import "syntax/syntax-abridge-light";
-// In parenthesis at the end of each comment are tested colors separated by commma, the first value is the default.
+
 :root {
-  --f1: #444;// Font Color Primary (444)
-  --f2: #333;// Font color Headers (333)
-  --c1: #fff;// Background Color Primary (fff)
-  --c2: #eee;// Background Color Secondary (eee,def)
-  --c3: #ddd;// Table Rows, Block quote edge, Borders (ddd,137)
-  --c4: #677;// Disabled Buttons, Borders, mark background (677,013)
-  --a1: #c40;// link color (c40,06e)
-  --a2: #e60;// link hover/focus color (e60,09f)
-  --a3: #f90;// link h1-h2 hover/focus color (f90,07f)
-  --cg: #373;// ins green, success (373)
-  --cr: #d33;// del red, errors (d33)
+  @include light;
 }

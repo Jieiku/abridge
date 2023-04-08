@@ -1,4 +1,4 @@
-:root {
+:root:not(.light) {
     .z-code {
     color: #bfbab0;
     background-color: #191919;
@@ -275,8 +275,7 @@
     color: #ff7c6d;
     }
 }
-@media (prefers-color-scheme: light) {
-  :root {
+:root.light {
     .z-code {
     color: #61676c;
     background-color: #ffffff;
@@ -549,5 +548,4 @@
     .z-sublimelinter.z-mark.z-error {
     color: #e6000b;
     }
-  }
 }

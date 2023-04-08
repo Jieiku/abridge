@@ -1,4 +1,4 @@
-:root:not(.light) {
+:root {
     .z-code {
     color: #cccece;
     background-color: #191919;
@@ -79,7 +79,8 @@
     color: #fe7d83;
     }
 }
-:root.light {
+@media (prefers-color-scheme: light) {
+  :root {
     .z-code {
     color: #727373;
     background-color: #ffffff;
@@ -159,4 +160,5 @@
     .z-source.z-js .z-constant.z-other.z-object.z-key.z-js .z-string.z-unquoted.z-label.z-js {
     color: #cb414d;
     }
+  }
 }

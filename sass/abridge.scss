@@ -1,5 +1,5 @@
 @import "imports";
-@import "syntax/syntax-abridge-switcher";
+@import "syntax/syntax-abridge";
 
 :root:not(.light) {
   @include dark;

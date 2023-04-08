@@ -1,10 +1,10 @@
 # do NOT include a trailing slash on the base URL for web urls
 base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public/" # Usable site directly from disk, also set in [extra] uglyurls = true
-#title = "Abridge"
+title = "Abridge"
 #description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 #default_language = "en"
-output_dir = "public"
+#output_dir = "public"
 compile_sass = true
 #minify_html = false
 #generate_feed = true
@@ -18,14 +18,6 @@ taxonomies = [
 
 #theme = "abridge"
 
-build_search_index = true
-[search]                # Options specific to elasticlunr search.
-index_format = "elasticlunr_json"
-include_title = true        # include title of page/section in index
-include_description = false # include description of page/section in index
-include_content = true      # include rendered content of page/section in index
-# truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
-
 #[markdown]
 #highlight_code = true
 #highlight_theme = "css"
@@ -35,6 +27,14 @@ include_content = true      # include rendered content of page/section in index
 #external_links_no_follow = false   # rel="nofollow"
 #external_links_no_referrer = false # rel="noreferrer"
 #smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
+
+build_search_index = true
+[search]                # Options specific to elasticlunr search.
+index_format = "elasticlunr_json"
+include_title = true        # include title of page/section in index
+include_description = false # include description of page/section in index
+include_content = true      # include rendered content of page/section in index
+# truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
 
 #[extra]
 #uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html

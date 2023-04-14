@@ -8,9 +8,9 @@
   "scripts": {
     "theme": "uglifyjs static/theme.js -c -m -o static/theme.min.js",
     "katex-bundle": "uglifyjs static/katex.min.js static/mathtex-script-type.min.js static/katex-auto-render.min.js static/katexoptions.js -c -m -o static/katexbundle.min.js",
-    "search-bundle": "uglifyjs public/search_index.en.js public/elasticlunr.min.js public/search.js -c -m -o static/search_bundle.min.js",
-    "search-bundle-stork": "uglifyjs static/stork.js static/stork_config.js -c -m -o static/search_bundle_stork.min.js",
-    "search-bundle-tinysearch": "uglifyjs static/tinysearch.js -c -m -o static/search_bundle_tinysearch.min.js",
+    "search-elasticlunr": "uglifyjs public/elasticlunr.min.js public/search.js -c -m -o static/search_elasticlunr.min.js",
+    "search-stork": "uglifyjs static/stork.js static/stork_config.js -c -m -o static/search_stork.min.js",
+    "search-tinysearch": "uglifyjs static/tinysearch.js -c -m -o static/search_tinysearch.min.js",
     "sha256": "sha256=$(shasum -b -a 256 'static/search_bundle.min.js' | awk '{ print $1 }') && echo $sha256 && sed -i \"s|sha256='.*'|sha256='$sha256'|\" 'themes/abridge/static/search_facade.js'",
     "sha256-demo": "sha256=$(shasum -b -a 256 'static/search_bundle.min.js' | awk '{ print $1 }') && echo $sha256 && sed -i \"s|sha256='.*'|sha256='$sha256'|\" 'static/search_facade.js'",
     "sha256-stork": "sha256=$(shasum -b -a 256 'static/search_bundle_stork.min.js' | awk '{ print $1 }') && echo $sha256 && sed -i \"s|sha256='.*'|sha256='$sha256'|\" 'static/search_facade_stork.js'",

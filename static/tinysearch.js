@@ -27,8 +27,17 @@ function goSearchNow() {
     document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
     return false
 }
+var loaded = false;
 window.onload = function() {
     document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+    document.getElementById('searchinput').onfocus = function() {
+        if (!loaded) {
+            lazyLoad();
+            loaded = true;
+            document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+        }
+        document.getElementById('searchinput').onfocus = '';
+    }
 };
 
 async function lazyLoad() {
@@ -37,13 +46,6 @@ async function lazyLoad() {
         baseUrl = baseUrl.slice(0, -1);
     }
     await init(baseUrl + "/tinysearch_engine_bg.wasm")
-}
-
-var loaded = false;
-if (!loaded) {
-    lazyLoad();
-    loaded = true;
-    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
 }
 
 /* Close search suggestion popup list */

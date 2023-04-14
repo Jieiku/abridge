@@ -162,13 +162,18 @@ stork demo: https://jieiku.github.io/abridge-stork/
 **Switch to tinysearch:**
 
 First you have to install tinysearch so that you can build the index:
+(you also need to download the latest stork.wasm into the abridge static folder)
 
 ```shell
+sudo pacman -S install wasm-pack binaryen
 git clone https://github.com/tinysearch/tinysearch
 cd tinysearch
 cargo build --release
 sudo cp ./target/release/tinysearch /usr/local/bin/tinysearch
 exit # reload shell environment
+
+cd ~/.dev/abridge/static
+curl -s https://api.github.com/repos/jameslittle230/stork/releases/latest | grep "browser_download_url.*stork.wasm" | cut -d : -f 2,3 | tr -d \" | wget -i -
 ```
 
 Switch abridge to tinysearch:
@@ -192,6 +197,7 @@ git clone https://github.com/jameslittle230/stork
 cd stork
 cargo build --release
 sudo cp ./target/release/stork /usr/local/bin/stork
+
 exit # reload shell environment
 ```
 
@@ -305,7 +311,7 @@ Abridge Alternate Bundles:
 
 Support Files:
 - theme.min.js (not a bundle, just a minification of theme.js)
-- katexbundle.min.js - includes: katex.min.js mathtex-script-type.min.js auto-render.min.js katexoptions.js
+- katexbundle.min.js - includes: katex.min.js mathtex-script-type.min.js katex-auto-render.min.js katexoptions.js
 - search_bundle.min.js: includes: search_index.en, elasticlunr, search (loaded on demand by search_facade)
 
 ### Global Configuration

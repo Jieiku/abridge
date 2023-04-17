@@ -129,7 +129,7 @@
   {%- if search_library == "tinysearch" %}
   <script defer type="module" src="{{ get_url(path='tinysearch.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='tinysearch.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- elif search_library == "stork" %}
-  <script defer type="module" src="{{ get_url(path='search_bundle_stork.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search_bundle_stork.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer type="module" src="{{ get_url(path='search_stork.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search_stork.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
   <script defer src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='elasticlunr.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   <script defer src="{{ get_url(path='search.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>

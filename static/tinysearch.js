@@ -229,7 +229,7 @@ async function init(e) {
     if (baseUrl.slice(-1) == "/") {
         baseUrl = baseUrl.slice(0, -1);
     }
-    void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm", import.meta.url));
+    void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm"));
     const t = {
         wbg: {}
     };
@@ -242,7 +242,3 @@ async function init(e) {
     } = await load(await (e = "string" == typeof e || "function" == typeof Request && e instanceof Request || "function" == typeof URL && e instanceof URL ? fetch(e) : e), t);
     return wasm = e.exports, init.__wbindgen_wasm_module = n, wasm
 }
-export default init;
-export {
-    search
-};

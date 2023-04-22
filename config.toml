@@ -108,7 +108,7 @@ menu_footer = [
 ###############################################################################
 
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
-js_bundle = true # multiple javascript files combined into a single file (setting to false is useful during js development)
+js_bundle = false # multiple javascript files combined into a single file (setting to false is useful during js development)
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
 

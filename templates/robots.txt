@@ -1,4 +1,9 @@
+{%- if config.extra.prod %}
 Sitemap: {{ get_url(path="sitemap.xml", trailing_slash=false) }}
 User-Agent: *
 Allow: /
 Host: {{ get_url(path="/", trailing_slash=false) }}
+{%- else %}
+User-Agent: *
+Disallow: /
+{%- endif %}

@@ -1,24 +1,35 @@
 # do NOT include a trailing slash on the base URL for web urls
 base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public/" # Usable site directly from disk, also set in [extra] uglyurls = true
-title = "Abridge"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 default_language = "en"
 compile_sass = true
 minify_html = false
+build_search_index = true
+
+title = "Abridge"
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 generate_feed = true
-feed_filename = "atom.xml"
-output_dir = "public"
-#ignored_content = ["*.{graphml,xlsx}", "temp.*"]
-#hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 taxonomies = [
     {name = "categories", feed = true},
     {name = "tags", feed = true},
 ]
 
+#feed_filename = "atom.xml"
+#output_dir = "public"
+#ignored_content = ["*.{graphml,xlsx}", "temp.*"]
+#hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
+
 #theme = "abridge"
 
-build_search_index = true
+[languages.fr]
+title = "Abréger"
+description = "Abridge est un thème Zola rapide et léger utilisant le html sémantique, le CSS abridge.css class-light et aucun JS obligatoire."
+generate_feed = true
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
 
 [search]                # Options specific to elasticlunr search.
 index_format = "elasticlunr_json"

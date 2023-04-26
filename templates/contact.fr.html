@@ -1,0 +1,49 @@
+{# Cette page affiche la page de contact, par exemple: example.com/contact/ #}
+
+{% extends "base.html" %}
+
+{%- block seo %}
+  {{- super() }}
+  {%- set title_addition = "" %}
+
+  {%- if page.title and config.title %}
+    {%- set title = page.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- elif page.title %}
+    {%- set title = page.title %}
+  {%- else %}
+    {%- set title = config.title %}
+  {%- endif %}
+
+  {%- if page.description %}
+    {%- set description = page.description %}
+  {%- else %}
+    {%- set description = config.description %}
+  {%- endif %}
+
+  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description) }}
+{%- endblock seo %}
+
+{%- block content %}
+  <div>
+    <p>Vous voulez entrer en contact ? Remplissez le formulaire ci-dessous pour m'envoyer un message et je vous répondrai dans les plus brefs délais !</p>
+    <form name="contact" method="POST">
+      <p>
+        <label for="name">Nom</label>
+        <input type="text" placeholder="Nom" id="name" required data-validation-required-message="S'il vous plaît entrez votre nom." />
+      </p>
+      <p>
+        <label for="email">Adresse e-mail</label>
+        <input type="email" placeholder="nom@example.com" id="email" required data-validation-required-message="Veuillez saisir votre adresse e-mail." />
+      </p>
+      <p>
+        <label for="message">Message</label>
+        <textarea rows="5" placeholder="Message" id="message" required data-validation-required-message="Veuillez entrer un message."></textarea>
+      </p>
+      <div id="success"></div>
+      <p>
+        <button type="submit" id="sendMessageButton">Envoyer</button>
+      </p>
+    </form>
+  </div>
+{%- endblock content %}

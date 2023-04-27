@@ -120,12 +120,15 @@
   {%- else %}
   <script defer src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='elasticlunr.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   <script defer src="{{ get_url(path='search.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+
+  {%- if lang != "en" %}
+  <script defer src="{{ get_url(path='lunr.stemmer.support.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='lunr.stemmer.support.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{ get_url(path='lunr.' ~ lang ~ '.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='lunr.' ~ lang ~ '.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
   {%- endif %}
 
 {%- endif %}
-
-
-
 
 
 {#- https://katex.org/docs/autorender.html #}

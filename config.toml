@@ -38,7 +38,6 @@ Recent_Posts = "Messages Récents"
 Index = "Indice"
 Powered_by = "Alimenté par"
 and = "et"
-Copyright = "Droits d'auteur"
 About = "À propos"
 Posts = "Des postes"
 Categories = "Catégories"
@@ -71,6 +70,13 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 
 [extra]
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
+
+###############################################################################
+### Language Flags
+###############################################################################
+flag.en = "🇬🇧"
+flag.fr = "🇫🇷"
+#flag.es = "🇪🇸"
 
 ###############################################################################
 ### Layout & Format
@@ -131,6 +137,36 @@ twitter_meta = "your-user-name" # for SEO: twitter:site and twitter:creator
 google = "Your Google Site verification code."
 bing = "Your Bing Site verification code."
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+
+
+###############################################################################
+### Footer social links; these are used in macros/social.html
+###   https://github.com/Jieiku/abridge/blob/master/templates/macros/social.html
+###############################################################################
+
+feed = true # this adds the RSS feed icon in the footer.
+mail_encode = true # This obfuscates your email address, javascript is used to decode it at page load.
+mail = "name@example.com"
+mastodon = "@your-user-name"
+element = "matrix.example.com"
+buymeacoffee = "your-user-name"
+discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
+twitter = "your-user-name"
+facebook = "your-user-name"
+linkedin = "your-user-name"
+gitlab = "your-user-name"
+github = "your-user-name"
+codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
+github_sponsor = "your-user-name"
+bitbucket = "your-user-name"
+python = "your-user-name"
+docker = "your-user-name"
+stack = "your-user-name"
+instagram = "your-user-name"
+pinterest = "your-user-name"
+twitch = "your-user-name"
+youtube = "channel/your-channel-id"
+researchgate = "your-profile-id"
 
 
 ###############################################################################
@@ -207,36 +243,6 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 
 ###############################################################################
-### Footer social links; these are used in macros/social.html
-###   https://github.com/Jieiku/abridge/blob/master/templates/macros/social.html
-###############################################################################
-
-feed = true # this adds the RSS feed icon in the footer.
-mail_encode = true # This obfuscates your email address, javascript is used to decode it at page load.
-mail = "name@example.com"
-mastodon = "@your-user-name"
-element = "matrix.example.com"
-buymeacoffee = "your-user-name"
-discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
-twitter = "your-user-name"
-facebook = "your-user-name"
-linkedin = "your-user-name"
-gitlab = "your-user-name"
-github = "your-user-name"
-codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
-github_sponsor = "your-user-name"
-bitbucket = "your-user-name"
-python = "your-user-name"
-docker = "your-user-name"
-stack = "your-user-name"
-instagram = "your-user-name"
-pinterest = "your-user-name"
-twitch = "your-user-name"
-youtube = "channel/your-channel-id"
-researchgate = "your-profile-id"
-
-
-###############################################################################
 ### Security Settings
 ### Security Headers should preferably be set by your webserver (Nginx, Apache)
 ###   https://observatory.mozilla.org  https://csp-evaluator.withgoogle.com/
@@ -307,13 +313,3 @@ researchgate = "your-profile-id"
 
 #math = false # Recommended setting false, and enable on per page bases instead.
 #math_auto_render = false # Recommended setting false, and enable on per page bases instead.
-
-###############################################################################
-### Language Translations
-###############################################################################
-[extra.translations.en]
-flag = "🇬🇧"
-[extra.translations.fr]
-flag = "🇫🇷"
-#[extra.translations.es]
-#flag = "🇪🇸"

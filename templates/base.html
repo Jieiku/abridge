@@ -69,15 +69,15 @@
           {%- set_global language_count = language_count + 1 -%}
           {%- endfor -%}
           {%- if language_count > 1 %}
-          <li class="js"><div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.translations.en.flag }}{% endif %}
+          <li class="js"><div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
             {%- if current_url %}
             <div class="dropdown-content">
-            {%- for lcode,lcfg in config.extra.translations -%}
+            {%- for lcode,flag in config.extra.flag -%}
             {%- if lang != lcode -%}
             {%- if lcode == config.default_language -%}
-            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}">{{ lcfg.flag }}</a><br />
+            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}">{{ flag }}</a><br />
             {%- else -%}
-            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}">{{ lcfg.flag }}</a><br />
+            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}">{{ flag }}</a><br />
             {%- endif -%}
             {%- endif -%}
             {%- endfor -%}

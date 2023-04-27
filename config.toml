@@ -33,6 +33,7 @@ taxonomies = [
 
 [languages.fr.translations]
 flag = "🇫🇷"
+date_locale = "fr_FR"
 Search = "Recherche"
 Recent_Posts = "Messages Récents"
 Index = "Indice"
@@ -47,6 +48,7 @@ Privacy = "Confidentialité"
 Sitemap = "Plan du site"
 
 #[languages.es.translations]
+#flag = "🇪🇸"
 #about = "Acerca de"
 #posts = "Publicaciones"
 #categories = "Categorías"
@@ -72,8 +74,12 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 
 ###############################################################################
-### Language Flags
+### Language
+### https://www.w3schools.com/tags/ref_country_codes.asp
+### https://tera.netlify.app/docs#date
 ###############################################################################
+date_locale = "en_US"
+language_code = "en-US"
 flag.en = "🇬🇧"
 flag.fr = "🇫🇷"
 #flag.es = "🇪🇸"
@@ -127,7 +133,6 @@ foothr = true # show or hide horizontal rule above footer
 ### To always set the page title exactly eg "Abridge" then comment out title_addition or set to false (not recommend, bad for SEO)
 ###############################################################################
 
-language_code = "en-US"
 title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
 title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
 author = "Jake G" # Put Your Name here

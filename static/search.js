@@ -165,7 +165,7 @@ Source:
   - https://github.com/aaranxu/adidoks/blob/main/static/js/search.js
 */
 (function(){
-  //var index = elasticlunr.Index.load(window.searchIndex);
+  var lang = document.documentElement.getAttribute("lang");
   var index;
   searchinput.addEventListener('input', show_results, true);
   suggestions.addEventListener('click', accept_suggestion, true);
@@ -173,7 +173,7 @@ Source:
   async function show_results(){
     var initIndex = async function () {
       if (index === undefined) {
-        index = fetch("/search_index.en.json")
+        index = fetch("/search_index." + lang + ".json")
           .then(
             async function(response) {
               return await elasticlunr.Index.load(await response.json());

@@ -79,7 +79,6 @@ uglyurls = false # if set to true then links are generated with the full path. e
 ### https://tera.netlify.app/docs#date
 ###############################################################################
 date_locale = "en_US"
-language_code = "en-US"
 flag.en = "🇬🇧"
 flag.fr = "🇫🇷"
 #flag.es = "🇪🇸"

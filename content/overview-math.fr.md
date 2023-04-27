@@ -72,7 +72,7 @@ C'est la plus belle équation que j'aie jamais vue :
 ```rs
 {%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
 ```
-### Output
+### Sortir
 ```html
 {% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 ```
@@ -86,7 +86,7 @@ Quelques Mathématiques en mode affichage sont assez justes :
 ```rs
 {%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
 ```
-### Output
+### Sortir
 ```html
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 ```

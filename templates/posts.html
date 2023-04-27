@@ -18,7 +18,11 @@
 {%- endblock seo %}
 
 {%- block content %}
-{%- set section_item = get_section(path="_index.md") %}
+    {%- if lang == config.default_language %}
+    {%- set section_item = get_section(path="_index.md") %}
+    {%- else %}
+    {%- set section_item = get_section(path="_index." ~ lang ~ ".md") %}
+    {%- endif %}
     <div>
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       <h2>{{ year }}</h2>

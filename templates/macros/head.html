@@ -103,7 +103,7 @@
 
   {%- set js_email=config.extra.js_email | default(value="email.js") -%}
   {%- if js_email %}
-  {%- if config.extra.social.mail_encode | default(value=true) %}
+  {%- if config.extra.mail_encode | default(value=true) %}
   <script defer src="{{ get_url(path=js_email, trzailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_email, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
   {%- endif %}
@@ -344,9 +344,9 @@
   <meta property="og:updated_time" content="{{ updated_time }}" />
 {%- endif %}
 
-{%- if config.extra.social.twitter %}
-  <meta name="twitter:site" content="@{{ config.extra.twitter }}" />
-  <meta name="twitter:creator" content="@{{ config.extra.twitter }}" />
+{%- if config.extra.twitter_meta %}
+  <meta name="twitter:site" content="@{{ config.extra.twitter_meta }}" />
+  <meta name="twitter:creator" content="@{{ config.extra.twitter_meta }}" />
 {%- endif %}
 
 

@@ -1,5 +1,5 @@
 +++
-title = "Guide de Style Markdown"
+title = "Markdown et Style"
 description = "Exemple d'article présentant la syntaxe et le formatage de base de Markdown pour les éléments HTML."
 date = 2022-05-15
 draft = false

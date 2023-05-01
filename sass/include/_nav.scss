@@ -2,6 +2,7 @@
  * Horizontal Nav
  * https://github.com/raj457036/attriCSS
  */
+@use "../variables" as variables;
 
 main nav a,
 main nav a:visited {//pagination link styling
@@ -118,8 +119,8 @@ footer nav {
   }
 }
 // breakpoint makes header responsive for mobile layouts
-@if map-get($breakpoints, "md") {
-  @media (max-width: map-get($breakpoints, "md")) {
+@if map-get(variables.$breakpoints, "md") {
+  @media (max-width: map-get(variables.$breakpoints, "md")) {
     header nav {
       display: flex;
       flex-direction: column;

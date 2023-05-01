@@ -1,8 +1,10 @@
-// Table
+/**
+ * Table - table specific elements
+ */
 table {
   border-collapse: collapse;
   width: 100%;
-  text-indent: 0; /* Remove text indentation from table contents in Chrome, Edge, and Safari. */
+  text-indent: 0; // Remove text indentation from table contents in Chrome, Edge, and Safari.
   caption {
     margin-bottom: .5rem;
   }

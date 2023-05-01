@@ -19,7 +19,7 @@
     <div>
       <div class="c">
         <h1>{{ terms | length }} {%- if lang != config.default_language %} {{ trans(key="Categories" | safe, lang=lang) }} {% else %} Categories {% endif %}</h1>
-        <p>{% for term in terms %} [<a href="#{{ term.name }}">{{ term.name }}</a>] {% endfor %}</p>
+        <p>{% for term in terms %} [<a href="#{{ term.name }}">{{ term.name }}</a>]<sup>{{ term.pages | length }}</sup> {% endfor %}</p>
       </div>
       {%- for term in terms %}
       <h2 id="{{ term.name }}"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></h2>

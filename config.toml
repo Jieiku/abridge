@@ -83,6 +83,7 @@ flag.en = "🇬🇧"
 flag.fr = "🇫🇷"
 #flag.es = "🇪🇸"
 
+
 ###############################################################################
 ### Layout & Format
 ### position: top, bottom, both, false(hidden)
@@ -187,7 +188,7 @@ js_copycode = true # The copy button on code blocks that allows you to copy them
 
 search_library = 'elasticlunr'
 
-js_search_index = "search_index.en.json" # Separate Always, generated each build
+#js_search_index = "search_index.en.json" # Separate Always, generated each build
 #js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
 #js_themeButton = "theme_button.js"# Bundleable - light/dark switcher button
 #js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
@@ -195,12 +196,12 @@ js_search_index = "search_index.en.json" # Separate Always, generated each build
 #js_email = "email.js"# Bundleable - obfuscates email address in footer
 
 ########## Switcher ########## (comment this block out if NOT using switcher):
-stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
+stylesheets = [ "abridge.css" ] # Automatic Dark/Light Theme based on browser/system preference with switcher
 
 ########## No Switcher ##########
-#stylesheets = [ "abridge-auto.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference
-#stylesheets = [ "abridge-dark.css" ] # Orange Dark Theme
-#stylesheets = [ "abridge-light.css" ] # Orange Light Theme
+#stylesheets = [ "abridge-auto.css" ] # Automatic Dark/Light Theme based on browser/system preference
+#stylesheets = [ "abridge-dark.css" ] # Dark Theme
+#stylesheets = [ "abridge-light.css" ] # Light Theme
 
 
 ###############################################################################

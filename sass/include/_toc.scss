@@ -1,3 +1,9 @@
+/**
+ * TOC - Table of Contents
+ * used as a page index, recent posts block
+ */
+@use "../variables" as variables;
+
 main {
   .toc {
     max-width: 15rem;
@@ -35,8 +41,8 @@ main {
   max-height: 100vh;
   overflow: auto;
 }
-@if map-get($breakpoints, "md") {
-  @media (max-width: map-get($breakpoints, "md")) {
+@if map-get(variables.$breakpoints, "md") {
+  @media (max-width: map-get(variables.$breakpoints, "md")) {
     .toc {
       display: none;
     }

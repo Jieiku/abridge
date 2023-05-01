@@ -1,4 +1,4 @@
-/*
+/**
  * Forked from Bamboo: https://github.com/rilwis/bamboo (MIT)
  * which was forked from new.css (MIT)
  * Supplemented code from Pico.css: https://github.com/picocss/pico (MIT)
@@ -113,12 +113,12 @@ $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
 // add an icon link to an html template like this:  <a href="#"><span class="svg home"></span></a>
 
-$font-main	: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif                                                                                      	!default;
-$font-code	: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace	!default;
+$font: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif !default;
+$font-mono: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace !default;
 
 :root {
-  #{--ff}: $font-main;
-  #{--fm}: $font-code;
+  #{--ff}: $font;
+  #{--fm}: $font-mono;//code
 
   // Spacings
   --s1: .5rem;

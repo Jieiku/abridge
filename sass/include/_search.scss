@@ -1,3 +1,8 @@
+/**
+ * Search - Zola Search - elasticlunr site-wide search
+ */
+@use "../variables" as variables;
+
 div:empty {
   display: none;
 }
@@ -58,8 +63,8 @@ nav > div > form > div:last-of-type {//parent div of suggestions div
 .searchd > button {
   margin-left: -2.4rem;//inlayed search icon
 }
-@if map-get($breakpoints, "md") {
-  @media (max-width: map-get($breakpoints, "md")) {
+@if map-get(variables.$breakpoints, "md") {
+  @media (max-width: map-get(variables.$breakpoints, "md")) {
     .searchd > input {
       max-width: 100%;
       flex-grow: 1;

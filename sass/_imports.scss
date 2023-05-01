@@ -1,4 +1,4 @@
-/*
+/**
  * Forked from Bamboo: https://github.com/rilwis/bamboo (MIT)
  * which was forked from new.css (MIT)
  * Supplemented code from Pico.css: https://github.com/picocss/pico (MIT)
@@ -13,41 +13,40 @@
  */
 
 // Config
-@import "variables";
-
-@import "colors/orange"
-//@import "colors/blue"
-//@import "colors/blueshade"
-
-//@import "fonts/Roboto";
-//@import "fonts/Roboto-Mono"; // Monospaced
-//@import "fonts/Arimo";
-//@import "fonts/Lato";
-//@import "fonts/FiraCode"; // Monospaced
-//@import "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
+@use "variables";
 
 // Includes - Sorted by importance/category (includes at top are needed most frequently)
-@import "include/document"; // html
-@import "include/typography"; // a, headings, p, ul, blockquote, ...
-@import "include/sectioning"; // body, header, main, footer
-@import "include/nav"; // Nav
+@use "include/document"; // html
+@use "include/typography"; // a, headings, p, ul, blockquote, ...
+@use "include/sectioning"; // body, header, main, footer
+@use "include/nav"; // Nav
 
-@import "include/embedded"; // iframe(youtube/vimeo), audio, canvas, img, svg, video
-@import "include/table"; // table, tr, td, ...
-@import "include/code"; // pre, code, ...
-@import "include/hr"; // hr
+@use "include/embedded"; // iframe(youtube/vimeo), audio, canvas, img, svg, video
+@use "include/table"; // table, tr, td, ...
+@use "include/code"; // pre, code, ...
+@use "include/hr"; // hr
 
-@import "include/scroller"; // figure
-@import "include/button"; // button, a[role=button], type=button, type=submit ...
-@import "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
-@import "include/top"; // back to top button using only CSS
+@use "include/scroller"; // figure
+@use "include/button"; // button, a[role=button], type=button, type=submit ...
+@use "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
+@use "include/top"; // back to top button using only CSS
 
-@import "include/search"; // Zola Search - elasticlunr site-wide search
-@import "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
+@use "include/search"; // Zola Search - elasticlunr site-wide search
+@use "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
 
-@import "include/icons"; // svg icons
+@use "include/icons"; // svg icons
 
-@import "include/zola"; // Zola spacing and layout classes
+@use "include/zola"; // Zola spacing and layout classes
 
-//@import "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow
-//@import "include/misc"; // template, [hidden], dialog, canvas
+//@use "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow
+//@use "include/misc"; // template, [hidden], dialog, canvas
+
+//@use "fonts/Roboto";
+//@use "fonts/Roboto-Mono"; // Monospaced
+//@use "fonts/Arimo";
+//@use "fonts/FiraCode"; // Monospaced
+//@use "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
+
+@import "colors/orange";
+//@import "colors/blue";
+//@import "colors/blueshade";

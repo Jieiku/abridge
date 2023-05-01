@@ -1,4 +1,6 @@
-// Typography
+/**
+ * Typography - a, headings, p, ul, blockquote
+ */
 .c {
   text-align: center;// The <center> does not pass validation, use: <div class="c"></div>
 }
@@ -84,7 +86,7 @@ small {
 .footnote-definition sup, .footnote-definition p {
   display: inline;
 }
-/* Prevent `sub` and `sup` elements from affecting the line height in all browsers. */
+// Prevent sub and sup elements from affecting the line height in all browsers.
 sub,
 sup {
   font-size: .75em;
@@ -116,7 +118,7 @@ ul {
   font-size: var(--fs);
 }
 
-/* Lists */
+// Lists
 ul,
 ol {
   padding-right: 0;

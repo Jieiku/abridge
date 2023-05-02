@@ -47,6 +47,6 @@
 //@use "fonts/FiraCode"; // Monospaced
 //@use "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
 
-@import "colors/orange";
-//@import "colors/blue";
-//@import "colors/blueshade";
+@forward "colors/orange" as colors-*;
+//@forward "colors/blue" as colors-*;
+//@forward "colors/blueshade" as colors-*;

@@ -1,9 +1,9 @@
-@import "imports";
-@import "syntax/syntax-abridge";
+@use "imports";
+@use "syntax/syntax-abridge";
 
 :root:not(.light) {
-  @include dark;
+  @include imports.colors-dark;
 }
 :root.light {
-  @include light;
+  @include imports.colors-light;
 }

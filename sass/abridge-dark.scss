@@ -1,6 +1,6 @@
-@import "imports";
-@import "syntax/syntax-abridge-dark";
+@use "imports";
+@use "syntax/syntax-abridge-dark";
 
 :root {
-  @include dark;
+  @include imports.colors-dark;
 }

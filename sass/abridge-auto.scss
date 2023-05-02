@@ -1,11 +1,11 @@
-@import "imports";
-@import "syntax/syntax-abridge-auto";
+@use "imports";
+@use "syntax/syntax-abridge-auto";
 
 :root {
-  @include dark;
+  @include imports.colors-dark;
 }
 @media (prefers-color-scheme: light) {
   :root {
-    @include light;
+    @include imports.colors-light;
   }
 }

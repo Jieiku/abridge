@@ -28,7 +28,7 @@
 
 @use "include/scroller"; // figure
 @use "include/button"; // button, a[role=button], type=button, type=submit ...
-@use "include/form"; // input, select, textarea, label, fieldset, legend (If you import this, you should also import button)
+@use "include/form"; // input, select, textarea, label, fieldset, legend (If you use this, you should also use button)
 @use "include/top"; // back to top button using only CSS
 
 @use "include/search"; // Zola Search - elasticlunr site-wide search

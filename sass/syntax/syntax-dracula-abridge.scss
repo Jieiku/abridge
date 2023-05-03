@@ -1,4 +1,4 @@
-:root:not(.light) {
+@mixin dark {
     .z-code {
     color: #f8f8f2;
     background-color: #191919;
@@ -245,7 +245,7 @@
     color: #8be9fd;
     }
 }
-:root.light {
+@mixin light {
     .z-code {
     color: #72726d;
     background-color: #ffffff;

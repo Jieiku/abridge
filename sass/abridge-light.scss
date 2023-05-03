@@ -1,5 +1,10 @@
 @use "imports";
-@use "syntax/syntax-abridge-light";
+@use "variables";
+@use "syntax/syntax-abridge" as syntax;
+
+@if variables.$syntax {
+  @include syntax.light;
+}
 
 :root {
   @include imports.colors-light;

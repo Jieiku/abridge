@@ -13,7 +13,7 @@
  */
 
 // Config
-@use "variables";
+@forward "variables" as var-*;
 
 // Includes - Sorted by importance/category (includes at top are needed most frequently)
 @use "include/document"; // html

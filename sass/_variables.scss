@@ -118,7 +118,7 @@ $icon-sun: false !default;// light sun
 $font: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif !default;
 $font-mono: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace !default;
 
-:root {
+@mixin root {
   #{--ff}: $font;
   #{--fm}: $font-mono;//code
 

@@ -17,3 +17,12 @@
       $base-pos: list.append($base-pos, $iEl, $separator:comma)
 
   @return list.join(list.join($base-pre, $ext), $base-pos)
+
+@function font-prepend($base, $ext)
+  $ext-type : meta.type-of($ext)
+
+  @if not ($ext-type == 'string') and not ($ext-type == 'list')
+    @debug "⚠ Expected a string or a list, but got '#{$ext-type}' in '#{$ext}'"
+    @return $base
+  @else
+    @return list.join($ext,$base)

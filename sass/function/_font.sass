@@ -1,0 +1,19 @@
+@use "sass:meta"
+@use "sass:list"
+
+@function font-append($base, $ext, $font-sep)
+  $base-pre	: ()
+  $base-pos	: ()
+  $iFontSep : index($base, $font-sep)
+  @if not $iFontSep // didn't find the font separator, return
+    @debug "⚠ Failed to find '#{$font-sep}' in the list of '#{$base}'"
+    @return $base
+
+  @for $i from 1 through list.length($base)
+    $iEl: list.nth($base, $i)
+    @if $i <= $iFontSep
+      $base-pre: list.append($base-pre, $iEl, $separator:comma)
+    @else
+      $base-pos: list.append($base-pos, $iEl, $separator:comma)
+
+  @return list.join(list.join($base-pre, $ext), $base-pos)

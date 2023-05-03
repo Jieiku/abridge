@@ -1,5 +1,15 @@
 @use "imports";
-@use "syntax/syntax-abridge";
+@use "variables";
+@use "syntax/syntax-abridge" as syntax;
+
+@if variables.$syntax {
+  :root:not(.light) {
+    @include syntax.dark;
+  }
+  :root.light {
+    @include syntax.light;
+  }
+}
 
 :root:not(.light) {
   @include imports.colors-dark;

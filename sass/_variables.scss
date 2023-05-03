@@ -61,6 +61,8 @@ $viewports: (
   xl: 1130px
 ) !default;
 
+$syntax: true !default;//syntax highlighting for Code Blocks.
+
 // Enable svg css icons
 $enable-icons: true !default; // setting this to false disables ALL icons, to use icons set to true.
 $ic: true !default; // icon color - set to true for colorized icons, otherwise a neutral gray #888 is used.

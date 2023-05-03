@@ -1,5 +1,17 @@
 @use "imports";
-@use "syntax/syntax-abridge-auto";
+@use "variables";
+@use "syntax/syntax-abridge" as syntax;
+
+@if variables.$syntax {
+  :root {
+    @include syntax.dark;
+  }
+@media (prefers-color-scheme: light) {
+  :root {
+    @include syntax.light;
+  }
+}
+}
 
 :root {
   @include imports.colors-dark;

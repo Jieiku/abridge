@@ -1,0 +1,21 @@
+@use "variables"    	as var
+@use "function/font"	as f
+
+$findFont-Main  	: "Segoe UI"                    	!default
+$findFont-Code  	: "Segoe UI Mono"               	!default
+$fontExt-Main   	: ("MAIN FONT 1", "MAIN FONT 2")	!default
+$fontExt-Code   	: ("CODE FONT 1", "CODE FONT 2")	!default
+$iFoundFont-Main	: index(var.$font     , $findFont-Main)
+$iFoundFont-Code	: index(var.$font-mono, $findFont-Code)
+@if $iFoundFont-Main
+  var.$font      : f.font-append(var.$font     , $fontExt-Main, $findFont-Main)
+@else
+  @debug "⚠ Failed to find font '#{$findFont-Main}' in the list of '#{var.$font}'"
+@if $iFoundFont-Code
+  var.$font-mono : f.font-append(var.$font-mono, $fontExt-Code, $findFont-Code)
+@else
+  @debug "⚠ Failed to find font '#{$findFont-Code}' in the list of '#{var.$font-mono}'"
+
+@mixin font-root
+  #{--ff}: var.$font
+  #{--fm}: var.$font-mono //code

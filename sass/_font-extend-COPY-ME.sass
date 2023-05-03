@@ -1,0 +1,16 @@
+// This abridge theme extension allows you to append custom fonts to font-family of the:
+  // main font 'html'                               ('--ff' theme css variable in '_document.scss')
+  // code font 'pre','code','kbd','samp','tt','var' ('--fm' theme css variable in '_code.scss'    )
+// copy this file to your 'sass' folder:
+  // either: remove the leading '_' and add 'font-extend-COPY-ME.css' to your 'stylesheets' in 'config.toml'
+  // or    : import it with '@use "_font-extend-COPY-ME"' in whatever existing sass file you already load
+$findFont-Main	: "Segoe UI"                    	// ← append custom MAIN font(s) AFTER this (full list @ '_variables.scss')
+$findFont-Code	: "Segoe UI Mono"               	// ← append custom CODE font(s) AFTER this
+$fontExt-Main 	: ("MAIN FONT 1", "MAIN FONT 2")	// list of  custom MAIN font(s) to append
+$fontExt-Code 	: ("CODE FONT 1", "CODE FONT 2")	// list of  custom CODE font(s) to append
+
+@use "../themes/abridge/sass/font-extend" with($findFont-Main:$findFont-Main, $findFont-Code:$findFont-Code,$fontExt-Main:$fontExt-Main,$fontExt-Code:$fontExt-Code)
+// check ↑ relative path if you copy this file to some other location
+
+:root
+  @include font-extend.font-root

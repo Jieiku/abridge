@@ -1,8 +1,11 @@
 @use "imports";
-@use "variables";
 @use "syntax/syntax-abridge" as syntax;
 
-@if variables.$syntax {
+:root {
+  @include imports.var-root;
+}
+
+@if imports.$var-syntax {
   @include syntax.light;
 }
 

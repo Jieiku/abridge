@@ -4,11 +4,14 @@
 // copy this file to your 'sass' folder:
   // either: remove the leading '_' and add 'font-extend-COPY-ME.css' to your 'stylesheets' in 'config.toml'
   // or    : import it with '@use "_font-extend-COPY-ME"' in whatever existing sass file you already load
+
+// delete the following two lines if you want to prepend your fonts...
 $findFont-Main	: "Segoe UI"                    	// ← append custom MAIN font(s) AFTER this (full list @ '_variables.scss')
 $findFont-Code	: "Segoe UI Mono"               	// ← append custom CODE font(s) AFTER this
 $fontExt-Main 	: ("MAIN FONT 1", "MAIN FONT 2")	// list of  custom MAIN font(s) to append
 $fontExt-Code 	: ("CODE FONT 1", "CODE FONT 2")	// list of  custom CODE font(s) to append
 
+// ...and delete the corresponding variables ↓
 @use "../themes/abridge/sass/font-extend" with($findFont-Main:$findFont-Main, $findFont-Code:$findFont-Code,$fontExt-Main:$fontExt-Main,$fontExt-Code:$fontExt-Code)
 // check ↑ relative path if you copy this file to some other location
 

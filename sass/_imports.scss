@@ -15,6 +15,16 @@
 // Config
 @forward "variables" as var-*;
 
+@forward "colors/orange" as colors-*;
+//@forward "colors/blue" as colors-*;
+//@forward "colors/blueshade" as colors-*;
+
+//@use "fonts/Roboto";
+//@use "fonts/Roboto-Mono"; // Monospaced
+//@use "fonts/Arimo";
+//@use "fonts/FiraCode"; // Monospaced
+//@use "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
+
 // Includes - Sorted by importance/category (includes at top are needed most frequently)
 @use "include/document"; // html
 @use "include/typography"; // a, headings, p, ul, blockquote, ...
@@ -40,13 +50,3 @@
 
 //@use "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow
 //@use "include/misc"; // template, [hidden], dialog, canvas
-
-//@use "fonts/Roboto";
-//@use "fonts/Roboto-Mono"; // Monospaced
-//@use "fonts/Arimo";
-//@use "fonts/FiraCode"; // Monospaced
-//@use "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
-
-@forward "colors/orange" as colors-*;
-//@forward "colors/blue" as colors-*;
-//@forward "colors/blueshade" as colors-*;

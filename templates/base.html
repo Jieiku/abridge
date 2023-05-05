@@ -3,7 +3,7 @@
 {%- import "macros/page.html" as page_macros %}
 {%- import "macros/macros.html" as macros %}
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
 <head>
   {{- macros_head::theme(config=config) }}
   {{- macros_head::stylesheets(config=config) }}

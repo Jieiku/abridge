@@ -166,6 +166,7 @@ Source:
 */
 (function(){
   var lang = document.documentElement.getAttribute("lang");
+  var langOnly = lang.substring(0, 2);
   var index;
   searchinput.addEventListener('input', show_results, true);
   suggestions.addEventListener('click', accept_suggestion, true);
@@ -173,7 +174,7 @@ Source:
   async function show_results(){
     var initIndex = async function () {
       if (index === undefined) {
-        index = fetch("/search_index." + lang + ".json")
+        index = fetch("/search_index." + langOnly + ".json")
           .then(
             async function(response) {
               return await elasticlunr.Index.load(await response.json());

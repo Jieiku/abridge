@@ -25,19 +25,46 @@ Voir [les docs](https://www.getzola.org/documentation/content/syntax-highlightin
 Si nous voulons, nous pouvons aussi `spécifier le code en ligne` ce qui est utile pour `les petites choses`.
 
 ### rust
-```rust,linenos,hl_lines=3
-//! jelly-actix-web-starter - Un modèle de démarrage pour les projets actix-web qui ressemble beaucoup à Django. Évitez les trucs ennuyeux et avancez plus vite.
+```rust
+fn main() {
+    let greetings = ["Hello", "Hola", "Bonjour",
+                     "Ciao", "こんにちは", "안녕하세요",
+                     "Cześć", "Olá", "Здравствуйте",
+                     "Chào bạn", "您好", "Hallo",
+                     "Hej", "Ahoj", "سلام",
+                     "Hej", "Hallo", "Hei",
+                     "Helló", "Hallo", "Buna ziua",
+                     "Merhaba"];
 
-use jelly::actix_web;
-use mainlib;
-use std::io;
-
-#[actix_web::main]
-async fn main() -> io::Result<()> {
-    mainlib::main().await
+    for (num, greeting) in greetings.iter().enumerate() {
+        print!("{} : ", greeting);
+        match num {
+            0 =>  println!("This code is editable and runnable!"),//en English
+            1 =>  println!("¡Este código es editable y ejecutable!"),//es Spanish
+            2 =>  println!("Ce code est modifiable et exécutable !"),//fr French
+            3 =>  println!("Questo codice è modificabile ed eseguibile!"),//it Italian
+            4 =>  println!("このコードは編集して実行出来ます！"),//jp Japanese
+            5 =>  println!("여기에서 코드를 수정하고 실행할 수 있습니다!"),//ko Korean
+            6 =>  println!("Ten kod można edytować oraz uruchomić!"),//pl Polish
+            7 =>  println!("Este código é editável e executável!"),//pt Portuguese
+            8 =>  println!("Этот код можно отредактировать и запустить!"),//ru Russian
+            9 =>  println!("Bạn có thể edit và run code trực tiếp!"),//vi Vietnamese
+            10 => println!("这段代码是可以编辑并且能够运行的！"),//zh Chinese
+            11 => println!("Dieser Code kann bearbeitet und ausgeführt werden!"),//de German
+            12 => println!("Den här koden kan redigeras och köras!"),//sv Swedish
+            13 => println!("Tento kód můžete upravit a spustit"),//cs Czech
+            14 => println!("این کد قابلیت ویرایش و اجرا دارد!"),//fa Persian
+            15 => println!("Denne kode kan redigeres og køres!"),//da Danish
+            16 => println!("Deze code is bewerkbaar en uitvoerbaar!"),//du Dutch
+            17 => println!("Tämä koodi on muokattavissa ja ajettavissa!"),//fi Finnish
+            18 => println!("Ez a kód szerkeszthető és futtatható!"),//hu Hungarian
+            19 => println!("Denne koden er redigerbar og kjørbar!"),//no Norwegian
+            20 => println!("Acest cod este editabil și rulabil!"),//ro Romanian
+            21 => println!("Bu kod düzenlenebilir ve çalıştırılabilir!"),//tr Turkish
+            _ =>  {},
+        }
+    }
 }
-
-let context = Context::new();
 ```
 
 ### TOML

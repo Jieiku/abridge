@@ -37,16 +37,16 @@
     <nav>
       <div>
         {%- if config.extra.logo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
         </a></h1>
         {%- elif config.extra.textlogo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.title | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
         {%- endif -%}
       </div>
       <div>
@@ -75,9 +75,9 @@
             {%- for lcode,flag in config.extra.flag -%}
             {%- if lang != lcode -%}
             {%- if lcode == config.default_language -%}
-            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}">{{ flag }}</a><br />
+            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
             {%- else -%}
-            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}">{{ flag }}</a><br />
+            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
             {%- endif -%}
             {%- endif -%}
             {%- endfor -%}

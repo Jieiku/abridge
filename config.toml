@@ -1,6 +1,6 @@
-# do NOT include a trailing slash on the base URL for web urls
+# do NOT include a trailing slash on the base URL
 base_url = "https://abridge.netlify.app"
-#base_url = "/home/jieiku/.dev/abridge/public/" # Usable site directly from disk, also set in [extra] uglyurls = true
+#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk, also set in [extra] uglyurls = true, and integrity = false
 default_language = "en"
 compile_sass = true
 minify_html = false

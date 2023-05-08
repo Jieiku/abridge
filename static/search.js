@@ -167,6 +167,11 @@ Source:
 (function(){
   var lang = document.documentElement.getAttribute("lang");
   var langOnly = lang.substring(0, 2);
+  var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
+  if (baseUrl.slice(-1) == "/") {
+      baseUrl = baseUrl.slice(0, -1);
+  }
+
   var index;
   searchinput.addEventListener('input', show_results, true);
   suggestions.addEventListener('click', accept_suggestion, true);
@@ -174,7 +179,7 @@ Source:
   async function show_results(){
     var initIndex = async function () {
       if (index === undefined) {
-        index = fetch("/search_index." + langOnly + ".json")
+        index = fetch(baseUrl + '/search_index.' + langOnly + '.json')
           .then(
             async function(response) {
               return await elasticlunr.Index.load(await response.json());

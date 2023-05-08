@@ -1,14 +1,14 @@
 @use "sass:meta"
-@use "variables"    	as var
-@use "function/font"	as f
+@use "variables"     as var
+@use "function/font" as f
 
-$findFont-Main	: null	!default
-$findFont-Code	: null	!default
-$fontExt-Main 	: null	!default
-$fontExt-Code 	: null	!default
+$findFont-Main : null !default
+$findFont-Code : null !default
+$fontExt-Main  : null !default
+$fontExt-Code  : null !default
 
-$typeMain	: meta.type-of($fontExt-Main)
-$typeCode	: meta.type-of($fontExt-Code)
+$typeMain : meta.type-of($fontExt-Main)
+$typeCode : meta.type-of($fontExt-Code)
 
 @if ($typeMain == 'string') or ($typeMain == 'list')
   @if ($findFont-Main == null) // prepend

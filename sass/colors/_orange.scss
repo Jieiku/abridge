@@ -12,12 +12,12 @@
   --cr: #e33;// del red, errors (e33)
 }
 @mixin light {
-  --f1: #444;// Font Color Primary (444)
-  --f2: #333;// Font color Headers (333)
+  --f1: #333;// Font Color Primary (444)
+  --f2: #222;// Font color Headers (333)
   --c1: #fff;// Background Color Primary (fff)
   --c2: #eee;// Background Color Secondary (eee)
   --c3: #ddd;// Table Rows, Block quote edge, Borders (ddd)
-  --c4: #677;// Disabled Buttons, Borders, mark background (677)
+  --c4: #555;// Disabled Buttons, Borders, mark background (677)
   --a1: #c40;// link color (c40)
   --a2: #e60;// link hover/focus color (e60)
   --a3: #f90;// link h1-h2 hover/focus color (f90)

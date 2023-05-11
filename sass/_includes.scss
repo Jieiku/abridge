@@ -19,6 +19,8 @@
 //@forward "colors/blue" as colors-*;
 //@forward "colors/blueshade" as colors-*;
 
+@forward "colors/syntax" as syntax-*;
+
 //@use "fonts/Roboto";
 //@use "fonts/Roboto-Mono"; // Monospaced
 //@use "fonts/Arimo";
@@ -41,12 +43,16 @@
 @use "include/form"; // input, select, textarea, label, fieldset, legend (If you use this, you should also use button)
 @use "include/top"; // back to top button using only CSS
 
+@use "include/syntax"; // syntax highlighting for code
+
 @use "include/search"; // Zola Search - elasticlunr site-wide search
 @use "include/toc"; // Zola TOC - Table of Content Menu (recent posts & index), sticky (floats top right)
 
 @use "include/icons"; // svg icons
 
 @use "include/zola"; // Zola spacing and layout classes
+
+
 
 //@use "include/grid"; // section infinite grid -- test/rework this similar to hnav and milligram in that it should collapse to a single column as the page becomes narrow
 //@use "include/misc"; // template, [hidden], dialog, canvas

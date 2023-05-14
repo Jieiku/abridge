@@ -1,17 +1,69 @@
-/**
- * SVG Icons
- * https://github.com/feathericons/feather
- * https://github.com/tabler/tabler-icons/find/master
- *
- * https://yqnn.github.io/svg-path-editor/
- * https://jakearchibald.github.io/svgomg/
- * https://codepen.io/yoksel/pen/MWKeKK
- */
-@use "../variables" as variables;
+@use "sass:meta";
+@use "sass:list";
 
-@function icon($icon-name,$stroke,$stroke-width: 1,$fill:'none'){
+@function remove($list, $value, $recursive:false) {
+  $result: ();
+  @for $i from 1 through length($list) {
+    @if type-of(nth($list, $i)) == list and $recursive {
+      $result: append($result, remove(nth($list, $i), $value, $recursive), $separator: comma);
+    } @else if nth($list, $i) != $value {
+      $result: append($result, nth($list, $i), $separator: comma);
+    }
+  }
+  @return $result;
+}
+
+@function font-append($base, $ext, $separator:comma) {
+  $base-pre: ();
+  $base-pos: ();
+  $iFontSep: index($base, $separator);
+  @if not $iFontSep {// didn't find the font separator, return
+    @debug "⚠ Failed to find '#{$separator}' in the list of '#{$base}'";
+    @return $base;
+  }
+  @for $i from 1 through list.length($base) {
+    $iEl: list.nth($base, $i);
+    @if $i <= $iFontSep {
+      $base-pre: list.append($base-pre, $iEl, $separator:comma);
+    } @else {
+      $base-pos: list.append($base-pos, $iEl, $separator:comma);
+    }
+  }
+  @return list.join(list.join($base-pre, $ext), $base-pos);
+}
+
+@function font-prepend($base, $ext) {
+  $ext-type: meta.type-of($ext);
+  @if not ($ext-type == 'string') and not ($ext-type == 'list') {
+    //@debug "⚠ Expected a string or a list, but got '#{$ext-type}' in '#{$ext}'";
+    @return $base;
+  } @else {
+    @return list.join($ext, $base);
+  }
+}
+
+@function font-var($base, $ext, $findFont:null) {
+  $typeFont: meta.type-of($base);
+
+  @if ($typeFont == 'string') or ($typeFont == 'list') {
+    @if ($findFont == null) {// prepend
+      $font: font-prepend($base, $ext);
+      @return $font;
+    } @else {                // append
+      $iFoundFont-Main: index($base, $findFont);
+      @if $iFoundFont-Main {
+        $font: font-append($base, $ext, $findFont);
+        @return $font;
+      } @else {
+        @debug "⚠ Failed to find font '#{$findFont}' in the list of '#{$base}'";
+      }
+    }
+  }
+}
+
+@function icon($icon-name,$stroke,$stroke-width:1,$fill:'none',$ic) {
   $sc:"%23888";//stroke color
-  @if variables.$ic {
+  @if $ic {
     $sc: $stroke
   }
   $p: (
@@ -67,68 +119,4 @@
   );
   $icon: map-get($icons, $icon-name);
   @return url("data:image/svg+xml,#{$icon}");
-}
-@if variables.$enable-icons {
-  @if variables.$icon-adjust {.adjust { -webkit-mask: icon(adjust, "none", 1, "%23000") ; background: var(--f2) }}//theme switcher
-  @if variables.$icon-angl {.angl { -webkit-mask: icon(angl, "%23000", 3, "none") ; background: var(--f2) }}//angle left
-  @if variables.$icon-angll {.angll { -webkit-mask: icon(angll, "%23000", 3, "none") ; background: var(--f2) }}//angle left left
-  @if variables.$icon-angr {.angr { -webkit-mask: icon(angr, "%23000", 3, "none") ; background: var(--f2) }}//angle right
-  @if variables.$icon-angrr {.angrr { -webkit-mask: icon(angrr, "%23000", 3, "none") ; background: var(--f2) }}//angle right right
-  @if variables.$icon-angu {.angu { -webkit-mask: icon(angu, "%23000", 3, "none") ; background: var(--f2) }}//angle up
-  @if variables.$icon-search {.search { -webkit-mask: icon(search, "%23000", 3, "none") ; background: var(--f2) }}//search
-  @if variables.$icon-bitbucket {.bitbucket { background-image: icon(bitbucket, "%2328f", 2, "none") }}
-  @if variables.$icon-buymeacoffee {.buymeacoffee { background-image: icon(buymeacoffee, "%23777", 1, "%23fd0") }}
-  @if variables.$icon-check {.check { background-image: icon(check, "%23888", 2, "none") }}
-  @if variables.$icon-chevron {.chevron { background-image: icon(chevron, "%23888", 2, "none") }}
-  @if variables.$icon-clock {.clock { background-image: icon(clock, "%23888", 2, "none") }}
-  @if variables.$icon-codeberg {.codeberg { background-image: icon(codeberg, "%23555", 2, "%23aaa") }}
-  @if variables.$icon-date {.date { background-image: icon(date, "%23888", 2, "none") }}
-  @if variables.$icon-discord {.discord { background-image: icon(discord, "none", 1, "%2356f") }}
-  @if variables.$icon-docker {.docker { background-image: icon(docker, "%2329e", 2, "none") }}
-  @if variables.$icon-element {.element { background-image: icon(element, "none", 1, "%231c8") }}
-  @if variables.$icon-facebook {.facebook { background-image: icon(facebook, "%23359", 2, "none") }}
-  @if variables.$icon-folder {.folder { background-image: icon(folder, "%23888", 2, "none") }}
-  @if variables.$icon-github {.github { background-image: icon(github, "%23888", 2, "none") }}
-  @if variables.$icon-github-sponsor {.github-sponsor { background-image: icon(github-sponsor, "%23c49", 2, "none") }}
-  @if variables.$icon-gitlab {.gitlab { background-image: icon(gitlab, "%23e62", 2, "none") }}
-  @if variables.$icon-globe {.globe { background-image: icon(globe, "%23888", 2, "none") }}
-  @if variables.$icon-home {.home { background-image: icon(home, "%23888", 2, "none") }}
-  @if variables.$icon-instagram {.instagram { background-image: icon(instagram, "%23e07", 2, "none") }}
-  @if variables.$icon-linkedin {.linkedin { background-image: icon(linkedin, "%2326a", 2, "none") }}
-  @if variables.$icon-mail {.mail { background-image: icon(mail, "%23888", 2, "none") }}
-  @if variables.$icon-mastodon {.mastodon { background-image: icon(mastodon, "none", 1, "%2328c") }}
-  @if variables.$icon-matrix {.matrix { background-image: icon(matrix, "%23888", 2, "none") }}
-  @if variables.$icon-minus {.minus { background-image: icon(minus, "%23888", 2, "none") }}
-  @if variables.$icon-moon {.moon { background-image: icon(moon, "%23888", 2, "none") }}
-  @if variables.$icon-pinterest {.pinterest { background-image: icon(pinterest, "%23b01", 2, "none") }}
-  @if variables.$icon-python {.python { background-image: icon(python, "%23fc1", 2, "%2326a") }}
-  @if variables.$icon-researchgate {.researchgate { background-image: icon(researchgate, "none", 2, "%230db") }}
-  @if variables.$icon-rss {.rss { background-image: icon(rss, "%23e94", 2, "none") }}
-  @if variables.$icon-stack {.stack { background-image: icon(stack, "%23e72", 2, "none") }}
-  @if variables.$icon-sun {.sun { background-image: icon(sun, "%23888", 2, "none") }}
-  @if variables.$icon-tag {.tag { background-image: icon(tag, "%23888", 2, "none") }}
-  @if variables.$icon-twitch {.twitch { background-image: icon(twitch, "%23a7f", 2, "none") }}
-  @if variables.$icon-twitter {.twitter { background-image: icon(twitter, "%232ad", 2, "none") }}
-  @if variables.$icon-x {.x { background-image: icon(x, "%23f00", 3, "none") }}
-  @if variables.$icon-youtube {.youtube { background-image: icon(youtube, "%23f00", 2, "none") }}
-  .svg {
-    width: 1.8rem;
-    height: 1.8rem;
-    display: inline-block;
-    //overflow: hidden;
-    text-align: center;
-    vertical-align: middle;
-  }
-  .svgs {
-    width: var(--fs);
-    height: var(--fs);
-    display: inline-block;
-    //overflow: hidden;
-    text-align: center;
-    vertical-align: middle;
-  }
-  .fa-a:hover {
-    color: var(--a3);
-    opacity: 1;
-  }
 }

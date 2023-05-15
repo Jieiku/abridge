@@ -44,7 +44,9 @@
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
         </a></h1>
         {%- elif config.extra.textlogo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls -%}
+        {%- if lang == config.default_language -%}/{%- endif -%}
+        index.html{%- endif -%}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title -%}
         <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
         {%- endif -%}

@@ -669,7 +669,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
     li {
       display: inline-block;
-      margin: 0 .3rem;
+      margin: 0 .2rem;
     }
   }
   main nav {
@@ -719,6 +719,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   .dropdown {
     display: inline-block;
     position: relative;
+    z-index: 99;
     vertical-align: -3px;
     font-weight: var(--fh);
     font-size: 1.3rem;
@@ -726,12 +727,13 @@ $syntax: true !default;//syntax highlighting for code blocks
   .dropdown-content {
     display: none;
     position: absolute;
-    z-index: 9;
+    z-index: 99;
     font-weight: var(--fh);
     font-size: 1.3rem;
   }
   .dropdown:hover .dropdown-content {
     display: block;
+    z-index: 99;
     a {
       text-decoration: none;
     }

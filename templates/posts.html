@@ -18,10 +18,20 @@
 {%- endblock seo %}
 
 {%- block content %}
-    {%- if lang == config.default_language %}
-    {%- set section_item = get_section(path="_index.md") %}
+    {%- if current_path is containing("/posts/") %}
+      {%- set spath = "" %}
     {%- else %}
-    {%- set section_item = get_section(path="_index." ~ lang ~ ".md") %}
+      {%- if lang == config.default_language %}
+        {%- set spath = current_path | trim_start_matches(pat="/") %}
+      {%- else %}
+        {%- set spath = current_path | trim_start_matches(pat="/" ~ lang ~ "/") %}
+      {%- endif %}
+    {%- endif %}
+
+    {%- if lang == config.default_language %}
+    {%- set section_item = get_section(path=spath ~ "_index.md") %}
+    {%- else %}
+    {%- set section_item = get_section(path=spath ~ "_index." ~ lang ~ ".md") %}
     {%- endif %}
     <div>
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}

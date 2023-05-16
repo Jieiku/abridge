@@ -1,4 +1,7 @@
-{# This Page Shows the Posts Grouped by Year: example.com/posts/ #}
+{#
+This Page Shows the Posts Grouped by Year: example.com/posts/
+This Template can also be used as the rendering template for Sections, eg: example.com/blog/  example.com/software/
+#}
 
 {% extends "base.html" %}
 
@@ -18,7 +21,7 @@
 {%- endblock seo %}
 
 {%- block content %}
-    {%- if current_path is containing("/posts/") %}
+    {%- if current_path is matching("^/posts/") %}
       {%- set spath = "" %}
     {%- else %}
       {%- if lang == config.default_language %}

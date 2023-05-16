@@ -21,20 +21,23 @@ This Template can also be used as the rendering template for Sections, eg: examp
 {%- endblock seo %}
 
 {%- block content %}
-    {%- if current_path is matching("^/posts/") %}
-      {%- set spath = "" %}
+    {#- The following line is checking if the template is being used for the posts page or a section #}
+    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/posts/$") %}
+      {%- set sec = "" %}
     {%- else %}
       {%- if lang == config.default_language %}
-        {%- set spath = current_path | trim_start_matches(pat="/") %}
+        {%- set sec = current_path | trim_start_matches(pat="/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
       {%- else %}
-        {%- set spath = current_path | trim_start_matches(pat="/" ~ lang ~ "/") %}
+        {%- set sec = current_path | trim_start_matches(pat="/" ~ lang ~ "/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
       {%- endif %}
     {%- endif %}
 
     {%- if lang == config.default_language %}
-    {%- set section_item = get_section(path=spath ~ "_index.md") %}
+    {%- set section_item = get_section(path=sec ~ "_index.md") %}
     {%- else %}
-    {%- set section_item = get_section(path=spath ~ "_index." ~ lang ~ ".md") %}
+    {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
     {%- endif %}
     <div>
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}

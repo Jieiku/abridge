@@ -60,22 +60,23 @@ This Template can also be used as the rendering template for Sections, eg: examp
     {{- macros::pagination(paginator=paginator, config=config) }}
     </div>
   {%- if config.extra.recent | default(value=true) %}
-    {%- if current_path == "/" %}
-      {%- set spath = "" %}
-    {%- elif current_path is matching("^/page/") %}
-      {%- set spath = "" %}
+    {#- The following line is checking if the template is being used for the root or a section #}
+    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") %}
+      {%- set sec = "" %}
     {%- else %}
       {%- if lang == config.default_language %}
-        {%- set spath = current_path | trim_start_matches(pat="/") %}
+        {%- set sec = current_path | trim_start_matches(pat="/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
       {%- else %}
-        {%- set spath = current_path | trim_start_matches(pat="/" ~ lang ~ "/") %}
+        {%- set sec = current_path | trim_start_matches(pat="/" ~ lang ~ "/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
       {%- endif %}
     {%- endif %}
 
     {%- if lang == config.default_language %}
-    {%- set section_item = get_section(path=spath ~ "_index.md") %}
+    {%- set section_item = get_section(path=sec ~ "_index.md") %}
     {%- else %}
-    {%- set section_item = get_section(path=spath ~ "_index." ~ lang ~ ".md") %}
+    {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
     {%- endif %}
     <div class="toc">
       <div class="toc-sticky">

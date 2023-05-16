@@ -253,12 +253,66 @@ A Bundle can be generated from the package.json scripts using npm:
 
 ## Switch Search Library
 
-In addition to elasticlunr abridge also supports tinysearch and stork. You can switch between them using npm:
+In addition to elasticlunr abridge also supports tinysearch and stork.
 
-- `npm run nosearch` - no search.
-- `npm run elasticlunr` - elasticlunr
-- `npm run tinysearch` - tinysearch
-- `npm run stork` - stork
+tinysearch demo: https://jieiku.github.io/abridge-tinysearch/
+
+stork demo: https://jieiku.github.io/abridge-stork/
+
+To use tinysearch/stork extra steps are required.
+
+**Switch to tinysearch:**
+
+First you have to install tinysearch so that you can build the index:
+
+```shell
+git clone https://github.com/tinysearch/tinysearch
+cd tinysearch
+cargo build --release
+sudo cp ./target/release/tinysearch /usr/local/bin/tinysearch
+exit # reload shell environment
+```
+
+Switch abridge to tinysearch:
+```shell
+npm run tinysearch
+zola build
+tinysearch --optimize --path static public/data_tinysearch/index.html
+# zola serve
+```
+
+**Switch to stork:**
+
+First you have to install stork so that you can build the index:
+
+```shell
+git clone https://github.com/jameslittle230/stork
+cd stork
+cargo build --release
+sudo cp ./target/release/stork /usr/local/bin/stork
+exit # reload shell environment
+```
+
+Switch abridge to stork:
+
+```shell
+npm run stork
+zola build
+stork build --input public/data_stork/index.html --output static/stork.st
+# zola serve
+```
+
+**Switch to elasticlunr:**
+
+```shell
+npm run elasticlunr
+```
+
+**Switch to nosearch:**
+
+```shell
+npm run nosearch
+```
 
 ## Optional Performance Optimizations:
 

@@ -47,14 +47,14 @@
   $icon-youtube: true,
   $icon-researchgate: true,
 
-  $icon-x: true,// x symbol
-  $icon-search: true,//search
-  $icon-adjust: true,//theme switcher
-  $icon-angll: true,//first page
-  $icon-angl: true,//previous page
-  $icon-angr: true,//next page
-  $icon-angrr: true,//last page
-  $icon-angu: true,//back to top
+  $icon-x: true,// x symbol, used to close search results page.
+  $icon-search: true,//search, spyglass search button in search box.
+  $icon-adjust: true,//theme switcher dark/light toggle button.
+  $icon-angll: true,//pagination, goto first page
+  $icon-angl: true,//pagination, goto previous page
+  $icon-angr: true,//pagination, goto next page
+  $icon-angrr: true,//pagination, goto last page
+  $icon-angu: true,//back to top button, appears after scrolling down.
 
   $icon-ffolder: false,
   $icon-folder: false,// categories folder

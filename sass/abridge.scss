@@ -587,6 +587,16 @@ $syntax: true !default;//syntax highlighting for code blocks
     margin-left: auto;
     padding-right: var(--s1);//add some spacing between nav divs
   }
+  // mobile first layout.
+  header nav {
+    flex-direction: column;// column layout for mobile view
+    h1 {
+      margin: var(--s2) 0 var(--s1);//adds more padding above for mobile view
+    }
+    div {
+      margin: auto; // keeps top menu/search centered in mobile view
+    }
+  }
   nav > div {
     ul, h2 {
       line-height: 1.9;
@@ -680,17 +690,17 @@ $syntax: true !default;//syntax highlighting for code blocks
       text-decoration: none;
     }
   }
-  // breakpoint makes header responsive for mobile layouts
+  // breakpoint makes header responsive for desktop layouts
+  // mobile first is min-width for desktop instead of max-width for mobile
   @if map-get($breakpoints, "md") {
-    @media (max-width: map-get($breakpoints, "md")) {
+    @media (min-width: map-get($breakpoints, "md")) {
       header nav {
-        display: flex;
-        flex-direction: column;
+        flex-direction: row;// row layout for desktop view
         h1 {
-          margin: var(--s2) 0 var(--s1);
+          margin: var(--s1) 0; // desktop layout
         }
         div {
-          margin: auto; // keeps top menu/search centered in mobile view
+          margin: var(--s1) 0; // desktop layout
         }
       }
     }
@@ -942,10 +952,10 @@ $syntax: true !default;//syntax highlighting for code blocks
     z-index: 9;
     background: var(--c1);
     border: 2px solid var(--c3);
-    position: absolute;
-    right: 0;
+    position: static;
+    left: 0;
+    width: 100%;
     margin-top: var(--s1);
-    width: 500px;
     max-height: 500px;
     overflow: auto;
   }
@@ -982,22 +992,25 @@ $syntax: true !default;//syntax highlighting for code blocks
     white-space: nowrap;
   }
   .searchd > input {
-    max-width: 15.3rem;
+    max-width: 100%;
+    flex-grow: 1;
     padding-right:2.4rem;//inlayed search icon
   }
   .searchd > button {
     margin-left: -2.4rem;//inlayed search icon
   }
+  // mobile first is min-width for desktop instead of max-width for mobile
   @if map-get($breakpoints, "md") {
-    @media (max-width: map-get($breakpoints, "md")) {
+    @media (min-width: map-get($breakpoints, "md")) {
       .searchd > input {
-        max-width: 100%;
-        flex-grow: 1;
+        max-width: 15.3rem;
+        flex-grow: 0;
       }
       #suggestions {
-        position: static;
-        left: 0;
-        width: 100%;
+        position: absolute;
+        right: 0;
+        left: unset;
+        width: 500px;
       }
     }
   }
@@ -1029,6 +1042,9 @@ $syntax: true !default;//syntax highlighting for code blocks
       color: var(--f1);
     }
   }
+  .toc {
+    display: none;
+  }
   .toc-sticky {
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
@@ -1041,9 +1057,10 @@ $syntax: true !default;//syntax highlighting for code blocks
     overflow: auto;
   }
   @if map-get($breakpoints, "md") {
-    @media (max-width: map-get($breakpoints, "md")) {
+    // mobile first is min-width for desktop instead of max-width for mobile
+    @media (min-width: map-get($breakpoints, "md")) {
       .toc {
-        display: none;
+        display: unset;
       }
     }
   }

@@ -25,7 +25,7 @@ $light: #333 #222 #fff #eee #ddd #555 #c40 #e60 #f90 #373 #d33 !default;//orange
 //$light: #333 #222 #fff #eee #ddd #555 #06e #09f #07f #373 #d33 !default;//blue
 //$light: #333 #222 #fff #def #137 #013 #06e #09f #07f #373 #d33 !default;//blueshade
 
-$syntax-dark: #191919 #e65 #f91 #eb6 #ac3 #8db #6ae #d6e !default;
+$syntax-dark: #191919 #e65 #e83 #eb6 #ac3 #8db #6ae #d6e !default;
 $syntax-light: #f7f7f7 #a21 #930 #a50 #350 #286 #059 #a3c !default;
 
 $syntax: true !default;//syntax highlighting for Code Blocks.
@@ -237,13 +237,11 @@ $syntax: true !default;//syntax highlighting for code blocks
   #{--ff}: $font;
   #{--fm}: $font-mono;//code
 }
-:root {
-  @include font;
-  @include root;
-}
 
 @if $abridgeMode == "auto" {
   :root {
+    @include font;
+    @include root;
     @include colors.dark($dark...);
     @if $syntax {
       @include syntax.dark($syntax-dark...);
@@ -259,6 +257,8 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 } @else if $abridgeMode == "dark" {
   :root {
+    @include font;
+    @include root;
     @include colors.dark($dark...);
     @if $syntax {
       @include syntax.dark($syntax-dark...);
@@ -266,12 +266,18 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 } @else if $abridgeMode == "light" {
   :root {
+    @include font;
+    @include root;
     @include colors.light($light...);
     @if $syntax {
       @include syntax.light($syntax-light...);
     }
   }
 } @else {//switcher (default)
+  :root {
+    @include font;
+    @include root;
+  }
   :root:not(.light) {
     @include colors.dark($dark...);
     @if $syntax {

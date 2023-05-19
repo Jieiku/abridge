@@ -1,74 +1,121 @@
 @use '../themes/abridge/sass/abridge' with (
   /// LINES HERE END WITH COMMA AFTER THE VALUE!
-  $abridgeMode:"switcher",//valid values: switcher, auto, dark, light
+  /// The things your less likely to need to override have been commented out.
 
   /// Enable a centered viewport for <header>, <main>, <footer> inside <body>
   /// Fluid layout until a defined size, then becomes centered viewport
-  $enable-maxwidth: true,
-  $mw:75%,// max-width
-  $mb:1200px,// value at which to switch from fluid layout to max-width
+  //$enable-maxwidth: true,
+  $mw: 75%,// max-width
+  //$mb: 1200px,// value at which to switch from fluid layout to max-width
 
-  $dark: #ccc #ddd #111 #222 #333 #888 #f90 #fb0 #f90 #593 #e33,//orange
-  //$dark: #ccc #ddd #111 #222 #333 #888 #09f #0bf #0af #593 #e33,//blue
-  //$dark: #ccc #ddd #111 #123 #345 #789 #09f #0bf #0af #593 #e33,//blueshade
+  $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
+  $syntax-mode: "auto",// Force syntax mode: auto, dark, light
 
-  $light: #333 #222 #fff #eee #ddd #555 #c40 #e60 #f90 #373 #d33,//orange
-  //$light: #333 #222 #fff #eee #ddd #555 #06e #09f #07f #373 #d33,//blue
-  //$light: #333 #222 #fff #def #137 #013 #06e #09f #07f #373 #d33,//blueshade
-
-  $syntax-dark: #191919 #e65 #f91 #eb6 #ac3 #8db #6ae #d6e,
-  $syntax-light: #f7f7f7 #a21 #930 #a50 #350 #286 #059 #a3c,
-
+  $color: "orange",// color template to use/override: orange, blue, blueshade
+  $color-syntax: "abridge",// syntax color template to use/override: abridge,
   $syntax: true,//syntax highlighting for Code Blocks.
 
   $enable-icons: true,// false disables ALL icons
   $ic: true,// true for colorized icons, otherwise #888 is used.
+
   $icon-rss: true,
-  $icon-mail: true,// email mail envelope
-  $icon-mastodon: true,
-  $icon-element: true,
+  $icon-mail: false,// e-mail
+  $icon-mastodon: false,
+  $icon-element: false,
   $icon-matrix: false,
-  $icon-buymeacoffee: true,
-  $icon-twitter: true,
-  $icon-facebook: true,
-  $icon-linkedin: true,
-  $icon-codeberg: true,
-  $icon-gitlab: true,
-  $icon-github: true,
-  $icon-github-sponsor: true,
-  $icon-bitbucket: true,
-  $icon-python: true,
-  $icon-docker: true,
-  $icon-stack: true,
-  $icon-instagram: true,
-  $icon-pinterest: true,
-  $icon-discord: true,
-  $icon-twitch: true,
-  $icon-youtube: true,
-  $icon-researchgate: true,
+  $icon-buymeacoffee: false,
+  $icon-twitter: false,
+  $icon-facebook: false,
+  $icon-linkedin: false,
+  $icon-codeberg: false,
+  $icon-gitlab: false,
+  $icon-github: false,
+  $icon-github-sponsor: false,
+  $icon-bitbucket: false,
+  $icon-python: false,
+  $icon-docker: false,
+  $icon-stack: false,
+  $icon-instagram: false,
+  $icon-pinterest: false,
+  $icon-discord: false,
+  $icon-twitch: false,
+  $icon-youtube: false,
+  $icon-researchgate: false,
 
-  $icon-x: true,// x symbol, used to close search results page.
-  $icon-search: true,//search, spyglass search button in search box.
-  $icon-adjust: true,//theme switcher dark/light toggle button.
-  $icon-angll: true,//pagination, goto first page
-  $icon-angl: true,//pagination, goto previous page
-  $icon-angr: true,//pagination, goto next page
-  $icon-angrr: true,//pagination, goto last page
-  $icon-angu: true,//back to top button, appears after scrolling down.
+  //$icon-x: true,// x symbol, used to close search results page.
+  //$icon-search: true,//search, spyglass search button in search box.
+  //$icon-adjust: true,//theme switcher dark/light toggle button.
+  //$icon-angll: true,//pagination, goto first page
+  //$icon-angl: true,//pagination, goto previous page
+  //$icon-angr: true,//pagination, goto next page
+  //$icon-angrr: true,//pagination, goto last page
+  //$icon-angu: true,//back to top button, appears after scrolling down.
 
-  $icon-ffolder: false,
-  $icon-folder: false,// categories folder
-  $icon-ftag: false,
-  $icon-tag: false,// tag
-  $icon-check: false,// check mark
-  $icon-chevron: false,// chevron down
-  $icon-clock: false,// time analog clock
-  $icon-date: false,// calendar
-  $icon-globe: false,
-  $icon-home: false,
-  $icon-minus: false,// minus symbol
-  $icon-moon: false,// dark moon
-  $icon-sun: false,// light sun
+  //$icon-ffolder: false,
+  //$icon-folder: false,// categories folder
+  //$icon-ftag: false,
+  //$icon-tag: false,// tag
+  //$icon-check: false,// check mark
+  //$icon-chevron: false,// chevron down
+  //$icon-clock: false,// time analog clock
+  //$icon-date: false,// calendar
+  //$icon-globe: false,
+  //$icon-home: false,
+  //$icon-minus: false,// minus symbol
+  //$icon-moon: false,// dark moon
+  //$icon-sun: false,// light sun
+
+  /// The colors below can be overrided individually as needed.
+
+  /// Dark Colors
+  //$f1d: #ccc,// Font Color Primary
+  //$f2d: #ddd,// Font Color Headers
+  //$c1d: #111,// Background Color Primary
+  //$c2d: #222,// Background Color Secondary
+  //$c3d: #333,// Table Rows, Block quote edge, Borders
+  //$c4d: #777,// Disabled Buttons, Borders, mark background
+  //$a1d: #f90,// link color
+  //$a2d: #fb0,// link hover/focus color
+  //$a3d: #f90,// link h1-h2 hover/focus color
+  //$cgd: #593,// ins green, success
+  //$crd: #e33,// del red, errors
+
+  /// Light Colors
+  //$f1: #333,// Font Color Primary
+  //$f2: #222,// Font Color Headers
+  //$c1: #fff,// Background Color Primary
+  //$c2: #eee,// Background Color Secondary
+  //$c3: #ddd,// Table Rows, Block quote edge, Borders
+  //$c4: #555,// Disabled Buttons, Borders, mark background
+  //$a1: #c40,// link color
+  //$a2: #e60,// link hover/focus color
+  //$a3: #f90,// link h1-h2 hover/focus color
+  //$cg: #373,// ins green, success
+  //$cr: #d33,// del red, errors
+
+  /// Dark Syntax Colors
+  //$h0d: #191919,// background color
+  //$h1d: #ddd,// unstyled text
+  //$h2d: #888,// comments
+  //$h3d: #e65,// red, support function
+  //$h4d: #e83,// orange, punctuation, constant, variable, json-key
+  //$h5d: #eb6,// tan, entity/function name
+  //$h6d: #ac3,// green, string
+  //$h7d: #8db,// teal, escape character
+  //$h8d: #6ae,// blue, declaration, tag, property
+  //$h9d: #d6e,// purple, operators
+
+  /// Light Syntax Colors
+  //$h0: #f7f7f7,// background color
+  //$h1: #222,// unstyled text
+  //$h2: #666,// comments
+  //$h3: #a21,// red, support function
+  //$h4: #930,// orange, punctuation, constant, variable, json-key
+  //$h5: #a50,// tan, entity/function name
+  //$h6: #350,// green, string
+  //$h7: #286,// teal, escape character
+  //$h8: #059,// blue, declaration, tag, property
+  //$h9: #a3c,// purple, operators
 
   /// These lines find the spot at which to insert your appended fonts.
   //$findFont-Main: "Segoe UI",     // ← append custom MAIN font(s) AFTER this

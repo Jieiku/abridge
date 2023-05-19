@@ -1,0 +1,61 @@
+// Syntax Highlighting
+@mixin syndark(
+  $h0: #191919,
+  $h1: #ddd,
+  $h2: #888,
+  $h3: #e65,
+  $h4: #e83,
+  $h5: #eb6,
+  $h6: #ac3,
+  $h7: #8db,
+  $h8: #6ae,
+  $h9: #d6e
+) {
+  #{--h0}: $h0;// background color
+  #{--h1}: $h1;// unstyled text
+  #{--h2}: $h2;// comments
+  #{--h3}: $h3;// red, support function
+  #{--h4}: $h4;// orange, punctuation, constant, variable, json-key
+  #{--h5}: $h5;// tan, entity/function name
+  #{--h6}: $h6;// green, string
+  #{--h7}: $h7;// teal, escape character
+  #{--h8}: $h8;// blue, declaration, tag, property
+  #{--h9}: $h9;// purple, operators
+  code table {
+    color: var(--h1);
+    mark {
+      background-color: var(--h0);
+      filter: brightness(140%);
+    }
+  }
+}
+@mixin synlight(
+  $h0: #f7f7f7,
+  $h1: #222,
+  $h2: #666,
+  $h3: #a21,
+  $h4: #930,
+  $h5: #a50,
+  $h6: #350,
+  $h7: #286,
+  $h8: #059,
+  $h9: #a3c
+) {
+  #{--h0}: $h0;// background color
+  #{--h1}: $h1;// unstyled text
+  #{--h2}: $h2;// comments
+  #{--h3}: $h3;// red, support function
+  #{--h4}: $h4;// orange, punctuation, constant, variable, json-key
+  #{--h5}: $h5;// tan, entity/function name
+  #{--h6}: $h6;// green, string
+  #{--h7}: $h7;// teal, escape character
+  #{--h8}: $h8;// blue, declaration, tag, property
+  #{--h9}: $h9;// purple, operators
+  code table {
+    color: var(--h1);
+    mark {
+      background-color: var(--h0);
+      filter: brightness(94%);
+    }
+  }
+}

@@ -116,8 +116,7 @@ Abridge SASS variables can be overrided by editing `sass\abridge.scss` file in y
 ### Page Width:
 
 ```scss
-$mw:50%,// max-width
-$mb:1200px,// value at which to switch from fluid layout to using max-width
+$mw:75%,// max-width
 ```
 
 ### Abridge Theme Modes
@@ -138,16 +137,12 @@ Colors and style are defined in the sass files.
 To change colors edit `sass\abridge.scss` file in your project's root sass folder:
 
 ```scss
-  $dark: #ccc #ddd #111 #222 #333 #888 #f90 #fb0 #f90 #593 #e33,//orange
-  //$dark: #ccc #ddd #111 #222 #333 #888 #09f #0bf #0af #593 #e33,//blue
-  //$dark: #ccc #ddd #111 #123 #345 #789 #09f #0bf #0af #593 #e33,//blueshade
-
-  $light: #333 #222 #fff #eee #ddd #555 #c40 #e60 #f90 #373 #d33,//orange
-  //$light: #333 #222 #fff #eee #ddd #555 #06e #09f #07f #373 #d33,//blue
-  //$light: #333 #222 #fff #def #137 #013 #06e #09f #07f #373 #d33,//blueshade
-
-  $syntax-dark: #191919 #e65 #f91 #eb6 #ac3 #8db #6ae #d6e,
-  $syntax-light: #f7f7f7 #a21 #930 #a50 #350 #286 #059 #a3c,
+  /// Dark Colors
+  $f1d: #ccc,// Font Color Primary
+  $f2d: #ddd,// Font Color Headers
+  $c1d: #111,// Background Color Primary
+  $c2d: #222,// Background Color Secondary
+  ...
 ```
 
 ### Footer Social Icons

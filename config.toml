@@ -195,11 +195,11 @@ js_copycode = true # The copy button on code blocks that allows you to copy them
 search_library = 'elasticlunr'
 
 #js_search_index = "search_index.en.json" # Separate Always, generated each build
-#js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
-#js_themeButton = "theme_button.js"# Bundleable - light/dark switcher button
-#js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
-#js_codecopy = "codecopy.js"# Bundleable - copy code block to clipboard button
-#js_email = "email.js"# Bundleable - obfuscates email address in footer
+#js_theme = "js/theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
+#js_themeButton = "js/theme_button.js"# Bundleable - light/dark switcher button
+#js_prestyle = "js/prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
+#js_codecopy = "js/codecopy.js"# Bundleable - copy code block to clipboard button
+#js_email = "js/email.js"# Bundleable - obfuscates email address in footer
 
 stylesheets = [ "abridge.css" ]
 
@@ -296,14 +296,14 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 ### Otherwise you will load the katex related javascript on every page!
 ###############################################################################
 
-#katex_options = "katexoptions.js"
-#katex_bundle = "katexbundle.min.js"
+#katex_options = "js/katexoptions.js"
+#katex_bundle = "js/katexbundle.min.js"
 
 ### Load Katex Local Resources
 #katex_css = "katex.min.css" # Fonts - load the css/fonts locally
-#katex_js = "katex.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
-#mathtex_js = "mathtex-script-type.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
-#katex_autorender_js = "katex-auto-render.min.js"
+#katex_js = "js/katex.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
+#mathtex_js = "js/mathtex-script-type.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
+#katex_autorender_js = "js/katex-auto-render.min.js"
 
 ### Load Katex External Resources
 #katex_css = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" # Fonts - use remote fonts

@@ -136,6 +136,12 @@ Colors and style are defined in the sass files.
 
 To change colors edit `sass\abridge.scss` file in your project's root sass folder:
 
+You can specify which color template you want to use as a base:
+```scss
+$color: "orange",// color template to use/override: orange, blue, blueshade
+```
+
+Then override individual colors as needed:
 ```scss
   /// Dark Colors
   $f1d: #ccc,// Font Color Primary

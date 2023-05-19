@@ -1,8 +1,8 @@
 # do NOT include a trailing slash on the base URL
 base_url = "https://abridge.netlify.app"
 
-#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk
-# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
+#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk, Including Search!
+# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false, js_bundle = false
 
 default_language = "en"
 compile_sass = true
@@ -60,7 +60,7 @@ Sitemap = "Plan du site"
 #tags = "Etiquetas"
 
 [search]                # Options specific to elasticlunr search.
-index_format = "elasticlunr_json"
+index_format = "elasticlunr_json" # elasticlunr_json, elasticlunr_javascript
 include_title = true        # include title of page/section in index
 include_description = true # include description of page/section in index
 include_content = true      # include rendered content of page/section in index
@@ -185,10 +185,10 @@ researchgate = "your-profile-id"
 ### search_library: library to use, valid values: false, "elasticlunr", "tinysearch", "stork"
 ###############################################################################
 
-uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
-integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
+uglyurls = true # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
+integrity = false # increases site security, should normally be true. (setting to false is useful during js development)
 
-js_bundle = true # multiple javascript files combined into a single file (setting to false is useful during js development)
+js_bundle = false # multiple javascript files combined into a single file (setting to false is useful during js development)
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
 

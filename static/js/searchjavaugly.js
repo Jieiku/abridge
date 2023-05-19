@@ -107,20 +107,9 @@ window.onload = function() {
         }
 
 
+        var index = elasticlunr.Index.load(window.searchIndex);
 
         async function show_results() {
-          var initIndex = async function () {
-            if (index === undefined) {
-              index = fetch(baseUrl + '/search_index.' + langOnly + '.json')
-                .then(
-                  async function(response) {
-                    return await elasticlunr.Index.load(await response.json());
-                }
-              );
-            }
-            let res = await index;
-            return res;
-          }
           var value = this.value.trim();
           var options = {
             bool: "OR",
@@ -129,8 +118,7 @@ window.onload = function() {
               body: {boost: 1},
             }
           };
-          //var results = index.search(value, options);
-          var results = (await initIndex()).search(value, options);
+          var results = index.search(value, options);
 
           var entry, childs = suggestions.childNodes;
           var i = 0, len = results.length;
@@ -146,7 +134,7 @@ window.onload = function() {
               a = entry.querySelector('a'),
               t = entry.querySelector('span:first-child'),
               d = entry.querySelector('span:nth-child(2)');
-              a.href = page.ref;
+              a.href = page.ref + 'index.html';
               t.textContent = page.doc.title;
               d.innerHTML = makeTeaser(page.doc.body, items);
 

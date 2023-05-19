@@ -148,7 +148,7 @@ $f1d: #ccc,// Font Color Primary
 $f2d: #ddd,// Font Color Headers
 $c1d: #111,// Background Color Primary
 $c2d: #222,// Background Color Secondary
-  ...
+...
 ```
 
 ### Footer Social Icons

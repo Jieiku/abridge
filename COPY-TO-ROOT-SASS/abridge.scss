@@ -122,12 +122,12 @@
   //$findFont-Code: "Segoe UI Mono",// ← append custom CODE font(s) AFTER this
 
   /// These lines specify the fonts to add.
-  //$fontExt-Main: ("Example Font 1", "Example Font 2"),// MAIN font(s) to add
-  //$fontExt-Code: ("Example Code 1", "Example Code 2"),// CODE font(s) to add
+  //$fontExt-Main: (ExampleFont1, "Example Font 2"),// MAIN font(s) to add
+  //$fontExt-Code: (ExampleCode1, "Example Code 2"),// CODE font(s) to add
 
   /// If prepending/appending fonts above, then no need to change them below
-  //$font: "Roboto" "system-ui" "-apple-system" "BlinkMacSystemFont" "Segoe UI" "Oxygen" "Ubuntu" "Cantarell" "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" "Helvetica" "Arial" "sans-serif",
-  //$font-mono: "ui-monospace" "Menlo" "Monaco" "Consolas" "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" "Courier" "monospace",
+  //$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif,
+  //$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace,
 
   /// Enable <header>, <main>, <footer> inside <body> as a container
   //$enable-semantic-container: true,

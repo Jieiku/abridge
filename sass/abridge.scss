@@ -136,13 +136,13 @@ $findFont-Main : null !default;
 $findFont-Code : null !default;
 
 /// These lines specify the fonts to add.
-//$fontExt-Main  : ("Example Font 1", "Example Font 2") // MAIN font(s) to add
-//$fontExt-Code  : ("Example Code 1", "Example Code 2") // CODE font(s) to add
+//$fontExt-Main  : (ExampleFont1, "Example Font 2") // MAIN font(s) to add
+//$fontExt-Code  : (ExampleCode1, "Example Code 2") // CODE font(s) to add
 $fontExt-Main  : null !default;
 $fontExt-Code  : null !default;
 
-$font: "Roboto" "system-ui" "-apple-system" "BlinkMacSystemFont" "Segoe UI" "Oxygen" "Ubuntu" "Cantarell" "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" "Helvetica" "Arial" "sans-serif" !default;
-$font-mono: "ui-monospace" "Menlo" "Monaco" "Consolas" "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" "Courier" "monospace" !default;
+$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif !default;
+$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace !default;
 
 /// Enable <header>, <main>, <footer> inside <body> as a container
 $enable-semantic-container: true !default;
@@ -761,13 +761,13 @@ $syntax: true !default;//syntax highlighting for code blocks
   // mobile first is min-width for desktop instead of max-width for mobile
   @if map-get($breakpoints, "md") {
     @media (min-width: map-get($breakpoints, "md")) {
+      header > nav > div {
+        margin: var(--s1) 0;// desktop layout
+      }
       header nav {
         flex-direction: row;// row layout for desktop view
         h1 {
-          margin: var(--s1) 0; // desktop layout
-        }
-        div {
-          margin: var(--s1) 0; // desktop layout
+          margin: var(--s1) 0;// desktop layout
         }
       }
     }

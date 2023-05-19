@@ -136,8 +136,8 @@ $findFont-Main : null !default;
 $findFont-Code : null !default;
 
 /// These lines specify the fonts to add.
-//$fontExt-Main  : (ExampleFont1, "Example Font 2") // MAIN font(s) to add
-//$fontExt-Code  : (ExampleCode1, "Example Code 2") // CODE font(s) to add
+//$fontExt-Main  : (ExampleFont1, "Example Font 2");// MAIN font(s) to add
+//$fontExt-Code  : (ExampleCode1, "Example Code 2");// CODE font(s) to add
 $fontExt-Main  : null !default;
 $fontExt-Code  : null !default;
 

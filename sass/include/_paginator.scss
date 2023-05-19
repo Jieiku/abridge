@@ -1,0 +1,15 @@
+.pagination {
+	margin-top: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	.left {
+ 		flex: 50%;
+		text-align: left;
+  	}
+  	.right {
+ 		flex: 50%;
+		text-align: right;
+  	}
+}

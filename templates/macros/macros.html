@@ -124,6 +124,20 @@
 <p><b><a href="#">Back to top</a></b></p>
 {%- endif %}
 {%- endif %}
+{% if page.lower or page.higher-%}
+	<div class="pagination">
+	{% if page.lower -%}
+		<a href="{{ page.lower.permalink | safe }}" class="left arrow">&#8592;  {{ page.lower.title | truncate(length=120)}}</a>
+	{% else %}
+		<div class="left arrow">&#8592</div>
+	{%- endif %}
+	{% if page.higher -%}
+		<a href="{{ page.higher.permalink | safe }}" class="right arrow"> {{ page.higher.title | truncate(length=120) }} &#8594;</a>
+	{% else %}
+		<div class="right arrow">&#8594;</div>
+	{%- endif %}
+	</div>
+{%- endif %}
 {%- endmacro footer %}
 
 

@@ -138,16 +138,16 @@ To change colors edit `sass\abridge.scss` file in your project's root sass folde
 
 You can specify which color template you want to use as a base:
 ```scss
-  $color: "orange",// color template to use/override: orange, blue, blueshade
+$color: "orange",// color template to use/override: orange, blue, blueshade
 ```
 
 Then override individual colors as needed:
 ```scss
-  /// Dark Colors
-  $f1d: #ccc,// Font Color Primary
-  $f2d: #ddd,// Font Color Headers
-  $c1d: #111,// Background Color Primary
-  $c2d: #222,// Background Color Secondary
+/// Dark Colors
+$f1d: #ccc,// Font Color Primary
+$f2d: #ddd,// Font Color Headers
+$c1d: #111,// Background Color Primary
+$c2d: #222,// Background Color Secondary
   ...
 ```
 
@@ -178,16 +178,16 @@ If a link should have a trailing slash at the end of the url set `slash = true`.
 
 ```toml
 menu = [
-    {url = "about", name = "About", slash = true, blank = false},
-    {url = "posts", name = "Posts", slash = true, blank = false},
-    {url = "categories", name = "Categories", slash = true, blank = false},
-    {url = "tags", name = "Tags", slash = true, blank = false},
+  {url = "about", name = "About", slash = true, blank = false},
+  {url = "posts", name = "Posts", slash = true, blank = false},
+  {url = "categories", name = "Categories", slash = true, blank = false},
+  {url = "tags", name = "Tags", slash = true, blank = false},
 ]
 menu_footer = [
-    {url = "about", name = "About", slash = true, blank = false},
-    {url = "contact", name = "Contact", slash = true, blank = false},
-    {url = "privacy", name = "Privacy", slash = true, blank = false},
-    {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true},
+  {url = "about", name = "About", slash = true, blank = false},
+  {url = "contact", name = "Contact", slash = true, blank = false},
+  {url = "privacy", name = "Privacy", slash = true, blank = false},
+  {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true},
 ]
 ```
 

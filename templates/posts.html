@@ -43,6 +43,9 @@ This Template can also be used as the rendering template for Sections, eg: examp
       {%- if section_item.title %}
       <h2>{{ section_item.title }}</h2>
       {%- endif %}
+
+      {{ section_item.content | safe }}
+
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       {%- if section_item.title %}<h3>{{ year }}</h3>{%- else %}<h2>{{ year }}</h2>{%- endif %}
       {%- for post in posts %}

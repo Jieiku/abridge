@@ -36,16 +36,24 @@
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
-          {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %} {{ page.date | date(format="%B %d, %Y") }}
+          {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
+          {%- if config.extra.date_locale %}
+          {%- if lang != config.default_language -%}
+            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+          {%- else -%}
+            {%- set lang_locale = config.extra.date_locale -%}
+          {%- endif -%}
+          {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
+          {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
-          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
 
         {#- Tags #}
-          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_post %}
 
 {%- macro title_index(page, config) %}
@@ -60,7 +68,7 @@
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
           {%- if author_flag %}, {% endif %}
-          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          <a href="{{ get_taxonomy_url(kind='authors', name=author, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_index.author %}
@@ -87,16 +95,24 @@
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
-          {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %} {{ page.date | date(format="%B %d, %Y") }}
+          {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
+          {%- if config.extra.date_locale %}
+          {%- if lang != config.default_language -%}
+            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+          {%- else -%}
+            {%- set lang_locale = config.extra.date_locale -%}
+          {%- endif -%}
+          {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
+          {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
-          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
 
         {#- Tags #}
-          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_index %}
 
 

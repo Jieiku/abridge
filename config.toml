@@ -1,29 +1,63 @@
 # do NOT include a trailing slash on the base URL for web urls
 base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public/" # Usable site directly from disk, also set in [extra] uglyurls = true
-title = "Abridge"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 default_language = "en"
 compile_sass = true
 minify_html = false
+build_search_index = true
+
+title = "Abridge"
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 generate_feed = true
-feed_filename = "atom.xml"
-output_dir = "public"
-#ignored_content = ["*.{graphml,xlsx}", "temp.*"]
-#hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 taxonomies = [
     {name = "categories", feed = true},
     {name = "tags", feed = true},
 ]
 
+#feed_filename = "atom.xml"
+#output_dir = "public"
+#ignored_content = ["*.{graphml,xlsx}", "temp.*"]
+#hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
+
 #theme = "abridge"
 
+[languages.fr]
+title = "Abridge"
+description = "Abridge est un thème Zola rapide et léger utilisant le html sémantique, le CSS abridge.css class-light et aucun JS obligatoire."
+generate_feed = true
 build_search_index = true
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
+[languages.fr.translations]
+flag = "🇫🇷"
+date_locale = "fr_FR"
+Search = "Recherche"
+Recent_Posts = "Articles Récents"
+Index = "Indice"
+Powered_by = "Propulsé"
+and = "et"
+About = "À propos"
+Posts = "Articles"
+Categories = "Catégories"
+Tags = "Mots-clés"
+Contact = "Contact"
+Privacy = "Confidentialité"
+Sitemap = "Plan du site"
+
+#[languages.es.translations]
+#flag = "🇪🇸"
+#about = "Acerca de"
+#posts = "Publicaciones"
+#categories = "Categorías"
+#tags = "Etiquetas"
 
 [search]                # Options specific to elasticlunr search.
 index_format = "elasticlunr_json"
 include_title = true        # include title of page/section in index
-include_description = true # include description of page/section in index
+include_description = false # include description of page/section in index
 include_content = true      # include rendered content of page/section in index
 # truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
 
@@ -40,22 +74,14 @@ smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 
 ###############################################################################
-### meta/seo/analytic tags
-### To disable title_addition but keep built in page additions eg, Posts page: "Posts | Abridge" set title_addition to an empty string
-### To always set the page title exactly eg "Abridge" then comment out title_addition or set to false (not recommend, bad for SEO)
+### Language
+### https://www.w3schools.com/tags/ref_country_codes.asp
+### https://tera.netlify.app/docs#date
 ###############################################################################
-
-language_code = "en-US"
-title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
-title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
-author = "Jake G" # Put Your Name here
-keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
-banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-twitter = "your-user-name" # for SEO: twitter:site and twitter:creator
-google = "Your Google Site verification code."
-bing = "Your Bing Site verification code."
-seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
-
+date_locale = "en_US"
+flag.en = "🇬🇧"
+flag.fr = "🇫🇷"
+#flag.es = "🇪🇸"
 
 ###############################################################################
 ### Layout & Format
@@ -63,6 +89,19 @@ seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twit
 ### size: s95, s90, s85, s80, s75, s70, false(full size)
 ### divider:    " "        "&middot;"        "&bull;"
 ###############################################################################
+
+menu = [
+    {url = "about", name = "About", slash = true, blank = false},
+    {url = "posts", name = "Posts", slash = true, blank = false},
+    {url = "categories", name = "Categories", slash = true, blank = false},
+    {url = "tags", name = "Tags", slash = true, blank = false},
+]
+menu_footer = [
+    {url = "about", name = "About", slash = true, blank = false},
+    {url = "contact", name = "Contact", slash = true, blank = false},
+    {url = "privacy", name = "Privacy", slash = true, blank = false},
+    {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true},
+]
 
 recent = true # TOC / index
 recent_items = 9
@@ -86,18 +125,52 @@ sitedesc = false # enables or disables the display of the site description below
 headhr = false # show or hide horizontal rule below header
 foothr = true # show or hide horizontal rule above footer
 
-menu = [
-    {url = "/about/", name = "About", slash = true, blank = false},
-    {url = "/posts/", name = "Posts", slash = true, blank = false},
-    {url = "/categories/", name = "Categories", slash = true, blank = false},
-    {url = "/tags/", name = "Tags", slash = true, blank = false},
-]
-menu_footer = [
-    {url = "/about/", name = "About", slash = true, blank = false},
-    {url = "/contact/", name = "Contact", slash = true, blank = false},
-    {url = "/privacy/", name = "Privacy", slash = true, blank = false},
-    {url = "/sitemap.xml", name = "Sitemap", slash = false, blank = true},
-]
+
+###############################################################################
+### meta/seo/analytic tags
+### To disable title_addition but keep built in page additions eg, Posts page: "Posts | Abridge" set title_addition to an empty string
+### To always set the page title exactly eg "Abridge" then comment out title_addition or set to false (not recommend, bad for SEO)
+###############################################################################
+
+title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
+title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
+author = "Jake G" # Put Your Name here
+keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
+banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
+twitter_meta = "your-user-name" # for SEO: twitter:site and twitter:creator
+google = "Your Google Site verification code."
+bing = "Your Bing Site verification code."
+seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+
+
+###############################################################################
+### Footer social links; these are used in macros/social.html
+###   https://github.com/Jieiku/abridge/blob/master/templates/macros/social.html
+###############################################################################
+
+feed = true # this adds the RSS feed icon in the footer.
+mail_encode = true # This obfuscates your email address, javascript is used to decode it at page load.
+mail = "name@example.com"
+mastodon = "@your-user-name"
+element = "matrix.example.com"
+buymeacoffee = "your-user-name"
+discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
+twitter = "your-user-name"
+facebook = "your-user-name"
+linkedin = "your-user-name"
+gitlab = "your-user-name"
+github = "your-user-name"
+codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
+github_sponsor = "your-user-name"
+bitbucket = "your-user-name"
+python = "your-user-name"
+docker = "your-user-name"
+stack = "your-user-name"
+instagram = "your-user-name"
+pinterest = "your-user-name"
+twitch = "your-user-name"
+youtube = "channel/your-channel-id"
+researchgate = "your-profile-id"
 
 
 ###############################################################################
@@ -171,38 +244,6 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 #icon_date = "svgs fa-solid fa-calendar" # displayed in metadata on index and below title on page.
 #icon_info = "svgs fa-solid fa-circle-info" # displayed in metadata on index and below title on page for categories/tags
 #icon_author = "svgs fa-solid fa-pen-fancy" # displayed in metadata on index and below title on page.
-
-
-###############################################################################
-### Footer social links; these are used in macros/social.html
-###   https://github.com/Jieiku/abridge/blob/master/templates/macros/social.html
-###############################################################################
-
-#[extra.social]
-#feed = true # this adds the RSS feed icon in the footer.
-#mail_encode = true # This obfuscates your email address, javascript is used to decode it at page load.
-#mail = "name@example.com"
-#mastodon = "@your-user-name"
-#element = "matrix.example.com"
-#matrix = "matrix.example.com"
-#buymeacoffee = "your-user-name"
-#discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
-#twitter = "your-user-name"
-#facebook = "your-user-name"
-#linkedin = "your-user-name"
-#gitlab = "your-user-name"
-#github = "your-user-name"
-#codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
-#github_sponsor = "your-user-name"
-#bitbucket = "your-user-name"
-#python = "your-user-name"
-#docker = "your-user-name"
-#stack = "your-user-name"
-#instagram = "your-user-name"
-#pinterest = "your-user-name"
-#twitch = "your-user-name"
-#youtube = "channel/your-channel-id"
-#researchgate = "your-profile-id"
 
 
 ###############################################################################

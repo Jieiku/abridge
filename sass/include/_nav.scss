@@ -96,6 +96,27 @@ footer nav {
     margin: 0 .2rem .4rem;
   }
 }
+//dropdown menu used for lang, etc.
+.dropdown {
+  display: inline-block;
+  position: relative;
+  vertical-align: -3px;
+  font-weight: var(--fh);
+  font-size: 1.3rem;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  font-weight: var(--fh);
+  font-size: 1.3rem;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  a {
+    text-decoration: none;
+  }
+}
 // breakpoint makes header responsive for mobile layouts
 @if map-get($breakpoints, "md") {
   @media (max-width: map-get($breakpoints, "md")) {

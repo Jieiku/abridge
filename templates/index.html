@@ -54,11 +54,15 @@
     {%- endfor %}
     {{- macros::pagination(paginator=paginator, config=config) }}
     </div>
+  {%- if lang == config.default_language %}
   {%- set section_item = get_section(path="_index.md") %}
+  {%- else %}
+  {%- set section_item = get_section(path="_index." ~ lang ~ ".md") %}
+  {%- endif %}
   {%- if config.extra.recent | default(value=true) %}
     <div class="toc">
       <div class="toc-sticky">
-        <h1><span class="s75">Recent Posts</span></h1>
+        <h1><span class="s70">{%- if lang != config.default_language %}{{ trans(key="Recent_Posts" | safe, lang=lang) }}{% else %}Recent Posts{% endif %}</span></h1>
         {%- set recent_items=config.extra.recent_items | default(value=9) -%}
         {%- for page in section_item.pages | slice(end=recent_items) %}
           {{- page_macros::page_listing(page=page, config=config) }}

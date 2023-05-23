@@ -3,7 +3,7 @@
 {%- import "macros/page.html" as page_macros %}
 {%- import "macros/macros.html" as macros %}
 <!DOCTYPE html>
-<html lang="{{ config.extra.language_code | default(value='en-US') }}">
+<html lang="{{ lang }}">
 <head>
   {{- macros_head::theme(config=config) }}
   {{- macros_head::stylesheets(config=config) }}
@@ -37,16 +37,16 @@
     <nav>
       <div>
         {%- if config.extra.logo -%}
-        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
         </a></h1>
         {%- elif config.extra.textlogo -%}
-        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title -%}
-        <h1><a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.title | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ config.title | safe }}</a></h1>
         {%- endif -%}
       </div>
       <div>
@@ -55,8 +55,35 @@
           {%- if config.extra.menu or js_switcher %}
           {%- if config.extra.menu %}
           {%- for i in config.extra.menu -%}
-          <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
+          <li> <h2><a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+          {%- if lang != config.default_language -%}
+          {{ trans(key=i.name | safe, lang=lang) }}
+          {%- else -%}
+          {{ i.name | safe }}
+          {%- endif -%}
+          </a></h2> </li>
           {%- endfor -%}
+          {%- endif -%}
+          {%- set language_count = 1 -%}
+          {%- for language_name, language in config.languages -%}
+          {%- set_global language_count = language_count + 1 -%}
+          {%- endfor -%}
+          {%- if language_count > 1 %}
+          <li class="js"><div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
+            {%- if current_url %}
+            <div class="dropdown-content">
+            {%- for lcode,flag in config.extra.flag -%}
+            {%- if lang != lcode -%}
+            {%- if lcode == config.default_language -%}
+            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}">{{ flag }}</a><br />
+            {%- else -%}
+            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}">{{ flag }}</a><br />
+            {%- endif -%}
+            {%- endif -%}
+            {%- endfor -%}
+            </div>
+            {%- endif %}
+          </div></li>
           {%- endif -%}
           {%- if js_switcher -%}
           {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
@@ -66,11 +93,11 @@
         </ul>
       </div>
       {%- if config.build_search_index %}
-      {%- set icon_search=config.extra.icon_search | default(value="svgs search") -%}
+      {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
       <div>
         <form autocomplete=off class="js" name="goSearch" id="searchbox">
           <div class="searchd">
-            <input id="searchinput" type="text" placeholder="Search" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
+            <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
             <button type="submit" title="Search">{%- if icon_search -%}<i class="{{ icon_search }}"></i>{%- else -%}<span class="si">&#8981;</span>{%- endif -%}</button>
           </div>
           <div><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
@@ -98,21 +125,24 @@
     <hr />
     {%- endif %}
     <div class="c">
-      {%- if config.extra.social %}
-      {{- social_macros::social_links(social_config=config.extra.social, config=config) }}
-      {%- endif %}
+      {{- social_macros::social_links(config=config) }}
 
       {#- Copyright START #}
       {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}
       {%- if copyright_start_year %}{%- set copyright_start_year=copyright_start_year ~ "-" %}{%- endif %}
       {%- set copyright_end_year=config.extra.copyright_end_year | default(value=now() | date(format="%Y")) %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Copyright &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> &copy; {{ copyright_start_year ~ copyright_end_year }} {{ config.title }}</p>
       {#- Copyright END #}
       {%- if config.extra.menu_footer %}
       <nav>
         <ul>
           {%- for i in config.extra.menu_footer -%}
-          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {{ i.name | safe }} </a> </li>
+          {%- if i.url != "sitemap.xml" %}
+          {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
+          {%- else %}
+          {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
+          {%- endif %}
+          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ furl }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {% if lang != config.default_language -%} {{ trans(key=i.name | safe, lang=lang) }} {%- else -%} {{ i.name | safe }} {% endif %} </a> </li>
           {%- endfor -%}
         </ul>
       </nav>
@@ -121,7 +151,7 @@
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> and <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{%- if lang != config.default_language %} {{ trans(key="Powered_by" | safe, lang=lang) }} {% else %} Powered by {% endif %} <a href="https://www.getzola.org/" target="_blank">Zola</a> {%- if lang != config.default_language %} {{ trans(key="and" | safe, lang=lang) }} {% else %} and {% endif %} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

@@ -57,7 +57,7 @@
     {%- if toc %}
     <div class="toc" aria-hidden="true">
       <div class="toc-sticky">
-        <h3>Index</h3>
+        <h3>{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</h3>
         {%- for h in toc %}
         <div class="toc-item">
           <a class="subtext" href="{{h.permalink | safe}}">{{ h.title }}</a>

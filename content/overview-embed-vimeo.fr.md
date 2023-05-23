@@ -1,5 +1,5 @@
 +++
-title = "Vidéos Vimeo intégrées"
+title = "Vimeo intégrées"
 description = "Exemple d'article présentant un code abrégé Zola personnalisé pour intégrer des vidéos Vimeo dans vos pages."
 date = 2021-05-07
 draft = false
@@ -16,7 +16,11 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 
 ## Vimeo
 
-with `vm(id="id_here")`
+### Usage
+
+```rs
+{{/* vimeo(id="514402648") */}}
+```
 
 - `id`: l'identifiant de la vidéo (obligatoire)
 - `class`: une classe à ajouter au &lt;div&gt; entourant l'iframe (optionnel)
@@ -26,4 +30,8 @@ with `vm(id="id_here")`
 - `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Vimeo")
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
-{{ vm(id="514402648") }}
+### Output
+```html
+{{ vimeo(id="514402648") }}
+```
+{{ vimeo(id="514402648") }}

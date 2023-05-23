@@ -1,5 +1,5 @@
 +++
-title = "Vidéos Youtube intégrées"
+title = "Youtube intégrées"
 description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos Youtube dans vos pages."
 date = 2021-05-08
 draft = false
@@ -16,7 +16,11 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 
 ## Youtube
 
-avec `yt(id="the_id_here")`
+### Usage
+
+```rs
+{{/* youtube(id="32gyFIWecuw") */}}
+```
 
 - `id`: l'identifiant de la vidéo (obligatoire)
 - `playlist`: l'identifiant de la playlist (optionnel)
@@ -25,4 +29,8 @@ avec `yt(id="the_id_here")`
 - `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Youtube")
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
-{{ yt(id="32gyFIWecuw") }}
+### Output
+```html
+{{ youtube(id="32gyFIWecuw") }}
+```
+{{ youtube(id="32gyFIWecuw") }}

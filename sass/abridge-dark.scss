@@ -1,14 +1,12 @@
-@use "imports";
-@use "syntax/syntax-abridge" as syntax;
+@use "includes";
 
 :root {
-  @include imports.var-root;
-}
-
-@if imports.$var-syntax {
-  @include syntax.dark;
+  @include includes.var-root;
 }
 
 :root {
-  @include imports.colors-dark;
+  @include includes.colors-dark;
+  @if includes.$var-syntax {
+    @include includes.syntax-dark;
+  }
 }

@@ -320,3 +320,60 @@ while True:
         print("Could Not Connect to SMTP server!")
     time.sleep(interval)
 ```
+
+### Ruby
+```ruby
+=begin
+  Ruby program to check whether the
+  year is leap year or not between range.
+=end
+
+puts "Enter the lower limit:"
+lwr = gets.chomp.to_i
+puts "Enter the upper limit:"
+upr = gets.chomp.to_i
+
+for yr in lwr..upr do
+  if yr % 400 == 0
+    puts "#{yr} is a leap year"
+  elsif yr % 4 == 0 && yr % 100 !=0
+    puts "#{yr} is a leap year"
+  else
+    puts "#{yr} is not a leap year"
+  end
+end
+```
+
+### SCSS
+```scss
+
+$font: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif !default;
+$font-mono: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace !default;
+
+@mixin root {
+  #{--ff}: $font;
+  #{--fm}: $font-mono;//code
+
+  --fs: 1rem; //font-size
+
+  // Responsive typography
+  @if $enable-responsive-typography {
+    @if map-get($breakpoints, "lg") {
+      @media (min-width: map-get($breakpoints, "lg")) {
+        --fs: 1.08rem;
+      }
+    }
+  }
+}
+```
+
+### CSS
+```css
+html {
+    font-size: var(--fs);
+}
+
+.c {
+    text-align: center;
+}
+```

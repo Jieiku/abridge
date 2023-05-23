@@ -1,0 +1,3 @@
+<div class="yv{% if class %} {{class}}{% endif %}">
+    <iframe src="https://www.youtube{% if not cookie %}-nocookie{% endif %}.com/embed/{{id}}{% if playlist %}?list={{playlist}}{% endif %}{% if autoplay %}?autoplay=1{% endif %}" title="{{title | default(value='Youtube') }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>

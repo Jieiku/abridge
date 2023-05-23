@@ -2,8 +2,8 @@
 @use "sass:list"
 
 @function font-append($base, $ext, $font-sep)
-  $base-pre	: ()
-  $base-pos	: ()
+  $base-pre : ()
+  $base-pos : ()
   $iFontSep : index($base, $font-sep)
   @if not $iFontSep // didn't find the font separator, return
     @debug "⚠ Failed to find '#{$font-sep}' in the list of '#{$base}'"

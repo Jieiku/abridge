@@ -60,12 +60,12 @@
         <h3>{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</h3>
         {%- for h in toc %}
         <div class="toc-item">
-          <a class="subtext" href="{{h.permalink | safe}}">{{ h.title }}</a>
+          <a class="subtext" href="#{{h.id | safe}}">{{ h.title }}</a>
         </div>
         {%- if h.children %}
         {%- for h2 in h.children %}
         <div class="toc-item-child">
-          <a class="subtext" href="{{h2.permalink | safe}}"><small>- {{ h2.title }}</small></a>
+          <a class="subtext" href="#{{h2.id | safe}}"><small>- {{ h2.title }}</small></a>
         </div>
         {%- endfor %}
         {%- endif %}

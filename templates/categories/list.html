@@ -22,9 +22,9 @@
         <p>{% for term in terms %} [<a href="#{{ term.name }}">{{ term.name }}</a>]<sup>{{ term.pages | length }}</sup> {% endfor %}</p>
       </div>
       {%- for term in terms %}
-      <h2 id="{{ term.name }}"><a href="{{ term.permalink | safe }}">{{ term.name }}</a></h2>
+      <h2 id="{{ term.name }}"><a href="{{ term.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ term.name }}</a></h2>
       {%- for page in term.pages %}
-      <p><a href="{{ page.permalink | safe }}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
+      <p><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
       {%- endfor %}
       {%- endfor %}
     </div>

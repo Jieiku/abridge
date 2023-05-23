@@ -66,6 +66,11 @@
           </a></h2> </li>
           {%- endfor -%}
           {%- endif -%}
+          {%- if js_switcher -%}
+          {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+          <li class="js">{%- if icon_adjust -%}<i type="reset" id="mode" class="{{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
+          {%- endif -%}
+          {%- endif -%}
           {%- set language_count = 1 -%}
           {%- for language_name, language in config.languages -%}
           {%- set_global language_count = language_count + 1 -%}
@@ -86,11 +91,6 @@
             </div>
             {%- endif %}
           </div></li>
-          {%- endif -%}
-          {%- if js_switcher -%}
-          {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
-          <li class="js">{%- if icon_adjust -%}<i type="reset" id="mode" class="{{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
-          {%- endif -%}
           {%- endif -%}
         </ul>
       </div>

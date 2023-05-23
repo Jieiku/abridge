@@ -1,3 +1,8 @@
+{#
+This Page Shows the Posts with a short summary on the index: example.com/
+This Template can also be used as the rendering template for Sections, eg: example.com/blog/  example.com/software/
+#}
+
 {%- extends "base.html" %}
 
 {%- block seo %}
@@ -54,12 +59,25 @@
     {%- endfor %}
     {{- macros::pagination(paginator=paginator, config=config) }}
     </div>
-  {%- if lang == config.default_language %}
-  {%- set section_item = get_section(path="_index.md") %}
-  {%- else %}
-  {%- set section_item = get_section(path="_index." ~ lang ~ ".md") %}
-  {%- endif %}
   {%- if config.extra.recent | default(value=true) %}
+    {#- The following line is checking if the template is being used for the root or a section #}
+    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") %}
+      {%- set sec = "" %}
+    {%- else %}
+      {%- if lang == config.default_language %}
+        {%- set sec = current_path | trim_start_matches(pat="/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
+      {%- else %}
+        {%- set sec = current_path | trim_start_matches(pat="/" ~ lang ~ "/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = sec ~ "/" %}
+      {%- endif %}
+    {%- endif %}
+
+    {%- if lang == config.default_language %}
+    {%- set section_item = get_section(path=sec ~ "_index.md") %}
+    {%- else %}
+    {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
+    {%- endif %}
     <div class="toc">
       <div class="toc-sticky">
         <h1><span class="s70">{%- if lang != config.default_language %}{{ trans(key="Recent_Posts" | safe, lang=lang) }}{% else %}Recent Posts{% endif %}</span></h1>

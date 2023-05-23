@@ -1,0 +1,26 @@
+@mixin dark {
+  --f1: #ccc;// Font Color Primary (ccc)
+  --f2: #ddd;// Font color Headers (ddd)
+  --c1: #111;// Background Color Primary (111)
+  --c2: #123;// Background Color Secondary (123)
+  --c3: #345;// Table Rows, Block quote edge, Borders (345)
+  --c4: #789;// Disabled Buttons, Borders, mark background (789)
+  --a1: #09f;// link color (09f)
+  --a2: #0bf;// link hover/focus color (0bf)
+  --a3: #0af;// link h1-h2 hover/focus color (0af)
+  --cg: #593;// ins green, success (593)
+  --cr: #e33;// del red, errors (e33)
+}
+@mixin light {
+  --f1: #444;// Font Color Primary (444)
+  --f2: #333;// Font color Headers (333)
+  --c1: #fff;// Background Color Primary (fff)
+  --c2: #def;// Background Color Secondary (def)
+  --c3: #137;// Table Rows, Block quote edge, Borders (137)
+  --c4: #013;// Disabled Buttons, Borders, mark background (013)
+  --a1: #06e;// link color (06e)
+  --a2: #09f;// link hover/focus color (09f)
+  --a3: #07f;// link h1-h2 hover/focus color (07f)
+  --cg: #373;// ins green, success (373)
+  --cr: #d33;// del red, errors (d33)
+}

@@ -1,16 +1,6 @@
 @import "imports";
 @import "syntax/syntax-abridge-dark";
-// In parenthesis at the end of each comment are tested colors separated by commma, the first value is the default.
+
 :root {
-  --f1: #ccc;// Font Color Primary (ccc)
-  --f2: #ddd;// Font color Headers (ddd)
-  --c1: #111;// Background Color Primary (111)
-  --c2: #222;// Background Color Secondary (222,123)
-  --c3: #333;// Table Rows, Block quote edge, Borders (333,345)
-  --c4: #888;// Disabled Buttons, Borders, mark background (888,789)
-  --a1: #f90;// link color (f90,09f)
-  --a2: #fb0;// link hover/focus color (fb0,0bf)
-  --a3: #f90;// link h1-h2 hover/focus color (f90,0af)
-  --cg: #593;// ins green, success (593)
-  --cr: #e33;// del red, errors (e33)
+  @include dark;
 }

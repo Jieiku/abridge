@@ -99,6 +99,38 @@ taxonomies = [
 </html>
 ```
 
+### CSS
+```css
+html {
+    font-size: var(--fs);
+}
+
+.c {
+    text-align: center;
+}
+```
+
+### SCSS
+```scss
+
+$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif !default;
+$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace !default;
+
+@mixin font {
+  // convert space separated list to comma separated list
+  $font: list.join($font, "", $separator: comma);
+  $font: functions.remove($font, "");
+  $font-mono: list.join($font-mono, "", $separator: comma);
+  $font-mono: functions.remove($font-mono, "");
+
+  $font: functions.font-var($font, $fontExt-Main, $findFont-Main);
+  $font-mono: functions.font-var($font-mono, $fontExt-Code, $findFont-Code);
+
+  #{--ff}: $font;
+  #{--fm}: $font-mono;//code
+}
+```
+
 ### javascript
 ```javascript
 function closeSearch() {//close the search displaying the regular page.
@@ -342,38 +374,4 @@ for yr in lwr..upr do
     puts "#{yr} is not a leap year"
   end
 end
-```
-
-### SCSS
-```scss
-
-$font: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans", Helvetica, Arial, sans-serif !default;
-$font-mono: ui-monospace, Menlo, Monaco, Consolas, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "DejaVu Sans Mono", "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Ubuntu Mono", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, monospace !default;
-
-@mixin root {
-  #{--ff}: $font;
-  #{--fm}: $font-mono;//code
-
-  --fs: 1rem; //font-size
-
-  // Responsive typography
-  @if $enable-responsive-typography {
-    @if map-get($breakpoints, "lg") {
-      @media (min-width: map-get($breakpoints, "lg")) {
-        --fs: 1.08rem;
-      }
-    }
-  }
-}
-```
-
-### CSS
-```css
-html {
-    font-size: var(--fs);
-}
-
-.c {
-    text-align: center;
-}
 ```

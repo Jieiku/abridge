@@ -16,11 +16,49 @@ You can then edit or comment out the values in this file as necessary.
 
 You should also uncomment out the line #theme = "abridge" in your root zola config.toml file. This tells your root zola site to use the abridge theme in the themes folder.
 
-You can set the number of items that appear on the home page by editing `themes\abridge\content\_index.md` file and adjusting `paginate_by = 5`
+## Pagination
 
-You can set the overal page width by editing `themes\abridge\sass\_variables.scss` file, and adjusting these two lines:
+You can set the number of items that appear on the home page by editing `content\_index.md` file and adjusting `paginate_by = 3`
+
+## Sass Overrides
+
+Abridge SCSS variables can be overrided by editing `sass\abridge.scss` file in your project's root sass folder.
+
+### Page Width
 
 ```scss
-$mw:50% !default;// max-width
-$mb:1200px !default;// value at which to switch from fluid layout to using max-width
+$mw:75%,// max-width
 ```
+
+### Abridge Theme Modes
+
+```scss
+$abridgeMode: "switcher",//valid values: switcher, auto, dark, light
+```
+
+### Colors and Styles
+
+You can specify which color template you want to use as a base:
+```scss
+$color: "orange",// color template to use/override: orange, blue, blueshade
+```
+
+Then override individual colors as needed:
+```scss
+/// Dark Colors
+$f1d: #ccc,// Font Color Primary
+$f2d: #ddd,// Font Color Headers
+$c1d: #111,// Background Color Primary
+$c2d: #222,// Background Color Secondary
+...
+```
+
+### Footer Social Icons
+
+You should configure which social icons you plan to use. (makes the css file size smaller)
+
+To simply turn them all off you can set `$enable-icons: false`
+
+Otherwise enable only the icons you need, eg for mail you would set `$icon-mail: true`
+
+You should then disable all the icons that you do not use.

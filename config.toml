@@ -1,6 +1,9 @@
 # do NOT include a trailing slash on the base URL
 base_url = "https://abridge.netlify.app"
-#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk, also set in [extra] uglyurls = true, and integrity = false
+
+#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk
+# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
+
 default_language = "en"
 compile_sass = true
 minify_html = false
@@ -71,8 +74,6 @@ external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 [extra]
-uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
-
 ###############################################################################
 ### Language
 ### https://www.w3schools.com/tags/ref_country_codes.asp
@@ -182,8 +183,10 @@ researchgate = "your-profile-id"
 ### search_library: library to use, valid values: false, "elasticlunr", "tinysearch", "stork"
 ###############################################################################
 
+uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
-js_bundle = false # multiple javascript files combined into a single file (setting to false is useful during js development)
+
+js_bundle = true # multiple javascript files combined into a single file (setting to false is useful during js development)
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
 
@@ -196,14 +199,7 @@ search_library = 'elasticlunr'
 #js_codecopy = "codecopy.js"# Bundleable - copy code block to clipboard button
 #js_email = "email.js"# Bundleable - obfuscates email address in footer
 
-########## Switcher ########## (comment this block out if NOT using switcher):
-stylesheets = [ "abridge.css" ] # Automatic Dark/Light Theme based on browser/system preference with switcher
-
-########## No Switcher ##########
-#stylesheets = [ "abridge-auto.css" ] # Automatic Dark/Light Theme based on browser/system preference
-#stylesheets = [ "abridge-dark.css" ] # Dark Theme
-#stylesheets = [ "abridge-light.css" ] # Light Theme
-
+stylesheets = [ "abridge.css" ]
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.

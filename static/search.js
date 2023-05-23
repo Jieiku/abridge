@@ -3,6 +3,7 @@ function closeSearchNow() {
     const main = document.querySelector("main");
     main.innerHTML = window.main
 }
+
 function goSearchNow() {
     const main = document.querySelector("main");
     if (!window.main) {
@@ -27,13 +28,6 @@ function goSearchNow() {
     document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
     return false
 }
-window.onload = function() {
-    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
-};
-
-// Everything Below this line For Suggestsions as you type in search box
-var suggestions = document.getElementById("suggestions");
-var searchinput = document.getElementById("searchinput");
 
 /* Close search suggestion popup list */
 function closeAllLists(elmnt) {
@@ -81,9 +75,6 @@ function inputFocus(e) {
   }
 
 }
-
-document.addEventListener("keydown", inputFocus);
-document.addEventListener("click", function(event) {suggestions.contains(event.target) || suggestions.classList.add("d-none")});
 
 // Get substring by bytes
 // If using JavaScript inline substring method, it will return error codes
@@ -156,208 +147,223 @@ function getByteByHex(hexCode) {
   return getByteByBinary(parseInt(hexCode, 16).toString(2));
 }
 
-/*
-Source:
-  - https://github.com/nextapps-de/flexsearch#index-documents-field-search
-  - https://raw.githack.com/nextapps-de/flexsearch/master/demo/autocomplete.html
-  - http://elasticlunr.com/
-  - https://github.com/getzola/zola/blob/master/docs/static/search.js
-  - https://github.com/aaranxu/adidoks/blob/main/static/js/search.js
-*/
-(function(){
-  var lang = document.documentElement.getAttribute("lang");
-  var langOnly = lang.substring(0, 2);
-  var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
-  if (baseUrl.slice(-1) == "/") {
-      baseUrl = baseUrl.slice(0, -1);
-  }
+window.onload = function() {
+    if (document.body.contains(document.goSearch)) {
+      document.goSearch.onsubmit = function() { return goSearchNow() };
+      var suggestions = document.getElementById("suggestions");
+      var searchinput = document.getElementById("searchinput");
+      document.addEventListener("keydown", inputFocus);
+      document.addEventListener("click", function(event) {suggestions.contains(event.target) || suggestions.classList.add("d-none")});
 
-  var index;
-  searchinput.addEventListener('input', show_results, true);
-  suggestions.addEventListener('click', accept_suggestion, true);
+      /*
+      Source:
+        - https://github.com/nextapps-de/flexsearch#index-documents-field-search
+        - https://raw.githack.com/nextapps-de/flexsearch/master/demo/autocomplete.html
+        - http://elasticlunr.com/
+        - https://github.com/getzola/zola/blob/master/docs/static/search.js
+        - https://github.com/aaranxu/adidoks/blob/main/static/js/search.js
+      */
+      (function(){
+        var lang = document.documentElement.getAttribute("lang");
+        var langOnly = lang.substring(0, 2);
+        var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
+        if (baseUrl.slice(-1) == "/") {
+            baseUrl = baseUrl.slice(0, -1);
+        }
 
-  async function show_results(){
-    var initIndex = async function () {
-      if (index === undefined) {
-        index = fetch(baseUrl + '/search_index.' + langOnly + '.json')
-          .then(
-            async function(response) {
-              return await elasticlunr.Index.load(await response.json());
+        var index;
+        searchinput.addEventListener('input', show_results, true);
+        suggestions.addEventListener('click', accept_suggestion, true);
+
+        async function show_results(){
+          var initIndex = async function () {
+            if (index === undefined) {
+              index = fetch(baseUrl + '/search_index.' + langOnly + '.json')
+                .then(
+                  async function(response) {
+                    return await elasticlunr.Index.load(await response.json());
+                }
+              );
+            }
+            let res = await index;
+            return res;
           }
-        );
-      }
-      let res = await index;
-      return res;
-    }
-    var value = this.value.trim();
-    var options = {
-      bool: "OR",
-      fields: {
-        title: {boost: 2},
-        body: {boost: 1},
-      }
-    };
-    //var results = index.search(value, options);
-    var results = (await initIndex()).search(value, options);
+          var value = this.value.trim();
+          var options = {
+            bool: "OR",
+            fields: {
+              title: {boost: 2},
+              body: {boost: 1},
+            }
+          };
+          //var results = index.search(value, options);
+          var results = (await initIndex()).search(value, options);
 
-    var entry, childs = suggestions.childNodes;
-    var i = 0, len = results.length;
-    var items = value.split(/\s+/);
-    suggestions.classList.remove('d-none');
+          var entry, childs = suggestions.childNodes;
+          var i = 0, len = results.length;
+          var items = value.split(/\s+/);
+          suggestions.classList.remove('d-none');
 
-    results.forEach(function(page) {
-      if (page.doc.body !== '') {
-        entry = document.createElement('div');
+          results.forEach(function(page) {
+            if (page.doc.body !== '') {
+              entry = document.createElement('div');
 
-        entry.innerHTML = '<a href><span></span><span></span></a>';
+              entry.innerHTML = '<a href><span></span><span></span></a>';
 
-        a = entry.querySelector('a'),
-        t = entry.querySelector('span:first-child'),
-        d = entry.querySelector('span:nth-child(2)');
-        a.href = page.ref;
-        t.textContent = page.doc.title;
-        d.innerHTML = makeTeaser(page.doc.body, items);
+              a = entry.querySelector('a'),
+              t = entry.querySelector('span:first-child'),
+              d = entry.querySelector('span:nth-child(2)');
+              a.href = page.ref;
+              t.textContent = page.doc.title;
+              d.innerHTML = makeTeaser(page.doc.body, items);
 
-        suggestions.appendChild(entry);
-      }
-    });
+              suggestions.appendChild(entry);
+            }
+          });
 
-    while(childs.length > len){
-        suggestions.removeChild(childs[i])
-    }
+          while(childs.length > len){
+              suggestions.removeChild(childs[i])
+          }
 
-  }
+        }
 
-  function accept_suggestion(){
+        function accept_suggestion(){
 
-      while(suggestions.lastChild){
+            while(suggestions.lastChild){
 
-          suggestions.removeChild(suggestions.lastChild);
-      }
+                suggestions.removeChild(suggestions.lastChild);
+            }
 
-      return false;
-  }
+            return false;
+        }
 
-  // Taken from mdbook
-  // The strategy is as follows:
-  // First, assign a value to each word in the document:
-  //  Words that correspond to search terms (stemmer aware): 40
-  //  Normal words: 2
-  //  First word in a sentence: 8
-  // Then use a sliding window with a constant number of words and count the
-  // sum of the values of the words within the window. Then use the window that got the
-  // maximum sum. If there are multiple maximas, then get the last one.
-  // Enclose the terms in <b>.
-  function makeTeaser(body, terms) {
-    var TERM_WEIGHT = 40;
-    var NORMAL_WORD_WEIGHT = 2;
-    var FIRST_WORD_WEIGHT = 8;
-    var TEASER_MAX_WORDS = 30;
+        /* Taken from mdbook
+        // The strategy is as follows:
+        // First, assign a value to each word in the document:
+        //  Words that correspond to search terms (stemmer aware): 40
+        //  Normal words: 2
+        //  First word in a sentence: 8
+        // Then use a sliding window with a constant number of words and count the
+        // sum of the values of the words within the window. Then use the window that got the
+        // maximum sum. If there are multiple maximas, then get the last one.
+        // Enclose the terms in <b>.
+        */
+        function makeTeaser(body, terms) {
+          var TERM_WEIGHT = 40;
+          var NORMAL_WORD_WEIGHT = 2;
+          var FIRST_WORD_WEIGHT = 8;
+          var TEASER_MAX_WORDS = 30;
 
-    var stemmedTerms = terms.map(function (w) {
-      return elasticlunr.stemmer(w.toLowerCase());
-    });
-    var termFound = false;
-    var index = 0;
-    var weighted = []; // contains elements of ["word", weight, index_in_document]
+          var stemmedTerms = terms.map(function (w) {
+            return elasticlunr.stemmer(w.toLowerCase());
+          });
+          var termFound = false;
+          var index = 0;
+          var weighted = []; // contains elements of ["word", weight, index_in_document]
 
-    // split in sentences, then words
-    var sentences = body.toLowerCase().split(". ");
-    for (var i in sentences) {
-      var words = sentences[i].split(/[\s\n]/);
-      var value = FIRST_WORD_WEIGHT;
-      for (var j in words) {
+          // split in sentences, then words
+          var sentences = body.toLowerCase().split(". ");
+          for (var i in sentences) {
+            var words = sentences[i].split(/[\s\n]/);
+            var value = FIRST_WORD_WEIGHT;
+            for (var j in words) {
 
-        var word = words[j];
+              var word = words[j];
 
-        if (word.length > 0) {
-          for (var k in stemmedTerms) {
-            if (elasticlunr.stemmer(word).startsWith(stemmedTerms[k])) {
-              value = TERM_WEIGHT;
-              termFound = true;
+              if (word.length > 0) {
+                for (var k in stemmedTerms) {
+                  if (elasticlunr.stemmer(word).startsWith(stemmedTerms[k])) {
+                    value = TERM_WEIGHT;
+                    termFound = true;
+                  }
+                }
+                weighted.push([word, value, index]);
+                value = NORMAL_WORD_WEIGHT;
+              }
+
+              index += word.length;
+              index += 1;  // ' ' or '.' if last word in sentence
+            }
+
+            index += 1;  // because we split at a two-char boundary '. '
+          }
+
+          if (weighted.length === 0) {
+            if (body.length !== undefined && body.length > TEASER_MAX_WORDS * 10) {
+              return body.substring(0, TEASER_MAX_WORDS * 10) + '...';
+            } else {
+              return body;
             }
           }
-          weighted.push([word, value, index]);
-          value = NORMAL_WORD_WEIGHT;
+
+          var windowWeights = [];
+          var windowSize = Math.min(weighted.length, TEASER_MAX_WORDS);
+          // We add a window with all the weights first
+          var curSum = 0;
+          for (var i = 0; i < windowSize; i++) {
+            curSum += weighted[i][1];
+          }
+          windowWeights.push(curSum);
+
+          for (var i = 0; i < weighted.length - windowSize; i++) {
+            curSum -= weighted[i][1];
+            curSum += weighted[i + windowSize][1];
+            windowWeights.push(curSum);
+          }
+
+          // If we didn't find the term, just pick the first window
+          var maxSumIndex = 0;
+          if (termFound) {
+            var maxFound = 0;
+            // backwards
+            for (var i = windowWeights.length - 1; i >= 0; i--) {
+              if (windowWeights[i] > maxFound) {
+                maxFound = windowWeights[i];
+                maxSumIndex = i;
+              }
+            }
+          }
+
+          var teaser = [];
+          var startIndex = weighted[maxSumIndex][2];
+          for (var i = maxSumIndex; i < maxSumIndex + windowSize; i++) {
+            var word = weighted[i];
+            if (startIndex < word[2]) {
+              // missing text from index to start of `word`
+              teaser.push(body.substring(startIndex, word[2]));
+              startIndex = word[2];
+            }
+
+            // add <em/> around search terms
+            if (word[1] === TERM_WEIGHT) {
+              teaser.push("<b>");
+            }
+
+            startIndex = word[2] + word[0].length;
+            // Check the string is ascii characters or not
+            var re = /^[\x00-\xff]+$/
+            if (word[1] !== TERM_WEIGHT && word[0].length >= 12 && !re.test(word[0])) {
+              // If the string's length is too long, it maybe a Chinese/Japance/Korean article
+              // if using substring method directly, it may occur error codes on emoji chars
+              var strBefor = body.substring(word[2], startIndex);
+              var strAfter = substringByByte(strBefor, 12);
+              teaser.push(strAfter);
+            } else {
+              teaser.push(body.substring(word[2], startIndex));
+            }
+
+            if (word[1] === TERM_WEIGHT) {
+              teaser.push("</b>");
+            }
+          }
+          teaser.push("…");
+          return teaser.join("");
         }
-
-        index += word.length;
-        index += 1;  // ' ' or '.' if last word in sentence
-      }
-
-      index += 1;  // because we split at a two-char boundary '. '
+        document.goSearch.onsubmit = function() { return goSearchNow() };
+      }());
     }
+};
 
-    if (weighted.length === 0) {
-      if (body.length !== undefined && body.length > TEASER_MAX_WORDS * 10) {
-        return body.substring(0, TEASER_MAX_WORDS * 10) + '...';
-      } else {
-        return body;
-      }
-    }
 
-    var windowWeights = [];
-    var windowSize = Math.min(weighted.length, TEASER_MAX_WORDS);
-    // We add a window with all the weights first
-    var curSum = 0;
-    for (var i = 0; i < windowSize; i++) {
-      curSum += weighted[i][1];
-    }
-    windowWeights.push(curSum);
 
-    for (var i = 0; i < weighted.length - windowSize; i++) {
-      curSum -= weighted[i][1];
-      curSum += weighted[i + windowSize][1];
-      windowWeights.push(curSum);
-    }
 
-    // If we didn't find the term, just pick the first window
-    var maxSumIndex = 0;
-    if (termFound) {
-      var maxFound = 0;
-      // backwards
-      for (var i = windowWeights.length - 1; i >= 0; i--) {
-        if (windowWeights[i] > maxFound) {
-          maxFound = windowWeights[i];
-          maxSumIndex = i;
-        }
-      }
-    }
-
-    var teaser = [];
-    var startIndex = weighted[maxSumIndex][2];
-    for (var i = maxSumIndex; i < maxSumIndex + windowSize; i++) {
-      var word = weighted[i];
-      if (startIndex < word[2]) {
-        // missing text from index to start of `word`
-        teaser.push(body.substring(startIndex, word[2]));
-        startIndex = word[2];
-      }
-
-      // add <em/> around search terms
-      if (word[1] === TERM_WEIGHT) {
-        teaser.push("<b>");
-      }
-
-      startIndex = word[2] + word[0].length;
-      // Check the string is ascii characters or not
-      var re = /^[\x00-\xff]+$/
-      if (word[1] !== TERM_WEIGHT && word[0].length >= 12 && !re.test(word[0])) {
-        // If the string's length is too long, it maybe a Chinese/Japance/Korean article
-        // if using substring method directly, it may occur error codes on emoji chars
-        var strBefor = body.substring(word[2], startIndex);
-        var strAfter = substringByByte(strBefor, 12);
-        teaser.push(strAfter);
-      } else {
-        teaser.push(body.substring(word[2], startIndex));
-      }
-
-      if (word[1] === TERM_WEIGHT) {
-        teaser.push("</b>");
-      }
-    }
-    teaser.push("…");
-    return teaser.join("");
-  }
-document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
-}());

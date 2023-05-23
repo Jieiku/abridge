@@ -1,0 +1,39 @@
+// Syntax Highlighting
+@mixin dark(
+  $bg: #191919,
+  $h1: #e65,
+  $h2: #f91,
+  $h3: #eb6,
+  $h4: #ac3,
+  $h5: #8db,
+  $h6: #6ae,
+  $h7: #d6e
+) {
+  #{--bg}: $bg;// background color
+  #{--h1}: $h1;// red, support function
+  #{--h2}: $h2;// orange, punctuation, constant, variable, json-key
+  #{--h3}: $h3;// tan, entity/function name
+  #{--h4}: $h4;// green, string
+  #{--h5}: $h5;// teal, escape character
+  #{--h6}: $h6;// blue, declaration, tag, property
+  #{--h7}: $h7;// purple, operators
+}
+@mixin light(
+  $bg: #f7f7f7,
+  $h1: #a21,
+  $h2: #930,
+  $h3: #a50,
+  $h4: #350,
+  $h5: #286,
+  $h6: #059,
+  $h7: #a3c
+) {
+  #{--bg}: $bg;// background color
+  #{--h1}: $h1;// red, support function
+  #{--h2}: $h2;// orange, punctuation, constant, variable, json-key
+  #{--h3}: $h3;// tan, entity/function name
+  #{--h4}: $h4;// green, string
+  #{--h5}: $h5;// teal, escape character
+  #{--h6}: $h6;// blue, declaration, tag, property
+  #{--h7}: $h7;// purple, operators
+}

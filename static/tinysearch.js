@@ -27,8 +27,17 @@ function goSearchNow() {
     document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
     return false
 }
+var loaded = false;
 window.onload = function() {
     document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+    document.getElementById('searchinput').onfocus = function() {
+        if (!loaded) {
+            lazyLoad();
+            loaded = true;
+            document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+        }
+        document.getElementById('searchinput').onfocus = '';
+    }
 };
 
 async function lazyLoad() {
@@ -37,13 +46,6 @@ async function lazyLoad() {
         baseUrl = baseUrl.slice(0, -1);
     }
     await init(baseUrl + "/tinysearch_engine_bg.wasm")
-}
-
-var loaded = false;
-if (!loaded) {
-    lazyLoad();
-    loaded = true;
-    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
 }
 
 /* Close search suggestion popup list */
@@ -227,7 +229,7 @@ async function init(e) {
     if (baseUrl.slice(-1) == "/") {
         baseUrl = baseUrl.slice(0, -1);
     }
-    void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm", import.meta.url));
+    void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm"));
     const t = {
         wbg: {}
     };
@@ -240,7 +242,3 @@ async function init(e) {
     } = await load(await (e = "string" == typeof e || "function" == typeof Request && e instanceof Request || "function" == typeof URL && e instanceof URL ? fetch(e) : e), t);
     return wasm = e.exports, init.__wbindgen_wasm_module = n, wasm
 }
-export default init;
-export {
-    search
-};

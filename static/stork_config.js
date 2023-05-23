@@ -11,4 +11,15 @@ function loadStork() {
     }); // download WASM
     stork.register("stork",baseUrl + "/stork.st");
 }
-loadStork();
+var loaded = false;
+window.onload = function() {
+    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+    document.getElementById('searchinput').onfocus = function() {
+        if (!loaded) {
+            loadStork();
+            loaded = true;
+            document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+        }
+        document.getElementById('searchinput').onfocus = '';
+    }
+};

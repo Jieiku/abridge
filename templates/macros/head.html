@@ -56,19 +56,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 {%- macro js(config) %}
   {%- set search_library=config.extra.search_library | default(value="elasticlunr") -%}
 
@@ -129,7 +116,7 @@
   {%- if search_library == "tinysearch" %}
   <script defer type="module" src="{{ get_url(path='tinysearch.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='tinysearch.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- elif search_library == "stork" %}
-  <script defer type="module" src="{{ get_url(path='stork.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='stork.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer type="module" src="{{ get_url(path='search_stork.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search_stork.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
   <script defer src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='elasticlunr.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   <script defer src="{{ get_url(path='search.js', trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
@@ -166,7 +153,7 @@
   {%- endif %}{%- endif %}
 
  {%- if config.extra.math_auto_render or page.extra.math_auto_render %}
-  {%- set katex_autorender_js=config.extra.katex_autorender_js | default(value="auto-render.min.js") -%}
+  {%- set katex_autorender_js=config.extra.katex_autorender_js | default(value="katex-auto-render.min.js") -%}
   {%- if katex_autorender_js %}
   {%- if katex_autorender_js is matching("^http[s]?://") %}
   <script defer src="{{ katex_autorender_js | safe }}"{%- if config.extra.integrity | default(value=true) and config.extra.katex_autorender_js_integrity %} integrity="{{ config.extra.katex_autorender_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
@@ -184,33 +171,6 @@
 {%- endif %}
 
 {%- endmacro %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -2,13 +2,13 @@
 base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public/" # Usable site directly from disk, also set in [extra] uglyurls = true
 title = "Abridge"
-#description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
-#default_language = "en"
-#output_dir = "public"
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
+default_language = "en"
 compile_sass = true
-#minify_html = false
-#generate_feed = true
-#feed_filename = "atom.xml"
+minify_html = false
+generate_feed = true
+feed_filename = "atom.xml"
+output_dir = "public"
 #ignored_content = ["*.{graphml,xlsx}", "temp.*"]
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 taxonomies = [
@@ -18,28 +18,26 @@ taxonomies = [
 
 #theme = "abridge"
 
-#[markdown]
-#highlight_code = true
-#highlight_theme = "css"
-
-#render_emoji = false
-#external_links_target_blank = true # rel="noopener"
-#external_links_no_follow = false   # rel="nofollow"
-#external_links_no_referrer = false # rel="noreferrer"
-#smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
-
 build_search_index = true
+
 [search]                # Options specific to elasticlunr search.
 index_format = "elasticlunr_json"
 include_title = true        # include title of page/section in index
-include_description = false # include description of page/section in index
+include_description = true # include description of page/section in index
 include_content = true      # include rendered content of page/section in index
 # truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
 
-#[extra]
-#uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
-#language_code = "en-US"
+[markdown]
+highlight_code = true
+highlight_theme = "css"
+render_emoji = false
+external_links_target_blank = true # rel="noopener"
+external_links_no_follow = false   # rel="nofollow"
+external_links_no_referrer = false # rel="noreferrer"
+smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
+[extra]
+uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 
 ###############################################################################
 ### meta/seo/analytic tags
@@ -47,15 +45,16 @@ include_content = true      # include rendered content of page/section in index
 ### To always set the page title exactly eg "Abridge" then comment out title_addition or set to false (not recommend, bad for SEO)
 ###############################################################################
 
-#title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
-#title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
-#author = "Jake G" # Put Your Name here
-#keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
-#banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-#twitter = "your-user-name" # for SEO: twitter:site and twitter:creator
-#google = "Your Google Site verification code."
-#bing = "Your Bing Site verification code."
-#seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+language_code = "en-US"
+title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
+title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
+author = "Jake G" # Put Your Name here
+keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
+banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
+twitter = "your-user-name" # for SEO: twitter:site and twitter:creator
+google = "Your Google Site verification code."
+bing = "Your Bing Site verification code."
+seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 
 
 ###############################################################################
@@ -65,56 +64,57 @@ include_content = true      # include rendered content of page/section in index
 ### divider:    " "        "&middot;"        "&bull;"
 ###############################################################################
 
-#recent = true # TOC / index
-#recent_items = 9
+recent = true # TOC / index
+recent_items = 9
 
-#meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, categories_tags=true, divider=" " }
-#meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, categories_tags=true, divider=" " }
+meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, categories_tags=true, divider=" " }
+meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, categories_tags=true, divider=" " }
 
-#title_size_index = "s85" # size: s95, s90, s85, s80, s75, s70, false(full size)
-#footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
-#footer_credit = false
+title_size_index = "s85" # size: s95, s90, s85, s80, s75, s70, false(full size)
+footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
+footer_credit = true
 #footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank">Abridge</a></p>'
 
 ### Uncomment one of the below lines, or neither, depending on which type of logo you want to use:
 #logo = { file="logo.svg", width="32", height="32", alt="Abridge", text="bridge" }
 #textlogo = '<font color="#f90">A</font>bridge'
-#textlogo = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f90" viewBox="0 0 96 96" width="32" height="32"><path stroke-width="14" d="M14 99 46 7h4l32 92"/><path stroke-width="9" d="M-3 82c43-26 59-26 102 0"/><path stroke-linecap="round" stroke-width="1.5" d="M94 72v7m-5-9.8v7m-5-9.8v7.1M79 64v7M63 57.7v7m-5-8.2v7m-5-7.8v7m-5-7.2v7m-5-6.7v7m-5-6.3v7m-5-5.8v7M17 64v7m-5-4.6v7m-5-4.2v7M2 72v7"/></svg>bridge'
+textlogo = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f90" viewBox="0 0 96 96" width="32" height="32"><path stroke-width="14" d="M14 99 46 7h4l32 92"/><path stroke-width="9" d="M-3 82c43-26 59-26 102 0"/><path stroke-linecap="round" stroke-width="1.5" d="M94 72v7m-5-9.8v7m-5-9.8v7.1M79 64v7M63 57.7v7m-5-8.2v7m-5-7.8v7m-5-7.2v7m-5-6.7v7m-5-6.3v7m-5-5.8v7M17 64v7m-5-4.6v7m-5-4.2v7M2 72v7"/></svg>bridge'
 
-#sitedesc = false # enables or disables the display of the site description below the logo.
+sitedesc = false # enables or disables the display of the site description below the logo.
 #copyright_start_year = 2019  # optional
 #copyright_end_year = 2020  # optional, recommend leaving unset, zola build will set this to current year by default
-#headhr = false # show or hide horizontal rule below header
-#foothr = true # show or hide horizontal rule above footer
+headhr = false # show or hide horizontal rule below header
+foothr = true # show or hide horizontal rule above footer
 
-#menu = [
-#    {url = "/about/", name = "About", slash = true, blank = false},
-#    {url = "/posts/", name = "Posts", slash = true, blank = false},
-#    {url = "/categories/", name = "Categories", slash = true, blank = false},
-#    {url = "/tags/", name = "Tags", slash = true, blank = false},
-#]
-#menu_footer = [
-#    {url = "/about/", name = "About", slash = true, blank = false},
-#    {url = "/contact/", name = "Contact", slash = true, blank = false},
-#    {url = "/privacy/", name = "Privacy", slash = true, blank = false},
-#    {url = "/sitemap.xml", name = "Sitemap", slash = false, blank = true},
-#]
+menu = [
+    {url = "/about/", name = "About", slash = true, blank = false},
+    {url = "/posts/", name = "Posts", slash = true, blank = false},
+    {url = "/categories/", name = "Categories", slash = true, blank = false},
+    {url = "/tags/", name = "Tags", slash = true, blank = false},
+]
+menu_footer = [
+    {url = "/about/", name = "About", slash = true, blank = false},
+    {url = "/contact/", name = "Contact", slash = true, blank = false},
+    {url = "/privacy/", name = "Privacy", slash = true, blank = false},
+    {url = "/sitemap.xml", name = "Sitemap", slash = false, blank = true},
+]
 
 
 ###############################################################################
 ### Resource Files
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
+### search_library: library to use, valid values: false, "elasticlunr", "tinysearch", "stork"
 ###############################################################################
 
-#integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
-#js_bundle = false # multiple javascript files combined into a single file (setting to false is useful during js development)
+integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
+js_bundle = false # multiple javascript files combined into a single file (setting to false is useful during js development)
+js_switcher = true # The button that allows manually changing between light/dark mode.
+js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
 
-#js_switcher = true # The button that allows manually changing between light/dark mode.
+search_library = 'elasticlunr'
 
-#search_library = false # search library to use, valid values are: false, "elasticlunr", "tinysearch", "stork" (false/elasticlunr causes issues)
-
-#js_search_index = "search_index.en.json" # Separate Always, generated each build
+js_search_index = "search_index.en.json" # Separate Always, generated each build
 #js_theme = "theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
 #js_themeButton = "theme_button.js"# Bundleable - light/dark switcher button
 #js_prestyle = "prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
@@ -122,7 +122,7 @@ include_content = true      # include rendered content of page/section in index
 #js_email = "email.js"# Bundleable - obfuscates email address in footer
 
 ########## Switcher ########## (comment this block out if NOT using switcher):
-#stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
+stylesheets = [ "abridge.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference with switcher
 
 ########## No Switcher ##########
 #stylesheets = [ "abridge-auto.css" ] # Orange Automatic Dark/Light Theme based on browser/system preference
@@ -134,14 +134,14 @@ include_content = true      # include rendered content of page/section in index
 ### Favicons, comment out a line to disable loading some or all of these if needed.
 ###############################################################################
 
-#favicon_theme_color = "#333333"
-#favicon_ms_color = "#333333"
-#favicon_webmanifest = "site.webmanifest" # Used for android-chrome-512x512.png and android-chrome-192x192.png
-#favicon_mask = "safari-pinned-tab.svg" # safari-pinned-tab.svg
-#favicon_mask_color = "#ff9900"
-#favicon180 = "apple-touch-icon.png" # apple-touch-icon.png
-#favicon32 = "favicon-32x32.png" # favicon-32x32.png
-#favicon16 = "favicon-16x16.png" # favicon-16x16.png
+favicon_theme_color = "#333333"
+favicon_ms_color = "#333333"
+favicon_webmanifest = "site.webmanifest" # Used for android-chrome-512x512.png and android-chrome-192x192.png
+favicon_mask = "safari-pinned-tab.svg" # safari-pinned-tab.svg
+favicon_mask_color = "#ff9900"
+favicon180 = "apple-touch-icon.png" # apple-touch-icon.png
+favicon32 = "favicon-32x32.png" # favicon-32x32.png
+favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 
 ###############################################################################
@@ -262,7 +262,7 @@ include_content = true      # include rendered content of page/section in index
 #katex_css = "katex.min.css" # Fonts - load the css/fonts locally
 #katex_js = "katex.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
 #mathtex_js = "mathtex-script-type.min.js" # use local js, so that we dont have to whitelist cdn.jsdelivr.net for script src in CSP
-#katex_autorender_js = "auto-render.min.js"
+#katex_autorender_js = "katex-auto-render.min.js"
 
 ### Load Katex External Resources
 #katex_css = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" # Fonts - use remote fonts

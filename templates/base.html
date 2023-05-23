@@ -51,14 +51,14 @@
       </div>
       <div>
         <ul>
-          {%- set js_theme=config.extra.js_theme | default(value=true) -%}
-          {%- if config.extra.menu or js_theme %}
+          {%- set js_switcher=config.extra.js_switcher | default(value=true) -%}
+          {%- if config.extra.menu or js_switcher %}
           {%- if config.extra.menu %}
           {%- for i in config.extra.menu -%}
           <li> <h2><a href="{{ get_url(path=i.url, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{{ i.name | safe }}</a></h2> </li>
           {%- endfor -%}
           {%- endif -%}
-          {%- if js_theme -%}
+          {%- if js_switcher -%}
           {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
           <li class="js">{%- if icon_adjust -%}<i type="reset" id="mode" class="{{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
           {%- endif -%}

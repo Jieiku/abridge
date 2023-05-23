@@ -15,6 +15,13 @@
 // Config
 @import "variables";
 
+//@import "fonts/Roboto";
+//@import "fonts/Roboto-Mono"; // Monospaced
+//@import "fonts/Arimo";
+//@import "fonts/Lato";
+//@import "fonts/FiraCode"; // Monospaced
+//@import "fonts/Abridge"; // Icon Font (don't recommend, CSS only icons are in my opinion better.)
+
 // Includes - Sorted by importance/category (includes at top are needed most frequently)
 @import "include/document"; // html
 @import "include/typography"; // a, headings, p, ul, blockquote, ...

@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Roboto Mono';
+    src: local("Roboto Mono"), local("Roboto-Mono"), local("RobotoMono"), local("Roboto-Mono-Regular"), local("RobotoMono-Regular"), url("font/Roboto-Mono.woff2");//latin regular
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto Mono';
+    src: local("Roboto Mono Italic"), local("Roboto-Mono-Italic"), local("RobotoMono-Italic"), url("font/Roboto-Mono-Italic.woff2");//latin italic
+    font-style: italic;
+    font-display: swap;
+}

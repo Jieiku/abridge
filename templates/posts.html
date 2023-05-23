@@ -39,17 +39,28 @@ This Template can also be used as the rendering template for Sections, eg: examp
     {%- else %}
     {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
     {%- endif %}
+    {%- if sec != "" %}
+      {#- the section always overrides the config -#}
+      {%- if section_item.extra and 'hide_section_dates' in section_item.extra -%}
+        {%- set hide_section_dates = section_item.extra.hide_section_dates -%}
+      {%- elif config.extra.hide_section_dates -%}
+        {%- set hide_section_dates = true -%}
+      {%- endif -%}
+    {%- endif %}
     <div>
       {%- if section_item.title %}
       <h2>{{ section_item.title }}</h2>
       {%- endif %}
-
-      {{ section_item.content | safe }}
-
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
-      {%- if section_item.title %}<h3>{{ year }}</h3>{%- else %}<h2>{{ year }}</h2>{%- endif %}
+      {%- if not hide_section_dates %}
+      {%- if section_item.title %}
+      <h3>{{ year }}</h3>
+      {%- else %}
+      <h2>{{ year }}</h2>
+      {%- endif %}
+      {%- endif %}
       {%- for post in posts %}
-      <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a> - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time></p>
+      <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
       {%- endfor %}
       {%- endfor %}
     </div>

@@ -114,6 +114,7 @@ recent_items = 9
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, categories_tags=true, divider=" " }
 meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, categories_tags=true, divider=" " }
 
+hide_section_dates = false # hides the date for sections that use posts.html as their template.
 title_size_index = "s85" # size: s95, s90, s85, s80, s75, s70, false(full size)
 footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
 footer_credit = true

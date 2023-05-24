@@ -52,23 +52,18 @@
         {%- endif -%}
       </div>
       <div>
-        <ul>
           {%- set js_switcher=config.extra.js_switcher | default(value=true) -%}
           {%- if config.extra.menu or js_switcher %}
           {%- if config.extra.menu %}
           {%- for i in config.extra.menu -%}
-          <li> <h2><a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
-          {%- if lang != config.default_language -%}
-          {{ trans(key=i.name | safe, lang=lang) }}
-          {%- else -%}
-          {{ i.name | safe }}
-          {%- endif -%}
-          </a></h2> </li>
+          <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+          {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
+          </a>
           {%- endfor -%}
           {%- endif -%}
           {%- if js_switcher -%}
           {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
-          <li class="js">{%- if icon_adjust -%}<i type="reset" id="mode" class="{{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="mode">&#9728;</i>{%- endif -%}</li>
+          {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
           {%- endif -%}
           {%- endif -%}
           {%- set language_count = 1 -%}
@@ -76,7 +71,7 @@
           {%- set_global language_count = language_count + 1 -%}
           {%- endfor -%}
           {%- if language_count > 1 %}
-          <li class="js"><div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
+          <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
             {%- if current_url %}
             <div class="dropdown-content">
             {%- for lcode,flag in config.extra.flag -%}
@@ -90,9 +85,8 @@
             {%- endfor -%}
             </div>
             {%- endif %}
-          </div></li>
+          </div>
           {%- endif -%}
-        </ul>
       </div>
       {%- if config.build_search_index %}
       {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
@@ -100,7 +94,7 @@
         <form autocomplete=off class="js" name="goSearch" id="searchbox">
           <div class="searchd">
             <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
-            <button type="submit" title="Search">{%- if icon_search -%}<i class="{{ icon_search }}"></i>{%- else -%}<span class="si">&#8981;</span>{%- endif -%}</button>
+            <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
           </div>
           <div><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
         </form>
@@ -137,16 +131,14 @@
       {#- Copyright END #}
       {%- if config.extra.menu_footer %}
       <nav>
-        <ul>
           {%- for i in config.extra.menu_footer -%}
           {%- if i.url != "sitemap.xml" %}
           {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
           {%- else %}
           {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
           {%- endif %}
-          <li{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> <a href="{{ furl }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {% if lang != config.default_language -%} {{ trans(key=i.name | safe, lang=lang) }} {%- else -%} {{ i.name | safe }} {% endif %} </a> </li>
-          {%- endfor -%}
-        </ul>
+          <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {% if lang != config.default_language -%} {{ trans(key=i.name | safe, lang=lang) }} {%- else -%} {{ i.name | safe }} {% endif %} </a>
+          {%- endfor %}
       </nav>
       {%- endif %}
       {%- if config.extra.footer_credit | default(value=true) %}

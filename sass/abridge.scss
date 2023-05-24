@@ -114,7 +114,8 @@ $h6d: #ac3 !default;// green, string
 $h7d: #8db !default;// teal, escape character
 $h8d: #6ae !default;// blue, declaration, tag, property
 $h9d: #d6e !default;// purple, operators
-$syntax-dark: $h0d $h1d $h2d $h3d $h4d $h5d $h6d $h7d $h8d $h9d;
+$had: 160% !default;// mark/highlight line
+$syntax-dark: $h0d $h1d $h2d $h3d $h4d $h5d $h6d $h7d $h8d $h9d $had;
 
 /// Light Syntax Colors
 $h0: #f7f7f7 !default;// background color
@@ -127,7 +128,8 @@ $h6: #350 !default;// green, string
 $h7: #286 !default;// teal, escape character
 $h8: #059 !default;// blue, declaration, tag, property
 $h9: #a3c !default;// purple, operators
-$syntax-light: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9;
+$ha: 92% !default;// mark/highlight line
+$syntax-light: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
 
 /// These lines find the spot at which to insert your appended fonts.
 //$findFont-Main : "Segoe UI";     // ← append custom MAIN font(s) AFTER this
@@ -444,7 +446,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--a2);
     text-decoration: underline;
   }
-  h1 a, h2 a, main nav a {
+  h1 a, h2 a, main nav a, header nav > div > a {
     color: var(--f2);
     text-decoration: none;
     &:hover {
@@ -625,7 +627,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   footer{
     line-height: var(--lhh);
     hr, p {
-      margin: 0.1rem 0 .3rem;
+      margin: 0.2rem 0;
     }
   }
 }
@@ -637,6 +639,19 @@ $syntax: true !default;//syntax highlighting for code blocks
     border: .1rem solid var(--c4);
     border-radius: var(--br);
     padding: .1rem var(--s1);
+  }
+  header nav > div > a, header i, header .dropdown {
+    margin-right: .2rem;
+    vertical-align: middle;
+    font-weight: var(--fh);
+  }
+  main nav {//pagination
+    a,span {
+      margin: .2rem;
+    }
+  }
+  footer nav > a {
+    margin: .2rem;
   }
   main nav a:hover {//makes border of pagination links hover color
     border-color: var(--a3);
@@ -665,11 +680,6 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
   }
   nav > div {
-    ul, h2 {
-      line-height: 1.9;
-      margin: 0;
-      padding: 0;
-    }
     margin: var(--s1) 0;
   }
   nav {
@@ -739,16 +749,15 @@ $syntax: true !default;//syntax highlighting for code blocks
     display: inline-block;
     position: relative;
     z-index: 99;
-    vertical-align: -3px;
     font-weight: var(--fh);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .dropdown-content {
     display: none;
     position: absolute;
     z-index: 99;
     font-weight: var(--fh);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .dropdown:hover .dropdown-content {
     display: block;
@@ -1061,10 +1070,12 @@ $syntax: true !default;//syntax highlighting for code blocks
   .searchd > input {
     max-width: 100%;
     flex-grow: 1;
-    padding-right:2.4rem;//inlayed search icon
+    padding-right: 1rem;//inlayed search icon
   }
-  .searchd > button {
-    margin-left: -2.4rem;//inlayed search icon
+  .searchd > button {//inlayed search icon
+    position: relative;
+    left: -1rem;
+    margin-left: -1rem;
   }
   // mobile first is min-width for desktop instead of max-width for mobile
   @if map-get($breakpoints, "md") {
@@ -1172,10 +1183,13 @@ $syntax: true !default;//syntax highlighting for code blocks
       font-size: .8rem;
       margin: 0;
       // Highlighted text
+      color: var(--h1);
       mark {
         display: block;
         color: unset;
         padding: 0;
+        background-color: var(--h0);
+        filter: brightness(var(--ha));
       }
     }
     td, th, tr {

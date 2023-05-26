@@ -18,7 +18,14 @@
 {%- block content %}
     <div>
       <h1>404 :(</h1>
-      <p>The page you are looking for doesn't exist or has been moved. Try using the search, or <a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">go home</a>.</p>
-      <p>La page que vous recherchez n'existe pas ou a été déplacée. Essayez d'utiliser la recherche, ou <a href="{{ config.base_url | safe }}/fr/{%- if config.extra.uglyurls %}index.html{%- endif %}">rentrez chez vous</a>.</p>
+      {#- Default English message #}
+      <p>Page not found, maybe moved{% if config.languages | length > 0 %} or not in this language{% endif %}. {% if config.build_search_index %}Try searching or{% endif %} <a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">go to homepage</a>.</p>
+
+      {# Iterate through each language and display the localised 404 message #}
+      {%- for language_name, language in config.languages -%}
+        {%- if language_name != config.default_language -%}
+          <p>{{ trans(key="404_not_found", lang=language_name) }}. {% if config.build_search_index %}{{ trans(key="404_try_search", lang=language_name) }}{% endif %} <a href="{{ config.base_url }}/{{ language_name }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ trans(key="404_go_home", lang=language_name) }}</a>.</p>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 {%- endblock content %}

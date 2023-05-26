@@ -51,6 +51,12 @@ Tags = "Mots-clés"
 Contact = "Contact"
 Privacy = "Confidentialité"
 Sitemap = "Plan du site"
+### Page not found, maybe moved or not in this language
+404_not_found = "Page introuvable, peut-être déplacée ou non dans cette langue"
+### Try searching or
+404_try_search = "Essayez de rechercher ou"
+### go to homepage
+404_go_home = "allez à la page d'accueil"
 
 #[languages.es.translations]
 #flag = "🇪🇸"

@@ -128,7 +128,7 @@ $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
 - Switcher automatically displays a dark or light version depending on browser/OS settings, and has a javascript user clickable theme switcher.
 - Auto automatically displays a dark or light version depending on browser/OS settings.
 - Dark is the dark theme always.
-- Light is the dark theme always.
+- Light is the light theme always.
 
 ### Colors and Styles
 

@@ -50,7 +50,7 @@
 
 {%- macro feed(config) %}
   {%- if config.generate_feed %}
-  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" />
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" />
   {%- endif %}
 {%- endmacro %}
 

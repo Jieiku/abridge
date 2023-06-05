@@ -1,7 +1,7 @@
 {%- macro social_links(config) %}
       <nav>
-          {%- if config.generate_feed -%}{%- if config.extra.feed -%}
-          <a href="{{ get_url(path=config.feed_filename, trailing_slash=false) | safe }}" target="_blank" title="Atom/RSS Feed"><i type="Button" class="svg rss" title="Atom/RSS Feed"></i></a>{% endif -%}{% endif -%}
+          {%- if config.generate_feed and config.extra.feed -%}
+          <a href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="Atom/RSS Feed"><i type="Button" class="svg rss" title="Atom/RSS Feed"></i></a>{% endif -%}
           {%- if config.extra.mail -%}
           {%- if config.extra.mail_encode | default(value=true) -%}
           {%- set base64_email = config.extra.mail -%}

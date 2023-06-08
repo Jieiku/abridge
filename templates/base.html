@@ -92,7 +92,7 @@
             <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
             <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
           </div>
-          <div><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
+          <div class="results"><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
         </form>
       </div>
       {%- endif %}

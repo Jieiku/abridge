@@ -446,7 +446,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--a2);
     text-decoration: underline;
   }
-  h1 a, h2 a, main nav a, header nav > div > a {
+  h1 a, h2 a, main nav a, nav > div > a {
     color: var(--f2);
     text-decoration: none;
     &:hover {
@@ -633,14 +633,21 @@ $syntax: true !default;//syntax highlighting for code blocks
 }
 @if $nav {
   //https://github.com/raj457036/attriCSS
-  main nav a,
-  main nav a:visited {//pagination link styling
+  .on,
+  .on:visited {//pagination link styling
     font-weight: var(--fh);
     border: .1rem solid var(--c4);
     border-radius: var(--br);
     padding: .1rem var(--s1);
   }
-  header nav > div > a, header i, header .dropdown {
+  .on:hover {//makes border of pagination links hover color
+    border-color: var(--a3);
+    .svgh {
+      background: var(--a3);
+      opacity: 1;
+    }
+  }
+  nav > div > a, header i, header .dropdown {
     margin-right: .2rem;
     vertical-align: middle;
     font-weight: var(--fh);
@@ -652,13 +659,6 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
   footer nav > a {
     margin: .2rem;
-  }
-  main nav a:hover {//makes border of pagination links hover color
-    border-color: var(--a3);
-    .svgh {
-      background: var(--a3);
-      opacity: 1;
-    }
   }
   header > nav > div:first-of-type {//Keep the logo from wrapping
     display: inline;
@@ -961,7 +961,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     margin-bottom: .25rem;
   }
   select,
-  input:not([size]):not([type="button" i]):not([type="submit" i]):not([type="reset" i]):not([type="checkbox" i]):not([type="radio" i]) {
+  input:not([size]), input:not([type="button" i]), input:not([type="submit" i]), input:not([type="reset" i]), input:not([type="checkbox" i]), input:not([type="radio" i]) {
     width: 100%;
   }
   [type="color" i] {
@@ -1057,7 +1057,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   #suggestions span:nth-child(2), #results span:nth-child(2) {
     color: var(--f1);
   }
-  nav > div > form > div:last-of-type {//parent div of suggestions div
+  .results {//parent div of suggestions div
     display: block;
     position: relative;
     width: 100%;
@@ -1442,10 +1442,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--h8);
   }
   //json
-  .z-meta.z-mapping.z-key.z-json {
-    .z-punctuation.z-definition.z-string.z-begin.z-json, .z-punctuation.z-definition.z-string.z-end.z-json, .z-string.z-quoted.z-double.z-json {
-        color: var(--h4);
-    }
+  .z-key.z-json {
+    color: var(--h4);
   }
   // Figure out how to reproduce in code block otherwise don't include
   //.z-constant.z-numeric.z-line-number.z-match {

@@ -118,12 +118,26 @@
 
 
 
-{%- macro footer(page) %}
-{%- if page.reading_time %}
-{%- if page.reading_time > 2 %}
+{%- macro footer(page, config) %}
+{%- if page.reading_time and page.reading_time > 2 %}
 <p><b><a href="#">Back to top</a></b></p>
 {%- endif %}
+<nav><!-- prev/next page title. Keep for CSS selector even if empty -->
+{% if not config.extra.hide_page_nextprev_titles | default(value=false) %}
+{% if page.lower or page.higher-%}
+	<div>
+	{% if page.lower -%}
+		<a href="{{ page.lower.permalink | safe }}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
+	{%- endif %}
+	</div>
+	<div>
+	{% if page.higher -%}
+		<a href="{{ page.higher.permalink | safe }}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
+	{%- endif %}
+	</div>
 {%- endif %}
+{%- endif %}
+</nav>
 {%- endmacro footer %}
 
 

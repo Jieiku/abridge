@@ -656,11 +656,10 @@ $syntax: true !default;//syntax highlighting for code blocks
     a,span {
       margin: .2rem;
     }
-    &:last-child //prev/next page title
-    {
-      div:last-child {
-        text-align: right;
-      }
+  }
+  article nav {//prev/next page title
+    div:last-child {
+      text-align: right;
     }
   }
   footer nav > a {

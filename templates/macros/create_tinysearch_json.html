@@ -18,10 +18,10 @@
 {%- if not loop.last -%},{%- endif %}
 {%- endif -%}
 {%- endfor -%}
-{%- if found -%}{%- if section.subsections -%}
+{%- if found and section.subsections -%}
 ,
 {%- for subsection in section.subsections -%}
 {{ self::from_section(section=subsection) }}
 {%- endfor -%}
-{%- endif -%}{%- endif -%}
+{%- endif -%}
 {%- endmacro from_section -%}

@@ -51,9 +51,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
       {%- if section_item.title %}
       <h2>{{ section_item.title }}</h2>
       {%- endif %}
-
-      {{ section_item.content | safe }}
-
+      {{- section_item.content | safe }}
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       {%- if not hide_section_dates %}
       {%- if section_item.title %}

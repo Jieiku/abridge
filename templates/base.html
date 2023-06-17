@@ -52,37 +52,37 @@
         {%- endif -%}
       </div>
       <div>
-          {%- set js_switcher=config.extra.js_switcher | default(value=true) -%}
-          {%- if config.extra.menu or js_switcher %}
-          {%- if config.extra.menu %}
-          {%- for i in config.extra.menu -%}
-          <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
-          {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
-          </a>
+        {% set js_switcher=config.extra.js_switcher | default(value=true) %}
+        {%- if config.extra.menu or js_switcher %}
+        {%- if config.extra.menu %}
+        {%- for i in config.extra.menu -%}
+        <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+        {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
+        </a>
+        {%- endfor -%}
+        {%- endif -%}
+        {%- if js_switcher -%}
+        {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+        {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
+        {%- endif -%}
+        {%- endif -%}
+        {%- if config.languages | length > 0 %}
+        <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
+          {%- if current_url %}
+          <div class="dropdown-content">
+          {%- for lcode,flag in config.extra.flag -%}
+          {%- if lang != lcode -%}
+          {%- if lcode == config.default_language -%}
+          <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+          {%- else -%}
+          <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+          {%- endif -%}
+          {%- endif -%}
           {%- endfor -%}
-          {%- endif -%}
-          {%- if js_switcher -%}
-          {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
-          {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
-          {%- endif -%}
-          {%- endif -%}
-          {%- if config.languages | length > 0 %}
-          <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
-            {%- if current_url %}
-            <div class="dropdown-content">
-            {%- for lcode,flag in config.extra.flag -%}
-            {%- if lang != lcode -%}
-            {%- if lcode == config.default_language -%}
-            <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-            {%- else -%}
-            <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-            {%- endif -%}
-            {%- endif -%}
-            {%- endfor -%}
-            </div>
-            {%- endif %}
           </div>
-          {%- endif -%}
+          {%- endif %}
+        </div>
+        {%- endif %}
       </div>
       {%- if config.build_search_index %}
       {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
@@ -127,21 +127,21 @@
       {#- Copyright END #}
       {%- if config.extra.menu_footer %}
       <nav>
-          {%- for i in config.extra.menu_footer -%}
-          {%- if i.url != "sitemap.xml" %}
-          {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
-          {%- else %}
-          {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
-          {%- endif %}
-          <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}> {% if lang != config.default_language -%} {{ trans(key=i.name | safe, lang=lang) }} {%- else -%} {{ i.name | safe }} {% endif %} </a>
-          {%- endfor %}
+        {%- for i in config.extra.menu_footer -%}
+        {%- if i.url != "sitemap.xml" %}
+        {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
+        {%- else %}
+        {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
+        {%- endif %}
+        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif %}</a>
+        {%- endfor %}
       </nav>
       {%- endif %}
       {%- if config.extra.footer_credit | default(value=true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{%- if lang != config.default_language %} {{ trans(key="Powered_by" | safe, lang=lang) }} {% else %} Powered by {% endif %} <a href="https://www.getzola.org/" target="_blank">Zola</a> {%- if lang != config.default_language %} {{ trans(key="and" | safe, lang=lang) }} {% else %} and {% endif %} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{% if lang != config.default_language -%} {{ trans(key="Powered_by" | safe, lang=lang) }} {% else -%} Powered by {% endif %}<a href="https://www.getzola.org/" target="_blank">Zola</a> {%- if lang != config.default_language %} {{ trans(key="and" | safe, lang=lang) }} {% else %} and {% endif -%} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

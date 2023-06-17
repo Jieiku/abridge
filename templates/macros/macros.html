@@ -1,9 +1,9 @@
 {%- macro title_post(page, config) %}
-        <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
+      <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
 {%- endmacro title_post %}
 
 {%- macro meta_post(page, config) %}
-        <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
+      <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
 
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
@@ -119,25 +119,26 @@
 
 
 {%- macro footer(page, config) %}
-{%- if page.reading_time and page.reading_time > 2 %}
-<p><b><a href="#">Back to top</a></b></p>
-{%- endif %}
-<nav><!-- prev/next page title. Keep for CSS selector even if empty -->
-{% if not config.extra.hide_page_nextprev_titles | default(value=false) %}
-{% if page.lower or page.higher-%}
-	<div>
-	{% if page.lower -%}
-		<a href="{{ page.lower.permalink | safe }}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
-	{%- endif %}
-	</div>
-	<div>
-	{% if page.higher -%}
-		<a href="{{ page.higher.permalink | safe }}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
-	{%- endif %}
-	</div>
-{%- endif %}
-{%- endif %}
-</nav>
+      {%- if page.reading_time and page.reading_time > 2 %}
+      <p><b><a href="#">Back to top</a></b></p>
+      {%- endif %}
+      {#- prev/next content page nextprev title pagination #}
+      {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
+      {%- if page.lower or page.higher %}
+      <nav>
+        <div>
+          {%- if page.lower %}
+          <a href="{{ page.lower.permalink | safe }}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
+          {%- endif %}
+        </div>
+        <div>
+          {%- if page.higher %}
+          <a href="{{ page.higher.permalink | safe }}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
+          {%- endif %}
+        </div>
+      </nav>
+      {%- endif %}
+      {%- endif %}
 {%- endmacro footer %}
 
 

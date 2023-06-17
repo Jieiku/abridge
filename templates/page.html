@@ -39,7 +39,7 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
-    {{ page.content | safe }}
+{{ page.content | safe }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "bottom" or config.extra.meta_post.position == "both" %}

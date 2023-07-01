@@ -1,0 +1,113 @@
+$f1_d: #ccc
+$f2_d: #ddd
+$c1_d: #111
+$c2_d: #222
+$c3_d: #333
+$c4_d: #888
+$a1_d: #f90
+$a2_d: #fb0
+$a3_d: #f90
+$cg_d: #593
+$cr_d: #e33
+@mixin dark($f1:$f1_d,$f2:$f2_d,$c1:$c1_d,$c2:$c2_d,$c3:$c3_d,$c4:$c4_d,$a1:$a1_d,$a2:$a2_d,$a3:$a3_d,$cg:$cg_d,$cr:$cr_d)
+  @if $f1 == null // Font Color Primary
+    #{--f1}: $f1_d
+  @else
+    #{--f1}: $f1
+  @if $f2 == null // Font Color Headers
+    #{--f2}: $f2_d
+  @else
+    #{--f2}: $f2
+  @if $c1 == null // Background Color Primary
+    #{--c1}: $c1_d
+  @else
+    #{--c1}: $c1
+  @if $c2 == null // Background Color Secondary
+    #{--c2}: $c2_d
+  @else
+    #{--c2}: $c2
+  @if $c3 == null // Table Rows, Block quote edge, Borders
+    #{--c3}: $c3_d
+  @else
+    #{--c3}: $c3
+  @if $c4 == null // Disabled Buttons, Borders, mark background
+    #{--c4}: $c4_d
+  @else
+    #{--c4}: $c4
+  @if $a1 == null // link color
+    #{--a1}: $a1_d
+  @else
+    #{--a1}: $a1
+  @if $a2 == null // link hover/focus color
+    #{--a2}: $a2_d
+  @else
+    #{--a2}: $a2
+  @if $a3 == null // link h1-h2 hover/focus color
+    #{--a3}: $a3_d
+  @else
+    #{--a3}: $a3
+  @if $cg == null // ins green, success
+    #{--cg}: $cg_d
+  @else
+    #{--cg}: $cg
+  @if $cr == null // del red, errors
+    #{--cr}: $cr_d
+  @else
+    #{--cr}: $cr
+
+$f1_l: #333
+$f2_l: #222
+$c1_l: #fff
+$c2_l: #eee
+$c3_l: #ddd
+$c4_l: #555
+$a1_l: #06e
+$a2_l: #09f
+$a3_l: #07f
+$cg_l: #373
+$cr_l: #d33
+@mixin light($f1:$f1_l,$f2:$f2_l,$c1:$c1_l,$c2:$c2_l,$c3:$c3_l,$c4:$c4_l,$a1:$a1_l,$a2:$a2_l,$a3:$a3_l,$cg:$cg_l,$cr:$cr_l)
+  @if $f1 == null // Font Color Primary
+    #{--f1}: $f1_l
+  @else
+    #{--f1}: $f1
+  @if $f2 == null // Font Color Headers
+    #{--f2}: $f2_l
+  @else
+    #{--f2}: $f2
+  @if $c1 == null // Background Color Primary
+    #{--c1}: $c1_l
+  @else
+    #{--c1}: $c1
+  @if $c2 == null // Background Color Secondary
+    #{--c2}: $c2_l
+  @else
+    #{--c2}: $c2
+  @if $c3 == null // Table Rows, Block quote edge, Borders
+    #{--c3}: $c3_l
+  @else
+    #{--c3}: $c3
+  @if $c4 == null // Disabled Buttons, Borders, mark background
+    #{--c4}: $c4_l
+  @else
+    #{--c4}: $c4
+  @if $a1 == null // link color
+    #{--a1}: $a1_l
+  @else
+    #{--a1}: $a1
+  @if $a2 == null // link hover/focus color
+    #{--a2}: $a2_l
+  @else
+    #{--a2}: $a2
+  @if $a3 == null // link h1-h2 hover/focus color
+    #{--a3}: $a3_l
+  @else
+    #{--a3}: $a3
+  @if $cg == null // ins green, success
+    #{--cg}: $cg_l
+  @else
+    #{--cg}: $cg
+  @if $cr == null // del red, errors
+    #{--cr}: $cr_l
+  @else
+    #{--cr}: $cr

@@ -1,0 +1,114 @@
+// Syntax Highlighting
+$h0_d: #191919,
+$h1_d: #ddd,
+$h2_d: #888,
+$h3_d: #e65,
+$h4_d: #e83,
+$h5_d: #eb6,
+$h6_d: #ac3,
+$h7_d: #8db,
+$h8_d: #6ae,
+$h9_d: #d6e,
+$ha_d: 160%
+@mixin syndark($h0:$h0_d,$h1:$h1_d,$h2:$h2_d,$h3:$h3_d,$h4:$h4_d,$h5:$h5_d,$h6:$h6_d,$h7:$h7_d,$h8:$h8_d,$h9:$h9_d,$ha:$ha_d)
+  @if $h0 == null // background color
+    #{--h0}: $h0_d
+  @else
+    #{--h0}: $h0
+  @if $h1 == null // unstyled text
+    #{--h1}: $h1_d
+  @else
+    #{--h1}: $h1
+  @if $h2 == null // comments
+    #{--h2}: $h2_d
+  @else
+    #{--h2}: $h2
+  @if $h3 == null // red, support function
+    #{--h3}: $h3_d
+  @else
+    #{--h3}: $h3
+  @if $h4 == null // orange, punctuation, constant, variable, json-key
+    #{--h4}: $h4_d
+  @else
+    #{--h4}: $h4
+  @if $h5 == null // tan, entity/function name
+    #{--h5}: $h5_d
+  @else
+    #{--h5}: $h5
+  @if $h6 == null // green, string
+    #{--h6}: $h6_d
+  @else
+    #{--h6}: $h6
+  @if $h7 == null // teal, escape character
+    #{--h7}: $h7_d
+  @else
+    #{--h7}: $h7
+  @if $h8 == null // blue, declaration, tag, property
+    #{--h8}: $h8_d
+  @else
+    #{--h8}: $h8
+  @if $h9 == null // purple, operators
+    #{--h9}: $h9_d
+  @else
+    #{--h9}: $h9
+  @if $ha == null // mark/highlight line
+    #{--ha}: $ha_d
+  @else
+    #{--ha}: $ha
+
+$h0_l: #f7f7f7,
+$h1_l: #222,
+$h2_l: #666,
+$h3_l: #a21,
+$h4_l: #930,
+$h5_l: #a50,
+$h6_l: #350,
+$h7_l: #286,
+$h8_l: #059,
+$h9_l: #a3c,
+$ha_l: 92%
+@mixin synlight($h0:$h0_l,$h1:$h1_l,$h2:$h2_l,$h3:$h3_l,$h4:$h4_l,$h5:$h5_l,$h6:$h6_l,$h7:$h7_l,$h8:$h8_l,$h9:$h9_l,$ha:$ha_l)
+  @if $h0 == null // background color
+    #{--h0}: $h0_l
+  @else
+    #{--h0}: $h0
+  @if $h1 == null // unstyled text
+    #{--h1}: $h1_l
+  @else
+    #{--h1}: $h1
+  @if $h2 == null // comments
+    #{--h2}: $h2_l
+  @else
+    #{--h2}: $h2
+  @if $h3 == null // red, support function
+    #{--h3}: $h3_l
+  @else
+    #{--h3}: $h3
+  @if $h4 == null // orange, punctuation, constant, variable, json-key
+    #{--h4}: $h4_l
+  @else
+    #{--h4}: $h4
+  @if $h5 == null // tan, entity/function name
+    #{--h5}: $h5_l
+  @else
+    #{--h5}: $h5
+  @if $h6 == null // green, string
+    #{--h6}: $h6_l
+  @else
+    #{--h6}: $h6
+  @if $h7 == null // teal, escape character
+    #{--h7}: $h7_l
+  @else
+    #{--h7}: $h7
+  @if $h8 == null // blue, declaration, tag, property
+    #{--h8}: $h8_l
+  @else
+    #{--h8}: $h8
+  @if $h9 == null // purple, operators
+    #{--h9}: $h9_l
+  @else
+    #{--h9}: $h9
+  @if $ha == null // mark/highlight line
+    #{--ha}: $ha_l
+  @else
+    #{--ha}: $ha

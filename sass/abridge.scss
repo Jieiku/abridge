@@ -75,59 +75,59 @@ $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
 
 /// Dark Colors
-$f1d: #ccc !default;// Font Color Primary
-$f2d: #ddd !default;// Font Color Headers
-$c1d: #111 !default;// Background Color Primary
-$c2d: #222 !default;// Background Color Secondary
-$c3d: #333 !default;// Table Rows, Block quote edge, Borders
-$c4d: #777 !default;// Disabled Buttons, Borders, mark background
-$a1d: #f90 !default;// link color
-$a2d: #fb0 !default;// link hover/focus color
-$a3d: #f90 !default;// link h1-h2 hover/focus color
-$cgd: #593 !default;// ins green, success
-$crd: #e33 !default;// del red, errors
+$f1d: null !default;// Font Color Primary
+$f2d: null !default;// Font Color Headers
+$c1d: null !default;// Background Color Primary
+$c2d: null !default;// Background Color Secondary
+$c3d: null !default;// Table Rows, Block quote edge, Borders
+$c4d: null !default;// Disabled Buttons, Borders, mark background
+$a1d: null !default;// link color
+$a2d: null !default;// link hover/focus color
+$a3d: null !default;// link h1-h2 hover/focus color
+$cgd: null !default;// ins green, success
+$crd: null !default;// del red, errors
 $dark: $f1d $f2d $c1d $c2d $c3d $c4d $a1d $a2d $a3d $cgd $crd;
 
 /// Light Colors
-$f1: #333 !default;// Font Color Primary
-$f2: #222 !default;// Font Color Headers
-$c1: #fff !default;// Background Color Primary
-$c2: #eee !default;// Background Color Secondary
-$c3: #ddd !default;// Table Rows, Block quote edge, Borders
-$c4: #555 !default;// Disabled Buttons, Borders, mark background
-$a1: #c40 !default;// link color
-$a2: #e60 !default;// link hover/focus color
-$a3: #f90 !default;// link h1-h2 hover/focus color
-$cg: #373 !default;// ins green, success
-$cr: #d33 !default;// del red, errors
+$f1: null !default;// Font Color Primary
+$f2: null !default;// Font Color Headers
+$c1: null !default;// Background Color Primary
+$c2: null !default;// Background Color Secondary
+$c3: null !default;// Table Rows, Block quote edge, Borders
+$c4: null !default;// Disabled Buttons, Borders, mark background
+$a1: null !default;// link color
+$a2: null !default;// link hover/focus color
+$a3: null !default;// link h1-h2 hover/focus color
+$cg: null !default;// ins green, success
+$cr: null !default;// del red, errors
 $light: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
 
 /// Dark Syntax Colors
-$h0d: #191919 !default;// background color
-$h1d: #ddd !default;// unstyled text
-$h2d: #888 !default;// comments
-$h3d: #e65 !default;// red, support function
-$h4d: #e83 !default;// orange, punctuation, constant, variable, json-key
-$h5d: #eb6 !default;// tan, entity/function name
-$h6d: #ac3 !default;// green, string
-$h7d: #8db !default;// teal, escape character
-$h8d: #6ae !default;// blue, declaration, tag, property
-$h9d: #d6e !default;// purple, operators
-$had: 160% !default;// mark/highlight line
+$h0d: null !default;// background color
+$h1d: null !default;// unstyled text
+$h2d: null !default;// comments
+$h3d: null !default;// red, support function
+$h4d: null !default;// orange, punctuation, constant, variable, json-key
+$h5d: null !default;// tan, entity/function name
+$h6d: null !default;// green, string
+$h7d: null !default;// teal, escape character
+$h8d: null !default;// blue, declaration, tag, property
+$h9d: null !default;// purple, operators
+$had: null !default;// mark/highlight line
 $syntax-dark: $h0d $h1d $h2d $h3d $h4d $h5d $h6d $h7d $h8d $h9d $had;
 
 /// Light Syntax Colors
-$h0: #f7f7f7 !default;// background color
-$h1: #222 !default;// unstyled text
-$h2: #666 !default;// comments
-$h3: #a21 !default;// red, support function
-$h4: #930 !default;// orange, punctuation, constant, variable, json-key
-$h5: #a50 !default;// tan, entity/function name
-$h6: #350 !default;// green, string
-$h7: #286 !default;// teal, escape character
-$h8: #059 !default;// blue, declaration, tag, property
-$h9: #a3c !default;// purple, operators
-$ha: 92% !default;// mark/highlight line
+$h0: null !default;// background color
+$h1: null !default;// unstyled text
+$h2: null !default;// comments
+$h3: null !default;// red, support function
+$h4: null !default;// orange, punctuation, constant, variable, json-key
+$h5: null !default;// tan, entity/function name
+$h6: null !default;// green, string
+$h7: null !default;// teal, escape character
+$h8: null !default;// blue, declaration, tag, property
+$h9: null !default;// purple, operators
+$ha: null !default;// mark/highlight line
 $syntax-light: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
 
 /// These lines find the spot at which to insert your appended fonts.

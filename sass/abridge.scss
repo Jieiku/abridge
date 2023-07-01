@@ -3,6 +3,9 @@
 
 @use "functions";
 
+@use 'colors/main'       	as colors;
+@use 'colors-syntax/main'	as colors-syntax;
+
 /******************************************************************************
  *   Variables
  *****************************************************************************/
@@ -16,13 +19,9 @@ $mb: 1200px !default;// value at which to switch from fluid layout to max-width
 $abridgeMode: "switcher" !default;//valid values: switcher, auto, dark, light
 $syntax-mode: "auto" !default;// Force syntax mode: auto, dark, light
 
-$path: "colors/" !default;
 $color: "orange" !default;// color template to use/override: orange, blue, blueshade
-@include meta.load-css(#{$path}#{$color});
 
-$spath: "colors-syntax/" !default;
 $color-syntax: "abridge" !default;// syntax color template to use/override: abridge,
-@include meta.load-css(#{$spath}#{$color-syntax});
 $syntax: true !default;//syntax highlighting for Code Blocks.
 
 $enable-icons: true !default; // false disables ALL icons
@@ -294,21 +293,21 @@ $syntax: true !default;//syntax highlighting for code blocks
   :root {
     @include font;
     @include root;
-    @include dark($dark...);
+    @include colors.getdark($color,$dark);
     @if $syntax {
       @if $syntax-mode == "light" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.getlight($color,$syntax-light);
       } @else {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.getdark($color,$syntax-dark);
       }
     }
   }
   @media (prefers-color-scheme: light) {
     :root {
-      @include light($light...);
+      @include colors.getlight($color,$light);
       @if $syntax {
         @if $syntax-mode == "auto" {
-          @include synlight($syntax-light...);
+          @include colors-syntax.getlight($color,$syntax-light);
         }
       }
     }
@@ -317,18 +316,18 @@ $syntax: true !default;//syntax highlighting for code blocks
   :root {
     @include font;
     @include root;
-    @include dark($dark...);
+    @include colors.getdark($color,$dark);
     @if $syntax {
-      @include syndark($syntax-dark...);
+      @include colors-syntax.getdark($color,$syntax-dark);
     }
   }
 } @else if $abridgeMode == "light" {
   :root {
     @include font;
     @include root;
-    @include light($light...);
+    @include colors.getlight($color,$light);
     @if $syntax {
-      @include synlight($syntax-light...);
+      @include colors-syntax.getlight($color,$syntax-light);
     }
   }
 } @else {//switcher (default)
@@ -337,25 +336,25 @@ $syntax: true !default;//syntax highlighting for code blocks
     @include root;
     @if $syntax {
       @if $syntax-mode == "light" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.getlight($color,$syntax-light);
       } @else if $syntax-mode == "dark" {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.getdark($color,$syntax-dark);
       }
     }
   }
   :root:not(.light) {
-    @include dark($dark...);
+    @include colors.getdark($color,$dark);
     @if $syntax {
       @if $syntax-mode == "auto" {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.getdark($color,$syntax-dark);
       }
     }
   }
   :root.light {
-    @include light($light...);
+    @include colors.getlight($color,$light);
     @if $syntax {
       @if $syntax-mode == "auto" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.getlight($color,$syntax-light);
       }
     }
   }

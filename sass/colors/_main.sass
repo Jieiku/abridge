@@ -1,0 +1,23 @@
+//import all themes via @use since dynamic meta.load-css doesn't make any members from the loaded module available in the current module (https://sass-lang.com/documentation/modules/meta/#load-css)
+@use 'orange'   	as orange
+@use 'blueshade'	as blueshade
+@use 'blue'     	as blue
+//and use a specific theme via ↓ mixin
+@mixin getdark($color,$dark)
+  @if      $color == "orange"
+    @include    orange.dark($dark...)
+  @else if $color == "blue"
+    @include      blue.dark($dark...)
+  @else if $color == "blueshade"
+    @include blueshade.dark($dark...)
+  @else
+    @include    orange.dark($dark...)
+@mixin getlight($color,$light)
+  @if      $color == "orange"
+    @include    orange.light($light...)
+  @else if $color == "blue"
+    @include      blue.light($light...)
+  @else if $color == "blueshade"
+    @include blueshade.light($light...)
+  @else
+    @include    orange.light($light...)

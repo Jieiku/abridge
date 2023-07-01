@@ -1,0 +1,13 @@
+//import all themes via @use since dynamic meta.load-css doesn't make any members from the loaded module available in the current module (https://sass-lang.com/documentation/modules/meta/#load-css)
+@use 'abridge'	as abridge
+//and use a specific theme via ↓ mixin
+@mixin getdark($color,$syntax-dark)
+  @if      $color == "abridge"
+    @include    abridge.syndark($syntax-dark...)
+  @else
+    @include    abridge.syndark($syntax-dark...)
+@mixin getlight($color,$syntax-light)
+  @if      $color == "abridge"
+    @include    abridge.synlight($syntax-light...)
+  @else
+    @include    abridge.synlight($syntax-light...)

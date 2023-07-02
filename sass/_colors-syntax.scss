@@ -1,0 +1,121 @@
+// Syntax Highlighting
+@mixin syndark($h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha) {
+  #{--h0}: $h0;// background color
+  #{--h1}: $h1;// unstyled text
+  #{--h2}: $h2;// comments
+  #{--h3}: $h3;// red, support function
+  #{--h4}: $h4;// orange, punctuation, constant, variable, json-key
+  #{--h5}: $h5;// tan, entity/function name
+  #{--h6}: $h6;// green, string
+  #{--h7}: $h7;// teal, escape character
+  #{--h8}: $h8;// blue, declaration, tag, property
+  #{--h9}: $h9;// purple, operators
+  #{--ha}: $ha;// mark/highlight line
+}
+@mixin synlight($h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha) {
+  #{--h0}: $h0;// background color
+  #{--h1}: $h1;// unstyled text
+  #{--h2}: $h2;// comments
+  #{--h3}: $h3;// red, support function
+  #{--h4}: $h4;// orange, punctuation, constant, variable, json-key
+  #{--h5}: $h5;// tan, entity/function name
+  #{--h6}: $h6;// green, string
+  #{--h7}: $h7;// teal, escape character
+  #{--h8}: $h8;// blue, declaration, tag, property
+  #{--h9}: $h9;// purple, operators
+  #{--ha}: $ha;// mark/highlight line
+}
+
+@function color($color-syntax,$dark,$h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha) {
+  @if $color-syntax == "charcoal" {//placeholder, this is actuall a copy of abridge syntax
+    @if $dark {/// Dark Syntax Colors
+      $h0: #191919 !default;// background color
+      $h1: #ddd !default;// unstyled text
+      $h2: #888 !default;// comments
+      $h3: #e65 !default;// red, support function
+      $h4: #e83 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #eb6 !default;// tan, entity/function name
+      $h6: #ac3 !default;// green, string
+      $h7: #8db !default;// teal, escape character
+      $h8: #6ae !default;// blue, declaration, tag, property
+      $h9: #d6e !default;// purple, operators
+      $ha: 160% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    } @else {/// Light Syntax Colors
+      $h0: #f7f7f7 !default;// background color
+      $h1: #222 !default;// unstyled text
+      $h2: #666 !default;// comments
+      $h3: #a21 !default;// red, support function
+      $h4: #930 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #a50 !default;// tan, entity/function name
+      $h6: #350 !default;// green, string
+      $h7: #286 !default;// teal, escape character
+      $h8: #059 !default;// blue, declaration, tag, property
+      $h9: #a3c !default;// purple, operators
+      $ha: 92% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    }
+  } @else if $color-syntax == "dracula" {//placeholder, this is actuall a copy of abridge syntax
+    @if $dark {/// Dark Syntax Colors
+      $h0: #191919 !default;// background color
+      $h1: #ddd !default;// unstyled text
+      $h2: #888 !default;// comments
+      $h3: #e65 !default;// red, support function
+      $h4: #e83 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #eb6 !default;// tan, entity/function name
+      $h6: #ac3 !default;// green, string
+      $h7: #8db !default;// teal, escape character
+      $h8: #6ae !default;// blue, declaration, tag, property
+      $h9: #d6e !default;// purple, operators
+      $ha: 160% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    } @else {/// Light Syntax Colors
+      $h0: #f7f7f7 !default;// background color
+      $h1: #222 !default;// unstyled text
+      $h2: #666 !default;// comments
+      $h3: #a21 !default;// red, support function
+      $h4: #930 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #a50 !default;// tan, entity/function name
+      $h6: #350 !default;// green, string
+      $h7: #286 !default;// teal, escape character
+      $h8: #059 !default;// blue, declaration, tag, property
+      $h9: #a3c !default;// purple, operators
+      $ha: 92% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    }
+  } @else {//abridge syntax colors (default)
+    @if $dark {/// Dark Syntax Colors
+      $h0: #191919 !default;// background color
+      $h1: #ddd !default;// unstyled text
+      $h2: #888 !default;// comments
+      $h3: #e65 !default;// red, support function
+      $h4: #e83 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #eb6 !default;// tan, entity/function name
+      $h6: #ac3 !default;// green, string
+      $h7: #8db !default;// teal, escape character
+      $h8: #6ae !default;// blue, declaration, tag, property
+      $h9: #d6e !default;// purple, operators
+      $ha: 160% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    } @else {/// Light Syntax Colors
+      $h0: #f7f7f7 !default;// background color
+      $h1: #222 !default;// unstyled text
+      $h2: #666 !default;// comments
+      $h3: #a21 !default;// red, support function
+      $h4: #930 !default;// orange, punctuation, constant, variable, json-key
+      $h5: #a50 !default;// tan, entity/function name
+      $h6: #350 !default;// green, string
+      $h7: #286 !default;// teal, escape character
+      $h8: #059 !default;// blue, declaration, tag, property
+      $h9: #a3c !default;// purple, operators
+      $ha: 92% !default;// mark/highlight line
+      $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+      @return $result;
+    }
+  }
+}

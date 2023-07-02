@@ -2,6 +2,8 @@
 @use "sass:list";
 
 @use "functions";
+@use "colors";
+@use "colors-syntax";
 
 /******************************************************************************
  *   Variables
@@ -16,13 +18,9 @@ $mb: 1200px !default;// value at which to switch from fluid layout to max-width
 $abridgeMode: "switcher" !default;//valid values: switcher, auto, dark, light
 $syntax-mode: "auto" !default;// Force syntax mode: auto, dark, light
 
-$path: "colors/" !default;
 $color: "orange" !default;// color template to use/override: orange, blue, blueshade
-@include meta.load-css(#{$path}#{$color});
 
-$spath: "colors-syntax/" !default;
 $color-syntax: "abridge" !default;// syntax color template to use/override: abridge,
-@include meta.load-css(#{$spath}#{$color-syntax});
 $syntax: true !default;//syntax highlighting for Code Blocks.
 
 $enable-icons: true !default; // false disables ALL icons
@@ -76,60 +74,60 @@ $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
 
 /// Dark Colors
-$f1d: #ccc !default;// Font Color Primary
-$f2d: #ddd !default;// Font Color Headers
-$c1d: #111 !default;// Background Color Primary
-$c2d: #222 !default;// Background Color Secondary
-$c3d: #333 !default;// Table Rows, Block quote edge, Borders
-$c4d: #777 !default;// Disabled Buttons, Borders, mark background
-$a1d: #f90 !default;// link color
-$a2d: #fb0 !default;// link hover/focus color
-$a3d: #f90 !default;// link h1-h2 hover/focus color
-$cgd: #593 !default;// ins green, success
-$crd: #e33 !default;// del red, errors
-$dark: $f1d $f2d $c1d $c2d $c3d $c4d $a1d $a2d $a3d $cgd $crd;
+$f1d: null !default;// Font Color Primary
+$f2d: null !default;// Font Color Headers
+$c1d: null !default;// Background Color Primary
+$c2d: null !default;// Background Color Secondary
+$c3d: null !default;// Table Rows, Block quote edge, Borders
+$c4d: null !default;// Disabled Buttons, Borders, mark background
+$a1d: null !default;// link color
+$a2d: null !default;// link hover/focus color
+$a3d: null !default;// link h1-h2 hover/focus color
+$cgd: null !default;// ins green, success
+$crd: null !default;// del red, errors
+$dark: colors.color($color,true,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
 
 /// Light Colors
-$f1: #333 !default;// Font Color Primary
-$f2: #222 !default;// Font Color Headers
-$c1: #fff !default;// Background Color Primary
-$c2: #eee !default;// Background Color Secondary
-$c3: #ddd !default;// Table Rows, Block quote edge, Borders
-$c4: #555 !default;// Disabled Buttons, Borders, mark background
-$a1: #c40 !default;// link color
-$a2: #e60 !default;// link hover/focus color
-$a3: #f90 !default;// link h1-h2 hover/focus color
-$cg: #373 !default;// ins green, success
-$cr: #d33 !default;// del red, errors
-$light: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+$f1: null !default;// Font Color Primary
+$f2: null !default;// Font Color Headers
+$c1: null !default;// Background Color Primary
+$c2: null !default;// Background Color Secondary
+$c3: null !default;// Table Rows, Block quote edge, Borders
+$c4: null !default;// Disabled Buttons, Borders, mark background
+$a1: null !default;// link color
+$a2: null !default;// link hover/focus color
+$a3: null !default;// link h1-h2 hover/focus color
+$cg: null !default;// ins green, success
+$cr: null !default;// del red, errors
+$light: colors.color($color,false,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
 
 /// Dark Syntax Colors
-$h0d: #191919 !default;// background color
-$h1d: #ddd !default;// unstyled text
-$h2d: #888 !default;// comments
-$h3d: #e65 !default;// red, support function
-$h4d: #e83 !default;// orange, punctuation, constant, variable, json-key
-$h5d: #eb6 !default;// tan, entity/function name
-$h6d: #ac3 !default;// green, string
-$h7d: #8db !default;// teal, escape character
-$h8d: #6ae !default;// blue, declaration, tag, property
-$h9d: #d6e !default;// purple, operators
-$had: 160% !default;// mark/highlight line
-$syntax-dark: $h0d $h1d $h2d $h3d $h4d $h5d $h6d $h7d $h8d $h9d $had;
+$h0d: null !default;// background color
+$h1d: null !default;// unstyled text
+$h2d: null !default;// comments
+$h3d: null !default;// red, support function
+$h4d: null !default;// orange, punctuation, constant, variable, json-key
+$h5d: null !default;// tan, entity/function name
+$h6d: null !default;// green, string
+$h7d: null !default;// teal, escape character
+$h8d: null !default;// blue, declaration, tag, property
+$h9d: null !default;// purple, operators
+$had: null !default;// mark/highlight line
+$syntax-dark: colors-syntax.color($color-syntax,true,$h0d,$h1d,$h2d,$h3d,$h4d,$h5d,$h6d,$h7d,$h8d,$h9d,$had);
 
 /// Light Syntax Colors
-$h0: #f7f7f7 !default;// background color
-$h1: #222 !default;// unstyled text
-$h2: #666 !default;// comments
-$h3: #a21 !default;// red, support function
-$h4: #930 !default;// orange, punctuation, constant, variable, json-key
-$h5: #a50 !default;// tan, entity/function name
-$h6: #350 !default;// green, string
-$h7: #286 !default;// teal, escape character
-$h8: #059 !default;// blue, declaration, tag, property
-$h9: #a3c !default;// purple, operators
-$ha: 92% !default;// mark/highlight line
-$syntax-light: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
+$h0: null !default;// background colorq
+$h1: null !default;// unstyled text
+$h2: null !default;// comments
+$h3: null !default;// red, support function
+$h4: null !default;// orange, punctuation, constant, variable, json-key
+$h5: null !default;// tan, entity/function name
+$h6: null !default;// green, string
+$h7: null !default;// teal, escape character
+$h8: null !default;// blue, declaration, tag, property
+$h9: null !default;// purple, operators
+$ha: null !default;// mark/highlight line
+$syntax-light: colors-syntax.color($color-syntax,false,$h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha);
 
 /// These lines find the spot at which to insert your appended fonts.
 //$findFont-Main : "Segoe UI";     // ← append custom MAIN font(s) AFTER this
@@ -294,21 +292,21 @@ $syntax: true !default;//syntax highlighting for code blocks
   :root {
     @include font;
     @include root;
-    @include dark($dark...);
+    @include colors.dark($dark...);
     @if $syntax {
       @if $syntax-mode == "light" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.synlight($syntax-light...);
       } @else {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.syndark($syntax-dark...);
       }
     }
   }
   @media (prefers-color-scheme: light) {
     :root {
-      @include light($light...);
+      @include colors.light($light...);
       @if $syntax {
         @if $syntax-mode == "auto" {
-          @include synlight($syntax-light...);
+          @include colors-syntax.synlight($syntax-light...);
         }
       }
     }
@@ -317,18 +315,18 @@ $syntax: true !default;//syntax highlighting for code blocks
   :root {
     @include font;
     @include root;
-    @include dark($dark...);
+    @include colors.dark($dark...);
     @if $syntax {
-      @include syndark($syntax-dark...);
+      @include colors-syntax.syndark($syntax-dark...);
     }
   }
 } @else if $abridgeMode == "light" {
   :root {
     @include font;
     @include root;
-    @include light($light...);
+    @include colors.light($light...);
     @if $syntax {
-      @include synlight($syntax-light...);
+      @include colors-syntax.synlight($syntax-light...);
     }
   }
 } @else {//switcher (default)
@@ -337,25 +335,25 @@ $syntax: true !default;//syntax highlighting for code blocks
     @include root;
     @if $syntax {
       @if $syntax-mode == "light" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.synlight($syntax-light...);
       } @else if $syntax-mode == "dark" {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.syndark($syntax-dark...);
       }
     }
   }
   :root:not(.light) {
-    @include dark($dark...);
+    @include colors.dark($dark...);
     @if $syntax {
       @if $syntax-mode == "auto" {
-        @include syndark($syntax-dark...);
+        @include colors-syntax.syndark($syntax-dark...);
       }
     }
   }
   :root.light {
-    @include light($light...);
+    @include colors.light($light...);
     @if $syntax {
       @if $syntax-mode == "auto" {
-        @include synlight($syntax-light...);
+        @include colors-syntax.synlight($syntax-light...);
       }
     }
   }

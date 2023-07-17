@@ -58,6 +58,7 @@ $icon-angl: true !default;//pagination, goto previous page
 $icon-angr: true !default;//pagination, goto next page
 $icon-angrr: true !default;//pagination, goto last page
 $icon-angu: true !default;//back to top button, appears after scrolling down.
+$icon-copy: true !default;//copy to clipboard, for code blocks.
 
 $icon-ffolder: false !default;
 $icon-folder: false !default;// categories folder
@@ -859,6 +860,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     padding: .3rem .2rem;
   }
   pre {
+    position: relative;
+    padding: 2rem .5rem .3rem;
     display: block;
     overflow-x: auto;
     -ms-overflow-style: scrollbar;
@@ -1158,27 +1161,29 @@ $syntax: true !default;//syntax highlighting for code blocks
   .rpad {padding-right: .2rem}
   .si {font-size: 1.5em}
   pre code[data-lang]::before {
+    content: attr(data-lang);
+    padding: .3rem;
+    display: block;
+    background-color: var(--c3);
     color: var(--h1);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 1rem;
     text-transform: uppercase;
-    content: ' [' attr(data-lang) '] ' "\a\a";
-  }
-  // code copy wrapper
-  .ccw {
-    position: relative;
-  }
-  .ccw:hover {
-    .cc {
-      opacity: 1;
-    }
   }
   // code copy button
   .cc {
-    opacity: 0;
+    cursor: pointer;
     z-index: 9;
     position: absolute;
-    right: 9px;
-    top: 9px;
-    font-size: .8rem;
+    top: .3rem;
+    right: .5rem;
+  }
+  .cc:hover {
+    background: var(--a3);
+    opacity: 1;
   }
   // Table Override, this is used for Zola's linenos and hl_lines
   code {
@@ -1246,6 +1251,11 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-angr {.angr { -webkit-mask: functions.icon(angr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right
   @if $icon-angrr {.angrr { -webkit-mask: functions.icon(angrr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right right
   @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
+  @if $icon-copy {//copy icons for code blocks
+    .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
+    .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--f2) }
+    .copy.err { -webkit-mask: functions.icon(copy-err, "%23000", 2, "none", $ic) ; background: var(--f2) }
+  }
   @if $icon-search {.search { -webkit-mask: functions.icon(search, "%23000", 3, "none", $ic) ; background: var(--f2) }}//search
   @if $icon-bitbucket {.bitbucket { background-image: functions.icon(bitbucket, "%2328f", 2, "none", $ic) }}
   @if $icon-buymeacoffee {.buymeacoffee { background-image: functions.icon(buymeacoffee, "%23777", 1, "%23fd0", $ic) }}

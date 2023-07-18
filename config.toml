@@ -154,6 +154,7 @@ twitter_meta = "your-user-name" # for SEO: twitter:site and twitter:creator
 google = "Your Google Site verification code."
 bing = "Your Bing Site verification code."
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
+#dev = false # development mode, if true then robots.txt should prevent search indexing.
 
 
 ###############################################################################
@@ -209,7 +210,8 @@ search_library = 'elasticlunr'
 #js_codecopy = "js/codecopy.js"# Bundleable - copy code block to clipboard button
 #js_email = "js/email.js"# Bundleable - obfuscates email address in footer
 
-stylesheets = [ "abridge.css" ]
+stylesheets = ["abridge.css"]
+
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.

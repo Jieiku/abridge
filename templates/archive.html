@@ -1,5 +1,5 @@
 {#
-This Page Shows the Posts Grouped by Year: example.com/posts/
+This Page Shows the Posts Grouped by Year: example.com/archive/
 This Template can also be used as the rendering template for Sections, eg: example.com/blog/  example.com/software/
 #}
 
@@ -7,7 +7,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
 
 {%- block seo %}
   {{- super() }}
-  {%- set title = "Posts" %}
+  {%- set title = "Archive" %}
 
   {%- if config.title %}
     {%- set title_addition = title_separator ~ config.title %}
@@ -21,8 +21,8 @@ This Template can also be used as the rendering template for Sections, eg: examp
 {%- endblock seo %}
 
 {%- block content %}
-    {#- The following line is checking if the template is being used for the posts page or a section #}
-    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/posts/$") %}
+    {#- The following line is checking if the template is being used for the archive page or a section #}
+    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
       {%- set sec = "" %}
     {%- else %}
       {%- set langpath = "/" %}

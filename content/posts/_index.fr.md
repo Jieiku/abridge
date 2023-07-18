@@ -1,3 +1,4 @@
 +++
-template = "posts.html"
+transparent = true
+redirect_to = "/"
 +++

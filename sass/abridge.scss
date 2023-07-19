@@ -17,6 +17,7 @@ $mb: 1200px !default;// value at which to switch from fluid layout to max-width
 
 $abridgeMode: "switcher" !default;//valid values: switcher, auto, dark, light
 $syntax-mode: "auto" !default;// Force syntax mode: auto, dark, light
+$switcherDefault: "dark" !default;// default for nojs switcher: dark, light
 
 $color: "orange" !default;// color template to use/override: orange, blue, blueshade
 
@@ -342,16 +343,24 @@ $syntax: true !default;//syntax highlighting for code blocks
       }
     }
   }
-  :root:not(.light) {
-    @include colors.dark($dark...);
+  :root:not(.switch) {
+    @if $switcherDefault == "light" {
+      @include colors.dark($light...);
+    }  @else {
+      @include colors.dark($dark...);
+    }
     @if $syntax {
       @if $syntax-mode == "auto" {
         @include colors-syntax.syndark($syntax-dark...);
       }
     }
   }
-  :root.light {
-    @include colors.light($light...);
+  :root.switch {
+    @if $switcherDefault == "light" {
+      @include colors.dark($dark...);
+    }  @else {
+      @include colors.dark($light...);
+    }
     @if $syntax {
       @if $syntax-mode == "auto" {
         @include colors-syntax.synlight($syntax-light...);

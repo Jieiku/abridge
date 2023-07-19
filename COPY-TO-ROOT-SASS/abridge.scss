@@ -10,8 +10,10 @@
 
   $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
   $syntax-mode: "auto",// Force syntax mode: auto, dark, light
+  $switcherDefault: "dark",// default for nojs switcher: dark, light
 
   $color: "orange",// color template to use/override: orange, blue, blueshade
+
   $color-syntax: "abridge",// syntax color template to use/override: abridge,
   $syntax: true,//syntax highlighting for Code Blocks.
 

@@ -52,6 +52,20 @@ This Template can also be used as the rendering template for Sections, eg: examp
       <h2>{{ section_item.title }}</h2>
       {%- endif %}
       {{- section_item.content | safe }}
+      {%- if config.extra.archive_reverse %}
+      {%- for year, posts in section_item.pages | sort(attribute="year") | reverse | group_by(attribute="year") %}
+      {%- if not hide_section_dates %}
+      {%- if section_item.title %}
+      <h3>{{ year }}</h3>
+      {%- else %}
+      <h2>{{ year }}</h2>
+      {%- endif %}
+      {%- endif %}
+      {%- for post in posts %}
+      <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
+      {%- endfor %}
+      {%- endfor %}
+      {%- else %}
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       {%- if not hide_section_dates %}
       {%- if section_item.title %}
@@ -64,5 +78,6 @@ This Template can also be used as the rendering template for Sections, eg: examp
       <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
       {%- endfor %}
       {%- endfor %}
+      {%- endif %}
     </div>
 {%- endblock content %}

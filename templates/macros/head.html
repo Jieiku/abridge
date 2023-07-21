@@ -228,6 +228,10 @@
   <link rel="mask-icon" href="{{ get_url(path=config.extra.favicon_mask, trailing_slash=false) | safe }}" color="{{ config.extra.favicon_mask_color }}" />
   {%- endif %}
 
+  {%- if config.extra.favicon_svg %}
+  <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
   {%- if config.extra.favicon180 %}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path=config.extra.favicon180, trailing_slash=false) | safe }}" />
   {%- endif %}

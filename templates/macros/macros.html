@@ -24,7 +24,7 @@
 
           {#- divider #}
           {%- if config.extra.meta_post.author %}
-          {%- if config.extra.meta_post.readtime or config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.readtime or config.extra.meta_post.date or config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
           {%- endif %}
           {%- endif %}
@@ -32,7 +32,7 @@
         {#- ReadTime #}
           {%- if config.extra.meta_post.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_post.readstring | default(value="min") }}
           {#- divider #}
-          {%- if config.extra.meta_post.date or config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.date or config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
@@ -45,6 +45,20 @@
           {%- endif -%}
           {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
           {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
+          {#- divider #}
+          {%- if config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+
+        {#- Updated #}
+          {%- if config.extra.meta_post.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
+          {%- if lang != config.default_language %} {{ trans(key="Updated" | safe, lang=lang) }}{% else %} Updated{% endif %}:
+          {%- if config.extra.date_locale %}
+          {%- if lang != config.default_language -%}
+            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+          {%- else -%}
+            {%- set lang_locale = config.extra.date_locale -%}
+          {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
+          {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
@@ -83,7 +97,7 @@
 
           {#- divider #}
           {%- if config.extra.meta_index.author %}
-          {%- if config.extra.meta_index.readtime or config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.readtime or config.extra.meta_index.date or config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
           {%- endif %}
           {%- endif %}
@@ -91,7 +105,7 @@
         {#- ReadTime #}
           {%- if config.extra.meta_index.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_index.readstring | default(value="min") }}
           {#- divider #}
-          {%- if config.extra.meta_index.date or config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.date or config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
@@ -104,6 +118,21 @@
           {%- endif -%}
           {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
           {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
+          {#- divider #}
+          {%- if config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+
+        {#- Updated #}
+          {%- if config.extra.meta_index.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
+          {%- if lang != config.default_language %} {{ trans(key="Updated" | safe, lang=lang) }}{% else %} Updated{% endif %}:
+          {%- if config.extra.date_locale %}
+          {%- if lang != config.default_language -%}
+            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+          {%- else -%}
+            {%- set lang_locale = config.extra.date_locale -%}
+          {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
+          {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
+
           {#- divider #}
           {%- if config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}

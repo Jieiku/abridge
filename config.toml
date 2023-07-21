@@ -41,6 +41,7 @@ flag = "🇫🇷"
 date_locale = "fr_FR"
 Search = "Recherche"
 Recent_Posts = "Articles Récents"
+Updated = "Modifié"
 Index = "Indice"
 Powered_by = "Propulsé"
 and = "et"
@@ -117,8 +118,8 @@ menu_footer = [
 recent = true # TOC / index
 recent_items = 9
 
-meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, categories_tags=true, divider=" " }
-meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, categories_tags=true, divider=" " }
+meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=" " }
+meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=" " }
 
 hide_section_dates = false # hides the date for sections that use posts.html as their template.
 hide_page_nextprev_titles = false # hides the next/previous titles for pages that use page.html as their template.

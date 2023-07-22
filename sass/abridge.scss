@@ -33,6 +33,7 @@ $icon-mastodon: true !default;
 $icon-element: true !default;
 $icon-matrix: false !default;
 $icon-buymeacoffee: true !default;
+$icon-kofi: true !default;
 $icon-twitter: true !default;
 $icon-facebook: true !default;
 $icon-linkedin: true !default;
@@ -1284,6 +1285,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-globe {.globe { background-image: functions.icon(globe, "%23888", 2, "none", $ic) }}
   @if $icon-home {.home { background-image: functions.icon(home, "%23888", 2, "none", $ic) }}
   @if $icon-instagram {.instagram { background-image: functions.icon(instagram, "%23e07", 2, "none", $ic) }}
+  @if $icon-kofi {.kofi { background-image: functions.icon(kofi, "%23888", 1.5, "%23f55", $ic) }}
   @if $icon-linkedin {.linkedin { background-image: functions.icon(linkedin, "%2326a", 2, "none", $ic) }}
   @if $icon-mail {.mail { background-image: functions.icon(mail, "%23888", 2, "none", $ic) }}
   @if $icon-mastodon {.mastodon { background-image: functions.icon(mastodon, "none", 1, "%2328c", $ic) }}

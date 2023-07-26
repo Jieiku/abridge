@@ -3,10 +3,9 @@
   {%- if config.extra.js_switcher | default(value=true) %}
   {%- set js_theme=config.extra.js_theme | default(value="") -%}
   {%- if not js_theme %}
+  {%- set js_theme="js/theme.min.js" -%}
   {%- if config.extra.js_switcher_default %}{%- if config.extra.js_switcher_default == "light" %}
   {%- set js_theme="js/theme_light.min.js" -%}
-  {%- else %}
-  {%- set js_theme="js/theme.min.js" -%}
   {%- endif %}{%- endif %}
   <script src="{{ get_url(path=js_theme, trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}

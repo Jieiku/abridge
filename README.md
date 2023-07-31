@@ -105,6 +105,24 @@ Saved changes will live reload in the browser.
 
 A lot of effort has been made to ensure Abridge features can be easily customized.
 
+### Default Theme for nojs/noscript visitors.
+
+If you have abridge configured to use the switcher mode instead of auto/dark/light, then your site will have a button that allows the visitor to toggle the theme.
+
+If your visitor uses noscript or some other javascript blocking browser addon, then they will be stuck with whatever the configured default theme is for the switcher mode.
+
+To adjust this mode you would set the following two config values in abridge.scss **AND** config.toml:
+
+```scss
+$switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in config.toml)
+```
+
+```toml
+js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
+```
+
+By default abrdige uses dark mode for the switcher, so unless you want to set the default mode to light for nojs visitors, then you do not need to worry about these settings.
+
 ### Number of Items per page for pagination
 
 To change the number of items per page edit: `content/_index.md` and change the value for `paginate_by`

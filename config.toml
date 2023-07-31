@@ -205,7 +205,7 @@ integrity = true # increases site security, should normally be true. (setting to
 
 js_bundle = true # multiple javascript files combined into a single file (setting to false is useful during js development)
 js_switcher = true # The button that allows manually changing between light/dark mode.
-js_switcher_default = "dark" # default switcher mode: dark, light
+js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
 js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
 

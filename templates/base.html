@@ -27,9 +27,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   {{- macros_head::security(config=config) }}
   {{- macros_head::favicons(config=config) }}
-  {%- if config.build_search_index %}
   <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
-  {%- endif %}
 </head>
 <body>
 {%- block header %}

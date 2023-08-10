@@ -65,3 +65,17 @@ code {
     background-color: unset;
   }
 }
+.img-swap-div {
+  .img-main {
+    display: block;
+  }
+  .img-swap {
+    display: none;
+  }
+  &:hover .img-swap {
+    display: block;
+  }
+  &:hover .img-main {
+    display: none;
+  }
+}

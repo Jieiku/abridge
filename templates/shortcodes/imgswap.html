@@ -1,0 +1,59 @@
+<div class="img-swap-div">
+  {%- set dirtest = main_src | trim_start_matches(pat="./") %}
+  {%- if dirtest is containing("/") %}
+    {%- set reldir = true %}
+  {%- endif %}
+
+  {%- if main_src is starting_with("./") and reldir %} {# Relative Path #}
+    {%- set path = main_src | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+    {%- set path = path ~ "/"  %}
+
+  {%- elif main_src is starting_with("/") %} {# Root Path #}
+    {%- set rootpath = main_src | split(pat="/") | slice(end=-1) | join(sep="/") %}
+    {%- set path = config.base_url ~ rootpath ~ "/"  %}
+
+  {%- else %} {# Same Directory Path #}
+    {%- set path = "" %}
+
+  {%- endif %}
+
+  {%- if not w or not h %}
+    {%- set metafile = page.path ~ path ~ main_src %}
+    {%- set meta = get_image_metadata(path=metafile) %}
+    {%- set w = meta.width %}
+    {%- set h = meta.height %}
+  {%- endif %}
+
+  {%- set img = main_src | split(pat="/") | last %}
+  {%- set name = img | split(pat=".") | first %}
+  <img src="{{ path | safe }}{{ img | safe }}" class="img-main{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />
+
+  {%- set dirtest = swap_src | trim_start_matches(pat="./") %}
+  {%- if dirtest is containing("/") %}
+    {%- set reldir = true %}
+  {%- endif %}
+
+  {%- if swap_src is starting_with("./") and reldir %} {# Relative Path #}
+    {%- set path = swap_src | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+    {%- set path = path ~ "/"  %}
+
+  {%- elif swap_src is starting_with("/") %} {# Root Path #}
+    {%- set rootpath = swap_src | split(pat="/") | slice(end=-1) | join(sep="/") %}
+    {%- set path = config.base_url ~ rootpath ~ "/"  %}
+
+  {%- else %} {# Same Directory Path #}
+    {%- set path = "" %}
+
+  {%- endif %}
+
+  {%- if not w or not h %}
+    {%- set metafile = page.path ~ path ~ swap_src %}
+    {%- set meta = get_image_metadata(path=metafile) %}
+    {%- set w = meta.width %}
+    {%- set h = meta.height %}
+  {%- endif %}
+
+  {%- set img = swap_src | split(pat="/") | last %}
+  {%- set name = img | split(pat=".") | first %}
+  <img src="{{ path | safe }}{{ img | safe }}" class="img-swap{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />
+</div>

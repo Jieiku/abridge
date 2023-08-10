@@ -200,6 +200,7 @@ $top: true !default;//back to top button using CSS
 $search: true !default;//search feature
 $toc: true !default;//Table of Contents, page index / recent posts block
 $zola: true !default;//Zola Specific
+$imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: false !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
@@ -1221,6 +1222,22 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
     tbody tr:nth-child(even), thead tr {
       background-color: unset;
+    }
+  }
+}
+@if $imgswap {
+  .img-swap-div {
+    .img-main {
+      display: block;
+    }
+    .img-swap {
+      display: none;
+    }
+    &:hover .img-swap {
+      display: block;
+    }
+    &:hover .img-main {
+      display: none;
     }
   }
 }

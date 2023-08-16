@@ -356,6 +356,13 @@ leanify -i 7777 *.png
 leanify -i 7777 *.ico
 ```
 
+With larger displays and greater pixel density becoming common it is probably a good idea to use atleast a littly bit of lossy compression. For example you can use pngquant with a 93% quality and you will often get images around 1/2 the size. Understand that pngquant is cumulative, so you should keep your original images somewhere, and only ever use pngquant once per image, if you use it again and again on the same image then you will lower the image quality each time. Always use oxipng afterwards, oxipng is lossless.
+
+```bash
+pngquant --skip-if-larger --strip --quality=93-93 --speed 1 *.png
+oxipng -o max --strip all -a -Z *.png
+```
+
 ### Pre gzip/brotli content to serve with nginx:
 
 If you are serving your site with nginx, you can pre gzip your content.

@@ -34,18 +34,18 @@ Le `video` shortcode prend un `sources` paramètre (un tableau de chaînes) et r
 
 Le `image` shortcode renvoie une `<picture>` balise et accepte trois paramètres : `sources` (un tableau de chaînes), `fallback_path`, et `fallback_alt` (les deux chaînes).
 
-Chaque chaîne du `sources` tableau doit être un chemin vers un fichier image d'un type différent (`webp`, `png`, `jpg`, etc). `fpath` et
+Chaque chaîne du `sources` tableau doit être un chemin vers un fichier image d'un type différent (`avif`, `webp`, `png`, `jpg`, etc). `fpath` et
 `falt` sont utilisés pour créer une `<img>` balise sur laquelle le navigateur peut se replier si les autres formats ne sont pas encore pris en charge, fw et fh définissent la largeur et la hauteur de la solution de repli
 
 ### Usage
 ```rs
-{{/* image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") */}}
+{{/* image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") */}}
 ```
 ### Sortir
 ```html
-{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
 ```
-{{ image(sources=["over9000-960.webp", "over9000-640.webp", "over9000-400.webp"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif"], fpath="over9000-640.webp", fw=640, fh=480, falt="ITS OVER 9000!") }}
 
 ## GIF
 

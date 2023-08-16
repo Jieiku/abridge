@@ -711,23 +711,9 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin-bottom: 0;
       margin-top: 0.2rem;
     }
-    li {
-      display: inline-block;
-      margin: 0 .2rem;
-    }
   }
   main nav {
-    ul {
-      display: flex;
-      padding-left: 0;
-    }
     margin-top: var(--s2);//pagination margin
-    li {
-      margin: .2rem;
-    }
-    li.inp {
-      padding-top: .1rem;
-    }
   }
   .outp {
     padding: 0 .26rem .2rem;
@@ -751,11 +737,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--a1);//pagination color current page
   }
   footer nav {
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-    li {
+    i {
       margin: 0 .2rem .4rem;
     }
   }

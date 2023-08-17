@@ -49,6 +49,12 @@
     {%- block page_footer %}
     {{- macros::footer(page=page) }}
     {%- endblock page_footer %}
+
+    {%- block comments_body %}
+    {%- if config.extra.comments.hyvor %}
+    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }} colors="os"></hyvor-talk-comments>
+    {%- endif %}
+    {%- endblock comments_body %}
     </article>
     {%- block toc %}
     {%- if page.extra.toc and config.extra.recent %}

@@ -28,6 +28,12 @@
   {{- macros_head::security(config=config) }}
   {{- macros_head::favicons(config=config) }}
   <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
+
+  {%- block comments_init %}
+  {%- if config.extra.comments.hyvor %}
+  <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+  {%- endif %}
+  {%- endblock comments_init %}
 </head>
 <body>
 {%- block header %}

@@ -25,8 +25,11 @@
   {%- endif %}
 
   {%- set img = main_src | split(pat="/") | last %}
-  {%- set name = img | split(pat=".") | first %}
-  <img src="{{ path | safe }}{{ img | safe }}" class="img-main{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />
+
+  {%- if not alt %}
+    {%- set alt = img | split(pat=".") | first %}
+  {%- endif %}
+  <img src="{{ path | safe }}{{ img | safe }}" class="img-main{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />
 
   {%- set dirtest = swap_src | trim_start_matches(pat="./") %}
   {%- if dirtest is containing("/") %}
@@ -54,6 +57,9 @@
   {%- endif %}
 
   {%- set img = swap_src | split(pat="/") | last %}
-  {%- set name = img | split(pat=".") | first %}
-  <img src="{{ path | safe }}{{ img | safe }}" class="img-swap{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} />
+
+  {%- if not alt %}
+    {%- set alt = img | split(pat=".") | first %}
+  {%- endif %}
+  <img src="{{ path | safe }}{{ img | safe }}" class="img-swap{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />
 </div>

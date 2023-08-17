@@ -30,6 +30,12 @@
   {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
 {%- endblock seo %}
 
+{%- block comments_init %}
+  {%- if config.extra.comments.hyvor %}
+  <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+  {%- endif %}
+{%- endblock comments_init %}
+
 {%- block content %}
     <article>
     {{- macros::title_post(page=page, config=config) }}
@@ -39,7 +45,7 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
-    {{ page.content | safe }}
+{{ page.content | safe }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "bottom" or config.extra.meta_post.position == "both" %}
@@ -47,7 +53,7 @@
     {%- endif %}{%- endif %}
 
     {%- block page_footer %}
-    {{- macros::footer(page=page) }}
+    {{- macros::footer(page=page, config=config) }}
     {%- endblock page_footer %}
 
     {%- block comments_body %}
@@ -61,17 +67,17 @@
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc %}
-    <div class="toc" aria-hidden="true">
+    <div class="toc">
       <div class="toc-sticky">
-        <h3>Index</h3>
+        <h3>{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</h3>
         {%- for h in toc %}
         <div class="toc-item">
-          <a class="subtext" href="{{h.permalink | safe}}">{{ h.title }}</a>
+          <a class="subtext" href="#{{h.id | safe}}">{{ h.title }}</a>
         </div>
         {%- if h.children %}
         {%- for h2 in h.children %}
         <div class="toc-item-child">
-          <a class="subtext" href="{{h2.permalink | safe}}"><small>- {{ h2.title }}</small></a>
+          <a class="subtext" href="#{{h2.id | safe}}"><small>- {{ h2.title }}</small></a>
         </div>
         {%- endfor %}
         {%- endif %}
@@ -87,8 +93,9 @@
 
 {%- if page.reading_time %}
 {%- if page.reading_time > 2 %}
+{%- set icon_top=config.extra.icon_top | default(value="svgs svgh angu") -%}
 <span class="topout">
-<span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if config.extra.icon_top %}<i class="{{ config.extra.icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
+<span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if icon_top %}<i class="{{ icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
 </span>
 {%- endif %}
 {%- endif %}

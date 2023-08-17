@@ -1,0 +1,83 @@
+{#
+This Page Shows the Posts Grouped by Year: example.com/archive/
+This Template can also be used as the rendering template for Sections, eg: example.com/blog/  example.com/software/
+#}
+
+{% extends "base.html" %}
+
+{%- block seo %}
+  {{- super() }}
+  {%- set title = "Archive" %}
+
+  {%- if config.title %}
+    {%- set title_addition = title_separator ~ config.title %}
+  {%- else %}
+    {%- set title_addition = "" %}
+  {%- endif %}
+
+  {%- set description = config.description %}
+
+  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
+{%- endblock seo %}
+
+{%- block content %}
+    {#- The following line is checking if the template is being used for the archive page or a section #}
+    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
+      {%- set sec = "" %}
+    {%- else %}
+      {%- set langpath = "/" %}
+      {%- if lang != config.default_language %}
+        {%- set langpath = "/" ~ lang ~ "/" %}
+      {%- endif %}
+
+      {%- set sec = current_path | trim_start_matches(pat=langpath) | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+      {%- set sec = sec ~ "/" %}
+    {%- endif %}
+
+    {%- if lang == config.default_language %}
+    {%- set section_item = get_section(path=sec ~ "_index.md") %}
+    {%- else %}
+    {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
+    {%- endif %}
+    {%- if sec != "" %}
+      {#- the section always overrides the config -#}
+      {%- if section_item.extra and 'hide_section_dates' in section_item.extra -%}
+        {%- set hide_section_dates = section_item.extra.hide_section_dates -%}
+      {%- elif config.extra.hide_section_dates -%}
+        {%- set hide_section_dates = true -%}
+      {%- endif -%}
+    {%- endif %}
+    <div>
+      {%- if section_item.title %}
+      <h2>{{ section_item.title }}</h2>
+      {%- endif %}
+      {{- section_item.content | safe }}
+      {%- if config.extra.archive_reverse %}
+      {%- for year, posts in section_item.pages | sort(attribute="year") | reverse | group_by(attribute="year") %}
+      {%- if not hide_section_dates %}
+      {%- if section_item.title %}
+      <h3>{{ year }}</h3>
+      {%- else %}
+      <h2>{{ year }}</h2>
+      {%- endif %}
+      {%- endif %}
+      {%- for post in posts %}
+      <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
+      {%- endfor %}
+      {%- endfor %}
+      {%- else %}
+      {%- for year, posts in section_item.pages | group_by(attribute="year") %}
+      {%- if not hide_section_dates %}
+      {%- if section_item.title %}
+      <h3>{{ year }}</h3>
+      {%- else %}
+      <h2>{{ year }}</h2>
+      {%- endif %}
+      {%- endif %}
+      {%- for post in posts %}
+      <p><a href="{{ post.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
+      {%- endfor %}
+      {%- endfor %}
+      {%- endif %}
+    </div>
+{%- endblock content %}

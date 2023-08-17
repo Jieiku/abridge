@@ -1,0 +1,181 @@
+@use '../themes/abridge/sass/abridge' with (
+  /// LINES HERE END WITH COMMA AFTER THE VALUE!
+  /// The things your less likely to need to override have been commented out.
+
+  /// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+  /// Fluid layout until a defined size, then becomes centered viewport
+  //$enable-maxwidth: true,
+  $mw: 75%,// max-width
+  //$mb: 1200px,// value at which to switch from fluid layout to max-width
+
+  $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
+  $syntax-mode: "auto",// Force syntax mode: auto, dark, light
+  $switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in config.toml)
+
+  $color: "orange",// color template to use/override: orange, blue, blueshade
+
+  $color-syntax: "abridge",// syntax color template to use/override: abridge,
+  $syntax: true,//syntax highlighting for Code Blocks.
+
+  $enable-icons: true,// false disables ALL icons
+  $ic: true,// true for colorized icons, otherwise #888 is used.
+
+  $icon-rss: true,
+  $icon-mail: false,// e-mail
+  $icon-mastodon: false,
+  $icon-element: false,
+  $icon-matrix: false,
+  $icon-buymeacoffee: false,
+  $icon-kofi: false,
+  $icon-twitter: false,
+  $icon-facebook: false,
+  $icon-linkedin: false,
+  $icon-codeberg: false,
+  $icon-gitlab: false,
+  $icon-github: false,
+  $icon-github-sponsor: false,
+  $icon-bitbucket: false,
+  $icon-python: false,
+  $icon-docker: false,
+  $icon-stack: false,
+  $icon-instagram: false,
+  $icon-pinterest: false,
+  $icon-discord: false,
+  $icon-twitch: false,
+  $icon-youtube: false,
+  $icon-researchgate: false,
+
+  //$icon-x: true,// x symbol, used to close search results page.
+  //$icon-search: true,//search, spyglass search button in search box.
+  //$icon-adjust: true,//theme switcher dark/light toggle button.
+  //$icon-angll: true,//pagination, goto first page
+  //$icon-angl: true,//pagination, goto previous page
+  //$icon-angr: true,//pagination, goto next page
+  //$icon-angrr: true,//pagination, goto last page
+  //$icon-angu: true,//back to top button, appears after scrolling down.
+  //$icon-copy: true,//copy to clipboard, for code blocks.
+
+  //$icon-ffolder: false,
+  //$icon-folder: false,// categories folder
+  //$icon-ftag: false,
+  //$icon-tag: false,// tag
+  //$icon-check: false,// check mark
+  //$icon-chevron: false,// chevron down
+  //$icon-clock: false,// time analog clock
+  //$icon-date: false,// calendar
+  //$icon-globe: false,
+  //$icon-home: false,
+  //$icon-minus: false,// minus symbol
+  //$icon-moon: false,// dark moon
+  //$icon-sun: false,// light sun
+
+  /// The colors below can be overrided individually as needed.
+
+  /// Dark Colors
+  //$f1d: #ccc,// Font Color Primary
+  //$f2d: #ddd,// Font Color Headers
+  //$c1d: #111,// Background Color Primary
+  //$c2d: #222,// Background Color Secondary
+  //$c3d: #333,// Table Rows, Block quote edge, Borders
+  //$c4d: #777,// Disabled Buttons, Borders, mark background
+  //$a1d: #f90,// link color
+  //$a2d: #fb0,// link hover/focus color
+  //$a3d: #f90,// link h1-h2 hover/focus color
+  //$cgd: #593,// ins green, success
+  //$crd: #e33,// del red, errors
+
+  /// Light Colors
+  //$f1: #333,// Font Color Primary
+  //$f2: #222,// Font Color Headers
+  //$c1: #fff,// Background Color Primary
+  //$c2: #eee,// Background Color Secondary
+  //$c3: #ddd,// Table Rows, Block quote edge, Borders
+  //$c4: #555,// Disabled Buttons, Borders, mark background
+  //$a1: #c40,// link color
+  //$a2: #e60,// link hover/focus color
+  //$a3: #f90,// link h1-h2 hover/focus color
+  //$cg: #373,// ins green, success
+  //$cr: #d33,// del red, errors
+
+  /// Dark Syntax Colors
+  //$h0d: #191919,// background color
+  //$h1d: #ddd,// unstyled text
+  //$h2d: #888,// comments
+  //$h3d: #e65,// red, support function
+  //$h4d: #e83,// orange, punctuation, constant, variable, json-key
+  //$h5d: #eb6,// tan, entity/function name
+  //$h6d: #ac3,// green, string
+  //$h7d: #8db,// teal, escape character
+  //$h8d: #6ae,// blue, declaration, tag, property
+  //$h9d: #d6e,// purple, operators
+  //$had: 160%,// mark/highlight line
+
+  /// Light Syntax Colors
+  //$h0: #f7f7f7,// background color
+  //$h1: #222,// unstyled text
+  //$h2: #666,// comments
+  //$h3: #a21,// red, support function
+  //$h4: #930,// orange, punctuation, constant, variable, json-key
+  //$h5: #a50,// tan, entity/function name
+  //$h6: #350,// green, string
+  //$h7: #286,// teal, escape character
+  //$h8: #059,// blue, declaration, tag, property
+  //$h9: #a3c,// purple, operators
+  //$ha: 92%,// mark/highlight line
+
+  /// These lines find the spot at which to insert your appended fonts.
+  //$findFont-Main: "Segoe UI",     // ← append custom MAIN font(s) AFTER this
+  //$findFont-Code: "Segoe UI Mono",// ← append custom CODE font(s) AFTER this
+
+  /// These lines specify the fonts to add.
+  //$fontExt-Main: (ExampleFont1, "Example Font 2"),// MAIN font(s) to add
+  //$fontExt-Code: (ExampleCode1, "Example Code 2"),// CODE font(s) to add
+
+  /// If prepending/appending fonts above, then no need to change them below
+  //$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif,
+  //$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace,
+
+  /// Enable <header>, <main>, <footer> inside <body> as a container
+  //$enable-semantic-container: true,
+
+  /// Enable responsive typography, Fixed root element size if disabled
+  //$enable-responsive-typography: true,
+
+  /// Enable responsive spacings for <header>, <main>, <footer>, <section>
+  //$enable-responsive-spacings: false,
+
+  /// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+  /// This option will only work if $enable-maxwidth: false
+  //$enable-viewport: false,
+
+  /// xs: Extra small (portrait phones)
+  /// sm: Small(landscape phones)
+  /// md: Medium(tablets)
+  /// lg: Large(desktops)
+  /// xl: Extra large (large desktops)
+
+  /// Breakpoints
+  //$breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px),
+
+  /// Viewports
+  //$viewports: (sm: 510px, md: 700px, lg: 920px, xl: 1130px),
+
+  //$document: true,//Content-box & Responsive typography
+  //$typography: true,//a, headings, p, ul, blockquote
+  //$sectioning: true,//responsive Container, header, main, footer
+  //$nav: true,//Horizontal Navigation at top of page
+  //$embedded: true,//Embedded content, iframe, video, images, etc.
+  //$table: true,//table specific elements
+  //$code: true,//codeblocks, code, pre, kbd
+  //$hr: true,//Horizontal Rule
+  //$scroller: true,//Horizontal scroller (<figure>)
+  //$button: true,//Form elements (button)
+  //$form: true,//Form elements (non-button)
+  //$top: true,//back to top button using CSS
+  //$search: true,//search feature
+  //$toc: true,//Table of Contents, page index / recent posts block
+  //$zola: true,//Zola Specific
+  //$misc: false,
+  //$grid: false,//Infinity Grid, column based layouts.
+  //$syntax: true,//syntax highlighting for code blocks
+);

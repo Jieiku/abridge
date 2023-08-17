@@ -1,0 +1,120 @@
+@mixin dark($f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+  #{--f1}: $f1;// Font Color Primary
+  #{--f2}: $f2;// Font Color Headers
+  #{--c1}: $c1;// Background Color Primary
+  #{--c2}: $c2;// Background Color Secondary
+  #{--c3}: $c3;// Table Rows, Block quote edge, Borders
+  #{--c4}: $c4;// Disabled Buttons, Borders, mark background
+  #{--a1}: $a1;// link color
+  #{--a2}: $a2;// link hover/focus color
+  #{--a3}: $a3;// link h1-h2 hover/focus color
+  #{--cg}: $cg;// ins green, success
+  #{--cr}: $cr;// del red, errors
+}
+@mixin light($f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+  #{--f1}: $f1;// Font Color Primary
+  #{--f2}: $f2;// Font Color Headers
+  #{--c1}: $c1;// Background Color Primary
+  #{--c2}: $c2;// Background Color Secondary
+  #{--c3}: $c3;// Table Rows, Block quote edge, Borders
+  #{--c4}: $c4;// Disabled Buttons, Borders, mark background
+  #{--a1}: $a1;// link color
+  #{--a2}: $a2;// link hover/focus color
+  #{--a3}: $a3;// link h1-h2 hover/focus color
+  #{--cg}: $cg;// ins green, success
+  #{--cr}: $cr;// del red, errors
+}
+
+@function color($color,$dark,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+  @if $color == "blue" {
+    @if $dark {/// Dark Colors
+      $f1: #ccc !default;// Font Color Primary
+      $f2: #ddd !default;// Font Color Headers
+      $c1: #111 !default;// Background Color Primary
+      $c2: #222 !default;// Background Color Secondary
+      $c3: #333 !default;// Table Rows, Block quote edge, Borders
+      $c4: #888 !default;// Disabled Buttons, Borders, mark background
+      $a1: #09f !default;// link color
+      $a2: #0bf !default;// link hover/focus color
+      $a3: #0af !default;// link h1-h2 hover/focus color
+      $cg: #593 !default;// ins green, success
+      $cr: #e33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    } @else {/// Light Colors
+      $f1: #333 !default;// Font Color Primary
+      $f2: #222 !default;// Font Color Headers
+      $c1: #fff !default;// Background Color Primary
+      $c2: #eee !default;// Background Color Secondary
+      $c3: #ddd !default;// Table Rows, Block quote edge, Borders
+      $c4: #555 !default;// Disabled Buttons, Borders, mark background
+      $a1: #06e !default;// link color
+      $a2: #09f !default;// link hover/focus color
+      $a3: #07f !default;// link h1-h2 hover/focus color
+      $cg: #373 !default;// ins green, success
+      $cr: #d33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    }
+  } @else if $color == "blueshade" {
+    @if $dark {/// Dark Colors
+      $f1: #ccc !default;// Font Color Primary
+      $f2: #ddd !default;// Font Color Headers
+      $c1: #111 !default;// Background Color Primary
+      $c2: #123 !default;// Background Color Secondary
+      $c3: #345 !default;// Table Rows, Block quote edge, Borders
+      $c4: #789 !default;// Disabled Buttons, Borders, mark background
+      $a1: #09f !default;// link color
+      $a2: #0bf !default;// link hover/focus color
+      $a3: #0af !default;// link h1-h2 hover/focus color
+      $cg: #593 !default;// ins green, success
+      $cr: #e33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    } @else {/// Light Colors
+      $f1: #333 !default;// Font Color Primary
+      $f2: #222 !default;// Font Color Headers
+      $c1: #fff !default;// Background Color Primary
+      $c2: #def !default;// Background Color Secondary
+      $c3: #cde !default;// Table Rows, Block quote edge, Borders
+      $c4: #013 !default;// Disabled Buttons, Borders, mark background
+      $a1: #06e !default;// link color
+      $a2: #09f !default;// link hover/focus color
+      $a3: #07f !default;// link h1-h2 hover/focus color
+      $cg: #373 !default;// ins green, success
+      $cr: #d33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    }
+  } @else {//orange (default)
+    @if $dark {/// Dark Colors
+      $f1: #ccc !default;// Font Color Primary
+      $f2: #ddd !default;// Font Color Headers
+      $c1: #111 !default;// Background Color Primary
+      $c2: #222 !default;// Background Color Secondary
+      $c3: #333 !default;// Table Rows, Block quote edge, Borders
+      $c4: #888 !default;// Disabled Buttons, Borders, mark background
+      $a1: #f90 !default;// link color
+      $a2: #fb0 !default;// link hover/focus color
+      $a3: #f90 !default;// link h1-h2 hover/focus color
+      $cg: #593 !default;// ins green, success
+      $cr: #e33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    } @else {/// Light Colors
+      $f1: #333 !default;// Font Color Primary
+      $f2: #222 !default;// Font Color Headers
+      $c1: #fff !default;// Background Color Primary
+      $c2: #eee !default;// Background Color Secondary
+      $c3: #ddd !default;// Table Rows, Block quote edge, Borders
+      $c4: #555 !default;// Disabled Buttons, Borders, mark background
+      $a1: #c40 !default;// link color
+      $a2: #e60 !default;// link hover/focus color
+      $a3: #f90 !default;// link h1-h2 hover/focus color
+      $cg: #373 !default;// ins green, success
+      $cr: #d33 !default;// del red, errors
+      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      @return $result;
+    }
+  }
+}

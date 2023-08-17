@@ -1,36 +1,1525 @@
-//@import "fonts/Abridge";
-//@import "fonts/Roboto";
-//@import "fonts/Arimo";
-//@import "fonts/Lato";
-//@import "fonts/FiraCode"; // Monospaced
-@import "imports";
-@import "syntax/syntax-abridge";
+@use "sass:meta";
+@use "sass:list";
 
-:root {
-  --f1: #ccc;// Font Color Primary
-  --f2: #ddd;// Font color Headers
-  --c1: #111;// Background Color Primary
-  --c2: #222;// Background Color Secondary
-  --c3: #333;// Table Rows, Block quote edge, Borders
-  --c4: #888;// Disabled Buttons, Borders, mark background
-  --a1: #f90;// link color
-  --a2: #fb0;// link hover/focus color
-  --a3: #f90;// link h1-h2 hover/focus color
-  --cg: #593; // ins green, success
-  --cr: #e33; // del red, errors
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --f1: #444;// Font Color Primary
-    --f2: #333;// Font color Headers
-    --c1: #fff;// Background Color Primary
-    --c2: #eee;// Background Color Secondary
-    --c3: #ddd;// Table Rows, Block quote edge, Borders
-    --c4: #677;// Disabled Buttons, Borders, mark background
-    --a1: #c40;// link color
-    --a2: #e60;// link hover/focus color
-    --a3: #f90;// link h1-h2 hover/focus color
-    --cg: #373; // ins green, success
-    --cr: #d33; // del red, errors
+@use "functions";
+@use "colors";
+@use "colors-syntax";
+
+/******************************************************************************
+ *   Variables
+ *****************************************************************************/
+
+/// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+/// Fluid layout until a defined size, then becomes centered viewport
+$enable-maxwidth: true !default;
+$mw: 60% !default;// max-width
+$mb: 1200px !default;// value at which to switch from fluid layout to max-width
+
+$abridgeMode: "switcher" !default;//valid values: switcher, auto, dark, light
+$syntax-mode: "auto" !default;// Force syntax mode: auto, dark, light
+$switcherDefault: "dark" !default;// default for nojs switcher: dark, light
+
+$color: "orange" !default;// color template to use/override: orange, blue, blueshade
+
+$color-syntax: "abridge" !default;// syntax color template to use/override: abridge,
+$syntax: true !default;//syntax highlighting for Code Blocks.
+
+$enable-icons: true !default; // false disables ALL icons
+$ic: true !default; // true for colorized icons, otherwise #888 is used.
+
+$icon-rss: true !default;
+$icon-mail: true !default;// e-mail
+$icon-mastodon: true !default;
+$icon-element: true !default;
+$icon-matrix: false !default;
+$icon-buymeacoffee: true !default;
+$icon-kofi: true !default;
+$icon-twitter: true !default;
+$icon-facebook: true !default;
+$icon-linkedin: true !default;
+$icon-codeberg: true !default;
+$icon-gitlab: true !default;
+$icon-github: true !default;
+$icon-github-sponsor: true !default;
+$icon-bitbucket: true !default;
+$icon-python: true !default;
+$icon-docker: true !default;
+$icon-stack: true !default;
+$icon-instagram: true !default;
+$icon-pinterest: true !default;
+$icon-discord: true !default;
+$icon-twitch: true !default;
+$icon-youtube: true !default;
+$icon-researchgate: true !default;
+
+$icon-x: true !default;// x symbol, used to close search results page.
+$icon-search: true !default;//search, spyglass search button in search box.
+$icon-adjust: true !default;//theme switcher dark/light toggle button.
+$icon-angll: true !default;//pagination, goto first page
+$icon-angl: true !default;//pagination, goto previous page
+$icon-angr: true !default;//pagination, goto next page
+$icon-angrr: true !default;//pagination, goto last page
+$icon-angu: true !default;//back to top button, appears after scrolling down.
+$icon-copy: true !default;//copy to clipboard, for code blocks.
+
+$icon-ffolder: false !default;
+$icon-folder: false !default;// categories folder
+$icon-ftag: false !default;
+$icon-tag: false !default;// tag
+$icon-check: false !default;// check mark
+$icon-chevron: false !default;// chevron down
+$icon-clock: false !default;// time analog clock
+$icon-date: false !default;// calendar
+$icon-globe: false !default;
+$icon-home: false !default;
+$icon-minus: false !default;// minus symbol
+$icon-moon: false !default;// dark moon
+$icon-sun: false !default;// light sun
+
+/// Dark Colors
+$f1d: null !default;// Font Color Primary
+$f2d: null !default;// Font Color Headers
+$c1d: null !default;// Background Color Primary
+$c2d: null !default;// Background Color Secondary
+$c3d: null !default;// Table Rows, Block quote edge, Borders
+$c4d: null !default;// Disabled Buttons, Borders, mark background
+$a1d: null !default;// link color
+$a2d: null !default;// link hover/focus color
+$a3d: null !default;// link h1-h2 hover/focus color
+$cgd: null !default;// ins green, success
+$crd: null !default;// del red, errors
+$dark: colors.color($color,true,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
+
+/// Light Colors
+$f1: null !default;// Font Color Primary
+$f2: null !default;// Font Color Headers
+$c1: null !default;// Background Color Primary
+$c2: null !default;// Background Color Secondary
+$c3: null !default;// Table Rows, Block quote edge, Borders
+$c4: null !default;// Disabled Buttons, Borders, mark background
+$a1: null !default;// link color
+$a2: null !default;// link hover/focus color
+$a3: null !default;// link h1-h2 hover/focus color
+$cg: null !default;// ins green, success
+$cr: null !default;// del red, errors
+$light: colors.color($color,false,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
+
+/// Dark Syntax Colors
+$h0d: null !default;// background color
+$h1d: null !default;// unstyled text
+$h2d: null !default;// comments
+$h3d: null !default;// red, support function
+$h4d: null !default;// orange, punctuation, constant, variable, json-key
+$h5d: null !default;// tan, entity/function name
+$h6d: null !default;// green, string
+$h7d: null !default;// teal, escape character
+$h8d: null !default;// blue, declaration, tag, property
+$h9d: null !default;// purple, operators
+$had: null !default;// mark/highlight line
+$syntax-dark: colors-syntax.color($color-syntax,true,$h0d,$h1d,$h2d,$h3d,$h4d,$h5d,$h6d,$h7d,$h8d,$h9d,$had);
+
+/// Light Syntax Colors
+$h0: null !default;// background colorq
+$h1: null !default;// unstyled text
+$h2: null !default;// comments
+$h3: null !default;// red, support function
+$h4: null !default;// orange, punctuation, constant, variable, json-key
+$h5: null !default;// tan, entity/function name
+$h6: null !default;// green, string
+$h7: null !default;// teal, escape character
+$h8: null !default;// blue, declaration, tag, property
+$h9: null !default;// purple, operators
+$ha: null !default;// mark/highlight line
+$syntax-light: colors-syntax.color($color-syntax,false,$h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha);
+
+/// These lines find the spot at which to insert your appended fonts.
+//$findFont-Main : "Segoe UI";     // ← append custom MAIN font(s) AFTER this
+//$findFont-Code : "Segoe UI Mono";// ← append custom CODE font(s) AFTER this
+$findFont-Main : null !default;
+$findFont-Code : null !default;
+
+/// These lines specify the fonts to add.
+//$fontExt-Main  : (ExampleFont1, "Example Font 2");// MAIN font(s) to add
+//$fontExt-Code  : (ExampleCode1, "Example Code 2");// CODE font(s) to add
+$fontExt-Main  : null !default;
+$fontExt-Code  : null !default;
+
+$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif !default;
+$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace !default;
+
+/// Enable <header>, <main>, <footer> inside <body> as a container
+$enable-semantic-container: true !default;
+
+/// Enable responsive typography, Fixed root element size if disabled
+$enable-responsive-typography: true !default;
+
+/// Enable responsive spacings for <header>, <main>, <footer>, <section>
+$enable-responsive-spacings: false !default;
+
+/// Enable a centered viewport for <header>, <main>, <footer> inside <body>
+/// This option will only work if $enable-maxwidth: false
+$enable-viewport: false !default;
+
+/// xs: Extra small (portrait phones)
+/// sm: Small(landscape phones)
+/// md: Medium(tablets)
+/// lg: Large(desktops)
+/// xl: Extra large (large desktops)
+
+/// Breakpoints
+$breakpoints: (
+  /// 'null' disable the breakpoint
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+/// Viewports
+$viewports: (
+  /// 'null' disable the viewport on a breakpoint
+  sm: 510px,
+  md: 700px,
+  lg: 920px,
+  xl: 1130px
+) !default;
+
+$document: true !default;//Content-box & Responsive typography
+$typography: true !default;//a, headings, p, ul, blockquote
+$sectioning: true !default;//responsive Container, header, main, footer
+$nav: true !default;//Horizontal Navigation at top of page
+$embedded: true !default;//Embedded content, iframe, video, images, etc.
+$table: true !default;//table specific elements
+$code: true !default;//codeblocks, code, pre, kbd
+$hr: true !default;//Horizontal Rule
+$scroller: true !default;//Horizontal scroller (<figure>)
+$button: true !default;//Form elements (button)
+$form: true !default;//Form elements (non-button)
+$top: true !default;//back to top button using CSS
+$search: true !default;//search feature
+$toc: true !default;//Table of Contents, page index / recent posts block
+$zola: true !default;//Zola Specific
+$imgswap: true !default;//Image Swap on hover/click
+$misc: false !default;
+$grid: false !default;//Infinity Grid, column based layouts.
+$syntax: true !default;//syntax highlighting for code blocks
+
+/******************************************************************************
+ *   Root element
+ *****************************************************************************/
+@mixin root {
+  // Spacings
+  --s1: .5rem;
+  --s2: 1rem;
+  --rc: .5rem; //radius corners
+
+  // Borders
+  --br: 0.25rem; //border radius
+  --bw: 0.0625rem; //border width
+  --ow: 0.1875rem; //outline width
+
+  --fs: 1rem; //font-size
+  --lh: 1.5; //line-height
+  --lhh: 1.2; //line-height headers
+  --fw: 400; //font-weight
+  --fh: 700; //font-weight h1-h6
+
+  // Responsive typography
+  @if $enable-responsive-typography {
+    @if map-get($breakpoints, "sm") {
+      @media (min-width: map-get($breakpoints, "sm")) {
+        --fs: 1rem;
+      }
+    }
+    @if map-get($breakpoints, "md") {
+      @media (min-width: map-get($breakpoints, "md")) {
+        --fs: 1.04rem;
+      }
+    }
+    @if map-get($breakpoints, "lg") {
+      @media (min-width: map-get($breakpoints, "lg")) {
+        --fs: 1.08rem;
+      }
+    }
+    @if map-get($breakpoints, "xl") {
+      @media (min-width: map-get($breakpoints, "xl")) {
+        --fs: 1.12rem;
+      }
+    }
   }
+
+  // Responsives spacings
+  @if $enable-responsive-spacings {
+    // Sectionning
+    header, main, footer,
+    section {
+      @if map-get($breakpoints, "sm") {
+        @media (min-width: map-get($breakpoints, "sm")) {
+          --s1: .5rem;
+        }
+      }
+      @if map-get($breakpoints, "md") {
+        @media (min-width: map-get($breakpoints, "md")) {
+          --s1: .6rem;
+        }
+      }
+      @if map-get($breakpoints, "lg") {
+        @media (min-width: map-get($breakpoints, "lg")) {
+          --s1: .7rem;
+        }
+      }
+      @if map-get($breakpoints, "xl") {
+        @media (min-width: map-get($breakpoints, "xl")) {
+          --s1: .8rem;
+        }
+      }
+    }
+  }
+}
+
+@mixin font {
+  // convert space separated list to comma separated list
+  $font: list.join($font, "", $separator: comma);
+  $font: functions.remove($font, "");
+  $font-mono: list.join($font-mono, "", $separator: comma);
+  $font-mono: functions.remove($font-mono, "");
+
+  $font: functions.font-var($font, $fontExt-Main, $findFont-Main);
+  $font-mono: functions.font-var($font-mono, $fontExt-Code, $findFont-Code);
+
+  #{--ff}: $font;
+  #{--fm}: $font-mono;//code
+}
+
+@if $abridgeMode == "auto" {
+  :root {
+    @include font;
+    @include root;
+    @include colors.dark($dark...);
+    @if $syntax {
+      @if $syntax-mode == "light" {
+        @include colors-syntax.synlight($syntax-light...);
+      } @else {
+        @include colors-syntax.syndark($syntax-dark...);
+      }
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      @include colors.light($light...);
+      @if $syntax {
+        @if $syntax-mode == "auto" {
+          @include colors-syntax.synlight($syntax-light...);
+        }
+      }
+    }
+  }
+} @else if $abridgeMode == "dark" {
+  :root {
+    @include font;
+    @include root;
+    @include colors.dark($dark...);
+    @if $syntax {
+      @include colors-syntax.syndark($syntax-dark...);
+    }
+  }
+} @else if $abridgeMode == "light" {
+  :root {
+    @include font;
+    @include root;
+    @include colors.light($light...);
+    @if $syntax {
+      @include colors-syntax.synlight($syntax-light...);
+    }
+  }
+} @else {//switcher (default)
+  :root {
+    @include font;
+    @include root;
+    @if $syntax {
+      @if $syntax-mode == "light" {
+        @include colors-syntax.synlight($syntax-light...);
+      } @else if $syntax-mode == "dark" {
+        @include colors-syntax.syndark($syntax-dark...);
+      }
+    }
+  }
+  :root:not(.switch) {
+    @if $switcherDefault == "light" {
+      @include colors.dark($light...);
+    }  @else {
+      @include colors.dark($dark...);
+    }
+    @if $syntax {
+      @if $syntax-mode == "auto" {
+        @include colors-syntax.syndark($syntax-dark...);
+      }
+    }
+  }
+  :root.switch {
+    @if $switcherDefault == "light" {
+      @include colors.dark($dark...);
+    }  @else {
+      @include colors.dark($light...);
+    }
+    @if $syntax {
+      @if $syntax-mode == "auto" {
+        @include colors-syntax.synlight($syntax-light...);
+      }
+    }
+  }
+}
+
+
+/******************************************************************************
+ *   Optional SCSS Blocks
+ *****************************************************************************/
+@if $document {
+  // Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box; // 1
+  }
+
+  // 1. Add text decoration inheritance in all browsers (opinionated)
+  // 2. Add vertical alignment inheritance in all browsers (opinionated)
+  //::before,
+  //::after {
+  //  text-decoration: inherit; // 1
+  //  vertical-align: inherit; // 2
+  //}
+
+  // 1. Correct the line height in all browsers
+  // 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS
+  // 3. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS
+  // 4. Change the default tap highlight to be completely transparent in iOS
+  // 5. Use the default cursor in all browsers (opinionated)
+  // 6. Use a 4-space tab width in all browsers (opinionated)
+  html {
+    text-rendering: optimizeLegibility;
+    background-color: var(--c1);
+    color: var(--f1);
+    font-family: var(--ff);
+    font-weight: var(--fw);
+    font-size: var(--fs);
+    line-height: var(--lh); // 1
+  //  -ms-text-size-adjust: 100%; // 2
+  //  -webkit-text-size-adjust: 100%; // 3
+  //  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 4
+  //  cursor: default; // 5
+  //  tab-size: 4; // 6
+  }
+}
+@if $typography {
+  .c {
+    text-align: center;// The <center> does not pass validation, use: <div class="c"></div>
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding-left: 0;
+    color: var(--f2);
+    margin-bottom: var(--s1);
+    margin-top: var(--s2);
+    font-weight: var(--fh);
+    font-size: var(--fs);
+    line-height: var(--lhh);
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  h5 {
+    font-size: 1.125rem;
+  }
+  header h1 {
+    margin-top: 0;
+  }
+  a {
+    color: var(--a1);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--a2);
+    text-decoration: underline;
+  }
+  h1 a, h2 a, main nav a, nav > div > a {
+    color: var(--f2);
+    text-decoration: none;
+    &:hover {
+      color: var(--a3);
+      text-decoration: none;
+    }
+  }
+  article {
+    padding-bottom: .2rem;
+  }
+
+  // Abbreviations
+  // 1. Remove underline decoration in Chrome, Edge, IE, Opera, and Safari
+  abbr[title] {
+    border-bottom: var(--bw) dotted;
+    text-decoration: none; // 1
+    cursor: help;
+  }
+
+  // Highlighted text
+  mark {
+    background-color: var(--c4);
+    color: var(--c1);
+    vertical-align: baseline;
+    padding: .1rem .4rem;
+  }
+  blockquote {
+    margin-left: 0;
+    padding: .5rem 0 .5rem 1.5rem;
+    border-left: .25rem solid var(--c3);
+  }
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+  small {
+    font-size: .875rem;
+  }
+
+  .footnote-definition sup, .footnote-definition p {
+    display: inline;
+  }
+  // Prevent sub and sup elements from affecting the line height in all browsers.
+  sub,
+  sup {
+    font-size: .75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -.25em;
+  }
+  sup {
+    top: -.5em;
+  }
+
+  address,
+  blockquote,
+  dl,
+  figure,
+  form,
+  ol,
+  p,
+  pre,
+  table,
+  ul {
+    margin: .7rem 0;
+    color: var(--f1);
+    font-style: normal;
+    font-weight: var(--fw);
+    font-size: var(--fs);
+  }
+
+  // Lists
+  ul,
+  ol {
+    padding-right: 0;
+    padding-left: var(--s2);
+  }
+  li {
+    margin-bottom: var(--s1);
+  }
+
+  ul li {
+    list-style: square;
+  }
+
+  // Ins
+  ins {
+    color: var(--cg);
+    text-decoration: none;
+  }
+
+  // del
+  del {
+    color: var(--cr);
+  }
+}
+@if $sectioning {
+  // https://github.com/picocss/pico
+  // Render the `main` element consistently in IE
+  main {
+    display: flex;
+    // should always have a single div that holds all content below main.
+    // TOC or Recent Posts are the only other sections that would be directly under main.
+    article, div {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+
+  body {
+    width: 100%;
+    margin: 0;
+  }
+
+  header,
+  main,
+  footer {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    // Semantic container
+    @if $enable-semantic-container {
+      padding: var(--s1);
+
+      // Centered viewport max-width only
+      @if $enable-maxwidth {
+        @media (min-width: $mb) {
+            min-width: $mb;
+            max-width: $mw;
+        }
+      }
+      // Centered viewport
+      @else if $enable-viewport {
+        @if map-get($breakpoints, "sm") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "sm")) {
+            max-width: map-get($viewports, "sm");
+            //padding-right: 0;
+            //padding-left: 0;
+            .toc {
+              display: none;
+            }
+          }
+        }
+        @if map-get($breakpoints, "md") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "md")) {
+            max-width: map-get($viewports, "md");
+          }
+        }
+        @if map-get($breakpoints, "lg") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "lg")) {
+            max-width: map-get($viewports, "lg");
+          }
+        }
+        @if map-get($breakpoints, "xl") and $enable-viewport {
+          @media (min-width: map-get($breakpoints, "xl")) {
+            max-width: map-get($viewports, "xl");
+          }
+        }
+      }
+    }
+    // Semantic container
+    @else {
+      padding: var(--s1) 0;
+    }
+  }
+  header, main {
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    hr {
+      margin:0.1rem 0;
+    }
+  }
+  footer{
+    line-height: var(--lhh);
+    hr, p {
+      margin: 0.2rem 0;
+    }
+  }
+}
+@if $nav {
+  //https://github.com/raj457036/attriCSS
+  .on,
+  .on:visited {//pagination link styling
+    font-weight: var(--fh);
+    border: .1rem solid var(--c4);
+    border-radius: var(--br);
+    padding: .1rem var(--s1);
+  }
+  .on:hover {//makes border of pagination links hover color
+    border-color: var(--a3);
+    .svgh {
+      background: var(--a3);
+      opacity: 1;
+    }
+  }
+  nav > div > a, header i, header .dropdown {
+    margin-right: .2rem;
+    vertical-align: middle;
+    font-weight: var(--fh);
+  }
+  main nav {//pagination
+    a,span {
+      margin: .2rem;
+    }
+  }
+  article nav {//prev/next page title
+    div:last-child {
+      text-align: right;
+    }
+  }
+  footer nav > a {
+    margin: .2rem;
+  }
+  header > nav > div:first-of-type {//Keep the logo from wrapping
+    display: inline;
+    min-width: fit-content;
+    padding-right: var(--s1);//add some spacing between nav divs
+  }
+  header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
+    margin-left: auto;
+    padding-right: var(--s1);//add some spacing between nav divs
+  }
+  // mobile first layout.
+  header nav {
+    flex-direction: column;// column layout for mobile view
+    h1 {
+      margin: var(--s2) 0 var(--s1);//adds more padding above for mobile view
+    }
+    div {
+      margin: auto; // keeps top menu/search centered in mobile view
+    }
+  }
+  nav > div {
+    margin: var(--s1) 0;
+  }
+  nav {
+    align-items: center;
+    justify-content: center;//center pagination horizontally
+    display: flex;
+    div h2 {
+      font-size: 1rem;
+      &:hover {
+        color: var(--a3);
+      }
+    }
+    h1 {
+      margin-bottom: 0;
+      margin-top: 0.2rem;
+    }
+  }
+  main nav {
+    margin-top: var(--s2);//pagination margin
+  }
+  .outp {
+    padding: 0 .26rem .2rem;
+  }
+  .off {
+    color: var(--c4);
+    font-weight: var(--fh);
+    border: .1rem solid var(--c3);
+    border-radius: var(--br);
+    .svgh {
+      background: var(--c3);
+      opacity: 1;
+    }
+  }
+  .on {
+    font-weight: var(--fh);
+    border: .1rem solid var(--c4);
+    border-radius: var(--br);
+  }
+  .mode:hover, .cnav {
+    color: var(--a1);//pagination color current page
+  }
+  footer nav {
+    i {
+      margin: 0 .2rem .4rem;
+    }
+  }
+  //dropdown menu used for lang, etc.
+  .dropdown {
+    display: inline-block;
+    position: relative;
+    z-index: 99;
+    font-weight: var(--fh);
+    font-size: 1.4rem;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 99;
+    font-weight: var(--fh);
+    font-size: 1.4rem;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+    z-index: 99;
+    a {
+      text-decoration: none;
+    }
+  }
+  // breakpoint makes header responsive for desktop layouts
+  // mobile first is min-width for desktop instead of max-width for mobile
+  @if map-get($breakpoints, "md") {
+    @media (min-width: map-get($breakpoints, "md")) {
+      header > nav > div {
+        margin: var(--s1) 0;// desktop layout
+      }
+      header nav {
+        flex-direction: row;// row layout for desktop view
+        h1 {
+          margin: var(--s1) 0;// desktop layout
+        }
+      }
+    }
+  }
+}
+@if $embedded {
+  .yvi {//youtube and vimeo iframe
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .yv {//youtube and vimeo div
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+  }
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+  embed,
+  iframe,
+  object {
+    max-width: 100%;
+  }
+  iframe {
+    border-style: none;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    overflow: hidden;
+  }
+}
+@if $table {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    text-indent: 0; // Remove text indentation from table contents in Chrome, Edge, and Safari.
+    caption {
+      margin-bottom: .5rem;
+    }
+  }
+  tr {
+    border-bottom: var(--bw) solid var(--c3);
+  }
+  td,
+  th {
+    padding: var(--s1);
+  }
+  th {
+    text-align: left;
+  }
+  // Striped
+  tbody tr:nth-child(even) {
+    background-color: var(--c2);
+  }
+  thead tr {
+    border-top: var(--bw) solid var(--c3);
+    background-color: var(--c2);
+  }
+}
+@if $code {
+  pre,
+  code,
+  kbd,
+  samp,
+  tt,
+  var {
+    border-radius: var(--br);
+    background: var(--c2);
+    font-family: var(--fm);
+    line-height: initial;
+    font-size: .8rem;
+    padding: .3rem .2rem;
+  }
+  pre {
+    position: relative;
+    padding: 2rem .5rem .3rem;
+    display: block;
+    overflow-x: auto;
+    -ms-overflow-style: scrollbar;
+    white-space: pre;
+    > code {
+      display: block;
+      background: transparent;
+    }
+  }
+
+  // kbd
+  kbd {
+    background-color: var(--f2);
+    color: var(--c1);
+    vertical-align: baseline;
+    font-size: 1rem;
+    padding: .2rem;
+  }
+}
+@if $hr {
+  // https://github.com/picocss/pico
+  hr {
+    box-sizing: content-box; // Add the correct box sizing in Firefox
+    height: 0;               // Add the correct box sizing in Firefox
+    overflow: visible; // Show the overflow in Edge and IE
+    border: none;
+    border-top: 1px solid var(--f1);
+  }
+  header hr, footer hr {border-top: 1px solid var(--c4)}
+}
+@if $scroller {
+  // https://github.com/picocss/pico
+  // Wrapper to make any content responsive across all viewports
+  figure {
+    display: block;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+
+    figcaption {
+      padding: var(--s1) 0;
+      color: var(--c4);
+    }
+  }
+}
+@if $button {
+  button,
+  input,
+  select,
+  textarea {
+    margin: 0;
+    padding: .2rem var(--s1);
+    max-width: 100%;
+    background: var(--c2);
+    border: 0;
+    border-radius: .25rem;
+    font: inherit;
+    line-height: var(--fs);
+    color: var(--f1);
+  }
+  button.del {
+    color: var(--cr);
+  }
+  button,
+  [type="button" i],
+  [type="submit" i],
+  [type="reset" i] {
+    //-webkit-appearance: button;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    //background: var(--c2);
+    color: var(--f1);
+    border: 0;
+    cursor: pointer;
+    transition: opacity .25s;
+  }
+  button:hover,
+  [type="button" i]:hover,
+  [type="submit" i]:hover,
+  [type="reset" i]:hover {
+    opacity: .75;
+  }
+  button[disabled],
+  [type="button" i][disabled],
+  [type="submit" i][disabled],
+  [type="reset" i][disabled] {
+    opacity: .5;
+  }
+}
+@if $form {
+  fieldset {
+    padding: .5rem .75rem;
+    border: var(--bw) solid var(--c3);
+    border-radius: .25rem;
+  }
+  legend {
+    padding: 0 .25rem;
+  }
+  label {
+    cursor: pointer;
+    display: block;
+    margin-bottom: .25rem;
+  }
+  select,
+  input:not([size]), input:not([type="button" i]), input:not([type="submit" i]), input:not([type="reset" i]), input:not([type="checkbox" i]), input:not([type="radio" i]) {
+    width: 100%;
+  }
+  [type="color" i] {
+    min-height: 2.125rem;
+  }
+  select:not([multiple]):not([size]) {
+    padding-right: 1.5rem;
+    background-repeat: no-repeat;
+    background-position: right .5rem center;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  textarea:not([rows]) {
+    height: 8rem;
+  }
+}
+@if $top {
+  .topout {
+    position: sticky;
+    bottom: 1px;
+    padding: 20px;
+    place-self: end;
+    margin-top: 110vh;
+    pointer-events: none;
+  }
+  .topleft {
+    margin-left: calc(100% - 80px);
+  }
+  .top {
+    pointer-events: all;
+    padding: 9px;
+    border-radius: 9px;
+    font-weight:700;
+    color: var(--a1);
+    background: var(--c2);
+  }
+  .top:hover {
+    text-decoration: none;
+    color: var(--c2);
+    background: var(--a1);
+    .svgh {
+      background: var(--c2);
+      opacity: 1;
+    }
+  }
+}
+@if $search {
+  div:empty {
+    display: none;
+  }
+  .stork-close-button {
+    display: none;
+  }
+  .stork-title p {
+    color: var(--a1);
+    font-weight: var(--fh);
+  }
+  #suggestions {
+    z-index: 9;
+    background: var(--c1);
+    border: 2px solid var(--c3);
+    position: static;
+    left: 0;
+    width: 100%;
+    margin-top: var(--s1);
+    max-height: 500px;
+    overflow: auto;
+  }
+  #suggestions a, #results a {
+    display: block;
+    text-decoration: none;
+    padding: var(--s1);
+    margin: 0 var(--s1);
+  }
+  #suggestions a:hover,
+  #suggestions a:focus,
+  #results a:hover,
+  #results a:focus {
+    background: var(--c2);
+  }
+  #suggestions span, #results span {
+    line-height: 1.5;
+    display: block;
+  }
+  #suggestions span:first-child, #results span:first-child {
+    font-weight: var(--fh);
+  }
+  #suggestions span:nth-child(2), #results span:nth-child(2) {
+    color: var(--f1);
+  }
+  .results {//parent div of suggestions div
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+  .searchd {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .searchd > input {
+    max-width: 100%;
+    flex-grow: 1;
+    padding-right: 1rem;//inlayed search icon
+  }
+  .searchd > button {//inlayed search icon
+    position: relative;
+    left: -1rem;
+    margin-left: -1rem;
+  }
+  // mobile first is min-width for desktop instead of max-width for mobile
+  @if map-get($breakpoints, "md") {
+    @media (min-width: map-get($breakpoints, "md")) {
+      .searchd > input {
+        max-width: 15.3rem;
+        flex-grow: 0;
+      }
+      #suggestions {
+        position: absolute;
+        right: 0;
+        left: unset;
+        width: 500px;
+      }
+    }
+  }
+}
+@if $toc {
+  main {
+    .toc {
+      max-width: 15rem;
+      min-width: 14rem;
+      margin-left: var(--s1);
+    }
+    .toc-item {
+      padding: .4rem 0;
+      color: var(--f1);
+    }
+    .toc-item a, .toc-item-child a {
+      color: var(--f1);
+      &:hover {
+        cursor: pointer;
+        color: var(--a2);
+        text-decoration: underline;
+      }
+    }
+    .toc-item a.active, .toc-item-child a.active {
+      color: var(--a2);
+    }
+    .toc-item-child {
+      padding: 0 var(--s1);
+      color: var(--f1);
+    }
+  }
+  .toc {
+    display: none;
+  }
+  .toc-sticky {
+    border-radius: var(--br);
+    border-top: 5px solid var(--a1);
+    background-color: var(--c2);
+    position: sticky;
+    top: var(--s2);
+    margin-top: var(--s2);
+    padding: 0 var(--s2) var(--s2);
+    max-height: 100vh;
+    overflow: auto;
+  }
+  @if map-get($breakpoints, "md") {
+    // mobile first is min-width for desktop instead of max-width for mobile
+    @media (min-width: map-get($breakpoints, "md")) {
+      .toc {
+        display: unset;
+      }
+    }
+  }
+}
+@if $zola {
+  .sum, .sum p {margin: .2rem 0}
+  .s95 {font-size: .95em}
+  .s90 {font-size: .90em}
+  .s85 {font-size: .85em}
+  .s80 {font-size: .80em}
+  .s75 {font-size: .75em}
+  .s70 {font-size: .70em}
+  .hpad {padding: 0 .2rem}
+  .rpad {padding-right: .2rem}
+  .si {font-size: 1.5em}
+  pre code[data-lang]::before {
+    content: attr(data-lang);
+    padding: .3rem;
+    display: block;
+    background-color: var(--c3);
+    color: var(--h1);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 1rem;
+    text-transform: uppercase;
+  }
+  // code copy button
+  .cc {
+    cursor: pointer;
+    z-index: 9;
+    position: absolute;
+    top: .2rem;
+    right: .5rem;
+  }
+  .cc:hover {
+    background: var(--a3);
+    opacity: 1;
+  }
+  // Table Override, this is used for Zola's linenos and hl_lines
+  code {
+    table {
+      font-size: .8rem;
+      margin: 0;
+      // Highlighted text
+      color: var(--h1);
+      mark {
+        display: block;
+        color: unset;
+        padding: 0;
+        background-color: var(--h0);
+        filter: brightness(var(--ha));
+      }
+    }
+    td, th, tr {
+      padding: 0;
+      border-bottom: none;
+    }
+    tbody td:first-child {
+      text-align: center;
+      user-select: none;
+      min-width: 60px;
+    }
+    tbody tr:nth-child(even), thead tr {
+      background-color: unset;
+    }
+  }
+}
+@if $imgswap {
+  .img-swap-div {
+    .img-main {
+      display: block;
+    }
+    .img-swap {
+      display: none;
+    }
+    &:hover .img-swap {
+      display: block;
+    }
+    &:hover .img-main {
+      display: none;
+    }
+  }
+}
+@if $misc {
+  // https://github.com/picocss/pico
+  // Add the correct display in IE 10+
+  [hidden],
+  template {
+    display: none;
+  }
+
+  // Add the correct display in IE 9-
+  canvas {
+    display: inline-block;
+  }
+}
+@if $grid {
+  // https://github.com/vladocar/Basic.css
+  [style*="--c:"], section>section {
+    color: var(--f2);
+    padding: var(--s1);
+    margin: var(--s1);
+    text-align: center;
+  }
+  section {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  [style*="--c:"], section>section {
+    flex:var(--c,1);
+    margin:var(--s1);
+  }
+}
+@if $enable-icons {
+  @if $icon-adjust {.adjust { -webkit-mask: functions.icon(adjust, "none", 1, "%23000", $ic) ; background: var(--f2) }}//theme switcher
+  @if $icon-angl {.angl { -webkit-mask: functions.icon(angl, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle left
+  @if $icon-angll {.angll { -webkit-mask: functions.icon(angll, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle left left
+  @if $icon-angr {.angr { -webkit-mask: functions.icon(angr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right
+  @if $icon-angrr {.angrr { -webkit-mask: functions.icon(angrr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right right
+  @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
+  @if $icon-copy {//copy icons for code blocks
+    .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
+    .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--f2) }
+    .copy.err { -webkit-mask: functions.icon(copy-err, "%23000", 2, "none", $ic) ; background: var(--f2) }
+  }
+  @if $icon-search {.search { -webkit-mask: functions.icon(search, "%23000", 3, "none", $ic) ; background: var(--f2) }}//search
+  @if $icon-bitbucket {.bitbucket { background-image: functions.icon(bitbucket, "%2328f", 2, "none", $ic) }}
+  @if $icon-buymeacoffee {.buymeacoffee { background-image: functions.icon(buymeacoffee, "%23777", 1, "%23fd0", $ic) }}
+  @if $icon-check {.check { background-image: functions.icon(check, "%23888", 2, "none", $ic) }}
+  @if $icon-chevron {.chevron { background-image: functions.icon(chevron, "%23888", 2, "none", $ic) }}
+  @if $icon-clock {.clock { background-image: functions.icon(clock, "%23888", 2, "none", $ic) }}
+  @if $icon-codeberg {.codeberg { background-image: functions.icon(codeberg, "%23555", 2, "%23aaa", $ic) }}
+  @if $icon-date {.date { background-image: functions.icon(date, "%23888", 2, "none", $ic) }}
+  @if $icon-discord {.discord { background-image: functions.icon(discord, "none", 1, "%2356f", $ic) }}
+  @if $icon-docker {.docker { background-image: functions.icon(docker, "%2329e", 2, "none", $ic) }}
+  @if $icon-element {.element { background-image: functions.icon(element, "none", 1, "%231c8", $ic) }}
+  @if $icon-facebook {.facebook { background-image: functions.icon(facebook, "%23359", 2, "none", $ic) }}
+  @if $icon-folder {.folder { background-image: functions.icon(folder, "%23888", 2, "none", $ic) }}
+  @if $icon-github {.github { background-image: functions.icon(github, "%23888", 2, "none", $ic) }}
+  @if $icon-github-sponsor {.github-sponsor { background-image: functions.icon(github-sponsor, "%23c49", 2, "none", $ic) }}
+  @if $icon-gitlab {.gitlab { background-image: functions.icon(gitlab, "%23e62", 2, "none", $ic) }}
+  @if $icon-globe {.globe { background-image: functions.icon(globe, "%23888", 2, "none", $ic) }}
+  @if $icon-home {.home { background-image: functions.icon(home, "%23888", 2, "none", $ic) }}
+  @if $icon-instagram {.instagram { background-image: functions.icon(instagram, "%23e07", 2, "none", $ic) }}
+  @if $icon-kofi {.kofi { background-image: functions.icon(kofi, "%23888", 1.5, "%23f55", $ic) }}
+  @if $icon-linkedin {.linkedin { background-image: functions.icon(linkedin, "%2326a", 2, "none", $ic) }}
+  @if $icon-mail {.mail { background-image: functions.icon(mail, "%23888", 2, "none", $ic) }}
+  @if $icon-mastodon {.mastodon { background-image: functions.icon(mastodon, "none", 1, "%2328c", $ic) }}
+  @if $icon-matrix {.matrix { background-image: functions.icon(matrix, "%23888", 2, "none", $ic) }}
+  @if $icon-minus {.minus { background-image: functions.icon(minus, "%23888", 2, "none", $ic) }}
+  @if $icon-moon {.moon { background-image: functions.icon(moon, "%23888", 2, "none", $ic) }}
+  @if $icon-pinterest {.pinterest { background-image: functions.icon(pinterest, "%23b01", 2, "none", $ic) }}
+  @if $icon-python {.python { background-image: functions.icon(python, "%23fc1", 2, "%2326a", $ic) }}
+  @if $icon-researchgate {.researchgate { background-image: functions.icon(researchgate, "none", 2, "%230db", $ic) }}
+  @if $icon-rss {.rss { background-image: functions.icon(rss, "%23e94", 2, "none", $ic) }}
+  @if $icon-stack {.stack { background-image: functions.icon(stack, "%23e72", 2, "none", $ic) }}
+  @if $icon-sun {.sun { background-image: functions.icon(sun, "%23888", 2, "none", $ic) }}
+  @if $icon-tag {.tag { background-image: functions.icon(tag, "%23888", 2, "none", $ic) }}
+  @if $icon-twitch {.twitch { background-image: functions.icon(twitch, "%23a7f", 2, "none", $ic) }}
+  @if $icon-twitter {.twitter { background-image: functions.icon(twitter, "%232ad", 2, "none", $ic) }}
+  @if $icon-x {.x { background-image: functions.icon(x, "%23f00", 3, "none", $ic) }}
+  @if $icon-youtube {.youtube { background-image: functions.icon(youtube, "%23f00", 2, "none", $ic) }}
+  .svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: inline-block;
+    //overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .svgs {
+    width: var(--fs);
+    height: var(--fs);
+    display: inline-block;
+    //overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .fa-a:hover {
+    color: var(--a3);
+    opacity: 1;
+  }
+}
+@if $syntax {
+  // Unstyled Text Color, and background color
+  .z-code {
+    color: var(--h1);//#ccc
+    background-color: var(--h0);
+  }
+  // This is a comment
+  .z-comment {//, .z-punctuation.z-definition.z-comment
+    color: var(--h2);//#888
+    font-style: italic;
+  }
+  // a  (int a;)
+  .z-variable {
+    color: var(--h1);
+  }
+  // "This is a string"
+  .z-string {//, .z-constant.z-other.z-symbol
+    color: var(--h6);
+  }
+  // 10  (a = 10;)
+  .z-constant.z-numeric {
+    color: var(--h4);
+  }
+  // /n
+  .z-constant.z-character.z-escape {//, .z-string.z-regexp
+    color: var(--h7);
+  }
+  // false, true, etc...
+  .z-constant.z-language {
+    color: var(--h4);
+  }
+  // BUF  (const BUF: usize = 10 * 1024;)
+  .z-constant.z-other {//, .z-constant.z-character
+    color: var(--h4);
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-variable.z-member {
+  //    color: var(--h3);
+  //}
+  // use, crate, let, etc.
+  .z-keyword {//, .z-keyword.z-operator.z-word
+    color: var(--h8);
+  }
+  // = * - + /
+  .z-keyword.z-operator {
+    color: var(--h9);
+  }
+  // separators: commas, colons, etc.  terminator:  endline semicolon, etc.
+  .z-punctuation.z-separator, .z-punctuation.z-terminator {
+    color: var(--h1);
+  }
+  // () [] {}
+  .z-punctuation.z-section {
+    color: var(--h1);
+  }
+  //  .  ::
+  .z-punctuation.z-accessor {
+    color: var(--h4);
+  }
+  //  #  (#[cfg(test)])
+  .z-punctuation.z-definition.z-annotation {
+    color: var(--h1);
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-variable.z-other.z-dollar.z-only.z-js, .z-variable.z-other.z-object.z-dollar.z-only.z-js, .z-variable.z-type.z-dollar.z-only.z-js, .z-support.z-class.z-dollar.z-only.z-js {
+  //    color: var(--h6);
+  //}
+  // const, pub, mut, Self, fn
+  .z-storage {
+    color: var(--h8);
+  }
+  // const, struct
+  .z-storage.z-type {
+    color: var(--h8);
+  }
+  // new, function names
+  .z-entity.z-name.z-function {
+    color: var(--h5);
+  }
+  // key in toml entries
+  .z-entity.z-name {//, .z-entity.z-name.z-label
+    color: var(--h5);
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-entity.z-other.z-inherited-class {
+  //    color: var(--h8);
+  //    text-decoration: underline;
+  //}
+  //  v1   (fn lookup(v1))
+  .z-variable.z-parameter {
+    color: var(--h4);
+  }
+  //  self  (self.html.push(c))
+  .z-variable.z-language {
+    color: var(--h5);
+    font-style: italic;
+  }
+  // html tag name, eg:  html, head, meta, title, body, etc.
+  .z-entity.z-name.z-tag {//, .z-meta.z-tag.z-sgml
+    color: var(--h8);
+  }
+  // html tag brackets <>
+  .z-punctuation.z-definition.z-tag.z-end, .z-punctuation.z-definition.z-tag.z-begin, .z-punctuation.z-definition.z-tag {
+    color: var(--h8);
+  }
+  // html attribute name, eg: lang, charset
+  .z-entity.z-other.z-attribute-name {
+    color: var(--h5);
+  }
+  // function name as variable value, and annotation:  derive  (#[derive(Debug)])
+  .z-variable.z-function, .z-variable.z-annotation {
+    color: var(--h5);
+  }
+  // support function, eg:   extend  (self.html.extend(b"<span");)
+  // macros, eg:  println!  print!  format!
+  .z-support.z-function, .z-support.z-macro {
+    color: var(--h3);
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-support.z-constant {
+  //    color: var(--h4);
+  //    font-style: italic;
+  //}
+  // type: Vec, Some, str, int
+  // class:  Config  ($CONF = Config::getInstance()->getAll();)
+  .z-support.z-type, .z-support.z-class {
+    color: var(--h8);
+    font-style: italic;
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-source.z-ruby .z-variable.z-other.z-readwrite {
+  //    color: var(--h5);
+  //}
+  // superfluous, already have .z-entity.z-name.z-tag
+  //.z-source.z-css .z-entity.z-name.z-tag, .z-source.z-sass .z-entity.z-name.z-tag, .z-source.z-scss .z-entity.z-name.z-tag, .z-source.z-less .z-entity.z-name.z-tag, .z-source.z-stylus .z-entity.z-name.z-tag {
+  //    color: var(--h8);
+  //}
+  // property name, eg css: font-size, text-align, etc.
+  .z-support.z-type.z-property-name {
+    color: var(--h8);
+  }
+  //json
+  .z-key.z-json {
+    color: var(--h4);
+  }
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-constant.z-numeric.z-line-number.z-match {
+  //    color: var(--h8);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-entity.z-name.z-filename.z-find-in-files {
+  //    color: var(--h6);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-message.z-error {
+  //    color: var(--h3);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-string.z-other.z-link, .z-markup.z-underline.z-link {
+  //    color: var(--h7);
+  //    text-decoration: underline;
+  //    font-style: italic;
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-punctuation.z-definition.z-image {
+  //    color: var(--h5);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-meta.z-separator {
+  //    color: var(--h1);
+  //    background-color: var(--h1);
+  //    font-weight: bold;
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-markup.z-list.z-numbered.z-bullet, .z-markup.z-list .z-punctuation.z-definition.z-list_item {
+  //    color: var(--h7);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-text.z-html.z-markdown .z-markup.z-raw.z-inline {
+  //    color: var(--h4);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-text.z-html.z-markdown .z-meta.z-dummy.z-line-break {
+  //    color: var(--h1);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-markup.z-raw.z-block.z-fenced.z-markdown {
+  //    color: var(--h1);
+  //    background-color: var(--h1);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-punctuation.z-definition.z-fenced.z-markdown, .z-variable.z-language.z-fenced.z-markdown {
+  //    color: var(--h1);
+  //    background-color: var(--h1);
+  //}
+  // Figure out how to reproduce in code block otherwise don't include
+  //.z-variable.z-language.z-fenced.z-markdown {
+  //    color: var(--h1);
+  //}
 }

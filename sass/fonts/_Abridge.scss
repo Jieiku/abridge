@@ -1,3 +1,8 @@
+// This is for the Abridge icon font, the css for this is adapted from fontello.
+// I experimented using this, it is still here for those that want it, but not used by default.
+// It is a pretty lightweight solution, but still not as good as svg icons directly in the css.
+// The loading of icon fonts is blocked by noscript type browser addons, but css icons are not.
+
 @font-face {
   font-family: 'Abridge';
   src: url('font/Abridge.woff2') format('woff2');

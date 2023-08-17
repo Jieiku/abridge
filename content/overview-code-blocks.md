@@ -25,19 +25,46 @@ See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting
 If we want, we can also `specify inline code` which is useful for `the small stuff`.
 
 ### rust
-```rust,linenos,hl_lines=3
-//! jelly-actix-web-starter - A starter template for actix-web projects that feels very Django-esque. Avoid the boring stuff and move faster.
+```rust
+fn main() {
+    let greetings = ["Hello", "Hola", "Bonjour",
+                     "Ciao", "こんにちは", "안녕하세요",
+                     "Cześć", "Olá", "Здравствуйте",
+                     "Chào bạn", "您好", "Hallo",
+                     "Hej", "Ahoj", "سلام",
+                     "Hej", "Hallo", "Hei",
+                     "Helló", "Hallo", "Buna ziua",
+                     "Merhaba"];
 
-use jelly::actix_web;
-use mainlib;
-use std::io;
-
-#[actix_web::main]
-async fn main() -> io::Result<()> {
-    mainlib::main().await
+    for (num, greeting) in greetings.iter().enumerate() {
+        print!("{} : ", greeting);
+        match num {
+            0 =>  println!("This code is editable and runnable!"),//en English
+            1 =>  println!("¡Este código es editable y ejecutable!"),//es Spanish
+            2 =>  println!("Ce code est modifiable et exécutable !"),//fr French
+            3 =>  println!("Questo codice è modificabile ed eseguibile!"),//it Italian
+            4 =>  println!("このコードは編集して実行出来ます！"),//jp Japanese
+            5 =>  println!("여기에서 코드를 수정하고 실행할 수 있습니다!"),//ko Korean
+            6 =>  println!("Ten kod można edytować oraz uruchomić!"),//pl Polish
+            7 =>  println!("Este código é editável e executável!"),//pt Portuguese
+            8 =>  println!("Этот код можно отредактировать и запустить!"),//ru Russian
+            9 =>  println!("Bạn có thể edit và run code trực tiếp!"),//vi Vietnamese
+            10 => println!("这段代码是可以编辑并且能够运行的！"),//zh Chinese
+            11 => println!("Dieser Code kann bearbeitet und ausgeführt werden!"),//de German
+            12 => println!("Den här koden kan redigeras och köras!"),//sv Swedish
+            13 => println!("Tento kód můžete upravit a spustit"),//cs Czech
+            14 => println!("این کد قابلیت ویرایش و اجرا دارد!"),//fa Persian
+            15 => println!("Denne kode kan redigeres og køres!"),//da Danish
+            16 => println!("Deze code is bewerkbaar en uitvoerbaar!"),//du Dutch
+            17 => println!("Tämä koodi on muokattavissa ja ajettavissa!"),//fi Finnish
+            18 => println!("Ez a kód szerkeszthető és futtatható!"),//hu Hungarian
+            19 => println!("Denne koden er redigerbar og kjørbar!"),//no Norwegian
+            20 => println!("Acest cod este editabil și rulabil!"),//ro Romanian
+            21 => println!("Bu kod düzenlenebilir ve çalıştırılabilir!"),//tr Turkish
+            _ =>  {},
+        }
+    }
 }
-
-let context = Context::new();
 ```
 
 ### TOML
@@ -70,6 +97,38 @@ taxonomies = [
   <p>Test</p>
 </body>
 </html>
+```
+
+### CSS
+```css
+html {
+    font-size: var(--fs);
+}
+
+.c {
+    text-align: center;
+}
+```
+
+### SCSS
+```scss
+
+$font: Roboto system-ui -apple-system BlinkMacSystemFont "Segoe UI" Oxygen Ubuntu Cantarell "Fira Sans" "Droid Sans" "Helvetica Neue" "Noto Sans" Helvetica Arial sans-serif !default;
+$font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe UI Mono" "DejaVu Sans Mono" "Liberation Mono" "Roboto Mono" "Oxygen Mono" "Ubuntu Monospace" "Ubuntu Mono" "Source Code Pro" "Fira Mono" "Droid Sans Mono" "Courier New" Courier monospace !default;
+
+@mixin font {
+  // convert space separated list to comma separated list
+  $font: list.join($font, "", $separator: comma);
+  $font: functions.remove($font, "");
+  $font-mono: list.join($font-mono, "", $separator: comma);
+  $font-mono: functions.remove($font-mono, "");
+
+  $font: functions.font-var($font, $fontExt-Main, $findFont-Main);
+  $font-mono: functions.font-var($font-mono, $fontExt-Code, $findFont-Code);
+
+  #{--ff}: $font;
+  #{--fm}: $font-mono;//code
+}
 ```
 
 ### javascript
@@ -292,4 +351,27 @@ while True:
       except socket.error as e:
         print("Could Not Connect to SMTP server!")
     time.sleep(interval)
+```
+
+### Ruby
+```ruby
+=begin
+  Ruby program to check whether the
+  year is leap year or not between range.
+=end
+
+puts "Enter the lower limit:"
+lwr = gets.chomp.to_i
+puts "Enter the upper limit:"
+upr = gets.chomp.to_i
+
+for yr in lwr..upr do
+  if yr % 400 == 0
+    puts "#{yr} is a leap year"
+  elsif yr % 4 == 0 && yr % 100 !=0
+    puts "#{yr} is a leap year"
+  else
+    puts "#{yr} is not a leap year"
+  end
+end
 ```

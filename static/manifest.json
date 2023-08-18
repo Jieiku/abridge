@@ -2,11 +2,13 @@
     "name": "Abridge Zola Theme",
     "short_name": "Abridge",
     "description": "Fast & Lightweight Zola Theme",
-    "start_url": "/index.html",
-    "scope": "/",
-    "background_color": "#111111",
-    "theme_color": "#222222",
+    "background_color": "#111",
+    "theme_color": "#222",
     "display": "standalone",
+    "orientation": "any",
+    "start_url": "/",
+    "scope": "/",
+    "categories": ["developer", "development", "productivity"],
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

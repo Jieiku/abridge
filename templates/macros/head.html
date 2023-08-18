@@ -7,11 +7,22 @@
   {%- if config.extra.js_switcher_default %}{%- if config.extra.js_switcher_default == "light" %}
   {%- set js_theme="js/theme_light.min.js" -%}
   {%- endif %}{%- endif %}
-  <script src="{{ get_url(path=js_theme, trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
+  <script src="{{ get_url(path=js_theme, trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 {%- endmacro %}
 
+
+{#- Service Worker for PWA #}
+{%- macro pwa(config) %}
+  {%- if config.extra.pwa | default(value=false) %}
+  {%- set js_swload=config.extra.js_swload | default(value="") -%}
+  {%- if not js_swload %}
+  {%- set js_swload="js/sw_load.min.js" -%}
+  {%- endif %}
+  <script defer src="{{ get_url(path=js_swload, trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_swload, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+{%- endmacro %}
 
 
 {%- macro stylesheets(config) %}
@@ -54,7 +65,7 @@
 
 {%- macro feed(config) %}
   {%- if config.generate_feed %}
-  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" />
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="{{ config.title }} Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" />
   {%- endif %}
 {%- endmacro %}
 
@@ -219,8 +230,8 @@
   <meta name="msapplication-TileColor" content="{{ config.extra.favicon_ms_color }}" />
   {%- endif %}
 
-  {%- if config.extra.favicon_webmanifest %}
-  <link rel="manifest" href="{{ get_url(path=config.extra.favicon_webmanifest, trailing_slash=false) | safe }}" />
+  {%- if config.extra.webmanifest %}
+  <link rel="manifest" href="{{ get_url(path=config.extra.webmanifest, trailing_slash=false) | safe }}" />
   {%- endif %}
 
   {%- if config.extra.favicon_mask and config.extra.favicon_mask_color %}

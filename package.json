@@ -6,10 +6,11 @@
   "license": "MIT",
   "homepage": "https://github.com/Jieiku/abridge",
   "scripts": {
-    "all": "npm run theme && npm run theme-light && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch && npm run abridge-bundle-elasticlunr",
-    "nonbundles": "npm run theme && npm run theme-light && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch",
+    "all": "npm run theme && npm run theme-light && npm run pwa && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch && npm run abridge-bundle-elasticlunr",
+    "nonbundles": "npm run theme && npm run theme-light && npm run pwa && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch",
     "theme": "uglifyjs static/js/theme.js -c -m -o static/js/theme.min.js",
     "theme-light": "uglifyjs static/js/theme_light.js -c -m -o static/js/theme_light.min.js",
+    "pwa": "uglifyjs static/js/sw_load.js -c -m -o static/js/sw_load.min.js && uglifyjs static/sw.js -c -m -o static/sw.min.js",
     "katex-bundle": "uglifyjs static/js/katex.min.js static/js/mathtex-script-type.min.js static/js/katex-auto-render.min.js static/js/katexoptions.js -c -m -o static/js/katexbundle.min.js",
     "search-elasticlunr": "uglifyjs static/js/elasticlunr.min.js static/js/search.js -c -m -o static/js/search_elasticlunr.min.js",
     "search-stork": "uglifyjs static/js/stork.js static/js/stork_config.js -c -m -o static/js/search_stork.min.js",

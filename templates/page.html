@@ -58,7 +58,7 @@
 
     {%- block comments_body %}
     {%- if config.extra.comments.hyvor %}
-    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }} colors="os"></hyvor-talk-comments>
+    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments.hyvorcolor %} colors="{{ config.extra.comments.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
     {%- endif %}
     {%- endblock comments_body %}
     </article>

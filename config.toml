@@ -194,6 +194,15 @@ researchgate = "your-profile-id"
 
 
 ###############################################################################
+### Commenting System for visitors to leave comments on pages.
+###   hyvor talk
+###############################################################################
+
+comments.hyvor = "9366" # hyvor website id, comment out to disable.
+comments.hyvorcolor = "os" # set the color property for hyvor
+
+
+###############################################################################
 ### Resource Files
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
@@ -217,9 +226,12 @@ search_library = 'elasticlunr'
 #js_prestyle = "js/prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
 #js_codecopy = "js/codecopy.js"# Bundleable - copy code block to clipboard button
 #js_email = "js/email.js"# Bundleable - obfuscates email address in footer
+#js_swload = "js/sw_load.min.js" # loads the PWA service worker
 
 stylesheets = ["abridge.css"]
 
+pwa = true # true to load the service worker
+webmanifest = "manifest.json" # Required for PWAs
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.
@@ -227,7 +239,6 @@ stylesheets = ["abridge.css"]
 
 favicon_theme_color = "#333333"
 favicon_ms_color = "#333333"
-favicon_webmanifest = "site.webmanifest" # Used for android-chrome-512x512.png and android-chrome-192x192.png
 favicon_mask = "safari-pinned-tab.svg" # safari-pinned-tab.svg
 favicon_mask_color = "#ff9900"
 favicon_svg = "favicon.svg" # favicon.svg

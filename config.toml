@@ -198,8 +198,8 @@ researchgate = "your-profile-id"
 ###   hyvor talk
 ###############################################################################
 
-comments.hyvor = "9366" # hyvor website id, comment out to disable.
-comments.hyvorcolor = "os" # set the color property for hyvor
+#comments.hyvor = "9366" # hyvor website id, comment out to disable.
+#comments.hyvorcolor = "os" # set the color property for hyvor
 
 
 ###############################################################################

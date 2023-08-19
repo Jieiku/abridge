@@ -672,8 +672,14 @@ $syntax: true !default;//syntax highlighting for code blocks
       text-align: right;
     }
   }
-  footer nav > a {
-    margin: .2rem;
+  //footer nav >
+  footer nav {
+    a {
+        margin: .2rem;
+    }
+    i {
+      margin-bottom: .2rem;
+    }
   }
   header > nav > div:first-of-type {//Keep the logo from wrapping
     display: inline;
@@ -735,11 +741,6 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
   .mode:hover, .cnav {
     color: var(--a1);//pagination color current page
-  }
-  footer nav {
-    i {
-      margin: 0 .2rem .4rem;
-    }
   }
   //dropdown menu used for lang, etc.
   .dropdown {

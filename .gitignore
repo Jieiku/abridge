@@ -1,8 +1,8 @@
 .env
 public
 themes
-storage
 build
+storage
 static/demo.html
 static/tinysearch_engine.js
 static/tinysearch_engine.d.ts

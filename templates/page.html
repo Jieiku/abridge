@@ -32,7 +32,7 @@
 
 {%- block comments_init %}
   {%- if config.extra.comments.hyvor %}
-  <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+  <script defer src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
   {%- endif %}
 {%- endblock comments_init %}
 
@@ -58,7 +58,7 @@
 
     {%- block comments_body %}
     {%- if config.extra.comments.hyvor %}
-    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }} colors="os"></hyvor-talk-comments>
+    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments.hyvorcolor %} colors="{{ config.extra.comments.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
     {%- endif %}
     {%- endblock comments_body %}
     </article>

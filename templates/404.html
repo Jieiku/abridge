@@ -19,7 +19,7 @@
     <div>
       <h1>404 :(</h1>
       {#- Default English message #}
-      <p>Page not found, maybe moved{% if config.languages | length > 0 %} or not in this language{% endif %}. {% if config.build_search_index %}Try searching or{% endif %} <a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">go to homepage</a>.</p>
+      <p>Page not found, maybe moved{% if config.languages | length > 1 %} or not in this language{% endif %}. {% if config.build_search_index %}Try searching or {% endif %}<a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">go to homepage</a>.</p>
 
       {# Iterate through each language and display the localised 404 message #}
       {%- for lcode, language in config.languages -%}

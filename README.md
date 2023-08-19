@@ -121,7 +121,7 @@ $switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure t
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 ```
 
-By default abrdige uses dark mode for the switcher, so unless you want to set the default mode to light for nojs visitors, then you do not need to worry about these settings.
+By default abridge uses dark mode for the switcher, so unless you want to set the default mode to light for nojs visitors, then you do not need to worry about these settings.
 
 ### Number of Items per page for pagination
 
@@ -240,6 +240,18 @@ You can see a demo on [this page](https://abridge.netlify.app/overview-math/).
 
 For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main config.toml file.
 
+### PWA (Progressive Web Application)
+
+Abridge theme has PWA support. You can install the entire site as an app and have it work offline. To try it out simply use google chrome or your phone and go here: https://abridge.netlify.app/
+
+If using chrome on desktop then look at the end of the address bar for the install button. On android you should get a popup to install, you can also install from the 3 dot menu in the top right corner. Once you have the PWA installed, you can go completely offline and you will still be able to browse or search the site!
+
+To use it in your own instance you will need to edit `static/sw.js` for the list of files to cache. Technically you do not need to edit `sw.js`, but if even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse.
+
+There is an npm script to generate the file cache list and minification `npm run pwa`. My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build.
+
+The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
+
 ## Javascript files
 
 These are the javascript files currently used by Abridge:
@@ -252,6 +264,8 @@ These are the javascript files currently used by Abridge:
 - theme.js: tiny script to facilitate local storage for the theme switcher. (never bundle, always separate)
 - theme_button.js: tiny script for the theme switcher function when you click the theme switch button.
 - prestyle.js: Used to preload css files `<link rel="preload"` - this script changes these to `<link rel="stylesheet"` once the page has finished loading, this allows us to load stylesheets for external fonts, fontawesome, or katex in a non blocking fashion.
+- sw.js: this is the Service Worker file for the PWA.
+- sw_load.js: this file handles loading the Service Worker for the PWA.
 
 ### js_bundle option
 
@@ -397,13 +411,11 @@ Nginx does not come by default with brotli support, but adding it was not diffic
 
 ## Contributing and Philosophy
 
-We'd love your help! Especially with fixes to issues.
+We'd love your help! Especially with fixes to issues, or improvements to existing features.
 
-The overall idea behind abridge is to be lightweight, fast, and to work properly even if javascript is disabled.
+The goal is for abridge to be lightweight, fast, and to work properly even if javascript is disabled or blocked.
 
 The only feature that may be considered a necessity that relies on javascript is the Search.
-
-New features that rely on javascript will do so with it disabled by default unless lightweight and useful.
 
 ## License
 

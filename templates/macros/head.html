@@ -20,7 +20,7 @@
   {%- if not js_swload %}
   {%- set js_swload="js/sw_load.min.js" -%}
   {%- endif %}
-  <script defer src="{{ get_url(path=js_swload, trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_swload, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{ get_url(path=js_swload, trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_swload, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 {%- endmacro %}
 

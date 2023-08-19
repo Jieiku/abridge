@@ -248,7 +248,7 @@ If using chrome on desktop then look at the end of the address bar for the insta
 
 To use it in your own instance you will need to edit `static/sw.js` for the list of files to cache. Technically you do not need to edit `sw.js`, but if even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse.
 
-There is an npm script to automatically handle generating the file cache list and then minification `npm run pwa`. My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build.
+There is an npm script to handle generating the file cache list and minification `npm run pwa`. My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build.
 
 The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
 

@@ -121,7 +121,7 @@ $switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure t
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 ```
 
-By default abrdige uses dark mode for the switcher, so unless you want to set the default mode to light for nojs visitors, then you do not need to worry about these settings.
+By default abridge uses dark mode for the switcher, so unless you want to set the default mode to light for nojs visitors, then you do not need to worry about these settings.
 
 ### Number of Items per page for pagination
 
@@ -239,6 +239,30 @@ KaTeX can be used to display complex mathematics, it is a "Fast math typesetting
 You can see a demo on [this page](https://abridge.netlify.app/overview-math/).
 
 For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main config.toml file.
+
+### PWA (Progress Web Application)
+
+Abridge theme has PWA support. You can install the entire site as an app and have it work offline.
+
+To try it out simply use google chrome or your phone and go here: https://abridge.netlify.app/
+
+If using chrome on desktop then look at the end of the address bar for the install button.
+
+On an android phone you should get a popup to install it, but if not you can also install from the 3 dot menu in the top right corner.
+
+Once you have the PWA installed, you can go completely offline and you will still be able to browse or search the site!
+
+To use it in your own instance you will need to edit `static/sw.js` for the list of files to cache.
+
+Technically you do not need to edit `sw.js`, but if even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse.
+
+There is an npm script to automatically handle generating the file cache list and then minification `npm run pwa`
+
+My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic.
+
+If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build.
+
+The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
 
 ## Javascript files
 

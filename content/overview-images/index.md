@@ -26,33 +26,33 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 
 ## Usage (same path)
 ```rs
-{{/* img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) */}}
+{{/* img(src="ferris-happy.svg" alt="Ferris is Happy") */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy") }}
 ```
-{{ img(src="ferris-happy.svg" alt="Ferris is Happy" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris is Happy") }}
 
 ## Usage (relative path ./)
 ```rs
-{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) */}}
+{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") */}}
 ```
 **Output**
 ```html
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") }}
 ```
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") }}
 
 ## Usage (root path /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) */}}
+{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") */}}
 ```
 **Output**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
 
 # SVG image directly in code:
 ```html
@@ -74,30 +74,30 @@ When you hover your mouse over the image it will display the image to compare.
 
 ## Usage (same path)
 ```rs
-{{/* imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") */}}
 ```
 **Output**
 ```html
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) }}
+{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
 ```
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) }}
+{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
 
 ## Usage (relative path ./)
 ```rs
-{{/* imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") */}}
 ```
 **Output**
 ```html
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
 
 ## Usage (root path /)
 ```rs
-{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") */}}
 ```
 **Output**
 ```html
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}

@@ -9,7 +9,7 @@
 
 {%- elif src is starting_with("/") %} {# Root Path #}
   {%- set rootpath = src | split(pat="/") | slice(end=-1) | join(sep="/") %}
-  {%- set path = config.base_url ~ rootpath ~ "/"  %}
+  {%- set path = config.base_url %}
 
 {%- else %} {# Same Directory Path #}
   {%- set path = "" %}
@@ -17,15 +17,19 @@
 {%- endif %}
 
 {%- if not w or not h %}
-  {%- set metafile = page.path ~ path ~ src %}
+  {%- set metafile = src %}
   {%- set meta = get_image_metadata(path=metafile) %}
   {%- set w = meta.width %}
   {%- set h = meta.height %}
 {%- endif %}
 
-{%- set img = src | split(pat="/") | last %}
+{%- if src is starting_with("/") %} {# then add the root path #}
+  {%- set img = path ~ src %}
+{%- else %}
+  {%- set img = src %}
+{%- endif %}
 
 {%- if not alt %}
   {%- set alt = img | split(pat=".") | first %}
 {%- endif %}
-<img src="{{ path | safe }}{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />
+<img src="{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />

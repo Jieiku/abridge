@@ -17,6 +17,7 @@ class Pwa {
         // rarely change, may be a good idea to periodically refresh, incase I change these and forget to increment service worker version:
         this.TTL_LONG = ["js", "css"];
         // never change, cache forever unless service worker version is incremented:
+
         this.TTL_EXEMPT = ["jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "otf", "eot", "ttf", "woff", "woff2", "xml", "xsl", "txt", "mp4", "webm", "mp3", "ogg"];
         // skip these extensions so they expire same time as html: st,wasm,json(search), xml(sitemap,atom,rss)
     }

@@ -9,7 +9,7 @@
 
 {%- elif src is starting_with("/") %} {# Root Path #}
   {%- set rootpath = src | split(pat="/") | slice(end=-1) | join(sep="/") %}
-  {%- set path = config.base_url %}
+  {%- set path = config.base_url ~ src %}
 
 {%- else %} {# Same Directory Path #}
   {%- set path = "" %}
@@ -23,13 +23,7 @@
   {%- set h = meta.height %}
 {%- endif %}
 
-{%- if src is starting_with("/") %} {# then add the root path #}
-  {%- set img = path ~ src %}
-{%- else %}
-  {%- set img = src %}
-{%- endif %}
-
 {%- if not alt %}
-  {%- set alt = img | split(pat=".") | first %}
+  {%- set alt = src | split(pat="/") | last | split(pat=".") | first %}
 {%- endif %}
-<img src="{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />
+<img src="{{ src | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />

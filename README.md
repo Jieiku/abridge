@@ -264,6 +264,8 @@ These are the javascript files currently used by Abridge:
 - theme.js: tiny script to facilitate local storage for the theme switcher. (never bundle, always separate)
 - theme_button.js: tiny script for the theme switcher function when you click the theme switch button.
 - prestyle.js: Used to preload css files `<link rel="preload"` - this script changes these to `<link rel="stylesheet"` once the page has finished loading, this allows us to load stylesheets for external fonts, fontawesome, or katex in a non blocking fashion.
+- sw.js: this is the Service Worker file for the PWA.
+- sw_load.js: this file handles loading the Service Worker for the PWA.
 
 ### js_bundle option
 
@@ -409,13 +411,11 @@ Nginx does not come by default with brotli support, but adding it was not diffic
 
 ## Contributing and Philosophy
 
-We'd love your help! Especially with fixes to issues.
+We'd love your help! Especially with fixes to issues, or improvements to existing features.
 
-The overall idea behind abridge is to be lightweight, fast, and to work properly even if javascript is disabled.
+The goal is for abridge to be lightweight, fast, and to work properly even if javascript is disabled or blocked.
 
 The only feature that may be considered a necessity that relies on javascript is the Search.
-
-New features that rely on javascript will do so with it disabled by default unless lightweight and useful.
 
 ## License
 

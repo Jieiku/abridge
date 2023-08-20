@@ -13,10 +13,11 @@ class Pwa {
         this.CACHE_NAME = `content-v${this.CACHE_VERSION}`;
         // 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
         this.NORM_TTL = 86400;// html, json, xml, anything else undefined
-        this.LONG_TTL = 1209600;// js, css
-        // rarely change, may be a good idea to periodically refresh, incase I change these and forget to increment the version:
+        this.LONG_TTL = 604800;// js, css
+        // rarely change, may be a good idea to periodically refresh, incase I change these and forget to increment service worker version:
         this.TTL_LONG = ["js", "css"];
-        // never change, increment version if need to refresh cache:
+        // never change, cache forever unless service worker version is incremented:
+
         this.TTL_EXEMPT = ["jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "otf", "eot", "ttf", "woff", "woff2", "xml", "xsl", "txt", "mp4", "webm", "mp3", "ogg"];
         // skip these extensions so they expire same time as html: st,wasm,json(search), xml(sitemap,atom,rss)
     }

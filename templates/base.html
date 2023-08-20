@@ -121,16 +121,22 @@
       {{- social_macros::social_links(config=config) }}
 
       {#- Copyright START #}
-      {%- set copyright_start_string=config.extra.copyright_start_string | default(value="&copy;") %}
-      {%- if copyright_start_string %}{%- set copyright_start_string=copyright_start_string ~ " " %}{%- endif %}
-      {%- set copyright_start_year=config.extra.copyright_start_year | default(value="") %}
-      {%- if copyright_start_year %}{%- set copyright_start_year=copyright_start_year ~ "-" %}{%- endif %}
-      {%- set copyright_end_year=config.extra.copyright_end_year | default(value=now() | date(format="%Y")) %}
-      {%- if config.extra.copyright_entity %}{%- set copyright_entity= " " ~ config.extra.copyright_entity %}{%- else %}{%- set copyright_entity= " " ~ config.title %}{%- endif %}
-      {%- set copyright_end_string=config.extra.copyright_end_string | default(value="") %}
-      {%- if copyright_end_string %}{%- set copyright_end_string= " " ~ copyright_end_string %}{%- endif %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> {{ copyright_start_string ~ copyright_start_year ~ copyright_end_year ~ copyright_entity ~ copyright_end_string }}</p>
+      {%- if config.extra.copyright | default(value=true) -%}
+      {%- set current_year = now() | date(format="%Y") %}
+
+        {%- if config.extra.copyright_override -%}
+          {%- if lang != config.default_language %}
+            {%- set copyright_string = trans(key="copyright_override", lang=lang) | replace(from="$CURRENT_YEAR", to=current_year) | replace(from="$SITE_TITLE", to=config.title) %}
+          {% else %}
+            {%- set copyright_string = config.extra.copyright_override | replace(from="$CURRENT_YEAR", to=current_year) | replace(from="$SITE_TITLE", to=config.title) %}
+          {% endif -%}
+        {%- else -%}
+          {%- set copyright_string = "&copy; " ~ current_year ~ " " ~ config.title %}
+        {%- endif %}
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}> {{ copyright_string | safe }}</p>
+      {%- endif -%}
       {#- Copyright END #}
+
       {%- if config.extra.menu_footer %}
       <nav>
         {%- for i in config.extra.menu_footer -%}

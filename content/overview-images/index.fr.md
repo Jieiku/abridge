@@ -20,39 +20,41 @@ Cet article couvre les **shortcodes imgswap et img**. Les images peuvent égalem
 
 - src est le chemin et le nom de fichier de l'image. (obligatoire)
 - class définit une classe pour l'image. (facultatif)
-- alt définit la note alt pour l'image. (recommandé pour google phare)
-- w est la largeur de l'image. (recommandé pour google phare)
-- h est la hauteur de l'image. (recommandé pour google phare)
+- alt définit la note alt pour l'image.
+- w est la largeur de l'image.
+- h est la hauteur de l'image.
+
+** google lighthouse recommande de définir les attributs alt, w et h. Si alt est omis, le nom du fichier est utilisé. Si w ou h sont omis alors get_image_metadata() remplit ces valeurs. **
 
 ## Utilisation (même chemin)
 ```rs
-{{/* img(src="ferris-happy.svg" alt="Ferris est heureux" w=600 h=400) */}}
+{{/* img(src="ferris-happy.svg" alt="Ferris est heureux") */}}
 ```
 **Sortir**
 ```html
-{{ img(src="ferris-happy.svg" alt="Ferris est heureux" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris est heureux") }}
 ```
-{{ img(src="ferris-happy.svg" alt="Ferris est heureux" w=600 h=400) }}
+{{ img(src="ferris-happy.svg" alt="Ferris est heureux") }}
 
 ## Utilisation (chemin relatif ./)
 ```rs
-{{/* img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour" w=600 h=400) */}}
+{{/* img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour") */}}
 ```
 **Sortir**
 ```html
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour") }}
 ```
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour" w=600 h=400) }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris dit bonjour") }}
 
 ## Utilisation (chemin racine /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé" w=600 h=400) */}}
+{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") */}}
 ```
 **Sortir**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé" w=600 h=400) }}
+{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") }}
 
 # Image SVG directement dans le code :
 ```html
@@ -69,35 +71,39 @@ Lorsque vous passez votre souris sur l'image, l'image à comparer s'affiche.
 
 - main_src est le chemin et le nom de fichier de l'image par défaut. (obligatoire)
 - swap_src est le chemin et le nom de fichier de l'image d'échange. (obligatoire)
+- class définit une classe pour l'image. (facultatif)
+- alt définit la note alt pour l'image.
 - w est la largeur de l'image.
 - h est la hauteur de l'image.
 
+** google lighthouse recommande de définir les attributs alt, w et h. Si alt est omis, le nom du fichier est utilisé. Si w ou h sont omis alors get_image_metadata() remplit ces valeurs. **
+
 ## Utilisation (même chemin)
 ```rs
-{{/* imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") */}}
 ```
 **Sortir**
 ```html
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) }}
+{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
 ```
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg" w=600 h=400) }}
+{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
 
 ## Utilisation (chemin relatif ./)
 ```rs
-{{/* imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") */}}
 ```
 **Sortir**
 ```html
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
 
 ## Utilisation (chemin racine /)
 ```rs
-{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) */}}
+{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") */}}
 ```
 **Sortir**
 ```html
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg" w=600 h=400) }}
+{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}

@@ -17,3 +17,79 @@ command = "zola build --base-url $DEPLOY_PRIME_URL && npm run pwa && zola build 
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubdomains"
     Content-Security-Policy = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; connect-src 'self' *.hyvor.com ws://*.hyvor.com; script-src 'self' talk.hyvor.com; img-src 'self' data: talk.hyvor.com cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com streamable.com www.streamable.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' talk.hyvor.com cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
+[[headers]]
+  for = "*.js"#javascript
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+[[headers]]
+  for = "*.css"#stylesheet
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+[[headers]]
+  for = "*.svg"#image/favicon
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.png"#image/favicon
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.ico"#image/favicon
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.jpg"#image
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.jpeg"#image
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.gif"#image
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.webp"#image
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.avif"#image
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.mp4"#video
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.webm"#video
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.mp3"#audio
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.ogg"#audio
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.otf"#font
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.eot"#font
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.ttf"#font
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.woff"#font
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.woff2"#font
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

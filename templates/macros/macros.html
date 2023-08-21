@@ -148,9 +148,6 @@
 
 
 {%- macro footer(page, config) %}
-      {%- if page.reading_time and page.reading_time > 2 %}
-      <p><b><a href="#">Back to top</a></b></p>
-      {%- endif %}
       {#- prev/next content page nextprev title pagination #}
       {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
       {%- if page.lower or page.higher %}

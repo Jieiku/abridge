@@ -14,6 +14,8 @@ class Pwa {
         // 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
         this.NORM_TTL = 86400;// html, json, xml, anything else undefined
         this.LONG_TTL = 604800;// js, css
+        // keep the ttl on these lower:
+        this.TTL_NORM = ["sw.min.js", "sw_load.min.js"];
         // rarely change, may be a good idea to periodically refresh, incase I change these and forget to increment service worker version:
         this.TTL_LONG = ["js", "css"];
         // never change, cache forever unless service worker version is incremented:
@@ -33,10 +35,20 @@ class Pwa {
         const extension = url.split('.').reverse()[0].split('?')[0];
         return (extension.endsWith('/')) ? '/' : extension;
     }
+    getFileName(url) {
+        const filename = url.substring(url.lastIndexOf('/') + 1).split('?')[0];;
+        return (filename.endsWith('/')) ? '/' : filename;
+    }
 
     getTTL(url) {
         if (typeof url === 'string') {
             const extension = this.getFileExtension(url);
+            const filename = this.getFileName(url);
+
+            if (this.TTL_NORM.indexOf(filename) > -1) {
+                //console.info(url + ' contains a TTL_NORM filename');
+                return this.NORM_TTL;
+            }
             if (this.TTL_LONG.indexOf(extension) > -1) {
                 //console.info(url + ' contains a TTL_LONG extension');
                 return this.LONG_TTL;
@@ -45,6 +57,7 @@ class Pwa {
                 //console.info(url + ' contains a TTL_EXEMPT extension');
                 return null;
             }
+            //console.info(url + ' TTL_NORM');
             return this.NORM_TTL;
         }
         return null;

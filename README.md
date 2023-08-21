@@ -351,6 +351,8 @@ The theme switcher relies on javascript to work, it applies the .light class to 
 
 ### Optimize PNG/ICO files:
 
+Good tool to generate maskable icons for manifest.json: [maskable.app](https://maskable.app/editor)
+
 All png files can be optimized using [oxipng](https://github.com/shssoichiro/oxipng):
 
 ```bash

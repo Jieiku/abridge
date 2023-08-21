@@ -20,9 +20,11 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 
 - src is the path and filename of the image. (mandatory)
 - class sets a class for the image. (optional)
-- alt sets the alt note for the image. (recommended for google lighthouse)
-- w is the width of the image. (recommended for google lighthouse)
-- h is the height of the image. (recommended for google lighthouse)
+- alt sets the alt note for the image.
+- w is the width of the image.
+- h is the height of the image.
+
+** google lighthouse recommends setting alt, w, and h attributes. If alt is omitted then the filename is used. If w or h are omitted then get_image_metadata() fills these values. **
 
 ## Usage (same path)
 ```rs
@@ -69,8 +71,12 @@ When you hover your mouse over the image it will display the image to compare.
 
 - main_src is the path and filename for the default image. (mandatory)
 - swap_src is the path and filename for the swap image. (mandatory)
+- class sets a class for the image. (optional)
+- alt sets the alt note for the image.
 - w is the width of the image.
 - h is the height of the image.
+
+** google lighthouse recommends setting alt, w, and h attributes. If alt is omitted then the filename is used. If w or h are omitted then get_image_metadata() fills these values. **
 
 ## Usage (same path)
 ```rs

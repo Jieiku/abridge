@@ -16,6 +16,8 @@ Maintenance of this project is made possible by all the <a href="https://github.
 **[View Abridge demo](https://abridge.netlify.app/)**
 
 **[View Abridge.css demo](https://abridgecss.netlify.app/)** [[abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)]
+
+The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml](https://github.com/Jieiku/abridge.css/blob/master/config.toml), [sass/abridge.scss](https://github.com/Jieiku/abridge.css/blob/master/sass/abridge.scss)
 </div>
 
 ## Requirements

@@ -199,7 +199,7 @@ $form: true !default;//Form elements (non-button)
 $top: true !default;//back to top button using CSS
 $search: true !default;//search feature
 $toc: true !default;//Table of Contents, page index / recent posts block
-$zola: true !default;//Zola Specific
+$modifiers: true !default;//tiny modifier classes for sizing and spacing
 $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: false !default;//Infinity Grid, column based layouts.
@@ -874,6 +874,61 @@ $syntax: true !default;//syntax highlighting for code blocks
     font-size: 1rem;
     padding: .2rem;
   }
+
+  // add header to code blocks
+  pre code[data-lang]::before {
+    content: attr(data-lang);
+    padding: .3rem;
+    display: block;
+    background-color: var(--c3);
+    color: var(--h1);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 1rem;
+    text-transform: uppercase;
+  }
+  // Table Override, this is used for numbered code blocks linenos and hl_lines
+  code {
+    table {
+      font-size: .8rem;
+      margin: 0;
+      // Highlighted text
+      color: var(--h1);
+      mark {
+        display: block;
+        color: unset;
+        padding: 0;
+        background-color: var(--h0);
+        filter: brightness(var(--ha));
+      }
+    }
+    td, th, tr {
+      padding: 0;
+      border-bottom: none;
+    }
+    tbody td:first-child {
+      text-align: center;
+      user-select: none;
+      min-width: 60px;
+    }
+    tbody tr:nth-child(even), thead tr {
+      background-color: unset;
+    }
+  }
+  // code copy button
+  .cc {
+    cursor: pointer;
+    z-index: 9;
+    position: absolute;
+    top: .2rem;
+    right: .5rem;
+  }
+  .cc:hover {
+    background: var(--a3);
+    opacity: 1;
+  }
 }
 @if $hr {
   // https://github.com/picocss/pico
@@ -1143,71 +1198,6 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
   }
 }
-@if $zola {
-  .sum, .sum p {margin: .2rem 0}
-  .s95 {font-size: .95em}
-  .s90 {font-size: .90em}
-  .s85 {font-size: .85em}
-  .s80 {font-size: .80em}
-  .s75 {font-size: .75em}
-  .s70 {font-size: .70em}
-  .hpad {padding: 0 .2rem}
-  .rpad {padding-right: .2rem}
-  .si {font-size: 1.5em}
-  pre code[data-lang]::before {
-    content: attr(data-lang);
-    padding: .3rem;
-    display: block;
-    background-color: var(--c3);
-    color: var(--h1);
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-left: 1rem;
-    text-transform: uppercase;
-  }
-  // code copy button
-  .cc {
-    cursor: pointer;
-    z-index: 9;
-    position: absolute;
-    top: .2rem;
-    right: .5rem;
-  }
-  .cc:hover {
-    background: var(--a3);
-    opacity: 1;
-  }
-  // Table Override, this is used for Zola's linenos and hl_lines
-  code {
-    table {
-      font-size: .8rem;
-      margin: 0;
-      // Highlighted text
-      color: var(--h1);
-      mark {
-        display: block;
-        color: unset;
-        padding: 0;
-        background-color: var(--h0);
-        filter: brightness(var(--ha));
-      }
-    }
-    td, th, tr {
-      padding: 0;
-      border-bottom: none;
-    }
-    tbody td:first-child {
-      text-align: center;
-      user-select: none;
-      min-width: 60px;
-    }
-    tbody tr:nth-child(even), thead tr {
-      background-color: unset;
-    }
-  }
-}
 @if $imgswap {
   .img-swap-div {
     .img-main {
@@ -1323,6 +1313,28 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--a3);
     opacity: 1;
   }
+} @else {
+  .copy::before {
+      content: "\1F5D0";
+  }
+  @if $search {
+  .x::before {
+      content: "X";
+      color: var(--cr);
+  }
+  }
+}
+@if $modifiers {
+  .sum, .sum p {margin: .2rem 0}
+  .s95 {font-size: .95em}
+  .s90 {font-size: .90em}
+  .s85 {font-size: .85em}
+  .s80 {font-size: .80em}
+  .s75 {font-size: .75em}
+  .s70 {font-size: .70em}
+  .hpad {padding: 0 .2rem}
+  .rpad {padding-right: .2rem}
+  .si {font-size: 1.5em}
 }
 @if $syntax {
   // Unstyled Text Color, and background color

@@ -6,7 +6,7 @@
   "license": "MIT",
   "homepage": "https://github.com/Jieiku/abridge",
   "scripts": {
-    "all": "npm run theme && npm run theme-light && npm run pwa-minify && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch && npm run abridge-bundle-elasticlunr",
+    "all": "npm run theme && npm run theme-light && npm run pwa-minify && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch && npm run abridge-bundle-nosearch && npm run abridge-bundle-elasticlunr",
     "nonbundles": "npm run theme && npm run theme-light && npm run pwa-minify && npm run katex-bundle && npm run search-elasticlunr && npm run search-stork && npm run search-tinysearch",
     "theme": "uglifyjs static/js/theme.js -c -m -o static/js/theme.min.js",
     "theme-light": "uglifyjs static/js/theme_light.js -c -m -o static/js/theme_light.min.js",
@@ -17,7 +17,7 @@
     "search-elasticlunr": "uglifyjs static/js/elasticlunr.min.js static/js/search.js -c -m -o static/js/search_elasticlunr.min.js",
     "search-stork": "uglifyjs static/js/stork.js static/js/stork_config.js -c -m -o static/js/search_stork.min.js",
     "search-tinysearch": "uglifyjs static/js/tinysearch.js -c -m -o static/js/search_tinysearch.min.js",
-    "abridge-bundle-nosearch": "uglifyjs static/js/prestyle.js static/js/theme_button.js static/js/email.js static/js/codecopy.js -c -m -o static/js/abridge.min.js",
+    "abridge-bundle-nosearch": "uglifyjs static/js/prestyle.js static/js/theme_button.js static/js/email.js static/js/codecopy.js -c -m -o static/js/abridge-nosearch.min.js",
     "abridge-bundle-elasticlunr": "uglifyjs static/js/prestyle.js static/js/theme_button.js static/js/search_elasticlunr.min.js static/js/email.js static/js/codecopy.js -c -m -o static/js/abridge.min.js",
     "abridge-bundle-tinysearch": "uglifyjs static/js/prestyle.js static/js/theme_button.js static/js/search_tinysearch.min.js static/js/email.js static/js/codecopy.js -c -m -o static/js/abridge.min.js",
     "abridge-bundle-stork": "uglifyjs static/js/prestyle.js static/js/theme_button.js static/js/search_stork.min.js static/js/email.js static/js/codecopy.js -c -m -o static/js/abridge.min.js",

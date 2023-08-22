@@ -4,13 +4,13 @@ base_url = "https://abridge.netlify.app"
 #base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk, Including Search!
 # Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false, js_bundle = false
 
+title = "Abridge"
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 default_language = "en"
+
 compile_sass = true
 minify_html = false
 build_search_index = true
-
-title = "Abridge"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 generate_feed = true
 taxonomies = [
     {name = "categories", feed = true},

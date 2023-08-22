@@ -5,8 +5,6 @@
 
 Abridge is a fast and lightweight Zola theme using semantic html, only ~6kb css before the svg icons and syntax highlighting css, no mandatory JS[*](https://github.com/Jieiku/abridge#contributing-and-philosophy), and perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
 
-There is also [Abridge-minimal](https://github.com/jieiku/abridge.css) Theme which is used to showcase the [abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)
-
 Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
 
 Maintenance of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
@@ -15,8 +13,9 @@ Maintenance of this project is made possible by all the <a href="https://github.
 
 ---
 
-**[View demo](https://abridge.netlify.app/)**
+**[View Abridge demo](https://abridge.netlify.app/)**
 
+**[View Abridge.css demo](https://abridgecss.netlify.app/)** [[abridge.css framework](https://github.com/Jieiku/abridge.css/tree/master/dist)]
 </div>
 
 ## Requirements
@@ -63,6 +62,7 @@ git submodule add https://github.com/jieiku/abridge.git themes/abridge
 Copy some files from the theme directory to your project's root directory:
 
 ```bash
+touch templates/.gitkeep
 rsync themes/abridge/config.toml config.toml
 rsync themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
@@ -70,6 +70,7 @@ rsync themes/abridge/package.json package.json
 rsync -r themes/abridge/content/static content/
 ```
 
+- `templates/.gitkeep` the templates directory is required in your base site. [#2150](https://github.com/getzola/zola/issues/2150)
 - `config.toml` base configuration with all config values
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
 - `netlify.toml` settings to deploy your repo with netlfiy

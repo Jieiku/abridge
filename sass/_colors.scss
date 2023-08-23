@@ -1,4 +1,5 @@
-@mixin dark($f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@mixin dark($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+  #{--cs}: $cs;// color-scheme Variable for scrollbars, required for Chrome.
   #{--f1}: $f1;// Font Color Primary
   #{--f2}: $f2;// Font Color Headers
   #{--c1}: $c1;// Background Color Primary
@@ -11,7 +12,8 @@
   #{--cg}: $cg;// ins green, success
   #{--cr}: $cr;// del red, errors
 }
-@mixin light($f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@mixin light($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+  #{--cs}: $cs;// color-scheme Variable for scrollbars, required for Chrome.
   #{--f1}: $f1;// Font Color Primary
   #{--f2}: $f2;// Font Color Headers
   #{--c1}: $c1;// Background Color Primary
@@ -25,9 +27,10 @@
   #{--cr}: $cr;// del red, errors
 }
 
-@function color($color,$dark,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@function color($color,$dark,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
   @if $color == "blue" {
     @if $dark {/// Dark Colors
+      $cs: dark !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #ccc !default;// Font Color Primary
       $f2: #ddd !default;// Font Color Headers
       $c1: #111 !default;// Background Color Primary
@@ -39,9 +42,10 @@
       $a3: #0af !default;// link h1-h2 hover/focus color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     } @else {/// Light Colors
+      $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #333 !default;// Font Color Primary
       $f2: #222 !default;// Font Color Headers
       $c1: #fff !default;// Background Color Primary
@@ -53,11 +57,12 @@
       $a3: #07f !default;// link h1-h2 hover/focus color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     }
   } @else if $color == "blueshade" {
     @if $dark {/// Dark Colors
+      $cs: dark !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #ccc !default;// Font Color Primary
       $f2: #ddd !default;// Font Color Headers
       $c1: #111 !default;// Background Color Primary
@@ -69,9 +74,10 @@
       $a3: #0af !default;// link h1-h2 hover/focus color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     } @else {/// Light Colors
+      $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #333 !default;// Font Color Primary
       $f2: #222 !default;// Font Color Headers
       $c1: #fff !default;// Background Color Primary
@@ -83,11 +89,12 @@
       $a3: #07f !default;// link h1-h2 hover/focus color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     }
   } @else {//orange (default)
     @if $dark {/// Dark Colors
+      $cs: dark !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #ccc !default;// Font Color Primary
       $f2: #ddd !default;// Font Color Headers
       $c1: #111 !default;// Background Color Primary
@@ -99,9 +106,10 @@
       $a3: #f90 !default;// link h1-h2 hover/focus color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     } @else {/// Light Colors
+      $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
       $f1: #333 !default;// Font Color Primary
       $f2: #222 !default;// Font Color Headers
       $c1: #fff !default;// Background Color Primary
@@ -113,7 +121,7 @@
       $a3: #f90 !default;// link h1-h2 hover/focus color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
       @return $result;
     }
   }

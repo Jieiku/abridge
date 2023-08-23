@@ -12,7 +12,7 @@
 /// Enable a centered viewport for <header>, <main>, <footer> inside <body>
 /// Fluid layout until a defined size, then becomes centered viewport
 $enable-maxwidth: true !default;
-$mw: 60% !default;// max-width
+$mw: 70% !default;// max-width
 $mb: 1200px !default;// value at which to switch from fluid layout to max-width
 
 $abridgeMode: "switcher" !default;//valid values: switcher, auto, dark, light
@@ -77,6 +77,7 @@ $icon-moon: false !default;// dark moon
 $icon-sun: false !default;// light sun
 
 /// Dark Colors
+$csd: null !default;// Color-scheme Variable for scrollbars, required for Chrome.
 $f1d: null !default;// Font Color Primary
 $f2d: null !default;// Font Color Headers
 $c1d: null !default;// Background Color Primary
@@ -88,9 +89,10 @@ $a2d: null !default;// link hover/focus color
 $a3d: null !default;// link h1-h2 hover/focus color
 $cgd: null !default;// ins green, success
 $crd: null !default;// del red, errors
-$dark: colors.color($color,true,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
+$dark: colors.color($color,true,$csd,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
 
 /// Light Colors
+$cs: null !default;// Color-scheme Variable for scrollbars, required for Chrome.
 $f1: null !default;// Font Color Primary
 $f2: null !default;// Font Color Headers
 $c1: null !default;// Background Color Primary
@@ -102,7 +104,7 @@ $a2: null !default;// link hover/focus color
 $a3: null !default;// link h1-h2 hover/focus color
 $cg: null !default;// ins green, success
 $cr: null !default;// del red, errors
-$light: colors.color($color,false,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
+$light: colors.color($color,false,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
 
 /// Dark Syntax Colors
 $h0d: null !default;// background color
@@ -209,6 +211,8 @@ $syntax: true !default;//syntax highlighting for code blocks
  *   Root element
  *****************************************************************************/
 @mixin root {
+  color-scheme: var(--cs);
+
   // Spacings
   --s1: .5rem;
   --s2: 1rem;
@@ -451,14 +455,16 @@ $syntax: true !default;//syntax highlighting for code blocks
   a {
     color: var(--a1);
     text-decoration: none;
+    font-weight: 500;
   }
   a:hover {
     color: var(--a2);
     text-decoration: underline;
   }
-  h1 a, h2 a, main nav a, nav > div > a {
+  h1 a, h2 a, a.si, main nav a, nav > div > a {
     color: var(--f2);
     text-decoration: none;
+    font-weight: var(--fh);
     &:hover {
       color: var(--a3);
       text-decoration: none;
@@ -537,7 +543,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     padding-left: var(--s2);
   }
   li {
-    margin-bottom: var(--s1);
+    margin-bottom: 0.2rem;
   }
 
   ul li {
@@ -1016,7 +1022,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     margin-bottom: .25rem;
   }
   select,
-  input:not([size]), input:not([type="button" i]), input:not([type="submit" i]), input:not([type="reset" i]), input:not([type="checkbox" i]), input:not([type="radio" i]) {
+  input:not([size]) input:not([type="button" i]) input:not([type="submit" i]) input:not([type="reset" i]) input:not([type="checkbox" i]) input:not([type="radio" i]) {
     width: 100%;
   }
   [type="color" i] {
@@ -1156,7 +1162,7 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin-left: var(--s1);
     }
     .toc-item {
-      padding: .4rem 0;
+      padding: .4rem 0 0;
       color: var(--f1);
     }
     .toc-item a, .toc-item-child a {
@@ -1253,8 +1259,8 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
   @if $icon-copy {//copy icons for code blocks
     .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
-    .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--f2) }
-    .copy.err { -webkit-mask: functions.icon(copy-err, "%23000", 2, "none", $ic) ; background: var(--f2) }
+    .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--cg) }
+    .copy.err { -webkit-mask: functions.icon(copy-err, "%23000", 2, "none", $ic) ; background: var(--cr) }
   }
   @if $icon-search {.search { -webkit-mask: functions.icon(search, "%23000", 3, "none", $ic) ; background: var(--f2) }}//search
   @if $icon-bitbucket {.bitbucket { background-image: functions.icon(bitbucket, "%2328f", 2, "none", $ic) }}

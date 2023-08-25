@@ -27,7 +27,7 @@
   {%- endif %}
 
 {%- else %} {# Same Directory Path #}
-  {%- set path = page.path %}
+  {%- set path = "" %}
   {%- if not w or not h %}
     {%- if lang != config.default_language %}
       {%- set metapath = page.path ~ img | replace(from=page.path | truncate(length=4, end=""), to="/") %}

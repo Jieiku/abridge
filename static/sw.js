@@ -7,7 +7,7 @@ class Pwa {
         //this.BASE_CACHE_FILES=['/js/theme.min.js','/js/theme_light.min.js','/abridge.css','/js/abridge.min.js','/','/404.html','/offline/','/manifest.json'];
         this.BASE_CACHE_FILES = ['/js/theme.min.js','/js/theme_light.min.js','/abridge.css','/js/abridge.min.js','/','/404.html','/offline/','/manifest.json'];
         this.host = `${self.location.protocol}//${self.location.host}`;
-        console.info(`Host: ${this.host}`);
+        //console.info(`Host: ${this.host}`);
         this.OFFLINE_PAGE = '/offline/';
         this.NOT_FOUND_PAGE = '/404.html';
         this.CACHE_NAME = `content-v${this.CACHE_VERSION}`;
@@ -116,7 +116,7 @@ class Pwa {
                     this.installServiceWorker(),
                     this.scope.skipWaiting(),
                 ]));
-                console.info('SW Installed');
+                //console.info('SW Installed');
         });
 
         this.scope.addEventListener('activate', event => {

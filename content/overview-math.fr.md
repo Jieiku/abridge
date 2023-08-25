@@ -6,9 +6,9 @@ updated = 2022-01-01
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["shortcodes","Mathematics"]
+tags = ["Features","Shortcodes","Mathematics"]
 [extra]
+toc = true
 math = true
 math_auto_render = true
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
@@ -66,7 +66,7 @@ Enveloppez tout [valide](https://katex.org/docs/supported.html) $\KaTeX$ syntaxe
 
 ### Mathématiques en ligne
 
-C'est la plus belle équation que j'aie jamais vue :
+C'est la plus belle équation que j'ai jamais vue:
 
 ### Usage
 ```rs
@@ -78,9 +78,9 @@ C'est la plus belle équation que j'aie jamais vue :
 ```
 {% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 
-### Bloc Mathématiques
+### Bloquer les mathématiques
 
-Quelques Mathématiques en mode affichage sont assez justes :
+Certaines mathématiques en mode affichage sont assez justes :
 
 ### Usage
 ```rs
@@ -92,14 +92,14 @@ Quelques Mathématiques en mode affichage sont assez justes :
 ```
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
-### Exemple de rendu automatique en ligne
+### Rendu automatique en ligne
 ```
 $ e^{i\pi}+1=0 $
 ```
 
 $ e^{i\pi}+1=0 $
 
-### Exemple de bloc de rendu automatique
+### Bloc de rendu automatique
 ```
 $$
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi

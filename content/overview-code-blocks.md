@@ -5,8 +5,7 @@ date = 2022-05-16
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["Markdown"]
+tags = ["Features","Markdown"]
 [extra]
 toc = true
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"

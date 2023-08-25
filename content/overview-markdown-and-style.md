@@ -5,8 +5,7 @@ date = 2022-05-15
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["Markdown"]
+tags = ["Features","Markdown"]
 [extra]
 toc = true
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
@@ -53,7 +52,7 @@ and optionally with in-line changes such as annotations and abbreviations.
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use *Markdown syntax* within a blockquote.
 
-## Blockquote with attribution
+## Blockquote attribution
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
@@ -77,14 +76,14 @@ out-of-the-box.
    John | 59
   Kerry | 23
 
-## Table with Inline Markdown
+## Table Inline Markdown
 
 | Italics   | Bold     | Code   | StrikeThrough     |
 | --------  | -------- | ------ | ----------------- |
 | *italics* | **bold** | `code` | ~~strikethrough~~ |
 
 
-## Large table within figure tag
+## Large table within figure
 
 Surround very Large tables with `<figure></figure>` so they can scroll horizontally.
 <figure>
@@ -129,7 +128,7 @@ See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting
 </html>
 ```
 
-## Line Numbers, Highlighting
+## Line Numbers, Highlights
 
 ```html,linenos,hl_lines=5 7-9
 <!doctype html>
@@ -195,18 +194,7 @@ during Gopherfest, November 18, 2015.
 
 ## Navs
 
-Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example.
-
-If the nav tag is under the main tag instead of the header tag then the links will have a border:
-
-<header>
-    <nav>
-        <ul>
-            <li><a href="#">&#60; Previous</a></li>
-            <li><a href="#">Next &#62;</a></li>
-        </ul>
-    </nav>
-</header>
+Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example. Navigation is responsive, shrink the page width to see it in action.
 
 ## Forms
 
@@ -277,7 +265,7 @@ If the nav tag is under the main tag instead of the header tag then the links wi
     </fieldset>
     <br>
     <!-- Search -->
-    <input type="search" id="search" name="search" placeholder="Search" title="Search">
+    <p><input type="search" id="search" name="search" placeholder="Search" title="Search"></p>
     <!-- File browser -->
     <label for="file">File browser
     <input type="file" id="file" name="file">

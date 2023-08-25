@@ -1021,10 +1021,11 @@ $syntax: true !default;//syntax highlighting for code blocks
     display: block;
     margin-bottom: .25rem;
   }
-  select,
-  input:not([size]) input:not([type="button" i]) input:not([type="submit" i]) input:not([type="reset" i]) input:not([type="checkbox" i]) input:not([type="radio" i]) {
-    width: 100%;
-  }
+  // flagged by yellow lab tools, and not entirely necessary, so disabled for now.
+  //select,
+  //input:not([size]) input:not([type="button" i]) input:not([type="submit" i]) input:not([type="reset" i]) input:not([type="checkbox" i]) input:not([type="radio" i]) {
+  //  width: 100%;
+  //}
   [type="color" i] {
     min-height: 2.125rem;
   }

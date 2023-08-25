@@ -3,6 +3,7 @@ public
 themes
 build
 storage
+node_modules
 static/demo.html
 static/tinysearch_engine.js
 static/tinysearch_engine.d.ts

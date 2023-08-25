@@ -13,7 +13,7 @@ minify_html = false
 build_search_index = true
 generate_feed = true
 taxonomies = [
-    {name = "categories", feed = true},
+#    {name = "categories", feed = true},
     {name = "tags", feed = true},
 ]
 
@@ -32,7 +32,7 @@ generate_feed = true
 build_search_index = true
 search.include_description = true # include description of page/section in index
 taxonomies = [
-    {name = "categories", feed = true},
+#    {name = "categories", feed = true},
     {name = "tags", feed = true},
 ]
 
@@ -102,7 +102,7 @@ flag.fr = "🇫🇷"
 menu = [
     {url = "about", name = "About", slash = true, blank = false},
     {url = "archive", name = "Posts", slash = true, blank = false},
-    {url = "categories", name = "Categories", slash = true, blank = false},
+#    {url = "categories", name = "Categories", slash = true, blank = false},
     {url = "tags", name = "Tags", slash = true, blank = false},
 ]
 menu_footer = [
@@ -165,7 +165,6 @@ seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twit
 ###############################################################################
 
 feed = true # this adds the RSS feed icon in the footer.
-mail_encode = true # This obfuscates your email address, javascript is used to decode it at page load.
 mail = "name@example.com"
 mastodon = "@your-user-name"
 element = "matrix.example.com"
@@ -208,23 +207,15 @@ researchgate = "your-profile-id"
 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
-
 js_bundle = true # multiple javascript files combined into a single file (setting to false is useful during js development)
+
+js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
+js_email_encode = true # obfuscates email address in footer
+js_prestyle = true # used to preload: FontAwesome, Katex, external Google Fonts
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
-js_copycode = true # The copy button on code blocks that allows you to copy them to the clipboard.
-
 search_library = 'elasticlunr'
-
-#js_search_index = "search_index.en.json" # Separate Always, generated each build
-#js_theme = "js/theme.min.js" # Separate Always, comment out if using -auto/-light/-dark stylesheet. (required for switcher)
-#js_themeButton = "js/theme_button.js"# Bundleable - light/dark switcher button
-#js_prestyle = "js/prestyle.js"# Bundleable - used to preload: FontAwesome, Katex, external Google Fonts
-#js_codecopy = "js/codecopy.js"# Bundleable - copy code block to clipboard button
-#js_email = "js/email.js"# Bundleable - obfuscates email address in footer
-#js_swload = "js/sw_load.min.js" # loads the PWA service worker
-
 stylesheets = ["abridge.css"]
 
 pwa = true # true to load the service worker

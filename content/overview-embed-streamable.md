@@ -5,8 +5,7 @@ date = 2021-05-06
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["shortcodes","video"]
+tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Streamable"
 +++

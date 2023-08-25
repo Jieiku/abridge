@@ -5,8 +5,7 @@ date = 2022-05-15
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["Markdown"]
+tags = ["Features","Markdown"]
 [extra]
 toc = true
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
@@ -116,7 +115,7 @@ Voir [les docs](https://www.getzola.org/documentation/content/syntax-highlightin
 </html>
 ```
 
-## Numéros de ligne, mise en surbrillance
+## Numéros de ligne, faits saillants
 
 ```html,linenos,hl_lines=5 7-9
 <!doctype html>
@@ -180,18 +179,7 @@ de Rob Pike lors du Gopherfest, le 18 novembre 2015.
 
 ## Navs
 
-Le menu principal du site est créé en imbriquant la navigation sous une balise d'en-tête. Reportez-vous au haut de ce site pour un exemple.
-
-Si la balise de navigation se trouve sous la balise principale au lieu de la balise d'en-tête, les liens auront une bordure :
-
-<header>
-    <nav>
-        <ul>
-            <li><a href="#">&#60; Précédent</a></li>
-            <li><a href="#">Suivant &#62;</a></li>
-        </ul>
-    </nav>
-</header>
+Le menu principal du site est créé en imbriquant la navigation sous une balise d'en-tête. Reportez-vous au haut de ce site pour un exemple. La navigation est réactive, réduisez la largeur de la page pour la voir en action.
 
 ## Formes
 
@@ -262,7 +250,7 @@ Si la balise de navigation se trouve sous la balise principale au lieu de la bal
     </fieldset>
     <br>
     <!-- Search -->
-    <input type="search" id="search" name="search" placeholder="Search" title="Search">
+    <p><input type="search" id="search" name="search" placeholder="Search" title="Search"></p>
     <!-- File browser -->
     <label for="file">Navigateur de fichiers
     <input type="file" id="file" name="file">

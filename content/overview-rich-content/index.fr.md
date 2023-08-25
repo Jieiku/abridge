@@ -5,14 +5,13 @@ date = 2021-05-15
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["video", "audio", "images", "shortcodes"]
+tags = ["Features","Video","Audio","Images","Shortcodes"]
 [extra]
 toc = true
 keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
 +++
 
-Plusieurs codes abrégés personnalisés sont inclus pour augmenter CommonMark (avec l'aimable autorisation du [theme d3c3nt](https://d3c3nt.figbert.com/posts/rich-content/)), en plus de ceux [déjà fournis par Zola][built-in]. `video`, `image`, `gif`, et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans votre écriture.
+Plusieurs codes abrégés personnalisés sont inclus pour augmenter CommonMark (avec l'aimable autorisation du [theme d3c3nt](https://d3c3nt.figbert.com/posts/rich-content/)). `video`, `image`, `gif`, et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans votre écriture.
 
 <!-- more -->
 
@@ -49,7 +48,7 @@ Chaque chaîne du `sources` tableau doit être un chemin vers un fichier image d
 
 ## GIF
 
-Le `gif` shortcode est exactement le même que le [shortcode vidéo][video]
+Le `gif` shortcode est exactement le même que le [shortcode vidéo][#video]
 – il prend un tableau de chaînes appelées `sources` et renvoie une `<video>` balise. La seule différence réside dans la balise la plus à l'extérieur, qui a quatre propriétés supplémentaires : `autoplay`, `loop`, `muted`, `playsinline`.
 
 L'utilisation de la `<video>` balise à la place des gifs permet de réduire la taille des fichiers, ce qui est particulièrement important dans les régions où Internet est plus lent ou moins fiable.
@@ -77,6 +76,3 @@ Le `audio` shortcode prend un `sources` tableau de chaînes et renvoie une `<aud
 {{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) }}
 ```
 {{ audio(sources=["over9000.ogg", "over9000.mp3"]) }}
-
-[built-in]: https://www.getzola.org/documentation/content/shortcodes/#built-in-shortcodes
-[video]: @/overview-rich-content/index.md#video

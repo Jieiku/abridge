@@ -5,14 +5,13 @@ date = 2021-05-15
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["video", "audio", "images", "shortcodes"]
+tags = ["Features","Video","Audio","Images","Shortcodes"]
 [extra]
 toc = true
 keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
 +++
 
-Several custom shortcodes are included to augment CommonMark (courtesy of [d3c3nt theme](https://d3c3nt.figbert.com/posts/rich-content/)), in addition to those [already provided by Zola][built-in]. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
+Several custom shortcodes are included to augment CommonMark (courtesy of [d3c3nt theme](https://d3c3nt.figbert.com/posts/rich-content/)). `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
 
 <!-- more -->
 
@@ -57,7 +56,7 @@ back on if the other formats aren't yet supported, fw and fh set the width and h
 
 ## GIF
 
-The `gif` shortcode is exactly the same as the [video shortcode][video]
+The `gif` shortcode is exactly the same as the [video shortcode](#video)
 – it takes an array of strings called `sources` and returns a
 `<video>` tag. The only difference is in the outermost tag, which has
 four additional properties: `autoplay`, `loop`, `muted`, `playsinline`.
@@ -92,6 +91,3 @@ The browser will play the first type it supports, so placing them in order of si
 {{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) }}
 ```
 {{ audio(sources=["over9000.ogg", "over9000.mp3"]) }}
-
-[built-in]: https://www.getzola.org/documentation/content/shortcodes/#built-in-shortcodes
-[video]: @/overview-rich-content/index.md#video

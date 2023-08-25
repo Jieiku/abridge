@@ -6,9 +6,9 @@ updated = 2022-01-01
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["shortcodes","Mathematics"]
+tags = ["Features","Shortcodes","Mathematics"]
 [extra]
+toc = true
 math = true
 math_auto_render = true
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
@@ -95,14 +95,14 @@ Some Mathematics in display mode is fair enough:
 ```
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
-### Auto Render Inline Example
+### Auto Render Inline
 ```
 $ e^{i\pi}+1=0 $
 ```
 
 $ e^{i\pi}+1=0 $
 
-### Auto Render Block Example
+### Auto Render Block
 ```
 $$
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi

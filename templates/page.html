@@ -69,7 +69,7 @@
     {%- if toc %}
     <div class="toc">
       <div class="toc-sticky">
-        <h3>{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</h3>
+        <a class="si" href="#">{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</a>
         {%- for h in toc %}
         <div class="toc-item">
           <a class="subtext" href="#{{h.id | safe}}">{{ h.title }}</a>

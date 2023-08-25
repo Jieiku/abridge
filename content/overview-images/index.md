@@ -5,8 +5,7 @@ date = 2021-05-19
 draft = false
 
 [taxonomies]
-categories = ["Features"]
-tags = ["shortcodes","images"]
+tags = ["Features","Shortcodes","Images"]
 [extra]
 toc = true
 keywords = "Image, Markdown, Shortcodes, Swap"

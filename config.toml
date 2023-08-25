@@ -113,7 +113,7 @@ menu_footer = [
 ]
 
 recent = true # TOC / index
-recent_items = 9
+recent_items = 12
 
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=" " }
 meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=" " }
@@ -281,28 +281,29 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 
 ###############################################################################
-### FONTS
-### Abridge by default uses the System Font Stack:
+### FONTS - Abridge by default uses the System Font Stack
 ###   https://css-tricks.com/snippets/css/system-font-stack/
-### The System Font Stack offers the best performance, but if you need you can load a specific font.
+### However if you need you can load a specific font below,
+###   make sure to have the relevant woff2 fonts in your static/fonts folder
+### I measured the least Cumulative Layout Shift with: Roboto, Lato, Arimo
 ###############################################################################
 
 ### For externally loaded Fonts, make sure to include the FULL url including the https prefix:
 
 #fonts = [ {url = "https://fonts.googleapis.com/css?family=Roboto:400,700,italic|Roboto+Mono:400,italic"} ]
 
-### Local fonts are defined in the css, https://github.com/Jieiku/abridge/blob/master/sass/fonts/_Roboto.scss
-### To import one include in the imports file: https://github.com/Jieiku/abridge/blob/master/sass/_imports.scss
+### Local fonts are defined in the css, https://github.com/Jieiku/abridge/tree/master/COPY-TO-ROOT-SASS/fonts/_Arimo.scss
+### To load a local font resource, look at the bottom of this file: https://github.com/Jieiku/abridge/blob/master/COPY-TO-ROOT-SASS/abridge.scss
 
-### After importing them in the CSS, You can also define them below and it will add the preload tag to the head.
+### After loading them in the CSS, You can also define them below and it will add the preload tag to the head.
 ### preloading fonts will eliminate Content Layout Shift, but will hurt with page load time. (not recommended)
 
 #fonts = [
-#    {url = "font/Roboto-Mono.woff2"},
-#    {url = "font/Roboto-Mono-Italic.woff2"},
-#    {url = "font/Roboto.woff2"},
-#    {url = "font/Roboto-Italic.woff2"},
-#    {url = "font/Roboto-Bold.woff2"},
+#    {url = "fonts/Roboto-Mono.woff2"},
+#    {url = "fonts/Roboto-Mono-Italic.woff2"},
+#    {url = "fonts/Roboto.woff2"},
+#    {url = "fonts/Roboto-Italic.woff2"},
+#    {url = "fonts/Roboto-Bold.woff2"},
 #]
 
 

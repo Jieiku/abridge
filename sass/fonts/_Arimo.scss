@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Arimo';
+    src: local("Arimo"), url("fonts/Arimo.woff2");//latin regular
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Arimo';
+    src: local("Arimo-Italic"), url("fonts/Arimo-Italic.woff2");//latin italic
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Arimo';
+    src: local("Arimo-Bold"), url("fonts/Arimo-Bold.woff2");//latin bold
+    font-weight: bold;
+    font-display: swap;
+}

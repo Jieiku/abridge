@@ -6,6 +6,17 @@
 @use "colors-syntax";
 
 /******************************************************************************
+ *   FONTS - Abridge by default uses the System Font Stack
+ *     https://css-tricks.com/snippets/css/system-font-stack/
+ *   However if you need you can load a specific font below,
+ *     make sure to have the relevant woff2 fonts in your static/fonts folder
+ *   This is for running the theme directly, if using abridge as a theme
+ *     use the section at the bottom of your root sass/abridge.scss
+ *   I measured the least Cumulative Layout Shift with: Roboto, Lato, Arimo
+ *****************************************************************************/
+//@use "fonts/Roboto";
+
+/******************************************************************************
  *   Variables
  *****************************************************************************/
 

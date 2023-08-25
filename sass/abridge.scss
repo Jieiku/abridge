@@ -555,10 +555,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
   li {
     margin-bottom: 0.2rem;
-  }
-
-  ul li {
-    list-style: square;
+    //list-style: square;//opinionated
   }
 
   // Ins
@@ -866,6 +863,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     border-radius: var(--br);
     background: var(--c2);
     font-family: var(--fm);
+    overflow-x: auto;
     line-height: initial;
     font-size: .8rem;
     padding: .3rem .2rem;

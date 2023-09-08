@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 
 {%- block seo %}
   {{ super() }}
@@ -19,12 +21,12 @@
     <div>
       <h1>404 :(</h1>
       {#- Default English message #}
-      <p>Page not found, maybe moved{% if config.languages | length > 1 %} or not in this language{% endif %}. {% if config.build_search_index %}Try searching or {% endif %}<a href="{{ config.base_url | safe }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">go to homepage</a>.</p>
+      <p>Page not found, maybe moved{% if config.languages | length > 1 %} or not in this language{% endif %}. {% if config.build_search_index %}Try searching or {% endif %}<a href="{{ config.base_url | safe }}/{%- if uglyurls %}index.html{%- endif %}">go to homepage</a>.</p>
 
       {# Iterate through each language and display the localised 404 message #}
       {%- for lcode, language in config.languages -%}
         {%- if lcode != config.default_language -%}
-          <p>{{ trans(key="404_not_found", lang=lcode) }}. {% if config.build_search_index %}{{ trans(key="404_try_search", lang=lcode) }}{% endif %} <a href="{{ config.base_url }}/{{ lcode }}/{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ trans(key="404_go_home", lang=lcode) }}</a>.</p>
+          <p>{{ trans(key="404_not_found", lang=lcode) }}. {% if config.build_search_index %}{{ trans(key="404_try_search", lang=lcode) }}{% endif %} <a href="{{ config.base_url }}/{{ lcode }}/{%- if uglyurls %}index.html{%- endif %}">{{ trans(key="404_go_home", lang=lcode) }}</a>.</p>
         {%- endif -%}
       {%- endfor -%}
     </div>

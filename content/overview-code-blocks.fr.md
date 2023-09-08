@@ -23,7 +23,7 @@ Voir [les docs](https://www.getzola.org/documentation/content/syntax-highlightin
 
 Si nous voulons, nous pouvons aussi `spécifier le code en ligne` ce qui est utile pour `les petites choses`.
 
-### rust
+### Rust
 ```rust
 fn main() {
     let greetings = ["Hello", "Hola", "Bonjour",
@@ -66,6 +66,16 @@ fn main() {
 }
 ```
 
+### Bash
+```bash
+#!/bin/bash
+for d in /sys/kernel/iommu_groups/*/devices/*; do
+  n=${d#*/iommu_groups/*}; n=${n%%/*}
+  printf 'IOMMU Group %s ' "$n"
+  lspci -nns "${d##*/}"
+done
+```
+
 ### TOML
 ```toml,linenos,hl_lines=3
 base_url = "https://abridge.netlify.app/"
@@ -83,7 +93,7 @@ taxonomies = [
 ]
 ```
 
-### html
+### HTML
 ```html
 <!doctype html>
 <html lang="en">
@@ -130,7 +140,7 @@ $font-mono: ui-monospace Menlo Monaco Consolas "SF Mono" "Cascadia Mono" "Segoe 
 }
 ```
 
-### javascript
+### Javascript
 ```javascript
 function closeSearch() {//close the search displaying the regular page.
     const e = document.querySelector("main");
@@ -149,7 +159,7 @@ function goSearch() {// on enter key or search icon click display results to the
 }
 ```
 
-### php
+### PHP
 ```php
 <?php
 /**
@@ -174,7 +184,7 @@ $_SESSION['PFA_token'] = md5(uniqid("pfa" . rand(), true));
 ```
 
 
-### json
+### Json
 ```json
 {
     "name": "Abridge Zola Theme",

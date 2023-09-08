@@ -4,6 +4,7 @@ themes
 build
 storage
 node_modules
+package-lock.json
 static/demo.html
 static/tinysearch_engine.js
 static/tinysearch_engine.d.ts

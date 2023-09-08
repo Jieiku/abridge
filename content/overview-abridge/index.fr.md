@@ -26,6 +26,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne utilisant [abrid
 - [X] Thèmes sombre, clair, automatique et Switcher. (les couleurs peuvent être personnalisées, variables CSS)
 - [X] Code [surlignage de la syntaxe](https://abridge.netlify.app/overview-code-blocks/). (les couleurs peuvent être personnalisées, variables CSS)
 - [X] Blocs de code numérotés avec [mise en évidence des lignes](https://abridge.netlify.app/overview-code-blocks/#toml).
+- [X] Site entièrement hors ligne en utilisant la PWA **ou** en définissant `offline = true` dans `config.toml` (prise en charge complète de la recherche).
 - [X] Prise en charge multilingue.
 - [X] Aide à la recherche. (elasticlunr, tinysearch, cigogne)
 - [X] Suggestions de recherche touches de navigation, focus `/`, déplacement `flèche`, sélection `entrée`, fermeture `évasion`.
@@ -95,8 +96,8 @@ rsync themes/abridge/config.toml config.toml
 rsync themes/abridge/content/_index.md content/
 rsync themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
+rsync themes/abridge/package_abridge.js package_abridge.js
 rsync themes/abridge/package.json package.json
-rsync -r themes/abridge/content/static content/
 ```
 
 - `templates/.gitkeep` le répertoire des modèles est requis dans votre site de base. [#2150](https://github.com/getzola/zola/issues/2150)
@@ -104,8 +105,8 @@ rsync -r themes/abridge/content/static content/
 - `content/_index.md` requis pour définir la pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` remplace pour personnaliser les variables Abridge.
 - `netlify.toml` paramètres pour déployer votre dépôt avec netlify
+- `package_abridge.js` script de nœud pour: mettre à jour la liste des fichiers de cache dans PWA, réduire js, regrouper js
 - `package.json` pour basculer entre nosearch, elasticlunr, tinysearch, stork.
-- `content/static` fichiers pour générer des index tinysearch et stork.
 
 Décommentez la ligne de thème dans le fichier racine config.toml de votre projet:
 ```bash
@@ -275,7 +276,7 @@ Si vous utilisez Chrome sur un ordinateur de bureau, regardez à la fin de la ba
 
 Pour l'utiliser dans votre propre instance, vous devrez éditer `static/sw.js` pour la liste des fichiers à mettre en cache. Techniquement, vous n'avez pas besoin de modifier `sw.js`, mais si même un seul fichier est manquant dans la liste de cache, la liste ne sera pas pré-mise en cache, elle ne sera donc mise en cache que pendant votre navigation.
 
-Il existe un script npm pour générer la liste de cache de fichiers et la minification `npm run pwa`. Mon fichier `netlify.toml` exécute automatiquement ce script npm lors du déploiement du site, donc tout est automatique. Si Zola était capable de modéliser un fichier js, il serait peut-être possible de générer dynamiquement la liste des fichiers cache lors de la construction.
+Il existe un script npm pour générer la liste de cache de fichiers et la minification `npm run abridge`. Mon fichier `netlify.toml` exécute automatiquement ce script npm lors du déploiement du site, donc tout est automatique. Si Zola était capable de modéliser un fichier js, il serait peut-être possible de générer dynamiquement la liste des fichiers cache lors de la construction.
 
 La fonctionnalité PWA est également facile à désactiver en définissant simplement `pwa = false` dans `config.toml`
 
@@ -310,16 +311,13 @@ Voici les fichiers javascript utilisés par Abridge :
 
 #### option js_bundle
 
-`js_bundle` lorsqu'il est défini sur true, il sert un fichier bundle au lieu de tous les fichiers js individuels.
+`js_bundle` lorsqu'il est défini sur true sert un fichier bundle au lieu de tous les fichiers js individuels.
 
-Tous les bundles sont définis dans [package.json](https://github.com/Jieiku/abridge/blob/master/package.json)
+Tous les bundles nécessaires sont générés dynamiquement par le script de nœud [package_abridge.js](https://github.com/Jieiku/abridge/blob/master/package_abridge.js)
 
-Un Bundle peut être généré à partir des scripts package.json en utilisant npm:
+Le script de nœud analysera votre config.toml pour rechercher les valeurs de configuration pertinentes, puis, en fonction de votre config.tomnl, générera les bundles requis.
 
-- `npm run nosearch` - génère un bundle sans recherche.
-- `npm run elasticlunr` - génère un bundle de tous les js avec elasticlunr.
-- `npm run tinysearch` - génère un bundle de tous les js avec tinysearch.
-- `npm run stork` - génère un bundle de tous les js avec stork.
+Tout ce qui est nécessaire est `zola build && npm run abridge`.
 
 #### Changer de bibliothèque de recherche
 

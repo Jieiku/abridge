@@ -26,49 +26,49 @@
             "type": "image/png"
         },
         {
-            "src": "/maskable-x48.png",
+            "src": "/m48.png",
             "sizes": "48x48",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x72.png",
+            "src": "/m72.png",
             "sizes": "72x72",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x96.png",
+            "src": "/m96.png",
             "sizes": "96x96",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x128.png",
+            "src": "/m128.png",
             "sizes": "128x128",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x192.png",
+            "src": "/m192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x384.png",
+            "src": "/m384.png",
             "sizes": "384x384",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x512.png",
+            "src": "/m512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/maskable-x1024.png",
+            "src": "/m1024.png",
             "sizes": "1024x1024",
             "type": "image/png",
             "purpose": "maskable"

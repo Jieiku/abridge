@@ -45,7 +45,7 @@ async function lazyLoad() {
     if (baseUrl.slice(-1) == "/") {
         baseUrl = baseUrl.slice(0, -1);
     }
-    await init(baseUrl + "/tinysearch_engine_bg.wasm")
+    await init(baseUrl + "/tinysearch_engine_bg.wasm");
 }
 
 /* Close search suggestion popup list */

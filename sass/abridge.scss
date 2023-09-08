@@ -1330,8 +1330,10 @@ $syntax: true !default;//syntax highlighting for code blocks
     opacity: 1;
   }
 } @else {
-  .copy::before {
-      content: "\1F5D0";
+  @if $code {
+    .copy::before {
+        content: "\1F5D0";
+    }
   }
   @if $search {
   .x::before {

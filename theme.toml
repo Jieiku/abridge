@@ -5,8 +5,9 @@ homepage = "https://github.com/jieiku/abridge"
 min_version = "0.17.2"
 demo = "https://abridge.netlify.app/"
 
-[extra]
-
+# Abridge theme author info
 [author]
 name = "Jake G (jieiku)"
 homepage = "https://github.com/jieiku/"
+
+[extra]

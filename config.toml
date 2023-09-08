@@ -1,13 +1,14 @@
 # do NOT include a trailing slash on the base URL
-base_url = "https://abridge.netlify.app"
-
-#base_url = "/home/jieiku/.dev/abridge/public" # Usable site directly from disk, Including Search!
-# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false, js_bundle = false
+base_url="https://abridge.netlify.app"
+# Usable site directly from disk, Including Search: "/home/jieiku/.dev/abridge/public"
+# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
+# If you use the npm/node script then all you have to do is set offline = true, and everything else is automatic.
 
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
-default_language = "en"
+#theme = "abridge"
 
+default_language = "en"
 compile_sass = true
 minify_html = false
 build_search_index = true
@@ -22,7 +23,21 @@ taxonomies = [
 #ignored_content = ["*.{graphml,xlsx}", "temp.*"]
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 
-#theme = "abridge"
+[search]                # Options specific to elasticlunr search.
+index_format = "elasticlunr_json" # elasticlunr_json, elasticlunr_javascript
+include_title = true        # include title of page/section in index
+include_description = true # include description of page/section in index
+include_content = true      # include rendered content of page/section in index
+# truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
+
+[markdown]
+highlight_code = true
+highlight_theme = "css"
+render_emoji = false
+external_links_target_blank = true # rel="noopener"
+external_links_no_follow = false   # rel="nofollow"
+external_links_no_referrer = false # rel="noreferrer"
+smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
 
 # Any Extra language you do not use, delete or comment out the extra language sections:
 [languages.fr]
@@ -63,22 +78,6 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web es
 #[languages.es.translations]
 #flag = "🇪🇸"
 
-[search]                # Options specific to elasticlunr search.
-index_format = "elasticlunr_json" # elasticlunr_json, elasticlunr_javascript
-include_title = true        # include title of page/section in index
-include_description = true # include description of page/section in index
-include_content = true      # include rendered content of page/section in index
-# truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
-
-[markdown]
-highlight_code = true
-highlight_theme = "css"
-render_emoji = false
-external_links_target_blank = true # rel="noopener"
-external_links_no_follow = false   # rel="nofollow"
-external_links_no_referrer = false # rel="noreferrer"
-smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
-
 [extra]
 ###############################################################################
 ### Language
@@ -113,7 +112,7 @@ menu_footer = [
 ]
 
 recent = true # TOC / index
-recent_items = 12
+recent_items = 15
 
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=" " }
 meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=" " }
@@ -202,8 +201,25 @@ researchgate = "your-profile-id"
 ### Resource Files
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
-### search_library: library to use, valid values: false, "elasticlunr", "tinysearch", "stork"
+### search_library, library to use. valid values:
+###   false, "elasticlunr", "tinysearch", "stork"
+### offline: implies uglyurls=true and integrity=false, when true NPM/node will
+###   automatically set the path for the base_url, it will build the site,
+###   then set the base_url back to what it was. This is a way to build a completely
+###   offline site, a feature not possible with Zola alone.
+###   The PWA feature is another way to build an offline site, so there are now two
+###   different ways to build an offline site with Abridge.
+###
+### For most people the value of online_url will be the same as base_url.
+###   online_url is used to restore the base_url after generating an Offline site.
+###   When you set offline = true and run the npm script, the base_url is set to the absolute path on disk.
+###   Once you set offline = false, the base_url will be set back to the value of online_url when you run the npm script again.
+
 ###############################################################################
+
+# do NOT include a trailing slash on the online URL
+online_url="https://abridge.netlify.app"
+offline = false # implies uglyurls=true and integrity=false, when true NPM/node will automatically set the path for the base_url, it will build the site, then set the base_url back to what it was.
 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
@@ -219,7 +235,7 @@ search_library = 'elasticlunr'
 stylesheets = ["abridge.css"]
 
 pwa = true # true to load the service worker
-webmanifest = "manifest.json" # Required for PWAs
+webmanifest = "manifest.min.json" # Required for PWAs
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.
@@ -277,7 +293,7 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 #security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' 'unsafe-inline' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
+#security_header_csp = "default-src 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
 
 
 ###############################################################################

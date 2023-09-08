@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 
 {%- block seo %}
   {{- super() }}
@@ -21,7 +23,7 @@
       {%- for year, posts in term.pages | group_by(attribute="year") %}
       <h3>{{ year }}</h3>
       {%- for page in posts %}
-      <p><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
+      <p><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
       {%- endfor %}
       {%- endfor %}
     </div>

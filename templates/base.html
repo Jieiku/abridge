@@ -2,6 +2,8 @@
 {%- import "macros/social.html" as social_macros %}
 {%- import "macros/page.html" as page_macros %}
 {%- import "macros/macros.html" as macros %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 <!DOCTYPE html>
 <html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
 <head>
@@ -27,7 +29,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   {{- macros_head::security(config=config) }}
   {{- macros_head::favicons(config=config) }}
-  {{- macros_head::pwa(config=config) }}
   {%- block comments_init %}
   {%- endblock comments_init %}
   <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
@@ -38,18 +39,18 @@
     <nav>
       <div>
         {%- if config.extra.logo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
         </a></h1>
         {%- elif config.extra.textlogo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls -%}
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
         {%- if lang == config.default_language -%}/{%- endif -%}
         index.html{%- endif -%}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if config.extra.uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
         {%- endif -%}
       </div>
       <div>
@@ -57,7 +58,7 @@
         {%- if config.extra.menu or js_switcher %}
         {%- if config.extra.menu %}
         {%- for i in config.extra.menu -%}
-        <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+        <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
         {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
         </a>
         {%- endfor -%}
@@ -74,9 +75,9 @@
           {%- for lcode,flag in config.extra.flag -%}
           {%- if lang != lcode -%}
           {%- if lcode == config.default_language -%}
-          <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+          <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
           {%- else -%}
-          <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+          <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
           {%- endif -%}
           {%- endif -%}
           {%- endfor -%}
@@ -145,7 +146,7 @@
         {%- else %}
         {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
         {%- endif %}
-        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and config.extra.uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif %}</a>
+        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif %}</a>
         {%- endfor %}
       </nav>
       {%- endif %}

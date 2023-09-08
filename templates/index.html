@@ -4,6 +4,8 @@ This Template can also be used as the rendering template for Sections, eg: examp
 #}
 
 {%- extends "base.html" %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 
 {%- block seo %}
   {{- super() }}
@@ -48,7 +50,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
           {{ page.content | striptags | truncate(length=150) | safe }}
         {%- elif page.extra.static_thumbnail %}
         {%- endif %}
-          <a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">...more</a>
+          <a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">...more</a>
         </div>
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}

@@ -23,17 +23,18 @@ The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml]
 ## Features
 
 - [X] Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores.
-- [X] [PWA support](#pwa-progressive-web-app) (Progressive Web Application).
+- [X] [PWA support](https://abridge.netlify.app/overview-abridge/#pwa-progressive-web-app) (Progressive Web Application).
 - [X] All JavaScript can be [fully disabled](https://abridge.netlify.app/overview-abridge/#javascript-files).
 - [X] Dark, Light, Auto, and Switcher themes. (colors can be customized, css variables)
 - [X] Code [syntax highlighting](https://abridge.netlify.app/overview-code-blocks/). (colors can be customized, css variables)
 - [X] Numbered code blocks with [line highlighting](https://abridge.netlify.app/overview-code-blocks/#toml).
+- [X] Entirely Offline Site by using the PWA **or** by setting `offline = true` in `config.toml` (full search support).
 - [X] Multi-language support.
 - [X] Search support. (elasticlunr, tinysearch, stork)
 - [X] Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
 - [X] Search Results Page, type search query then hit `Enter Key` or `click` the search button icon.
-- [X] [SEO](#seo-and-header-tags) support. (Search Engine Optimization)
-- [X] [Pagination](#pagination) with numbered paginator on index.
+- [X] [SEO](https://abridge.netlify.app/overview-abridge/#seo-and-header-tags) support. (Search Engine Optimization)
+- [X] [Pagination](https://abridge.netlify.app/overview-abridge/#pagination) with numbered paginator on index.
 - [X] Title Based Previous and Next Article links at bottom of Article.
 - [X] Table of Contents in page Index (Optional, clickable links)
 - [X] Recent Posts Block. (Optional)
@@ -49,6 +50,8 @@ The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml]
 - [X] Video Shortcodes: [Youtube](https://abridge.netlify.app/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/overview-embed-streamable/).
 - [X] Media Shortcodes: [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
 - [X] Other Shortcodes: [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
+
+**[Complete Documentation is availabe here](https://abridge.netlify.app/overview-abridge/)**
 
 ## Quick Start
 
@@ -97,8 +100,8 @@ rsync themes/abridge/config.toml config.toml
 rsync themes/abridge/content/_index.md content/
 rsync themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
+rsync themes/abridge/package_abridge.js package_abridge.js
 rsync themes/abridge/package.json package.json
-rsync -r themes/abridge/content/static content/
 ```
 
 - `templates/.gitkeep` the templates directory is required in your base site. [#2150](https://github.com/getzola/zola/issues/2150)
@@ -106,8 +109,8 @@ rsync -r themes/abridge/content/static content/
 - `content/_index.md` required to set pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
 - `netlify.toml` settings to deploy your repo with netlfiy.
+- `package_abridge.js` node script to: update cache files list in PWA, minify js, bundle js
 - `package.json` to switch between nosearch, elasticlunr, tinysearch, stork.
-- `content/static` files for generating tinysearch and stork indexes.
 
 Uncomment the theme line in your project's root config.toml:
 

@@ -1,5 +1,7 @@
 {%- macro page_listing(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
         <div class="toc-item">
-          <a href="{{ page.permalink | safe}}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a>
+          <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>
         </div>
 {%- endmacro page_listing %}

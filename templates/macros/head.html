@@ -1,21 +1,16 @@
 {#- Theme Switcher Button to toggle between dark/light #}
 {%- macro theme(config) %}
+  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+
   {%- if config.extra.js_switcher | default(value=true) %}
   {%- set js_theme="js/theme.min.js" %}
   {%- if config.extra.js_switcher_default %}
     {%- if config.extra.js_switcher_default == "light" %}{% set js_theme="js/theme_light.min.js" %}{% endif %}
   {%- endif %}
-  <script src="{{                     get_url(path=js_theme                        , trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script src="{{                     get_url(path=js_theme                        , trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 {%- endmacro %}
-
-{#- Service Worker for PWA #}
-{%- macro pwa(config) %}
-  {%- if config.extra.pwa | default(value=false) %}
-  <script defer src="{{               get_url(path='js/sw_load.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/sw_load.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
-  {%- endif %}
-{%- endmacro %}
-
 
 {%- macro stylesheets(config) %}
   {%- set stylesheets=config.extra.stylesheets | default(value=[ "abridge.css" ]) -%}
@@ -27,6 +22,8 @@
 
 
 {%- macro stylesheets_preload(config) %}
+  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
 
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}
@@ -44,9 +41,9 @@
 
   {%- set katex_css=config.extra.katex_css | default(value="katex.min.css") -%}
   {%- if katex_css %}{%- if katex_css is matching("^http[s]?://") %}
-  <link rel="preload" as="style" class="preStyle" href="{{ katex_css | safe }}"{%- if config.extra.integrity | default(value=true) and config.extra.katex_css_integrity %} integrity="{{ config.extra.katex_css_integrity | safe }}"{%- endif %} crossorigin="anonymous" />
+  <link rel="preload" as="style" class="preStyle" href="{{ katex_css | safe }}"{%- if integrity and config.extra.katex_css_integrity %} integrity="{{ config.extra.katex_css_integrity | safe }}"{%- endif %} crossorigin="anonymous" />
   {%- else %}
-  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=katex_css, trailing_slash=false) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=katex_css, sha_type=384, base64=true) | safe }}"{%- endif %} />
+  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=katex_css, trailing_slash=false) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_css, sha_type=384, base64=true) | safe }}"{%- endif %} />
   {%- endif %}{%- endif %}
 
 {%- endif %}
@@ -64,6 +61,8 @@
 
 
 {%- macro js(config) %}
+  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
   {%- set search_library=config.extra.search_library | default(value="elasticlunr") -%}
 
   {%- set preStyle = false %}
@@ -88,16 +87,25 @@
 
 {%- if config.extra.js_bundle %}
   {%- if config.build_search_index %}
-  <script defer src="{{               get_url(path='js/abridge.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/abridge.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- if config.extra.pwa | default(value=false) %}
+  <script defer src="{{               get_url(path='js/abridge.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
-  <script defer src="{{               get_url(path='js/abridge_nosearch.min.js'    , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/abridge_nosearch.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/abridge_nopwa.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nopwa.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
+  {%- else %}
+  {%- if config.extra.pwa | default(value=false) %}
+  <script defer src="{{               get_url(path='js/abridge_nosearch.min.js'    , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nosearch.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- else %}
+  <script defer src="{{               get_url(path='js/abridge_nosearch_nopwa.min.js'    , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nosearch_nopwa.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
   {%- endif %}
 
   {%- if config.build_search_index %}
   {%- if search_library == "elasticlunr" %}
   {%- if lang != "en" %}
-  <script defer src="{{               get_url(path='js/lunr.stemmer.support.min.js', trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/lunr.stemmer.support.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
-  <script defer src="{{               get_url(path='js/lunr.' ~ lang ~ '.min.js'   , trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/lunr.' ~ lang ~ '.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/lunr.stemmer.support.min.js', trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.stemmer.support.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/lunr.' ~ lang ~ '.min.js'   , trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.' ~ lang ~ '.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
   {%- endif %}
   {%- endif %}
@@ -106,26 +114,30 @@
 
   {%- if preStyle == true %}
   {%- if config.extra.js_prestyle | default(value=true) %}
-  <script defer src="{{               get_url(path='js/prestyle.js'                , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/prestyle.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/prestyle.js'                , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/prestyle.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
   {%- endif %}
 
   {%- if config.extra.js_switcher | default(value=true) %}
-  <script defer src="{{               get_url(path='js/theme_button.js'            , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/theme_button.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/theme_button.js'            , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/theme_button.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- if config.extra.js_email_encode | default(value=true) %}
-  <script defer src="{{               get_url(path='js/email.js'                   , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/email.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/email.js'                   , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/email.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- if config.extra.js_copycode | default(value=true) %}
-  <script defer src="{{               get_url(path='js/codecopy.js'                , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/codecopy.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/codecopy.js'                , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/codecopy.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
+  {%- if config.extra.pwa | default(value=false) %}
+  <script defer src="{{               get_url(path='js/sw_load.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/sw_load.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%-   if search_library == "tinysearch" %}
-  <script defer type="module" src="{{ get_url(path='js/search_tinysearch.min.js'   , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/search_tinysearch.min.js'   , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer type="module" src="{{ get_url(path='js/tinysearch.js'   , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/tinysearch.js'   , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- elif search_library == "stork"      %}
-  <script defer type="module" src="{{ get_url(path='js/search_stork.min.js'        , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/search_stork.min.js'        , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer type="module" src="{{ get_url(path='js/search_stork.min.js'        , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/search_stork.min.js'        , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- elif config.build_search_index %}
 
   {%- set search_index_format="elasticlunr_json" -%}
@@ -135,24 +147,25 @@
     {%- endif %}
   {%- endif %}
 
-  {%- set uglyurls=config.extra.uglyurls | default(value=false) -%}
+  {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+  {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
   {%- if search_index_format == "elasticlunr_javascript" %}{#- Javascript index format #}
-  <script defer src="{{               get_url(path='js/elasticlunr.min.js'         , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/elasticlunr.min.js'         , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
-  <script defer src="{{               get_url(path='search_index.' ~ lang ~ '.js'  , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='search_index.' ~ lang ~ '.js'  , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/elasticlunr.min.js'         , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/elasticlunr.min.js'         , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='search_index.' ~ lang ~ '.js'  , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='search_index.' ~ lang ~ '.js'  , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
 
   {%- if uglyurls %}
-  <script defer src="{{               get_url(path='js/searchjavaugly.js'          , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/searchjavaugly.js'          , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/searchjavaugly.js'          , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/searchjavaugly.js'          , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
-  <script defer src="{{               get_url(path='js/searchjava.js'              , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/searchjava.js'              , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/searchjava.js'              , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/searchjava.js'              , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- else %}
-  <script defer src="{{               get_url(path='js/search_elasticlunr.min.js'  , trailing_slash=false, cachebust=true) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/search_elasticlunr.min.js'  , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/search_elasticlunr.min.js'  , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/search_elasticlunr.min.js'  , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- if lang != "en" %}
-  <script defer src="{{               get_url(path='js/lunr.stemmer.support.min.js', trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/lunr.stemmer.support.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
-  <script defer src="{{               get_url(path='js/lunr.' ~ lang ~ '.min.js'   , trailing_slash=false) | safe }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path='js/lunr.' ~ lang ~ '.min.js'   , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/lunr.stemmer.support.min.js', trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.stemmer.support.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/lunr.' ~ lang ~ '.min.js'   , trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.' ~ lang ~ '.min.js'   , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- endif %}
@@ -167,35 +180,35 @@
 
 {%- set katex_bundle=config.extra.katex_bundle | default(value="js/katexbundle.min.js") -%}
 {%- if katex_bundle %}
-  <script defer src="{{               get_url(path=katex_bundle                    , trailing_slash=false, cachebust=true) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=katex_bundle, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path=katex_bundle                    , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_bundle, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
 {%- else %}
 
   {%- set katex_js=config.extra.katex_js | default(value="js/katex.min.js") -%}
   {%- if katex_js %}{%- if katex_js is matching("^http[s]?://") %}
-  <script defer src="{{               katex_js | safe }}"{%- if config.extra.integrity | default(value=true) and config.extra.katex_js_integrity %} integrity="{{ config.extra.katex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
+  <script defer src="{{               katex_js | safe }}"{%- if integrity and config.extra.katex_js_integrity %} integrity="{{ config.extra.katex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
-  <script defer src="{{               get_url(path=katex_js                        , trailing_slash=false, cachebust=true) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=katex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path=katex_js                        , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}{%- endif %}
 
   {%- set mathtex_js=config.extra.mathtex_js | default(value="js/mathtex-script-type.min.js") -%}
   {%- if mathtex_js %}{%- if mathtex_js is matching("^http[s]?://") %}
-  <script defer src="{{ mathtex_js | safe }}"{%- if config.extra.integrity | default(value=true) and config.extra.mathtex_js_integrity %} integrity="{{ config.extra.mathtex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
+  <script defer src="{{ mathtex_js | safe }}"{%- if integrity and config.extra.mathtex_js_integrity %} integrity="{{ config.extra.mathtex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
-  <script defer src="{{               get_url(path=mathtex_js                      , trailing_slash=false, cachebust=true) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=mathtex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path=mathtex_js                      , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=mathtex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}{%- endif %}
 
  {%- if config.extra.math_auto_render or page.extra.math_auto_render %}
   {%- set katex_autorender_js=config.extra.katex_autorender_js | default(value="js/katex-auto-render.min.js") -%}
   {%- if katex_autorender_js %}
   {%- if katex_autorender_js is matching("^http[s]?://") %}
-  <script defer src="{{               katex_autorender_js | safe }}"{%- if config.extra.integrity | default(value=true) and config.extra.katex_autorender_js_integrity %} integrity="{{ config.extra.katex_autorender_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
+  <script defer src="{{               katex_autorender_js | safe }}"{%- if integrity and config.extra.katex_autorender_js_integrity %} integrity="{{ config.extra.katex_autorender_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
-  <script defer src="{{               get_url(path=katex_autorender_js             , trailing_slash=false, cachebust=true) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=katex_autorender_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path=katex_autorender_js             , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_autorender_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
   {%- endif %}
   {%- set katex_options=config.extra.katex_options | default(value="js/katexoptions.js") -%}
   {%- if katex_options %}
-  <script defer src="{{               get_url(path=katex_options                   , trailing_slash=false, cachebust=true) }}"{%- if config.extra.integrity | default(value=true) %} integrity="sha384-{{ get_hash(path=katex_options, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path=katex_options                   , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_options, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
  {%- endif %}
 {%- endif %}

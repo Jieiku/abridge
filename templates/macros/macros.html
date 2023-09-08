@@ -1,15 +1,19 @@
 {%- macro title_post(page, config) %}
-      <h1><a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+      <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
 {%- endmacro title_post %}
 
 {%- macro meta_post(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
       <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
 
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
           {%- if author_flag %}, {% endif %}
-          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          <a href="{{ get_taxonomy_url(kind='authors', name=author) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_post.author %}
@@ -64,25 +68,29 @@
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
-          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
 
         {#- Tags #}
-          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_post %}
 
 {%- macro title_index(page, config) %}
-        <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+        <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
 {%- endmacro title_index %}
 
 
 {%- macro meta_index(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
         <span{%- if config.extra.meta_index.size %} class="{{ config.extra.meta_index.size }}"{% endif %}>
 
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
           {%- if author_flag %}, {% endif %}
-          <a href="{{ get_taxonomy_url(kind='authors', name=author, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ author }}</a>
+          <a href="{{ get_taxonomy_url(kind='authors', name=author, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
           {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_index.author %}
@@ -138,28 +146,30 @@
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
-          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
+          {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
 
         {#- Tags #}
-          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
+          {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_index %}
 
 
 
 
 {%- macro footer(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
       {#- prev/next content page nextprev title pagination #}
       {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
       {%- if page.lower or page.higher %}
       <nav>
         <div>
           {%- if page.lower %}
-          <a href="{{ page.lower.permalink | safe }}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
+          <a href="{{ page.lower.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
           {%- endif %}
         </div>
         <div>
           {%- if page.higher %}
-          <a href="{{ page.higher.permalink | safe }}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
+          <a href="{{ page.higher.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
           {%- endif %}
         </div>
       </nav>
@@ -169,6 +179,8 @@
 
 
 {%- macro pagination(paginator, config)%}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}
@@ -203,7 +215,7 @@
         {%- set icon_next=config.extra.icon_next | default(value="svgs svgh angr") -%}
         {%- set icon_last=config.extra.icon_last | default(value="svgs svgh angrr") -%}
         {%- if paginator.previous -%}
-          <a class="on outp" href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="First Page">
+          <a class="on outp" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">
           {%- if icon_first -%}<i class="{{ icon_first }}" alt="First Page"></i>
           {%- else -%}&#171;
           {%- endif -%}
@@ -217,7 +229,7 @@
         {%- endif -%}
 
         {%- if paginator.previous -%}
-          <a class="on outp" href="{{ paginator.previous | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Previous Page">
+          <a class="on outp" href="{{ paginator.previous | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Previous Page">
           {%- if icon_prev -%}<i class="{{ icon_prev }}" alt="Previous Page"></i>
           {%- else -%}&#8249;
           {%- endif -%}
@@ -234,14 +246,14 @@
             {%- if i == paginator.current_index -%}
             <a class="inp on cnav" href="#">{{i}}</a>
             {%- elif i > 1 -%}
-            <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{i}}</a>
+            <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}">{{i}}</a>
             {%- else -%}
-            <a class="inp on" href="{{ paginator.first | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}">{{ i }}</a>
+            <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ i }}</a>
             {%- endif -%}
         {%- endfor -%}
 
         {%- if paginator.next -%}
-          <a class="on outp" href="{{ paginator.next | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Next Page">
+          <a class="on outp" href="{{ paginator.next | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Next Page">
           {%- if icon_next -%}<i class="{{ icon_next }}" alt="Next Page"></i>
           {%- else -%}&#8250;
           {%- endif -%}
@@ -255,7 +267,7 @@
         {%- endif -%}
 
         {%- if paginator.next -%}
-          <a class="on outp" href="{{ paginator.last | safe }}{%- if config.extra.uglyurls %}index.html{%- endif %}" title="Last Page">
+          <a class="on outp" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">
           {%- if icon_last -%}<i class="{{ icon_last }}" alt="Last Page"></i>
           {%- else -%}&#187;
           {%- endif -%}

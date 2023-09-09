@@ -217,13 +217,15 @@ if (bpath === '') {// abridge used directly
 }
 
 // Minify the json manifest
-let out;
-try {
-  out = JSON.minify(fs.readFileSync('static/manifest.json', {encoding:"utf-8"}));
-} catch(err) {
-  stdout.write(" -  ❌\n\n\n");
+if (fs.existsSync('static/manifest.json')) {// if manifest.json is present, then minify it.
+  let out;
+  try {
+    out = JSON.minify(fs.readFileSync('static/manifest.json', {encoding:"utf-8"}));
+  } catch(err) {
+    console.log(err);
+  }
+  fs.writeFileSync('static/manifest.min.json', out);
 }
-fs.writeFileSync('static/manifest.min.json', out);
 
 abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,false);
 minify(abridge_bundle,bpath+'static/js/abridge_nopwa.min.js');

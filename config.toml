@@ -214,7 +214,6 @@ researchgate = "your-profile-id"
 ###   online_url is used to restore the base_url after generating an Offline site.
 ###   When you set offline = true and run the npm script, the base_url is set to the absolute path on disk.
 ###   Once you set offline = false, the base_url will be set back to the value of online_url when you run the npm script again.
-
 ###############################################################################
 
 # do NOT include a trailing slash on the online URL
@@ -234,8 +233,32 @@ js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sur
 search_library = 'elasticlunr'
 stylesheets = ["abridge.css"]
 
-pwa = true # true to load the service worker
 webmanifest = "manifest.min.json" # Required for PWAs
+
+###############################################################################
+### PWA (Progressive Web Application)
+### By default Abridge has pwa_NORM_TTL and pwa_LONG_TTL set to 0, this essential turns the PWA cache strategy into network first.
+###  Abridge uses cachebust hashing on js and css files, so anytime a page cache is updated, these resources would also get updated if changed.
+###  Media files rarely change, especially font files, so it is a good idea cache indefinitely.
+###  For pwa_TTL_EXEMPT indefinitely cached resources, you can force a new cache by incrementing the pwa_VER (cache version number).
+### If you would like to try a cache first strategy then set a value higher than 0 for pwa_NORM_TTL and pwa_LONG_TTL.
+###############################################################################
+
+pwa = true # true to load the service worker
+pwa_VER = '3.10.0' # Service Worker cache version. (increment if you need to force a new cache)
+
+### 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
+pwa_NORM_TTL = 0 #  86400 is reasonable. html, json, xml, anything else undefined
+pwa_LONG_TTL = 0 # 604800 is reasonable. js, css
+
+### list of files that overrides TTL_LONG/TTL_EXEMPT to be a NORM TTL.
+pwa_TTL_NORM = '"sw.min.js", "sw_load.min.js"'
+
+### TTL_LONG file extensions will be cached for the LONG_TTL duration.
+pwa_TTL_LONG = '"jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "xsl", "txt"'
+
+### TTL_EXEMPT file extensions will be cached indefinitely unless sw_load version is incremented, which would invalidate any existing cache. (and a new cache would be started)
+pwa_TTL_EXEMPT = '"js", "css", "otf", "eot", "ttf", "woff", "woff2", "mp4", "webm", "mp3", "ogg"'
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.

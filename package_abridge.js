@@ -24,8 +24,14 @@ const index_format = data.search.index_format;
 const uglyurls = data.extra.uglyurls;
 const offline = data.extra.offline;
 const online_url = data.extra.online_url;
+const sitePath = path.resolve('public');// used for offline builds
 const pwa = data.extra.pwa;
-const sitePath = path.resolve('public');// used for offline builds  integrity = true
+const pwa_VER = data.extra.pwa_VER;
+const pwa_NORM_TTL = data.extra.pwa_NORM_TTL;
+const pwa_LONG_TTL = data.extra.pwa_LONG_TTL;
+const pwa_TTL_NORM = data.extra.pwa_TTL_NORM;
+const pwa_TTL_LONG = data.extra.pwa_TTL_LONG;
+const pwa_TTL_EXEMPT = data.extra.pwa_TTL_EXEMPT;
 
 if (offline === false) {
   replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url=\""+online_url+"\""});
@@ -79,7 +85,7 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
       }
   }
   if (pwa) {
-    minify_files.push(bpath+'static/js/sw_load.js');
+    minify_files.push('static/js/sw_load.js');
   }
   return minify_files;
 }
@@ -146,10 +152,25 @@ if (search_library === 'elasticlunr') {
   // zola build && stork build --input public/data_stork/index.html --output static/stork.st
 }
 
-if (pwa) {// Update pwa file list and hashes
+if (pwa) {// Update pwa settings, file list, and hashes.
   if (!fs.existsSync('static/sw.js')) {// static/sw.js file is missing, copy from abridge theme.
     fs.copyFileSync(bpath+'static/sw.js', 'static/sw.js',fs.constants.COPYFILE_EXCL);
   }
+  if (!fs.existsSync('static/js/sw_load.js')) {// static/sw.js file is missing, copy from abridge theme.
+    fs.copyFileSync(bpath+'static/js/sw_load.js', 'static/js/sw_load.js',fs.constants.COPYFILE_EXCL);
+  }
+  // Update settings in PWA javascript file, using options parsed from config.toml.
+  if (fs.existsSync('static/js/sw_load.js')) {
+    replace.sync({files: 'static/js/sw_load.js', from: /v=.*/g, to: "v="+pwa_VER+"\","});
+  }
+  if (fs.existsSync('static/sw.js')) {
+    replace.sync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
+    replace.sync({files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = "+pwa_LONG_TTL+";"});
+    replace.sync({files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = ["+pwa_TTL_NORM+"];"});
+    replace.sync({files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = ["+pwa_TTL_LONG+"];"});
+    replace.sync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
+  }
+
   // Generate hashes for PWA BASE_CACHE_FILES
   buff = fs.readFileSync('public/abridge.css');
   const h_abridge_css = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
@@ -212,8 +233,8 @@ if (bpath === '') {// abridge used directly
   minify(['static/js/sw_load.js']);
   minify(['static/sw.js']);
 } else if (pwa) {
-  minify([bpath+'static/js/sw_load.js']);
-  minify([bpath+'static/sw.js']);
+  minify(['static/js/sw_load.js']);
+  minify(['static/sw.js']);
 }
 
 // Minify the json manifest
@@ -228,7 +249,7 @@ if (fs.existsSync('static/manifest.json')) {// if manifest.json is present, then
 }
 
 abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,false);
-minify(abridge_bundle,bpath+'static/js/abridge_nopwa.min.js');
+minify(abridge_bundle,'static/js/abridge_nopwa.min.js');
 
 abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa);
-minify(abridge_bundle,bpath+'static/js/abridge.min.js');
+minify(abridge_bundle,'static/js/abridge.min.js');

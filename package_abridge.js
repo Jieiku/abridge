@@ -1,10 +1,10 @@
 const fs = require('fs');
-const crypto = require('crypto');
 const path = require("path");
 const TOML = require('fast-toml');
 const UglifyJS = require('uglify-js');
 const jsonminify = require("jsonminify");
 const replace = require('replace-in-file');
+//const crypto = require('crypto'); (disabled for now, because unused)
 
 // check if abridge is used directly or as a theme.
 bpath = '';
@@ -22,6 +22,7 @@ const js_copycode = data.extra.js_copycode;
 const search_library = data.extra.search_library;
 const index_format = data.search.index_format;
 const uglyurls = data.extra.uglyurls;
+const js_bundle = data.extra.js_bundle;
 const offline = data.extra.offline;
 const online_url = data.extra.online_url;
 const sitePath = path.resolve('public');// used for offline builds
@@ -32,6 +33,8 @@ const pwa_LONG_TTL = data.extra.pwa_LONG_TTL;
 const pwa_TTL_NORM = data.extra.pwa_TTL_NORM;
 const pwa_TTL_LONG = data.extra.pwa_TTL_LONG;
 const pwa_TTL_EXEMPT = data.extra.pwa_TTL_EXEMPT;
+const pwa_cache_all = data.extra.pwa_cache_all;
+const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 
 if (offline === false) {
   replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url=\""+online_url+"\""});
@@ -44,11 +47,12 @@ if (base_url.slice(-1) == "/") {
     base_url = base_url.slice(0, -1);
 }
 
-function checksum(input) {
-    var hash = crypto.createHash('sha384').update(input, 'utf8');
-    var hashBase64 = hash.digest('base64');
-    return 'sha384-' + hashBase64;
-}
+// disabled for now, because unused
+// function checksum(input) {
+//     var hash = crypto.createHash('sha384').update(input, 'utf8');
+//     var hashBase64 = hash.digest('base64');
+//     return 'sha384-' + hashBase64;
+// }
 
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {
   minify_files = [];
@@ -153,15 +157,16 @@ if (search_library === 'elasticlunr') {
 }
 
 if (pwa) {// Update pwa settings, file list, and hashes.
-  if (!fs.existsSync('static/sw.js')) {// static/sw.js file is missing, copy from abridge theme.
-    fs.copyFileSync(bpath+'static/sw.js', 'static/sw.js',fs.constants.COPYFILE_EXCL);
-  }
-  if (!fs.existsSync('static/js/sw_load.js')) {// static/sw.js file is missing, copy from abridge theme.
-    fs.copyFileSync(bpath+'static/js/sw_load.js', 'static/js/sw_load.js',fs.constants.COPYFILE_EXCL);
-  }
-  // Update settings in PWA javascript file, using options parsed from config.toml.
+  // update from abridge theme.
+  fs.copyFileSync(bpath+'static/sw.js', 'static/sw.js');
+  fs.copyFileSync(bpath+'static/js/sw_load.js', 'static/js/sw_load.js');
+  // Update settings in PWA javascript file, using options parsed from config.toml.  sw.min.js?v=3.10.0",  "++"
   if (fs.existsSync('static/js/sw_load.js')) {
-    replace.sync({files: 'static/js/sw_load.js', from: /v=.*/g, to: "v="+pwa_VER+"\","});
+    sw_load_min = '.js?v=';
+    if (js_bundle) {
+      sw_load_min = '.min.js?v=';
+    }
+    replace.sync({files: 'static/js/sw_load.js', from: /sw.*v=.*/g, to: "sw"+sw_load_min+pwa_VER+"\","});
   }
   if (fs.existsSync('static/sw.js')) {
     replace.sync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
@@ -171,45 +176,49 @@ if (pwa) {// Update pwa settings, file list, and hashes.
     replace.sync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
   }
 
-  // Generate hashes for PWA BASE_CACHE_FILES
-  buff = fs.readFileSync('public/abridge.css');
-  const h_abridge_css = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
-  buff = fs.readFileSync('public/js/abridge.min.js');
-  const h_abridge_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
-  buff = fs.readFileSync('public/js/abridge_nosearch.min.js');
-  const h_abridge_nosearch_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
-  buff = fs.readFileSync('public/js/katexbundle.min.js');
-  const h_katexbundle_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
+  /// Generate hashes for PWA BASE_CACHE_FILES (disabled, seems unsupported, errors on install)
+  // buff = fs.readFileSync('public/abridge.css');
+  // const h_abridge_css = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
+  // buff = fs.readFileSync('public/js/abridge.min.js');
+  // const h_abridge_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
+  // buff = fs.readFileSync('public/js/abridge_nosearch.min.js');
+  // const h_abridge_nosearch_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
+  // buff = fs.readFileSync('public/js/katexbundle.min.js');
+  // const h_katexbundle_js = crypto.createHash('sha256').update(buff).digest('hex').slice(0,20);
 
-  // Generate array from the list of files, for the entire site.
-  const path = './public/';
-  cache = 'this.BASE_CACHE_FILES = [';
-  files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
-  .forEach(
-    (file) => {
-      // check if is directory, if not then add the path/file
-      if (!fs.lstatSync(path+file).isDirectory()) {
-        // format output
-        item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
-        item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
+  if (pwa_cache_all) {
+    // Generate array from the list of files, for the entire site.
+    const path = './public/';
+    cache = 'this.BASE_CACHE_FILES = [';
+    files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
+    .forEach(
+      (file) => {
+        // check if is directory, if not then add the path/file
+        if (!fs.lstatSync(path+file).isDirectory()) {
+          // format output
+          item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
+          item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
 
-        // look for files ending in .js, if its not preceded by .min then skip it.
+          // look for files ending in .js, if its not preceded by .min then skip it.
 
-        // if formatted output is not empty line then append it to cache var
-        if (item != '') {// skip empty lines
-          cache = cache+"'"+item+"',";
+          // if formatted output is not empty line then append it to cache var
+          if (item != '') {// skip empty lines
+            cache = cache+"'"+item+"',";
+          }
         }
       }
-    }
-  );
-  cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
+    );
+    cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
+  } else if (pwa_BASE_CACHE_FILES) {
+    cache = 'this.BASE_CACHE_FILES = ['+pwa_BASE_CACHE_FILES+'];';
+  }
 
-  // add cachebust hashes
-  cache = cache.replace(/abridge\.css/i,'abridge.css?h='+h_abridge_css);
-  cache = cache.replace(/abridge\.min\.js/i,'abridge.min.js?h='+h_abridge_js);
-  cache = cache.replace(/abridge_nosearch\.min\.js/i,'abridge_nosearch.min.js?h='+h_abridge_nosearch_js);
-  cache = cache.replace(/katexbundle\.min\.js/i,'katexbundle.min.js?h='+h_katexbundle_js);
-  //console.log(cache);
+  /// add cachebust hashes (disabled, seems unsupported, errors on install)
+  // cache = cache.replace(/abridge\.css/i,'abridge.css?h='+h_abridge_css);
+  // cache = cache.replace(/abridge\.min\.js/i,'abridge.min.js?h='+h_abridge_js);
+  // cache = cache.replace(/abridge_nosearch\.min\.js/i,'abridge_nosearch.min.js?h='+h_abridge_nosearch_js);
+  // cache = cache.replace(/katexbundle\.min\.js/i,'katexbundle.min.js?h='+h_katexbundle_js);
+  // console.log(cache);
 
   // update the BASE_CACHE_FILES variable in the sw.js service worker file
   results = replace.sync({
@@ -237,8 +246,8 @@ if (bpath === '') {// abridge used directly
   minify(['static/sw.js']);
 }
 
-// Minify the json manifest
-if (fs.existsSync('static/manifest.json')) {// if manifest.json is present, then minify it.
+// if manifest.json is present, then minify it.
+if (fs.existsSync('static/manifest.json')) {
   let out;
   try {
     out = JSON.minify(fs.readFileSync('static/manifest.json', {encoding:"utf-8"}));

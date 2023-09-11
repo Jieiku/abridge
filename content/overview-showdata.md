@@ -22,8 +22,8 @@ These are the parameters, currently all 3 are required.
 
 ### Usage
 
-This theme requires version &#123;&#123; showdata(src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" type="toml" key="min_version") &#125;&#125; or later of Zola.
+This theme requires version &#123;&#123; showdata(src="../theme.toml" type="toml" key="min_version") &#125;&#125; or later of Zola.
 
 ### Output
 
-This theme requires version {{ showdata(src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" type="toml" key="min_version") }} or later of Zola.
+This theme requires version {{ showdata(src="../theme.toml" type="toml" key="min_version") }} or later of Zola.

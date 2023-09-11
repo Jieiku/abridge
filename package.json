@@ -6,14 +6,9 @@
   "license": "MIT",
   "homepage": "https://github.com/Jieiku/abridge",
   "scripts": {
-    "abridge": "node package_abridge.js",
-    "build": "zola build && npm run abridge && zola build",
-    "serve": "zola build && npm run abridge && zola serve",
-    "tinysearch": "mkdir -p tmp && tinysearch --optimize --path tmp public/data_tinysearch/index.html && rsync -avz tmp/*.wasm static/ && rm -rf tmp",
-    "stork": "stork build --input public/data_stork/index.html --output static/stork.st"
+    "abridge": "node -e \"if ( require('fs').existsSync('./themes/abridge/package_abridge.js')) {require('fs').copyFileSync('./themes/abridge/package_abridge.js', './package_abridge.js')}\" && node package_abridge.js"
   },
   "dependencies": {
-    "jq": "^1.7.2",
     "fast-toml": "^0.5.4",
     "uglify-js": "^3.17.4",
     "jsonminify": "^0.4.2",

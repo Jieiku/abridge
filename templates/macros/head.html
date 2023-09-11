@@ -131,7 +131,7 @@
   {%- endif %}
 
   {%- if config.extra.pwa | default(value=false) %}
-  <script defer src="{{               get_url(path='js/sw_load.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/sw_load.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  <script defer src="{{               get_url(path='js/sw_load.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/sw_load.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%-   if search_library == "tinysearch" %}

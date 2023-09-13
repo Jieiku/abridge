@@ -45,6 +45,26 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
+    {%- if page.extra.section %}
+    {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section) %}
+
+
+    <div>
+      <h2>{{ tag.name }} Series</h2>
+      <ol>
+      {%- for inner in tag.pages | sort(attribute="year") %}
+      {%- if inner.content == page.content %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+      {% else %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+      </ol>
+    </div>
+
+
+    {%- endif %}
+
 {{ page.content | safe }}
 
     {%- if config.extra.meta_post.position %}

@@ -45,6 +45,35 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
+
+    {%- if page.extra.section %}
+    
+      {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section, lang=lang) %}
+      {%- set page_num = tag.page_count | as_str %}
+
+        {%- if lang != config.default_language %}
+          {%- set parts_string = trans(key="Series_parts", lang=lang) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
+        {% else %}
+          {%- set parts_string = page_num ~ " part Series" %}
+        {% endif -%}
+
+
+
+    <div class="series-mobile series">
+      <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
+      <ol>
+      {%- for inner in tag.pages | sort(attribute="year") %}
+      {%- if inner.content == page.content %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+      {% else %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+      </ol>
+    </div>
+    {%- endif %}
+
+
 {{ page.content | safe }}
 
     {%- if config.extra.meta_post.position %}
@@ -67,7 +96,23 @@
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc %}
+    
     <div class="toc">
+      {%- if page.extra.section %}
+      <div class="series-toc series">
+        <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
+        <ol>
+        {%- for inner in tag.pages | sort(attribute="year") %}
+        {%- if inner.content == page.content %}
+        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+        {% else %}
+        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+        {%- endif %}
+        {%- endfor %}
+        </ol>
+      </div>
+      {%- endif %}
+
       <div class="toc-sticky">
         <a class="si" href="#">{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</a>
         {%- for h in toc %}

@@ -217,6 +217,7 @@ $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: false !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
+$series: true !default;//series of posts
 
 /******************************************************************************
  *   Root element
@@ -1553,4 +1554,66 @@ $syntax: true !default;//syntax highlighting for code blocks
   //.z-variable.z-language.z-fenced.z-markdown {
   //    color: var(--h1);
   //}
+}
+
+@if $series {
+  .series-mobile {
+    max-width: 30rem;
+    margin: var(--s2) auto;
+    border-radius: var(--br);
+    background-color: var(--c2);
+  }
+
+  .series {
+    background-color: var(--c2);
+    max-height: 100vh;
+    padding: 0 var(--s2) var(--s2);
+    border-radius: var(--br);
+    border-top: 5px solid var(--a1);
+    overflow: auto;
+  }
+
+  .series h4 a {
+    color: var(--f1);
+    font-weight: 700;
+    &:hover {
+      color: var(--a3);
+    }
+  }
+  
+  .series ol {
+    margin: 0;
+  }
+
+  .series ol a {
+    color: var(--f1);
+    &:hover {
+      color: var(--a2);
+      text-decoration: underline;
+    }
+  }
+
+  .series li {
+    font-size: .875rem;
+  }
+}
+
+@if $series and $toc {
+  .series-toc {
+    margin-top: var(--s2);
+    max-height: 100vh;
+  }
+
+  @if map-get($breakpoints, "md") {
+    // mobile first is min-width for desktop instead of max-width for mobile
+    @media (min-width: map-get($breakpoints, "md")) {
+      .series-mobile {
+        display: none;
+      }
+    }
+  }
+}
+
+.toc h1 {
+  margin: 0;
 }

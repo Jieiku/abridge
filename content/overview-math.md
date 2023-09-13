@@ -12,6 +12,7 @@ toc = true
 math = true
 math_auto_render = true
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
+section = "Features"
 +++
 
 You can use [KaTeX](https://katex.org) to render mathematical notations.

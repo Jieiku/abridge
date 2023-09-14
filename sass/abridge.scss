@@ -217,6 +217,7 @@ $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: false !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
+$series: true !default;//series of posts
 
 /******************************************************************************
  *   Root element
@@ -1553,4 +1554,15 @@ $syntax: true !default;//syntax highlighting for code blocks
   //.z-variable.z-language.z-fenced.z-markdown {
   //    color: var(--h1);
   //}
+}
+
+@if $series {
+  .series {
+    max-width: 30rem;
+    min-width: 14rem;
+    padding: 0.25rem 2rem;
+    margin: var(--s1) auto;
+    border-radius: var(--br);
+    background-color: var(--c2);
+  }
 }

@@ -45,12 +45,13 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
+    {%- block series %}
+
     {%- if page.extra.section %}
     {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section) %}
 
-
-    <div>
-      <h2>{{ tag.name }} Series</h2>
+    <div class="series">
+      <h3>{{ tag.name }} ({{ tag.page_count }} Part Series)</h3>
       <ol>
       {%- for inner in tag.pages | sort(attribute="year") %}
       {%- if inner.content == page.content %}
@@ -61,9 +62,9 @@
       {%- endfor %}
       </ol>
     </div>
-
-
     {%- endif %}
+
+    {%- endblock series %}
 
 {{ page.content | safe }}
 

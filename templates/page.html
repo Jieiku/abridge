@@ -47,10 +47,20 @@
 
 
     {%- if page.extra.section %}
-    {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section) %}
+    
+      {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section, lang=lang) %}
+      {%- set page_num = tag.page_count | as_str %}
+
+        {%- if lang != config.default_language %}
+          {%- set parts_string = trans(key="Series_parts", lang=lang) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
+        {% else %}
+          {%- set parts_string = page_num ~ " part Series" %}
+        {% endif -%}
+
+
 
     <div class="series-mobile">
-      <h4>{{ tag.name }} ({{ tag.page_count }} Part Series)</h4>
+      <h4>{{ tag.name }} ({{ parts_string }})</h4>
       <ol>
       {%- for inner in tag.pages | sort(attribute="year") %}
       {%- if inner.content == page.content %}
@@ -89,9 +99,8 @@
     
     <div class="toc">
       {%- if page.extra.section %}
-      {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section) %}
       <div class="series-toc">
-        <h3>{{ tag.name }} ({{ tag.page_count }} Part Series)</h3>
+        <h3>{{ tag.name }} ({{ parts_string }})</h3>
         <ol>
         {%- for inner in tag.pages | sort(attribute="year") %}
         {%- if inner.content == page.content %}

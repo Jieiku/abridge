@@ -1572,7 +1572,7 @@ $series: true !default;//series of posts
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
     background-color: var(--c2);
-    position: block;
+    position: static;
     top: var(--s2);
     margin-top: var(--s2);
     padding: 0 var(--s2) var(--s2);
@@ -1584,13 +1584,23 @@ $series: true !default;//series of posts
     font-size: .875rem;
   }
 
-  .series-toc li a {
+  .series-toc h4 a {
     color: var(--f1);
+    font-weight: bold;
+    &:hover {
+      cursor: pointer;
+      color: var(--a3);
+      text-decoration: none;
+    }
   }
 
-
-  .series-toc li a.on:hover {
-    color: var(--a1);
+  .series-toc ol a {
+    color: var(--f1);
+    &:hover {
+      cursor: pointer;
+      color: var(--a2);
+      text-decoration: underline;
+    }
   }
 
   @if map-get($breakpoints, "md") {

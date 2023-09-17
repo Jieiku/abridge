@@ -68,7 +68,7 @@ Contact = "Contact"
 Privacy = "Confidentialité"
 Sitemap = "Plan du site"
 ## Describtion of the number of parts in a series of posts
-Series_parts = "Série en $NUMBER_OF_PARTS parties"
+Series_parts = "Série de $NUMBER_OF_PARTS parties"
 ### Page not found, maybe moved or not in this language
 404_not_found = "Page introuvable, peut-être déplacée ou non dans cette langue"
 ### Try searching or

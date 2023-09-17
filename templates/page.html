@@ -60,7 +60,7 @@
 
 
     <div class="series-mobile">
-      <h4>{{ tag.name }} ({{ parts_string }})</h4>
+      <h4><a href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"></a>{{ tag.name }} ({{ parts_string }})</a></h4>
       <ol>
       {%- for inner in tag.pages | sort(attribute="year") %}
       {%- if inner.content == page.content %}
@@ -100,7 +100,7 @@
     <div class="toc">
       {%- if page.extra.section %}
       <div class="series-toc">
-        <h3>{{ tag.name }} ({{ parts_string }})</h3>
+        <h4><a href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a></h4>
         <ol>
         {%- for inner in tag.pages | sort(attribute="year") %}
         {%- if inner.content == page.content %}

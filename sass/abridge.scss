@@ -1556,13 +1556,49 @@ $series: true !default;//series of posts
   //}
 }
 
-@if $series {
-  .series {
-    max-width: 30rem;
-    min-width: 14rem;
-    padding: 0.25rem 2rem;
-    margin: var(--s1) auto;
+.series-mobile {
+  max-width: 30rem;
+  min-width: 14rem;
+  padding: 0.15rem 1.25rem;
+  margin: var(--s1) auto;
+  border-radius: var(--br);
+  background-color: var(--c2);
+}
+
+
+@if $series and $toc {
+
+  .series-toc {
     border-radius: var(--br);
+    border-top: 5px solid var(--a1);
     background-color: var(--c2);
+    position: block;
+    top: var(--s2);
+    margin-top: var(--s2);
+    padding: 0 var(--s2) var(--s2);
+    max-height: 100vh;
+    overflow: auto;
+  }
+
+  .series-toc li {
+    font-size: .875rem;
+  }
+
+  .series-toc li a {
+    color: var(--f1);
+  }
+
+
+  .series-toc li a.on:hover {
+    color: var(--a1);
+  }
+
+  @if map-get($breakpoints, "md") {
+    // mobile first is min-width for desktop instead of max-width for mobile
+    @media (min-width: map-get($breakpoints, "md")) {
+      .series-mobile {
+        display: none;
+      }
+    }
   }
 }

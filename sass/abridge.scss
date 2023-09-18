@@ -1567,7 +1567,6 @@ $series: true !default;//series of posts
 
 
 @if $series and $toc {
-
   .series-toc {
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
@@ -1611,4 +1610,8 @@ $series: true !default;//series of posts
       }
     }
   }
+}
+
+.toc h1 {
+  margin: 0;
 }

@@ -1572,12 +1572,14 @@ $series: true !default;//series of posts
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
     background-color: var(--c2);
-    position: static;
-    top: var(--s2);
     margin-top: var(--s2);
     padding: 0 var(--s2) var(--s2);
     max-height: 100vh;
     overflow: auto;
+  }
+
+  .series-toc ol {
+    margin: 0;
   }
 
   .series-toc li {
@@ -1588,7 +1590,6 @@ $series: true !default;//series of posts
     color: var(--f1);
     font-weight: bold;
     &:hover {
-      cursor: pointer;
       color: var(--a3);
       text-decoration: none;
     }
@@ -1597,7 +1598,6 @@ $series: true !default;//series of posts
   .series-toc ol a {
     color: var(--f1);
     &:hover {
-      cursor: pointer;
       color: var(--a2);
       text-decoration: underline;
     }

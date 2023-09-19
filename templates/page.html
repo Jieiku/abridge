@@ -53,9 +53,11 @@
 
         {%- if lang != config.default_language %}
           {%- set parts_string = trans(key="Series_parts", lang=lang) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
-        {% else %}
+        {%- else %}
           {%- set parts_string = page_num ~ " part Series" %}
-        {% endif -%}
+          {%- endif %}
+
+
 
 
 
@@ -97,6 +99,14 @@
     {%- endif %}
     {%- if toc %}
     
+    {%- set num_extra_pages = config.extra.section_items | default(value=5) %}
+
+    {%- if tag.page_count > num_extra_pages %}
+      
+    {%- else %}
+
+    {%- endif %}
+
     <div class="toc">
       {%- if page.extra.section %}
       <div class="series-toc">

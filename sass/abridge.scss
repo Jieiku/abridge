@@ -1556,50 +1556,52 @@ $series: true !default;//series of posts
   //}
 }
 
-.series-mobile {
-  max-width: 30rem;
-  min-width: 14rem;
-  padding: 0.15rem 1.25rem;
-  margin: var(--s1) auto;
-  border-radius: var(--br);
-  background-color: var(--c2);
-}
+@if $series {
+  .series-mobile {
+    max-width: 30rem;
+    margin: var(--s2) auto;
+    border-radius: var(--br);
+    background-color: var(--c2);
+  }
 
-
-@if $series and $toc {
-  .series-toc {
+  .series {
+    background-color: var(--c2);
+    max-height: 100vh;
+    padding: 0 var(--s2) var(--s2);
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
-    background-color: var(--c2);
-    margin-top: var(--s2);
-    padding: 0 var(--s2) var(--s2);
-    max-height: 100vh;
     overflow: auto;
   }
 
-  .series-toc ol {
+  .series h4 a {
+    color: var(--f1);
+    font-weight: 700;
+    &:hover {
+      color: var(--a3);
+    }
+  }
+  
+  .series ol {
     margin: 0;
   }
 
-  .series-toc li {
-    font-size: .875rem;
-  }
-
-  .series-toc h4 a {
-    color: var(--f1);
-    font-weight: bold;
-    &:hover {
-      color: var(--a3);
-      text-decoration: none;
-    }
-  }
-
-  .series-toc ol a {
+  .series ol a {
     color: var(--f1);
     &:hover {
       color: var(--a2);
       text-decoration: underline;
     }
+  }
+
+  .series li {
+    font-size: .875rem;
+  }
+}
+
+@if $series and $toc {
+  .series-toc {
+    margin-top: var(--s2);
+    max-height: 100vh;
   }
 
   @if map-get($breakpoints, "md") {

@@ -59,8 +59,8 @@
 
 
 
-    <div class="series-mobile">
-      <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"></a>{{ tag.name }} ({{ parts_string }})</a>
+    <div class="series-mobile series">
+      <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
       <ol>
       {%- for inner in tag.pages | sort(attribute="year") %}
       {%- if inner.content == page.content %}
@@ -99,7 +99,7 @@
     
     <div class="toc">
       {%- if page.extra.section %}
-      <div class="series-toc">
+      <div class="series-toc series">
         <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
         {%- for inner in tag.pages | sort(attribute="year") %}

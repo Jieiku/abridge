@@ -98,9 +98,10 @@ $c4d: null !default;// Disabled Buttons, Borders, mark background
 $a1d: null !default;// link color
 $a2d: null !default;// link hover/focus color
 $a3d: null !default;// link h1-h2 hover/focus color
+$a4d: null !default;// link visited color
 $cgd: null !default;// ins green, success
 $crd: null !default;// del red, errors
-$dark: colors.color($color,true,$csd,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
+$dark: colors.color($color,true,$csd,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$a4d,$cgd,$crd);
 
 /// Light Colors
 $cs: null !default;// Color-scheme Variable for scrollbars, required for Chrome.
@@ -113,9 +114,10 @@ $c4: null !default;// Disabled Buttons, Borders, mark background
 $a1: null !default;// link color
 $a2: null !default;// link hover/focus color
 $a3: null !default;// link h1-h2 hover/focus color
+$a4: null !default;// link visited color
 $cg: null !default;// ins green, success
 $cr: null !default;// del red, errors
-$light: colors.color($color,false,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
+$light: colors.color($color,false,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$a4,$cg,$cr);
 
 /// Dark Syntax Colors
 $h0d: null !default;// background color
@@ -429,9 +431,6 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 }
 @if $typography {
-  .c {
-    text-align: center;// The <center> does not pass validation, use: <div class="c"></div>
-  }
   h1,
   h2,
   h3,
@@ -472,10 +471,16 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--a2);
     text-decoration: underline;
   }
+  a:visited {
+    color: var(--a4);
+  }
   h1 a, h2 a, main nav a, header span > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
+    &:visited {
+      color: var(--f2);
+    }
     &:hover {
       color: var(--a3);
       text-decoration: none;
@@ -1363,6 +1368,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   .rpad {padding-right: var(--s1)}
   .tpad {padding-top: var(--s1)}
   .b {font-weight: var(--fh)}
+  .c {text-align: center}// <center> does not pass validation, use: <div class="c"></div>
 }
 @if $syntax {
   // Unstyled Text Color, and background color

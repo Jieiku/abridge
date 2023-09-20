@@ -1157,7 +1157,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if map-get($breakpoints, "md") {
     @media (min-width: map-get($breakpoints, "md")) {
       .searchd > input {
-        max-width: 15rem;
+        width: 15rem;
         flex-grow: 0;
       }
       #suggestions {
@@ -1175,8 +1175,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     margin: var(--s2) auto;
   }
   .sblock {
+    width: 15rem;
     max-width: 15rem;
-    min-width: 14rem;
     margin-left: var(--s1);
   }
   .blockdiv {

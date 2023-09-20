@@ -1,4 +1,4 @@
-{# This Page Shows the Individual Blog Posts#}
+{# This Template Shows the Individual Blog Posts#}
 
 {% extends "base.html" %}
 
@@ -27,7 +27,7 @@
     {%- set page_section = "" %}
   {%- endif %}
 
-  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
+  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
 {%- endblock seo %}
 
 {%- block comments_init %}
@@ -45,32 +45,34 @@
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
 
-
+    {# In Page Series Navigation #}
+    {%- if config.extra.series | default(value=true) %}
     {%- if page.extra.section %}
-    
+
       {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section, lang=lang) %}
       {%- set page_num = tag.page_count | as_str %}
 
         {%- if lang != config.default_language %}
           {%- set parts_string = trans(key="Series_parts", lang=lang) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {% else %}
-          {%- set parts_string = page_num ~ " part Series" %}
+          {%- set parts_string = config.extra.Series_parts | default(value="Series") | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {% endif -%}
 
-
-
-    <div class="series-mobile series">
-      <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
-      <ol>
-      {%- for inner in tag.pages | sort(attribute="year") %}
-      {%- if inner.content == page.content %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
-      {% else %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
-      {%- endif %}
-      {%- endfor %}
-      </ol>
+    <div class="block">
+      <div class="blockdiv">
+        <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
+        <ol>
+        {%- for inner in tag.pages | sort(attribute="year") %}
+        {%- if inner.content == page.content %}
+        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+        {% else %}
+        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+        {%- endif %}
+        {%- endfor %}
+        </ol>
+      </div>
     </div>
+    {%- endif %}
     {%- endif %}
 
 
@@ -92,15 +94,16 @@
     {%- endblock comments_body %}
     </article>
     {%- block toc %}
-    {%- if page.extra.toc and config.extra.recent %}
+    {%- if config.extra.toc | default(value=true) %}
+    {%- if page.extra.toc %}
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc %}
-    
-    <div class="toc">
+
+    <div class="sblock">
       {%- if page.extra.section %}
-      <div class="series-toc series">
-        <a class="si" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
+      <div class="blockdiv">
+        <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
         {%- for inner in tag.pages | sort(attribute="year") %}
         {%- if inner.content == page.content %}
@@ -113,22 +116,23 @@
       </div>
       {%- endif %}
 
-      <div class="toc-sticky">
-        <a class="si" href="#">{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</a>
+      <div class="blockdiv sticky">
+        <a class="b s150" href="#">{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</a>
         {%- for h in toc %}
-        <div class="toc-item">
-          <a class="subtext" href="#{{h.id | safe}}">{{ h.title }}</a>
+        <div>
+          <a href="#{{h.id | safe}}">{{ h.title }}</a>
         </div>
         {%- if h.children %}
         {%- for h2 in h.children %}
-        <div class="toc-item-child">
-          <a class="subtext" href="#{{h2.id | safe}}"><small>- {{ h2.title }}</small></a>
+        <div class="hpad">
+          <a href="#{{h2.id | safe}}"><small>- {{ h2.title }}</small></a>
         </div>
         {%- endfor %}
         {%- endif %}
         {%- endfor %}
       </div>
     </div>
+    {%- endif %}
     {%- endif %}
     {%- endblock toc %}
 

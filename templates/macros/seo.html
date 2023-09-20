@@ -1,0 +1,140 @@
+{#- type:          website or article, generally setting article for blog articles -#}
+{#- page_images:   using for the blog single template page -#}
+{#- page_section:  the blog single template page have to pass the parameter -#}
+{#- is_404:        using for the 404.html template -#}
+
+{%- macro seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2023-05-15T07:07:00-07:00", updated_time="2023-05-15T07:07:00-07:00" ) %}
+
+{%- if is_404 -%}
+  <meta name="robots" content="noindex, follow" />
+{%- else -%}
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+{%- endif -%}
+
+{%- if current_url %}
+  {%- set page_url = current_url %}
+{%- else %}
+  {%- set page_url = get_url(path="404.html", trailing_slash=true) %}
+{%- endif %}
+  <title>{{ title ~ title_addition }}</title>
+
+{%- if config.extra.author %}
+  <meta name="author" content="{{ config.extra.author }}" />
+{%- endif %}
+{%- if config.extra.facebook_publisher %}
+  <meta property="article:publisher" content="https://www.facebook.com/{{ config.extra.facebook_publisher }}" />
+{%- endif %}
+  <meta name="copyright" content="{{ config.title }}" />
+{%- if config.extra.facebook_author %}
+  <meta property="article:author" content="https://www.facebook.com/{{ config.extra.facebook_author }}" />
+{%- endif %}
+{%- if page.description %}
+  <meta name="description" content="{{ page.description }}" />
+{%- else %}
+  <meta name="description" content="{{ config.description }}" />
+{%- endif %}
+  <link rel="canonical" href="{{ page_url | safe }}" />
+{%- if page.extra.keywords and config.extra.keywords %}
+  <meta name="keywords" content="{{ page.extra.keywords }}, {{ config.extra.keywords }}" />
+{%- elif page.extra.keywords %}
+  <meta name="keywords" content="{{ page.extra.keywords }}" />
+{%- elif config.extra.keywords %}
+  <meta name="keywords" content="{{ config.extra.keywords }}" />
+{%- endif %}
+
+{#- Extra SEO START #}
+{%- if config.extra.seo | default(value=true) %}
+{%- if not is_404 %}
+
+{%- if config.extra.google %}
+  <meta name="google-site-verification" content="{{ config.extra.google | safe }}" />
+{%- endif %}
+
+{%- if config.extra.bing %}
+  <meta name="msvalidate.01" content="{{ config.extra.bing | safe}}" />
+{%- endif %}
+  <meta property="og:url" content="{{ page_url | safe }}" />
+  <meta name="twitter:url" content="{{ page_url | safe }}" />
+
+{%- if page.description %}
+  <meta property="og:description" content="{{ page.description }}" />
+  <meta name="twitter:description" content="{{ page.description }}" />
+{%- else %}
+  <meta property="og:description" content="{{ config.description }}" />
+  <meta name="twitter:description" content="{{ config.description}}" />
+{%- endif %}
+
+{%- if page.title %}
+  <meta property="og:title" content="{{ page.title }} | {{ config.title }}" />
+  <meta name="twitter:title" content="{{ page.title }} | {{ config.title }}" />
+{%- else %}
+  <meta property="og:title" content="{{ config.title }}" />
+  <meta name="twitter:title" content="{{ config.title }}" />
+{%- endif %}
+
+
+{#- SEO MEDIA START #}
+{%- if page.extra.thumbnail %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=page.path ~ page.extra.thumbnail, trailing_slash=false) }}" />
+
+{%- elif page.extra.static_thumbnail %}
+  <meta name="twitter:card" content="summary_large_image" />
+  {%- if page.extra.static_thumbnail is matching("^http[s]?://") %}
+  <meta name="twitter:image" content="{{ page.extra.static_thumbnail }}" />
+  <meta property="og:image" content="{{ page.extra.static_thumbnail }}" />
+  {%- else %}
+  <meta name="twitter:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=page.extra.static_thumbnail, trailing_slash=false) }}" />
+  {%- endif %}
+
+{%- elif config.extra.banner %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}" />
+  <meta property="og:image" content="{{ get_url(path=config.extra.banner, trailing_slash=false) }}" />
+
+{%- else %}
+  <meta name="twitter:card" content="summary" />
+
+{%- endif %}
+
+{%- if config.extra.open.audio %}
+  <meta property="og:audio" content="{{ config.extra.open.audio }}" />
+{%- endif %}
+
+{%- if config.extra.open.locale %}
+  <meta property="og:locale" content="{{ config.extra.open.locale }}" />
+{%- endif %}
+
+{%- if config.extra.open.videos %}
+  {%- for video in config.extra.open.videos %}
+  <meta property="og:video" content="{{ get_url(path=video) }}" />
+  {%- endfor %}
+{%- endif %}
+
+{#- SEO MEDIA END #}
+  <meta property="og:site_name" content="{{ config.title }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+{%- if page.updated %}
+  <meta property="og:updated_time" content="{{ page.updated | date(format='%F') }}" />
+{%- elif page.date %}
+  <meta property="og:updated_time" content="{{ page.date | date(format='%F') }}" />
+{%- else %}
+  <meta property="og:updated_time" content="{{ updated_time }}" />
+{%- endif %}
+
+{%- if config.extra.twitter_meta %}
+  <meta name="twitter:site" content="@{{ config.extra.twitter_meta }}" />
+  <meta name="twitter:creator" content="@{{ config.extra.twitter_meta }}" />
+{%- endif %}
+
+
+
+{%- endif %}
+{%- endif %}
+{#- Extra SEO END #}
+{%- endmacro %}

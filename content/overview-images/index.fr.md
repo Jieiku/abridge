@@ -47,13 +47,13 @@ Cet article couvre les **shortcodes imgswap et img**. Les images peuvent égalem
 
 ## Utilisation (chemin racine /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") */}}
+{{/* img(src="/images/ferris.svg" alt="Ferris le Rustacé") */}}
 ```
 **Sortir**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") }}
+{{ img(src="/images/ferris.svg" alt="Ferris le Rustacé") }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris le Rustacé") }}
+{{ img(src="/images/ferris.svg" alt="Ferris le Rustacé") }}
 
 # Image SVG directement dans le code
 ```html
@@ -99,10 +99,10 @@ Lorsque vous passez votre souris sur l'image, l'image à comparer s'affiche.
 
 ## Utilisation (chemin racine /)
 ```rs
-{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") */}}
+{{/* imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") */}}
 ```
 **Sortir**
 ```html
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}

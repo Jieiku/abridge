@@ -1,21 +1,13 @@
-{%- import 'macros/head.html' as macros_head %}
-{%- import "macros/social.html" as social_macros %}
-{%- import "macros/page.html" as page_macros %}
+{%- import 'macros/seo.html' as macros_seo %}
 {%- import "macros/macros.html" as macros %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 <!DOCTYPE html>
 <html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
 <head>
-  {{- macros_head::theme(config=config) }}
-  {{- macros_head::stylesheets(config=config) }}
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {{- macros_head::stylesheets_preload(config=config) }}
-  {{- macros_head::js(config=config) }}
-  <meta name="base" content="{{ config.base_url | safe }}" />
-  {{- macros_head::feed(config=config) }}
+  {%- include "partials/head.html" %}
+
+  {#- SEO: title, description, etc #}
   {%- block seo %}
     {%- if config.extra.title_separator %}
       {%- set title_separator = " " ~ config.extra.title_separator ~ " " -%}
@@ -23,15 +15,11 @@
       {%- set title_separator = " | " -%}
     {%- endif %}
   {%- endblock seo %}
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  {{- macros_head::security(config=config) }}
-  {{- macros_head::favicons(config=config) }}
+
   {%- block comments_init %}
   {%- endblock comments_init %}
-  <noscript><link rel="stylesheet" href="{{ get_url(path='nojs.css', trailing_slash=false) | safe }}" /></noscript>
+
+  {%- include "partials/head_js.html" %}
 </head>
 <body>
 {%- block header %}
@@ -39,7 +27,7 @@
     <nav>
       <div>
         {%- if config.extra.logo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}">
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
@@ -48,56 +36,65 @@
         {%- elif config.extra.textlogo -%}
         <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
         {%- if lang == config.default_language -%}/{%- endif -%}
-        index.html{%- endif -%}">{{ config.extra.textlogo | safe }}</a></h1>
+        index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></h1>
         {%- elif config.title -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}">{{ config.title | safe }}</a></h1>
+        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></h1>
         {%- endif -%}
       </div>
       <div>
-        {% set js_switcher=config.extra.js_switcher | default(value=true) %}
-        {%- if config.extra.menu or js_switcher %}
-        {%- if config.extra.menu %}
-        {%- for i in config.extra.menu -%}
-        <a href="{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
-        {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
-        </a>
-        {%- endfor -%}
-        {%- endif -%}
-        {%- if js_switcher -%}
-        {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
-        {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
-        {%- endif -%}
-        {%- endif -%}
-        {%- if config.languages | length > 0 %}
-        <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
-          {%- if current_url %}
-          <div class="dropdown-content">
-          {%- for lcode,flag in config.extra.flag -%}
-          {%- if lang != lcode -%}
-          {%- if lcode == config.default_language -%}
-          <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-          {%- else -%}
-          <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-          {%- endif -%}
-          {%- endif -%}
-          {%- endfor -%}
+        <div>
+          <span>
+            {% set js_switcher=config.extra.js_switcher | default(value=true) %}
+            {%- if config.extra.menu or js_switcher %}
+            {%- if config.extra.menu %}
+            {%- for i in config.extra.menu -%}
+
+
+
+            <a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching("^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+            {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
+            </a>
+            {%- endfor -%}
+            {%- endif -%}
+            {%- if js_switcher -%}
+            {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+            {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
+            {%- endif -%}
+            {%- endif -%}
+            {%- if config.languages | length > 0 %}
+            <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
+              {%- if current_url %}
+              <div class="dropdown-content">
+              {%- for lcode,flag in config.extra.flag -%}
+              {%- if lang != lcode -%}
+              {%- if lcode == config.default_language -%}
+              <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+              {%- else -%}
+              <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
+              {%- endif -%}
+              {%- endif -%}
+              {%- endfor -%}
+              </div>
+              {%- endif %}
+            </span>
           </div>
           {%- endif %}
         </div>
-        {%- endif %}
-      </div>
-      {%- if config.build_search_index %}
-      {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
-      <div>
-        <form autocomplete=off class="js" name="goSearch" id="searchbox">
-          <div class="searchd">
-            <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
-            <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
+        <div>
+          {%- if config.build_search_index %}
+          {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
+          <div>
+            <form autocomplete=off class="js" name="goSearch" id="searchbox">
+              <div class="searchd">
+                <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
+                <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
+              </div>
+              <div class="results"><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
+            </form>
           </div>
-          <div class="results"><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
-        </form>
+          {%- endif %}
+        </div>
       </div>
-      {%- endif %}
     </nav>
     {%- if config.extra.sitedesc %}
     {%- if config.description %}
@@ -119,11 +116,12 @@
     <hr />
     {%- endif %}
     <div class="c">
-      {{- social_macros::social_links(config=config) }}
+      {%- include "partials/social.html" %}
 
       {#- Copyright START #}
       {%- if config.extra.copyright | default(value=true) -%}
       {%- set current_year = now() | date(format="%Y") %}
+      {%- set current_year = '<span id="year">' ~ current_year ~ '</span>' %}
 
         {%- if config.extra.copyright_override -%}
           {%- if lang != config.default_language %}

@@ -1,6 +1,6 @@
 {#
-This Page Shows the Posts with a short summary on the index: example.com/
-This Template can also be used as the rendering template for Sections, eg: example.com/blog/  example.com/software/
+This Tempalte Shows a paginated page of the Posts of a section with a short summary.
+This Template can also be used directly for the index eg: example.com/ or as the rendering template for Sections, eg: example.com/blog/  example.com/software/
 #}
 
 {%- extends "base.html" %}
@@ -26,7 +26,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
 
   {%- set description = config.description %}
 
-  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
+  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
 {%- endblock seo %}
 
 
@@ -80,12 +80,12 @@ This Template can also be used as the rendering template for Sections, eg: examp
     {%- else %}
     {%- set section_item = get_section(path=sec ~ "_index." ~ lang ~ ".md") %}
     {%- endif %}
-    <div class="toc">
-      <div class="toc-sticky">
-        <h1><span class="s70">{%- if lang != config.default_language %}{{ trans(key="Recent_Posts" | safe, lang=lang) }}{% else %}Recent Posts{% endif %}</span></h1>
+    <div class="sblock">
+      <div class="blockdiv sticky">
+        <span class="b s150">{%- if lang != config.default_language %}{{ trans(key="Recent_Posts" | safe, lang=lang) }}{% else %}Recent Posts{% endif %}</span>
         {%- set recent_items=config.extra.recent_items | default(value=9) -%}
         {%- for page in section_item.pages | slice(end=recent_items) %}
-          {{- page_macros::page_listing(page=page, config=config) }}
+          {{- macros::page_listing(page=page, config=config) }}
         {%- endfor %}
       </div>
     </div>

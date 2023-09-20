@@ -61,6 +61,7 @@ Index = "Indice"
 Powered_by = "Propulsé"
 and = "et"
 About = "Sur"
+Blog = "Blog"
 Posts = "Articles"
 Categories = "Catégories"
 Tags = "Mots-clés"
@@ -96,15 +97,16 @@ flag.fr = "🇫🇷"
 ###############################################################################
 ### Layout & Format
 ### position: top, bottom, both, false(hidden)
-### size: s95, s90, s85, s80, s75, s70, false(full size)
+### size: s150, s140, s130, s120, s110, s95, s90, s85, s80, s75, s70, false(full size)
 ### divider:    " "        "&middot;"        "&bull;"
 ###############################################################################
 
 menu = [
-    {url = "about", name = "About", slash = true, blank = false},
-    {url = "archive", name = "Posts", slash = true, blank = false},
-#    {url = "categories", name = "Categories", slash = true, blank = false},
-    {url = "tags", name = "Tags", slash = true, blank = false},
+#    {url = "blog", name = "Blog", slash = true, blank = false, size="s110"},
+    {url = "about", name = "About", slash = true, blank = false, size="s110"},
+    {url = "archive", name = "Posts", slash = true, blank = false, size="s110"},
+#    {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
+    {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
 ]
 menu_footer = [
     {url = "about", name = "About", slash = true, blank = false},
@@ -113,16 +115,20 @@ menu_footer = [
     {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true},
 ]
 
+toc = true
 recent = true # TOC / index
 recent_items = 15
+series = true
+#Series_parts = "$NUMBER_OF_PARTS part Series"
 
-meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=" " }
-meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=" " }
+
+meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=""}
+meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=""}
 
 hide_section_dates = false # hides the date for sections that use posts.html as their template.
 hide_page_nextprev_titles = false # hides the next/previous titles for pages that use page.html as their template.
-title_size_index = "s85" # size: s95, s90, s85, s80, s75, s70, false(full size)
-footer_size = "s90" # size: s95, s90, s85, s80, s75, s70, false(full size)
+title_size_index = "s85"
+footer_size = "s90"
 footer_credit = true
 #footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank">Abridge</a></p>'
 #archive_reverse = true # Set to True to sort posts chronologically per year instead of newest first on the archive page: example.com/archive/

@@ -47,13 +47,13 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 
 ## Usage (root path /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") */}}
+{{/* img(src="/images/ferris.svg" alt="Ferris the Rustacean") */}}
 ```
 **Output**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
+{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
+{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
 
 # SVG image directly in code
 ```html
@@ -99,10 +99,10 @@ When you hover your mouse over the image it will display the image to compare.
 
 ## Usage (root path /)
 ```rs
-{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") */}}
+{{/* imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") */}}
 ```
 **Output**
 ```html
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}

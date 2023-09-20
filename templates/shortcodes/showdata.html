@@ -1,3 +1,5 @@
+{# showdata(src="../theme.toml" type="toml" key="min_version") #}
+
 {%- if src and key and type %}
   {%- if src is matching("^http[s]?://") %}
     {% set data = load_data(url=src, format=type) %}
@@ -5,4 +7,12 @@
     {% set data = load_data(path=src, format=type) %}
   {%- endif %}
   {{ data[key] }}
+{%- else %}
+  {# Load other file types as plain text #}
+  {%- if src is matching("^http[s]?://") %}
+    {% set data = load_data(url=src) %}
+  {%- else %}
+    {% set data = load_data(path=src) %}
+  {%- endif %}
+  {{ data }}
 {%- endif %}

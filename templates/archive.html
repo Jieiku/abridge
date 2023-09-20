@@ -19,13 +19,17 @@ This Template can also be used as the rendering template for Sections, eg: examp
 
   {%- set description = config.description %}
 
-  {{- macros_head::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
+  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
 {%- endblock seo %}
 
 {%- block content %}
     {#- The following line is checking if the template is being used for the archive page or a section #}
     {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
-      {%- set sec = "" %}
+      {%- if section.extra.sec %}
+        {%- set sec = section.extra.sec ~ "/" %}
+      {%- else %}
+        {%- set sec = "" %}
+      {%- endif %}
     {%- else %}
       {%- set langpath = "/" %}
       {%- if lang != config.default_language %}

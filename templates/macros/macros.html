@@ -1,8 +1,20 @@
+{%- macro page_listing(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+        <div class="tpad">
+          <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>
+        </div>
+{%- endmacro page_listing %}
+
+
+
 {%- macro title_post(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
       <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
 {%- endmacro title_post %}
+
+
 
 {%- macro meta_post(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
@@ -29,7 +41,7 @@
           {#- divider #}
           {%- if config.extra.meta_post.author %}
           {%- if config.extra.meta_post.readtime or config.extra.meta_post.date or config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}
           {%- endif %}
           {%- endif %}
 
@@ -37,7 +49,7 @@
           {%- if config.extra.meta_post.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_post.readstring | default(value="min") }}
           {#- divider #}
           {%- if config.extra.meta_post.date or config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
           {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
@@ -51,7 +63,7 @@
           {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
 
         {#- Updated #}
           {%- if config.extra.meta_post.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
@@ -65,7 +77,7 @@
           {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.categories_tags %}
-          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
           {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
@@ -74,11 +86,14 @@
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_post %}
 
+
+
 {%- macro title_index(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
         <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
 {%- endmacro title_index %}
+
 
 
 {%- macro meta_index(page, config) %}
@@ -106,7 +121,7 @@
           {#- divider #}
           {%- if config.extra.meta_index.author %}
           {%- if config.extra.meta_index.readtime or config.extra.meta_index.date or config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}
           {%- endif %}
           {%- endif %}
 
@@ -114,7 +129,7 @@
           {%- if config.extra.meta_index.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_index.readstring | default(value="min") }}
           {#- divider #}
           {%- if config.extra.meta_index.date or config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{%- endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{%- endif %}
 
         {#- Date #}
           {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
@@ -128,7 +143,7 @@
           {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
 
         {#- Updated #}
           {%- if config.extra.meta_index.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
@@ -143,7 +158,7 @@
 
           {#- divider #}
           {%- if config.extra.meta_index.categories_tags %}
-          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} &nbsp; {%- endif %}{%- endif %}{% endif %}
+          {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
 
         {#- Categories #}
           {%- if page.taxonomies.categories %} {%- if config.extra.icon_info %}<i class="{{ config.extra.icon_info }}"></i> {% endif %} [{% for cat in page.taxonomies.categories %}<a href="{{ get_taxonomy_url(kind='categories', name=cat, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ cat }}</a>{% endfor %}]{% endif %}
@@ -151,7 +166,6 @@
         {#- Tags #}
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor -%}{%- endif %}</span>
 {%- endmacro meta_index %}
-
 
 
 
@@ -176,6 +190,7 @@
       {%- endif %}
       {%- endif %}
 {%- endmacro footer %}
+
 
 
 {%- macro pagination(paginator, config)%}

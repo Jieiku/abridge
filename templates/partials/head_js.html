@@ -22,17 +22,18 @@
     {%- endif %}
   {%- endif %}
 
-
+{%- if config.mode != "serve" -%}{%- set notserve = true %}{%- endif %}
 {%- if config.extra.js_bundle %}
+
   {%- if config.build_search_index %}
-  {%- if config.extra.pwa | default(value=false) %}
+  {%- if notserve and config.extra.pwa | default(value=false) %}
   <script defer src="{{               get_url(path='js/abridge.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
   <script defer src="{{               get_url(path='js/abridge_nopwa.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nopwa.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
   {%- else %}
-  {%- if config.extra.pwa | default(value=false) %}
+  {%- if notserve and config.extra.pwa | default(value=false) %}
   <script defer src="{{               get_url(path='js/abridge_nosearch.min.js'    , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nosearch.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
   <script defer src="{{               get_url(path='js/abridge_nosearch_nopwa.min.js'    , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge_nosearch_nopwa.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
@@ -68,7 +69,7 @@
   <script defer src="{{               get_url(path='js/codecopy.js'                , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/codecopy.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 
-  {%- if config.extra.pwa | default(value=false) %}
+  {%- if notserve and config.extra.pwa | default(value=false) %}
   <script defer src="{{               get_url(path='js/sw_load.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/sw_load.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}
 

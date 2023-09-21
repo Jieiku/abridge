@@ -1,4 +1,4 @@
-@mixin dark($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@mixin dark($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$a4,$cg,$cr) {
   #{--cs}: $cs;// color-scheme Variable for scrollbars, required for Chrome.
   #{--f1}: $f1;// Font Color Primary
   #{--f2}: $f2;// Font Color Headers
@@ -9,10 +9,11 @@
   #{--a1}: $a1;// link color
   #{--a2}: $a2;// link hover/focus color
   #{--a3}: $a3;// link h1-h2 hover/focus color
+  #{--a4}: $a4;// link visited color
   #{--cg}: $cg;// ins green, success
   #{--cr}: $cr;// del red, errors
 }
-@mixin light($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@mixin light($cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$a4,$cg,$cr) {
   #{--cs}: $cs;// color-scheme Variable for scrollbars, required for Chrome.
   #{--f1}: $f1;// Font Color Primary
   #{--f2}: $f2;// Font Color Headers
@@ -23,11 +24,12 @@
   #{--a1}: $a1;// link color
   #{--a2}: $a2;// link hover/focus color
   #{--a3}: $a3;// link h1-h2 hover/focus color
+  #{--a4}: $a4;// link visited color
   #{--cg}: $cg;// ins green, success
   #{--cr}: $cr;// del red, errors
 }
 
-@function color($color,$dark,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr) {
+@function color($color,$dark,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$a4,$cg,$cr) {
   @if $color == "blue" {
     @if $dark {/// Dark Colors
       $cs: dark !default;// color-scheme Variable for scrollbars, required for Chrome.
@@ -40,9 +42,10 @@
       $a1: #09f !default;// link color
       $a2: #0bf !default;// link hover/focus color
       $a3: #0af !default;// link h1-h2 hover/focus color
+      $a4: #09f !default;// link visited color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     } @else {/// Light Colors
       $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
@@ -55,9 +58,10 @@
       $a1: #06e !default;// link color
       $a2: #09f !default;// link hover/focus color
       $a3: #07f !default;// link h1-h2 hover/focus color
+      $a4: #06e !default;// link visited color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     }
   } @else if $color == "blueshade" {
@@ -72,9 +76,10 @@
       $a1: #09f !default;// link color
       $a2: #0bf !default;// link hover/focus color
       $a3: #0af !default;// link h1-h2 hover/focus color
+      $a4: #09f !default;// link visited color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     } @else {/// Light Colors
       $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
@@ -87,9 +92,10 @@
       $a1: #06e !default;// link color
       $a2: #09f !default;// link hover/focus color
       $a3: #07f !default;// link h1-h2 hover/focus color
+      $a4: #06e !default;// link visited color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     }
   } @else {//orange (default)
@@ -104,9 +110,10 @@
       $a1: #f90 !default;// link color
       $a2: #fb0 !default;// link hover/focus color
       $a3: #f90 !default;// link h1-h2 hover/focus color
+      $a4: #f90 !default;// link visited color
       $cg: #593 !default;// ins green, success
       $cr: #e33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     } @else {/// Light Colors
       $cs: light !default;// color-scheme Variable for scrollbars, required for Chrome.
@@ -119,9 +126,10 @@
       $a1: #c40 !default;// link color
       $a2: #e60 !default;// link hover/focus color
       $a3: #f90 !default;// link h1-h2 hover/focus color
+      $a4: #c40 !default;// link visited color
       $cg: #373 !default;// ins green, success
       $cr: #d33 !default;// del red, errors
-      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $cg $cr;
+      $result: $cs $f1 $f2 $c1 $c2 $c3 $c4 $a1 $a2 $a3 $a4 $cg $cr;
       @return $result;
     }
   }

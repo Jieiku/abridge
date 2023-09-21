@@ -1,5 +1,5 @@
 +++
-title = "Mathematical Notations"
+title = "Mathematical Notation"
 description = "Sample article showcasing the display of Mathematical Notations, made possible by the KaTeX library."
 date = 2021-05-05
 updated = 2022-01-01
@@ -8,10 +8,10 @@ draft = false
 [taxonomies]
 tags = ["Features","Shortcodes","Mathematics"]
 [extra]
-toc = true
 math = true
 math_auto_render = true
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
+toc = true
 section = "Features"
 +++
 

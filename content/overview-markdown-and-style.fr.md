@@ -7,8 +7,9 @@ draft = false
 [taxonomies]
 tags = ["Features","Markdown"]
 [extra]
-toc = true
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
+toc = true
+section = "Features"
 +++
 
 Cet article propose un exemple de syntaxe Markdown de base pouvant être utilisée dans les fichiers de contenu Zola. Il indique également si les éléments HTML de base sont décorés avec CSS dans un thème Zola.

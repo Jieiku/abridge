@@ -7,8 +7,9 @@ draft = false
 [taxonomies]
 tags = ["Features","Video","Audio","Images","Shortcodes"]
 [extra]
-toc = true
 keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
+toc = true
+section = "Features"
 +++
 
 Plusieurs codes abrégés personnalisés sont inclus pour augmenter CommonMark (avec l'aimable autorisation du [theme d3c3nt](https://d3c3nt.figbert.com/posts/rich-content/)). `video`, `image`, `gif`, et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans votre écriture.

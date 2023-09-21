@@ -8,6 +8,8 @@ draft = false
 tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
+toc = true
+section = "Features"
 +++
 
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.

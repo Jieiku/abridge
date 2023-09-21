@@ -9,9 +9,8 @@ draft = false
 tags = ["Features","Config"]
 [extra]
 toc = true
+section = "Features"
 +++
-
-A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
 
 Un thème [Zola](https://getzola.org) rapide, léger et moderne utilisant [abridge.css](https://github.com/Jieiku/abridge.css) (un framework HTML CSS sémantique léger en classe ). Scores parfait [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://observatory.mozilla.org/analyze/abridge.netlify.app). Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
 <!-- more -->

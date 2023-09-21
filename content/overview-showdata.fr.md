@@ -8,6 +8,8 @@ draft = false
 tags = ["Features","Data","Shortcodes"]
 [extra]
 keywords = "Data, Load, External, Shortcodes"
+toc = true
+section = "Features"
 +++
 
 Le shortcode `showdata` peut charger et afficher des données provenant d'une source externe via la fonction [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) de Zola.

@@ -7,9 +7,10 @@ draft = false
 [taxonomies]
 tags = ["Features","Shortcodes","Images"]
 [extra]
-toc = true
 keywords = "Image, Markdown, Shortcodes, Swap"
 thumbnail = "ferris-gesture.png"
+toc = true
+section = "Features"
 +++
 
 This post covers the **imgswap and img shortcodes**. Images can also be embedded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.
@@ -47,13 +48,13 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 
 ## Usage (root path /)
 ```rs
-{{/* img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") */}}
+{{/* img(src="/images/ferris.svg" alt="Ferris the Rustacean") */}}
 ```
 **Output**
 ```html
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
+{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
 ```
-{{ img(src="/overview-rich-content/ferris.svg" alt="Ferris the Rustacean") }}
+{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
 
 # SVG image directly in code
 ```html
@@ -99,10 +100,10 @@ When you hover your mouse over the image it will display the image to compare.
 
 ## Usage (root path /)
 ```rs
-{{/* imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") */}}
+{{/* imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") */}}
 ```
 **Output**
 ```html
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}
 ```
-{{ imgswap(main_src="/overview-rich-content/ferris.svg" swap_src="/overview-rich-content/ferris-gesture.svg") }}
+{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}

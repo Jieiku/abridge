@@ -1,5 +1,5 @@
 +++
-title = "Embed Youtube Video"
+title = "Embed Youtube"
 description = "Sample article showcasing a custom Zola shortcode for embedding Youtube Videos into your pages."
 date = 2021-05-08
 draft = false
@@ -8,6 +8,8 @@ draft = false
 tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Youtube"
+toc = true
+section = "Features"
 +++
 
 Zola has many shortcodes, and new are easily added, this example shows youtube.

@@ -71,6 +71,7 @@ $icon-angl: true !default;//pagination, goto previous page
 $icon-angr: true !default;//pagination, goto next page
 $icon-angrr: true !default;//pagination, goto last page
 $icon-angu: true !default;//back to top button, appears after scrolling down.
+$icon-world: true !default;//language select menu
 $icon-copy: true !default;//copy to clipboard, for code blocks.
 
 $icon-ffolder: false !default;
@@ -98,9 +99,10 @@ $c4d: null !default;// Disabled Buttons, Borders, mark background
 $a1d: null !default;// link color
 $a2d: null !default;// link hover/focus color
 $a3d: null !default;// link h1-h2 hover/focus color
+$a4d: null !default;// link visited color
 $cgd: null !default;// ins green, success
 $crd: null !default;// del red, errors
-$dark: colors.color($color,true,$csd,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$cgd,$crd);
+$dark: colors.color($color,true,$csd,$f1d,$f2d,$c1d,$c2d,$c3d,$c4d,$a1d,$a2d,$a3d,$a4d,$cgd,$crd);
 
 /// Light Colors
 $cs: null !default;// Color-scheme Variable for scrollbars, required for Chrome.
@@ -113,9 +115,10 @@ $c4: null !default;// Disabled Buttons, Borders, mark background
 $a1: null !default;// link color
 $a2: null !default;// link hover/focus color
 $a3: null !default;// link h1-h2 hover/focus color
+$a4: null !default;// link visited color
 $cg: null !default;// ins green, success
 $cr: null !default;// del red, errors
-$light: colors.color($color,false,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$cg,$cr);
+$light: colors.color($color,false,$cs,$f1,$f2,$c1,$c2,$c3,$c4,$a1,$a2,$a3,$a4,$cg,$cr);
 
 /// Dark Syntax Colors
 $h0d: null !default;// background color
@@ -211,13 +214,14 @@ $button: true !default;//Form elements (button)
 $form: true !default;//Form elements (non-button)
 $top: true !default;//back to top button using CSS
 $search: true !default;//search feature
-$toc: true !default;//Table of Contents, page index / recent posts block
+$blocks: true !default;//css classes for block formatting, eg: recent posts, table of contents, series navigation
 $modifiers: true !default;//tiny modifier classes for sizing and spacing
 $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
-$grid: false !default;//Infinity Grid, column based layouts.
+$grid: true !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
 $series: true !default;//series of posts
+
 
 /******************************************************************************
  *   Root element
@@ -429,9 +433,6 @@ $series: true !default;//series of posts
   }
 }
 @if $typography {
-  .c {
-    text-align: center;// The <center> does not pass validation, use: <div class="c"></div>
-  }
   h1,
   h2,
   h3,
@@ -440,8 +441,7 @@ $series: true !default;//series of posts
   h6 {
     padding-left: 0;
     color: var(--f2);
-    margin-bottom: var(--s1);
-    margin-top: var(--s2);
+    margin: var(--s2) 0 var(--s1);
     font-weight: var(--fh);
     font-size: var(--fs);
     line-height: var(--lhh);
@@ -462,7 +462,7 @@ $series: true !default;//series of posts
     font-size: 1.125rem;
   }
   header h1 {
-    margin-top: 0;
+    margin: 0;
   }
   a {
     color: var(--a1);
@@ -473,10 +473,16 @@ $series: true !default;//series of posts
     color: var(--a2);
     text-decoration: underline;
   }
-  h1 a, h2 a, a.si, main nav a, nav > div > a {
+  a:visited {
+    color: var(--a4);
+  }
+  h1 a, h2 a, main nav a, header li > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
+    &:visited {
+      color: var(--f2);
+    }
     &:hover {
       color: var(--a3);
       text-decoration: none;
@@ -657,7 +663,97 @@ $series: true !default;//series of posts
   }
 }
 @if $nav {
-  //https://github.com/raj457036/attriCSS
+  header > nav > div {//padding above nav divs in header
+    padding-top: var(--s2);
+  }
+  footer > div {//padding above social icons
+    padding-top: var(--s1);
+  }
+  header > nav, header > nav > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+  }
+
+  header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
+    margin-left: auto;
+    justify-content: center;
+  }
+  // mobile first layout.
+  header nav {
+    margin: var(--s1) auto 0; // keeps top menu/search centered in mobile view
+    flex-direction: column;// column layout for mobile view
+    div:nth-child(2) {
+      margin: auto; // keeps top menu/search centered in mobile view
+    }
+  }
+  nav {
+    align-items: center;
+    justify-content: center;//center pagination horizontally
+    display: flex;
+    li {
+      display: inline-block;
+      margin: 0 var(--s2) 0 0;//right margin
+    }
+  }
+
+  //dropdown menu used for lang, etc.
+  .dropdown {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    font-weight: var(--fh);
+    font-size: var(--fs);
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+    right: -1rem;
+    z-index: 1;
+    font-weight: var(--fh);
+    font-size: var(--fs);
+    background: var(--c2);
+    a,span {
+      margin: 0 var(--s1);
+      display: block;
+      text-decoration: none;
+    }
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  article nav {//prev/next page title
+    div:last-child {
+      text-align: right;
+    }
+  }
+  footer nav {
+    a {
+        margin: .2rem;
+    }
+    i {
+      margin-bottom: .2rem;
+    }
+  }
+
+  //pagination
+  main nav {
+    margin-top: var(--s2);//pagination margin
+    a,span {
+      margin: .2rem;
+    }
+  }
   .on,
   .on:visited {//pagination link styling
     font-weight: var(--fh);
@@ -671,70 +767,6 @@ $series: true !default;//series of posts
       background: var(--a3);
       opacity: 1;
     }
-  }
-  nav > div > a, header i, header .dropdown {
-    margin-right: .2rem;
-    vertical-align: middle;
-    font-weight: var(--fh);
-  }
-  main nav {//pagination
-    a,span {
-      margin: .2rem;
-    }
-  }
-  article nav {//prev/next page title
-    div:last-child {
-      text-align: right;
-    }
-  }
-  //footer nav >
-  footer nav {
-    a {
-        margin: .2rem;
-    }
-    i {
-      margin-bottom: .2rem;
-    }
-  }
-  header > nav > div:first-of-type {//Keep the logo from wrapping
-    display: inline;
-    min-width: fit-content;
-    padding-right: var(--s1);//add some spacing between nav divs
-  }
-  header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
-    margin-left: auto;
-    padding-right: var(--s1);//add some spacing between nav divs
-  }
-  // mobile first layout.
-  header nav {
-    flex-direction: column;// column layout for mobile view
-    h1 {
-      margin: var(--s2) 0 var(--s1);//adds more padding above for mobile view
-    }
-    div {
-      margin: auto; // keeps top menu/search centered in mobile view
-    }
-  }
-  nav > div {
-    margin: var(--s1) 0;
-  }
-  nav {
-    align-items: center;
-    justify-content: center;//center pagination horizontally
-    display: flex;
-    div h2 {
-      font-size: 1rem;
-      &:hover {
-        color: var(--a3);
-      }
-    }
-    h1 {
-      margin-bottom: 0;
-      margin-top: 0.2rem;
-    }
-  }
-  main nav {
-    margin-top: var(--s2);//pagination margin
   }
   .outp {
     padding: 0 .26rem .2rem;
@@ -757,40 +789,17 @@ $series: true !default;//series of posts
   .mode:hover, .cnav {
     color: var(--a1);//pagination color current page
   }
-  //dropdown menu used for lang, etc.
-  .dropdown {
-    display: inline-block;
-    position: relative;
-    z-index: 99;
-    font-weight: var(--fh);
-    font-size: 1.4rem;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 99;
-    font-weight: var(--fh);
-    font-size: 1.4rem;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-    z-index: 99;
-    a {
-      text-decoration: none;
-    }
-  }
+
   // breakpoint makes header responsive for desktop layouts
   // mobile first is min-width for desktop instead of max-width for mobile
   @if map-get($breakpoints, "md") {
     @media (min-width: map-get($breakpoints, "md")) {
-      header > nav > div {
-        margin: var(--s1) 0;// desktop layout
-      }
-      header nav {
+      header nav, header > nav > div:nth-child(2) {
         flex-direction: row;// row layout for desktop view
-        h1 {
-          margin: var(--s1) 0;// desktop layout
-        }
+        margin: 0 0 0 auto;// desktop layout
+      }
+      header > nav > div {
+        padding-top: var(--s1);
       }
     }
   }
@@ -1153,7 +1162,7 @@ $series: true !default;//series of posts
   @if map-get($breakpoints, "md") {
     @media (min-width: map-get($breakpoints, "md")) {
       .searchd > input {
-        max-width: 15.3rem;
+        width: 15rem;
         flex-grow: 0;
       }
       #suggestions {
@@ -1165,52 +1174,50 @@ $series: true !default;//series of posts
     }
   }
 }
-@if $toc {
-  main {
-    .toc {
-      max-width: 15rem;
-      min-width: 14rem;
-      margin-left: var(--s1);
-    }
-    .toc-item {
-      padding: .4rem 0 0;
-      color: var(--f1);
-    }
-    .toc-item a, .toc-item-child a {
-      color: var(--f1);
-      &:hover {
-        cursor: pointer;
-        color: var(--a2);
-        text-decoration: underline;
-      }
-    }
-    .toc-item a.active, .toc-item-child a.active {
-      color: var(--a2);
-    }
-    .toc-item-child {
-      padding: 0 var(--s1);
-      color: var(--f1);
-    }
+@if $blocks {
+  .sticky {
+    position: sticky;
+    top: var(--s2);
   }
-  .toc {
-    display: none;
+  .block {
+    max-width: 30rem;
+    margin: var(--s2) auto;
   }
-  .toc-sticky {
+  .blockdiv {
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
     background-color: var(--c2);
-    position: sticky;
-    top: var(--s2);
     margin-top: var(--s2);
     padding: 0 var(--s2) var(--s2);
     max-height: 100vh;
     overflow: auto;
+    a {
+      color: var(--f1);
+      &:hover {
+        color: var(--a2);
+      }
+    }
+    ol {
+      margin: 0;
+    }
+  }
+  .sblock {
+    ol,ul {
+      font-size: 1em;
+    }
+    width: 15rem;
+    max-width: 15rem;
+    margin-left: var(--s1);
+    display: none;//hide in mobile view
   }
   @if map-get($breakpoints, "md") {
     // mobile first is min-width for desktop instead of max-width for mobile
     @media (min-width: map-get($breakpoints, "md")) {
-      .toc {
-        display: unset;
+      .sblock {
+        display: unset;//show in desktop view
+      }
+      .block {
+        display: none;//hide in desktop view, TODO: depending on what blocks get used for, this could be a problem in the future, should be fine for now.
       }
     }
   }
@@ -1247,18 +1254,25 @@ $series: true !default;//series of posts
 @if $grid {
   // https://github.com/vladocar/Basic.css
   [style*="--c:"], section>section {
+    flex: var(--c,1);
+    margin: var(--s1);
     color: var(--f2);
     padding: var(--s1);
-    margin: var(--s1);
     text-align: center;
   }
   section {
     display: flex;
     flex-flow: row wrap;
-  }
-  [style*="--c:"], section>section {
-    flex:var(--c,1);
-    margin:var(--s1);
+    article {
+      div {
+        text-align: center;
+      }
+      h1, h2, h3 {
+        text-align: center;
+      }
+      padding: 20px 30px;
+      min-width: 340px;// limits to 3 columns wide, TODO: solution to limit number of columns
+    }
   }
 }
 @if $enable-icons {
@@ -1268,6 +1282,7 @@ $series: true !default;//series of posts
   @if $icon-angr {.angr { -webkit-mask: functions.icon(angr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right
   @if $icon-angrr {.angrr { -webkit-mask: functions.icon(angrr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right right
   @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
+  @if $icon-world {.world { -webkit-mask: functions.icon(world, "%23000", 2, "none", $ic) ; background: var(--f2) }}//language select menu
   @if $icon-copy {//copy icons for code blocks
     .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
     .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--cg) }
@@ -1345,15 +1360,22 @@ $series: true !default;//series of posts
 }
 @if $modifiers {
   .sum, .sum p {margin: .2rem 0}
+  .s150 {font-size: 1.5em}
+  .s140 {font-size: 1.4em}
+  .s130 {font-size: 1.3em}
+  .s120 {font-size: 1.2em}
+  .s110 {font-size: 1.1em}
   .s95 {font-size: .95em}
   .s90 {font-size: .90em}
   .s85 {font-size: .85em}
   .s80 {font-size: .80em}
   .s75 {font-size: .75em}
   .s70 {font-size: .70em}
-  .hpad {padding: 0 .2rem}
-  .rpad {padding-right: .2rem}
-  .si {font-size: 1.5em}
+  .hpad {padding: 0 var(--s1)}
+  .rpad {padding-right: var(--s1)}
+  .tpad {padding-top: var(--s1)}
+  .b {font-weight: var(--fh)}
+  .c {text-align: center}// <center> does not pass validation, use: <div class="c"></div>
 }
 @if $syntax {
   // Unstyled Text Color, and background color

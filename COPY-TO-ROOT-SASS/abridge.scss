@@ -51,9 +51,7 @@
   //$icon-angll: true,//pagination, goto first page
   //$icon-angl: true,//pagination, goto previous page
   //$icon-angr: true,//pagination, goto next page
-  //$icon-angrr: true,//pagination, goto last page
-  //$icon-angu: true,//back to top button, appears after scrolling down.
-  //$icon-copy: true,//copy to clipboard, for code blocks.
+  //$icon-angrr: true,//pagination, goto last page>
 
   //$icon-ffolder: false,
   //$icon-folder: false,// categories folder
@@ -81,6 +79,7 @@
   //$a1d: #f90,// link color
   //$a2d: #fb0,// link hover/focus color
   //$a3d: #f90,// link h1-h2 hover/focus color
+  //$a4d: #f90,// link visited color
   //$cgd: #593,// ins green, success
   //$crd: #e33,// del red, errors
 
@@ -94,6 +93,7 @@
   //$a1: #c40,// link color
   //$a2: #e60,// link hover/focus color
   //$a3: #f90,// link h1-h2 hover/focus color
+  //$a4: #c40,// link visited color
   //$cg: #373,// ins green, success
   //$cr: #d33,// del red, errors
 
@@ -182,13 +182,13 @@
   //$form: true,//Form elements (non-button)
   //$top: true,//back to top button using CSS
   //$search: true,//search feature
-  //$toc: true,//Table of Contents, page index / recent posts block
-  //$series: true,//Allows for posts to display in a series
-  //$modifiers: true,//tiny modifier classes for sizing and spacing
+  //$blocks: true,//css classes for block formatting, eg: recent posts, table of contents, series navigation
+  //$modifiers: true,//tiny modifier classes for sizing, spacing, etc.
   //$misc: false,
-  //$grid: false,//Infinity Grid, column based layouts.
+  //$grid: true,//Infinity Grid, column based layouts.
   //$syntax: true,//syntax highlighting for code blocks
 );
+@use "extra";
 /******************************************************************************
  *   FONTS - Abridge by default uses the System Font Stack
  *     https://css-tricks.com/snippets/css/system-font-stack/

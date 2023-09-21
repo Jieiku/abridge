@@ -1,0 +1,131 @@
+
+{#- Theme Switcher Button to toggle between dark/light #}
+  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+
+  {%- if config.extra.js_switcher | default(value=true) %}
+  {%- set js_theme="js/theme.min.js" %}
+  {%- if config.extra.js_switcher_default %}
+    {%- if config.extra.js_switcher_default == "light" %}{% set js_theme="js/theme_light.min.js" %}{% endif %}
+  {%- endif %}
+  <script src="{{                     get_url(path=js_theme                        , trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=js_theme, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
+
+
+
+
+
+{#- Style Sheets #}
+  {%- set stylesheets=config.extra.stylesheets | default(value=[ "abridge.css" ]) -%}
+  {%- if stylesheets %}{%- for i in stylesheets %}
+  <link rel="stylesheet" href="{{     get_url(path=i                               , trailing_slash=false, cachebust=true) | safe }}" />
+  {%- endfor %}{%- endif %}
+
+
+
+
+
+{#- meta tags #}
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="base" content="{{ config.base_url | safe }}" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+
+
+
+
+{#- Security: CSP, referrer #}
+  {%- if config.extra.security_header_referrer %}
+  <meta name="referrer" content="{{ config.extra.security_header_referrer | safe }}" />
+  {%- endif %}
+  {%- if config.extra.security_header_csp %}
+  <meta http-equiv="Content-Security-Policy" content="{{ config.extra.security_header_csp | safe }}" />
+  {%- endif %}
+
+
+
+
+
+{#- Favicons #}
+  {%- if config.extra.favicon_theme_color %}
+  <meta name="theme-color" content="{{ config.extra.favicon_theme_color }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon_ms_color %}
+  <meta name="msapplication-TileColor" content="{{ config.extra.favicon_ms_color }}" />
+  {%- endif %}
+
+  {%- if config.extra.webmanifest %}
+  <link rel="manifest" href="{{ get_url(path=config.extra.webmanifest, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon_mask and config.extra.favicon_mask_color %}
+  <link rel="mask-icon" href="{{ get_url(path=config.extra.favicon_mask, trailing_slash=false) | safe }}" color="{{ config.extra.favicon_mask_color }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon_svg %}
+  <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon_svg, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon180 %}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path=config.extra.favicon180, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon32 %}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path=config.extra.favicon32, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
+  {%- if config.extra.favicon16 %}
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path=config.extra.favicon16, trailing_slash=false) | safe }}" />
+  {%- endif %}
+
+
+
+
+
+{#- Style Sheets Preload #}
+  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+
+{%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
+  {%- if i.url is matching("^http[s]?://") %}
+  <link rel="preload" as="style" class="preStyle" href="{{ i.url | safe }}" crossorigin="anonymous" />
+  {%- else %}
+  <link rel="preload" as="font" href="{{ get_url(path=i.url, trailing_slash=false) | safe }}" type="font/woff2" />
+  {%- endif %}
+{%- endfor %}{%- endif %}
+
+{%- if config.extra.fontawesome %}
+  <link rel="preload" as="style" class="preStyle" href="{{ config.extra.fontawesome | safe }}" crossorigin="anonymous" />
+{%- endif %}
+
+{%- if config.extra.math or page.extra.math %}
+
+  {%- set katex_css=config.extra.katex_css | default(value="katex.min.css") -%}
+  {%- if katex_css %}{%- if katex_css is matching("^http[s]?://") %}
+  <link rel="preload" as="style" class="preStyle" href="{{ katex_css | safe }}"{%- if integrity and config.extra.katex_css_integrity %} integrity="{{ config.extra.katex_css_integrity | safe }}"{%- endif %} crossorigin="anonymous" />
+  {%- else %}
+  <link rel="preload" as="style" class="preStyle" href="{{ get_url(path=katex_css, trailing_slash=false) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_css, sha_type=384, base64=true) | safe }}"{%- endif %} />
+  {%- endif %}{%- endif %}
+
+{%- endif %}
+
+
+
+
+
+{#- Rss / Atom Feed #}
+  {%- if config.generate_feed %}
+  <link rel="alternate" type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="{{ config.title }} Atom/RSS Feed" href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" />
+  {%- endif %}
+
+
+
+
+
+{#- End of head partial -#}

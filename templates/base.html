@@ -27,12 +27,14 @@
     <nav>
       <div>
         {%- if config.extra.logo -%}
+
         <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
         </a></h1>
+
         {%- elif config.extra.textlogo -%}
         <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
         {%- if lang == config.default_language -%}/{%- endif -%}
@@ -42,44 +44,46 @@
         {%- endif -%}
       </div>
       <div>
+
         <div>
-          <span>
-            {% set js_switcher=config.extra.js_switcher | default(value=true) %}
-            {%- if config.extra.menu or js_switcher %}
+          <ul>
+
+            {%- set js_switcher=config.extra.js_switcher | default(value=true) %}
             {%- if config.extra.menu %}
-            {%- for i in config.extra.menu -%}
-
-
-
-            <a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching("^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
-            {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
-            </a>
-            {%- endfor -%}
-            {%- endif -%}
-            {%- if js_switcher -%}
-            {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
-            {%- if icon_adjust -%}<i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i>{%- endif -%}
-            {%- endif -%}
-            {%- endif -%}
-            {%- if config.languages | length > 0 %}
-            <div class="dropdown" type="Button"> {%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}
-              {%- if current_url %}
-              <div class="dropdown-content">
-              {%- for lcode,flag in config.extra.flag -%}
-              {%- if lang != lcode -%}
-              {%- if lcode == config.default_language -%}
-              <a type="Button" href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-              {%- else -%}
-              <a type="Button" href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a><br />
-              {%- endif -%}
-              {%- endif -%}
+              {%- for i in config.extra.menu -%}
+                <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching("^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+                {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
+                </a></li>
               {%- endfor -%}
-              </div>
+            {%- endif -%}
+
+            {%- if config.languages | length > 0 %}
+            <li><div class="dropdown"><i class="svgs world" type="reset"></i>
+              {%- if current_url %}
+                <div class="dropdown-content">
+                <span>{%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}</span>
+                {%- for lcode,flag in config.extra.flag -%}
+                  {%- if lang != lcode -%}
+                    {%- if lcode == config.default_language -%}
+                    <a href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a>
+                    {%- else -%}
+                    <a href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                </div>
               {%- endif %}
-            </span>
-          </div>
-          {%- endif %}
+            </div></li>
+            {%- endif %}
+
+            {%- if js_switcher -%}
+              {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+              {%- if icon_adjust -%}<li><i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i></li>{%- endif -%}
+            {%- endif -%}
+
+          </ul>
         </div>
+
         <div>
           {%- if config.build_search_index %}
           {%- set icon_search=config.extra.icon_search | default(value="svgs search") %}
@@ -94,6 +98,7 @@
           </div>
           {%- endif %}
         </div>
+
       </div>
     </nav>
     {%- if config.extra.sitedesc %}

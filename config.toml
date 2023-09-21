@@ -52,7 +52,7 @@ taxonomies = [
 ]
 
 [languages.fr.translations]
-flag = "🇫🇷"
+flag = "Français"
 date_locale = "fr_FR"
 Search = "Recherche"
 Recent_Posts = "Articles Récents"
@@ -79,7 +79,7 @@ Series_parts = "Série de $NUMBER_OF_PARTS parties"
 copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web est sous licence <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.'
 
 #[languages.es.translations]
-#flag = "🇪🇸"
+#flag = "Español"
 
 [extra]
 ###############################################################################
@@ -89,9 +89,9 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web es
 ###############################################################################
 date_locale = "en_US"
 language_code = "en-US"
-flag.en = "🇬🇧"
-flag.fr = "🇫🇷"
-#flag.es = "🇪🇸"
+flag.en = "English"
+flag.fr = "Français"
+#flag.es = "Español"
 
 
 ###############################################################################
@@ -136,7 +136,7 @@ footer_credit = true
 ### Uncomment one of the below lines, or neither, depending on which type of logo you want to use:
 #logo = { file="logo.svg", width="32", height="32", alt="Abridge", text="bridge" }
 #textlogo = '<font color="#f90">A</font>bridge'
-textlogo = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f90" viewBox="0 0 96 96" width="32" height="32"><path stroke-width="14" d="M14 99 46 7h4l32 92"/><path stroke-width="9" d="M-3 82c43-26 59-26 102 0"/><path stroke-linecap="round" stroke-width="1.5" d="M94 72v7m-5-9.8v7m-5-9.8v7.1M79 64v7M63 57.7v7m-5-8.2v7m-5-7.8v7m-5-7.2v7m-5-6.7v7m-5-6.3v7m-5-5.8v7M17 64v7m-5-4.6v7m-5-4.2v7M2 72v7"/></svg>bridge'
+textlogo = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f90" viewBox="0 0 96 96" width="28" height="28"><path stroke-width="14" d="M14 99 46 7h4l32 92"/><path stroke-width="9" d="M-3 82c43-26 59-26 102 0"/><path stroke-linecap="round" stroke-width="1.5" d="M94 72v7m-5-9.8v7m-5-9.8v7.1M79 64v7M63 57.7v7m-5-8.2v7m-5-7.8v7m-5-7.2v7m-5-6.7v7m-5-6.3v7m-5-5.8v7M17 64v7m-5-4.6v7m-5-4.2v7M2 72v7"/></svg>bridge'
 
 sitedesc = false # enables or disables the display of the site description below the logo.
 headhr = false # show or hide horizontal rule below header
@@ -253,7 +253,7 @@ webmanifest = "manifest.min.json" # Required for PWAs
 ###  The options below other than pwa=true, only come into play when the npm/node script is ran.
 ###############################################################################
 
-pwa = true # true to load the service worker
+pwa = false # true to load the service worker
 pwa_VER = '3.11.0' # Service Worker cache version. (increment if you need to force a new cache)
 
 ### 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks

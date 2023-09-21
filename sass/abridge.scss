@@ -71,6 +71,7 @@ $icon-angl: true !default;//pagination, goto previous page
 $icon-angr: true !default;//pagination, goto next page
 $icon-angrr: true !default;//pagination, goto last page
 $icon-angu: true !default;//back to top button, appears after scrolling down.
+$icon-world: true !default;//language select menu
 $icon-copy: true !default;//copy to clipboard, for code blocks.
 
 $icon-ffolder: false !default;
@@ -460,7 +461,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     font-size: 1.125rem;
   }
   header h1 {
-    margin-top: 0;
+    margin: 0;
   }
   a {
     color: var(--a1);
@@ -474,7 +475,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   a:visited {
     color: var(--a4);
   }
-  h1 a, h2 a, main nav a, header span > a {
+  h1 a, h2 a, main nav a, header li > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
@@ -549,7 +550,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     color: var(--f1);
     font-style: normal;
     font-weight: var(--fw);
-    //font-size: var(--fs);//TODO: This caused the lists to be a different size than the rest of the page, it was quite jarring
+    font-size: var(--fs);
   }
 
   // Lists
@@ -673,11 +674,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    //margin: 0 auto;
-    h1 {
-      margin: 0;//right margin
-    }
-    span {
+    ul {
+        margin: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -688,9 +686,6 @@ $syntax: true !default;//syntax highlighting for code blocks
   header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
     margin-left: auto;
     justify-content: center;
-    a, i, .dropdown {
-      margin: 0 var(--s2) 0 0;//right margin
-    }
   }
   // mobile first layout.
   header nav {
@@ -704,29 +699,38 @@ $syntax: true !default;//syntax highlighting for code blocks
     align-items: center;
     justify-content: center;//center pagination horizontally
     display: flex;
+    li {
+      display: inline-block;
+      margin: 0 var(--s2) 0 0;//right margin
+    }
   }
 
   //dropdown menu used for lang, etc.
   .dropdown {
     display: inline-block;
     position: relative;
-    z-index: 99;
+    z-index: 1;
     font-weight: var(--fh);
-    font-size: 1.4rem;
+    font-size: var(--fs);
   }
   .dropdown-content {
     display: none;
     position: absolute;
-    z-index: 99;
+    cursor: pointer;
+    text-align: center;
+    right: -1rem;
+    z-index: 1;
     font-weight: var(--fh);
-    font-size: 1.4rem;
+    font-size: var(--fs);
+    background: var(--c2);
+    a,span {
+      margin: 0 var(--s1);
+      display: block;
+      text-decoration: none;
+    }
   }
   .dropdown:hover .dropdown-content {
     display: block;
-    z-index: 99;
-    a {
-      text-decoration: none;
-    }
   }
   article nav {//prev/next page title
     div:last-child {
@@ -1170,14 +1174,13 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 }
 @if $blocks {
+  .sticky {
+    position: sticky;
+    top: var(--s2);
+  }
   .block {
     max-width: 30rem;
     margin: var(--s2) auto;
-  }
-  .sblock {
-    width: 15rem;
-    max-width: 15rem;
-    margin-left: var(--s1);
   }
   .blockdiv {
     border-radius: var(--br);
@@ -1197,11 +1200,13 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin: 0;
     }
   }
-  .sticky {
-    position: sticky;
-    top: var(--s2);
-  }
   .sblock {
+    ol,ul {
+      font-size: 1em;
+    }
+    width: 15rem;
+    max-width: 15rem;
+    margin-left: var(--s1);
     display: none;//hide in mobile view
   }
   @if map-get($breakpoints, "md") {
@@ -1276,6 +1281,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-angr {.angr { -webkit-mask: functions.icon(angr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right
   @if $icon-angrr {.angrr { -webkit-mask: functions.icon(angrr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right right
   @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
+  @if $icon-world {.world { -webkit-mask: functions.icon(world, "%23000", 2, "none", $ic) ; background: var(--f2) }}//language select menu
   @if $icon-copy {//copy icons for code blocks
     .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
     .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--cg) }

@@ -7,9 +7,10 @@ draft = false
 [taxonomies]
 tags = ["Features","Shortcodes","Images"]
 [extra]
-toc = true
 keywords = "Image, Markdown, Shortcodes, Swap"
 thumbnail = "ferris-gesture.png"
+toc = true
+section = "Features"
 +++
 
 Cet article couvre les **shortcodes imgswap et img**. Les images peuvent également être intégrées directement à l'aide de markdown `![Ferris](ferris.svg)`, mais il est préférable d'utiliser un shortcode afin de pouvoir définir explicitement la largeur et la hauteur, cela aidera à empêcher le changement de mise en page du contenu, ce qui améliore l'expérience utilisateur et le score Google Lighthouse.

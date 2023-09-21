@@ -8,10 +8,10 @@ draft = false
 [taxonomies]
 tags = ["Features","Shortcodes","Mathematics"]
 [extra]
-toc = true
 math = true
 math_auto_render = true
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
+toc = true
 section = "Features"
 +++
 

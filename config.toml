@@ -69,7 +69,7 @@ Contact = "Contact"
 Privacy = "Confidentialité"
 Sitemap = "Plan du site"
 ## Describtion of the number of parts in a series of posts
-Series_parts = "Série de $NUMBER_OF_PARTS parties"
+Series_parts = "Série" # Série de $NUMBER_OF_PARTS parties
 ### Page not found, maybe moved or not in this language
 404_not_found = "Page introuvable, peut-être déplacée ou non dans cette langue"
 ### Try searching or
@@ -121,9 +121,8 @@ recent_items = 15
 series = true
 #Series_parts = "$NUMBER_OF_PARTS part Series"
 
-
-meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider=""}
-meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider=""}
+meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider="" }
+meta_post = { position="top", size="s95", author=true, readtime=false, readstring="min read", date=true, updated=true, categories_tags=true, divider="" }
 
 hide_section_dates = false # hides the date for sections that use posts.html as their template.
 hide_page_nextprev_titles = false # hides the next/previous titles for pages that use page.html as their template.
@@ -253,7 +252,7 @@ webmanifest = "manifest.min.json" # Required for PWAs
 ###  The options below other than pwa=true, only come into play when the npm/node script is ran.
 ###############################################################################
 
-pwa = false # true to load the service worker
+pwa = true # true to load the service worker
 pwa_VER = '3.11.0' # Service Worker cache version. (increment if you need to force a new cache)
 
 ### 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks

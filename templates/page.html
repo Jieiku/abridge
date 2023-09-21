@@ -62,7 +62,7 @@
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
         <ol>
-        {%- for inner in tag.pages | sort(attribute="year") %}
+        {%- for inner in tag.pages | sort(attribute="date") %}
         {%- if inner.content == page.content %}
         <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
         {% else %}
@@ -105,7 +105,7 @@
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
-        {%- for inner in tag.pages | sort(attribute="year") %}
+        {%- for inner in tag.pages | sort(attribute="date") %}
         {%- if inner.content == page.content %}
         <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
         {% else %}

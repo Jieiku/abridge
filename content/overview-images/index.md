@@ -7,9 +7,10 @@ draft = false
 [taxonomies]
 tags = ["Features","Shortcodes","Images"]
 [extra]
-toc = true
 keywords = "Image, Markdown, Shortcodes, Swap"
 thumbnail = "ferris-gesture.png"
+toc = true
+section = "Features"
 +++
 
 This post covers the **imgswap and img shortcodes**. Images can also be embedded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.

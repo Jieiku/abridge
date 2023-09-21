@@ -65,6 +65,7 @@
         {%- for inner in tag.pages | sort(attribute="date") %}
         {%- if inner.content == page.content %}
         <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+        {%- set_global current_section_index = loop.index0 %} {# Finds the current section, needed for pagination logic later #}
         {% else %}
         <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
         {%- endif %}
@@ -102,16 +103,85 @@
 
     <div class="sblock">
       {%- if page.extra.section %}
+
+      
+      {%- set num_extra_pages = config.extra.section_items | default(value=5) %}
+      
+      
+      
+      
+      
+      
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
-        {%- for inner in tag.pages | sort(attribute="date") %}
-        {%- if inner.content == page.content %}
-        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
-        {% else %}
-        <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+        {%- if tag.page_count > num_extra_pages %}
+          {%- set num_either_side = config.extra.section_either_side | default(value=2) %}
+          {%- set sorted_array = tag.pages | sort(attribute="date") %}
+          {%- set num_pages = tag.page_count %}
+        
+          {{ macros::series_link(inner=sorted_array.0, page=page) }}
+
+          {%- if current_section_index > 3 %}
+            <details>
+              <summary>...</summary>
+              {%- for inner in sorted_array | slice(start=1, end=(current_section_index - 3)) %}
+                {{ macros::series_link(inner=inner, page=page) }}
+              {%- endfor %}
+            </details>
+            <br>
+          {%- endif %}
+
+          {# Max(current_section_index - 2, 1) #}
+          {%- if (current_section_index - 2 ) > 1 %}
+            {%- set num = current_section_index - 2 %}
+          {%- else %}
+            {%- set num = 1 %}
+          {%- endif %}
+          
+
+          {%- for inner in sorted_array | slice(start=num, end=current_section_index) %}
+            {{ macros::series_link(inner=inner, page=page) }}
+          {%- endfor %}
+
+          {%- if current_section_index != 0 and current_section_index != (num_pages - 1) %}
+            {{ macros::series_link(inner=sorted_array[current_section_index], page=page) }}
+          {%- endif %}
+
+          {# Min(num_pages - 1, current_section_index + 3) #}
+          {%- if (num_pages - 2 ) < (current_section_index + 3) %}
+            {%- set num = num_pages - 1 %}
+          {%- else %}
+            {%- set num = current_section_index + 3 %}
+          {%- endif %}
+
+          {%- for inner in sorted_array | slice(start=(current_section_index + 1), end=num ) %}
+            {{ macros::series_link(inner=inner, page=page) }}
+          {%- endfor %}
+
+          {%- if current_section_index < num_pages - 4 %}
+            <details>
+              <summary>...</summary>
+              {%- for inner in sorted_array | slice(start=(current_section_index + 3), end=(num_pages - 1)) %}
+                {{ macros::series_link(inner=inner, page=page) }}
+              {%- endfor %}
+            </details>
+            <br>
+          {%- endif %}
+        
+        {%- set last = num_pages - 1%}
+        {{ macros::series_link(inner=sorted_array[last], page=page) }}
+
+
+        {%- else %}
+          {%- for inner in tag.pages | sort(attribute="date") %}
+          {%- if inner.content == page.content %}
+          <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+          {% else %}
+          <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+          {%- endif %}
+          {%- endfor %}
         {%- endif %}
-        {%- endfor %}
         </ol>
       </div>
       {%- endif %}

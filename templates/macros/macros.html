@@ -306,20 +306,3 @@
       <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
   {%- endif %}
 {%- endmacro %}
-
-{%- macro max(first, last) %}
-  {%- if first > last %}
-      {{ first }}
-  {%- else %}
-      {{ last }}
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro min(inner, page) %}
-  {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-  {%- if inner.content == page.content %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
-    {% else %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
-  {%- endif %}
-{%- endmacro %}

@@ -63,7 +63,12 @@
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a>
         <ol>
         {%- for inner in tag.pages | sort(attribute="date") %}
-          {{ macros::series_link(inner=inner, page=page) }}
+          {%- if inner.content == page.content %}
+            <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+            {%- set_global current_section_index = loop.index0 %} {# Finds the current section, needed for pagination logic later #}
+          {% else %}
+            <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+          {%- endif %}
         {%- endfor %}
         </ol>
       </div>

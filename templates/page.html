@@ -107,7 +107,7 @@
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
-        {%- if tag.page_count > num_extra_pages %}
+        {%- if tag.page_count > num_extra_pages and num_extra_pages > 0 %}
           {%- set sorted_array = tag.pages | sort(attribute="date") %} 
           {%- set num_pages = tag.page_count %}
         

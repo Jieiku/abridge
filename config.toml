@@ -119,6 +119,7 @@ toc = true
 recent = true # TOC / index
 recent_items = 15
 series = true
+section_items = 10 # Max amount of section items allowed to displayed in a list, use 0 to disable
 #Series_parts = "$NUMBER_OF_PARTS part Series"
 
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider="" }

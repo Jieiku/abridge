@@ -1182,6 +1182,21 @@ $syntax: true !default;//syntax highlighting for code blocks
     max-width: 30rem;
     margin: var(--s2) auto;
   }
+
+  // Hides the next .hidden_li element when details is closed
+  details:not([open]) + .hidden_li {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  summary {
+    margin-left: -1em;
+    margin-bottom: .2rem;
+    color: var(--c4);
+  }
+  
+
   .blockdiv {
     border-radius: var(--br);
     border-top: 5px solid var(--a1);

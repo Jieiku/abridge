@@ -112,7 +112,7 @@
           {%- set num_pages = tag.page_count %}
 
           {# Shows the first page #}
-          {{ macros::series_link(inner=sorted_array.0, page=page) }}
+          {{ macros::series_link(inner=sorted_array.0, page=page, config=config) }}
 
           {# Hides the next couple of pages if the current section is more than 3 away from start #}
           {%- if current_section_index > 3 %}
@@ -140,7 +140,7 @@
 
           {# Shows the current page #}
           {%- if current_section_index != 0 and current_section_index != (num_pages - 1) %}
-            {{ macros::series_link(inner=sorted_array[current_section_index], page=page) }}
+            {{ macros::series_link(inner=sorted_array[current_section_index], page=page, config=config) }}
           {%- endif %}
 
           {# Min(num_pages - 1, current_section_index + 3) #}
@@ -166,12 +166,12 @@
           {%- endif %}
 
         {%- set last = num_pages - 1%}
-        {{ macros::series_link(inner=sorted_array[last], page=page) }}
+        {{ macros::series_link(inner=sorted_array[last], page=page, config=config) }}
 
         {# If there is not more than max pages render normally #}
         {%- else %}
           {%- for inner in tag.pages | sort(attribute="date") %}
-            {{ macros::series_link(inner=inner, page=page) }}
+            {{ macros::series_link(inner=inner, page=page, config=config) }}
           {%- endfor %}
         {%- endif %}
         </ol>

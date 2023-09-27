@@ -1,7 +1,7 @@
 # do NOT include a trailing slash on the base URL
-base_url="https://abridge.netlify.app"
+base_url = "https://abridge.netlify.app"
 # Usable site directly from disk, Including Search: "/home/jieiku/.dev/abridge/public"
-# Also set index_format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
+# Also set index format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
 # If you use the npm/node script then all you have to do is set offline = true, and everything else is automatic.
 
 title = "Abridge"
@@ -24,7 +24,8 @@ taxonomies = [
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 
 [search]                # Options specific to elasticlunr search.
-index_format = "elasticlunr_json" # elasticlunr_json, elasticlunr_javascript
+# index format can be: elasticlunr_json or elasticlunr_javascript
+index_format = "elasticlunr_json"
 include_title = true        # include title of page/section in index
 include_description = true # include description of page/section in index
 include_content = true      # include rendered content of page/section in index
@@ -94,7 +95,7 @@ toc = true
 recent = true # TOC / index
 recent_items = 15
 series = true
-series_items = 9 # Max number of items to display in series list
+series_items = 9 # Max number of items to display in series list, use 0 to disable
 #Series_parts = "$NUMBER_OF_PARTS part Series"
 
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider="" }
@@ -200,7 +201,8 @@ researchgate = "your-profile-id"
 ###############################################################################
 
 # do NOT include a trailing slash on the online URL
-online_url="https://abridge.netlify.app"
+online_url = "https://abridge.netlify.app"
+online_indexformat = "elasticlunr_json"# used to restore your preferred index format when offline = false
 offline = false # implies uglyurls=true and integrity=false, when true NPM/node will automatically set the path for the base_url, it will build the site, then set the base_url back to what it was.
 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html

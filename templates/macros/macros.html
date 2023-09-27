@@ -11,8 +11,9 @@
 {%- endmacro page_listing %}
 
 
-{%- macro series_link(inner, page) %}
-  {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- macro series_link(inner, page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
   {%- if inner.content == page.content %}
       <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
     {% else %}

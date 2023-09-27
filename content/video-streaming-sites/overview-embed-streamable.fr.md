@@ -9,7 +9,7 @@ tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Streamable"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre streamable.
@@ -28,6 +28,7 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 - `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Streamable")
 
 ### Output
+
 ```html
 {{ streamable(id="92ok4") }}
 ```

@@ -26,7 +26,10 @@
       {# Iterate through each language and display the localised 404 message #}
       {%- for lcode, language in config.languages -%}
         {%- if lcode != config.default_language -%}
-          <p>{{ trans(key="404_not_found", lang=lcode) }}. {% if config.build_search_index %}{{ trans(key="404_try_search", lang=lcode) }}{% endif %} <a href="{{ config.base_url }}/{{ lcode }}/{%- if uglyurls %}index.html{%- endif %}">{{ trans(key="404_go_home", lang=lcode) }}</a>.</p>
+        {%- set i18n_404 = load_data(path="i18n/" ~ lcode ~ '.toml', required=false) -%}
+        {%- if not i18n_404 -%}{%- set i18n_404 = load_data(path="themes/abridge/i18n/" ~ lcode ~ ".toml", required=false) -%}{%- endif %}
+
+          <p>{{ macros::translate(key="404_not_found", default="404_not_found", i18n=i18n_404) }}{{ macros::translate(key="full_stop", default=".", i18n=i18n_404) }} {% if config.build_search_index %}{{ macros::translate(key="404_try_search", default="Try searching or", i18n=i18n_404) }}{% endif %} <a href="{{ config.base_url }}/{{ lcode }}/{%- if uglyurls %}index.html{%- endif %}">{{ macros::translate(key="404_go_home", default="go to homepage", i18n=i18n_404) }}</a>{{ macros::translate(key="full_stop", default=".", i18n=i18n_404) }}</p>
         {%- endif -%}
       {%- endfor -%}
     </div>

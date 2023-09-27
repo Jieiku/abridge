@@ -20,7 +20,7 @@
 {%- block content %}
     <div>
       <div class="c">
-        <h1>{{ terms | length }} {%- if lang != config.default_language %} {{ trans(key="Tags" | safe, lang=lang) }} {% else %} Tags {% endif %}</h1>
+        <h1>{{ terms | length }} {{ macros::translate(key="Tags", default="Tags", i18n=i18n) }} </h1>
         <p>{% for term in terms %} #<a href="#{{ term.name }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup> {% endfor %}</p>
       </div>
       {%- for term in terms %}

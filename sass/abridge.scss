@@ -215,6 +215,7 @@ $form: true !default;//Form elements (non-button)
 $top: true !default;//back to top button using CSS
 $search: true !default;//search feature
 $blocks: true !default;//css classes for block formatting, eg: recent posts, table of contents, series navigation
+$series: true !default;//series navigation list
 $modifiers: true !default;//tiny modifier classes for sizing and spacing
 $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
@@ -1182,21 +1183,6 @@ $syntax: true !default;//syntax highlighting for code blocks
     max-width: 30rem;
     margin: var(--s2) auto;
   }
-
-  // Hides the next .hidden_li element when details is closed
-  details:not([open]) + .hidden_li {
-    height: 0;
-    visibility: hidden;
-    overflow: hidden;
-  }
-
-  summary {
-    margin-left: -1em;
-    margin-bottom: .2rem;
-    color: var(--c4);
-  }
-  
-
   .blockdiv {
     border-radius: var(--br);
     border-top: 5px solid var(--a1);
@@ -1216,6 +1202,18 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
   }
   .sblock {
+  @if $series {
+    details:not([open]) + .hidden_li {// Series: Hides next .hidden_li element when details is closed
+      height: 0;
+      visibility: hidden;
+      overflow: hidden;
+    }
+    summary {// Series: aligns item with the rest of the list, and color differently.
+      margin-left: -1em;
+      margin-bottom: .2rem;
+      color: var(--c4);
+    }
+  }
     ol,ul {
       font-size: 1em;
     }

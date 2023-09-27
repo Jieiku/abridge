@@ -9,7 +9,7 @@ tags = ["Features","Video","Audio","Images","Shortcodes"]
 [extra]
 keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 Several custom shortcodes are included to augment CommonMark (courtesy of [d3c3nt theme](https://d3c3nt.figbert.com/posts/rich-content/)). `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.

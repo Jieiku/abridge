@@ -9,7 +9,7 @@ tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.
@@ -32,6 +32,7 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
 ### Output
+
 ```html
 {{ vimeo(id="514402648") }}
 ```

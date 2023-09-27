@@ -82,7 +82,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
     {%- endif %}
     <div class="sblock">
       <div class="blockdiv sticky">
-        <span class="b s150">{%- if lang != config.default_language %}{{ trans(key="Recent_Posts" | safe, lang=lang) }}{% else %}Recent Posts{% endif %}</span>
+        <span class="b s150">{{ macros::translate(key="Recent", default="Recent", i18n=i18n) }}</span>
         {%- set recent_items=config.extra.recent_items | default(value=9) -%}
         {%- for page in section_item.pages | slice(end=recent_items) %}
           {{- macros::page_listing(page=page, config=config) }}

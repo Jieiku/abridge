@@ -1,3 +1,7 @@
+{%- macro translate(key, i18n="", default="") %}
+{{- i18n[key] | default(value=default) | safe -}}
+{%- endmacro %}
+
 {%- macro page_listing(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
@@ -6,6 +10,15 @@
         </div>
 {%- endmacro page_listing %}
 
+
+{%- macro series_link(inner, page) %}
+  {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+  {%- if inner.content == page.content %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
+    {% else %}
+      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+  {%- endif %}
+{%- endmacro %}
 
 
 {%- macro title_post(page, config) %}
@@ -17,6 +30,10 @@
 
 
 {%- macro meta_post(page, config) %}
+{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
+{%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
+
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
       <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
@@ -55,7 +72,7 @@
           {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
           {%- if config.extra.date_locale %}
           {%- if lang != config.default_language -%}
-            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
           {%- else -%}
             {%- set lang_locale = config.extra.date_locale -%}
           {%- endif -%}
@@ -67,10 +84,10 @@
 
         {#- Updated #}
           {%- if config.extra.meta_post.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
-          {%- if lang != config.default_language %} {{ trans(key="Updated" | safe, lang=lang) }}{% else %} Updated{% endif %}:
+          {{ macros::translate(key="Updated", default="Updated", i18n=i18n) }}:
           {%- if config.extra.date_locale %}
           {%- if lang != config.default_language -%}
-            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
           {%- else -%}
             {%- set lang_locale = config.extra.date_locale -%}
           {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
@@ -97,6 +114,9 @@
 
 
 {%- macro meta_index(page, config) %}
+{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
+{%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
         <span{%- if config.extra.meta_index.size %} class="{{ config.extra.meta_index.size }}"{% endif %}>
@@ -135,7 +155,7 @@
           {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
           {%- if config.extra.date_locale %}
           {%- if lang != config.default_language -%}
-            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
           {%- else -%}
             {%- set lang_locale = config.extra.date_locale -%}
           {%- endif -%}
@@ -147,10 +167,10 @@
 
         {#- Updated #}
           {%- if config.extra.meta_index.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
-          {%- if lang != config.default_language %} {{ trans(key="Updated" | safe, lang=lang) }}{% else %} Updated{% endif %}:
+          {{ macros::translate(key="Updated", default="Updated", i18n=i18n) }}:
           {%- if config.extra.date_locale %}
           {%- if lang != config.default_language -%}
-            {%- set lang_locale = trans(key="date_locale" | safe, lang=lang) -%}
+            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
           {%- else -%}
             {%- set lang_locale = config.extra.date_locale -%}
           {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
@@ -295,14 +315,5 @@
           </span>
         {%- endif -%}
       </nav>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro series_link(inner, page) %}
-  {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-  {%- if inner.content == page.content %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"><b>{{ inner.title }}</b></a></li>
-    {% else %}
-      <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
   {%- endif %}
 {%- endmacro %}

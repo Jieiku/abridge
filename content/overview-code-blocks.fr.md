@@ -9,7 +9,7 @@ tags = ["Features","Markdown"]
 [extra]
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 Cet article présente différents Code Blocks permettant de comparer facilement des thèmes sublimes.

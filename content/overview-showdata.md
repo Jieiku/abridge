@@ -9,7 +9,7 @@ tags = ["Features","Data","Shortcodes"]
 [extra]
 keywords = "Data, Load, External, Shortcodes"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 The `showdata` shortcode can load and display data from an external source via Zola's [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) function.

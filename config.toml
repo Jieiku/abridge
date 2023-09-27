@@ -45,55 +45,30 @@ title = "Abridge"
 description = "Abridge est un thème Zola rapide et léger utilisant le html sémantique, le CSS abridge.css class-light et aucun JS obligatoire."
 generate_feed = true
 build_search_index = true
+search.include_title = true # include title of page/section in index
 search.include_description = true # include description of page/section in index
+search.include_content = true # include rendered content of page/section in index
+# search.truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
 taxonomies = [
 #    {name = "categories", feed = true},
     {name = "tags", feed = true},
 ]
 
-[languages.fr.translations]
-flag = "Français"
-date_locale = "fr_FR"
-Search = "Recherche"
-Recent_Posts = "Articles Récents"
-Updated = "Modifié"
-Index = "Indice"
-Powered_by = "Propulsé"
-and = "et"
-About = "Sur"
-Blog = "Blog"
-Posts = "Articles"
-Categories = "Catégories"
-Tags = "Mots-clés"
-Contact = "Contact"
-Privacy = "Confidentialité"
-Sitemap = "Plan du site"
-## Describtion of the number of parts in a series of posts
-Series_parts = "Série" # Série de $NUMBER_OF_PARTS parties
-### Page not found, maybe moved or not in this language
-404_not_found = "Page introuvable, peut-être déplacée ou non dans cette langue"
-### Try searching or
-404_try_search = "Essayez de rechercher ou"
-### go to homepage
-404_go_home = "allez à la page d'accueil"
-copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web est sous licence <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.'
-
-#[languages.es.translations]
-#flag = "Español"
+[languages.es]
+title = "Abridge"
+description = "Abridge es un tema de Zola rápido y liviano que utiliza HTML semántico, CSS ligero de clase abridge.css y JS no obligatorio."
+generate_feed = true
+build_search_index = true
+search.include_title = true # include title of page/section in index
+search.include_description = true # include description of page/section in index
+search.include_content = true # include rendered content of page/section in index
+# search.truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
+taxonomies = [
+#    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
 
 [extra]
-###############################################################################
-### Language
-### https://www.w3schools.com/tags/ref_country_codes.asp
-### https://tera.netlify.app/docs#date
-###############################################################################
-date_locale = "en_US"
-language_code = "en-US"
-flag.en = "English"
-flag.fr = "Français"
-#flag.es = "Español"
-
-
 ###############################################################################
 ### Layout & Format
 ### position: top, bottom, both, false(hidden)
@@ -119,7 +94,7 @@ toc = true
 recent = true # TOC / index
 recent_items = 15
 series = true
-section_items = 10 # Max amount of section items allowed to displayed in a list, use 0 to disable
+series_items = 9 # Max number of items to display in series list
 #Series_parts = "$NUMBER_OF_PARTS part Series"
 
 meta_index = { position="bottom", size="s90", author=false, readtime=false, readstring="min", date=true, updated=false, categories_tags=true, divider="" }

@@ -47,13 +47,13 @@
 
     {# In Page Series Navigation #}
     {%- if config.extra.series | default(value=true) %}
-    {%- if page.extra.section %}
+    {%- if page.extra.series %}
 
-      {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.section, lang=lang) %}
+      {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.series, lang=lang) %}
       {%- set page_num = tag.page_count | as_str %}
 
         {%- if lang != config.default_language %}
-          {%- set parts_string = trans(key="Series_parts", lang=lang) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
+          {%- set parts_string = macros::translate(key='Series_parts', default='Series', i18n=i18n) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {% else %}
           {%- set parts_string = config.extra.Series_parts | default(value="Series") | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {% endif -%}
@@ -102,15 +102,15 @@
     {%- if toc %}
 
     <div class="sblock">
-      {%- if page.extra.section %} 
-      {%- set num_extra_pages = config.extra.section_items | default(value=5) %}
+      {%- if page.extra.series %}
+      {%- set num_extra_pages = config.extra.series_items | default(value=9) %}
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a>
         <ol>
         {%- if tag.page_count > num_extra_pages and num_extra_pages > 0 %}
-          {%- set sorted_array = tag.pages | sort(attribute="date") %} 
+          {%- set sorted_array = tag.pages | sort(attribute="date") %}
           {%- set num_pages = tag.page_count %}
-        
+
           {# Shows the first page #}
           {{ macros::series_link(inner=sorted_array.0, page=page) }}
 
@@ -132,7 +132,7 @@
           {%- else %}
             {%- set num = 1 %}
           {%- endif %}
-          
+
           {# Shows two pages before current page #}
           {%- for inner in sorted_array | slice(start=num, end=current_section_index) %}
             <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
@@ -164,7 +164,7 @@
               {%- endfor %}
             </div>
           {%- endif %}
-        
+
         {%- set last = num_pages - 1%}
         {{ macros::series_link(inner=sorted_array[last], page=page) }}
 
@@ -179,7 +179,7 @@
       {%- endif %}
 
       <div class="blockdiv sticky">
-        <a class="b s150" href="#">{%- if lang != config.default_language %}{{ trans(key="Index" | safe, lang=lang) }}{% else %}Index{% endif %}</a>
+        <a class="b s150" href="#">{{ macros::translate(key="Index", default="Index", i18n=i18n) }}</a>
         {%- for h in toc %}
         <div>
           <a href="#{{h.id | safe}}">{{ h.title }}</a>

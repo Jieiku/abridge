@@ -9,7 +9,7 @@ tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Youtube"
 toc = true
-section = "Features"
+series = "Features"
 +++
 
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre youtube.
@@ -31,6 +31,7 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
 ### Output
+
 ```html
 {{ youtube(id="32gyFIWecuw") }}
 ```

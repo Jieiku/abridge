@@ -1,5 +1,9 @@
 {%- import 'macros/seo.html' as macros_seo %}
 {%- import "macros/macros.html" as macros %}
+{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
+{%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
+
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
 <!DOCTYPE html>
@@ -52,7 +56,7 @@
             {%- if config.extra.menu %}
               {%- for i in config.extra.menu -%}
                 <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching("^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
-                {%- if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif -%}
+                {%- if lang != config.default_language %} {{ macros::translate(key=i.name|safe, default=i.name|safe, i18n=i18n) }} {% else %} {{ i.name | safe }} {% endif -%}
                 </a></li>
               {%- endfor -%}
             {%- endif -%}
@@ -61,13 +65,17 @@
             <li><div class="dropdown"><i class="svgs world" type="reset"></i>
               {%- if current_url %}
                 <div class="dropdown-content">
-                <span>{%- if lang != config.default_language %}{{ trans(key="flag" | safe, lang=lang) }}{% else %}{{ config.extra.flag.en }}{% endif %}</span>
-                {%- for lcode,flag in config.extra.flag -%}
+                <span>{{ macros::translate(key="language_name", default="lang_name", i18n=i18n) }}</span>
+                {%- for lcode,language in config.languages -%}
+                  {%- set i18n_menu = load_data(path="i18n/" ~ lcode ~ '.toml', required=false) -%}
+                  {%- if not i18n_menu -%}{%- set i18n_menu = load_data(path="themes/abridge/i18n/" ~ lcode ~ ".toml", required=false) -%}{%- endif %}
                   {%- if lang != lcode -%}
                     {%- if lcode == config.default_language -%}
-                    <a href="{{ current_url | replace(from=current_path | truncate(length=4, end=""), to="/") | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a>
+                    <a href="{{ current_url | replace(from='/' ~ lang ~ '/', to = '/') | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ macros::translate(key="language_name", default="language_name", i18n=i18n_menu) }}</a>
+                    {%- elif lang == config.default_language -%}
+                    <a href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ macros::translate(key="language_name", default="language_name", i18n=i18n_menu) }}</a>
                     {%- else -%}
-                    <a href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ flag }}</a>
+                    <a href="{{ current_url | replace(from='/' ~ lang ~ '/', to = '/' ~ lcode ~ '/') | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ macros::translate(key="language_name", default="language_name", i18n=i18n_menu) }}</a>
                     {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
@@ -90,7 +98,7 @@
           <div>
             <form autocomplete=off class="js" name="goSearch" id="searchbox">
               <div class="searchd">
-                <input id="searchinput" type="text" placeholder="{%- if lang != config.default_language %}{{ trans(key="Search" | safe, lang=lang) }}{% else %}Search{% endif %}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
+                <input id="searchinput" type="text" placeholder="{{ macros::translate(key="Search", default="Search", i18n=i18n) }}" title="Search"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork" {% endif %}{% endif %} />
                 <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
               </div>
               <div class="results"><div id="suggestions"{% if config.extra.search_library %}{% if config.extra.search_library == "stork" %} data-stork="stork-output" {% endif %}{% endif %}></div></div>
@@ -130,7 +138,7 @@
 
         {%- if config.extra.copyright_override -%}
           {%- if lang != config.default_language %}
-            {%- set copyright_string = trans(key="copyright_override", lang=lang) | replace(from="$CURRENT_YEAR", to=current_year) | replace(from="$SITE_TITLE", to=config.title) %}
+            {%- set copyright_string = macros::translate(key='copyright_override', default='© $CURRENT_YEAR $SITE_TITLE', i18n=i18n) | replace(from="$CURRENT_YEAR", to=current_year) | replace(from="$SITE_TITLE", to=config.title) %}
           {% else %}
             {%- set copyright_string = config.extra.copyright_override | replace(from="$CURRENT_YEAR", to=current_year) | replace(from="$SITE_TITLE", to=config.title) %}
           {% endif -%}
@@ -149,7 +157,7 @@
         {%- else %}
         {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
         {%- endif %}
-        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ trans(key=i.name | safe, lang=lang) }} {% else %} {{ i.name | safe }} {% endif %}</a>
+        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ macros::translate(key=i.name|safe, default=i.name|safe, i18n=i18n) }} {% else %} {{ i.name | safe }} {% endif %}</a>
         {%- endfor %}
       </nav>
       {%- endif %}
@@ -157,7 +165,7 @@
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{% if lang != config.default_language -%} {{ trans(key="Powered_by" | safe, lang=lang) }} {% else -%} Powered by {% endif %}<a href="https://www.getzola.org/" target="_blank">Zola</a> {%- if lang != config.default_language %} {{ trans(key="and" | safe, lang=lang) }} {% else %} and {% endif -%} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{{ macros::translate(key="Powered_by", default="Powered by", i18n=i18n) }} <a href="https://www.getzola.org/" target="_blank">Zola</a> {{ macros::translate(key="and", default="and", i18n=i18n) }} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

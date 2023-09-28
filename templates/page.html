@@ -64,7 +64,7 @@
         <ol>
         {%- for inner in tag.pages | sort(attribute="date") %}
           {%- if inner.content == page.content %}
-            <li><a class="b" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
+            <li><a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
             {%- set_global current_section_index = loop.index0 %} {# Finds the current section, needed for pagination logic later #}
           {% else %}
             <li><a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>

@@ -1213,6 +1213,10 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin-bottom: .2rem;
       color: var(--c4);
     }
+    .scur {//series current page
+      font-weight: var(--fh);
+      color: var(--a1);
+    }
   }
     ol,ul {
       font-size: 1em;

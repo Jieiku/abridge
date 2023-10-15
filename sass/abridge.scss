@@ -57,6 +57,7 @@ $icon-python: true !default;
 $icon-docker: true !default;
 $icon-stack: true !default;
 $icon-instagram: true !default;
+$icon-pixelfed: true !default;
 $icon-pinterest: true !default;
 $icon-discord: true !default;
 $icon-twitch: true !default;
@@ -1332,6 +1333,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-minus {.minus { background-image: functions.icon(minus, "%23888", 2, "none", $ic) }}
   @if $icon-moon {.moon { background-image: functions.icon(moon, "%23888", 2, "none", $ic) }}
   @if $icon-pinterest {.pinterest { background-image: functions.icon(pinterest, "%23b01", 2, "none", $ic) }}
+  @if $icon-pixelfed {.pixelfed { background-image: functions.icon(pixelfed, "%23e07", 2, "none", $ic) }}
   @if $icon-python {.python { background-image: functions.icon(python, "%23fc1", 2, "%2326a", $ic) }}
   @if $icon-researchgate {.researchgate { background-image: functions.icon(researchgate, "none", 2, "%230db", $ic) }}
   @if $icon-rss {.rss { background-image: functions.icon(rss, "%23e94", 2, "none", $ic) }}

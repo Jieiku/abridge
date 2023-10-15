@@ -40,6 +40,8 @@
           <a href="https://stackoverflow.com/users/{{ config.extra.stack }}/" target="_blank" title="Stack"><i type="Button" class="svg stack" title="Stack"></i></a>{% endif -%}
           {%- if config.extra.instagram -%}
           <a href="https://www.instagram.com/{{ config.extra.instagram }}/" target="_blank" title="Instagram"><i type="Button" class="svg instagram" title="Instagram"></i></a>{% endif -%}
+          {%- if config.extra.pixelfed -%}
+          <a href="{{ config.extra.pixelfed | safe }}" target="_blank" title="Pixelfed"><i type="Button" class="svg pixelfed" title="Pixelfed"></i></a>{% endif -%}
           {%- if config.extra.pinterest -%}
           <a href="https://www.pinterest.com/{{ config.extra.pinterest }}/" target="_blank" title="Pinterest"><i type="Button" class="svg pinterest" title="Pinterest"></i></a>{% endif -%}
           {%- if config.extra.twitch -%}

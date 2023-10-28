@@ -44,7 +44,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - [x] Categories. (similar to Tags, disabled/commented out by default)
 - [x] Social icon links in footer.
 - [X] Responsive design. (mobile first)
-- [X] Video Shortcodes: [Youtube](https://abridge.netlify.app/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/overview-embed-streamable/).
+- [X] Video Shortcodes: [Youtube](https://abridge.netlify.app/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/video-streaming-sites/overview-embed-streamable/).
 - [X] Media Shortcodes: [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
 - [X] Other Shortcodes: [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
 
@@ -215,15 +215,16 @@ I recommend copying the entire config.toml file as outlined in Step 3 as it prov
 
 Set a field in `extra` with a key of `menu` and `menu_footer`.
 If you want the link to open in a new tab/browser then set `blank = true`.
+size: s150, s140, s130, s120, s110, s95, s90, s85, s80, s75, s70, false(full size)
 If a link should have a trailing slash at the end of the url set `slash = true`.
 (generally all links should have a trailing slash unless its a file link such as `sitemap.xml`)
 
 ```toml
 menu = [
-  {url = "about", name = "About", slash = true, blank = false},
-  {url = "posts", name = "Posts", slash = true, blank = false},
-  {url = "categories", name = "Categories", slash = true, blank = false},
-  {url = "tags", name = "Tags", slash = true, blank = false},
+  {url = "about", name = "About", slash = true, blank = false, size="s110"},
+  {url = "posts", name = "Posts", slash = true, blank = false, size="s110"},
+  {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
+  {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
 ]
 menu_footer = [
   {url = "about", name = "About", slash = true, blank = false},
@@ -235,7 +236,7 @@ menu_footer = [
 
 ### SEO and Header Tags
 
-You can review the SEO tags in the head macro located at `templates/macros/head.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
+You can review the SEO tags in the seo macro located at `templates/macros/seo.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
 
 In your post markdown file you should set a title less than 60 characters and a description between 80 and 160 characters in length. The description is what is displayed in search results below the page title. Anywhere that you do not set a page description, the primary site config.description will be used instead.
 

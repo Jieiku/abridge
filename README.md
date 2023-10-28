@@ -51,7 +51,7 @@ The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml]
 - [X] Media Shortcodes: [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
 - [X] Other Shortcodes: [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
 
-**[Complete Documentation is availabe here](https://abridge.netlify.app/overview-abridge/)**
+**[Complete Documentation is available here](https://abridge.netlify.app/overview-abridge/)**
 
 ## Quick Start
 

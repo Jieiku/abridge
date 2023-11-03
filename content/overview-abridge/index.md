@@ -295,6 +295,8 @@ js_copycode = false
 js_email_encode = false
 js_prestyle = false
 js_switcher = false
+
+pwa = false
 ```
 
 These are the javascript files used by Abridge:

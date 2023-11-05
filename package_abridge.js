@@ -53,6 +53,14 @@ async function abridge() {
   console.log('Zola Build to generate files for minification:');
   await execWrapper('zola build');
 
+  //check that static/js exists, do this after zola build, it will handle creating static if missing.
+  var jsdir = 'static/js';
+  try {
+    fs.mkdirSync(jsdir);
+  } catch(e) {
+    if (e.code != 'EEXIST') throw e;
+  }
+
   // check if abridge is used directly or as a theme.
   bpath = '';
   if (fs.existsSync('./themes')) {

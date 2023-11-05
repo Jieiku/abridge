@@ -275,9 +275,9 @@ Abridge theme has PWA support. You can install the entire site as an app and hav
 
 If using Chrome on desktop then look at the end of the address bar for the install button. On Android you should get a popup to install, you can also install from the 3 dot menu in the top right corner. Once you have the PWA installed, you can go completely offline and you will still be able to browse or search the site!
 
-To use it in your own instance you will need to edit `static/sw.js` for the list of files to cache. Technically you do not need to edit `sw.js`, but if even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse.
+There is an npm script to generate the file cache list and minification `npm run abridge`. My [netlify.toml](https://github.com/Jieiku/abridge/blob/master/netlify.toml) file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
 
-There is an npm script to generate the file cache list and minification `npm run abridge`. My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
+To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `config.toml`. If even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
 
 The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
 

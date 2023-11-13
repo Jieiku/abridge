@@ -1228,10 +1228,13 @@ $syntax: true !default;//syntax highlighting for code blocks
     margin-left: var(--s1);
     display: none;//hide in mobile view
   }
+  .desc {
+    display: none;//hide in mobile view
+  }
   @if map-get($breakpoints, "md") {
     // mobile first is min-width for desktop instead of max-width for mobile
     @media (min-width: map-get($breakpoints, "md")) {
-      .sblock {
+      .sblock, .desc {
         display: unset;//show in desktop view
       }
       .block {

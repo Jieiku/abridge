@@ -2,7 +2,7 @@ name = "abridge"
 description = "A fast and lightweight Zola theme using semantic html, a class-light abridge.css, and No mandatory JS."
 license = "MIT"
 homepage = "https://github.com/jieiku/abridge"
-min_version = "0.17.2"
+min_version = "0.18.0"
 demo = "https://abridge.netlify.app/"
 
 # Abridge theme author info

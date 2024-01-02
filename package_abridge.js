@@ -43,7 +43,9 @@ async function execWrapper(cmd) {
 
 async function abridge() {
   if (offline === false) {
-    replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
+    if (online_url) {
+      replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
+    }
     replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
   } else if (offline === true) {
     replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});

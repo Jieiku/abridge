@@ -202,7 +202,7 @@ researchgate = "your-profile-id"
 ###############################################################################
 
 # do NOT include a trailing slash on the online URL
-online_url = "https://abridge.netlify.app"
+#online_url = "https://abridge.netlify.app"
 online_indexformat = "elasticlunr_json"# used to restore your preferred index format when offline = false
 offline = false # implies uglyurls=true and integrity=false, when true NPM/node will automatically set the path for the base_url, it will build the site, then set the base_url back to what it was.
 

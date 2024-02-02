@@ -676,6 +676,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+  }
+  header > nav {
     ul {
         margin: 0;
         display: flex;
@@ -684,7 +686,6 @@ $syntax: true !default;//syntax highlighting for code blocks
         align-items: center;
     }
   }
-
   header > nav > div:nth-child(2) {//puts logo on left and menu/search on right
     margin-left: auto;
     justify-content: center;

@@ -538,6 +538,10 @@ $syntax: true !default;//syntax highlighting for code blocks
     top: -.5em;
   }
 
+  details summary {
+    cursor: pointer;
+  }
+
   address,
   blockquote,
   dl,

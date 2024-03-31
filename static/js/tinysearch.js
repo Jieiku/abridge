@@ -15,7 +15,7 @@ function goSearchNow() {
 
     var headerDiv = document.createElement("div");// create a div element
 
-    var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> Results For: '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
+    var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
 
     headerDiv.innerHTML = headerContent;// document element div (headerDiv), set the inner contents to our header html (headerContent)
 

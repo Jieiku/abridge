@@ -8,6 +8,9 @@ const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
 
+if (!(fs.existsSync('config.toml'))) {
+  throw new Error('ERROR: cannot find config.toml!');
+}
 const tomlString = String(fs.readFileSync('config.toml'));
 const data = TOML.parse(tomlString);
 const js_prestyle = data.extra.js_prestyle;
@@ -37,21 +40,35 @@ async function execWrapper(cmd) {
     console.log(stdout);
   }
   if (stderr) {
-    console.log('Error: '+stderr);
+    console.log('ERROR: '+stderr);
   }
 }
 
 async function abridge() {
   if (offline === false) {
-    replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
-    replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
+    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
+      replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
+      replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
+    }
   } else if (offline === true) {
-    replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
-    replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
+      replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
+      replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+    } else {
+      throw new Error('ERROR: offline = true requires that online_url and online_indexformat are set in config.toml, so that the base_url and index_format can be restored if offline is later set to false.');
+    }
   }
 
   console.log('Zola Build to generate files for minification:');
   await execWrapper('zola build');
+
+  //check that static/js exists, do this after zola build, it will handle creating static if missing.
+  var jsdir = 'static/js';
+  try {
+    fs.mkdirSync(jsdir);
+  } catch(e) {
+    if (e.code != 'EEXIST') throw e;
+  }
 
   // check if abridge is used directly or as a theme.
   bpath = '';
@@ -97,64 +114,69 @@ async function abridge() {
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.
-    // update from abridge theme.
-    fs.copyFileSync(bpath+'static/sw.js', 'static/sw.js');
-    fs.copyFileSync(bpath+'static/js/sw_load.js', 'static/js/sw_load.js');
-    // Update settings in PWA javascript file, using options parsed from config.toml.  sw.min.js?v=3.10.0",  "++"
-    if (fs.existsSync('static/js/sw_load.js')) {
-      sw_load_min = '.js?v=';
-      if (js_bundle) {
-        sw_load_min = '.min.js?v=';
+    if (typeof pwa_VER !== 'undefined' && typeof pwa_NORM_TTL !== 'undefined' && typeof pwa_LONG_TTL !== 'undefined' && typeof pwa_TTL_NORM !== 'undefined' && typeof pwa_TTL_LONG !== 'undefined' && typeof pwa_TTL_EXEMPT !== 'undefined') {
+      // update from abridge theme.
+      fs.copyFileSync(bpath+'static/sw.js', 'static/sw.js');
+      fs.copyFileSync(bpath+'static/js/sw_load.js', 'static/js/sw_load.js');
+      // Update settings in PWA javascript file, using options parsed from config.toml.  sw.min.js?v=3.10.0",  "++"
+      if (fs.existsSync('static/js/sw_load.js')) {
+        sw_load_min = '.js?v=';
+        if (js_bundle) {
+          sw_load_min = '.min.js?v=';
+        }
+        replace.sync({files: 'static/js/sw_load.js', from: /sw.*v=.*/g, to: "sw"+sw_load_min+pwa_VER+"\","});
       }
-      replace.sync({files: 'static/js/sw_load.js', from: /sw.*v=.*/g, to: "sw"+sw_load_min+pwa_VER+"\","});
-    }
-    if (fs.existsSync('static/sw.js')) {
-      replace.sync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
-      replace.sync({files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = "+pwa_LONG_TTL+";"});
-      replace.sync({files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = ["+pwa_TTL_NORM+"];"});
-      replace.sync({files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = ["+pwa_TTL_LONG+"];"});
-      replace.sync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
-    }
-
-    if (pwa_cache_all) {
-      // Generate array from the list of files, for the entire site.
-
-      var dir = 'public';
-      try {
-        fs.mkdirSync(dir);
-      } catch(e) {
-        if (e.code != 'EEXIST') throw e;
+      if (fs.existsSync('static/sw.js')) {
+        replace.sync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
+        replace.sync({files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = "+pwa_LONG_TTL+";"});
+        replace.sync({files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = ["+pwa_TTL_NORM+"];"});
+        replace.sync({files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = ["+pwa_TTL_LONG+"];"});
+        replace.sync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
       }
-      const path = './public/';
-      cache = 'this.BASE_CACHE_FILES = [';
-      files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
-      .forEach(
-        (file) => {
-          // check if is directory, if not then add the path/file
-          if (!fs.lstatSync(path+file).isDirectory()) {
-            // format output
-            item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
-            item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
 
-            // if formatted output is not empty line then append it to cache var
-            if (item != '') {// skip empty lines
-              cache = cache+"'"+item+"',";
+      if (pwa_cache_all === true) {
+        console.log('info: pwa_cache_all = true in config.toml, so caching the entire site.\n');
+        // Generate array from the list of files, for the entire site.
+
+        var dir = 'public';
+        try {
+          fs.mkdirSync(dir);
+        } catch(e) {
+          if (e.code != 'EEXIST') throw e;
+        }
+        const path = './public/';
+        cache = 'this.BASE_CACHE_FILES = [';
+        files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
+        .forEach(
+          (file) => {
+            // check if is directory, if not then add the path/file
+            if (!fs.lstatSync(path+file).isDirectory()) {
+              // format output
+              item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
+              item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
+
+              // if formatted output is not empty line then append it to cache var
+              if (item != '') {// skip empty lines
+                cache = cache+"'"+item+"',";
+              }
             }
           }
-        }
-      );
-      cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
-    } else if (pwa_BASE_CACHE_FILES) {
-      cache = 'this.BASE_CACHE_FILES = ['+pwa_BASE_CACHE_FILES+'];';
-    }
+        );
+        cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
+      } else if (pwa_BASE_CACHE_FILES) {
+        cache = 'this.BASE_CACHE_FILES = ['+pwa_BASE_CACHE_FILES+'];';
+      }
 
-    // update the BASE_CACHE_FILES variable in the sw.js service worker file
-    results = replace.sync({
-      files: 'static/sw.js',
-      from: /this\.BASE_CACHE_FILES =.*/g,
-      to: cache,
-      countMatches: true,
-    });
+      // update the BASE_CACHE_FILES variable in the sw.js service worker file
+      results = replace.sync({
+        files: 'static/sw.js',
+        from: /this\.BASE_CACHE_FILES =.*/g,
+        to: cache,
+        countMatches: true,
+      });
+    } else {
+      throw new Error('ERROR: pwa requires that pwa_VER, pwa_NORM_TTL, pwa_LONG_TTL, pwa_TTL_NORM, pwa_TTL_LONG, pwa_TTL_EXEMPT are set in config.toml.');
+    }
   }
 
   if (bpath === '') {// abridge used directly

@@ -44,7 +44,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne utilisant [abrid
 - [x] Catégories. (similaire aux Tags, désactivés/commentés par défaut)
 - [x] Liens vers les icônes sociales dans le pied de page.
 - [X] Conception réactive. (mobile d'abord)
-- [X] Vidéo Shortcodes: [Youtube](https://abridge.netlify.app/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/overview-embed-streamable/).
+- [X] Vidéo Shortcodes: [Youtube](https://abridge.netlify.app/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/video-streaming-sites/overview-embed-streamable/).
 - [X] Médias Shortcodes: [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
 - [X] Autre Shortcodes: [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
 
@@ -214,15 +214,16 @@ Je recommande de copier l'intégralité du fichier config.toml comme indiqué à
 
 Définissez un champ dans `extra` avec une clé de `menu` et `menu_footer`.
 Si vous souhaitez que le lien s'ouvre dans un nouvel onglet/navigateur, définissez `blank = true`.
+taille : s150, s140, s130, s120, s110, s95, s90, s85, s80, s75, s70, faux (pleine taille)
 Si un lien doit avoir une barre oblique à la fin de l'URL définie `slash = true`.
 (généralement, tous les liens doivent avoir une barre oblique finale, sauf s'il s'agit d'un lien de fichier tel que `sitemap.xml`)
 
 ```toml
 menu = [
-  {url = "about", name = "About", slash = true, blank = false},
-  {url = "posts", name = "Posts", slash = true, blank = false},
-  {url = "categories", name = "Categories", slash = true, blank = false},
-  {url = "tags", name = "Tags", slash = true, blank = false},
+  {url = "about", name = "About", slash = true, blank = false, size="s110"},
+  {url = "posts", name = "Posts", slash = true, blank = false, size="s110"},
+  {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
+  {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
 ]
 menu_footer = [
   {url = "about", name = "About", slash = true, blank = false},
@@ -234,7 +235,7 @@ menu_footer = [
 
 ### SEO et balises d’en-tête
 
-Vous pouvez consulter les balises SEO dans la macro principale située dans `templates/macros/head.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers de démarque de contenu.
+Vous pouvez consulter les balises SEO dans la macro SEO située dans `templates/macros/seo.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers de démarque de contenu.
 
 Dans votre fichier de démarque, vous devez définir un titre de moins de 60 caractères et une description entre 80 et 160 caractères. La description est ce qui est affiché dans les résultats de recherche sous le titre de la page. Partout où vous ne définissez pas de description de page, le fichier config.description du site principal sera utilisé à la place.
 
@@ -293,6 +294,8 @@ js_copycode = false
 js_email_encode = false
 js_prestyle = false
 js_switcher = false
+
+pwa = false
 ```
 
 Voici les fichiers javascript utilisés par Abridge :

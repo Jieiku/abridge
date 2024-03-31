@@ -71,14 +71,9 @@
 
         {#- Date #}
           {%- if config.extra.meta_post.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
-          {%- if config.extra.date_locale %}
-          {%- if lang != config.default_language -%}
-            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
-          {%- else -%}
-            {%- set lang_locale = config.extra.date_locale -%}
-          {%- endif -%}
-          {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
-          {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
+          {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
+          {%- set page_date = page.date | date(format="%B %d, %Y", locale=lang_locale) -%}
+          {%- if page_date %} {{ page_date }} {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.updated or config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
@@ -86,13 +81,9 @@
         {#- Updated #}
           {%- if config.extra.meta_post.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
           {{ macros::translate(key="Updated", default="Updated", i18n=i18n) }}:
-          {%- if config.extra.date_locale %}
-          {%- if lang != config.default_language -%}
-            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
-          {%- else -%}
-            {%- set lang_locale = config.extra.date_locale -%}
-          {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
-          {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
+          {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
+          {%- set page_updated = page.updated | date(format="%B %d, %Y", locale=lang_locale) -%}
+          {%- if page_updated %} {{ page_updated }} {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_post.categories_tags %}
           {%- if config.extra.meta_post.divider %}<span class="hpad">{{ config.extra.meta_post.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
@@ -154,14 +145,9 @@
 
         {#- Date #}
           {%- if config.extra.meta_index.date %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif %}
-          {%- if config.extra.date_locale %}
-          {%- if lang != config.default_language -%}
-            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
-          {%- else -%}
-            {%- set lang_locale = config.extra.date_locale -%}
-          {%- endif -%}
-          {{ page.date | date(format="%B %d, %Y", locale=lang_locale) }}
-          {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
+          {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
+          {%- set page_date = page.date | date(format="%B %d, %Y", locale=lang_locale) -%}
+          {%- if page_date %} {{ page_date }} {%- else %} {{ page.date | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_index.updated or config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}
@@ -169,14 +155,9 @@
         {#- Updated #}
           {%- if config.extra.meta_index.updated and page.updated %} {%- if config.extra.icon_date %}<i class="{{ config.extra.icon_date }}"></i> {% endif -%}
           {{ macros::translate(key="Updated", default="Updated", i18n=i18n) }}:
-          {%- if config.extra.date_locale %}
-          {%- if lang != config.default_language -%}
-            {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
-          {%- else -%}
-            {%- set lang_locale = config.extra.date_locale -%}
-          {%- endif %} {{ page.updated | date(format="%B %d, %Y", locale=lang_locale) }}
-          {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
-
+          {%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
+          {%- set page_updated = page.updated | date(format="%B %d, %Y", locale=lang_locale) -%}
+          {%- if page_updated %} {{ page_updated }} {%- else %} {{ page.updated | date(format="%B %d, %Y") }} {%- endif %}
           {#- divider #}
           {%- if config.extra.meta_index.categories_tags %}
           {%- if config.extra.meta_index.divider %}<span class="hpad">{{ config.extra.meta_index.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{% endif %}

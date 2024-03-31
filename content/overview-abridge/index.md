@@ -44,7 +44,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - [x] Categories. (similar to Tags, disabled/commented out by default)
 - [x] Social icon links in footer.
 - [X] Responsive design. (mobile first)
-- [X] Video Shortcodes: [Youtube](https://abridge.netlify.app/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/overview-embed-streamable/).
+- [X] Video Shortcodes: [Youtube](https://abridge.netlify.app/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/video-streaming-sites/overview-embed-streamable/).
 - [X] Media Shortcodes: [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
 - [X] Other Shortcodes: [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
 
@@ -66,7 +66,7 @@ The Quick Start shows how to run the theme directly. Next we will use abridge as
 ### 1: Create a new zola site
 
 ```bash
-zola init mysite
+yes "" | zola init mysite
 cd mysite
 ```
 
@@ -77,6 +77,8 @@ Add the theme as a git submodule:
 ```bash
 git init  # if your project is a git repository already, ignore this command
 git submodule add https://github.com/jieiku/abridge.git themes/abridge
+git submodule update --init --recursive
+git submodule update --remote --merge
 ```
 
 Or clone the theme into your themes directory:
@@ -90,16 +92,15 @@ git clone https://github.com/jieiku/abridge.git themes/abridge
 Copy some files from the theme directory to your project's root directory:
 
 ```bash
-touch templates/.gitkeep
+rsync themes/abridge/.gitignore .gitignore
 rsync themes/abridge/config.toml config.toml
 rsync themes/abridge/content/_index.md content/
-rsync themes/abridge/COPY-TO-ROOT-SASS/* sass/
+rsync -r themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
 rsync themes/abridge/package_abridge.js package_abridge.js
 rsync themes/abridge/package.json package.json
 ```
 
-- `templates/.gitkeep` the templates directory is required in your base site. [#2150](https://github.com/getzola/zola/issues/2150)
 - `config.toml` base configuration with all config values.
 - `content/_index.md` required to set pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
@@ -215,15 +216,16 @@ I recommend copying the entire config.toml file as outlined in Step 3 as it prov
 
 Set a field in `extra` with a key of `menu` and `menu_footer`.
 If you want the link to open in a new tab/browser then set `blank = true`.
+size: s150, s140, s130, s120, s110, s95, s90, s85, s80, s75, s70, false(full size)
 If a link should have a trailing slash at the end of the url set `slash = true`.
 (generally all links should have a trailing slash unless its a file link such as `sitemap.xml`)
 
 ```toml
 menu = [
-  {url = "about", name = "About", slash = true, blank = false},
-  {url = "posts", name = "Posts", slash = true, blank = false},
-  {url = "categories", name = "Categories", slash = true, blank = false},
-  {url = "tags", name = "Tags", slash = true, blank = false},
+  {url = "about", name = "About", slash = true, blank = false, size="s110"},
+  {url = "posts", name = "Posts", slash = true, blank = false, size="s110"},
+  {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
+  {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
 ]
 menu_footer = [
   {url = "about", name = "About", slash = true, blank = false},
@@ -235,7 +237,7 @@ menu_footer = [
 
 ### SEO and Header Tags
 
-You can review the SEO tags in the head macro located at `templates/macros/head.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
+You can review the SEO tags in the seo macro located at `templates/macros/seo.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
 
 In your post markdown file you should set a title less than 60 characters and a description between 80 and 160 characters in length. The description is what is displayed in search results below the page title. Anywhere that you do not set a page description, the primary site config.description will be used instead.
 
@@ -274,9 +276,9 @@ Abridge theme has PWA support. You can install the entire site as an app and hav
 
 If using Chrome on desktop then look at the end of the address bar for the install button. On Android you should get a popup to install, you can also install from the 3 dot menu in the top right corner. Once you have the PWA installed, you can go completely offline and you will still be able to browse or search the site!
 
-To use it in your own instance you will need to edit `static/sw.js` for the list of files to cache. Technically you do not need to edit `sw.js`, but if even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse.
+There is an npm script to generate the file cache list and minification `npm run abridge`. My [netlify.toml](https://github.com/Jieiku/abridge/blob/master/netlify.toml) file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
 
-There is an npm script to generate the file cache list and minification `npm run abridge`. My `netlify.toml` file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
+To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `config.toml`. If even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
 
 The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
 
@@ -294,6 +296,8 @@ js_copycode = false
 js_email_encode = false
 js_prestyle = false
 js_switcher = false
+
+pwa = false
 ```
 
 These are the javascript files used by Abridge:

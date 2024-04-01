@@ -99,7 +99,7 @@
     {%- if page.extra.toc %}
     {%- set toc = page.toc %}
     {%- endif %}
-    {%- if toc %}
+    {%- if toc or page.extra.series %}
 
     <div class="sblock">
       {%- if page.extra.series %}
@@ -178,6 +178,7 @@
       </div>
       {%- endif %}
 
+      {%- if toc %}
       <div class="blockdiv sticky">
         <a class="b s150" href="#">{{ macros::translate(key="Index", default="Index", i18n=i18n) }}</a>
         {%- for h in toc %}
@@ -194,6 +195,7 @@
         {%- endfor %}
       </div>
     </div>
+    {%- endif %}
     {%- endif %}
     {%- endif %}
     {%- endblock toc %}

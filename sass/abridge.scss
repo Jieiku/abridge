@@ -1197,6 +1197,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     padding: .2rem 0 var(--s2) var(--s2);
     max-height: 100vh;
     overflow: auto;
+    overflow-wrap: break-word;
     a {
       color: var(--f1);
       &:hover {

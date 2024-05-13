@@ -62,6 +62,7 @@ $icon-pinterest: true !default;
 $icon-discord: true !default;
 $icon-twitch: true !default;
 $icon-youtube: true !default;
+$icon-peertube: true !default;
 $icon-researchgate: true !default;
 
 $icon-x: true !default;// x symbol, used to close search results page.
@@ -1341,6 +1342,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-matrix {.matrix { background-image: functions.icon(matrix, "%23888", 2, "none", $ic) }}
   @if $icon-minus {.minus { background-image: functions.icon(minus, "%23888", 2, "none", $ic) }}
   @if $icon-moon {.moon { background-image: functions.icon(moon, "%23888", 2, "none", $ic) }}
+  @if $icon-peertube {.peertube { background-image: functions.icon(peertube, "%23777", 2, "%23f60", $ic) }}
   @if $icon-pinterest {.pinterest { background-image: functions.icon(pinterest, "%23b01", 2, "none", $ic) }}
   @if $icon-pixelfed {.pixelfed { background-image: functions.icon(pixelfed, "%23e07", 2, "none", $ic) }}
   @if $icon-python {.python { background-image: functions.icon(python, "%23fc1", 2, "%2326a", $ic) }}

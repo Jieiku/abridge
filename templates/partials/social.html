@@ -50,6 +50,8 @@
           <a href="https://discord.com/{{ config.extra.discord }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
           {%- if config.extra.youtube -%}
           <a href="https://www.youtube.com/{{ config.extra.youtube }}" target="_blank" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a>{% endif -%}
+          {%- if config.extra.peertube -%}
+          <a href="{{ config.extra.peertube | safe }}/" target="_blank" title="PeerTube"><i type="Button" class="svg peertube" title="PeerTube"></i></a>{% endif -%}
           {%- if config.extra.kofi -%}
           <a href="https://www.ko-fi.com/{{ config.extra.kofi }}/" target="_blank" title="Support me on Ko-fi"><i type="Button" class="svg kofi" title="Support me on Ko-fi"></i></a>{% endif -%}
           {%- if config.extra.buymeacoffee -%}

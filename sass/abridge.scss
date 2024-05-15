@@ -1304,57 +1304,57 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 }
 @if $enable-icons {
-  @if $icon-adjust {.adjust { -webkit-mask: functions.icon(adjust, "none", 1, "%23000", $ic) ; background: var(--f2) }}//theme switcher
-  @if $icon-angl {.angl { -webkit-mask: functions.icon(angl, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle left
-  @if $icon-angll {.angll { -webkit-mask: functions.icon(angll, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle left left
-  @if $icon-angr {.angr { -webkit-mask: functions.icon(angr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right
-  @if $icon-angrr {.angrr { -webkit-mask: functions.icon(angrr, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle right right
-  @if $icon-angu {.angu { -webkit-mask: functions.icon(angu, "%23000", 3, "none", $ic) ; background: var(--f2) }}//angle up
-  @if $icon-world {.world { -webkit-mask: functions.icon(world, "%23000", 2, "none", $ic) ; background: var(--f2) }}//language select menu
+  @if $icon-adjust {        .adjust {             -webkit-mask: functions.icon(adjust,          $ic,1, "none", "%23000") ; background: var(--f2) }}//theme switcher
+  @if $icon-angl {          .angl {               -webkit-mask: functions.icon(angl,            $ic,3, "%23000", "none") ; background: var(--f2) }}//angle left
+  @if $icon-angll {         .angll {              -webkit-mask: functions.icon(angll,           $ic,3, "%23000", "none") ; background: var(--f2) }}//angle left left
+  @if $icon-angr {          .angr {               -webkit-mask: functions.icon(angr,            $ic,3, "%23000", "none") ; background: var(--f2) }}//angle right
+  @if $icon-angrr {         .angrr {              -webkit-mask: functions.icon(angrr,           $ic,3, "%23000", "none") ; background: var(--f2) }}//angle right right
+  @if $icon-angu {          .angu {               -webkit-mask: functions.icon(angu,            $ic,3, "%23000", "none") ; background: var(--f2) }}//angle up
+  @if $icon-world {         .world {              -webkit-mask: functions.icon(world,           $ic,2, "%23000", "none") ; background: var(--f2) }}//language select menu
   @if $icon-copy {//copy icons for code blocks
-    .copy { -webkit-mask: functions.icon(copy, "%23000", 2, "none", $ic) ; background: var(--f2) }
-    .copy.yes { -webkit-mask: functions.icon(copy-yes, "%23000", 2, "none", $ic) ; background: var(--cg) }
-    .copy.err { -webkit-mask: functions.icon(copy-err, "%23000", 2, "none", $ic) ; background: var(--cr) }
+                            .copy {               -webkit-mask: functions.icon(copy,            $ic,2, "%23000", "none") ; background: var(--f2) }
+                            .copy.yes {           -webkit-mask: functions.icon(copy-yes,        $ic,2, "%23000", "none") ; background: var(--cg) }
+                            .copy.err {           -webkit-mask: functions.icon(copy-err,        $ic,2, "%23000", "none") ; background: var(--cr) }
   }
-  @if $icon-search {.search { -webkit-mask: functions.icon(search, "%23000", 3, "none", $ic) ; background: var(--f2) }}//search
-  @if $icon-bitbucket {.bitbucket { background-image: functions.icon(bitbucket, "%2328f", 2, "none", $ic) }}
-  @if $icon-buymeacoffee {.buymeacoffee { background-image: functions.icon(buymeacoffee, "%23777", 1, "%23fd0", $ic) }}
-  @if $icon-check {.check { background-image: functions.icon(check, "%23888", 2, "none", $ic) }}
-  @if $icon-chevron {.chevron { background-image: functions.icon(chevron, "%23888", 2, "none", $ic) }}
-  @if $icon-clock {.clock { background-image: functions.icon(clock, "%23888", 2, "none", $ic) }}
-  @if $icon-codeberg {.codeberg { background-image: functions.icon(codeberg, "%23555", 2, "%23aaa", $ic) }}
-  @if $icon-date {.date { background-image: functions.icon(date, "%23888", 2, "none", $ic) }}
-  @if $icon-discord {.discord { background-image: functions.icon(discord, "none", 1, "%2356f", $ic) }}
-  @if $icon-docker {.docker { background-image: functions.icon(docker, "%2329e", 2, "none", $ic) }}
-  @if $icon-element {.element { background-image: functions.icon(element, "none", 1, "%231c8", $ic) }}
-  @if $icon-facebook {.facebook { background-image: functions.icon(facebook, "%23359", 2, "none", $ic) }}
-  @if $icon-folder {.folder { background-image: functions.icon(folder, "%23888", 2, "none", $ic) }}
-  @if $icon-github {.github { background-image: functions.icon(github, "%23888", 2, "none", $ic) }}
-  @if $icon-github-sponsor {.github-sponsor { background-image: functions.icon(github-sponsor, "%23c49", 2, "none", $ic) }}
-  @if $icon-gitlab {.gitlab { background-image: functions.icon(gitlab, "%23e62", 2, "none", $ic) }}
-  @if $icon-globe {.globe { background-image: functions.icon(globe, "%23888", 2, "none", $ic) }}
-  @if $icon-home {.home { background-image: functions.icon(home, "%23888", 2, "none", $ic) }}
-  @if $icon-instagram {.instagram { background-image: functions.icon(instagram, "%23e07", 2, "none", $ic) }}
-  @if $icon-kofi {.kofi { background-image: functions.icon(kofi, "%23888", 1.5, "%23f55", $ic) }}
-  @if $icon-linkedin {.linkedin { background-image: functions.icon(linkedin, "%2326a", 2, "none", $ic) }}
-  @if $icon-mail {.mail { background-image: functions.icon(mail, "%23888", 2, "none", $ic) }}
-  @if $icon-mastodon {.mastodon { background-image: functions.icon(mastodon, "none", 1, "%2328c", $ic) }}
-  @if $icon-matrix {.matrix { background-image: functions.icon(matrix, "%23888", 2, "none", $ic) }}
-  @if $icon-minus {.minus { background-image: functions.icon(minus, "%23888", 2, "none", $ic) }}
-  @if $icon-moon {.moon { background-image: functions.icon(moon, "%23888", 2, "none", $ic) }}
-  @if $icon-peertube {.peertube { background-image: functions.icon(peertube, "%23777", 2, "%23f60", $ic) }}
-  @if $icon-pinterest {.pinterest { background-image: functions.icon(pinterest, "%23b01", 2, "none", $ic) }}
-  @if $icon-pixelfed {.pixelfed { background-image: functions.icon(pixelfed, "%23e07", 2, "none", $ic) }}
-  @if $icon-python {.python { background-image: functions.icon(python, "%23fc1", 2, "%2326a", $ic) }}
-  @if $icon-researchgate {.researchgate { background-image: functions.icon(researchgate, "none", 2, "%230db", $ic) }}
-  @if $icon-rss {.rss { background-image: functions.icon(rss, "%23e94", 2, "none", $ic) }}
-  @if $icon-stack {.stack { background-image: functions.icon(stack, "%23e72", 2, "none", $ic) }}
-  @if $icon-sun {.sun { background-image: functions.icon(sun, "%23888", 2, "none", $ic) }}
-  @if $icon-tag {.tag { background-image: functions.icon(tag, "%23888", 2, "none", $ic) }}
-  @if $icon-twitch {.twitch { background-image: functions.icon(twitch, "%23a7f", 2, "none", $ic) }}
-  @if $icon-twitter {.twitter { background-image: functions.icon(twitter, "%232ad", 2, "none", $ic) }}
-  @if $icon-x {.x { background-image: functions.icon(x, "%23f00", 3, "none", $ic) }}
-  @if $icon-youtube {.youtube { background-image: functions.icon(youtube, "%23f00", 2, "none", $ic) }}
+  @if $icon-search {        .search {             -webkit-mask: functions.icon(search,          $ic,3, "%23000", "none") ; background: var(--f2) }}//search
+  @if $icon-bitbucket {     .bitbucket {      background-image: functions.icon(bitbucket,       $ic,2, "%2328f", "none") }}
+  @if $icon-buymeacoffee {  .buymeacoffee {   background-image: functions.icon(buymeacoffee,    $ic,0, "none", ["%23fd0","%23777"]) }}
+  @if $icon-check {         .check {          background-image: functions.icon(check,           $ic,2, "%23888", "none") }}
+  @if $icon-chevron {       .chevron {        background-image: functions.icon(chevron,         $ic,2, "%23888", "none") }}
+  @if $icon-clock {         .clock {          background-image: functions.icon(clock,           $ic,2, "%23888", "none") }}
+  @if $icon-codeberg {      .codeberg {       background-image: functions.icon(codeberg,        $ic,2, "none", ["%23aaa", "%23555"]) }}
+  @if $icon-date {          .date {           background-image: functions.icon(date,            $ic,2, "%23888", "none") }}
+  @if $icon-discord {       .discord {        background-image: functions.icon(discord,         $ic,0, "none", "%2356f") }}
+  @if $icon-docker {        .docker {         background-image: functions.icon(docker,          $ic,2, "%2329e", "none") }}
+  @if $icon-element {       .element {        background-image: functions.icon(element,         $ic,0, "none", "%231c8") }}
+  @if $icon-facebook {      .facebook {       background-image: functions.icon(facebook,        $ic,2, "%23359", "none") }}
+  @if $icon-folder {        .folder {         background-image: functions.icon(folder,          $ic,2, "%23888", "none") }}
+  @if $icon-github {        .github {         background-image: functions.icon(github,          $ic,2, "%23888", "none") }}
+  @if $icon-github-sponsor {.github-sponsor { background-image: functions.icon(github-sponsor,  $ic,2, "%23c49", "none") }}
+  @if $icon-gitlab {        .gitlab {         background-image: functions.icon(gitlab,          $ic,2, "%23e62", "none") }}
+  @if $icon-globe {         .globe {          background-image: functions.icon(globe,           $ic,2, "%23888", "none") }}
+  @if $icon-home {          .home {           background-image: functions.icon(home,            $ic,2, "%23888", "none") }}
+  @if $icon-instagram {     .instagram {      background-image: functions.icon(instagram,       $ic,2, "%23e07", "none") }}
+  @if $icon-kofi {          .kofi {           background-image: functions.icon(kofi,            $ic,1.5, "%23888", ["%23f55","%23fff"]) }}
+  @if $icon-linkedin {      .linkedin {       background-image: functions.icon(linkedin,        $ic,2, "%2326a", "none") }}
+  @if $icon-mail {          .mail {           background-image: functions.icon(mail,            $ic,2, "%23888", "none") }}
+  @if $icon-mastodon {      .mastodon {       background-image: functions.icon(mastodon,        $ic,0, "none", "%2328c") }}
+  @if $icon-matrix {        .matrix {         background-image: functions.icon(matrix,          $ic,2, "%23888", "none") }}
+  @if $icon-minus {         .minus {          background-image: functions.icon(minus,           $ic,2, "%23888", "none") }}
+  @if $icon-moon {          .moon {           background-image: functions.icon(moon,            $ic,2, "%23888", "none") }}
+  @if $icon-peertube {      .peertube {       background-image: functions.icon(peertube,        $ic,1, "%23444", ["%23212","%23f60","%23777"]) }}
+  @if $icon-pinterest {     .pinterest {      background-image: functions.icon(pinterest,       $ic,2, "%23b01", "none") }}
+  @if $icon-pixelfed {      .pixelfed {       background-image: functions.icon(pixelfed,        $ic,2, "%23e07", "none") }}
+  @if $icon-python {        .python {         background-image: functions.icon(python,          $ic,0, "none", ["%23fc1","%2326a"]) }}
+  @if $icon-researchgate {  .researchgate {   background-image: functions.icon(researchgate,    $ic,0, "none", "%230db") }}
+  @if $icon-rss {           .rss {            background-image: functions.icon(rss,             $ic,2, "%23e94", "none") }}
+  @if $icon-stack {         .stack {          background-image: functions.icon(stack,           $ic,2, "%23e72", "none") }}
+  @if $icon-sun {           .sun {            background-image: functions.icon(sun,             $ic,2, "%23888", "none") }}
+  @if $icon-tag {           .tag {            background-image: functions.icon(tag,             $ic,2, "%23888", "none") }}
+  @if $icon-twitch {        .twitch {         background-image: functions.icon(twitch,          $ic,2, "%23a7f", "none") }}
+  @if $icon-twitter {       .twitter {        background-image: functions.icon(twitter,         $ic,2, "%232ad", "none") }}
+  @if $icon-x {             .x {              background-image: functions.icon(x,               $ic,3, "%23f00", "none") }}
+  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "%23f00", "none") }}
   .svg {
     width: 1.8rem;
     height: 1.8rem;

@@ -149,7 +149,7 @@ seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twit
 
 feed = true # this adds the RSS feed icon in the footer.
 mail = "name@example.com"
-mastodon = "the-link-to-your-mastodon"
+mastodon = "https://mastodon.example.com/@username"
 element = "matrix.example.com"
 buymeacoffee = "your-user-name"
 kofi = "your-user-name"
@@ -166,11 +166,11 @@ python = "your-user-name"
 docker = "your-user-name"
 stack = "your-user-name"
 instagram = "your-user-name"
-#pixelfed = "the-link-to-your-pixelfed" # Heaviest icon, off by default
+#pixelfed = "https://pixelfed.example.com/" # Heaviest icon, off by default
 pinterest = "your-user-name"
 twitch = "your-user-name"
 youtube = "channel/your-channel-id"
-peertube = "the-link-to-your-peertube"
+peertube = "https://peertube.example.com/@username"
 researchgate = "your-profile-id"
 
 

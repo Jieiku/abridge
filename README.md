@@ -55,7 +55,7 @@ The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml]
 
 ## Quick Start
 
-This theme requires version 0.18.0 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+This theme requires version 0.19.1 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git

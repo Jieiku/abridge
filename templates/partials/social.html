@@ -1,7 +1,16 @@
 {#- Social Footer Icons #}
       <nav><div>
-          {%- if config.generate_feed and config.extra.feed -%}
-          <a type="{% if config.feed_filename is containing('atom') %}application/atom+xml{% else %}application/rss+xml{% endif %}" href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} Atom/RSS Feed"><i type="Button" class="svg rss" title="{{ config.title }} Atom/RSS Feed"></i></a>{% endif -%}
+          {%- if config.generate_feeds and config.extra.feed -%}
+          {%- for feed in config.feed_filenames -%}
+
+          {%- if feed is containing('atom') -%}
+          <a type="application/atom+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} Atom Feed"><i type="Button" class="svg rss" title="{{ config.title }} Atom Feed"></i></a>{% endif -%}
+          {%- if feed is containing('rss') -%}
+          <a type="application/rss+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} RSS Feed"><i type="Button" class="svg rss" title="{{ config.title }} RSS Feed"></i></a>{% endif -%}
+
+          {%- endfor -%}
+          {%- endif -%}
+
           {%- if config.extra.mail -%}
           {%- if config.extra.mail_encode | default(value=true) -%}
           {%- set base64_email = config.extra.mail -%}

@@ -153,6 +153,7 @@ async function abridge() {
             if (!fs.lstatSync(path+file).isDirectory()) {
               // format output
               item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
+              item = item.replace(/\\/g,'/');// replace backslash with forward slash for Windows
               item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
 
               // if formatted output is not empty line then append it to cache var

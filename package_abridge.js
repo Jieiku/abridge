@@ -34,6 +34,10 @@ const pwa_TTL_EXEMPT = data.extra.pwa_TTL_EXEMPT;
 const pwa_cache_all = data.extra.pwa_cache_all;
 const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 
+// This is used to pass arguments to zola via npm, for example:
+// npm run abridge -- "--base-url https://abridge.pages.dev"
+const args = (' '+process.argv[2] || '');
+
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
   if (stdout) {
@@ -60,7 +64,7 @@ async function abridge() {
   }
 
   console.log('Zola Build to generate files for minification:');
-  await execWrapper('zola build');
+  await execWrapper('zola build'+args);
 
   //check that static/js exists, do this after zola build, it will handle creating static if missing.
   var jsdir = 'static/js';
@@ -215,7 +219,7 @@ async function abridge() {
   minify(abridge_bundle,'static/js/abridge.min.js');
 
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
-  await execWrapper('zola build');
+  await execWrapper('zola build'+args);
 }
 
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {

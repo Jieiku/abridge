@@ -1,12 +1,12 @@
 [build]
 publish = "public"
-command = "zola build && npm run abridge && zola build"
+command = "npm run abridge -- '--base-url https://abridge.netlify.app'"
 
 [build.environment]
 ZOLA_VERSION = "0.19.1"
 
 [context.deploy-preview]
-command = "zola build --base-url $DEPLOY_PRIME_URL && npm run abridge && zola build --base-url $DEPLOY_PRIME_URL"
+command = "npm run abridge -- '--drafts --base-url https://abridge.netlify.app'"
 
 [[headers]]
   for = "/*"

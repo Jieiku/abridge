@@ -138,4 +138,12 @@
 
 
 
+
+{#- Extra items #}
+  {%- if config.extra.head_extra %}
+  {{ config.extra.head_extra | safe }}
+  {%- endif %}
+
+
+
 {#- End of head partial -#}

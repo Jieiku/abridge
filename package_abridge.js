@@ -36,7 +36,7 @@ const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 
 // This is used to pass arguments to zola via npm, for example:
 // npm run abridge -- "--base-url https://abridge.pages.dev"
-const args = (' '+process.argv[2] || '');
+const args = process.argv[2] ? ' '+process.argv[2] : '';
 
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);

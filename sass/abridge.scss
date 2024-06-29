@@ -1366,12 +1366,15 @@ $syntax: true !default;//syntax highlighting for code blocks
   .svgs {
     width: var(--fs);
     height: var(--fs);
-    min-width: 24px;
-    min-height: 24px;
     display: inline-block;
     //overflow: hidden;
     text-align: center;
     vertical-align: middle;
+  }
+  .svgm {
+    //set minimum width and height for items with insufficient spacings
+    min-width: 24px;
+    min-height: 24px;
   }
   .fa-a:hover {
     color: var(--a3);

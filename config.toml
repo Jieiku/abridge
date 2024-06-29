@@ -280,7 +280,7 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 ###############################################################################
 
 ### To disable any of these icons set them to "false" (will default to unicode icons instead)
-#icon_search = "svgs search" # Search button in search box.
+#icon_search = "svgs svgm search" # Search button in search box.
 #icon_adjust = "svgs adjust" # Theme Switcher button in top menu. (add class svgh to change colors on hover)
 #icon_first = "svgs svgh angll" # Pagination First Page.
 #icon_prev = "svgs svgh angl" # Pagination Previous Page.

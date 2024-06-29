@@ -85,10 +85,10 @@ menu = [
     {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
 ]
 menu_footer = [
-    {url = "about", name = "About", slash = true, blank = false},
-    {url = "contact", name = "Contact", slash = true, blank = false},
-    {url = "privacy", name = "Privacy", slash = true, blank = false},
-    {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true},
+    {url = "about", name = "About", slash = true, blank = false, size="s90"},
+    {url = "contact", name = "Contact", slash = true, blank = false, size="s90"},
+    {url = "privacy", name = "Privacy", slash = true, blank = false, size="s90"},
+    {url = "sitemap.xml", name = "Sitemap", slash = false, blank = true, size="s90"},
 ]
 
 toc = true
@@ -104,7 +104,7 @@ meta_post = { position="top", size="s95", author=true, readtime=false, readstrin
 hide_section_dates = false # hides the date for sections that use posts.html as their template.
 hide_page_nextprev_titles = false # hides the next/previous titles for pages that use page.html as their template.
 title_size_index = "s85"
-footer_size = "s90"
+footer_size = "s80" # the size of the copyright and powered by text
 footer_credit = true
 #footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank">Abridge</a></p>'
 #archive_reverse = true # Set to True to sort posts chronologically per year instead of newest first on the archive page: example.com/archive/
@@ -116,7 +116,7 @@ textlogo = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#f90" vi
 
 sitedesc = false # enables or disables the display of the site description below the logo.
 headhr = false # show or hide horizontal rule below header
-foothr = true # show or hide horizontal rule above footer
+foothr = false # show or hide horizontal rule above footer
 
 ### $CURRENT_YEAR and $SITE_TITLE can be used anywhere within the copyright, you can change their position or you can also delete them and type whatever you want instead.
 #copyright = false # set to false to disable the copyright.

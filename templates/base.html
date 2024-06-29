@@ -131,6 +131,21 @@
     <div class="c">
       {%- include "partials/social.html" %}
 
+
+
+      {%- if config.extra.menu_footer %}
+      <nav class="vpad">
+        {%- for i in config.extra.menu_footer -%}
+        {%- if i.url != "sitemap.xml" %}
+        {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
+        {%- else %}
+        {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
+        {%- endif %}
+        <a class="rpad{%- if i.size %} {{ i.size }}{% endif %}" href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ macros::translate(key=i.name|safe, default=i.name|safe, i18n=i18n) }} {% else %} {{ i.name | safe }} {% endif %}</a>
+        {%- endfor %}
+      </nav>
+      {%- endif %}
+
       {#- Copyright START #}
       {%- if config.extra.copyright | default(value=true) -%}
       {%- set current_year = now() | date(format="%Y") %}
@@ -149,18 +164,6 @@
       {%- endif -%}
       {#- Copyright END #}
 
-      {%- if config.extra.menu_footer %}
-      <nav>
-        {%- for i in config.extra.menu_footer -%}
-        {%- if i.url != "sitemap.xml" %}
-        {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
-        {%- else %}
-        {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
-        {%- endif %}
-        <a{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %} href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{ macros::translate(key=i.name|safe, default=i.name|safe, i18n=i18n) }} {% else %} {{ i.name | safe }} {% endif %}</a>
-        {%- endfor %}
-      </nav>
-      {%- endif %}
       {%- if config.extra.footer_credit | default(value=true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}

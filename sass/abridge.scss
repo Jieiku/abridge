@@ -44,26 +44,26 @@ $icon-mastodon: true !default;
 $icon-element: true !default;
 $icon-matrix: false !default;
 $icon-buymeacoffee: true !default;
-$icon-kofi: true !default;
-$icon-twitter: true !default;
-$icon-facebook: true !default;
-$icon-linkedin: true !default;
-$icon-codeberg: true !default;
-$icon-gitlab: true !default;
+$icon-kofi: false !default;
+$icon-twitter: false !default;
+$icon-facebook: false !default;
+$icon-linkedin: false !default;
+$icon-codeberg: false !default;
+$icon-gitlab: false !default;
 $icon-github: true !default;
 $icon-github-sponsor: true !default;
-$icon-bitbucket: true !default;
-$icon-python: true !default;
-$icon-docker: true !default;
-$icon-stack: true !default;
+$icon-bitbucket: false !default;
+$icon-python: false !default;
+$icon-docker: false !default;
+$icon-stack: false !default;
 $icon-instagram: true !default;
 $icon-pixelfed: false !default;//heaviest icon, off by default
-$icon-pinterest: true !default;
+$icon-pinterest: false !default;
 $icon-discord: true !default;
 $icon-twitch: true !default;
 $icon-youtube: true !default;
-$icon-peertube: true !default;
-$icon-researchgate: true !default;
+$icon-peertube: false !default;
+$icon-researchgate: false !default;
 
 $icon-x: true !default;// x symbol, used to close search results page.
 $icon-search: true !default;//search, spyglass search button in search box.
@@ -1354,7 +1354,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-twitch {        .twitch {         background-image: functions.icon(twitch,          $ic,2, "%23a7f", "none") }}
   @if $icon-twitter {       .twitter {        background-image: functions.icon(twitter,         $ic,2, "%232ad", "none") }}
   @if $icon-x {             .x {              background-image: functions.icon(x,               $ic,3, "%23f00", "none") }}
-  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "%23f00", "none") }}
+  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "none", ["%23f00","%23fff"]) }}
   .svg {
     width: 1.8rem;
     height: 1.8rem;

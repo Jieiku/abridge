@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "fast-toml": "^0.5.4",
-    "uglify-js": "^3.17.4",
     "jsonminify": "^0.4.2",
-    "replace-in-file": "^7.0.1"
+    "pagefind": "^1.1.0",
+    "replace-in-file": "^7.0.1",
+    "uglify-js": "^3.17.4"
   }
 }

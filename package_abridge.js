@@ -7,6 +7,7 @@ const replace = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
+const pagefind_index = require('./public/js/pagefind.index.js');
 
 if (!(fs.existsSync('config.toml'))) {
   throw new Error('ERROR: cannot find config.toml!');
@@ -115,6 +116,17 @@ async function abridge() {
       replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     // zola build && stork build --input public/data_stork/index.html --output static/stork.st
+  } else if (search_library === 'pagefind') {
+    if (fs.existsSync('content/static/stork_toml.md')) {
+      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
+    }
+    if (fs.existsSync('content/static/tinysearch_json.md')) {
+      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
+    }
+
+    
+
+
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.

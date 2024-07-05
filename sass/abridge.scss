@@ -68,10 +68,10 @@ $icon-researchgate: false !default;
 $icon-x: true !default;// x symbol, used to close search results page.
 $icon-search: true !default;//search, spyglass search button in search box.
 $icon-adjust: true !default;//theme switcher dark/light toggle button.
-$icon-angll: true !default;//pagination, goto first page
-$icon-angl: true !default;//pagination, goto previous page
-$icon-angr: true !default;//pagination, goto next page
-$icon-angrr: true !default;//pagination, goto last page
+$icon-angll: false !default;//pagination, goto first page
+$icon-angl: false !default;//pagination, goto previous page
+$icon-angr: false !default;//pagination, goto next page
+$icon-angrr: false !default;//pagination, goto last page
 $icon-angu: true !default;//back to top button, appears after scrolling down.
 $icon-world: true !default;//language select menu
 $icon-copy: true !default;//copy to clipboard, for code blocks.
@@ -778,6 +778,10 @@ $syntax: true !default;//syntax highlighting for code blocks
   .outp {
     padding: 0 .26rem .2rem;
   }
+  .dis {
+    color: var(--c4);
+    font-weight: var(--fh);
+  }
   .off {
     color: var(--c4);
     font-weight: var(--fh);
@@ -794,7 +798,8 @@ $syntax: true !default;//syntax highlighting for code blocks
     border-radius: var(--br);
   }
   .mode:hover, .cnav {
-    color: var(--a1);//pagination color current page
+    //pagination color current page
+    background-color: var(--c2);
   }
 
   // breakpoint makes header responsive for desktop layouts

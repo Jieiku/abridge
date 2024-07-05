@@ -59,7 +59,11 @@ This Template can also be used directly for the index eg: example.com/ or as the
         {%- endif %}
       </article>
     {%- endfor %}
+    {%- if config.extra.arrow_pagination %}
     {{- macros::pagination(paginator=paginator, config=config) }}
+    {%- else %}
+    {{- macros::numpagination(paginator=paginator, config=config) }}
+    {%- endif %}
     </div>
   {%- if config.extra.recent | default(value=true) %}
     {#- The following line is checking if the template is being used for the root or a section #}

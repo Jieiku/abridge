@@ -7,7 +7,7 @@ const replace = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
-const pagefind_index = require('./public/js/pagefind.index.js');
+const pagefind_index = require('./static/js/pagefind.index.js');
 
 if (!(fs.existsSync('config.toml'))) {
   throw new Error('ERROR: cannot find config.toml!');

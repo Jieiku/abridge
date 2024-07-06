@@ -1,8 +1,9 @@
 async function createIndex() {
     // Dynamically import the pagefind module
     const pagefind = await import('pagefind');
-    const path = require('path');
 
+    // Import the path and fs modules to fetch the search index
+    const path = require('path');
     const fs = require('fs');
 
     
@@ -12,7 +13,8 @@ async function createIndex() {
         forceLanguage: 'en', // Force the language to English
     });
 
-    const filePath = path.join(__dirname, '../search_index.en.json');
+
+    const filePath = path.join(__dirname, '../../public/search_index.en.json');
 
     // Assuming fetch is available in the environment
     // Fetch the data asynchronously and wait for the response
@@ -37,9 +39,13 @@ async function createIndex() {
     }
 
     // Write the index files to disk
-    await index.writeFiles({
-        outputPath: 'public/pagefind'
+    const {errors} = await index.writeFiles({
+        outputPath: './static/js/',
     });
+
+    if (errors != []) {
+        console.log('Errors: ', errors);
+    }
 
     console.log('Index created successfully!');
 }

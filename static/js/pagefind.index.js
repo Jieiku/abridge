@@ -6,46 +6,65 @@ async function createIndex() {
     const path = require('path');
     const fs = require('fs');
 
-    
+
 
     console.log('Creating index...');
-    const { index } = await pagefind.createIndex({
-        forceLanguage: 'en', // Force the language to English
+
+    const publicFolder = path.join(__dirname, '../../public');
+
+    const files = fs.readdirSync(publicFolder);
+    let langArray = [];
+
+    files.forEach(file => {
+        if (file.startsWith('search_index')) {
+            langArray.push(file.split('.')[1]);
+        }
     });
 
+    console.log('Languages found: ', langArray);
 
-    const filePath = path.join(__dirname, '../../public/search_index.en.json');
+    const { index } = await pagefind.createIndex();
+    // Assuming index, fs, and path are already defined and properly imported
 
-    // Assuming fetch is available in the environment
-    // Fetch the data asynchronously and wait for the response
+    // Convert each lang in langArray to a promise that performs the desired operations
+    const promises = langArray.map(lang => (async () => {
+        console.log('Fetching data for lang: ', lang);
+        const filePath = path.join(__dirname, '../../public/search_index.' + lang + '.json');
 
+        // Read the file content synchronously (consider using async readFile for better performance)
+        const fileContent = fs.readFileSync(filePath);
+        const data = JSON.parse(fileContent);
+        console.log('Data fetched');
 
-    const fileContent = fs.readFileSync(filePath);
-    const data = JSON.parse(fileContent);
-    // Assuming the response is JSON, parse it
-    console.log('Data fetched');
+        // Add each record to the index asynchronously
+        for (const record of data) {
+            await index.addCustomRecord({
+                url: record.url,
+                content: record.body,
+                language: lang,
+                meta: {
+                    title: record.title,
+                    description: record.meta,
+                }
+            });
+        }
+    })());
 
-    // Add each record to the index
-    for (const record of data) {
-        await index.addCustomRecord({
-            url: record.url,
-            content: record.body,
-            language: 'en',
-            meta: {
-                title: record.title,
-                description: record.meta,
-            }
+    // Execute all promises concurrently
+    Promise.all(promises).then(async () => {
+        console.log('All data fetched and processed');
+        // Write the index files to disk
+        const { errors } = await index.writeFiles({
+            outputPath: './static/js/',
         });
-    }
-
-    // Write the index files to disk
-    const {errors} = await index.writeFiles({
-        outputPath: './static/js/',
+        if (errors != []) {
+            console.log('Errors: ', errors);
+        }
+    }).catch(error => {
+        console.error('An error occurred:', error);
     });
 
-    if (errors != []) {
-        console.log('Errors: ', errors);
-    }
+
 
     console.log('Index created successfully!');
 }

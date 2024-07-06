@@ -7,7 +7,6 @@ const replace = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
-const pagefind_index = require('./static/js/pagefind.index.js');
 
 if (!(fs.existsSync('config.toml'))) {
   throw new Error('ERROR: cannot find config.toml!');
@@ -124,9 +123,7 @@ async function abridge() {
       replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
 
-    
-
-
+    require('./static/js/pagefind.index.js');
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.
@@ -266,6 +263,10 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
         minify_files.push(bpath+'static/js/stork_config.js');
       } else if (search_library === 'tinysearch') {
         minify_files.push(bpath+'static/js/tinysearch.js');
+      } else if (search_library === 'pagefind') {
+        minify_files.push(bpath+'static/js/pagefind.js');
+        minify_files.push(bpath+'static/js/pagefind-highlight.js');
+        minify_files.push(bpath+'static/js/pagefind-ui.js');
       }
   }
   if (pwa) {

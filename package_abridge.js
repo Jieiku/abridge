@@ -123,7 +123,7 @@ async function abridge() {
       replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
 
-    require('./static/js/pagefind.index.js');
+    require('./static/js/pagefind.index.js'); // run the pagefind index.js script
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.

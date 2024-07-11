@@ -49,6 +49,12 @@ async function execWrapper(cmd) {
 }
 
 async function abridge() {
+  if (search_library === 'pagefind') {
+    // Run the pagefind script to generate the index files.
+    // Has to happen at start otherwise, it happens too late asyncronously.
+    const createIndex = require('./static/js/pagefind.index.js'); // run the pagefind index.js script
+    createIndex(); // makes program wait for pagefind build execution
+  }
   if (offline === false) {
     if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
       replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
@@ -122,8 +128,6 @@ async function abridge() {
     if (fs.existsSync('content/static/tinysearch_json.md')) {
       replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
-
-    require('./static/js/pagefind.index.js'); // run the pagefind index.js script
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.
@@ -194,7 +198,7 @@ async function abridge() {
   }
 
   if (bpath === '') {// abridge used directly
-    // These are truely static js files, so they should only need to be updated by abridge maintainer or contributors.
+    // These are truely static js files, so they should only need to be updated by the abridge maintainer or contributors.
     minify(['static/js/theme.js']);
     minify(['static/js/theme_light.js']);
     minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
@@ -220,6 +224,8 @@ async function abridge() {
     }
     fs.writeFileSync('static/manifest.min.json', out);
   }
+
+  console.log('Minifying files.')
 
   abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,false);
   minify(abridge_bundle,'static/js/abridge_nopwa.min.js');
@@ -265,8 +271,7 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
         minify_files.push(bpath+'static/js/tinysearch.js');
       } else if (search_library === 'pagefind') {
         minify_files.push(bpath+'static/js/pagefind.js');
-        minify_files.push(bpath+'static/js/pagefind-highlight.js');
-        minify_files.push(bpath+'static/js/pagefind-ui.js');
+        minify_files.push(bpath+'static/js/search.pagefind.js');
       }
   }
   if (pwa) {
@@ -291,7 +296,7 @@ function minify(fileA,outfile) {
       unsafe_proto: true,
       unsafe_regexp: true,
       unsafe_undefined: true,
-      drop_console: true
+      drop_console: false // !just for testing, IMPORTANT REMOVE FOR PRODUCTION!!!
     }
   }
   if (!outfile) {// outfile parameter omitted, infer based on input

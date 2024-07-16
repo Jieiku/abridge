@@ -1417,6 +1417,12 @@ $syntax: true !default;//syntax highlighting for code blocks
   .tpad {padding-top: var(--s1)}
   .b {font-weight: var(--fh)}
   .c {text-align: center}// <center> does not pass validation, use: <div class="c"></div>
+  .fl {float: left}
+  .fr {float: right}
+  .ci {
+    display: block;
+    margin: 0 auto;
+  }// center image, <center> does not pass validation, use: <img class="ci"></img>
 }
 @if $syntax {
   // Unstyled Text Color, and background color

@@ -24,17 +24,23 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 - w is the width of the image.
 - h is the height of the image.
 
+Optional Classes:
+
+- ci can be used to center the image.
+- fr can be used to float the image right.
+- fl can be used to float the image left.
+
 ** google lighthouse recommends setting alt, w, and h attributes. If alt is omitted then the filename is used. If w or h are omitted then get_image_metadata() fills these values. **
 
 ## Usage (same path)
 ```rs
-{{/* img(src="ferris-happy.svg" alt="Ferris is Happy") */}}
+{{/* img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" alt="Ferris is Happy") }}
+{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") }}
 ```
-{{ img(src="ferris-happy.svg" alt="Ferris is Happy") }}
+{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") }}
 
 ## Usage (relative path ./)
 ```rs

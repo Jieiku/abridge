@@ -24,6 +24,12 @@ Cet article couvre les **shortcodes imgswap et img**. Les images peuvent égalem
 - w est la largeur de l'image.
 - h est la hauteur de l'image.
 
+Cours optionnels:
+
+- ci peut être utilisé pour centrer l'image.
+- fr peut être utilisé pour faire flotter l'image à droite.
+- fl peut être utilisé pour faire flotter l'image vers la gauche.
+
 ** google lighthouse recommande de définir les attributs alt, w et h. Si alt est omis, le nom du fichier est utilisé. Si w ou h sont omis alors get_image_metadata() remplit ces valeurs. **
 
 ## Utilisation (même chemin)

@@ -127,15 +127,24 @@ window.onload = function () {
 
 
                 //var results = index.search(value, options);
-                var results = search(value);
+                var searchResults = await search(value);
+
+                console.log(search);
+
+                // const fiveResults = await Promise.all(x.results.slice(0, 5).map(r => r.data()));
+
+                // console.log(fiveResults);
 
                 var entry, childs = suggestions.childNodes;
-                var i = 0, len = results.length;
+                // var i = 0, len = search.results.length;
                 var items = value.split(/\s+/);
                 suggestions.classList.remove('d-none');
 
-                results.forEach(function (page) {
-                    if (page.doc.body !== '') {
+                for (const result of searchResults.results) {
+                    const data = await result.data();
+                    console.log(data);
+                    if (data.content !== '') {
+                        console.log(data);
                         entry = document.createElement('div');
 
                         entry.innerHTML = '<a href><span></span><span></span></a>';
@@ -143,17 +152,19 @@ window.onload = function () {
                         a = entry.querySelector('a'),
                             t = entry.querySelector('span:first-child'),
                             d = entry.querySelector('span:nth-child(2)');
-                        a.href = page.ref;
-                        t.textContent = page.doc.title;
-                        d.innerHTML = makeTeaser(page.doc.body, items);
+                        a.href = data.url;
+                        t.textContent = data.meta.title;
+                        d.innerHTML = data.excerpt;
 
                         suggestions.appendChild(entry);
                     }
-                });
-
-                while (childs.length > len) {
-                    suggestions.removeChild(childs[i])
                 }
+
+
+
+                // while (childs.length > len) {
+                //     suggestions.removeChild(childs[i])
+                // }
 
             }
 
@@ -247,6 +258,7 @@ window.onload = function () {
             // Enclose the terms in <b>.
             */
             function makeTeaser(body, terms) {
+                return "";
                 var TERM_WEIGHT = 40;
                 var NORMAL_WORD_WEIGHT = 2;
                 var FIRST_WORD_WEIGHT = 8;

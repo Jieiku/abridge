@@ -136,7 +136,7 @@ window.onload = function () {
                 // console.log(fiveResults);
 
                 var entry, childs = suggestions.childNodes;
-                // var i = 0, len = search.results.length;
+                var i = 0, len = searchResults.results.length;
                 var items = value.split(/\s+/);
                 suggestions.classList.remove('d-none');
 
@@ -162,9 +162,9 @@ window.onload = function () {
 
 
 
-                // while (childs.length > len) {
-                //     suggestions.removeChild(childs[i])
-                // }
+                while (childs.length > len) {
+                    suggestions.removeChild(childs[i])
+                }
 
             }
 

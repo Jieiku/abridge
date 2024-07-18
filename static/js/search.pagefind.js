@@ -1,3 +1,8 @@
+String.prototype.sanitise = function () {
+    // Removes {{*}}, em dash, <*> or <\*> using a regular expression
+    return this.replace(/\{\{.*?\}\}|—|<\*.*?>|<.*?>/g, '');
+}
+
 window.onload = function () {
     console.log("can you hear me?");
     if (document.body.contains(document.goSearch)) {
@@ -139,6 +144,7 @@ window.onload = function () {
                 var i = 0, len = searchResults.results.length;
                 var items = value.split(/\s+/);
                 suggestions.classList.remove('d-none');
+                console.log(sanitise("z {{   afdsadfsf  }} - <a> <\as>"))
 
                 for (const result of searchResults.results) {
                     const data = await result.data();
@@ -154,7 +160,7 @@ window.onload = function () {
                             d = entry.querySelector('span:nth-child(2)');
                         a.href = data.url;
                         t.textContent = data.meta.title;
-                        d.innerHTML = data.excerpt;
+                        d.innerHTML = sanitise(data.excerpt);
 
                         suggestions.appendChild(entry);
                     }
@@ -167,6 +173,11 @@ window.onload = function () {
                 }
 
             }
+
+            function sanitise(str) {
+                return str.replace(/\{\{.*?\}\}|—|<(?!\/?mark\b).*?>|&lt;.*?&gt;/g, '');
+            }
+
 
             function accept_suggestion() {
 

@@ -1,16 +1,9 @@
-String.prototype.sanitise = function () {
-    // Removes {{*}}, em dash, <*> or <\*> using a regular expression
-    return this.replace(/\{\{.*?\}\}|—|<\*.*?>|<.*?>/g, '');
-}
-
 window.onload = function () {
-    console.log("can you hear me?");
     if (document.body.contains(document.goSearch)) {
         options({
             basePath: "/js/"
         });
         init();
-        console.log("hello from in here!");
         document.goSearch.onsubmit = function () { return goSearchNow() };
 
         /*
@@ -122,35 +115,17 @@ window.onload = function () {
 
             async function show_results() {
                 var value = this.value.trim();
-                var options = {
-                    bool: "OR",
-                    fields: {
-                        title: { boost: 2 },
-                        body: { boost: 1 },
-                    }
-                };
 
-
-                //var results = index.search(value, options);
                 var searchResults = await search(value);
-
-                console.log(search);
-
-                // const fiveResults = await Promise.all(x.results.slice(0, 5).map(r => r.data()));
-
-                // console.log(fiveResults);
 
                 var entry, childs = suggestions.childNodes;
                 var i = 0, len = searchResults.results.length;
                 var items = value.split(/\s+/);
                 suggestions.classList.remove('d-none');
-                console.log(sanitise("z {{   afdsadfsf  }} - <a> <\as>"))
 
                 for (const result of searchResults.results) {
                     const data = await result.data();
-                    console.log(data);
                     if (data.content !== '') {
-                        console.log(data);
                         entry = document.createElement('div');
 
                         entry.innerHTML = '<a href><span></span><span></span></a>';
@@ -166,12 +141,9 @@ window.onload = function () {
                     }
                 }
 
-
-
                 while (childs.length > len) {
                     suggestions.removeChild(childs[i])
                 }
-
             }
 
             function sanitise(str) {
@@ -268,118 +240,7 @@ window.onload = function () {
             // maximum sum. If there are multiple maximas, then get the last one.
             // Enclose the terms in <b>.
             */
-            function makeTeaser(body, terms) {
-                return "";
-                var TERM_WEIGHT = 40;
-                var NORMAL_WORD_WEIGHT = 2;
-                var FIRST_WORD_WEIGHT = 8;
-                var TEASER_MAX_WORDS = 30;
 
-                var stemmedTerms = terms.map(function (w) {
-                    return elasticlunr.stemmer(w.toLowerCase());
-                });
-                var termFound = false;
-                var index = 0;
-                var weighted = []; // contains elements of ["word", weight, index_in_document]
-
-                // split in sentences, then words
-                var sentences = body.toLowerCase().split(". ");
-                for (var i in sentences) {
-                    var words = sentences[i].split(/[\s\n]/);
-                    var value = FIRST_WORD_WEIGHT;
-                    for (var j in words) {
-
-                        var word = words[j];
-
-                        if (word.length > 0) {
-                            for (var k in stemmedTerms) {
-                                if (elasticlunr.stemmer(word).startsWith(stemmedTerms[k])) {
-                                    value = TERM_WEIGHT;
-                                    termFound = true;
-                                }
-                            }
-                            weighted.push([word, value, index]);
-                            value = NORMAL_WORD_WEIGHT;
-                        }
-
-                        index += word.length;
-                        index += 1;  // ' ' or '.' if last word in sentence
-                    }
-
-                    index += 1;  // because we split at a two-char boundary '. '
-                }
-
-                if (weighted.length === 0) {
-                    if (body.length !== undefined && body.length > TEASER_MAX_WORDS * 10) {
-                        return body.substring(0, TEASER_MAX_WORDS * 10) + '...';
-                    } else {
-                        return body;
-                    }
-                }
-
-                var windowWeights = [];
-                var windowSize = Math.min(weighted.length, TEASER_MAX_WORDS);
-                // We add a window with all the weights first
-                var curSum = 0;
-                for (var i = 0; i < windowSize; i++) {
-                    curSum += weighted[i][1];
-                }
-                windowWeights.push(curSum);
-
-                for (var i = 0; i < weighted.length - windowSize; i++) {
-                    curSum -= weighted[i][1];
-                    curSum += weighted[i + windowSize][1];
-                    windowWeights.push(curSum);
-                }
-
-                // If we didn't find the term, just pick the first window
-                var maxSumIndex = 0;
-                if (termFound) {
-                    var maxFound = 0;
-                    // backwards
-                    for (var i = windowWeights.length - 1; i >= 0; i--) {
-                        if (windowWeights[i] > maxFound) {
-                            maxFound = windowWeights[i];
-                            maxSumIndex = i;
-                        }
-                    }
-                }
-
-                var teaser = [];
-                var startIndex = weighted[maxSumIndex][2];
-                for (var i = maxSumIndex; i < maxSumIndex + windowSize; i++) {
-                    var word = weighted[i];
-                    if (startIndex < word[2]) {
-                        // missing text from index to start of `word`
-                        teaser.push(body.substring(startIndex, word[2]));
-                        startIndex = word[2];
-                    }
-
-                    // add <em/> around search terms
-                    if (word[1] === TERM_WEIGHT) {
-                        teaser.push("<b>");
-                    }
-
-                    startIndex = word[2] + word[0].length;
-                    // Check the string is ascii characters or not
-                    var re = /^[\x00-\xff]+$/
-                    if (word[1] !== TERM_WEIGHT && word[0].length >= 12 && !re.test(word[0])) {
-                        // If the string's length is too long, it maybe a Chinese/Japanese/Korean article
-                        // if using substring method directly, it may occur error codes on emoji chars
-                        var strBefore = body.substring(word[2], startIndex);
-                        var strAfter = substringByByte(strBefore, 12);
-                        teaser.push(strAfter);
-                    } else {
-                        teaser.push(body.substring(word[2], startIndex));
-                    }
-
-                    if (word[1] === TERM_WEIGHT) {
-                        teaser.push("</b>");
-                    }
-                }
-                teaser.push("…");
-                return teaser.join("");
-            }
             document.goSearch.onsubmit = function () { return goSearchNow() };
         }());
     }

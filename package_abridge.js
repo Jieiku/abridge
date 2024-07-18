@@ -296,7 +296,7 @@ function minify(fileA,outfile) {
       unsafe_proto: true,
       unsafe_regexp: true,
       unsafe_undefined: true,
-      drop_console: false // !just for testing, IMPORTANT REMOVE FOR PRODUCTION!!!
+      drop_console: true
     }
   }
   if (!outfile) {// outfile parameter omitted, infer based on input

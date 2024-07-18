@@ -19,7 +19,6 @@ async function createIndex() {
       }
     });
   
-    console.log("Languages found: ", langArray);
   
     const { index } = await pagefind.createIndex();
     // Assuming index, fs, and path are already defined and properly imported
@@ -27,7 +26,6 @@ async function createIndex() {
     // Convert each lang in langArray to a promise that performs the desired operations
     const promises = langArray.map((lang) =>
       (async () => {
-        console.log("Fetching data for lang: ", lang);
         const filePath = path.join(
           __dirname,
           "../../public/search_index." + lang + ".json"
@@ -36,7 +34,6 @@ async function createIndex() {
         // Read the file content synchronously (consider using async readFile for better performance)
         const fileContent = fs.readFileSync(filePath);
         const data = JSON.parse(fileContent);
-        console.log("Data fetched");
   
         // Add each record to the index asynchronously
         for (const record of data) {
@@ -56,7 +53,6 @@ async function createIndex() {
     // Execute all promises concurrently
     Promise.all(promises)
       .then(async () => {
-        console.log("All data fetched and processed");
         // Write the index files to disk
         const { errors } = await index.writeFiles({
           outputPath: "./static/js/",
@@ -69,7 +65,6 @@ async function createIndex() {
         
         // Edit the pagefind to convert from MJS to CJS
         const pagefindPath = path.join(__dirname, "pagefind.js");
-        console.log(__dirname, pagefindPath);
         let pagefindContent = fs.readFileSync(pagefindPath, "utf8");
         // Remove 'import.meta.url' from the pagefind file and exports
         pagefindContent = pagefindContent
@@ -79,13 +74,11 @@ async function createIndex() {
           ) // Remove annoying function
           .replace(/;export\{[^}]*\}/g, "");
         fs.writeFileSync(pagefindPath, pagefindContent);
-        console.log("Pagefind file edited successfully!");
       })
       .catch((error) => {
         console.error("An error occurred:", error);
       });
   
-    console.log("Index created successfully!");
   }
   
   module.exports = createIndex;

@@ -1,5 +1,5 @@
 # do NOT include a trailing slash on the base URL
-base_url = "https://abridge.local"
+base_url = "https://abridge.netlify.app"
 # Usable site directly from disk, Including Search: "/home/jieiku/.dev/abridge/public"
 # Also set index format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
 # If you use the npm/node script then all you have to do is set offline = true, and everything else is automatic.
@@ -24,8 +24,8 @@ taxonomies = [
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 
 [search]                # Options specific to elasticlunr search.
-# index format can be: elasticlunr_json or elasticlunr_javascript
-index_format = "fuse_json"
+# index format can be: elasticlunr_json or elasticlunr_javascript or fuse_json
+index_format = "elasticlunr_json"
 include_title = true        # include title of page/section in index
 include_description = true # include description of page/section in index
 include_content = true      # include rendered content of page/section in index
@@ -154,26 +154,26 @@ mail = "name@example.com"
 mastodon = "https://mastodon.example.com/@username"
 element = "matrix.example.com"
 buymeacoffee = "your-user-name"
-kofi = "your-user-name"
+#kofi = "your-user-name"
 discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
-twitter = "your-user-name"
-facebook = "your-user-name"
-linkedin = "your-user-name"
-gitlab = "your-user-name"
+#twitter = "your-user-name"
+#facebook = "your-user-name"
+#linkedin = "your-user-name"
+#gitlab = "your-user-name"
 github = "your-user-name"
-codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
+#codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
 github_sponsor = "your-user-name"
-bitbucket = "your-user-name"
-python = "your-user-name"
-docker = "your-user-name"
-stack = "your-user-name"
+#bitbucket = "your-user-name"
+#python = "your-user-name"
+#docker = "your-user-name"
+#stack = "your-user-name"
 instagram = "your-user-name"
 #pixelfed = "https://pixelfed.example.com/" # Heaviest icon, off by default
-pinterest = "your-user-name"
+#pinterest = "your-user-name"
 twitch = "your-user-name"
 youtube = "channel/your-channel-id"
-peertube = "https://peertube.example.com/@username"
-researchgate = "your-profile-id"
+#peertube = "https://peertube.example.com/@username"
+#researchgate = "your-profile-id"
 
 
 ###############################################################################
@@ -210,7 +210,7 @@ js_prestyle = true # used to preload: FontAwesome, Katex, external Google Fonts
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
-search_library = 'pagefind'
+search_library = "elasticlunr"
 stylesheets = ["abridge.css"]
 
 webmanifest = "manifest.min.json" # Required for PWAs

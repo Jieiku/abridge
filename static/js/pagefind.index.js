@@ -1,10 +1,12 @@
+// Import the path and fs modules to fetch the search index
+const path = require("path");
+const fs = require("fs");
+
 async function createIndex() {
   // Dynamically import the pagefind module
   const pagefind = await import("pagefind");
 
-  // Import the path and fs modules to fetch the search index
-  const path = require("path");
-  const fs = require("fs");
+  removeOldIndex();
 
   console.log("Creating index...");
 
@@ -73,9 +75,47 @@ async function createIndex() {
         .replace(/;export\{[^}]*\}/g, "");
       fs.writeFileSync(pagefindPath, pagefindContent);
     })
+    .then(async () => {
+      await pagefind.close();
+    })
     .catch((error) => {
       console.error("An error occurred:", error);
     });
+}
+
+function removeOldIndex() {
+  // Remove all the old fragment, index and pagefind files
+  const indexFolder = path.join(__dirname, "../../static/js/index");
+  const fragmentFolder = path.join(__dirname, "../../static/js/fragment");
+  clearFolder(indexFolder);
+  clearFolder(fragmentFolder);
+
+  // Delete all files in this format pagefind.*.pf_meta
+  const publicFolder = path.join(__dirname, "../../static/js");
+  const files = fs.readdirSync(publicFolder);
+  files.forEach((file) => {
+    if (file.startsWith("pagefind") && file.endsWith(".pf_meta")) {
+      fs.unlinkSync(path.join(publicFolder, file));
+    }
+  });
+}
+
+function clearFolder(directoryPath) {
+  try {
+    // Read all the files in the directory
+    const files = fs.readdirSync(directoryPath);
+
+    // Iterate over each file and delete it
+    for (const file of files) {
+      const filePath = path.join(directoryPath, file);
+      fs.unlinkSync(filePath);
+    }
+  } catch (error) {
+    // Ignore the error if the directory does not exist, as that is a good behaviour :)
+    if (error.code !== 'ENOENT') {
+      console.error("An error occurred:", error);
+    }
+  }
 }
 
 module.exports = createIndex;

@@ -91,11 +91,11 @@ function removeOldIndex() {
   clearFolder(fragmentFolder);
 
   // Delete all files in this format pagefind.*.pf_meta
-  const publicFolder = path.join(__dirname, "../../static/js");
-  const files = fs.readdirSync(publicFolder);
+  const staticFolder = path.join(__dirname, "../../static/js");
+  const files = fs.readdirSync(staticFolder);
   files.forEach((file) => {
     if (file.startsWith("pagefind") && file.endsWith(".pf_meta")) {
-      fs.unlinkSync(path.join(publicFolder, file));
+      fs.unlinkSync(path.join(staticFolder, file));
     }
   });
 }

@@ -224,8 +224,6 @@ async function abridge() {
     fs.writeFileSync('static/manifest.min.json', out);
   }
 
-  console.log('Minifying files.')
-
   abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,false);
   minify(abridge_bundle,'static/js/abridge_nopwa.min.js');
 

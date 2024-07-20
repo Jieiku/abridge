@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require("path");
-const { replaceInFileSync } = require('replace-in-file');
-
 // Path for config.toml
 const configTomlPath = path.join(__dirname, "../../config.toml");
 
 async function main() {
+  const { replaceInFileSync } = await import('replace-in-file');
     // Process arguments to determine the search mode
     const args = process.argv.slice(2); // Remove the first two default arguments
 
@@ -14,11 +13,11 @@ async function main() {
         switch (args[0]) {
             case '--pagefind':
                 console.log('Pagefind search mode activated.');
-                await swapToPagefind();
+                await swapToPagefind(replaceInFileSync);
                 break;
             case '--elasticlunr':
                 console.log('Elasticlunr search mode activated.');
-                await swapToElasticlunr();
+                await swapToElasticlunr(replaceInFileSync);
                 break;
             default:
                 console.log('Unknown search mode. Please use --pagefind or --elasticlunr.');
@@ -30,7 +29,7 @@ async function main() {
 
 main();
 
-async function swapToPagefind() {
+async function swapToPagefind(replaceInFileSync) {
     // Edit the config.toml file
     replaceInFileSync({
         files: configTomlPath,
@@ -49,7 +48,7 @@ async function swapToPagefind() {
     });
 }
 
-async function swapToElasticlunr() {
+async function swapToElasticlunr(replaceInFileSync) {
     // Edit the config.toml file
     replaceInFileSync({
         files: configTomlPath,

@@ -3,10 +3,18 @@ const path = require("path");
 const TOML = require('fast-toml');
 const UglifyJS = require('uglify-js');
 const jsonminify = require("jsonminify");
-const { replaceInFileSync } = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
+
+let replaceInFileSync;
+
+(async () => {
+  const replaceInFileModule = await import('replace-in-file');
+  replaceInFileSync = replaceInFileModule.replaceInFileSync;
+
+  // Your code that uses replaceInFileSync here
+})();
 
 if (!(fs.existsSync('config.toml'))) {
   throw new Error('ERROR: cannot find config.toml!');
@@ -49,6 +57,7 @@ async function execWrapper(cmd) {
 }
 
 async function abridge() {
+  const { replaceInFileSync } = await import('replace-in-file');
   if (offline === false) {
     if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
       replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});

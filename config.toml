@@ -24,7 +24,7 @@ taxonomies = [
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 
 [search]                # Options specific to elasticlunr search.
-# index format can be: elasticlunr_json or elasticlunr_javascript
+# index format can be: elasticlunr_json or elasticlunr_javascript or fuse_json
 index_format = "elasticlunr_json"
 include_title = true        # include title of page/section in index
 include_description = true # include description of page/section in index
@@ -212,7 +212,7 @@ js_prestyle = true # used to preload: FontAwesome, Katex, external Google Fonts
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
-search_library = 'elasticlunr'
+search_library = "elasticlunr" 
 stylesheets = ["abridge.css"]
 
 webmanifest = "manifest.min.json" # Required for PWAs

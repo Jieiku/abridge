@@ -115,6 +115,18 @@ async function abridge() {
       replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     // zola build && stork build --input public/data_stork/index.html --output static/stork.st
+  } else if (search_library === 'pagefind') {
+    if (fs.existsSync('content/static/stork_toml.md')) {
+      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
+    }
+    if (fs.existsSync('content/static/tinysearch_json.md')) {
+      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
+    }
+
+    // Run the pagefind script to generate the index files.
+    // Has to happen at start otherwise, it happens too late asyncronously.
+    const createIndex = require('./static/js/pagefind.index.js'); // run the pagefind index.js script
+    await createIndex(); // makes program wait for pagefind build execution
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.
@@ -185,7 +197,7 @@ async function abridge() {
   }
 
   if (bpath === '') {// abridge used directly
-    // These are truely static js files, so they should only need to be updated by abridge maintainer or contributors.
+    // These are truely static js files, so they should only need to be updated by the abridge maintainer or contributors.
     minify(['static/js/theme.js']);
     minify(['static/js/theme_light.js']);
     minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
@@ -254,6 +266,9 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
         minify_files.push(bpath+'static/js/stork_config.js');
       } else if (search_library === 'tinysearch') {
         minify_files.push(bpath+'static/js/tinysearch.js');
+      } else if (search_library === 'pagefind') {
+        minify_files.push(bpath+'static/js/pagefind.js');
+        minify_files.push(bpath+'static/js/pagefind.search.js');
       }
   }
   if (pwa) {

@@ -7,15 +7,6 @@ const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
 
-let replaceInFileSync;
-
-(async () => {
-  const replaceInFileModule = await import('replace-in-file');
-  replaceInFileSync = replaceInFileModule.replaceInFileSync;
-
-  // Your code that uses replaceInFileSync here
-})();
-
 if (!(fs.existsSync('config.toml'))) {
   throw new Error('ERROR: cannot find config.toml!');
 }

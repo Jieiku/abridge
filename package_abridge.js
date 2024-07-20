@@ -331,30 +331,51 @@ async function sync() {
 
   // Check for changes in package.json
   const packageJson = path.join(__dirname, "package.json");
-  const submodulePackageJson = path.join(__dirname, "themes/abridge/package.json");
+  const submodulePackageJson = path.join(
+    __dirname,
+    "themes/abridge/package.json"
+  );
 
   const packageJsonContent = fs.readFileSync(packageJson, "utf-8");
-  const submodulePackageJsonContent = fs.readFileSync(submodulePackageJson, "utf-8");
+  const submodulePackageJsonContent = fs.readFileSync(
+    submodulePackageJson,
+    "utf-8"
+  );
   if (packageJsonContent !== submodulePackageJsonContent) {
     console.log("Updating package.json from submodule");
-    // fs.copyFileSync(submodulePackageJson, packageJson);
+    fs.copyFileSync(submodulePackageJson, packageJson);
   }
 
   const configToml = path.join(__dirname, "config.toml");
-  const submoduleConfigToml = path.join(__dirname, "themes/abridge/config.toml");
+  const submoduleConfigToml = path.join(
+    __dirname,
+    "themes/abridge/config.toml"
+  );
 
   let adjustTomlContent = function (content) {
-    content = content.replace(/(^#.*$|(["']).*?\2|(?<=\s)#.*$|\btrue\b|\bfalse\b)/gm, ""); // A regex to remove all user added content, (so you can tell if the .toml format has changed)
-    content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing white spaces and multiple white spaces
+    content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces
+    content = content.replace(/(^#)(?=\s*\w+\s*=\s*)|#.*$/gm, ""); // A regex to selectively remove all comments, and to uncomment all commented config lines
+    content = content.replace(/(\[([^]]*)\])|(\{([^}]*)\})/gs, ""); // A regex to remove all tables and arrays
+    content = content.replace(
+      /(^#.*$|(["']).*?\2|(?<=\s)#.*$|\btrue\b|\bfalse\b)/gm,
+      ""
+    ); // A regex to remove all user added content, (so you can tell if the .toml format has changed)
     return content.trim(); // Finally remove any leading or trailing white spaces
-  }
+  };
 
-  const configTomlContent = adjustTomlContent(fs.readFileSync(configToml, "utf-8"));
-  const submoduleConfigTomlContent = adjustTomlContent(fs.readFileSync(submoduleConfigToml, "utf-8"));
+  const configTomlContent = adjustTomlContent(
+    fs.readFileSync(configToml, "utf-8")
+  );
+  const submoduleConfigTomlContent = adjustTomlContent(
+    fs.readFileSync(submoduleConfigToml, "utf-8")
+  );
 
   if (configTomlContent !== submoduleConfigTomlContent) {
     // This should say info: then the message in blue (which works in every terminal)
-    console.log('\x1b[34m%s\x1b[0m', 'info:', 'The config.toml file format may of changed, please update it manually.');
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      "info:",
+      "The config.toml file format may have changed, please update it manually."
+    );
   }
-  
 }

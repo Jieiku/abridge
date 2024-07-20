@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require("path");
-const replace = require('replace-in-file');
+const { replaceInFileSync } = require('replace-in-file');
 
 // Path for config.toml
 const configTomlPath = path.join(__dirname, "../../config.toml");
@@ -32,17 +32,17 @@ main();
 
 async function swapToPagefind() {
     // Edit the config.toml file
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /search_library = ['|"]\w+['|"]/g,
         to: 'search_library = "pagefind"',
     });
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /online_indexformat = ['|"]\w+['|"]/g,
         to: 'online_indexformat = "fuse_json"',
     });
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /index_format = ['|"]\w+['|"]/g,
         to: 'index_format = "fuse_json"',
@@ -51,17 +51,17 @@ async function swapToPagefind() {
 
 async function swapToElasticlunr() {
     // Edit the config.toml file
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /search_library = ['|"]\w+['|"]/g,
         to: 'search_library = "elasticlunr"',
     });
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /online_indexformat = ['|"]\w+['|"]/g,
         to: 'online_indexformat = "elasticlunr_json"',
     });
-    replace.sync({
+    replaceInFileSync({
         files: configTomlPath,
         from: /index_format = ['|"]\w+['|"]/g,
         to: 'index_format = "elasticlunr_json"',

@@ -25,6 +25,8 @@
           <a href="https://{{ config.extra.element }}/" target="_blank" title="Element"><i type="Button" class="svg element" title="Element"></i></a>{% endif -%}
           {%- if config.extra.matrix -%}
           <a href="https://{{ config.extra.matrix }}/" target="_blank" title="Matrix"><i type="Button" class="svg matrix" title="Matrix"></i></a>{% endif -%}
+          {%- if config.extra.discord -%}
+          <a href="https://discord.com/{{ config.extra.discord }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
           {%- if config.extra.twitter -%}
           <a href="https://twitter.com/{{ config.extra.twitter }}/" target="_blank" title="Twitter"><i type="Button" class="svg twitter" title="Twitter"></i></a>{% endif -%}
           {%- if config.extra.facebook -%}
@@ -53,12 +55,10 @@
           <a href="{{ config.extra.pixelfed | safe }}" target="_blank" title="Pixelfed"><i type="Button" class="svg pixelfed" title="Pixelfed"></i></a>{% endif -%}
           {%- if config.extra.pinterest -%}
           <a href="https://www.pinterest.com/{{ config.extra.pinterest }}/" target="_blank" title="Pinterest"><i type="Button" class="svg pinterest" title="Pinterest"></i></a>{% endif -%}
-          {%- if config.extra.twitch -%}
-          <a href="https://www.twitch.tv/{{ config.extra.twitch }}/" target="_blank" title="Twitch"><i type="Button" class="svg twitch" title="Twitch"></i></a>{% endif -%}
-          {%- if config.extra.discord -%}
-          <a href="https://discord.com/{{ config.extra.discord }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
           {%- if config.extra.youtube -%}
           <a href="https://www.youtube.com/{{ config.extra.youtube }}" target="_blank" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a>{% endif -%}
+          {%- if config.extra.twitch -%}
+          <a href="https://www.twitch.tv/{{ config.extra.twitch }}/" target="_blank" title="Twitch"><i type="Button" class="svg twitch" title="Twitch"></i></a>{% endif -%}
           {%- if config.extra.peertube -%}
           <a href="{{ config.extra.peertube | safe }}/" target="_blank" title="PeerTube"><i type="Button" class="svg peertube" title="PeerTube"></i></a>{% endif -%}
           {%- if config.extra.kofi -%}

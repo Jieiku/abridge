@@ -6,6 +6,7 @@ const jsonminify = require("jsonminify");
 const replace = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
+const { exit } = require('process');
 const execPromise = util.promisify(exec);
 
 if (!(fs.existsSync('config.toml'))) {
@@ -341,11 +342,32 @@ async function sync() {
     submodulePackageJson,
     "utf-8"
   );
+
+  // Check for changes in dependencies - prompting an npm update
+  let checkPackageVersion = function (content) {
+    let matches = content.match(/"dependencies": \{([^}]+)\}/)[1]; // Look in the dependencies section
+    return [...matches.matchAll(/"(\w+-\w+|\w+)": "[^0-9]*([0-9])/g)].map(match => ({ // Extract all packages and their major version number (aka for breaking changes which need an update)
+      name: match[1],
+      majorVersion: match[2]
+    })).sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  const packageVersionLocal = checkPackageVersion(packageJsonContent);
+  const packageVersionSubmodule = checkPackageVersion(submodulePackageJsonContent);
+  if (JSON.stringify(packageVersionLocal) !== JSON.stringify(packageVersionSubmodule)) {
+    console.log(
+      "\x1b[31m%s\x1b[0m",
+      "warning:",
+      "The packages are out of date, please run `npm install` to update them."
+    );
+    exit(1);
+  }
+  console.log(packageVersionLocal, packageVersionSubmodule);
+
   if (packageJsonContent !== submodulePackageJsonContent) {
     console.log("Updating package.json from submodule");
     fs.copyFileSync(submodulePackageJson, packageJson);
   }
-
   const configToml = path.join(__dirname, "config.toml");
   const submoduleConfigToml = path.join(
     __dirname,

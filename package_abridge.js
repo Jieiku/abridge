@@ -354,7 +354,7 @@ async function sync() {
 
   let adjustTomlContent = function (content) {
     content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces
-    content = content.replace(/(^#)(?=\s*\w+\s*=\s*)|#.*$/gm, ""); // A regex to selectively remove all comments, and to uncomment all commented config lines
+    content = content.replace(/(^#)(?=\s*\w+\s*=\s*)|[[:blank:]]*#.*$/gm, ""); // A regex to selectively remove all comments, and to uncomment all commented config lines
     content = content.replace(/(\[([^]]*)\])|(\{([^}]*)\})/gs, ""); // A regex to remove all tables and arrays
     content = content.replace(
       /(^#.*$|(["']).*?\2|(?<=\s)#.*$|\btrue\b|\bfalse\b)/gm,

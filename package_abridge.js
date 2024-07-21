@@ -3,7 +3,6 @@ const path = require("path");
 const TOML = require('fast-toml');
 const UglifyJS = require('uglify-js');
 const jsonminify = require("jsonminify");
-const replace = require('replace-in-file');
 const util  = require("util");
 const { exec } = require("child_process");
 const execPromise = util.promisify(exec);
@@ -49,15 +48,16 @@ async function execWrapper(cmd) {
 }
 
 async function abridge() {
+  const { replaceInFileSync } = await import('replace-in-file');
   if (offline === false) {
     if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
-      replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
+      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
+      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
     }
   } else if (offline === true) {
     if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replace.sync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
-      replace.sync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
+      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
     } else {
       throw new Error('ERROR: offline = true requires that online_url and online_indexformat are set in config.toml, so that the base_url and index_format can be restored if offline is later set to false.');
     }
@@ -87,20 +87,20 @@ async function abridge() {
 
   if (search_library === 'elasticlunr') {
     if (fs.existsSync('content/static/stork_toml.md')) {
-      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
   } else if (search_library === 'tinysearch') {
     if (!fs.existsSync('content/static/tinysearch_json.md')) {// 'content/static/tinysearch_json.md' file is missing, copy from abridge theme.
       fs.copyFileSync(bpath+'content/static/tinysearch_json.md', 'content/static/tinysearch_json.md',fs.constants.COPYFILE_EXCL);
     }
     if (fs.existsSync('content/static/stork_toml.md')) {
-      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = false"});
+      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = false"});
     }
     // zola build && mkdir -p tmp && tinysearch --optimize --path tmp public/data_tinysearch/index.html && rsync -avz tmp/*.wasm static/ && rm -rf tmp
   } else if (search_library === 'stork') {
@@ -109,18 +109,18 @@ async function abridge() {
       fs.copyFileSync(bpath+'content/static/stork_toml.md', 'content/static/stork_toml.md',fs.constants.COPYFILE_EXCL);
     }
     if (fs.existsSync('content/static/stork_toml.md')) {
-      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = false"});
+      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = false"});
     }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     // zola build && stork build --input public/data_stork/index.html --output static/stork.st
   } else if (search_library === 'pagefind') {
     if (fs.existsSync('content/static/stork_toml.md')) {
-      replace.sync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
     }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replace.sync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
+      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
 
     // Run the pagefind script to generate the index files.
@@ -140,14 +140,14 @@ async function abridge() {
         if (js_bundle) {
           sw_load_min = '.min.js?v=';
         }
-        replace.sync({files: 'static/js/sw_load.js', from: /sw.*v=.*/g, to: "sw"+sw_load_min+pwa_VER+"\","});
+        replaceInFileSync({files: 'static/js/sw_load.js', from: /sw.*v=.*/g, to: "sw"+sw_load_min+pwa_VER+"\","});
       }
       if (fs.existsSync('static/sw.js')) {
-        replace.sync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
-        replace.sync({files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = "+pwa_LONG_TTL+";"});
-        replace.sync({files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = ["+pwa_TTL_NORM+"];"});
-        replace.sync({files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = ["+pwa_TTL_LONG+"];"});
-        replace.sync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
+        replaceInFileSync({files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = "+pwa_NORM_TTL+";"});
+        replaceInFileSync({files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = "+pwa_LONG_TTL+";"});
+        replaceInFileSync({files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = ["+pwa_TTL_NORM+"];"});
+        replaceInFileSync({files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = ["+pwa_TTL_LONG+"];"});
+        replaceInFileSync({files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = ["+pwa_TTL_EXEMPT+"];"});
       }
 
       if (pwa_cache_all === true) {
@@ -185,7 +185,7 @@ async function abridge() {
       }
 
       // update the BASE_CACHE_FILES variable in the sw.js service worker file
-      results = replace.sync({
+      results = replaceInFileSync({
         files: 'static/sw.js',
         from: /this\.BASE_CACHE_FILES =.*/g,
         to: cache,

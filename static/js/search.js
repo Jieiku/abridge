@@ -344,10 +344,10 @@ window.onload = function() {
             // Check the string is ascii characters or not
             var re = /^[\x00-\xff]+$/
             if (word[1] !== TERM_WEIGHT && word[0].length >= 12 && !re.test(word[0])) {
-              // If the string's length is too long, it maybe a Chinese/Japance/Korean article
+              // If the string's length is too long, it maybe a Chinese/Japanese/Korean article
               // if using substring method directly, it may occur error codes on emoji chars
-              var strBefor = body.substring(word[2], startIndex);
-              var strAfter = substringByByte(strBefor, 12);
+              var strBefore = body.substring(word[2], startIndex);
+              var strAfter = substringByByte(strBefore, 12);
               teaser.push(strAfter);
             } else {
               teaser.push(body.substring(word[2], startIndex));

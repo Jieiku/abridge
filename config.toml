@@ -183,7 +183,7 @@ youtube = "channel/your-channel-id"
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
 ### search_library, library to use. valid values:
-###   false, "elasticlunr", "tinysearch", "stork"
+###   false, "elasticlunr", "tinysearch", "stork", "pagefind"
 ### offline: implies uglyurls=true and integrity=false, when true NPM/node will
 ###   automatically set the path for the base_url, it will build the site,
 ###   then set the base_url back to what it was. This is a way to build a completely

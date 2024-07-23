@@ -5,6 +5,7 @@ const UglifyJS = require('uglify-js');
 const jsonminify = require("jsonminify");
 const util  = require("util");
 const { exec } = require("child_process");
+const { exit } = require('process');
 const execPromise = util.promisify(exec);
 
 if (!(fs.existsSync('config.toml'))) {
@@ -48,6 +49,7 @@ async function execWrapper(cmd) {
 }
 
 async function abridge() {
+  await sync();
   const { replaceInFileSync } = await import('replace-in-file');
   if (offline === false) {
     if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
@@ -305,6 +307,112 @@ function minify(fileA,outfile) {
 
   result = UglifyJS.minify(filesContents, options);
   fs.writeFileSync(outfile, result.code);
+
 }
 
 abridge();
+
+async function sync() {
+  // Check if the submodule is present, if not skip entire function
+  if (!fs.existsSync(path.join(__dirname, "themes/abridge"))) {
+    return;
+  }
+
+  // Checks for changes from local version in static, package.json and config.toml
+  // and if there are changes it sync from the submodule
+
+  // Check for changes in static
+  const staticFolder = path.join(__dirname, "static/js");
+  const submoduleFolder = path.join(__dirname, "themes/abridge/static/js");
+
+  const files = fs.readdirSync(staticFolder);
+
+  files.forEach((file) => {
+    if (file.endsWith(".js") && !file.endsWith(".min.js")) {
+      try {
+        const localFile = path.join(staticFolder, file);
+        const submoduleFile = path.join(submoduleFolder, file);
+        const localFileContent = fs.readFileSync(localFile, "utf-8");
+        const submoduleFileContent = fs.readFileSync(submoduleFile, "utf-8");
+
+        if (localFileContent !== submoduleFileContent) {
+          console.log(`Updating ${file} from submodule`);
+          fs.copyFileSync(submoduleFile, localFile);
+        }
+      } catch (error) {
+        console.log(`Skipping ${file} due to error: ${error}`);
+      }
+    }
+  });
+
+  // Check for changes in package.json
+  const packageJson = path.join(__dirname, "package.json");
+  const submodulePackageJson = path.join(
+    __dirname,
+    "themes/abridge/package.json"
+  );
+
+  const packageJsonContent = fs.readFileSync(packageJson, "utf-8");
+  const submodulePackageJsonContent = fs.readFileSync(
+    submodulePackageJson,
+    "utf-8"
+  );
+
+  // Check for changes in dependencies - prompting an npm update
+  let checkPackageVersion = function (content) {
+    let matches = content.match(/"dependencies": \{([^}]+)\}/)[1]; // Look in the dependencies section
+    return [...matches.matchAll(/"(\w+-\w+|\w+)": "[^0-9]*([0-9])/g)].map(match => ({ // Extract all packages and their major version number (aka for breaking changes which need an update)
+      name: match[1],
+      majorVersion: match[2]
+    })).sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  const packageVersionLocal = checkPackageVersion(packageJsonContent);
+  const packageVersionSubmodule = checkPackageVersion(submodulePackageJsonContent);
+  if (JSON.stringify(packageVersionLocal) !== JSON.stringify(packageVersionSubmodule)) {
+    console.log(
+      "\x1b[31m%s\x1b[0m",
+      "warning:",
+      "The packages are out of date, please run `npm install` to update them."
+    );
+    exit(1);
+  }
+  console.log(packageVersionLocal, packageVersionSubmodule);
+
+  if (packageJsonContent !== submodulePackageJsonContent) {
+    console.log("Updating package.json from submodule");
+    fs.copyFileSync(submodulePackageJson, packageJson);
+  }
+  const configToml = path.join(__dirname, "config.toml");
+  const submoduleConfigToml = path.join(
+    __dirname,
+    "themes/abridge/config.toml"
+  );
+
+  let adjustTomlContent = function (content) {
+    content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces
+    content = content.replace(/(^#)(?=\s*\w+\s*=\s*)|[[:blank:]]*#.*$/gm, ""); // A regex to selectively remove all comments, and to uncomment all commented config lines
+    content = content.replace(/(\[([^]]*)\])|(\{([^}]*)\})/gs, ""); // A regex to remove all tables and arrays
+    content = content.replace(
+      /(^#.*$|(["']).*?\2|(?<=\s)#.*$|\btrue\b|\bfalse\b)/gm,
+      ""
+    ); // A regex to remove all user added content, (so you can tell if the .toml format has changed)
+    return content.trim(); // Finally remove any leading or trailing white spaces
+  };
+
+  const configTomlContent = adjustTomlContent(
+    fs.readFileSync(configToml, "utf-8")
+  );
+  const submoduleConfigTomlContent = adjustTomlContent(
+    fs.readFileSync(submoduleConfigToml, "utf-8")
+  );
+
+  if (configTomlContent !== submoduleConfigTomlContent) {
+    // This should say info: then the message in blue (which works in every terminal)
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      "info:",
+      "The config.toml file format may have changed, please update it manually."
+    );
+  }
+}

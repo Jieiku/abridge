@@ -69,6 +69,20 @@ taxonomies = [
     {name = "tags", feed = true},
 ]
 
+[languages.pt]
+title = "Abridge"
+description = "Abridge é um tema rápido e leve que usa HTML semântico, CSS de clase leve abridge.css y JS não obrigatório."
+generate_feeds = true
+build_search_index = true
+search.include_title = true # include title of page/section in index
+search.include_description = true # include description of page/section in index
+search.include_content = true # include rendered content of page/section in index
+# search.truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
+taxonomies = [
+#    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
 [extra]
 ###############################################################################
 ### Layout & Format

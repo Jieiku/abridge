@@ -1,0 +1,32 @@
+language_name = "Português" # Shown in language picker for multi-language sites.
+date_locale = "pt_BR"
+full_stop = "."  # Used at the end of a sentence.
+
+# Menu items should match the names in config.extra.menu
+Blog = "Blog"
+About = "Sobre mim"
+Posts = "Publicações"
+Tags = "Etiquetas"
+Categories = "Categorias"
+Contact = "Contato"
+Privacy = "Privacidade"
+Sitemap = "Mapa do site"
+
+Search = "Pesquisa"
+Updated = "Atualizado"
+Index = "Índice"
+Recent = "Recente"
+Powered_by = "Feito com"
+and = "e"
+more = "mais" # "...more" read more links
+series_parts = "Série" # $NUMBER_OF_PARTS Serie de piezas : 10 Part Series
+
+### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+copyright_override = '© $CURRENT_YEAR $SITE_TITLE • O conteúdo do site tem licença <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.'
+
+### Page not found, maybe moved or not in this language
+404_not_found = "Página não encontrada, talvez tenha sido movida ou não esteja neste idioma"
+### Try searching or
+404_try_search = "Tente pesquisar ou"
+### go to homepage
+404_go_home = "ir para a página inicial"

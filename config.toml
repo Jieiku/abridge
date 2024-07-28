@@ -291,8 +291,9 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 ###############################################################################
 ### Icons
 ### Loading the entire fontawesome icon collection will negatively impact your sites performance.
-### For a lightweight solution consider adding only the icons that you need to the following file:
-### https://github.com/Jieiku/abridge/blob/master/sass/include/_icons.scss
+### For a lightweight solution consider adding only the icons that you need.
+### you can load individual scss based svg icons by including them in the _extra.scss file
+### https://github.com/Jieiku/abridge/blob/master/COPY-TO-ROOT-SASS/_extra.scss
 ###############################################################################
 
 ### To disable any of these icons set them to "false" (will default to unicode icons instead)

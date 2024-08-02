@@ -934,12 +934,28 @@ $syntax: true !default;//syntax highlighting for code blocks
       // Highlighted text
       color: var(--h1);
       mark {
-        display: block;
-        color: unset;
-        padding: 0;
-        background-color: var(--h0);
-        filter: brightness(var(--ha));
+        border-radius: unset;
       }
+      td:first-child {
+        mark {
+          border-top-left-radius: var(--br);
+          border-bottom-left-radius: var(--br);
+        }
+      }
+      td:last-child {
+        mark {
+          border-top-right-radius: var(--br);
+          border-bottom-right-radius: var(--br);
+        }
+      }
+    }
+    mark {
+      display: block;
+      color: unset;
+      padding: 0;
+      background-color: var(--h0);
+      filter: brightness(var(--ha));
+      border-radius: var(--br);
     }
     td, th, tr {
       padding: 0;

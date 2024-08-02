@@ -1,0 +1,32 @@
+language_name = "Nederlands" # Shown in language picker for multi-language sites.
+date_locale = "nl_NL"
+full_stop = "."  # Used at the end of a sentence.
+
+# Menu items should match the names in config.extra.menu
+Blog = "Blog"
+About = "Over"
+Posts = "Artikelen"
+Tags = "Labels"
+Categories = "Categorieën"
+Contact = "Contact"
+Privacy = "Privacy"
+Sitemap = "Sitemap"
+
+Search = "Zoeken"
+Updated = "Bijgewerkt"
+Index = "Index"
+Recent = "Recent"
+Powered_by = "Aangedreven door"
+and = "&"
+more = "meer" # "...more" read more links
+series_parts = "Serie" # $NUMBER_OF_PARTS Part Series : 10 Part Series
+
+### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Website inhoud is gelicenseerd <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.'
+
+### Page not found, maybe moved or not in this language
+404_not_found = "Pagina niet gevonden, deze kan verplaatst zijn of alleen in een andere taal beschikbaar zijn"
+### Try searching or
+404_try_search = "Probeer te zoeken of"
+### go to homepage
+404_go_home = "ga naar homepage"

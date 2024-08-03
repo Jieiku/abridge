@@ -69,6 +69,20 @@ taxonomies = [
     {name = "tags", feed = true},
 ]
 
+[languages.pt]
+title = "Abridge"
+description = "Abridge é um tema rápido e leve que usa HTML semântico, CSS de clase leve abridge.css y JS não obrigatório."
+generate_feeds = true
+build_search_index = true
+search.include_title = true # include title of page/section in index
+search.include_description = true # include description of page/section in index
+search.include_content = true # include rendered content of page/section in index
+# search.truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
+taxonomies = [
+#    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
 [extra]
 ###############################################################################
 ### Layout & Format
@@ -183,7 +197,7 @@ youtube = "channel/your-channel-id"
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
 ### search_library, library to use. valid values:
-###   false, "elasticlunr", "tinysearch", "stork"
+###   false, "elasticlunr", "tinysearch", "stork", "pagefind"
 ### offline: implies uglyurls=true and integrity=false, when true NPM/node will
 ###   automatically set the path for the base_url, it will build the site,
 ###   then set the base_url back to what it was. This is a way to build a completely
@@ -277,8 +291,9 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 ###############################################################################
 ### Icons
 ### Loading the entire fontawesome icon collection will negatively impact your sites performance.
-### For a lightweight solution consider adding only the icons that you need to the following file:
-### https://github.com/Jieiku/abridge/blob/master/sass/include/_icons.scss
+### For a lightweight solution consider adding only the icons that you need.
+### you can load individual scss based svg icons by including them in the _extra.scss file
+### https://github.com/Jieiku/abridge/blob/master/COPY-TO-ROOT-SASS/_extra.scss
 ###############################################################################
 
 ### To disable any of these icons set them to "false" (will default to unicode icons instead)

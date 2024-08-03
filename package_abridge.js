@@ -202,7 +202,8 @@ async function abridge() {
     // These are truely static js files, so they should only need to be updated by the abridge maintainer or contributors.
     minify(['static/js/theme.js']);
     minify(['static/js/theme_light.js']);
-    minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
+    // Something went wrong with minifying katexbundle, so commenting this out for now
+    // minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
     minify(['static/js/elasticlunr.min.js','static/js/search.js'],'static/js/search_elasticlunr.min.js');
     minify(['static/js/stork.js','static/js/stork_config.js'],'static/js/search_stork.min.js');
     minify(['static/js/tinysearch.js'],'static/js/search_tinysearch.min.js');

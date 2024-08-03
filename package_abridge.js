@@ -368,6 +368,11 @@ async function sync() {
     })).sort((a, b) => a.name.localeCompare(b.name));
   };
 
+  if (packageJsonContent !== submodulePackageJsonContent) {
+    console.log("Updating package.json from submodule");
+    fs.copyFileSync(submodulePackageJson, packageJson);
+  }
+
   const packageVersionLocal = checkPackageVersion(packageJsonContent);
   const packageVersionSubmodule = checkPackageVersion(submodulePackageJsonContent);
   if (JSON.stringify(packageVersionLocal) !== JSON.stringify(packageVersionSubmodule)) {
@@ -379,11 +384,7 @@ async function sync() {
     exit(1);
   }
   console.log(packageVersionLocal, packageVersionSubmodule);
-
-  if (packageJsonContent !== submodulePackageJsonContent) {
-    console.log("Updating package.json from submodule");
-    fs.copyFileSync(submodulePackageJson, packageJson);
-  }
+  
   const configToml = path.join(__dirname, "config.toml");
   const submoduleConfigToml = path.join(
     __dirname,

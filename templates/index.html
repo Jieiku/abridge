@@ -5,7 +5,8 @@ This Template can also be used directly for the index eg: example.com/ or as the
 
 {%- extends "base.html" %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+
 
 {%- block seo %}
   {{- super() }}

@@ -93,7 +93,7 @@ taxonomies = [
 
 menu = [
 #    {url = "blog", name = "Blog", slash = true, blank = false, size="s110"},
-    {url = "about", name = "About", slash = true, blank = false, size="s110"},
+#    {url = "about", name = "About", slash = true, blank = false, size="s110"},
     {url = "archive", name = "Posts", slash = true, blank = false, size="s110"},
 #    {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
     {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
@@ -197,24 +197,17 @@ youtube = "channel/your-channel-id"
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
 ### search_library, library to use. valid values:
-###   false, "elasticlunr", "tinysearch", "stork", "pagefind"
-### offline: implies uglyurls=true and integrity=false, when true NPM/node will
-###   automatically set the path for the base_url, it will build the site,
-###   then set the base_url back to what it was. This is a way to build a completely
-###   offline site, a feature not possible with Zola alone.
-###   The PWA feature is another way to build an offline site, so there are now two
-###   different ways to build an offline site with Abridge.
+###   false, "elasticlunr", "elasticlunrjava", "pagefind", "tinysearch", "offline"
+###     elasticlunr - elasticlunr using the elasticlunr_json index format
+###     elasticlunrjava - elasticlunr using the elasticlunr_javascript index format
+###     pagefind - pagefind using the fuse_json index format
+###     tinysearch - tinysearch using the fuse_json index format
+###     offline - elasticlunr using the elasticlunr_javascript index format with content paths relative to the location on disk.
+###       (offline: implies uglyurls=true and integrity=false, node script will pass base_url argument as the path on disk.)
 ###
-### For most people the value of online_url will be the same as base_url.
-###   online_url is used to restore the base_url after generating an Offline site.
-###   When you set offline = true and run the npm script, the base_url is set to the absolute path on disk.
-###   Once you set offline = false, the base_url will be set back to the value of online_url when you run the npm script again.
+###       The PWA feature is another way to build an offline site, so there are now two
+###       different ways to build an offline site with Abridge.
 ###############################################################################
-
-# do NOT include a trailing slash on the online URL
-#online_url = "https://abridge.netlify.app"
-online_indexformat = "elasticlunr_json"# used to restore your preferred index format when offline = false
-offline = false # implies uglyurls=true and integrity=false, when true NPM/node will automatically set the path for the base_url, it will build the site, then set the base_url back to what it was.
 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
@@ -226,7 +219,7 @@ js_prestyle = true # used to preload: FontAwesome, Katex, external Google Fonts
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
-search_library = "elasticlunr" 
+search_library = "elasticlunr"
 stylesheets = ["abridge.css"]
 
 webmanifest = "manifest.min.json" # Required for PWAs

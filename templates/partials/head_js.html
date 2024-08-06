@@ -1,6 +1,6 @@
 {#- JAVASCRIPT #}
   {%- set integrity = config.extra.integrity | default(value=true) -%}
-  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
   {%- set search_library=config.extra.search_library | default(value="elasticlunr") -%}
 
   {%- set preStyle = false %}
@@ -75,8 +75,6 @@
 
   {%-   if search_library == "tinysearch" %}
   <script defer type="module" src="{{ get_url(path='js/tinysearch.js'   , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/tinysearch.js'   , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
-  {%- elif search_library == "stork"      %}
-  <script defer type="module" src="{{ get_url(path='js/search_stork.min.js'        , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/search_stork.min.js'        , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- elif config.build_search_index %}
 
   {%- set search_index_format="elasticlunr_json" -%}
@@ -87,7 +85,7 @@
   {%- endif %}
 
   {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-  {%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if search_index_format == "elasticlunr_javascript" %}{#- Javascript index format #}
   <script defer src="{{               get_url(path='js/elasticlunr.min.js'         , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/elasticlunr.min.js'         , sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   <script defer src="{{               get_url(path='search_index.' ~ lang ~ '.js'  , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='search_index.' ~ lang ~ '.js'  , sha_type=384, base64=true) | safe }}"{%- endif %}></script>

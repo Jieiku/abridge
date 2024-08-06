@@ -1110,13 +1110,6 @@ $syntax: true !default;//syntax highlighting for code blocks
   div:empty {
     display: none;
   }
-  .stork-close-button {
-    display: none;
-  }
-  .stork-title p {
-    color: var(--a1);
-    font-weight: var(--fh);
-  }
   #suggestions {
     z-index: 9;
     background: var(--c1);

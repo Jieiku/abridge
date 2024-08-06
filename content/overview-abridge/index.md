@@ -27,7 +27,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - [X] Numbered code blocks with [line highlighting](https://abridge.netlify.app/overview-code-blocks/#toml).
 - [X] Entirely Offline Site by using the PWA **or** by setting `offline = true` in `config.toml` (full search support).
 - [X] Multi-language support.
-- [X] Search support. (elasticlunr, tinysearch, stork)
+- [X] Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://jieiku.github.io/abridge-pagefind/), [tinysearch](https://jieiku.github.io/abridge-tinysearch/))
 - [X] Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
 - [X] Search Results Page, type search query then hit `Enter Key` or `click` the search button icon.
 - [X] [SEO](#seo-and-header-tags) support. (Search Engine Optimization)
@@ -106,7 +106,7 @@ rsync themes/abridge/package.json package.json
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
 - `netlify.toml` settings to deploy your repo with netlfiy.
 - `package_abridge.js` node script to: update cache files list in PWA, minify js, bundle js
-- `package.json` to switch between nosearch, elasticlunr, tinysearch, stork.
+- `package.json` used by node, defines scripts and dependencies.
 
 Uncomment the theme line in your project's root config.toml:
 
@@ -325,13 +325,36 @@ All that is necessary is `zola build && npm run abridge`.
 
 #### Switch Search Library
 
-In addition to elasticlunr abridge also supports tinysearch and stork.
+In addition to elasticlunr abridge also supports pagefind and tinysearch.
+
+pagefind demo: https://jieiku.github.io/abridge-pagefind/
 
 tinysearch demo: https://jieiku.github.io/abridge-tinysearch/
 
-stork demo: https://jieiku.github.io/abridge-stork/
+To use tinysearch extra steps are required.
 
-To use tinysearch/stork extra steps are required.
+**Switch to pagefind:**
+
+```bash
+npm install
+sed -i 's/^search_library =.*/search_library = "pagefind"/' config.toml
+npm run abridge
+# zola serve
+```
+
+**Switch to elasticlunr:**
+
+```bash
+sed -i 's/^search_library =.*/search_library = "elasticlunr"/' config.toml
+npm run abridge
+```
+
+**Switch to nosearch:**
+
+```bash
+sed -i 's/^search_library =.*/search_library = "false"/' config.toml
+npm run abridge
+```
 
 **Switch to tinysearch:**
 
@@ -347,43 +370,10 @@ exit # reload shell environment
 
 Switch Abridge to tinysearch:
 ```bash
-npm run tinysearch
-zola build
+sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
+npm run abridge
 tinysearch --optimize --path static public/data_tinysearch/index.html
 # zola serve
-```
-
-**Switch to stork:**
-
-First you have to install stork so that you can build the index:
-
-```bash
-git clone https://github.com/jameslittle230/stork
-cd stork
-cargo build --release
-sudo cp ./target/release/stork /usr/local/bin/stork
-exit # reload shell environment
-```
-
-Switch Abridge to stork:
-
-```bash
-npm run stork
-zola build
-stork build --input public/data_stork/index.html --output static/stork.st
-# zola serve
-```
-
-**Switch to elasticlunr:**
-
-```bash
-npm run elasticlunr
-```
-
-**Switch to nosearch:**
-
-```bash
-npm run nosearch
 ```
 
 #### Theme-Switcher

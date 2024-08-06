@@ -21,9 +21,6 @@ const search_library = data.extra.search_library;
 const index_format = data.search.index_format;
 const uglyurls = data.extra.uglyurls;
 const js_bundle = data.extra.js_bundle;
-const offline = data.extra.offline;
-const online_url = data.extra.online_url;
-const online_indexformat = data.extra.online_indexformat;
 const pwa = data.extra.pwa;
 const pwa_VER = data.extra.pwa_VER;
 const pwa_NORM_TTL = data.extra.pwa_NORM_TTL;
@@ -36,7 +33,7 @@ const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 
 // This is used to pass arguments to zola via npm, for example:
 // npm run abridge -- "--base-url https://abridge.pages.dev"
-const args = process.argv[2] ? ' '+process.argv[2] : '';
+var args = process.argv[2] ? ' '+process.argv[2] : '';
 
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
@@ -51,18 +48,18 @@ async function execWrapper(cmd) {
 async function abridge() {
   await sync();
   const { replaceInFileSync } = await import('replace-in-file');
-  if (offline === false) {
-    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
-      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
-    }
-  } else if (offline === true) {
-    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
-      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
-    } else {
-      throw new Error('ERROR: offline = true requires that online_url and online_indexformat are set in config.toml, so that the base_url and index_format can be restored if offline is later set to false.');
-    }
+  if (search_library === 'offline') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+    //replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
+    args = args + " -u \""+__dirname+"\/public\""
+  } else if (search_library === 'elasticlunrjava') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+  } else if (search_library === 'elasticlunr') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_json\""});
+  } else if (search_library === 'pagefind') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\""});
+  } else if (search_library === 'tinysearch') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\""});
   }
 
   console.log('Zola Build to generate files for minification:');
@@ -88,9 +85,6 @@ async function abridge() {
   }
 
   if (search_library === 'elasticlunr') {
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
       replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
@@ -98,36 +92,18 @@ async function abridge() {
     if (!fs.existsSync('content/static/tinysearch_json.md')) {// 'content/static/tinysearch_json.md' file is missing, copy from abridge theme.
       fs.copyFileSync(bpath+'content/static/tinysearch_json.md', 'content/static/tinysearch_json.md',fs.constants.COPYFILE_EXCL);
     }
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
       replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = false"});
     }
     // zola build && mkdir -p tmp && tinysearch --optimize --path tmp public/data_tinysearch/index.html && rsync -avz tmp/*.wasm static/ && rm -rf tmp
-  } else if (search_library === 'stork') {
-
-    if (!fs.existsSync('content/static/stork_toml.md')) {// 'content/static/stork_toml.md' file is missing, copy from abridge theme.
-      fs.copyFileSync(bpath+'content/static/stork_toml.md', 'content/static/stork_toml.md',fs.constants.COPYFILE_EXCL);
-    }
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = false"});
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-    // zola build && stork build --input public/data_stork/index.html --output static/stork.st
   } else if (search_library === 'pagefind') {
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
     if (fs.existsSync('content/static/tinysearch_json.md')) {
       replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
     }
 
     // Run the pagefind script to generate the index files.
     // Has to happen at start otherwise, it happens too late asyncronously.
-    const createIndex = require('./static/js/pagefind.index.js'); // run the pagefind index.js script
+    const createIndex = require('./static/js/pagefind.index.cjs'); // run the pagefind index.js script
     await createIndex(); // makes program wait for pagefind build execution
   }
 
@@ -205,7 +181,6 @@ async function abridge() {
     // Something went wrong with minifying katexbundle, so commenting this out for now
     // minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
     minify(['static/js/elasticlunr.min.js','static/js/search.js'],'static/js/search_elasticlunr.min.js');
-    minify(['static/js/stork.js','static/js/stork_config.js'],'static/js/search_stork.min.js');
     minify(['static/js/tinysearch.js'],'static/js/search_tinysearch.min.js');
     minify(['static/js/prestyle.js','static/js/theme_button.js','static/js/email.js','static/js/codecopy.js','static/js/sw_load.js'],'static/js/abridge_nosearch.min.js');
     minify(['static/js/prestyle.js','static/js/theme_button.js','static/js/email.js','static/js/codecopy.js'],'static/js/abridge_nosearch_nopwa.min.js');
@@ -253,25 +228,22 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
     minify_files.push(bpath+'static/js/codecopy.js');
   }
   if (search_library) {
-      if ((search_library === 'elasticlunr' && offline === true) || (search_library === 'elasticlunr' && index_format === 'elasticlunr_javascript' && uglyurls === true)) {
+      if ((search_library === 'offline' || (search_library === 'elasticlunrjava' && uglyurls === true))) {
         minify_files.push('public/search_index.en.js');
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/searchjavaugly.js');
-      } else if (search_library === 'elasticlunr' && index_format === 'elasticlunr_javascript') {
+      } else if (search_library === 'elasticlunrjava') {
         minify_files.push('public/search_index.en.js');
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/searchjava.js');
       } else if (search_library === 'elasticlunr') {//abridge default
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/search.js');
-      } else if (search_library === 'stork') {
-        minify_files.push(bpath+'static/js/stork.js');
-        minify_files.push(bpath+'static/js/stork_config.js');
-      } else if (search_library === 'tinysearch') {
-        minify_files.push(bpath+'static/js/tinysearch.js');
       } else if (search_library === 'pagefind') {
         minify_files.push(bpath+'static/js/pagefind.js');
         minify_files.push(bpath+'static/js/pagefind.search.js');
+      } else if (search_library === 'tinysearch') {
+        minify_files.push(bpath+'static/js/tinysearch.js');
       }
   }
   if (pwa) {
@@ -384,7 +356,7 @@ async function sync() {
     exit(1);
   }
   console.log(packageVersionLocal, packageVersionSubmodule);
-  
+
   const configToml = path.join(__dirname, "config.toml");
   const submoduleConfigToml = path.join(
     __dirname,

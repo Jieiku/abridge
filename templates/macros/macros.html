@@ -4,7 +4,7 @@
 
 {%- macro page_listing(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
         <div class="tpad">
           <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>
         </div>
@@ -13,7 +13,7 @@
 
 {%- macro series_link(inner, page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if inner.content == page.content %}
       <li><a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a></li>
     {% else %}
@@ -24,7 +24,7 @@
 
 {%- macro title_post(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
       <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a></h1>
 {%- endmacro title_post %}
 
@@ -36,7 +36,7 @@
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
 
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
       <span{%- if config.extra.meta_post.size %} class="{{ config.extra.meta_post.size }}"{% endif %}>
 
         {#- Author #}
@@ -99,7 +99,7 @@
 
 {%- macro title_index(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
         <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
 {%- endmacro title_index %}
 
@@ -110,7 +110,7 @@
 {%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
         <span{%- if config.extra.meta_index.size %} class="{{ config.extra.meta_index.size }}"{% endif %}>
 
         {#- Author #}
@@ -173,7 +173,7 @@
 
 {%- macro footer(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
       {#- prev/next content page nextprev title pagination #}
       {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
       {%- if page.lower or page.higher %}
@@ -197,7 +197,7 @@
 
 {%- macro pagination(paginator, config)%}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}
@@ -304,7 +304,7 @@
 
 {%- macro numpagination(paginator, config)%}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.offline %}{% set uglyurls = true %}{% endif %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}

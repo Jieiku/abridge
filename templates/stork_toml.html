@@ -1,9 +1,0 @@
-{%- import "macros/create_stork_toml.html" as create_stork_toml -%}
-
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "stork" %}
-[input]
-base_directory = "public"
-files = [
-{{ create_stork_toml::from_section(section="_index.md", config=config) }}
-]
-{%- endif %}{%- endif %}

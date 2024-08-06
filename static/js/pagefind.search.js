@@ -1,9 +1,6 @@
 window.onload = function () {
     if (document.body.contains(document.goSearch)) {
-        options({
-            basePath: "/js/"
-        });
-        init();
+        var loaded = false;
         document.goSearch.onsubmit = function () { return goSearchNow() };
 
         /*
@@ -60,17 +57,32 @@ window.onload = function () {
             document.addEventListener("keydown", inputFocus);
             document.addEventListener("click", function (event) { suggestions.contains(event.target) || suggestions.classList.add("d-none") });
 
+            document.getElementById('searchinput').onfocus = function() {
+                if (!loaded) {
+                    lazyLoad();
+                    loaded = true;
+                    document.body.contains(document.goSearch) && (document.goSearch.onsubmit = function() { return goSearchNow() })
+                }
+                document.getElementById('searchinput').onfocus = '';
+            }
+
             var lang = document.documentElement.getAttribute("lang");
             var langOnly = lang.substring(0, 2);
             var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
             if (baseUrl.slice(-1) == "/") {
                 baseUrl = baseUrl.slice(0, -1);
             }
+            options({
+                basePath: baseUrl + '/js/'
+            });
 
             var index;
             searchinput.addEventListener('input', show_results, true);
             suggestions.addEventListener('click', accept_suggestion, true);
 
+            async function lazyLoad() {
+                await init();
+            }
 
             // in page results when press enter or click search icon from search box
             function closeSearchNow() {

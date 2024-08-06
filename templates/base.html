@@ -136,7 +136,9 @@
       {%- if config.extra.menu_footer %}
       <nav class="vpad">
         {%- for i in config.extra.menu_footer -%}
-        {%- if i.url != "sitemap.xml" %}
+        {%- if i.url is matching("^http[s]?://") %}
+        {%- set furl=i.url %}
+        {%- elif i.url != "sitemap.xml" %}
         {%- set furl=get_url(path=i.url, lang=lang, trailing_slash=i.slash) %}
         {%- else %}
         {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}

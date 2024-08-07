@@ -212,6 +212,11 @@ async function abridge() {
   await execWrapper('zola build'+args);
 }
 
+async function searchChange(searchOption) {
+  const { replaceInFileSync } = await import('replace-in-file');
+  replaceInFileSync({files: 'config.toml', from: /search_library.*=.*/g, to: 'search_library = \"'+searchOption+'\"'});
+}
+
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {
   minify_files = [];
 
@@ -283,7 +288,19 @@ function minify(fileA,outfile) {
 
 }
 
-abridge();
+if (args === ' offline') {
+  searchChange('offline');
+} else if (args === ' elasticlunrjava') {
+  searchChange('elasticlunrjava');
+} else if (args === ' elasticlunr') {
+  searchChange('elasticlunr');
+} else if (args === ' pagefind') {
+  searchChange('pagefind');
+} else if (args === ' tinysearch') {
+  searchChange('tinysearch');
+} else {
+  abridge();
+}
 
 async function sync() {
   // Check if the submodule is present, if not skip entire function

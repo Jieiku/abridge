@@ -139,7 +139,7 @@ async function abridge() {
           if (e.code != 'EEXIST') throw e;
         }
         const path = './public/';
-        cache = 'this.BASE_CACHE_FILES = [';
+        cache = '';
         files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
         .forEach(
           (file) => {
@@ -149,6 +149,7 @@ async function abridge() {
               item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
               item = item.replace(/\\/g,'/');// replace backslash with forward slash for Windows
               item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
+              item = item.replace(/^\/_headers/i,'');// dont cache the cloudflare _headers file
 
               // if formatted output is not empty line then append it to cache var
               if (item != '') {// skip empty lines
@@ -157,11 +158,13 @@ async function abridge() {
             }
           }
         );
-        cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
+        cache = cache.slice(0, -1)// remove the last comma
       } else if (pwa_BASE_CACHE_FILES) {
-        cache = 'this.BASE_CACHE_FILES = ['+pwa_BASE_CACHE_FILES+'];';
+        cache = pwa_BASE_CACHE_FILES;
       }
 
+      cache = cache.split(",").sort().join(",")//sort the cache list, this should help keep the commit history cleaner.
+      cache = 'this.BASE_CACHE_FILES = ['+cache+'];';
       // update the BASE_CACHE_FILES variable in the sw.js service worker file
       results = replaceInFileSync({
         files: 'static/sw.js',
@@ -210,11 +213,6 @@ async function abridge() {
 
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
   await execWrapper('zola build'+args);
-}
-
-async function searchChange(searchOption) {
-  const { replaceInFileSync } = await import('replace-in-file');
-  replaceInFileSync({files: 'config.toml', from: /search_library.*=.*/g, to: 'search_library = \"'+searchOption+'\"'});
 }
 
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {
@@ -286,6 +284,11 @@ function minify(fileA,outfile) {
   result = UglifyJS.minify(filesContents, options);
   fs.writeFileSync(outfile, result.code);
 
+}
+
+async function searchChange(searchOption) {
+  const { replaceInFileSync } = await import('replace-in-file');
+  replaceInFileSync({files: 'config.toml', from: /search_library.*=.*/g, to: 'search_library = \"'+searchOption+'\"'});
 }
 
 if (args === ' offline') {

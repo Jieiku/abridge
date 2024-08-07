@@ -84,23 +84,7 @@ async function abridge() {
       base_url = base_url.slice(0, -1);
   }
 
-  if (search_library === 'elasticlunr') {
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-  } else if (search_library === 'tinysearch') {
-    if (!fs.existsSync('content/static/tinysearch_json.md')) {// 'content/static/tinysearch_json.md' file is missing, copy from abridge theme.
-      fs.copyFileSync(bpath+'content/static/tinysearch_json.md', 'content/static/tinysearch_json.md',fs.constants.COPYFILE_EXCL);
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = false"});
-    }
-    // zola build && mkdir -p tmp && tinysearch --optimize --path tmp public/data_tinysearch/index.html && rsync -avz tmp/*.wasm static/ && rm -rf tmp
-  } else if (search_library === 'pagefind') {
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-
+  if (search_library === 'pagefind') {
     // Run the pagefind script to generate the index files.
     // Has to happen at start otherwise, it happens too late asyncronously.
     const createIndex = require('./static/js/pagefind.index.cjs'); // run the pagefind index.js script

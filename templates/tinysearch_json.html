@@ -1,5 +1,0 @@
-{%- import "macros/create_tinysearch_json.html" as create_tinysearch_json -%}
-
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "tinysearch" %}
-[{{ create_tinysearch_json::from_section(section="_index.md", config=config) }}]
-{%- endif %}{%- endif %}

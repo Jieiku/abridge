@@ -27,7 +27,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - [X] Numbered code blocks with [line highlighting](https://abridge.netlify.app/overview-code-blocks/#toml).
 - [X] Entirely Offline Site by using the PWA **or** by setting `offline = true` in `config.toml` (full search support).
 - [X] Multi-language support.
-- [X] Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://jieiku.github.io/abridge-pagefind/), [tinysearch](https://jieiku.github.io/abridge-tinysearch/))
+- [X] Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
 - [X] Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
 - [X] Search Results Page, type search query then hit `Enter Key` or `click` the search button icon.
 - [X] [SEO](#seo-and-header-tags) support. (Search Engine Optimization)

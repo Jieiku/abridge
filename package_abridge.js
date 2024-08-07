@@ -162,6 +162,7 @@ async function abridge() {
   }
 
   if (bpath === '') {// abridge used directly
+    _headersWASM();
     // These are truely static js files, so they should only need to be updated by the abridge maintainer or contributors.
     minify(['static/js/theme.js']);
     minify(['static/js/theme_light.js']);
@@ -197,6 +198,22 @@ async function abridge() {
 
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
   await execWrapper('zola build'+args);
+}
+
+async function _headersWASM() {
+  // running WASM in the browser requires wasm-unsafe-eval if using Content-Security-Policy:
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_webassembly_execution
+  // This function adds wasm-unsafe-eval to the pagefind and tinysearch demos without adding it to the elasticlunr demo.
+  // I keep hoping they will add something like:   wasm-src 'self'   but as far as I know nothing like that exists.
+
+  const { replaceInFileSync } = await import('replace-in-file');
+  if (search_library === 'pagefind') {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
+  } else if (search_library === 'tinysearch') {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
+  } else {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'wasm-unsafe-eval' 'self'/g, to: "script-src 'self'"});
+  }
 }
 
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {

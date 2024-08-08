@@ -244,7 +244,7 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/search.js');
       } else if (search_library === 'pagefind') {
-        minify_files.push(bpath+'static/js/search_pagefind.js');
+        minify_files.push(bpath+'static/js/pagefind-search.js');
       } else if (search_library === 'tinysearch') {
         minify_files.push(bpath+'static/js/tinysearch.js');
       }

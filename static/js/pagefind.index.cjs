@@ -64,7 +64,7 @@ async function createIndex() {
     })
     .then(async () => {
       // Edit the pagefind to convert from MJS to CJS
-      const pagefindPath = path.join(__dirname, "pagefind.js");
+      const pagefindPath = path.join(__dirname, "pagefind.js");//source pagefind from node module
       let pagefindContent = fs.readFileSync(pagefindPath, "utf8");
       // Remove 'import.meta.url' from the pagefind file and exports
       pagefindContent = pagefindContent
@@ -74,6 +74,15 @@ async function createIndex() {
         ) // Remove annoying function
         .replace(/;export\{[^}]*\}/g, "");
       fs.writeFileSync(pagefindPath, pagefindContent);
+
+      // now insert the CJS into the anonymous function within pagefind.search.js
+      const pagefind_searchPath = path.join(__dirname, "pagefind.search.js");//file to insert into
+      const search_pagefindPath = path.join(__dirname, "search_pagefind.js");//output
+      let pagefind_searchContent = fs.readFileSync(pagefind_searchPath, "utf8");
+      // Now insert into pagefind.search.js at this location: //insertHere
+      pagefind_searchContent = pagefind_searchContent.replace(/\/\/insertHere/g, pagefindContent);
+      fs.writeFileSync(search_pagefindPath, pagefind_searchContent);
+
     })
     .then(async () => {
       await pagefind.close();

@@ -13,6 +13,8 @@ window.onload = function () {
           - https://github.com/aaranxu/adidoks/blob/main/static/js/search.js
         */
         (function () {
+            //insertHere
+
             function inputFocus(e) {
 
                 if (e.keyCode === 191//forward slash

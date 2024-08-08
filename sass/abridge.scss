@@ -223,6 +223,7 @@ $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: true !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
+$coderoundhighlight: false !default;//round corners on highlighted code blocks
 
 
 /******************************************************************************
@@ -933,20 +934,22 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin: 0;
       // Highlighted text
       color: var(--h1);
-      mark {
-        border-radius: unset;
-      }
-      td:first-child {
+      @if $coderoundhighlight {
         mark {
-          border-top-left-radius: var(--br);
-          border-bottom-left-radius: var(--br);
+          border-radius: unset;
         }
+        td:first-child {
+          mark {
+            border-top-left-radius: var(--br);
+            border-bottom-left-radius: var(--br);
+          }
+        }
+        td:last-child {
+          mark {
+            border-top-right-radius: var(--br);
+            border-bottom-right-radius: var(--br);
+          }
       }
-      td:last-child {
-        mark {
-          border-top-right-radius: var(--br);
-          border-bottom-right-radius: var(--br);
-        }
       }
     }
     mark {
@@ -955,7 +958,9 @@ $syntax: true !default;//syntax highlighting for code blocks
       padding: 0;
       background-color: var(--h0);
       filter: brightness(var(--ha));
-      border-radius: var(--br);
+      @if $coderoundhighlight {
+        border-radius: var(--br);
+      }
     }
     td, th, tr {
       padding: 0;

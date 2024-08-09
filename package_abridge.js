@@ -35,6 +35,12 @@ const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 // npm run abridge -- "--base-url https://abridge.pages.dev"
 var args = process.argv[2] ? ' '+process.argv[2] : '';
 
+// check if abridge is used directly or as a theme.
+bpath = '';
+if (fs.existsSync('./themes')) {
+  bpath = 'themes/abridge/';
+}
+
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
   if (stdout) {
@@ -73,12 +79,6 @@ async function abridge() {
     if (e.code != 'EEXIST') throw e;
   }
 
-  // check if abridge is used directly or as a theme.
-  bpath = '';
-  if (fs.existsSync('./themes')) {
-    bpath = 'themes/abridge/';
-  }
-
   base_url = data.base_url;
   if (base_url.slice(-1) == "/") {
       base_url = base_url.slice(0, -1);
@@ -89,7 +89,19 @@ async function abridge() {
     // Has to happen at start otherwise, it happens too late asyncronously.
     const createIndex = require('./static/js/pagefind.index.cjs'); // run the pagefind index.js script
     await createIndex(); // makes program wait for pagefind build execution
+  } else {
+    _rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
+    _rmRecursive(path.join(bpath, "static/js/index"));
+    _rmRecursive(path.join(bpath, "static/js/fragment"));
   }
+
+  // cleanup
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind\.js$/);//pagefind temporary intermediate files
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.js$/);//pagefind temporary intermediate files
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.css$/);//pagefind temporary intermediate files
+
 
   if (pwa) {// Update pwa settings, file list, and hashes.
     if (typeof pwa_VER !== 'undefined' && typeof pwa_NORM_TTL !== 'undefined' && typeof pwa_LONG_TTL !== 'undefined' && typeof pwa_TTL_NORM !== 'undefined' && typeof pwa_TTL_LONG !== 'undefined' && typeof pwa_TTL_EXEMPT !== 'undefined') {
@@ -196,6 +208,9 @@ async function abridge() {
   abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa);
   minify(abridge_bundle,'static/js/abridge.min.js');
 
+  // cleanup
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind_search\.js$/);//pagefind intermediate file that is now in bundle.
+
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
   await execWrapper('zola build'+args);
 }
@@ -204,8 +219,6 @@ async function _headersWASM() {
   // running WASM in the browser requires wasm-unsafe-eval if using Content-Security-Policy:
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_webassembly_execution
   // This function adds wasm-unsafe-eval to the pagefind and tinysearch demos without adding it to the elasticlunr demo.
-  // I keep hoping they will add something like:   wasm-src 'self'   but as far as I know nothing like that exists.
-
   const { replaceInFileSync } = await import('replace-in-file');
   if (search_library === 'pagefind') {
     replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
@@ -213,6 +226,26 @@ async function _headersWASM() {
     replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
   } else {
     replaceInFileSync({files: 'static/_headers', from: /script-src 'wasm-unsafe-eval' 'self'/g, to: "script-src 'self'"});
+  }
+}
+
+function _rmRecursive(targetFiles) {
+  try {
+    fs.rmSync(targetFiles, { recursive: true });
+  } catch (error) {
+    if (error.code !== 'ENOENT') {// Ignore if does not exist, that is the desired result.
+      console.error("An error occurred:", error);
+    }
+  }
+}
+
+function _rmRegex(path,regex) {
+  try {
+    fs.readdirSync(path).filter(f => regex.test(f)).forEach(f => fs.unlinkSync(path + f));
+  } catch (error) {
+    if (error.code !== 'ENOENT') {// Ignore if does not exist, that is the desired result.
+      console.error("An error occurred:", error);
+    }
   }
 }
 
@@ -244,7 +277,7 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/search.js');
       } else if (search_library === 'pagefind') {
-        minify_files.push(bpath+'static/js/pagefind-search.js');
+        minify_files.push(bpath+'static/js/pagefind_search.js');
       } else if (search_library === 'tinysearch') {
         minify_files.push(bpath+'static/js/tinysearch.js');
       }
@@ -295,7 +328,13 @@ if (args === ' offline') {
   searchChange('offline');
 } else if (args === ' elasticlunrjava') {
   searchChange('elasticlunrjava');
-} else if (args === ' elasticlunr') {
+} else if (args === ' elasticlunr') {// Zola default search_library
+  // I should not need to do cleanup here as well... but this is what works for now to keep the repo clean.
+  _rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
+  _rmRecursive(path.join(bpath, "static/js/index"));
+  _rmRecursive(path.join(bpath, "static/js/fragment"));
   searchChange('elasticlunr');
 } else if (args === ' pagefind') {
   searchChange('pagefind');

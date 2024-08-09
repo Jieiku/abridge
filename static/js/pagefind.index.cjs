@@ -77,7 +77,7 @@ async function createIndex() {
 
       // now insert the CJS into the anonymous function within pagefind.search.js
       const pagefind_searchPath = path.join(__dirname, "pagefind.search.js");//file to insert into
-      const search_pagefindPath = path.join(__dirname, "pagefind-search.js");//output
+      const search_pagefindPath = path.join(__dirname, "pagefind_search.js");//output
       let pagefind_searchContent = fs.readFileSync(pagefind_searchPath, "utf8");
       // Now insert into pagefind.search.js at this location: //insertHere
       pagefind_searchContent = pagefind_searchContent.replace(/\/\/insertHere/g, pagefindContent);

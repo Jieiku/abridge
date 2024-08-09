@@ -40,6 +40,12 @@ bpath = '';
 if (fs.existsSync('./themes')) {
   bpath = 'themes/abridge/';
 }
+// cleanup pagefind files from old builds.
+_rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
+_rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
+_rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
+_rmRecursive(path.join(bpath, "static/js/index"));
+_rmRecursive(path.join(bpath, "static/js/fragment"));
 
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
@@ -54,10 +60,10 @@ async function execWrapper(cmd) {
 async function abridge() {
   await sync();
   const { replaceInFileSync } = await import('replace-in-file');
+  // set index_format for chosen search_library accordingly.
   if (search_library === 'offline') {
     replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
-    //replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
-    args = args + " -u \""+__dirname+"\/public\""
+    args = args + " -u \""+__dirname+"\/public\""//set base_url to the path on disk for offline site.
   } else if (search_library === 'elasticlunrjava') {
     replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
   } else if (search_library === 'elasticlunr') {
@@ -85,23 +91,19 @@ async function abridge() {
   }
 
   if (search_library === 'pagefind') {
-    // Run the pagefind script to generate the index files.
-    // Has to happen at start otherwise, it happens too late asyncronously.
-    const createIndex = require('./static/js/pagefind.index.cjs'); // run the pagefind index.js script
-    await createIndex(); // makes program wait for pagefind build execution
-  } else {
-    _rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
-    _rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
-    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
-    _rmRecursive(path.join(bpath, "static/js/index"));
-    _rmRecursive(path.join(bpath, "static/js/fragment"));
+    // Generate pagefind index at start, otherwise it happens too late asyncronously.
+    await createPagefindIndex(); // makes program wait for pagefind build execution
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.css$/);//pagefind temporary intermediate files
+
+    //copy to public so the files are included in the PWA cache list if necessary.
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind-entry\.json$/);
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind.*pf_meta$/);
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^wasm.*pagefind$/);
+    _cpRecursive(path.join(bpath, "static/js/index"),path.join(bpath, "public/js/index"));
+    _cpRecursive(path.join(bpath, "static/js/fragment"),path.join(bpath, "public/js/fragment"));
   }
-
-  // cleanup
-  _rmRegex(path.join(bpath, "static/js/"),/^pagefind\.js$/);//pagefind temporary intermediate files
-  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.js$/);//pagefind temporary intermediate files
-  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.css$/);//pagefind temporary intermediate files
-
 
   if (pwa) {// Update pwa settings, file list, and hashes.
     if (typeof pwa_VER !== 'undefined' && typeof pwa_NORM_TTL !== 'undefined' && typeof pwa_LONG_TTL !== 'undefined' && typeof pwa_TTL_NORM !== 'undefined' && typeof pwa_TTL_LONG !== 'undefined' && typeof pwa_TTL_EXEMPT !== 'undefined') {
@@ -239,6 +241,14 @@ function _rmRecursive(targetFiles) {
   }
 }
 
+function _cpRecursive(source,dest) {
+  try {
+    fs.cpSync(source, dest, { recursive: true });
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
+
 function _rmRegex(path,regex) {
   try {
     fs.readdirSync(path).filter(f => regex.test(f)).forEach(f => fs.unlinkSync(path + f));
@@ -246,6 +256,15 @@ function _rmRegex(path,regex) {
     if (error.code !== 'ENOENT') {// Ignore if does not exist, that is the desired result.
       console.error("An error occurred:", error);
     }
+  }
+}
+
+function _cpRegex(source,dest,regex) {
+  try {
+    fs.readdirSync(source).filter(f => regex.test(f)).forEach(f => fs.copyFileSync(source + f, dest + f));
+    //fs.copyFileSync(path.join(bpath, "static/js/pagefind-entry.json"), 'public/pagefind-entry.json');
+  } catch (error) {
+    console.error("An error occurred:", error);
   }
 }
 
@@ -328,13 +347,7 @@ if (args === ' offline') {
   searchChange('offline');
 } else if (args === ' elasticlunrjava') {
   searchChange('elasticlunrjava');
-} else if (args === ' elasticlunr') {// Zola default search_library
-  // I should not need to do cleanup here as well... but this is what works for now to keep the repo clean.
-  _rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
-  _rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
-  _rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
-  _rmRecursive(path.join(bpath, "static/js/index"));
-  _rmRecursive(path.join(bpath, "static/js/fragment"));
+} else if (args === ' elasticlunr') {
   searchChange('elasticlunr');
 } else if (args === ' pagefind') {
   searchChange('pagefind');
@@ -342,6 +355,87 @@ if (args === ' offline') {
   searchChange('tinysearch');
 } else {
   abridge();
+}
+
+async function createPagefindIndex() {
+  console.log("Creating Pagefind index...");
+  const pagefind = await import("pagefind");// Dynamically import the pagefind module
+  const publicFolder = path.join(__dirname, "public");
+  const files = fs.readdirSync(publicFolder);
+  let langArray = [];
+
+  files.forEach((file) => {
+    if (file.startsWith("search_index")) {
+      langArray.push(file.split(".")[1]);
+    }
+  });
+
+  const { index } = await pagefind.createIndex();
+  // Assuming index, fs, and path are already defined and properly imported
+
+  // Convert each lang in langArray to a promise that performs the desired operations
+  const promises = langArray.map((lang) =>
+    (async () => {
+      const filePath = path.join(__dirname,"public/search_index." + lang + ".json");
+
+      // Read the file content synchronously (consider using async readFile for better performance)
+      const fileContent = fs.readFileSync(filePath);
+      const data = JSON.parse(fileContent);
+
+      // Add each record to the index asynchronously
+      for (const record of data) {
+        await index.addCustomRecord({
+          url: record.url,
+          content: record.body,
+          language: lang,
+          meta: {
+            title: record.title,
+            description: record.meta,
+          },
+        });
+      }
+    })()
+  );
+
+  // Execute all promises concurrently
+  await Promise.all(promises)
+    .then(async () => {
+      // Write the index files to disk
+      const { errors } = await index.writeFiles({
+        outputPath: "./static/js/",
+      });
+      if (errors.length > 0) {
+        console.log("Errors: ", errors);
+      }
+    })
+    .then(async () => {
+      // Edit the pagefind to convert from MJS to CJS
+      const pagefindPath = path.join(__dirname, "static/js/pagefind.js");//source pagefind from node module
+      let pagefindContent = fs.readFileSync(pagefindPath, "utf8");
+      // Remove 'import.meta.url' from the pagefind file and exports
+      pagefindContent = pagefindContent
+        .replace(
+          /initPrimary\(\)\{([^{}]*\{[^{}]*\})*[^{}]*\}/g,
+          `initPrimary(){}`
+        ) // Remove annoying function
+        .replace(/;export\{[^}]*\}/g, "");
+      fs.writeFileSync(pagefindPath, pagefindContent);
+
+      // now insert the CJS into the anonymous function within pagefind.search.js
+      const pagefind_searchPath = path.join(__dirname, "static/js/pagefind.search.js");//file to insert into
+      const search_pagefindPath = path.join(__dirname, "static/js/pagefind_search.js");//output
+      let pagefind_searchContent = fs.readFileSync(pagefind_searchPath, "utf8");
+      // Now insert into pagefind.search.js at this location: //insertHere
+      pagefind_searchContent = pagefind_searchContent.replace(/\/\/insertHere/g, pagefindContent);
+      fs.writeFileSync(search_pagefindPath, pagefind_searchContent);
+
+    })
+    .then(async () => {
+      await pagefind.close();
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
 }
 
 async function sync() {

@@ -520,7 +520,6 @@ async function sync() {
     );
     exit(1);
   }
-  console.log(packageVersionLocal, packageVersionSubmodule);
 
   const configToml = path.join(__dirname, "config.toml");
   const submoduleConfigToml = path.join(

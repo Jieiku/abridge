@@ -43,7 +43,7 @@ if (fs.existsSync('./themes')) {
 // cleanup pagefind files from old builds.
 _rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
 _rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
-_rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry\.json$/);
+_rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry.*json$/);
 _rmRecursive(path.join(bpath, "static/js/index"));
 _rmRecursive(path.join(bpath, "static/js/fragment"));
 
@@ -97,7 +97,20 @@ async function abridge() {
     _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.js$/);//pagefind temporary intermediate files
     _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.css$/);//pagefind temporary intermediate files
 
+    // This line in pagefind is causing a problem for the PWA:
+    // var e = await (await fetch(this.basePath + "pagefind-entry.json?ts=" + Date.now())).json();
+    // instead generate an epoch timestamp at build and add it to the filename.
+    var hash = Math.floor(new Date().getTime() / 1000);
+    fs.renameSync(path.join(bpath, "static/js/pagefind-entry.json"), path.join(bpath, "static/js/pagefind-entry-"+hash+".json"));
+
+    // original: var e=await(await fetch(this.basePath+"pagefind-entry.json?ts="+Date.now())).json();
+    //      new: var e=await(await fetch(this.basePath+"pagefind-entry-1723268715.json")).json();
+    // Tricky regex, so I split it into two replaceInFileSync() calls, pull requests welcome if you can improve this.
+    replaceInFileSync({files: path.join(bpath, "static/js/pagefind_search.js"), from: /pagefind-entry\.json\?ts=/g, to: "pagefind-entry-"+hash+"\.json"});
+    replaceInFileSync({files: path.join(bpath, "static/js/pagefind_search.js"), from: /Date.now\(\)/g, to: "\"\""});
+
     //copy to public so the files are included in the PWA cache list if necessary.
+    fs.copyFileSync(path.join(bpath, "static/js/pagefind-entry-"+hash+".json"), path.join(bpath, "public/js/pagefind-entry-"+hash+".json"))
     _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind-entry\.json$/);
     _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind.*pf_meta$/);
     _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^wasm.*pagefind$/);
@@ -262,7 +275,6 @@ function _rmRegex(path,regex) {
 function _cpRegex(source,dest,regex) {
   try {
     fs.readdirSync(source).filter(f => regex.test(f)).forEach(f => fs.copyFileSync(source + f, dest + f));
-    //fs.copyFileSync(path.join(bpath, "static/js/pagefind-entry.json"), 'public/pagefind-entry.json');
   } catch (error) {
     console.error("An error occurred:", error);
   }

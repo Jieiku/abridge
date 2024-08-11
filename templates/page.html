@@ -117,7 +117,7 @@
           {# Hides the next couple of pages if the current section is more than 3 away from start #}
           {%- if current_section_index > 3 %}
             <details>
-              <summary>More...</summary>
+              <summary>{{ macros::translate(key="more", default="more", i18n=i18n) | title }}...</summary>
             </details>
             <div class="hidden_li">
               {%- for inner in sorted_array | slice(start=1, end=(current_section_index - 2)) %}
@@ -156,7 +156,7 @@
 
           {%- if current_section_index < num_pages - 4 %}
             <details>
-              <summary>More...</summary>
+              <summary>{{ macros::translate(key="more", default="more", i18n=i18n) | title }}...</summary>
             </details>
             <div class="hidden_li">
               {%- for inner in sorted_array | slice(start=(current_section_index + 3), end=(num_pages - 1)) %}

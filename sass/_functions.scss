@@ -65,6 +65,7 @@
  * SVG Icons
  * https://github.com/feathericons/feather
  * https://github.com/tabler/tabler-icons/find/master
+ * https://github.com/twbs/icons
  *
  * https://yqnn.github.io/svg-path-editor/
  * https://jakearchibald.github.io/svgomg/
@@ -132,7 +133,8 @@
     copy: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{getColor($ic,$stroke,1)}' stroke-width='#{$stroke-width}' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Cpath d='M11 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1ZM7 9H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4'/%3E%3C/svg%3E",
     copy-yes: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{getColor($ic,$stroke,1)}' stroke-width='#{$stroke-width}' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E",
     copy-err: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{getColor($ic,$stroke,1)}' stroke-width='#{$stroke-width}' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Cpath d='M1 12a1 1 0 0 0 22 0 1 1 0 0 0-22 0m11-7v9m0 5v-2'/%3E%3C/svg%3E",
-    search: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{getColor($ic,$stroke,1)}' stroke-width='#{$stroke-width}' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Ccircle cx='9.5' cy='9.5' r='8'/%3E%3Cpath d='m23 23-9-9'/%3E%3C/svg%3E"
+    search: "%3Csvg xmlns='http://www.w3.org/2000/svg' stroke='#{getColor($ic,$stroke,1)}' stroke-width='#{$stroke-width}' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Ccircle cx='9.5' cy='9.5' r='8'/%3E%3Cpath d='m23 23-9-9'/%3E%3C/svg%3E",
+    telegram: "<svg xmlns='http://www.w3.org/2000/svg' fill='#{getColor($ic,$fill,1)}' viewBox='0 0 24 24'%3E%3Cpath d='m24 12a12 12 0 1 1-24 0 12 12 0 0 1 24 0m-11.57-3.141q-1.752 0.729-6.999 3.015-0.8505 0.3375-0.8925 0.663c-0.045 0.3645 0.4125 0.5085 1.035 0.705l0.2625 0.0825c0.612 0.1995 1.437 0.432 1.8645 0.441q0.585 0.015 1.302-0.48 4.9035-3.309 5.061-3.345c0.075-0.018 0.18-0.039 0.249 0.024s0.063 0.18 0.0555 0.2115c-0.045 0.1935-1.8405 1.8615-2.769 2.7255-0.2895 0.27-0.495 0.4605-0.537 0.504a12 12 0 0 1-0.282 0.279c-0.57 0.549-0.996 0.96 0.0225 1.632 0.4905 0.324 0.8835 0.5895 1.275 0.8565 0.426 0.291 0.852 0.5805 1.404 0.9435q0.21 0.138 0.405 0.2805c0.4965 0.354 0.945 0.672 1.4955 0.621 0.321-0.03 0.6525-0.33 0.8205-1.23 0.3975-2.1255 1.179-6.729 1.359-8.6265a2.1 2.1 0 0 0-0.0195-0.4725 0.51 0.51 0 0 0-0.171-0.3255 0.795 0.795 0 0 0-0.465-0.1395c-0.45 0.0075-1.1445 0.249-4.476 1.635'/%3E%3C/svg%3E"
   );
   $icon: map-get($icons, $name);
   @return url("data:image/svg+xml,#{$icon}");

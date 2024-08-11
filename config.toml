@@ -190,6 +190,7 @@ twitch = "your-user-name"
 youtube = "channel/your-channel-id"
 #peertube = "https://peertube.example.com/@username"
 #researchgate = "your-profile-id"
+#telegram = "your-user-name"
 
 
 ###############################################################################

@@ -43,8 +43,8 @@ $icon-mail: true !default;// e-mail
 $icon-mastodon: true !default;
 $icon-element: true !default;
 $icon-matrix: false !default;
-$icon-buymeacoffee: true !default;
-$icon-kofi: false !default;
+$icon-buymeacoffee: false !default;
+$icon-kofi: true !default;
 $icon-twitter: false !default;
 $icon-facebook: false !default;
 $icon-linkedin: false !default;
@@ -1355,7 +1355,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   @if $icon-globe {         .globe {          background-image: functions.icon(globe,           $ic,2, "%23888", "none") }}
   @if $icon-home {          .home {           background-image: functions.icon(home,            $ic,2, "%23888", "none") }}
   @if $icon-instagram {     .instagram {      background-image: functions.icon(instagram,       $ic,2, "%23e07", "none") }}
-  @if $icon-kofi {          .kofi {           background-image: functions.icon(kofi,            $ic,1.5, "%23888", ["%23f55","%23fff"]) }}
+  @if $icon-kofi {          .kofi {           background-image: functions.icon(kofi,            $ic,1.4, "%23888", ["none", "%23f55"]) }}
   @if $icon-linkedin {      .linkedin {       background-image: functions.icon(linkedin,        $ic,2, "%2326a", "none") }}
   @if $icon-mail {          .mail {           background-image: functions.icon(mail,            $ic,2, "%23888", "none") }}
   @if $icon-mastodon {      .mastodon {       background-image: functions.icon(mastodon,        $ic,0, "none", "%2328c") }}

@@ -51,7 +51,7 @@ $icon-linkedin: false !default;
 $icon-codeberg: false !default;
 $icon-gitlab: false !default;
 $icon-github: true !default;
-$icon-github-sponsor: true !default;
+$icon-github-sponsor: false !default;
 $icon-bitbucket: false !default;
 $icon-python: false !default;
 $icon-docker: false !default;
@@ -59,7 +59,7 @@ $icon-stack: false !default;
 $icon-instagram: true !default;
 $icon-pixelfed: false !default;//heaviest icon, off by default
 $icon-pinterest: false !default;
-$icon-discord: true !default;
+$icon-discord: false !default;
 $icon-twitch: true !default;
 $icon-youtube: true !default;
 $icon-peertube: false !default;
@@ -1374,7 +1374,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   @if $icon-twitch {        .twitch {         background-image: functions.icon(twitch,          $ic,2, "%23a7f", "none") }}
   @if $icon-twitter {       .twitter {        background-image: functions.icon(twitter,         $ic,2, "%232ad", "none") }}
   @if $icon-x {             .x {              background-image: functions.icon(x,               $ic,3, "%23f00", "none") }}
-  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "none", ["%23f00","%23fff"]) }}
+  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "none", "%23f00") }}
   @if $icon-telegram {      .telegram {       background-image: functions.icon(telegram,        $ic,0, "none", "%233ad") }}
   .svg {
     width: 1.8rem;

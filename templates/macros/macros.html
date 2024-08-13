@@ -100,7 +100,7 @@
 {%- macro title_index(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
-        <h1>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h1>
+        <big>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</big>
 {%- endmacro title_index %}
 
 

@@ -437,6 +437,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   }
 }
 @if $typography {
+  big,
   h1,
   h2,
   h3,
@@ -450,7 +451,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     font-size: var(--fs);
     line-height: var(--lhh);
   }
-  h1 {
+  big,h1 {
     font-size: 2rem;
   }
   h2 {
@@ -480,7 +481,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   a:visited {
     color: var(--a4);
   }
-  h1 a, h2 a, main nav a, header li > a {
+  big a, h1 a, h2 a, main nav a, header li > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
@@ -493,7 +494,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     }
   }
   article {
-    padding-bottom: .2rem;
+    padding: 1rem 0rem;
   }
 
   // Abbreviations

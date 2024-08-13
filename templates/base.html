@@ -32,19 +32,19 @@
       <div>
         {%- if config.extra.logo -%}
 
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
+        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
         {%- if config.extra.logo.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo.file | safe }}"{%- if config.extra.logo.alt %} alt="{{ config.extra.logo.alt | safe }}"{%- endif %}{%- if config.extra.logo.width %} width="{{ config.extra.logo.width | safe }}"{%- endif %}{%- if config.extra.logo.height %} height="{{ config.extra.logo.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo.text -%}{{ config.extra.logo.text | safe }}{%- endif -%}
-        </a></h1>
+        </a></big>
 
         {%- elif config.extra.textlogo -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
+        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
         {%- if lang == config.default_language -%}/{%- endif -%}
-        index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></h1>
+        index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></big>
         {%- elif config.title -%}
-        <h1><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></h1>
+        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></big>
         {%- endif -%}
       </div>
       <div>

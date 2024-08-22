@@ -7,8 +7,11 @@
   "homepage": "https://github.com/Jieiku/abridge",
   "scripts": {
     "abridge": "node -e \"if ( require('fs').existsSync('./themes/abridge/package_abridge.js')) {require('fs').copyFileSync('./themes/abridge/package_abridge.js', './package_abridge.js')}\" && node package_abridge.js",
-    "search:pagefind": "node -e \"if ( require('fs').existsSync('./themes/abridge/static/js/searchChange.js')) {require('fs').copyFileSync('./themes/abridge/static/js/searchChange.js', './static/js/searchChange.js')}\" && node ./static/js/searchChange.js --pagefind",
-    "search:elasticlunr": "node -e \"if ( require('fs').existsSync('./themes/abridge/static/js/searchChange.js')) {require('fs').copyFileSync('./themes/abridge/static/js/searchChange.js', './static/js/searchChange.js')}\" && node ./static/js/searchChange.js --elasticlunr"
+    "offline": "npm run abridge -- offline",
+    "elasticlunrjava": "npm run abridge -- elasticlunrjava",
+    "elasticlunr": "npm run abridge -- elasticlunr",
+    "pagefind": "npm run abridge -- pagefind",
+    "tinysearch": "npm run abridge -- tinysearch"
   },
   "dependencies": {
     "fast-toml": "^0.5.4",

@@ -325,7 +325,7 @@ window.onload = function() {
 
             // add <em/> around search terms
             if (word[1] === TERM_WEIGHT) {
-              teaser.push("<b>");
+              teaser.push("<mark>");
             }
 
             startIndex = word[2] + word[0].length;
@@ -342,7 +342,7 @@ window.onload = function() {
             }
 
             if (word[1] === TERM_WEIGHT) {
-              teaser.push("</b>");
+              teaser.push("</mark>");
             }
           }
           teaser.push("…");

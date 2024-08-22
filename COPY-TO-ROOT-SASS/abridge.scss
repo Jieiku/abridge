@@ -46,6 +46,7 @@
   $icon-youtube: false,
   $icon-peertube: false,
   $icon-researchgate: false,
+  $icon-telegram: false,
 
   //$icon-x: true,// x symbol, used to close search results page.
   //$icon-search: true,//search, spyglass search button in search box.
@@ -193,6 +194,7 @@
   //$misc: false,
   //$grid: true,//Infinity Grid, column based layouts.
   //$syntax: true,//syntax highlighting for code blocks
+  //$coderoundhighlight: false,//round corners on highlighted code blocks
 );
 @use "extra";
 /******************************************************************************

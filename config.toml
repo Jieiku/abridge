@@ -5,7 +5,7 @@ base_url = "https://abridge.netlify.app"
 # If you use the npm/node script then all you have to do is set offline = true, and everything else is automatic.
 
 title = "Abridge"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
+description = "Abridge is a fast, lightweight, and modern Zola theme (class-light, semantic HTML). Perfect Lighthouse, YellowLabTools, and Observatory scores."#for SEO aim for 140-180 Characters
 #theme = "abridge"
 
 default_language = "en"
@@ -34,6 +34,7 @@ include_content = true      # include rendered content of page/section in index
 [markdown]
 highlight_code = true
 highlight_theme = "css"
+bottom_footnotes = true # adds footnote backreference
 render_emoji = false
 external_links_target_blank = true # rel="noopener"
 external_links_no_follow = false   # rel="nofollow"
@@ -93,7 +94,7 @@ taxonomies = [
 
 menu = [
 #    {url = "blog", name = "Blog", slash = true, blank = false, size="s110"},
-    {url = "about", name = "About", slash = true, blank = false, size="s110"},
+#    {url = "about", name = "About", slash = true, blank = false, size="s110"},
     {url = "archive", name = "Posts", slash = true, blank = false, size="s110"},
 #    {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
     {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},
@@ -147,7 +148,7 @@ foothr = false # show or hide horizontal rule above footer
 ###############################################################################
 
 title_separator = "|"  # Separator between title and title_addition, set as |, -, _, etc
-title_addition = "Fast & Lightweight Zola Theme" # a default value for title addition
+title_addition = "Fast, Lightweight, and Modern Zola Theme" # a default value for title addition (for SEO aim for 50-70 characters including the title and separator 'Abridge | title_addition')
 author = "Jake G" # Put Your Name here
 keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
@@ -169,16 +170,16 @@ feed = true # this adds the RSS feed icon in the footer.
 mail = "name@example.com"
 mastodon = "https://mastodon.example.com/@username"
 element = "matrix.example.com"
-buymeacoffee = "your-user-name"
-#kofi = "your-user-name"
-discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
+#buymeacoffee = "your-user-name"
+kofi = "your-user-name"
+#discord = "your-discord" # Everything after https://discord.com/   eg: invite/my-server  *or*  servers/my-server-id
 #twitter = "your-user-name"
 #facebook = "your-user-name"
 #linkedin = "your-user-name"
 #gitlab = "your-user-name"
 github = "your-user-name"
 #codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
-github_sponsor = "your-user-name"
+#github_sponsor = "your-user-name"
 #bitbucket = "your-user-name"
 #python = "your-user-name"
 #docker = "your-user-name"
@@ -190,6 +191,7 @@ twitch = "your-user-name"
 youtube = "channel/your-channel-id"
 #peertube = "https://peertube.example.com/@username"
 #researchgate = "your-profile-id"
+#telegram = "your-user-name"
 
 
 ###############################################################################
@@ -197,24 +199,17 @@ youtube = "channel/your-channel-id"
 ### You can load extra css files if you need to, just separate by comma:
 ### stylesheets = [ "abridge.css", "extra.css" ]
 ### search_library, library to use. valid values:
-###   false, "elasticlunr", "tinysearch", "stork", "pagefind"
-### offline: implies uglyurls=true and integrity=false, when true NPM/node will
-###   automatically set the path for the base_url, it will build the site,
-###   then set the base_url back to what it was. This is a way to build a completely
-###   offline site, a feature not possible with Zola alone.
-###   The PWA feature is another way to build an offline site, so there are now two
-###   different ways to build an offline site with Abridge.
+###   false, "elasticlunr", "elasticlunrjava", "pagefind", "tinysearch", "offline"
+###     elasticlunr - elasticlunr using the elasticlunr_json index format
+###     elasticlunrjava - elasticlunr using the elasticlunr_javascript index format
+###     pagefind - pagefind using the fuse_json index format
+###     tinysearch - tinysearch using the fuse_json index format
+###     offline - elasticlunr using the elasticlunr_javascript index format with content paths relative to the location on disk.
+###       (offline: implies uglyurls=true and integrity=false, node script will pass base_url argument as the path on disk.)
 ###
-### For most people the value of online_url will be the same as base_url.
-###   online_url is used to restore the base_url after generating an Offline site.
-###   When you set offline = true and run the npm script, the base_url is set to the absolute path on disk.
-###   Once you set offline = false, the base_url will be set back to the value of online_url when you run the npm script again.
+###       The PWA feature is another way to build an offline site, so there are now two
+###       different ways to build an offline site with Abridge.
 ###############################################################################
-
-# do NOT include a trailing slash on the online URL
-#online_url = "https://abridge.netlify.app"
-online_indexformat = "elasticlunr_json"# used to restore your preferred index format when offline = false
-offline = false # implies uglyurls=true and integrity=false, when true NPM/node will automatically set the path for the base_url, it will build the site, then set the base_url back to what it was.
 
 uglyurls = false # if set to true then links are generated with the full path. eg https://abridge.netlify.app/index.html
 integrity = true # increases site security, should normally be true. (setting to false is useful during js development)
@@ -226,7 +221,7 @@ js_prestyle = true # used to preload: FontAwesome, Katex, external Google Fonts
 js_switcher = true # The button that allows manually changing between light/dark mode.
 js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sure to also set $switcherDefault in abridge.scss)
 
-search_library = "elasticlunr" 
+search_library = "elasticlunr"
 stylesheets = ["abridge.css"]
 
 webmanifest = "manifest.min.json" # Required for PWAs
@@ -243,7 +238,7 @@ webmanifest = "manifest.min.json" # Required for PWAs
 ###############################################################################
 
 pwa = true # true to load the service worker
-pwa_VER = '3.11.0' # Service Worker cache version. (increment if you need to force a new cache)
+pwa_VER = '3.12.1' # Service Worker cache version. (increment if you need to force a new cache)
 
 ### 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
 pwa_NORM_TTL = 0 #  86400 is reasonable. html, json, xml, anything else undefined
@@ -291,8 +286,9 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 ###############################################################################
 ### Icons
 ### Loading the entire fontawesome icon collection will negatively impact your sites performance.
-### For a lightweight solution consider adding only the icons that you need to the following file:
-### https://github.com/Jieiku/abridge/blob/master/sass/include/_icons.scss
+### For a lightweight solution consider adding only the icons that you need.
+### you can load individual scss based svg icons by including them in the _extra.scss file
+### https://github.com/Jieiku/abridge/blob/master/COPY-TO-ROOT-SASS/_extra.scss
 ###############################################################################
 
 ### To disable any of these icons set them to "false" (will default to unicode icons instead)

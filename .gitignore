@@ -10,6 +10,9 @@ static/tinysearch_engine.js
 static/tinysearch_engine.d.ts
 static/tinysearch_engine_bg.wasm.d.ts
 static/package.json
+static/js/pagefind.js
+static/js/pagefind-*.js
+static/js/pagefind-*.css
 static/js/pagefind.*.pf_meta
 static/js/index
 static/js/fragment

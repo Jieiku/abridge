@@ -22,10 +22,10 @@ Ce sont les paramètres, actuellement tous les 3 sont requis.
 - `type` le type de fichier à charger. ([supported types](https://www.getzola.org/documentation/templates/overview/#load-data))
 - `key` le champ dans les données que vous souhaitez afficher.
 
-### Usage
+## Usage
 
 Ce thème nécessite une version &#123;&#123; showdata(src="../theme.toml" type="toml" key="min_version") &#125;&#125; ou plus tard de Zola.
 
-### Sortir
+## Sortir
 
 Ce thème nécessite une version {{ showdata(src="../theme.toml" type="toml" key="min_version") }} ou plus tard de Zola.

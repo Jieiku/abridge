@@ -43,15 +43,15 @@ $icon-mail: true !default;// e-mail
 $icon-mastodon: true !default;
 $icon-element: true !default;
 $icon-matrix: false !default;
-$icon-buymeacoffee: true !default;
-$icon-kofi: false !default;
+$icon-buymeacoffee: false !default;
+$icon-kofi: true !default;
 $icon-twitter: false !default;
 $icon-facebook: false !default;
 $icon-linkedin: false !default;
 $icon-codeberg: false !default;
 $icon-gitlab: false !default;
 $icon-github: true !default;
-$icon-github-sponsor: true !default;
+$icon-github-sponsor: false !default;
 $icon-bitbucket: false !default;
 $icon-python: false !default;
 $icon-docker: false !default;
@@ -59,11 +59,12 @@ $icon-stack: false !default;
 $icon-instagram: true !default;
 $icon-pixelfed: false !default;//heaviest icon, off by default
 $icon-pinterest: false !default;
-$icon-discord: true !default;
+$icon-discord: false !default;
 $icon-twitch: true !default;
 $icon-youtube: true !default;
 $icon-peertube: false !default;
 $icon-researchgate: false !default;
+$icon-telegram: false !default;
 
 $icon-x: true !default;// x symbol, used to close search results page.
 $icon-search: true !default;//search, spyglass search button in search box.
@@ -223,6 +224,7 @@ $imgswap: true !default;//Image Swap on hover/click
 $misc: false !default;
 $grid: true !default;//Infinity Grid, column based layouts.
 $syntax: true !default;//syntax highlighting for code blocks
+$coderoundhighlight: false !default;//round corners on highlighted code blocks
 
 
 /******************************************************************************
@@ -435,6 +437,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   }
 }
 @if $typography {
+  big,
   h1,
   h2,
   h3,
@@ -448,7 +451,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     font-size: var(--fs);
     line-height: var(--lhh);
   }
-  h1 {
+  big,h1 {
     font-size: 2rem;
   }
   h2 {
@@ -478,7 +481,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   a:visited {
     color: var(--a4);
   }
-  h1 a, h2 a, main nav a, header li > a {
+  big a, h1 a, h2 a, main nav a, header li > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
@@ -491,7 +494,7 @@ $syntax: true !default;//syntax highlighting for code blocks
     }
   }
   article {
-    padding-bottom: .2rem;
+    padding: 1rem 0rem;
   }
 
   // Abbreviations
@@ -933,12 +936,32 @@ $syntax: true !default;//syntax highlighting for code blocks
       margin: 0;
       // Highlighted text
       color: var(--h1);
-      mark {
-        display: block;
-        color: unset;
-        padding: 0;
-        background-color: var(--h0);
-        filter: brightness(var(--ha));
+      @if $coderoundhighlight {
+        mark {
+          border-radius: unset;
+        }
+        td:first-child {
+          mark {
+            border-top-left-radius: var(--br);
+            border-bottom-left-radius: var(--br);
+          }
+        }
+        td:last-child {
+          mark {
+            border-top-right-radius: var(--br);
+            border-bottom-right-radius: var(--br);
+          }
+      }
+      }
+    }
+    mark {
+      display: block;
+      color: unset;
+      padding: 0;
+      background-color: var(--h0);
+      filter: brightness(var(--ha));
+      @if $coderoundhighlight {
+        border-radius: var(--br);
       }
     }
     td, th, tr {
@@ -1109,13 +1132,6 @@ $syntax: true !default;//syntax highlighting for code blocks
 @if $search {
   div:empty {
     display: none;
-  }
-  .stork-close-button {
-    display: none;
-  }
-  .stork-title p {
-    color: var(--a1);
-    font-weight: var(--fh);
   }
   #suggestions {
     z-index: 9;
@@ -1340,7 +1356,7 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-globe {         .globe {          background-image: functions.icon(globe,           $ic,2, "%23888", "none") }}
   @if $icon-home {          .home {           background-image: functions.icon(home,            $ic,2, "%23888", "none") }}
   @if $icon-instagram {     .instagram {      background-image: functions.icon(instagram,       $ic,2, "%23e07", "none") }}
-  @if $icon-kofi {          .kofi {           background-image: functions.icon(kofi,            $ic,1.5, "%23888", ["%23f55","%23fff"]) }}
+  @if $icon-kofi {          .kofi {           background-image: functions.icon(kofi,            $ic,1.4, "%23888", ["none", "%23f55"]) }}
   @if $icon-linkedin {      .linkedin {       background-image: functions.icon(linkedin,        $ic,2, "%2326a", "none") }}
   @if $icon-mail {          .mail {           background-image: functions.icon(mail,            $ic,2, "%23888", "none") }}
   @if $icon-mastodon {      .mastodon {       background-image: functions.icon(mastodon,        $ic,0, "none", "%2328c") }}
@@ -1359,7 +1375,8 @@ $syntax: true !default;//syntax highlighting for code blocks
   @if $icon-twitch {        .twitch {         background-image: functions.icon(twitch,          $ic,2, "%23a7f", "none") }}
   @if $icon-twitter {       .twitter {        background-image: functions.icon(twitter,         $ic,2, "%232ad", "none") }}
   @if $icon-x {             .x {              background-image: functions.icon(x,               $ic,3, "%23f00", "none") }}
-  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "none", ["%23f00","%23fff"]) }}
+  @if $icon-youtube {       .youtube {        background-image: functions.icon(youtube,         $ic,2, "none", "%23f00") }}
+  @if $icon-telegram {      .telegram {       background-image: functions.icon(telegram,        $ic,0, "none", "%233ad") }}
   .svg {
     width: 1.8rem;
     height: 1.8rem;

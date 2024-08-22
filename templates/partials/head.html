@@ -1,7 +1,7 @@
 
 {#- Theme Switcher Button to toggle between dark/light #}
   {%- set integrity = config.extra.integrity | default(value=true) -%}
-  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
 
   {%- if config.extra.js_switcher | default(value=true) %}
   {%- set js_theme="js/theme.min.js" %}
@@ -90,7 +90,7 @@
 
 {#- Style Sheets Preload #}
   {%- set integrity = config.extra.integrity | default(value=true) -%}
-  {%- if config.extra.offline %}{% set integrity = false %}{% endif %}
+  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
 
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching("^http[s]?://") %}

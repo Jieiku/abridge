@@ -68,7 +68,7 @@ fn main() {
 ```
 
 ### Bash
-```bash
+```bash,hl_lines=5
 #!/bin/bash
 for d in /sys/kernel/iommu_groups/*/devices/*; do
   n=${d#*/iommu_groups/*}; n=${n%%/*}

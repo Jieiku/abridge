@@ -21,9 +21,6 @@ const search_library = data.extra.search_library;
 const index_format = data.search.index_format;
 const uglyurls = data.extra.uglyurls;
 const js_bundle = data.extra.js_bundle;
-const offline = data.extra.offline;
-const online_url = data.extra.online_url;
-const online_indexformat = data.extra.online_indexformat;
 const pwa = data.extra.pwa;
 const pwa_VER = data.extra.pwa_VER;
 const pwa_NORM_TTL = data.extra.pwa_NORM_TTL;
@@ -36,7 +33,19 @@ const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 
 // This is used to pass arguments to zola via npm, for example:
 // npm run abridge -- "--base-url https://abridge.pages.dev"
-const args = process.argv[2] ? ' '+process.argv[2] : '';
+var args = process.argv[2] ? ' '+process.argv[2] : '';
+
+// check if abridge is used directly or as a theme.
+bpath = '';
+if (fs.existsSync('./themes')) {
+  bpath = 'themes/abridge/';
+}
+// cleanup pagefind files from old builds.
+_rmRegex(path.join(bpath, "static/js/"),/^wasm.*pagefind$/);
+_rmRegex(path.join(bpath, "static/js/"),/^pagefind.*pf_meta$/);
+_rmRegex(path.join(bpath, "static/js/"),/^pagefind-entry.*json$/);
+_rmRecursive(path.join(bpath, "static/js/index"));
+_rmRecursive(path.join(bpath, "static/js/fragment"));
 
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
@@ -51,18 +60,18 @@ async function execWrapper(cmd) {
 async function abridge() {
   await sync();
   const { replaceInFileSync } = await import('replace-in-file');
-  if (offline === false) {
-    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+online_url+"\""});
-      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \""+online_indexformat+"\""});
-    }
-  } else if (offline === true) {
-    if (typeof online_url !== 'undefined' && typeof online_indexformat !== 'undefined') {
-      replaceInFileSync({files: 'config.toml', from: /base_url.*=.*/g, to: "base_url = \""+__dirname+"\/public\""});
-      replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
-    } else {
-      throw new Error('ERROR: offline = true requires that online_url and online_indexformat are set in config.toml, so that the base_url and index_format can be restored if offline is later set to false.');
-    }
+  // set index_format for chosen search_library accordingly.
+  if (search_library === 'offline') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+    args = args + " -u \""+__dirname+"\/public\""//set base_url to the path on disk for offline site.
+  } else if (search_library === 'elasticlunrjava') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\""});
+  } else if (search_library === 'elasticlunr') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_json\""});
+  } else if (search_library === 'pagefind') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\""});
+  } else if (search_library === 'tinysearch') {
+    replaceInFileSync({files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\""});
   }
 
   console.log('Zola Build to generate files for minification:');
@@ -76,59 +85,37 @@ async function abridge() {
     if (e.code != 'EEXIST') throw e;
   }
 
-  // check if abridge is used directly or as a theme.
-  bpath = '';
-  if (fs.existsSync('./themes')) {
-    bpath = 'themes/abridge/';
-  }
-
   base_url = data.base_url;
   if (base_url.slice(-1) == "/") {
       base_url = base_url.slice(0, -1);
   }
 
-  if (search_library === 'elasticlunr') {
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-  } else if (search_library === 'tinysearch') {
-    if (!fs.existsSync('content/static/tinysearch_json.md')) {// 'content/static/tinysearch_json.md' file is missing, copy from abridge theme.
-      fs.copyFileSync(bpath+'content/static/tinysearch_json.md', 'content/static/tinysearch_json.md',fs.constants.COPYFILE_EXCL);
-    }
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = false"});
-    }
-    // zola build && mkdir -p tmp && tinysearch --optimize --path tmp public/data_tinysearch/index.html && rsync -avz tmp/*.wasm static/ && rm -rf tmp
-  } else if (search_library === 'stork') {
+  if (search_library === 'pagefind') {
+    // Generate pagefind index at start, otherwise it happens too late asyncronously.
+    await createPagefindIndex(); // makes program wait for pagefind build execution
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(bpath, "static/js/"),/^pagefind-.*\.css$/);//pagefind temporary intermediate files
 
-    if (!fs.existsSync('content/static/stork_toml.md')) {// 'content/static/stork_toml.md' file is missing, copy from abridge theme.
-      fs.copyFileSync(bpath+'content/static/stork_toml.md', 'content/static/stork_toml.md',fs.constants.COPYFILE_EXCL);
-    }
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = false"});
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-    // zola build && stork build --input public/data_stork/index.html --output static/stork.st
-  } else if (search_library === 'pagefind') {
-    if (fs.existsSync('content/static/stork_toml.md')) {
-      replaceInFileSync({files: 'content/static/stork_toml.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
-    if (fs.existsSync('content/static/tinysearch_json.md')) {
-      replaceInFileSync({files: 'content/static/tinysearch_json.md', from: /draft.*=.*/g, to: "draft = true"});
-    }
+    // This line in pagefind is causing a problem for the PWA:
+    // var e = await (await fetch(this.basePath + "pagefind-entry.json?ts=" + Date.now())).json();
+    // instead generate an epoch timestamp at build and add it to the filename.
+    var hash = Math.floor(new Date().getTime() / 1000);
+    fs.renameSync(path.join(bpath, "static/js/pagefind-entry.json"), path.join(bpath, "static/js/pagefind-entry-"+hash+".json"));
 
-    // Run the pagefind script to generate the index files.
-    // Has to happen at start otherwise, it happens too late asyncronously.
-    const createIndex = require('./static/js/pagefind.index.js'); // run the pagefind index.js script
-    await createIndex(); // makes program wait for pagefind build execution
+    // original: var e=await(await fetch(this.basePath+"pagefind-entry.json?ts="+Date.now())).json();
+    //      new: var e=await(await fetch(this.basePath+"pagefind-entry-1723268715.json")).json();
+    // Tricky regex, so I split it into two replaceInFileSync() calls, pull requests welcome if you can improve this.
+    replaceInFileSync({files: path.join(bpath, "static/js/pagefind_search.js"), from: /pagefind-entry\.json\?ts=/g, to: "pagefind-entry-"+hash+"\.json"});
+    replaceInFileSync({files: path.join(bpath, "static/js/pagefind_search.js"), from: /Date.now\(\)/g, to: "\"\""});
+
+    //copy to public so the files are included in the PWA cache list if necessary.
+    fs.copyFileSync(path.join(bpath, "static/js/pagefind-entry-"+hash+".json"), path.join(bpath, "public/js/pagefind-entry-"+hash+".json"))
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind-entry\.json$/);
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^pagefind.*pf_meta$/);
+    _cpRegex(path.join(bpath, "static/js/"),path.join(bpath, "public/js/"),/^wasm.*pagefind$/);
+    _cpRecursive(path.join(bpath, "static/js/index"),path.join(bpath, "public/js/index"));
+    _cpRecursive(path.join(bpath, "static/js/fragment"),path.join(bpath, "public/js/fragment"));
   }
 
   if (pwa) {// Update pwa settings, file list, and hashes.
@@ -163,7 +150,7 @@ async function abridge() {
           if (e.code != 'EEXIST') throw e;
         }
         const path = './public/';
-        cache = 'this.BASE_CACHE_FILES = [';
+        cache = '';
         files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
         .forEach(
           (file) => {
@@ -173,6 +160,7 @@ async function abridge() {
               item = "/"+file.replace(/index\.html$/i,'');// strip index.html from path
               item = item.replace(/\\/g,'/');// replace backslash with forward slash for Windows
               item = item.replace(/^\/sw(\.min)?\.js/i,'');// dont cache service worker
+              item = item.replace(/^\/_headers/i,'');// dont cache the cloudflare _headers file
 
               // if formatted output is not empty line then append it to cache var
               if (item != '') {// skip empty lines
@@ -181,11 +169,13 @@ async function abridge() {
             }
           }
         );
-        cache = cache.slice(0, -1)+'];'// remove the last comma and close the array
+        cache = cache.slice(0, -1)// remove the last comma
       } else if (pwa_BASE_CACHE_FILES) {
-        cache = 'this.BASE_CACHE_FILES = ['+pwa_BASE_CACHE_FILES+'];';
+        cache = pwa_BASE_CACHE_FILES;
       }
 
+      cache = cache.split(",").sort().join(",")//sort the cache list, this should help keep the commit history cleaner.
+      cache = 'this.BASE_CACHE_FILES = ['+cache+'];';
       // update the BASE_CACHE_FILES variable in the sw.js service worker file
       results = replaceInFileSync({
         files: 'static/sw.js',
@@ -199,13 +189,13 @@ async function abridge() {
   }
 
   if (bpath === '') {// abridge used directly
+    _headersWASM();
     // These are truely static js files, so they should only need to be updated by the abridge maintainer or contributors.
     minify(['static/js/theme.js']);
     minify(['static/js/theme_light.js']);
     // Something went wrong with minifying katexbundle, so commenting this out for now
     // minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
     minify(['static/js/elasticlunr.min.js','static/js/search.js'],'static/js/search_elasticlunr.min.js');
-    minify(['static/js/stork.js','static/js/stork_config.js'],'static/js/search_stork.min.js');
     minify(['static/js/tinysearch.js'],'static/js/search_tinysearch.min.js');
     minify(['static/js/prestyle.js','static/js/theme_button.js','static/js/email.js','static/js/codecopy.js','static/js/sw_load.js'],'static/js/abridge_nosearch.min.js');
     minify(['static/js/prestyle.js','static/js/theme_button.js','static/js/email.js','static/js/codecopy.js'],'static/js/abridge_nosearch_nopwa.min.js');
@@ -233,8 +223,61 @@ async function abridge() {
   abridge_bundle = bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa);
   minify(abridge_bundle,'static/js/abridge.min.js');
 
+  // cleanup
+  _rmRegex(path.join(bpath, "static/js/"),/^pagefind_search\.js$/);//pagefind intermediate file that is now in bundle.
+
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
   await execWrapper('zola build'+args);
+}
+
+async function _headersWASM() {
+  // running WASM in the browser requires wasm-unsafe-eval if using Content-Security-Policy:
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_webassembly_execution
+  // This function adds wasm-unsafe-eval to the pagefind and tinysearch demos without adding it to the elasticlunr demo.
+  const { replaceInFileSync } = await import('replace-in-file');
+  if (search_library === 'pagefind') {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
+  } else if (search_library === 'tinysearch') {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'self'/g, to: "script-src 'wasm-unsafe-eval' 'self'"});
+  } else {
+    replaceInFileSync({files: 'static/_headers', from: /script-src 'wasm-unsafe-eval' 'self'/g, to: "script-src 'self'"});
+  }
+}
+
+function _rmRecursive(targetFiles) {
+  try {
+    fs.rmSync(targetFiles, { recursive: true });
+  } catch (error) {
+    if (error.code !== 'ENOENT') {// Ignore if does not exist, that is the desired result.
+      console.error("An error occurred:", error);
+    }
+  }
+}
+
+function _cpRecursive(source,dest) {
+  try {
+    fs.cpSync(source, dest, { recursive: true });
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
+
+function _rmRegex(path,regex) {
+  try {
+    fs.readdirSync(path).filter(f => regex.test(f)).forEach(f => fs.unlinkSync(path + f));
+  } catch (error) {
+    if (error.code !== 'ENOENT') {// Ignore if does not exist, that is the desired result.
+      console.error("An error occurred:", error);
+    }
+  }
+}
+
+function _cpRegex(source,dest,regex) {
+  try {
+    fs.readdirSync(source).filter(f => regex.test(f)).forEach(f => fs.copyFileSync(source + f, dest + f));
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 }
 
 function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search_library,index_format,uglyurls,pwa) {
@@ -253,25 +296,21 @@ function bundle(bpath,js_prestyle,js_switcher,js_email_encode,js_copycode,search
     minify_files.push(bpath+'static/js/codecopy.js');
   }
   if (search_library) {
-      if ((search_library === 'elasticlunr' && offline === true) || (search_library === 'elasticlunr' && index_format === 'elasticlunr_javascript' && uglyurls === true)) {
+      if ((search_library === 'offline' || (search_library === 'elasticlunrjava' && uglyurls === true))) {
         minify_files.push('public/search_index.en.js');
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/searchjavaugly.js');
-      } else if (search_library === 'elasticlunr' && index_format === 'elasticlunr_javascript') {
+      } else if (search_library === 'elasticlunrjava') {
         minify_files.push('public/search_index.en.js');
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/searchjava.js');
       } else if (search_library === 'elasticlunr') {//abridge default
         minify_files.push(bpath+'static/js/elasticlunr.min.js');
         minify_files.push(bpath+'static/js/search.js');
-      } else if (search_library === 'stork') {
-        minify_files.push(bpath+'static/js/stork.js');
-        minify_files.push(bpath+'static/js/stork_config.js');
+      } else if (search_library === 'pagefind') {
+        minify_files.push(bpath+'static/js/pagefind_search.js');
       } else if (search_library === 'tinysearch') {
         minify_files.push(bpath+'static/js/tinysearch.js');
-      } else if (search_library === 'pagefind') {
-        minify_files.push(bpath+'static/js/pagefind.js');
-        minify_files.push(bpath+'static/js/pagefind.search.js');
       }
   }
   if (pwa) {
@@ -311,7 +350,105 @@ function minify(fileA,outfile) {
 
 }
 
-abridge();
+async function searchChange(searchOption) {
+  const { replaceInFileSync } = await import('replace-in-file');
+  replaceInFileSync({files: 'config.toml', from: /search_library.*=.*/g, to: 'search_library = \"'+searchOption+'\"'});
+}
+
+if (args === ' offline') {
+  searchChange('offline');
+} else if (args === ' elasticlunrjava') {
+  searchChange('elasticlunrjava');
+} else if (args === ' elasticlunr') {
+  searchChange('elasticlunr');
+} else if (args === ' pagefind') {
+  searchChange('pagefind');
+} else if (args === ' tinysearch') {
+  searchChange('tinysearch');
+} else {
+  abridge();
+}
+
+async function createPagefindIndex() {
+  console.log("Creating Pagefind index...");
+  const pagefind = await import("pagefind");// Dynamically import the pagefind module
+  const publicFolder = path.join(__dirname, "public");
+  const files = fs.readdirSync(publicFolder);
+  let langArray = [];
+
+  files.forEach((file) => {
+    if (file.startsWith("search_index")) {
+      langArray.push(file.split(".")[1]);
+    }
+  });
+
+  const { index } = await pagefind.createIndex();
+  // Assuming index, fs, and path are already defined and properly imported
+
+  // Convert each lang in langArray to a promise that performs the desired operations
+  const promises = langArray.map((lang) =>
+    (async () => {
+      const filePath = path.join(__dirname,"public/search_index." + lang + ".json");
+
+      // Read the file content synchronously (consider using async readFile for better performance)
+      const fileContent = fs.readFileSync(filePath);
+      const data = JSON.parse(fileContent);
+
+      // Add each record to the index asynchronously
+      for (const record of data) {
+        await index.addCustomRecord({
+          url: record.url,
+          content: record.body,
+          language: lang,
+          meta: {
+            title: record.title,
+            description: record.meta,
+          },
+        });
+      }
+    })()
+  );
+
+  // Execute all promises concurrently
+  await Promise.all(promises)
+    .then(async () => {
+      // Write the index files to disk
+      const { errors } = await index.writeFiles({
+        outputPath: "./static/js/",
+      });
+      if (errors.length > 0) {
+        console.log("Errors: ", errors);
+      }
+    })
+    .then(async () => {
+      // Edit the pagefind to convert from MJS to CJS
+      const pagefindPath = path.join(__dirname, "static/js/pagefind.js");//source pagefind from node module
+      let pagefindContent = fs.readFileSync(pagefindPath, "utf8");
+      // Remove 'import.meta.url' from the pagefind file and exports
+      pagefindContent = pagefindContent
+        .replace(
+          /initPrimary\(\)\{([^{}]*\{[^{}]*\})*[^{}]*\}/g,
+          `initPrimary(){}`
+        ) // Remove annoying function
+        .replace(/;export\{[^}]*\}/g, "");
+      fs.writeFileSync(pagefindPath, pagefindContent);
+
+      // now insert the CJS into the anonymous function within pagefind.search.js
+      const pagefind_searchPath = path.join(__dirname, "static/js/pagefind.search.js");//file to insert into
+      const search_pagefindPath = path.join(__dirname, "static/js/pagefind_search.js");//output
+      let pagefind_searchContent = fs.readFileSync(pagefind_searchPath, "utf8");
+      // Now insert into pagefind.search.js at this location: //insertHere
+      pagefind_searchContent = pagefind_searchContent.replace(/\/\/insertHere/g, pagefindContent);
+      fs.writeFileSync(search_pagefindPath, pagefind_searchContent);
+
+    })
+    .then(async () => {
+      await pagefind.close();
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
+}
 
 async function sync() {
   // Check if the submodule is present, if not skip entire function
@@ -368,6 +505,11 @@ async function sync() {
     })).sort((a, b) => a.name.localeCompare(b.name));
   };
 
+  if (packageJsonContent !== submodulePackageJsonContent) {
+    console.log("Updating package.json from submodule");
+    fs.copyFileSync(submodulePackageJson, packageJson);
+  }
+
   const packageVersionLocal = checkPackageVersion(packageJsonContent);
   const packageVersionSubmodule = checkPackageVersion(submodulePackageJsonContent);
   if (JSON.stringify(packageVersionLocal) !== JSON.stringify(packageVersionSubmodule)) {
@@ -378,12 +520,7 @@ async function sync() {
     );
     exit(1);
   }
-  console.log(packageVersionLocal, packageVersionSubmodule);
 
-  if (packageJsonContent !== submodulePackageJsonContent) {
-    console.log("Updating package.json from submodule");
-    fs.copyFileSync(submodulePackageJson, packageJson);
-  }
   const configToml = path.join(__dirname, "config.toml");
   const submoduleConfigToml = path.join(
     __dirname,

@@ -1241,10 +1241,8 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
       visibility: hidden;
       overflow: hidden;
     }
-    summary {// Series: aligns item with the rest of the list, and color differently.
-      margin-left: -1em;
-      margin-bottom: .2rem;
-      color: var(--c4);
+    summary {
+      filter: brightness(.7);
     }
 
   }

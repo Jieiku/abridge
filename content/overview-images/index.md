@@ -21,6 +21,7 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 - src is the path and filename of the image. (mandatory)
 - class sets a class for the image.
 - alt sets the alt note for the image.
+- caption sets the caption text below the image.
 - link sets a hyperlink for the image.
 - w is the width of the image.
 - h is the height of the image.
@@ -80,6 +81,7 @@ When you hover your mouse over the image it will display the image to compare.
 - swap_src is the path and filename for the swap image. (mandatory)
 - class sets a class for the image.
 - alt sets the alt note for the image.
+- caption sets the caption text below the image.
 - link sets a hyperlink for the image.
 - w is the width of the image.
 - h is the height of the image.

@@ -849,6 +849,17 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     border: 0;
     overflow: hidden;
   }
+  .fi {//figure for images
+    display: inline-block;
+    img {
+      border: 1px solid var(--c4);
+      vertical-align: top;
+    }
+    figcaption {
+      padding-bottom: var(--s1);
+      text-align: center;
+    }
+  }
 }
 @if $table {
   table {
@@ -1004,16 +1015,11 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
 @if $scroller {
   // https://github.com/picocss/pico
   // Wrapper to make any content responsive across all viewports
-  figure {
+  figure {//figure for scroller
     display: block;
     margin: 0;
     padding: 0;
     overflow-x: auto;
-
-    figcaption {
-      padding: var(--s1) 0;
-      color: var(--c4);
-    }
   }
 }
 @if $button {
@@ -1474,10 +1480,6 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .z-constant.z-other {//, .z-constant.z-character
     color: var(--h4);
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-variable.z-member {
-  //    color: var(--h3);
-  //}
   // use, crate, let, etc.
   .z-keyword {//, .z-keyword.z-operator.z-word
     color: var(--h8);
@@ -1502,10 +1504,6 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .z-punctuation.z-definition.z-annotation {
     color: var(--h1);
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-variable.z-other.z-dollar.z-only.z-js, .z-variable.z-other.z-object.z-dollar.z-only.z-js, .z-variable.z-type.z-dollar.z-only.z-js, .z-support.z-class.z-dollar.z-only.z-js {
-  //    color: var(--h6);
-  //}
   // const, pub, mut, Self, fn
   .z-storage {
     color: var(--h8);
@@ -1522,11 +1520,6 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .z-entity.z-name {//, .z-entity.z-name.z-label
     color: var(--h5);
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-entity.z-other.z-inherited-class {
-  //    color: var(--h8);
-  //    text-decoration: underline;
-  //}
   //  v1   (fn lookup(v1))
   .z-variable.z-parameter {
     color: var(--h4);
@@ -1557,25 +1550,12 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .z-support.z-function, .z-support.z-macro {
     color: var(--h3);
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-support.z-constant {
-  //    color: var(--h4);
-  //    font-style: italic;
-  //}
   // type: Vec, Some, str, int
   // class:  Config  ($CONF = Config::getInstance()->getAll();)
   .z-support.z-type, .z-support.z-class {
     color: var(--h8);
     font-style: italic;
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-source.z-ruby .z-variable.z-other.z-readwrite {
-  //    color: var(--h5);
-  //}
-  // superfluous, already have .z-entity.z-name.z-tag
-  //.z-source.z-css .z-entity.z-name.z-tag, .z-source.z-sass .z-entity.z-name.z-tag, .z-source.z-scss .z-entity.z-name.z-tag, .z-source.z-less .z-entity.z-name.z-tag, .z-source.z-stylus .z-entity.z-name.z-tag {
-  //    color: var(--h8);
-  //}
   // property name, eg css: font-size, text-align, etc.
   .z-support.z-type.z-property-name {
     color: var(--h8);
@@ -1584,58 +1564,4 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .z-key.z-json {
     color: var(--h4);
   }
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-constant.z-numeric.z-line-number.z-match {
-  //    color: var(--h8);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-entity.z-name.z-filename.z-find-in-files {
-  //    color: var(--h6);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-message.z-error {
-  //    color: var(--h3);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-string.z-other.z-link, .z-markup.z-underline.z-link {
-  //    color: var(--h7);
-  //    text-decoration: underline;
-  //    font-style: italic;
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-punctuation.z-definition.z-image {
-  //    color: var(--h5);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-meta.z-separator {
-  //    color: var(--h1);
-  //    background-color: var(--h1);
-  //    font-weight: bold;
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-markup.z-list.z-numbered.z-bullet, .z-markup.z-list .z-punctuation.z-definition.z-list_item {
-  //    color: var(--h7);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-text.z-html.z-markdown .z-markup.z-raw.z-inline {
-  //    color: var(--h4);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-text.z-html.z-markdown .z-meta.z-dummy.z-line-break {
-  //    color: var(--h1);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-markup.z-raw.z-block.z-fenced.z-markdown {
-  //    color: var(--h1);
-  //    background-color: var(--h1);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-punctuation.z-definition.z-fenced.z-markdown, .z-variable.z-language.z-fenced.z-markdown {
-  //    color: var(--h1);
-  //    background-color: var(--h1);
-  //}
-  // Figure out how to reproduce in code block otherwise don't include
-  //.z-variable.z-language.z-fenced.z-markdown {
-  //    color: var(--h1);
-  //}
 }

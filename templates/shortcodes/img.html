@@ -44,4 +44,6 @@
 {%- if not alt %}
   {%- set alt = img | split(pat=".") | first %}
 {%- endif %}
-<img src="{{ path | safe }}{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />
+{%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif -%}
+{%- if link %}<a href="{{link | safe}}">{% endif %}<img src="{{ path | safe }}{{ img | safe }}"{% if class %} class="{{class}}"{% endif %}{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />{% if link %}</a>{% endif -%}
+{%- if caption %}<figcaption>{{caption}}</figcaption></figure>{%- endif %}

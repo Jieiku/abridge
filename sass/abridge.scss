@@ -851,8 +851,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   }
   .fi {//figure for images
     display: inline-block;
-    img {
-      border: 1px solid var(--c4);
+    img,video {
       vertical-align: top;
     }
     figcaption {
@@ -1437,6 +1436,11 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .vpad {padding: var(--s1) 0}
   .tpad {padding-top: var(--s1)}
   .b {font-weight: var(--fh)}
+  .b1 {
+    video,img {
+      border: 1px solid var(--c4);
+    }
+  }
   .c {text-align: center}// <center> does not pass validation, use: <div class="c"></div>
   .fl {float: left}
   .fr {float: right}

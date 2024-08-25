@@ -20,6 +20,24 @@ Plusieurs codes abrégés personnalisés sont inclus pour augmenter CommonMark (
 
 Le `video` shortcode prend un `sources` paramètre (un tableau de chaînes) et renvoie une `<video>` balise. Chaque chaîne du `sources` tableau doit être un chemin vers un fichier vidéo d'un type différent (`webm`, `mp4`, etc). Chaque source individuelle est ensuite convertie en `<source>` balise et l'élément est renvoyé.
 
+- sources sont un tableau de chemins de fichiers vidéo. (obligatoire)
+- class définit une classe pour la vidéo.
+- caption définit le texte de la légende sous la vidéo.
+- w définit la largeur de la vidéo.
+- h définit la hauteur de la vidéo.
+- autoplay lorsqu'il est défini sur "true", lit automatiquement la vidéo au chargement.
+- loop lorsqu'il est défini sur "true", lit la vidéo en boucle.
+- muted lorsqu'il est défini sur "true", règle le son initialement coupé.
+
+** les sources peuvent être le même chemin, un chemin relatif ou un chemin racine, comme le [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode) **
+
+Cours optionnels:
+
+- ci peut être utilisé pour centrer l'image.
+- fr peut être utilisé pour faire flotter l'image à droite.
+- fl peut être utilisé pour faire flotter l'image vers la gauche.
+- b1 peut être utilisé pour ajouter une bordure de 1px.
+
 ### Usage
 ```rs
 {{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
@@ -29,6 +47,16 @@ Le `video` shortcode prend un `sources` paramètre (un tableau de chaînes) et r
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+
+### Usage
+```rs
+{{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
+```
+### Sortir
+```html
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+```
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
 
 ## Image
 

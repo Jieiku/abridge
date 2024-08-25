@@ -24,6 +24,24 @@ be a path to a video file of a different type (`webm`, `mp4`, etc). Each
 individual source is then converted into a `<source>` tag, and the
 element is returned.
 
+- sources is an array of video file paths. (mandatory)
+- class sets a class for the video.
+- caption sets the caption text below the video.
+- w sets the width of the video.
+- h sets the height of the video.
+- autoplay when set to "true", autoplays the video on load.
+- loop when set to "true", plays the video on a loop.
+- muted when set to "true", sets the audio muted initially.
+
+** sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode) **
+
+Optional Classes:
+
+- ci can be used to center the image.
+- fr can be used to float the image right.
+- fl can be used to float the image left.
+- b1 can be used to add a 1px border.
+
 ### Usage
 ```rs
 {{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
@@ -33,6 +51,16 @@ element is returned.
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+
+### Usage
+```rs
+{{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
+```
+### Output
+```html
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+```
+{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
 
 ## Image
 

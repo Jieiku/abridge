@@ -31,18 +31,19 @@ Optional Classes:
 - ci can be used to center the image.
 - fr can be used to float the image right.
 - fl can be used to float the image left.
+- b1 can be used to add a 1px border.
 
 ** google lighthouse recommends setting alt, w, and h attributes. If alt is omitted then the filename is used. If w or h are omitted then get_image_metadata() fills these values. **
 
 ## Usage (same path)
 ```rs
-{{/* img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") */}}
+{{/* img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
 ```
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
 
 ## Usage (relative path ./)
 ```rs

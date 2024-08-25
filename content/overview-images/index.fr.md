@@ -31,18 +31,19 @@ Cours optionnels:
 - ci peut être utilisé pour centrer l'image.
 - fr peut être utilisé pour faire flotter l'image à droite.
 - fl peut être utilisé pour faire flotter l'image vers la gauche.
+- b1 peut être utilisé pour ajouter une bordure de 1px.
 
 ** google lighthouse recommande de définir les attributs alt, w et h. Si alt est omis, le nom du fichier est utilisé. Si w ou h sont omis alors get_image_metadata() remplit ces valeurs. **
 
 ## Utilisation (même chemin)
 ```rs
-{{/* img(src="ferris-happy.svg" class="ci" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") */}}
+{{/* img(src="ferris-happy.svg" class="ci b1" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") }}
 ```
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris est heureux" caption="Ferris" link="https://www.rust-lang.org/") }}
 
 ## Utilisation (chemin relatif ./)
 ```rs

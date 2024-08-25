@@ -94,14 +94,14 @@ Certaines mathématiques en mode affichage sont assez justes :
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
 ### Rendu automatique en ligne
-```
+```tex
 $ e^{i\pi}+1=0 $
 ```
 
 $ e^{i\pi}+1=0 $
 
 ### Bloc de rendu automatique
-```
+```tex
 $$
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 $$

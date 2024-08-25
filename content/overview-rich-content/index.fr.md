@@ -137,10 +137,10 @@ Le `audio` shortcode prend un `sources` tableau de chaînes et renvoie une `<aud
 
 ### Usage
 ```rs
-{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
+{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") */}}
 ```
 ### Sortir
 ```html
-{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") }}
 ```
 {{ audio(sources=["over9000.ogg", "over9000.mp3"] class="ci b1" caption="It's Over 9000!!") }}

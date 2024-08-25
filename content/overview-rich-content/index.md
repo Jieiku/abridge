@@ -143,10 +143,10 @@ The browser will play the first type it supports, so placing them in order of si
 
 ### Usage
 ```rs
-{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
+{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") */}}
 ```
 ### Output
 ```html
-{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") }}
 ```
 {{ audio(sources=["over9000.ogg", "over9000.mp3"] class="ci b1" caption="It's Over 9000!!") }}

@@ -1437,7 +1437,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   .tpad {padding-top: var(--s1)}
   .b {font-weight: var(--fh)}
   .b1 {
-    video,img {
+    video,audio,picture,img {
       border: 1px solid var(--c4);
     }
   }

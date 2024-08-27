@@ -62,9 +62,9 @@ This Template can also be used as the rendering template for Sections, eg: examp
       {%- for year, posts in section_item.pages | sort(attribute="year") | reverse | group_by(attribute="year") %}
       {%- if not hide_section_dates %}
       {%- if section_item.title %}
-      <h3>{{ year }}</h3>
+      <h3 class="tpad">{{ year }}</h3>
       {%- else %}
-      <h2>{{ year }}</h2>
+      <h2 class="tpad">{{ year }}</h2>
       {%- endif %}
       {%- endif %}
       {%- for post in posts %}
@@ -75,9 +75,9 @@ This Template can also be used as the rendering template for Sections, eg: examp
       {%- for year, posts in section_item.pages | group_by(attribute="year") %}
       {%- if not hide_section_dates %}
       {%- if section_item.title %}
-      <h3>{{ year }}</h3>
+      <h3 class="tpad">{{ year }}</h3>
       {%- else %}
-      <h2>{{ year }}</h2>
+      <h2 class="tpad">{{ year }}</h2>
       {%- endif %}
       {%- endif %}
       {%- for post in posts %}

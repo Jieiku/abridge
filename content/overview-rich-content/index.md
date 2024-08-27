@@ -81,13 +81,13 @@ Each string in the `sources` array should be a path to an image file of a differ
 
 ### Usage
 ```rs
-{{/* image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"], w=640, h=480, alt="ITS OVER 9000!") */}}
+{{/* image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") */}}
 ```
 ### Output
 ```html
-{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"], w=640, h=480, alt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
 ```
-{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"], w=640, h=480, alt="ITS OVER 9000!") }}
+{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
 
 ## GIF
 

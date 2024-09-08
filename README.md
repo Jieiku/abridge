@@ -3,7 +3,7 @@
 
 # Abridge Zola Theme
 
-A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.pages.dev) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
+A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
 
 ![Lighthouse Score](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-abridge/lighthouse.png)
 
@@ -22,7 +22,7 @@ The Abridge.css demo is simply using Abridge theme as a submodule: [config.toml]
 
 ## Features
 
-- Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://observatory.mozilla.org/analyze/abridge.pages.dev) scores.
+- Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores.
 - [PWA support](https://abridge.pages.dev/overview-abridge/#pwa-progressive-web-app) (Progressive Web Application).
 - All JavaScript can be [fully disabled](https://abridge.pages.dev/overview-abridge/#javascript-files).
 - Dark, Light, Auto, and Switcher themes. (colors can be customized, css variables)

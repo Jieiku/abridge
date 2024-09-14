@@ -1,7 +1,7 @@
 +++
 title = "Vimeo intégrées"
 description = "Exemple d'article présentant un code abrégé Zola personnalisé pour intégrer des vidéos Vimeo dans vos pages."
-date = 2021-05-07
+date = 2021-05-07T15:00:00Z
 draft = false
 
 [taxonomies]

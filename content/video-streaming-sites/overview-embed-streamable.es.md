@@ -1,7 +1,7 @@
 +++
 title = "Incrustar Streamable"
 description = "Artículo de ejemplo que muestra un shortcode personalizado de Zola para incrustar vídeos Streamable en tus páginas."
-date = 2021-05-06
+date = 2021-05-06T15:00:00Z
 draft = false
 
 [taxonomies]

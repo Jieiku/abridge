@@ -1,7 +1,7 @@
 +++
 title = "Blocs de code et thème"
 description = "Exemple d'article présentant la coloration syntaxique et la mise en forme des blocs de code avec un thème personnalisé."
-date = 2022-05-16
+date = 2022-05-16T15:00:00Z
 draft = false
 
 [taxonomies]

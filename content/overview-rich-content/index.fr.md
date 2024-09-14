@@ -1,7 +1,7 @@
 +++
 title = "Contenu riche"
 description = "Une brève description des Shortcodes personnalisés pour Zola qui implémentent des éléments html modernes : vidéo, image, gif, audio."
-date = 2021-05-15
+date = 2021-05-15T15:00:00Z
 draft = false
 
 [taxonomies]

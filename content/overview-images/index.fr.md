@@ -1,7 +1,7 @@
 +++
 title = "Codes courts d'image"
 description = "Les images peuvent être intégrées directement à l'aide de markdown `![Ferris](ferris.svg)`, mais l'utilisation d'un shortcode empêche CLS en définissant explicitement la largeur et la hauteur."
-date = 2021-05-19
+date = 2021-05-19T15:00:00Z
 draft = false
 
 [taxonomies]

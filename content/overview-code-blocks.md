@@ -1,7 +1,7 @@
 +++
 title = "Code Blocks Theme"
 description = "Sample article showcasing syntax highlighting and formatting for Code Blocks with a custom theme."
-date = 2022-05-16
+date = 2022-05-16T15:00:00Z
 draft = false
 
 [taxonomies]

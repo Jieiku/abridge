@@ -1,7 +1,7 @@
 +++
 title = "Youtube intégrées"
 description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos Youtube dans vos pages."
-date = 2021-05-08
+date = 2021-05-08T15:00:00Z
 draft = false
 
 [taxonomies]

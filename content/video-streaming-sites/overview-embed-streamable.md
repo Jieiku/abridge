@@ -1,7 +1,7 @@
 +++
 title = "Embed Streamable"
 description = "Sample article showcasing a custom Zola shortcode for embedding Streamable Videos into your pages."
-date = 2021-05-06
+date = 2021-05-06T15:00:00Z
 draft = false
 
 [taxonomies]

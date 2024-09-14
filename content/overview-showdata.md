@@ -1,7 +1,7 @@
 +++
 title = "Showdata Shortcode"
 description = "A brief description of a custom Shortcode for Zola that implements loading and displaying external data."
-date = 2021-05-04
+date = 2021-05-04T15:00:00Z
 draft = false
 
 [taxonomies]

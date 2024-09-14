@@ -1,7 +1,7 @@
 +++
 title = "Streamable intégrées"
 description = "Exemple d'article présentant un code abrégé Zola personnalisé pour intégrer des vidéos Streamable dans vos pages."
-date = 2021-05-06
+date = 2021-05-06T15:00:00Z
 draft = false
 
 [taxonomies]

@@ -1,7 +1,7 @@
 +++
 title = "Code court Showdata"
 description = "Une brève description d'un shortcode personnalisé pour Zola qui implémente le chargement et l'affichage de données externes."
-date = 2021-05-04
+date = 2021-05-04T15:00:00Z
 draft = false
 
 [taxonomies]

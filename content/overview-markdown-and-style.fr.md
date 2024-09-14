@@ -1,7 +1,7 @@
 +++
 title = "Markdown et Style"
 description = "Exemple d'article présentant la syntaxe et le formatage de base de Markdown pour les éléments HTML."
-date = 2022-05-15
+date = 2022-05-15T15:00:00Z
 draft = false
 
 [taxonomies]

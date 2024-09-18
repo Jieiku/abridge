@@ -327,9 +327,9 @@ All that is necessary is `zola build && npm run abridge`.
 
 In addition to elasticlunr abridge also supports pagefind and tinysearch.
 
-pagefind demo: https://jieiku.github.io/abridge-pagefind/
+pagefind demo: https://abridge-pagefind.pages.dev/
 
-tinysearch demo: https://jieiku.github.io/abridge-tinysearch/
+tinysearch demo: https://abridge-tinysearch.pages.dev/
 
 To use tinysearch extra steps are required.
 

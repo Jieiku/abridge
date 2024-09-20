@@ -5,6 +5,11 @@
 
 {%- macro seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2023-05-15T07:07:00-07:00", updated_time="2023-05-15T07:07:00-07:00" ) %}
 
+{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
+{%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
+{%- set lang_locale = macros::translate(key='date_locale', default='en_US', i18n=i18n) -%}
+
 {%- if is_404 -%}
   <meta name="robots" content="noindex, follow" />
 {%- else -%}
@@ -117,7 +122,7 @@
 
 {#- SEO MEDIA END #}
   <meta property="og:site_name" content="{{ config.title }}" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="{{ lang_locale }}" />
   <meta property="og:type" content="website" />
 {%- if page.updated %}
   <meta property="og:updated_time" content="{{ page.updated | date(format='%F') }}" />

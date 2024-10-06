@@ -463,6 +463,8 @@ async function sync() {
   const staticFolder = path.join(__dirname, "static/js");
   const submoduleFolder = path.join(__dirname, "themes/abridge/static/js");
 
+  fs.mkdirSync(staticFolder, { recursive: true });
+
   const files = fs.readdirSync(staticFolder);
 
   files.forEach((file) => {

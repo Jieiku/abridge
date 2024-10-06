@@ -41,11 +41,11 @@ if (fs.existsSync('./themes')) {
   bpath = 'themes/abridge/';
 }
 // cleanup pagefind files from old builds.
-_rmRegex(path.join(bpath, "static/js/"), /^wasm.*pagefind$/);
-_rmRegex(path.join(bpath, "static/js/"), /^pagefind.*pf_meta$/);
-_rmRegex(path.join(bpath, "static/js/"), /^pagefind-entry.*json$/);
-_rmRecursive(path.join(bpath, "static/js/index"));
-_rmRecursive(path.join(bpath, "static/js/fragment"));
+_rmRegex(path.join(__dirname, "static/js/"), /^wasm.*pagefind$/);
+_rmRegex(path.join(__dirname, "static/js/"), /^pagefind.*pf_meta$/);
+_rmRegex(path.join(__dirname, "static/js/"), /^pagefind-entry.*json$/);
+_rmRecursive(path.join(__dirname, "static/js/index"));
+_rmRecursive(path.join(__dirname, "static/js/fragment"));
 
 async function execWrapper(cmd) {
   const { stdout, stderr } = await execPromise(cmd);
@@ -93,9 +93,9 @@ async function abridge() {
   if (search_library === 'pagefind') {
     // Generate pagefind index at start, otherwise it happens too late asyncronously.
     await createPagefindIndex(); // makes program wait for pagefind build execution
-    _rmRegex(path.join(bpath, "static/js/"), /^pagefind\.js$/);//pagefind temporary intermediate files
-    _rmRegex(path.join(bpath, "static/js/"), /^pagefind-.*\.js$/);//pagefind temporary intermediate files
-    _rmRegex(path.join(bpath, "static/js/"), /^pagefind-.*\.css$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(__dirname, "static/js/"), /^pagefind\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(__dirname, "static/js/"), /^pagefind-.*\.js$/);//pagefind temporary intermediate files
+    _rmRegex(path.join(__dirname, "static/js/"), /^pagefind-.*\.css$/);//pagefind temporary intermediate files
 
     // This line in pagefind is causing a problem for the PWA:
     // var e = await (await fetch(this.basePath + "pagefind-entry.json?ts=" + Date.now())).json();
@@ -224,7 +224,7 @@ async function abridge() {
   minify(abridge_bundle, 'static/js/abridge.min.js');
 
   // cleanup
-  _rmRegex(path.join(bpath, "static/js/"), /^pagefind_search\.js$/);//pagefind intermediate file that is now in bundle.
+  _rmRegex(path.join(__dirname, "static/js/"), /^pagefind_search\.js$/);//pagefind intermediate file that is now in bundle.
 
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
   await execWrapper('zola build' + args);
@@ -284,33 +284,33 @@ function bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, s
   minify_files = [];
 
   if (js_prestyle) {
-    minify_files.push(bpath + 'static/js/prestyle.js');
+    minify_files.push(path.join(bpath, 'static/js/prestyle.js'));
   }
   if (js_switcher) {
-    minify_files.push(bpath + 'static/js/theme_button.js');
+    minify_files.push(path.join(bpath, 'static/js/theme_button.js'));
   }
   if (js_email_encode) {
-    minify_files.push(bpath + 'static/js/email.js');
+    minify_files.push(path.join(bpath, 'static/js/email.js'));
   }
   if (js_copycode) {
-    minify_files.push(bpath + 'static/js/codecopy.js');
+    minify_files.push(path.join(bpath, 'static/js/codecopy.js'));
   }
   if (search_library) {
     if ((search_library === 'offline' || (search_library === 'elasticlunrjava' && uglyurls === true))) {
       minify_files.push('public/search_index.en.js');
-      minify_files.push(bpath + 'static/js/elasticlunr.min.js');
-      minify_files.push(bpath + 'static/js/searchjavaugly.js');
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/searchjavaugly.js'));
     } else if (search_library === 'elasticlunrjava') {
       minify_files.push('public/search_index.en.js');
-      minify_files.push(bpath + 'static/js/elasticlunr.min.js');
-      minify_files.push(bpath + 'static/js/searchjava.js');
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/searchjava.js'));
     } else if (search_library === 'elasticlunr') {//abridge default
-      minify_files.push(bpath + 'static/js/elasticlunr.min.js');
-      minify_files.push(bpath + 'static/js/search.js');
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/search.js'));
     } else if (search_library === 'pagefind') {
       minify_files.push(path.join(__dirname, 'static/js/pagefind_search.js'));
     } else if (search_library === 'tinysearch') {
-      minify_files.push(bpath + 'static/js/tinysearch.js');
+      minify_files.push(path.join(bpath, 'static/js/tinysearch.js'));
     }
   }
   if (pwa) {
@@ -487,16 +487,10 @@ async function sync() {
 
   // Check for changes in package.json
   const packageJson = path.join(__dirname, "package.json");
-  const submodulePackageJson = path.join(
-    __dirname,
-    "themes/abridge/package.json"
-  );
+  const submodulePackageJson = path.join(__dirname, "themes/abridge/package.json");
 
   const packageJsonContent = fs.readFileSync(packageJson, "utf-8");
-  const submodulePackageJsonContent = fs.readFileSync(
-    submodulePackageJson,
-    "utf-8"
-  );
+  const submodulePackageJsonContent = fs.readFileSync(submodulePackageJson, "utf-8");
 
   // Check for changes in dependencies - prompting an npm update
   let checkPackageVersion = function (content) {
@@ -524,10 +518,7 @@ async function sync() {
   }
 
   const configToml = path.join(__dirname, "config.toml");
-  const submoduleConfigToml = path.join(
-    __dirname,
-    "themes/abridge/config.toml"
-  );
+  const submoduleConfigToml = path.join(__dirname, "themes/abridge/config.toml");
 
   let adjustTomlContent = function (content) {
     content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces

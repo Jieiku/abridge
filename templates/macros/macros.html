@@ -335,43 +335,43 @@
             {%- endif %}
       <nav class="vpad">
         {%- if paginator.current_index > 6 and paginator.number_pagers > 7 %}
-          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">1</a>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" title="Page 2">2</a>
+          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="First Page">1</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page 2">2</a>
           <span class="dis outp">...</span>
         {%- elif paginator.current_index > 5 and paginator.number_pagers > 7 %}
-          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">1</a>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" title="Page 2">2</a>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 3 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" title="Page 3">3</a>
+          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="First Page">1</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page 2">2</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 3 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page 3">3</a>
         {%- elif paginator.current_index > 4 and paginator.number_pagers > 6 %}
-          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">1</a>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" title="Page 2">2</a>
+          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="First Page">1</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{ 2 ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page 2">2</a>
         {%- elif paginator.current_index > 3 and paginator.number_pagers > 5 -%}
-          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">1</a>
+          <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="First Page">1</a>
         {%- endif -%}
 
         {%- for i in range(start=start, end=end+1) -%}
             {%- if i == paginator.current_index -%}
             <a class="inp on cnav" href="#">{{i}}</a>
             {%- elif i > 1 -%}
-            <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}">{{i}}</a>
+            <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{i}}">{{i}}</a>
             {%- else -%}
-            <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ i }}</a>
+            <a class="inp on" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{i}}">{{ i }}</a>
             {%- endif -%}
         {%- endfor -%}
 
         {%- if paginator.number_pagers > paginator.current_index+5 and paginator.number_pagers > 7 %}
           <span class="dis outp">...</span>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{paginator.number_pagers-1}}">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+4 and paginator.number_pagers > 7 %}
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-2}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-2}}</a>
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-2}}/{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{paginator.number_pagers-2}}">{{paginator.number_pagers-2}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{paginator.number_pagers-1}}">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+3 and paginator.number_pagers > 6 %}
-          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{paginator.number_pagers-1}}">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+2 and paginator.number_pagers > 5 %}
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
+          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Last Page">{{paginator.number_pagers}}</a>
         {%- endif -%}
       </nav>
   {%- endif %}

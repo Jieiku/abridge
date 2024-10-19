@@ -361,14 +361,14 @@
 
         {%- if paginator.number_pagers > paginator.current_index+5 and paginator.number_pagers > 7 %}
           <span class="dis outp">...</span>
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
           <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+4 and paginator.number_pagers > 7 %}
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers-2}}</a>
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-2}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-2}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
           <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+3 and paginator.number_pagers > 6 %}
-          <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers-1}}</a>
+          <a class="inp on" href="{{ paginator.base_url | safe }}{{paginator.number_pagers-1}}/{%- if uglyurls %}index.html{%- endif %}">{{paginator.number_pagers-1}}</a>
           <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>
         {%- elif paginator.number_pagers > paginator.current_index+2 and paginator.number_pagers > 5 %}
           <a class="inp on" href="{{ paginator.last | safe }}{%- if uglyurls %}index.html{%- endif %}" title="Last Page">{{paginator.number_pagers}}</a>

@@ -18,6 +18,9 @@ taxonomies = [
     {name = "tags", feed = true},
 ]
 
+#ignored_content = []
+#ignored_static = ["apple-touch-icon.png","banner.png","safari-pinned-tab.svg","favicon*","m*.png","android-chrome*png"]
+
 #feed_filename = "atom.xml"
 #output_dir = "public"
 #ignored_content = ["*.{graphml,xlsx}", "temp.*"]

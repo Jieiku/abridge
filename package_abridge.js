@@ -30,6 +30,7 @@ const pwa_TTL_LONG = data.extra.pwa_TTL_LONG;
 const pwa_TTL_EXEMPT = data.extra.pwa_TTL_EXEMPT;
 const pwa_cache_all = data.extra.pwa_cache_all;
 const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
+const pwa_IGNORE_FILES = data.extra.pwa_IGNORE_FILES;
 
 // This is used to pass arguments to zola via npm, for example:
 // npm run abridge -- "--base-url https://abridge.pages.dev"
@@ -159,8 +160,12 @@ async function abridge() {
                 // format output
                 item = "/" + file.replace(/index\.html$/i, '');// strip index.html from path
                 item = item.replace(/\\/g, '/');// replace backslash with forward slash for Windows
-                item = item.replace(/^\/sw(\.min)?\.js/i, '');// dont cache service worker
-                item = item.replace(/^\/_headers/i, '');// dont cache the cloudflare _headers file
+
+                var arrayLength = pwa_IGNORE_FILES.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    regex = new RegExp(`^\/${pwa_IGNORE_FILES[i]}`, `i`);
+                    item = item.replace(regex, '');// dont cache files in the pwa_IGNORE_FILES array
+                }
 
                 // if formatted output is not empty line then append it to cache var
                 if (item != '') {// skip empty lines

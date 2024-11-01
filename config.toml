@@ -262,6 +262,8 @@ pwa_cache_all = true
 ### List of Files for the PWA to initially Cache, used if pwa_cache_all = false
 pwa_BASE_CACHE_FILES = "'/js/theme.min.js','/js/theme_light.min.js','/abridge.css','/js/abridge.min.js','/','/404.html','/offline/','/manifest.min.json'"
 
+pwa_IGNORE_FILES = ["_headers","sw.min.js","sw.js"]
+#pwa_IGNORE_FILES = ["_headers","sw.min.js","sw.js","android-chrome-192x192.png","android-chrome-512x512.png","apple-touch-icon.png","favicon-16x16.png","favicon-32x32.png","favicon.ico","m48.png","m72.png","m96.png","m128.png","m192.png","m384.png","m512.png","m1024.png","mstile-150x150.png"]
 
 ###############################################################################
 ### Favicons, comment out a line to disable loading some or all of these if needed.

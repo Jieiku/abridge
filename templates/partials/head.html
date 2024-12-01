@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="{{     get_url(path=i                               , trailing_slash=false, cachebust=true) | safe }}" />
   {%- endfor %}{%- endif %}
 
+  {%- if page.extra.stylesheets %}{%- set pagestylesheets=page.extra.stylesheets -%}{%- endif %}
+  {%- if pagestylesheets %}{%- for i in pagestylesheets %}
+  <link rel="stylesheet" href="{{     get_url(path=i                               , trailing_slash=false, cachebust=true) | safe }}" />
+  {%- endfor %}{%- endif %}
+
 
 
 

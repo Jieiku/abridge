@@ -9,7 +9,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 
 Maintenance of this project is made possible by all the <a href="https://github.com/Jieiku/abridge/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/Jieiku">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/Jieiku">click here</a>. 💖
 
-<!-- sponsors --><a href="https://github.com/yugfletcher"><img src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;50535827?u&#x3D;05a40a74732285f9a126fd7fd118a259a6fab6ca&amp;v&#x3D;4" width="60px" alt="" /></a><a href="https://github.com/samueloph"><img src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;2778482?u&#x3D;389037b5d44d9f53ee61280f02b9fd5a94fc624e&amp;v&#x3D;4" width="60px" alt="Samuel Henrique" /></a><!-- sponsors -->
+<!-- sponsors --><a href="https://github.com/yugfletcher"><img src="https:&#x2F;&#x2F;github.com&#x2F;yugfletcher.png" width="60px" alt="User avatar: " /></a><a href="https://github.com/samueloph"><img src="https:&#x2F;&#x2F;github.com&#x2F;samueloph.png" width="60px" alt="User avatar: Samuel Henrique" /></a><!-- sponsors -->
 
 ---
 

@@ -2,7 +2,7 @@
 base_url = "https://abridge.netlify.app"
 # Usable site directly from disk, Including Search: "/home/jieiku/.dev/abridge/public"
 # Also set index format = "elasticlunr_javascript", and in [extra] uglyurls = true, integrity = false
-# If you use the npm/node script then all you have to do is set offline = true, and everything else is automatic.
+# If you use the npm/node script then all you have to do is set search_library = "offline", and everything else is automatic.
 
 title = "Abridge"
 description = "Abridge is a fast, lightweight, and modern Zola theme (class-light, semantic HTML). Perfect Lighthouse, YellowLabTools, and Observatory scores."#for SEO aim for 140-180 Characters

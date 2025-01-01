@@ -25,7 +25,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - Dark, Light, Auto, and Switcher themes. (colors can be customized, css variables)
 - Code [syntax highlighting](https://abridge.netlify.app/overview-code-blocks/). (colors can be customized, css variables)
 - Numbered code blocks with [line highlighting](https://abridge.netlify.app/overview-code-blocks/#toml).
-- Entirely Offline Site by using the PWA **or** by setting `offline = true` in `config.toml` (full search support).
+- Entirely Offline Site by using the PWA **or** by setting `search_library = "offline"` in `config.toml`.
 - Multi-language support.
 - Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
 - Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.

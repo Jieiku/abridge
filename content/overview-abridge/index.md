@@ -20,7 +20,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 ## Features
 
 - Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores.
-- [PWA support](#pwa-progressive-web-app) (Progressive Web Application).
+- [PWA support](#pwa) (Progressive Web Application).
 - All JavaScript can be [fully disabled](https://abridge.netlify.app/overview-abridge/#javascript-files).
 - Dark, Light, Auto, and Switcher themes. (colors can be customized, css variables)
 - Code [syntax highlighting](https://abridge.netlify.app/overview-code-blocks/). (colors can be customized, css variables)
@@ -30,7 +30,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 - Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
 - Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
 - Search Results Page, type search query then hit `Enter Key` or `click` the search button icon.
-- [SEO](#seo-and-header-tags) support. (Search Engine Optimization)
+- [SEO](#seo) support. (Search Engine Optimization)
 - [Pagination](#pagination) with numbered paginator on index.
 - Title Based Previous and Next Article links at bottom of Article.
 - Table of Contents in page Index (Optional, clickable links)
@@ -134,7 +134,7 @@ Zola will start the dev web server, accessible by default at `http://127.0.0.1:1
 
 Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `config.toml`)
 
-## Pagination
+## Pagination {#pagination}
 
 You can set the number of home page items by editing `content\_index.md` file and adjusting `paginate_by`
 
@@ -235,7 +235,7 @@ menu_footer = [
 ]
 ```
 
-### SEO and Header Tags
+### SEO and Header Tags {#seo}
 
 You can review the SEO tags in the seo macro located at `templates/macros/seo.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
 
@@ -270,7 +270,7 @@ You can see a demo on [this page](https://abridge.netlify.app/overview-math/).
 
 For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main config.toml file.
 
-### PWA, Progressive Web App
+### PWA, Progressive Web App {#pwa}
 
 Abridge theme has PWA support. You can install the entire site as an app and have it work offline. To try it out simply use google chrome or your phone and go here: [abridge.netlify.app](https://abridge.netlify.app/)
 

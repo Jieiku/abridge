@@ -52,6 +52,9 @@ L'élément blockquote représente le contenu qui est cité à partir d'une autr
 > Le pouvoir vient en réponse à un besoin, pas à un désir.<br>
 > — *Goku*
 
+> Adaptez ce qui est utile, rejetez ce qui est inutile et ajoutez ce qui vous est propre.<br>
+> — *Bruce Lee*
+
 # Les Tables
 
 Les tables ne font pas partie de la spécification principale de Markdown, mais Zola les prend en charge prêtes à l'emploi.

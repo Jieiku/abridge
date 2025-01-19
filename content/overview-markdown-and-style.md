@@ -64,6 +64,9 @@ and optionally with in-line changes such as annotations and abbreviations.
 > Power comes in response to a need, not a desire.<br>
 > — *Goku*
 
+> Adapt what is useful, reject what is useless, and add what is specifically your own.<br>
+> — *Bruce Lee*
+
 # Tables
 
 Tables aren't part of the core Markdown spec, but Zola supports them

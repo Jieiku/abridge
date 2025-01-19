@@ -26,7 +26,7 @@
           {%- if config.extra.matrix -%}
           <a href="https://{{ config.extra.matrix }}/" target="_blank" title="Matrix"><i type="Button" class="svg matrix" title="Matrix"></i></a>{% endif -%}
           {%- if config.extra.discord -%}
-          <a href="https://discord.com/{{ config.extra.discord }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
+          <a href="{{ config.extra.discord | safe }}/" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
           {%- if config.extra.twitter -%}
           <a href="https://twitter.com/{{ config.extra.twitter }}/" target="_blank" title="Twitter"><i type="Button" class="svg twitter" title="Twitter"></i></a>{% endif -%}
           {%- if config.extra.facebook -%}

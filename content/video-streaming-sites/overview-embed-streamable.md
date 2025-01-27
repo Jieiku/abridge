@@ -1,18 +1,23 @@
 +++
-title = "Embed Streamable"
-description = "Sample article showcasing a custom Zola shortcode for embedding Streamable Videos into your pages."
 date = 2021-05-06T15:00:00Z
+description = "Sample article showcasing a custom Zola shortcode for embedding Streamable Videos into your pages."
 draft = false
+title = "Embed Streamable"
 
-[taxonomies]
-tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Streamable"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Shortcodes",
+    "Video",
+]
++++
 Zola has many shortcodes, and new are easily added, this example shows streamable.
+
 <!-- more -->
 
 ## Streamable

@@ -1,18 +1,22 @@
 +++
-title = "Abridge Zola Theme"
-description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 date = 2022-05-17T15:00:00Z
-updated = 2023-07-21T15:00:00Z
+description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 draft = false
+title = "Abridge Zola Theme"
+updated = 2023-07-21T15:00:00Z
+
+[extra]
+series = "Features"
+toc = true
 
 [taxonomies]
-tags = ["Features","Config"]
-[extra]
-toc = true
-series = "Features"
+tags = [
+  "Features",
+  "Config",
+]
 +++
-
 A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
+
 <!-- more -->
 
 ![lighthouse](lighthouse.png)

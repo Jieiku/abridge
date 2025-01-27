@@ -1,11 +1,10 @@
 +++
-title = "Contato"
 description = "Para entrar em contato conosco, por favor, use o formulário de contato nesta página."
+draft = false
 path = "pt/contact"
 template = "pages.html"
-draft = false
+title = "Contato"
 +++
-
 <p>Quer entrar em contato? Preencha o formulário abaixo para me enviar uma mensagem e eu entrarei em contato com você o mais rápido possível!</p>
 <form name="contact" method="POST">
   <p>

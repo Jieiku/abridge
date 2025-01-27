@@ -1,11 +1,10 @@
 +++
-title = "Contact"
 description = "To reach us please use the contact form on this page."
+draft = false
 path = "contact"
 template = "pages.html"
-draft = false
+title = "Contact"
 +++
-
 <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
 <form name="contact" method="POST">
   <p>

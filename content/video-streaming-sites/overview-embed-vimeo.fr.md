@@ -1,18 +1,23 @@
 +++
-title = "Vimeo intégrées"
-description = "Exemple d'article présentant un code abrégé Zola personnalisé pour intégrer des vidéos Vimeo dans vos pages."
 date = 2021-05-07T15:00:00Z
+description = "Exemple d'article présentant un code abrégé Zola personnalisé pour intégrer des vidéos Vimeo dans vos pages."
 draft = false
+title = "Vimeo intégrées"
 
-[taxonomies]
-tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Shortcodes",
+    "Video",
+]
++++
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.
+
 <!-- more -->
 
 ## Vimeo

@@ -1,19 +1,24 @@
 +++
-title = "Blocs de code et thème"
-description = "Exemple d'article présentant la coloration syntaxique et la mise en forme des blocs de code avec un thème personnalisé."
 date = 2022-05-16T15:00:00Z
+description = "Exemple d'article présentant la coloration syntaxique et la mise en forme des blocs de code avec un thème personnalisé."
 draft = false
+title = "Blocs de code et thème"
 
-[taxonomies]
-tags = ["Features","Markdown"]
 [extra]
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Markdown",
+]
++++
 Cet article présente différents Code Blocks permettant de comparer facilement des thèmes sublimes.
+
 <!-- more -->
+
 ## Blocs de codes
 
 Blocs de code.. ❤️ avec coloration syntaxique automatique ✨‍

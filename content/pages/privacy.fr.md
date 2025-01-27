@@ -1,11 +1,10 @@
 +++
-title = "politique de confidentialité"
 description = "Cette page décrit la politique de confidentialité de ce site et la date à laquelle cette politique a été mise en vigueur."
+draft = false
 path = "fr/privacy"
 template = "pages.html"
-draft = false
+title = "politique de confidentialité"
 +++
-
 ## Confidentialité
 
 - Ce site ne crée ni n'utilise de cookies.

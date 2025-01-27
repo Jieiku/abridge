@@ -1,17 +1,23 @@
 +++
-title = "Contenu riche"
-description = "Une brève description des Shortcodes personnalisés pour Zola qui implémentent des éléments html modernes : vidéo, image, gif, audio."
 date = 2021-05-15T15:00:00Z
+description = "Une brève description des Shortcodes personnalisés pour Zola qui implémentent des éléments html modernes : vidéo, image, gif, audio."
 draft = false
+title = "Contenu riche"
 
-[taxonomies]
-tags = ["Features","Video","Audio","Images","Shortcodes"]
 [extra]
 keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Video",
+    "Audio",
+    "Images",
+    "Shortcodes",
+]
++++
 Plusieurs codes abrégés personnalisés sont inclus pour augmenter CommonMark. `video`, `image`, `gif`, et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans votre écriture.
 
 <!-- more -->

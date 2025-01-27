@@ -1,17 +1,21 @@
 +++
-title = "Showdata Shortcode"
-description = "A brief description of a custom Shortcode for Zola that implements loading and displaying external data."
 date = 2021-05-04T15:00:00Z
+description = "A brief description of a custom Shortcode for Zola that implements loading and displaying external data."
 draft = false
+title = "Showdata Shortcode"
 
-[taxonomies]
-tags = ["Features","Data","Shortcodes"]
 [extra]
 keywords = "Data, Load, External, Shortcodes"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Data",
+    "Shortcodes",
+]
++++
 The `showdata` shortcode can load and display data from an external source via Zola's [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) function.
 
 <!-- more -->

@@ -1,18 +1,23 @@
 +++
-title = "Youtube intégrées"
-description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos Youtube dans vos pages."
 date = 2021-05-08T15:00:00Z
+description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos Youtube dans vos pages."
 draft = false
+title = "Youtube intégrées"
 
-[taxonomies]
-tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Youtube"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Shortcodes",
+    "Video",
+]
++++
 Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre youtube.
+
 <!-- more -->
 
 ## Youtube

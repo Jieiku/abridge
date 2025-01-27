@@ -1,19 +1,24 @@
 +++
-title = "Markdown et Style"
-description = "Exemple d'article présentant la syntaxe et le formatage de base de Markdown pour les éléments HTML."
 date = 2022-05-15T15:00:00Z
+description = "Exemple d'article présentant la syntaxe et le formatage de base de Markdown pour les éléments HTML."
 draft = false
+title = "Markdown et Style"
 
-[taxonomies]
-tags = ["Features","Markdown"]
 [extra]
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Markdown",
+]
++++
 Cet article propose un exemple de syntaxe Markdown de base pouvant être utilisée dans les fichiers de contenu Zola. Il indique également si les éléments HTML de base sont décorés avec CSS dans un thème Zola.
+
 <!-- more -->
+
 # Rubriques
 
 Les éléments HTML `<h1>`—`<h6>` suivants représentent six niveaux d'en-têtes de section.

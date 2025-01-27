@@ -1,19 +1,24 @@
 +++
-title = "Code Blocks Theme"
-description = "Sample article showcasing syntax highlighting and formatting for Code Blocks with a custom theme."
 date = 2022-05-16T15:00:00Z
+description = "Sample article showcasing syntax highlighting and formatting for Code Blocks with a custom theme."
 draft = false
+title = "Code Blocks Theme"
 
-[taxonomies]
-tags = ["Features","Markdown"]
 [extra]
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Markdown",
+]
++++
 This article shows various Code Blocks allowing to easily compare sublime themes.
+
 <!-- more -->
+
 ## Code Blocks
 
 Code blocks.. ❤️ with automatic syntax highlighting ✨‍

@@ -1,19 +1,24 @@
 +++
-title = "Incrustar Streamable"
-description = "Artículo de ejemplo que muestra un shortcode personalizado de Zola para incrustar vídeos Streamable en tus páginas."
 date = 2021-05-06T15:00:00Z
+description = "Artículo de ejemplo que muestra un shortcode personalizado de Zola para incrustar vídeos Streamable en tus páginas."
 draft = false
+title = "Incrustar Streamable"
 
-[taxonomies]
-tags = ["Features","Shortcodes","Video"]
 [extra]
 keywords = "Video, Shortcodes, Embed, Embedded, Streamable"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Shortcodes",
+    "Video",
+]
++++
 Zola tiene muchos shortcodes, y nuevos son facilmente añadidos, este ejemplo muestra streamable.
-<!-- más -->
+
+<!-- more -->
 
 ## Streamable
 

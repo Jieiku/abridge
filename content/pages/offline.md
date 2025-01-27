@@ -1,10 +1,9 @@
 +++
-title = "Offline Mode"
+draft = false
 path = "offline"
 template = "pages.html"
-draft = false
+title = "Offline Mode"
 +++
-
 ## Offline Mode
 
 Sorry, no cache found and it looks like you’re offline, a connection is required.

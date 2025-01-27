@@ -1,19 +1,24 @@
 +++
-title = "Image Shortcodes"
-description = "Images can be embedded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
 date = 2021-05-19T15:00:00Z
+description = "Images can be embedded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
 draft = false
+title = "Image Shortcodes"
 
-[taxonomies]
-tags = ["Features","Shortcodes","Images"]
 [extra]
 keywords = "Image, Markdown, Shortcodes, Swap"
+series = "Features"
 thumbnail = "ferris-gesture.png"
 toc = true
-series = "Features"
-+++
 
+[taxonomies]
+tags = [
+    "Features",
+    "Shortcodes",
+    "Images",
+]
++++
 This post covers the **imgswap and img shortcodes**. Images can also be embedded directly using markdown `![Ferris](ferris.svg)`, but it is better to use a shortcode so you can explicitly set the width and height, this will help prevent content layout shift which improves user experience and the google lighthouse score.
+
 <!-- more -->
 
 # img Shortcode

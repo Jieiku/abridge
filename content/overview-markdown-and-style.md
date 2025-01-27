@@ -1,19 +1,24 @@
 +++
-title = "Markdown and Style"
-description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 date = 2022-05-15T15:00:00Z
+description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 draft = false
+title = "Markdown and Style"
 
-[taxonomies]
-tags = ["Features","Markdown"]
 [extra]
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
-toc = true
 series = "Features"
-+++
+toc = true
 
+[taxonomies]
+tags = [
+    "Features",
+    "Markdown",
+]
++++
 This article offers a sample of basic Markdown syntax that can be used in Zola content files, also it shows if basic HTML elements are decorated with CSS in a Zola theme.
+
 <!-- more -->
+
 # Headings
 
 The following HTML `<h1>`—`<h6>` elements represent six levels of section

@@ -22,6 +22,7 @@ tags = [
 Vous pouvez utiliser [KaTeX](https://katex.org) pour rendre des notations mathématiques.
 
 Vous pouvez activer le $\KaTeX$ prise en charge globale, par section ou par page.
+
 <!-- more -->
 
 ## Activer globalement
@@ -74,13 +75,17 @@ Enveloppez tout [valide](https://katex.org/docs/supported.html) $\KaTeX$ syntaxe
 C'est la plus belle équation que j'ai jamais vue:
 
 ### Usage
+
 ```rs
 {%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
 ```
+
 ### Sortir
+
 ```html
 {% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 ```
+
 {% katex(block=false) %} e^{i\pi}+1=0 {% end %}
 
 ### Bloquer les mathématiques
@@ -88,16 +93,21 @@ C'est la plus belle équation que j'ai jamais vue:
 Certaines mathématiques en mode affichage sont assez justes :
 
 ### Usage
+
 ```rs
 {%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
 ```
+
 ### Sortir
+
 ```html
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 ```
+
 {% katex(block=true) %} \int_0^1 x^2 dx {% end %}
 
 ### Rendu automatique en ligne
+
 ```tex
 $ e^{i\pi}+1=0 $
 ```
@@ -105,6 +115,7 @@ $ e^{i\pi}+1=0 $
 $ e^{i\pi}+1=0 $
 
 ### Bloc de rendu automatique
+
 ```tex
 $$
 f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi

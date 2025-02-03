@@ -34,7 +34,7 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 - `muted` when set, sets the audio muted initially.
 - `playsinline` when set, plays the video embeded instead of fullscreen on mobile browsers.
 
-** sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode) **
+*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
 
 **Optional Classes:**
 
@@ -44,23 +44,31 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 - `b1` can be used to add a 1px border.
 
 ### Usage
+
 ```rs
 {{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
 ```
+
 ### Output
+
 ```html
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
+
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 
 ### Usage
+
 ```rs
 {{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
 ```
+
 ### Output
+
 ```html
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
 ```
+
 {{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
 
 ## Image
@@ -76,7 +84,7 @@ Each string in the `sources` array should be a path to an image file of a differ
 - `w` sets the width of the image.
 - `h` sets the height of the image.
 
-** sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode) **
+*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
 
 **Optional Classes:**
 
@@ -86,13 +94,17 @@ Each string in the `sources` array should be a path to an image file of a differ
 - `b1` can be used to add a 1px border.
 
 ### Usage
+
 ```rs
 {{/* image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") */}}
 ```
+
 ### Output
+
 ```html
 {{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
 ```
+
 {{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
 
 ## GIF
@@ -105,13 +117,17 @@ which is especially important in regions where internet is slower or
 less reliable.
 
 ### Usage
+
 ```rs
 {{/* gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
 ```
+
 ### Output
+
 ```html
 {{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 ```
+
 {{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
 
 ## Audio
@@ -128,7 +144,7 @@ The browser will play the first type it supports, so placing them in order of si
 - `loop` when set, plays the audio on a loop.
 - `muted` when set, sets the audio muted initially.
 
-** sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode) **
+*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
 
 **Optional Classes:**
 
@@ -138,21 +154,29 @@ The browser will play the first type it supports, so placing them in order of si
 - `b1` can be used to add a 1px border.
 
 ### Usage
+
 ```rs
 {{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) */}}
 ```
+
 ### Output
+
 ```html
 {{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) }}
 ```
+
 {{ audio(sources=["over9000.ogg", "over9000.mp3"]) }}
 
 ### Usage
+
 ```rs
 {{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") */}}
 ```
+
 ### Output
+
 ```html
 {{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") }}
 ```
+
 {{ audio(sources=["over9000.ogg", "over9000.mp3"] class="ci b1" caption="It's Over 9000!!") }}

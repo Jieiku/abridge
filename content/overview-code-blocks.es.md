@@ -1,8 +1,8 @@
 +++
 date = 2022-05-16T15:00:00Z
-description = "Sample article showcasing syntax highlighting and formatting for Code Blocks with a custom theme."
+description = "Artículo de ejemplo que muestra el resaltado de sintaxis y el formato de los bloques de código con un tema personalizado."
 draft = false
-title = "Code Blocks Theme"
+title = "Tema Code Blocks"
 
 [extra]
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"
@@ -15,19 +15,19 @@ tags = [
     "Markdown",
 ]
 +++
-This article shows various Code Blocks allowing to easily compare sublime themes.
+Este artículo muestra varios Bloques de Código que permiten comparar fácilmente los temas de Sublime.
 
 <!-- more -->
 
-## Code Blocks
+## Bloques de código
 
-Code blocks.. ❤️ with automatic syntax highlighting ✨‍
+Bloques de código.. ❤️ con resaltado automático de sintaxis ✨‍
 
-See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting/) for options.
+Consulte las opciones en [la documentación](https://www.getzola.org/documentation/content/syntax-highlighting/).
 
-### Inline Code block
+### Bloque de código en línea
 
-If we want, we can also `specify inline code` which is useful for `the small stuff`.
+Si queremos, también podemos `specify inline code` que es útil para `the small stuff`.
 
 ### Rust
 

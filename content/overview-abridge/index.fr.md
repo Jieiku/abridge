@@ -11,8 +11,8 @@ toc = true
 
 [taxonomies]
 tags = [
-  "Features",
-  "Config",
+    "Features",
+    "Config",
 ]
 +++
 Un thème rapide, léger et moderne [Zola](https://getzola.org) utilisant [abridge.css](https://github.com/Jieiku/abridge.css) (un cadre HTML CSS sémantique de classe légère). Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
@@ -166,11 +166,13 @@ $abridgeMode : "switcher",//valeurs valides : switcher, auto, dark, light
 ### Couleurs et styles
 
 Vous pouvez spécifier le modèle de couleur que vous souhaitez utiliser comme base :
+
 ```scss
 $color : "orange",// modèle de couleur à utiliser : orange, bleu, blueshade
 ```
 
 Ensuite, vous pouvez surcharger des couleurs individuelles si nécessaire :
+
 ```scss
 /// Couleurs sombres
 $f1d : #ccc,// Couleur de police primaire
@@ -199,7 +201,7 @@ Si votre visiteur utilise noscript ou un autre module complémentaire de navigat
 Pour ajuster ce mode, vous devez définir les deux valeurs de configuration suivantes dans `abridge.scss` **ET** `config.toml` :
 
 ```scss
-$switcherDefault : "dark",// mode de commutation nojs par défaut : dark, light (assurez-vous de définir également js_switcher_default dans config.toml)
+$switcherDefault: "dark",// mode de commutation nojs par défaut : dark, light (assurez-vous de définir également js_switcher_default dans config.toml)
 ```
 
 ```toml
@@ -250,18 +252,10 @@ Vous devez également définir des mots-clés spécifiques à la page, à moins 
 Vous pouvez également définir une image spécifique à la page pour les résultats de recherche en utilisant page.extra.thumbnail. Les cartes Facebook, Twitter et OpenGraph sont prises en charge (image et description automatiques pour les liens affichés). OpenGraph recommande une taille de 1200 x 630 (1,9:1). Twitter recommande 2:1 pour les grandes images et 1:1 pour les petites. Si vous ne définissez pas de vignette spécifique à une page, la bannière définie dans config.toml sera utilisée à la place.
 
 Référez-vous à [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) pour un exemple :
+
 ```md
 +++
-title = "Raccourcis d'images"
-description = "Les images peuvent être incorporées directement en utilisant le markdown ` ![Ferris](ferris.svg)`, mais l'utilisation d'un shortcode permet d'éviter le CLS en définissant explicitement la largeur et la hauteur."
-date = 2021-05-19
-draft = false
-
-[taxonomies]
-tags = ["Fonctionnalités", "Shortcodes", "Images"]
 [extra]
-toc = true
-keywords = "Image, Markdown, Shortcodes, Swap"
 thumbnail = "ferris-gesture.png"
 +++
 ```
@@ -373,6 +367,7 @@ exit # reload shell environment
 ```
 
 Passer Abridge à tinysearch :
+
 ```bash
 sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
 npm run abridge

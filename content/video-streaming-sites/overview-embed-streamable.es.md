@@ -28,12 +28,14 @@ Zola tiene muchos shortcodes, y nuevos son facilmente añadidos, este ejemplo mu
 {{/* streamable(id="92ok4") */}}
 ```
 
-- `id`: el id del vídeo (obligatorio)
-- `class`: una clase para añadir al &lt;div&gt; que rodea al iframe (opcional)
-- `title`: establecer el título alt para el iframe (opcional, por defecto "Streamable")
+- `id` - el id del vídeo (obligatorio)
+- `class` - una clase para añadir al &lt;div&gt; que rodea al iframe (opcional)
+- `title` - establecer el título alt para el iframe (opcional, por defecto "Streamable")
 
 ### Salida
+
 ```html
 {{ streamable(id="92ok4") }}
 ```
+
 {{ streamable(id="92ok4") }}

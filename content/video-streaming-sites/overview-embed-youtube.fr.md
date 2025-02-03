@@ -28,10 +28,10 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 {{/* youtube(id="32gyFIWecuw") */}}
 ```
 
-- `id`: l'identifiant de la vidéo (obligatoire)
-- `playlist`: l'identifiant de la playlist (optionnel)
-- `class`: une classe à ajouter au &lt;div&gt; entourant l'iframe (optionnel)
-- `autoplay`: lorsqu'il est défini sur "true", la vidéo se lance automatiquement au chargement (facultatif)
+- `id` - l'identifiant de la vidéo (obligatoire)
+- `playlist` - l'identifiant de la playlist (optionnel)
+- `class` - une classe à ajouter au &lt;div&gt; entourant l'iframe (optionnel)
+- `autoplay` - lorsqu'il est défini sur "true", la vidéo se lance automatiquement au chargement (facultatif)
 - `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Youtube")
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
@@ -40,4 +40,5 @@ Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exem
 ```html
 {{ youtube(id="32gyFIWecuw") }}
 ```
+
 {{ youtube(id="32gyFIWecuw") }}

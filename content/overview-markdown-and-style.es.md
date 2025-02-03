@@ -1,8 +1,8 @@
 +++
 date = 2022-05-15T15:00:00Z
-description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+description = "Artículo de ejemplo que muestra la sintaxis básica de Markdown y el formato de los elementos HTML."
 draft = false
-title = "Markdown and Style"
+title = "Markdown y estilo"
 
 [extra]
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
@@ -15,13 +15,13 @@ tags = [
     "Markdown",
 ]
 +++
-This article offers a sample of basic Markdown syntax that can be used in Zola content files, also it shows if basic HTML elements are decorated with CSS in a Zola theme.
+Este artículo ofrece una muestra de la sintaxis básica de Markdown que puede utilizarse en los archivos de contenido de Zola, también muestra si los elementos HTML básicos se decoran con CSS en un tema de Zola.
 
 <!-- more -->
 
-# Headings
+# Encabezados
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+Los siguientes elementos HTML `<h1>`-`<h6>` representan seis niveles de encabezados de sección. `<h1>` es el nivel de sección más alto, mientras que `<h6>` es el más bajo.
 
 # H1
 
@@ -35,68 +35,68 @@ The following HTML `<h1>`—`<h6>` elements represent six levels of section head
 
 ###### H6
 
-# Paragraph
+# Párrafo
 
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+¿Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
 
 # Blockquotes
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+El elemento blockquote representa contenido citado de otra fuente, opcionalmente con una cita que debe estar dentro de un elemento `footer` o `cite`, y opcionalmente con cambios en línea como anotaciones y abreviaturas.
 
-## Blockquote no attribution
+## Blockquote sin atribución
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-> **Note** that you can use *Markdown syntax* within a blockquote.
+> **Tenga en cuenta** que puede utilizar *la sintaxis Markdown* dentro de un blockquote.
 
-## Blockquote attribution
+## Blockquote atribución
 
-> Don't communicate by sharing memory, share memory by communicating.<br>
+> No comuniques compartiendo memoria, comparte memoria comunicando.<br>
 > — <cite>Rob Pike[^1]</cite>
 
-> All men by nature desire to know.<br>
+> Todos los hombres desean saber por naturaleza.<br>
 > ― <cite>Aristotle[^2]</cite>
 
-> Power comes in response to a need, not a desire.<br>
+> El poder surge como respuesta a una necesidad, no a un deseo.<br>
 > — *Goku*
 
-> Adapt what is useful, reject what is useless, and add what is specifically your own.<br>
+> Adapta lo que es útil, rechaza lo que es inútil y añade lo que es específicamente tuyo.<br>
 > — *Bruce Lee*
 
-# Tables
+# Tablas
 
-Tables aren't part of the core Markdown spec, but Zola supports them out-of-the-box.
+Las tablas no forman parte de las especificaciones básicas de Markdown, pero Zola las soporta desde el principio.
 
-| Name  | Age |
-| ----- | --- |
-| Alice | 23  |
-| Bob   | 27  |
-| Cody  | 33  |
-| John  | 59  |
-| Kerry | 23  |
+| Nombre | Edad |
+| ------ | ---- |
+| Alice  | 23   |
+| Bob    | 27   |
+| Cody   | 33   |
+| John   | 59   |
+| Kerry  | 23   |
 
-## Table Inline Markdown
+## Tabla Inline Markdown
 
-| Italics   | Bold     | Code   | StrikeThrough     |
-| --------- | -------- | ------ | ----------------- |
-| *italics* | **bold** | `code` | ~~strikethrough~~ |
+| Cursiva   | Negrita     | Código | Tachado   |
+| --------- | ----------- | ------ | --------- |
+| *cursiva* | **negrita** | `code` | ~tachado~ |
 
-## Large table within figure
+## Tabla grande dentro de una figura
 
-Surround very Large tables with `<figure></figure>` so they can scroll horizontally.
+Rodee las tablas muy grandes con `<figure></figure>` para que puedan desplazarse horizontalmente.
 
 <figure>
 
-| **Manufacturer** | Volkswagen | Toyota | Ford | Honda | Chevrolet | BMW | Hyundai | Audi | Nissan | Kia | Mercedes | Tesla | Mitsubishi | Suzuki | Volvo | Subaru | Mazda | Jaguar | Buick | Lexus | GMC | Porsche | Cadillac |
-| ---------- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **Revenue $B** | $254 | $249 | $127 | $124 | $123 | $113 | $88 | $83 | $74 | $61 | $55 | $54 | $38 | $31 | $30 | $28 | $27 | $22 | $21 | $19 | $17 | $16 | $12 |
+| **Fabricante** | Volkswagen | Toyota | Ford | Honda | Chevrolet | BMW | Hyundai | Audi | Nissan | Kia | Mercedes | Tesla | Mitsubishi | Suzuki | Volvo | Subaru | Mazda | Jaguar | Buick | Lexus | GMC | Porsche | Cadillac |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Ingresos $B** | $254 | $249 | $127 | $124 | $123 | $113 | $88 | $83 | $74 | $61 | $55 | $54 | $38 | $31 | $30 | $28 | $27 | $22 | $21 | $19 | $17 | $16 | $12 |
 
 </figure>
 
-*revenue values found on search engine and not verified, for figure scroller table demonstration purposes only.*
+*valores de ingresos encontrados en el motor de búsqueda y no verificados, sólo para fines de demostración de la tabla de desplazamiento de figuras.*
 
-# Foldable Text
+# Texto plegable
 
 <details>
     <summary>Title 1</summary>
@@ -108,94 +108,94 @@ Surround very Large tables with `<figure></figure>` so they can scroll horizonta
     <p>Stay awhile, and listen!</p>
 </details>
 
-# Code Blocks
+# Bloques de código
 
-Code blocks.. ❤️ with automatic syntax highlighting ✨‍
+Bloques de código.. ❤️ con resaltado automático de sintaxis ✨‍
 
-See [the docs](https://www.getzola.org/documentation/content/syntax-highlighting/) for options.
+Consulte las opciones en [la documentación](https://www.getzola.org/documentation/content/syntax-highlighting/).
 
-## Code block with backticks
+## Bloque de código con backticks
 
 ```html
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
+  <title>Ejemplo de documento HTML5</title>
 </head>
 <body>
-  <p>Test</p>
+  <p>Prueba</p>
 </body>
 </html>
 ```
 
-## Line Numbers, Highlights
+## Números de línea, destacados
 
 ```html,linenos,hl_lines=5 7-9
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
+  <title>Ejemplo de documento HTML5</title>
 </head>
 <body>
-  <p>Test</p>
+  <p>Prueba</p>
 </body>
 </html>
 ```
 
-## Inline Code block
+## Bloque de código en línea
 
-If we want, we can also `specify inline code` which is useful for `the small stuff`.
+Si queremos, también podemos `specify inline code` que es útil para `the small stuff`.
 
-# List Types
+# Tipos de lista
 
-## Ordered List
+## Lista ordenada
 
-1. First item
-2. Second item
-3. Third item
+1. Primer elemento
+2. Segundo elemento
+3. Tercer elemento
 
-## Unordered List
+## Lista desordenada
 
-- List item
-- Another item
-- And another item
+- Elemento de lista
+- Otro elemento
+- Y otro elemento
 
-## Nested list
+## Lista anidada
 
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+- Fruta
+  - Manzana
+  - Naranja
+  - Plátano
+- Lácteos
+  - Leche
+  - Queso
 
-# Other Elements — abbr, sub, sup, kbd, mark, link
+# Otros elementos - abbr, sub, sup, kbd, mark, link
 
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+<abbr title="Graphics Interchange Format">GIF</abbr> es un formato de imagen de mapa de bits.
 
 H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.
+Pulse <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Supr</kbd></kbd> para finalizar la sesión.
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+La mayoría de las <mark>salamandras</mark> son nocturnas y cazan insectos, gusanos y otras criaturas pequeñas.
 
 -----
 <!-- Note: There must be a blank line between every two lines of the footnote definition.  -->
 
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+\[^1\]: La cita anterior es un extracto de la [charla](https://www.youtube.com/watch?v=PAAkCSZUG1c) de Rob Pike durante el Gopherfest, el 18 de noviembre de 2015.
 
-[^2]: The quote is the first sentence of Aristotle's [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics_(Aristotle)).
+\[^2\]: La cita es la primera frase de la [Metafísica](https://en.wikipedia.org/wiki/Metaphysics_\(Aristotle\)) de Aristóteles.
 
-## Navs
+## Navegadores
 
-Site primary menu is created by nesting the nav under a header tag. Refer to the top of this site for an example. Navigation is responsive, shrink the page width to see it in action.
+Menú principal del sitio se crea mediante la anidación de la nav bajo una etiqueta de encabezado. Consulte la parte superior de este sitio para ver un ejemplo. La navegación es adaptativa, reduzca el ancho de la página para verla en acción.
 
-## Forms
+## Formularios
 
 <form name="contact" method="POST" >
     <p><label for="name">Name</label>

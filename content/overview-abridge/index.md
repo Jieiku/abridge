@@ -11,8 +11,8 @@ toc = true
 
 [taxonomies]
 tags = [
-  "Features",
-  "Config",
+    "Features",
+    "Config",
 ]
 +++
 A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
@@ -166,11 +166,13 @@ $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
 ### Colors and Styles
 
 You can specify which color template you want to use as a base:
+
 ```scss
 $color: "orange",// color template to use/override: orange, blue, blueshade
 ```
 
 Then override individual colors as needed:
+
 ```scss
 /// Dark Colors
 $f1d: #ccc,// Font Color Primary
@@ -249,19 +251,11 @@ You should also set page specific keywords unless your keywords defined in confi
 
 You can optionally also set a page specific image for search results by using page.extra.thumbnail. Facebook, Twitter, and OpenGraph Cards are supported (automatic image & description for posted links). OpenGraph recommends 1200 x 630 (1.9:1). Twitter recommends 2:1 for large and 1:1 for small. If you do not set a page specific thumbnail then the banner defined in config.toml will be used instead.
 
-Refer to [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) for an example:
+Refer to [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) for an example.
+
 ```md
 +++
-title = "Image Shortcodes"
-description = "Images can be embedded directly using markdown `![Ferris](ferris.svg)`, but using a shortcode prevents CLS by explicitly setting the width and height."
-date = 2021-05-19
-draft = false
-
-[taxonomies]
-tags = ["Features","Shortcodes","Images"]
 [extra]
-toc = true
-keywords = "Image, Markdown, Shortcodes, Swap"
 thumbnail = "ferris-gesture.png"
 +++
 ```
@@ -373,6 +367,7 @@ exit # reload shell environment
 ```
 
 Switch Abridge to tinysearch:
+
 ```bash
 sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
 npm run abridge

@@ -46,9 +46,9 @@ This Template can also be used directly for the index eg: example.com/ or as the
         {%- if page.summary %}
           {{ page.summary | markdown(inline=true) | safe }}
         {%- elif page.description %}
-          {{ page.description | safe }}
+          {{ page.description | markdown(inline=true) | safe }}
         {%- elif page.content %}
-          {{ page.content | striptags | truncate(length=150) | safe }}
+          {{ page.content | striptags | truncate(length=150) | markdown(inline=true) | safe }}
         {%- elif page.extra.static_thumbnail %}
         {%- endif %}
           <a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">

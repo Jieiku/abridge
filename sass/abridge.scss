@@ -911,7 +911,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     -ms-overflow-style: scrollbar;
     white-space: pre;
     > code {
-      display: block;
+      display: grid;
       background: transparent;
     }
   }

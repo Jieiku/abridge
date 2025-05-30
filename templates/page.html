@@ -38,12 +38,15 @@
 
 {%- block content %}
     <article>
+
+    {%- block page_header %}
     {{- macros::title_post(page=page, config=config) }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "top" or config.extra.meta_post.position == "both" %}
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
+    {%- endblock page_header %}
 
     {# In Page Series Navigation #}
     {%- if config.extra.series | default(value=true) %}

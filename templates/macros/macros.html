@@ -180,12 +180,12 @@
       <nav>
         <div>
           {%- if page.lower %}
-          <a href="{{ page.lower.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">&#8249; {{ page.lower.title | truncate(length=100) }}</a>
+          <a href="{{ page.lower.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">&#8249; {{ page.lower.title | truncate(length=100) | markdown(inline=true) | safe }}</a>
           {%- endif %}
         </div>
         <div>
           {%- if page.higher %}
-          <a href="{{ page.higher.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"> {{ page.higher.title | truncate(length=100) }} &#8250;</a>
+          <a href="{{ page.higher.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}"> {{ page.higher.title | truncate(length=100) | markdown(inline=true) | safe }} &#8250;</a>
           {%- endif %}
         </div>
       </nav>

@@ -54,6 +54,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
           <a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">
             ...{{ macros::translate(key="more", default="more", i18n=i18n) }}
           </a>
+        </p>
         </div>
         {%- if config.extra.meta_index.position %}
         {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}

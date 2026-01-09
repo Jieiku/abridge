@@ -1221,7 +1221,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     border-top: 5px solid var(--a1);
     background-color: var(--c2);
     margin-top: var(--s2);
-    padding: .2rem 0 var(--s2) var(--s2);
+    padding: .2rem var(--s1) var(--s2) var(--s2);
     max-height: 100vh;
     overflow: auto;
     overflow-wrap: break-word;

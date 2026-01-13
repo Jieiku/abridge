@@ -35,14 +35,15 @@ include_content = true      # include rendered content of page/section in index
 # truncate_content_length = 100 # Truncate at nth character. May be useful if index is getting too large.
 
 [markdown]
-highlight_code = true
-highlight_theme = "css"
 bottom_footnotes = true # adds footnote backreference
 render_emoji = false
 external_links_target_blank = true # rel="noopener"
 external_links_no_follow = false   # rel="nofollow"
 external_links_no_referrer = false # rel="noreferrer"
 smart_punctuation = false          # `...` to `…`, `"quote"` to `“curly”` etc
+
+[markdown.highlighting]
+theme = "synthwave-84"
 
 # Any Extra language you do not use, delete or comment out the extra language sections:
 [languages.fr]

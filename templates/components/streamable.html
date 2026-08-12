@@ -1,3 +1,5 @@
+{% component streamable(id, class="", title="") %}
 <div class="yv{% if class %} {{class}}{% endif %}">
     <iframe src="https://www.streamable.com/e/{{id}}" title="{{title | default(value='Streamable') }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
+{% endcomponent streamable %}

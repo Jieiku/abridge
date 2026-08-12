@@ -24,9 +24,11 @@ Zola has many shortcodes, and new are easily added, this example shows streamabl
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* streamable(id="92ok4") */}}
+{{<streamable id="92ok4" />}}
 ```
+{% endraw %}
 
 - `id` - the video id (mandatory)
 - `class` - a class to add to the &lt;div&gt; surrounding the iframe (optional)
@@ -35,7 +37,7 @@ Zola has many shortcodes, and new are easily added, this example shows streamabl
 ### Output
 
 ```html
-{{ streamable(id="92ok4") }}
+{{<streamable id="92ok4" />}}
 ```
 
-{{ streamable(id="92ok4") }}
+{{<streamable id="92ok4" />}}

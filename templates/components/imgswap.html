@@ -1,0 +1,107 @@
+{% component imgswap(page, config, main_src, swap_src, caption="", class="", alt="", w=0, h=0) %}
+<div class="img-swap-div">
+  {%- set img = main_src | split(pat="/") | last %}
+  {%- set dirtest = main_src | trim_start(pat="./") %}
+  {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
+  {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
+
+  {%- if main_src is starting_with(pat="./") and reldir %} {# Relative Path #}
+    {%- set _parts = main_src | trim_start(pat="./") | split(pat="/")  %}
+    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = path ~ "/" %}
+    {%- if not w or not h %}
+      {%- if lang != config.default_language %}
+        {%- set metapath = pagepath ~ path ~ img | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- else %}
+        {%- set metapath = pagepath ~ path ~ img %}
+      {%- endif %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+
+  {%- elif main_src is starting_with(pat="/") %} {# Root Path #}
+    {%- set _parts = main_src | split(pat="/")  %}
+    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
+    {%- if not w or not h %}
+      {%- set metapath = rootpath ~ "/" ~ img %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+
+  {%- else %} {# Same Directory Path #}
+    {%- set path = "" %}
+    {%- if not w or not h %}
+      {%- if lang != config.default_language %}
+        {%- set metapath = pagepath ~ img | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- else %}
+        {%- set metapath = pagepath ~ img %}
+      {%- endif %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+  {%- endif %}
+
+  {%- if not alt %}
+    {%- set alt = img | split(pat=".") | first %}
+  {%- endif %}
+  {%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
+  {%- if link %}<a href="{{link | safe}}">{% endif %}<img src="{{ path | safe }}{{ img | safe }}" class="img-main{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />{% if link %}</a>{% endif  %}
+  {%- if caption %}<figcaption>{{caption}}</figcaption></figure>{%- endif %}
+
+  {%- set img = swap_src | split(pat="/") | last %}
+  {%- set dirtest = swap_src | trim_start(pat="./") %}
+  {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
+
+  {%- if swap_src is starting_with(pat="./") and reldir %} {# Relative Path #}
+    {%- set _parts = swap_src | trim_start(pat="./") | split(pat="/")  %}
+    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = path ~ "/" %}
+    {%- if not w or not h %}
+      {%- if lang != config.default_language %}
+        {%- set metapath = pagepath ~ path ~ img | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- else %}
+        {%- set metapath = pagepath ~ path ~ img %}
+      {%- endif %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+
+  {%- elif swap_src is starting_with(pat="/") %} {# Root Path #}
+    {%- set _parts = swap_src | split(pat="/")  %}
+    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
+    {%- if not w or not h %}
+      {%- set metapath = rootpath ~ "/" ~ img %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+
+  {%- else %} {# Same Directory Path #}
+    {%- set path = "" %}
+    {%- if not w or not h %}
+      {%- if lang != config.default_language %}
+        {%- set metapath = pagepath ~ img | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- else %}
+        {%- set metapath = pagepath ~ img %}
+      {%- endif %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set w = meta.width %}
+      {%- set h = meta.height %}
+    {%- endif %}
+  {%- endif %}
+
+  {%- if not alt %}
+    {%- set alt = img | split(pat=".") | first %}
+  {%- endif %}
+  {%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
+  {%- if link %}<a href="{{link | safe}}">{% endif %}<img src="{{ path | safe }}{{ img | safe }}" class="img-swap{% if class %} {{class}}{% endif %}"{% if alt %} alt="{{alt}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} loading="lazy" />{% if link %}</a>{% endif  %}
+  {%- if caption %}<figcaption>{{caption}}</figcaption></figure>{%- endif %}
+</div>
+
+{% endcomponent imgswap %}

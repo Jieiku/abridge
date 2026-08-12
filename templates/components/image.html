@@ -1,14 +1,16 @@
-{%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif -%}
+{% component image(page, config, sources, caption="", class="", alt="", w=0, h=0) %}
+{%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
 <picture{% if class %} class="{{class}}"{% endif %}>
   {%- for src in sources %}
 
   {%- set video = src | split(pat="/") | last %}
-  {%- set dirtest = src | trim_start_matches(pat="./") %}
-  {%- if dirtest is containing("/") %} {%- set reldir = true %} {%- endif %}
-  {%- if page.path %}{%- set pagepath = page.path %}{%- elif section.path %}{%- set pagepath = section.path %}{%- endif %}
+  {%- set dirtest = src | trim_start(pat="./") %}
+  {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
+  {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
 
-  {%- if src is starting_with("./") and reldir %}{# Relative Path #}
-    {%- set path = src | trim_start_matches(pat="./") | split(pat="/") | slice(end=-1) | join(sep="/") | trim_start_matches(pat="/") %}
+  {%- if src is starting_with(pat="./") and reldir %}{# Relative Path #}
+    {%- set _parts = src | trim_start(pat="./") | split(pat="/")  %}
+    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if lang != config.default_language %}
@@ -16,17 +18,18 @@
       {%- else %}
         {%- set metapath = pagepath ~ path ~ video %}
       {%- endif %}
-      {%- set meta = get_image_metadata(path=metapath) %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}
 
-  {%- elif src is starting_with("/") %}{# Root Path #}
-    {%- set rootpath = src | split(pat="/") | slice(end=-1) | join(sep="/") %}
-    {%- set path = config.base_url ~ rootpath ~ "/"  %}
+  {%- elif src is starting_with(pat="/") %}{# Root Path #}
+    {%- set _parts = src | split(pat="/")  %}
+    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
     {%- if not w or not h %}
       {%- set metapath = rootpath ~ "/" ~ video %}
-      {%- set meta = get_image_metadata(path=metapath) %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}
@@ -39,15 +42,15 @@
       {%- else %}
         {%- set metapath = pagepath ~ video %}
       {%- endif %}
-      {%- set meta = get_image_metadata(path=metapath) %}
+      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}
 
   {%- endif %}
 
-  {%- set type = src | split(pat=".") | last -%}
-  {%- if type is matching("^mov$") %}{%- set type = "quicktime" -%}{% endif -%}
+  {%- set type = src | split(pat=".") | last  %}
+  {%- if type is matching(pat="^mov$") %}{%- set type = "quicktime"  %}{% endif  %}
   {%- if loop.last %}
   {%- if not alt %}
     {%- set alt = video | split(pat=".") | first %}
@@ -58,4 +61,6 @@
   {%- endif %}
   {%- endfor %}
 </picture>
-{%- if caption %}<figcaption>{{caption}}</figcaption></figure>{% endif -%}
+{%- if caption %}<figcaption>{{caption}}</figcaption></figure>{% endif  %}
+
+{% endcomponent image %}

@@ -4,7 +4,7 @@ const changeIcon = (copyDiv, className) => {
 };
 
 const copyCodeAndChangeIcon = async (copyDiv, block) => {
-    const code = block.querySelector('table') ? getTableCode(block) : getNonTableCode(block);
+    const code = getCodeContent(block);
     try {
         await navigator.clipboard.writeText(code);
         changeIcon(copyDiv, "yes");
@@ -13,16 +13,15 @@ const copyCodeAndChangeIcon = async (copyDiv, block) => {
     }
 };
 
-const getNonTableCode = (block) => {
-    return [...block.querySelectorAll('code')]
-        .map(code => code.textContent)
-        .join('');
-};
-
-const getTableCode = (block) => {
-    return [...block.querySelectorAll('tr')]
-        .map(row => row.querySelector('td:last-child')?.innerText ?? '')
-        .join('');
+const getCodeContent = (block) => {
+    return [...block.querySelectorAll('.giallo-l')]
+        .map(line => {
+            const clone = line.cloneNode(true);
+            const ln = clone.querySelector('.giallo-ln');
+            if (ln) ln.remove();
+            return clone.textContent;
+        })
+        .join('\n');
 };
 
 document.querySelectorAll("pre").forEach((block) => {
@@ -30,5 +29,5 @@ document.querySelectorAll("pre").forEach((block) => {
     copyDiv.className = "cc svgs svgh copy";
     copyDiv.innerHTML = " ";
     block.prepend(copyDiv);
-    copyDiv.addEventListener("click", () => copyCodeAndChangeIcon(copyDiv, block));;
+    copyDiv.addEventListener("click", () => copyCodeAndChangeIcon(copyDiv, block));
 });

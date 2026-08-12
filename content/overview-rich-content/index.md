@@ -45,31 +45,35 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 ```
 
-{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") */}}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]} muted={true} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]} muted={true} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}
 ```
 
-{{ video(sources=["over9000_av1.mp4", "over9000_vp9.webm"] muted="true" class="ci b1" caption="It's Over 9000!!") }}
+{{<video sources={["over9000_av1.mp4", "over9000_vp9.webm"]} muted={true} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}
 
 ## Image
 
@@ -95,17 +99,19 @@ Each string in the `sources` array should be a path to an image file of a differ
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") */}}
+{{<image sources={["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"]} w={640} h={480} alt="ITS OVER 9000!"  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
+{{<image sources={["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"]} w={640} h={480} alt="ITS OVER 9000!"  page={page} config={config} />}}
 ```
 
-{{ image(sources=["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"] w=640 h=480 alt="ITS OVER 9000!") }}
+{{<image sources={["over9000-960.avif", "over9000-640.avif", "over9000-400.avif", "over9000-640.webp"]} w={640} h={480} alt="ITS OVER 9000!"  page={page} config={config} />}}
 
 ## GIF
 
@@ -118,17 +124,19 @@ less reliable.
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) */}}
+{{<gif sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+{{<gif sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 ```
 
-{{ gif(sources=["over9000_av1.mp4", "over9000_vp9.webm"]) }}
+{{<gif sources={["over9000_av1.mp4", "over9000_vp9.webm"]}  page={page} config={config} />}}
 
 ## Audio
 
@@ -155,28 +163,32 @@ The browser will play the first type it supports, so placing them in order of si
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) */}}
+{{<audio sources={["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]}  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]) }}
+{{<audio sources={["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]}  page={page} config={config} />}}
 ```
 
-{{ audio(sources=["over9000.ogg", "over9000.mp3"]) }}
+{{<audio sources={["over9000.ogg", "over9000.mp3"]}  page={page} config={config} />}}
 
 ### Usage
 
+{% raw %}
 ```rs
-{{/* audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") */}}
+{{<audio sources={["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{{ audio(sources=["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"] class="ci b1" caption="It's Over 9000!!") }}
+{{<audio sources={["over9000.ogg", "over9000.mp3", "over9000.flac", "over9000.wav"]} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}
 ```
 
-{{ audio(sources=["over9000.ogg", "over9000.mp3"] class="ci b1" caption="It's Over 9000!!") }}
+{{<audio sources={["over9000.ogg", "over9000.mp3"]} class="ci b1" caption="It's Over 9000!!"  page={page} config={config} />}}

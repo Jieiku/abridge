@@ -32,4 +32,4 @@ Este tema requiere la versión &#123;&#123; showdata(src="../theme.toml" type="t
 
 ## Salida
 
-Este tema requiere la versión {{ showdata(src="../theme.toml" type="toml" key="min_version") }} o posterior de Zola.
+Este tema requiere la versión {{<showdata src="../theme.toml" type="toml" key="min_version" page={page} config={config} />}} o posterior de Zola.

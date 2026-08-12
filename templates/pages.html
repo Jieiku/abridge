@@ -26,13 +26,13 @@ Some people prefer a landing page for the index, and then use a separate paginat
 
   {%- if page.description %}
     {%- set description = page.description %}
-  {%- elif section.description %}
+  {%- elif section and section.description %}
     {%- set description = section.description %}
   {%- else %}
     {%- set description = config.description %}
   {%- endif %}
 
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description) }}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""} />}}
 {%- endblock seo %}
 
 {%- block content %}

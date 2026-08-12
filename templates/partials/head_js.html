@@ -6,7 +6,7 @@
   {%- set preStyle = false %}
 
   {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
-    {%- if i.url is matching("^http[s]?://") %}
+    {%- if i.url is matching(pat="^http[s]?://") %}
       {%- set preStyle = true %}
     {%- endif %}
   {%- endfor %}{%- endif %}
@@ -15,7 +15,7 @@
     {%- set preStyle = true %}
   {%- endif %}
 
-  {%- if config.extra.math or page.extra.math %}
+  {%- if config.extra.math or page?.extra?.math %}
     {%- set katex_css=config.extra.katex_css | default(value="katex.min.css") -%}
     {%- if katex_css %}
       {%- set preStyle = true %}
@@ -117,7 +117,7 @@
 {#- https://katex.org/docs/autorender.html #}
 {#- https://github.com/KaTeX/KaTeX/ #}
 {#- https://github.com/KaTeX/KaTeX/tree/main/contrib/mathtex-script-type/ #}
-{%- if config.extra.math or page.extra.math %}
+{%- if config.extra.math or page?.extra?.math %}
 
 {%- set katex_bundle=config.extra.katex_bundle | default(value="js/katexbundle.min.js") -%}
 {%- if katex_bundle %}
@@ -125,23 +125,23 @@
 {%- else %}
 
   {%- set katex_js=config.extra.katex_js | default(value="js/katex.min.js") -%}
-  {%- if katex_js %}{%- if katex_js is matching("^http[s]?://") %}
+  {%- if katex_js %}{%- if katex_js is matching(pat="^http[s]?://") %}
   <script defer src="{{               katex_js | safe }}"{%- if integrity and config.extra.katex_js_integrity %} integrity="{{ config.extra.katex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
   <script defer src="{{               get_url(path=katex_js                        , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}{%- endif %}
 
   {%- set mathtex_js=config.extra.mathtex_js | default(value="js/mathtex-script-type.min.js") -%}
-  {%- if mathtex_js %}{%- if mathtex_js is matching("^http[s]?://") %}
+  {%- if mathtex_js %}{%- if mathtex_js is matching(pat="^http[s]?://") %}
   <script defer src="{{ mathtex_js | safe }}"{%- if integrity and config.extra.mathtex_js_integrity %} integrity="{{ config.extra.mathtex_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
   <script defer src="{{               get_url(path=mathtex_js                      , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=mathtex_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- endif %}{%- endif %}
 
- {%- if config.extra.math_auto_render or page.extra.math_auto_render %}
+ {%- if config.extra.math_auto_render or page?.extra?.math_auto_render %}
   {%- set katex_autorender_js=config.extra.katex_autorender_js | default(value="js/katex-auto-render.min.js") -%}
   {%- if katex_autorender_js %}
-  {%- if katex_autorender_js is matching("^http[s]?://") %}
+  {%- if katex_autorender_js is matching(pat="^http[s]?://") %}
   <script defer src="{{               katex_autorender_js | safe }}"{%- if integrity and config.extra.katex_autorender_js_integrity %} integrity="{{ config.extra.katex_autorender_js_integrity | safe }}"{%- endif %} crossorigin="anonymous"></script>
   {%- else %}
   <script defer src="{{               get_url(path=katex_autorender_js             , trailing_slash=false, cachebust=true) }}"{%- if integrity %} integrity="sha384-{{ get_hash(path=katex_autorender_js, sha_type=384, base64=true) | safe }}"{%- endif %}></script>

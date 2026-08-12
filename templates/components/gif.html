@@ -1,0 +1,32 @@
+{% component gif(page, config, sources, caption="", class="", w=0, h=0) %}
+{%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
+<video controls{% if class %} class="{{class}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %} autoplay loop muted playsinline>
+  {% for src in sources  %}
+
+  {%- set video = src | split(pat="/") | last %}
+  {%- set dirtest = src | trim_start(pat="./") %}
+  {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
+  {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
+
+  {%- if src is starting_with(pat="./") and reldir %}{# Relative Path #}
+    {%- set _parts = src | trim_start(pat="./") | split(pat="/")  %}
+    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = path ~ "/" %}
+
+  {%- elif src is starting_with(pat="/") %}{# Root Path #}
+    {%- set _parts = src | split(pat="/")  %}
+    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
+
+  {%- else %}{# Same Directory Path #}
+    {%- set path = "" %}
+
+  {%- endif %}
+
+  {%- set type = src | split(pat=".") | last  %}
+  {%- if type is matching(pat="^mov$") %}{% set type = "quicktime" %}{% endif  %}
+  <source src="{{ path | safe }}{{ video | safe }}" type="{{ 'video/' ~ type }}" />
+  {%- endfor -%}Your browser doesn't support the video tag and/or the video formats in use here – sorry!</video>
+{%- if caption %}<figcaption>{{caption}}</figcaption></figure>{% endif %}
+
+{% endcomponent gif %}

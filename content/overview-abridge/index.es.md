@@ -54,7 +54,7 @@ Un tema [Zola](https://getzola.org) rápido, ligero y moderno que utiliza [abrid
 
 ## Inicio rápido
 
-Este tema requiere la versión {{ showdata(src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml") }} o posterior de [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+Este tema requiere la versión {{<showdata src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml" page={page} config={config} />}} o posterior de [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git
@@ -138,7 +138,7 @@ Zola iniciará el servidor web dev, accesible por defecto en `http://127.0.0.1:1
 
 Los cambios guardados se recargarán en vivo en el navegador. (pulse `ctrl+f5`, o mientras desarrolla configure `pwa=false` en `config.toml`)
 
-## Paginación {#pagination}
+## Paginación {% raw %}{#pagination}{% endraw %}
 
 Puede establecer el número de elementos de la página de inicio editando el archivo `content\_index.md` y ajustando `paginate_by`
 
@@ -241,7 +241,7 @@ menu_footer = [
 ]
 ```
 
-### Etiquetas SEO y de cabecera {#seo}
+### Etiquetas SEO y de cabecera {% raw %}{#seo}{% endraw %}
 
 Puede revisar las etiquetas SEO en la macro seo ubicada en `templates/macros/seo.html`, todos los valores configurables deben estar en `config.toml` bajo `config.extra` o en los archivos markdown de contenido.
 
@@ -268,7 +268,7 @@ Puedes ver una demo en [esta página](https://abridge.netlify.app/overview-math/
 
 Para un mejor rendimiento, recomiendo sólo habilitar las matemáticas en una [base por página en sus archivos post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), en lugar de en su archivo config.toml principal.
 
-### PWA, Aplicación Web Progresiva {#pwa}
+### PWA, Aplicación Web Progresiva {% raw %}{#pwa}{% endraw %}
 
 Abridge tema tiene soporte PWA. Puede instalar todo el sitio como una aplicación y hacer que funcione sin conexión. Para probarlo simplemente usa google chrome o tu teléfono y ve aquí: [abridge.netlify.app](https://abridge.netlify.app/)
 

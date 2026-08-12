@@ -24,9 +24,11 @@ Zola tiene muchos shortcodes, y los nuevos se añaden fácilmente, este ejemplo 
 
 ### Uso
 
+{% raw %}
 ```rs
-{{/* vimeo(id="514402648") */}}
+{{<vimeo id="514402648" />}}
 ```
+{% endraw %}
 
 - `id` - el id del video (obligatorio)
 - `class` - una clase para añadir al \<div\> que rodea el iframe (opcional)
@@ -39,7 +41,7 @@ Zola tiene muchos shortcodes, y los nuevos se añaden fácilmente, este ejemplo 
 ### Salida
 
 ```html
-{{ vimeo(id="514402648") }}
+{{<vimeo id="514402648" />}}
 ```
 
-{{ vimeo(id="514402648") }}
+{{<vimeo id="514402648" />}}

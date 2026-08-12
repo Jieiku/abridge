@@ -76,17 +76,19 @@ This is the most beautiful equation I've ever seen:
 
 ### Usage
 
+{% raw %}
 ```rs
-{%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
+{% <katex block={false}> %}e^{i\pi}+1=0{% </katex> %}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 ```
 
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 
 ### Block Mathematics
 
@@ -94,17 +96,19 @@ Some Mathematics in display mode is fair enough:
 
 ### Usage
 
+{% raw %}
 ```rs
-{%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
+{% <katex block={true}> %}\int_0^1 x^2 dx{% </katex> %}
 ```
+{% endraw %}
 
 ### Output
 
 ```html
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 ```
 
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 
 ### Auto Render Inline
 

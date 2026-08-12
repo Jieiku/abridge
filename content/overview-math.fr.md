@@ -76,17 +76,19 @@ C'est la plus belle équation que j'ai jamais vue:
 
 ### Usage
 
+{% raw %}
 ```rs
-{%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
+{% <katex block={false}> %}e^{i\pi}+1=0{% </katex> %}
 ```
+{% endraw %}
 
 ### Sortir
 
 ```html
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 ```
 
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 
 ### Bloquer les mathématiques
 
@@ -94,17 +96,19 @@ Certaines mathématiques en mode affichage sont assez justes :
 
 ### Usage
 
+{% raw %}
 ```rs
-{%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
+{% <katex block={true}> %}\int_0^1 x^2 dx{% </katex> %}
 ```
+{% endraw %}
 
 ### Sortir
 
 ```html
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 ```
 
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 
 ### Rendu automatique en ligne
 

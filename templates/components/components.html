@@ -12,29 +12,29 @@
         </div>
 {%- endcomponent page_listing %}
 
-{% component series_link(inner, page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- component series_link(inner, page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
   {%- if inner.content == page.content %}
-      <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
-    {% else %}
-      <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+        <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+    {%- else %}
+        <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
   {%- endif %}
-{% endcomponent series_link %}
+{%- endcomponent series_link %}
 
-{% component title_post(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- component title_post(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) %}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
       <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a></h1>
-{% endcomponent title_post %}
+{%- endcomponent title_post %}
 
-{% component meta_post(page, config) %}
-{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
-{%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false)  %}
-{%- if not i18n  %}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false)  %}{%- endif %}
+{%- component meta_post(page, config) -%}
+{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
+{%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false) -%}{%- endif -%}
 
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif %}{%- endif %}
       <span{%- if config.extra.meta_post?.size %} class="{{ config.extra.meta_post?.size }}"{% endif %}>
 
         {#- Author #}
@@ -91,7 +91,7 @@
 
         {#- Tags #}
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor  %}{%- endif %}</span>
-{% endcomponent meta_post %}
+{%- endcomponent meta_post %}
 
 {%- component title_index(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false)  -%}
@@ -163,10 +163,10 @@
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor  %}{%- endif %}</span>
 {%- endcomponent meta_index -%}
 
-{% component footer(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
-      {#- prev/next content page nextprev title pagination #}
+{%- component footer(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
+      {#- prev/next content page nextprev title pagination -#}
       {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
       {%- if page.lower or page.higher %}
       <nav>
@@ -183,7 +183,7 @@
       </nav>
       {%- endif %}
       {%- endif %}
-{% endcomponent footer %}
+{%- endcomponent footer %}
 
 {% component pagination(paginator, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false)  %}

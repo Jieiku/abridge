@@ -4,13 +4,13 @@
 {{- i18n[key] | default(value=default) | safe -}}
 {% endcomponent translate %}
 
-{% component page_listing(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- component page_listing(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
         <div class="tpad">
           <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>
         </div>
-{% endcomponent page_listing %}
+{%- endcomponent page_listing %}
 
 {% component series_link(inner, page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
@@ -93,18 +93,18 @@
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor  %}{%- endif %}</span>
 {% endcomponent meta_post %}
 
-{% component title_index(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- component title_index(page, config) %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false)  -%}
+{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
         <big>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</big>
-{% endcomponent title_index %}
+{%- endcomponent title_index -%}
 
-{% component meta_index(page, config) %}
-{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
-{%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false)  %}
+{%- component meta_index(page, config) %}
+{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
+{%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false)  -%}
 {%- if not i18n  %}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false)  %}{%- endif %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- set uglyurls = config.extra.uglyurls | default(value=false)  -%}
+{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
         <span{%- if config.extra.meta_index?.size %} class="{{ config.extra.meta_index?.size }}"{% endif %}>
 
         {#- Author #}
@@ -161,7 +161,7 @@
 
         {#- Tags #}
           {%- if page.taxonomies.tags %} {%- for tag in page.taxonomies.tags %} #<a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag }}</a> {% endfor  %}{%- endif %}</span>
-{% endcomponent meta_index %}
+{%- endcomponent meta_index -%}
 
 {% component footer(page, config) %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false)  %}

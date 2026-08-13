@@ -30,7 +30,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
 {%- block content %}
     <div>
     {%- set pages = paginator.pages if paginator else section.pages %}
-    {%- for page in pages %}
+    {% for page in pages %}
       <article>
         {{<title_index page={page}  config={config} />}}
         {%- if config.extra.meta_index?.position %}
@@ -88,7 +88,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
       <div class="blockdiv sticky">
         <span class="b s150">{{<translate key="Recent"  default="Recent"  i18n={i18n} />}}</span>
         {%- set recent_items=config.extra.recent_items | default(value=9) -%}
-        {%- for page in section_item.pages[:recent_items] %}
+        {%- for page in section_item.pages[:recent_items] -%}
           {{<page_listing page={page}  config={config} />}}
         {%- endfor %}
       </div>

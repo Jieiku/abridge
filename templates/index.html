@@ -8,27 +8,23 @@ This Template can also be used directly for the index eg: example.com/ or as the
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
 
 
-{%- block seo %}
-  {{- super() }}
-
-  {%- if config.title %}
-    {%- set title = config.title %}
-  {%- else %}
-    {%- set title = "" %}
-  {%- endif %}
-
-  {%- if config.extra.title_addition and title %}
-    {%- set title_addition = title_separator ~ config.extra.title_addition %}
-  {%- elif config.extra.title_addition %}
-    {%- set title_addition = config.extra.title_addition %}
-  {%- else %}
-    {%- set title_addition = "" %}
-  {%- endif %}
-
-  {%- set description = config.description %}
-
+{%- block seo -%}
+  {{- super() -}}
+  {%- if config.title -%}
+    {%- set title = config.title -%}
+  {%- else -%}
+    {%- set title = "" -%}
+  {%- endif -%}
+  {%- if config.extra.title_addition and title -%}
+    {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+  {%- elif config.extra.title_addition -%}
+    {%- set title_addition = config.extra.title_addition -%}
+  {%- else -%}
+    {%- set title_addition = "" -%}
+  {%- endif -%}
+  {%- set description = config.description -%}
   {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
-{%- endblock seo %}
+{%- endblock seo -%}
 
 
 

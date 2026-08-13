@@ -7,16 +7,15 @@
 <!DOCTYPE html>
 <html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
 <head>
-  {%- include "partials/head.html" %}
-
-  {#- SEO: title, description, etc #}
-  {%- block seo %}
-    {%- if config.extra.title_separator %}
+  {%- include "partials/head.html" -%}
+  {#- SEO: title, description, etc -#}
+  {%- block seo -%}
+    {%- if config.extra.title_separator -%}
       {%- set title_separator = " " ~ config.extra.title_separator ~ " " -%}
-    {%- else %}
+    {%- else -%}
       {%- set title_separator = " | " -%}
-    {%- endif %}
-  {%- endblock seo %}
+    {%- endif -%}
+  {%- endblock seo -%}
 
   {%- block comments_init %}
   {%- endblock comments_init %}

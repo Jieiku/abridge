@@ -124,31 +124,19 @@
 
 
 
-{#- Rss / Atom Feed #}
-
-  {%- if config.generate_feeds %}
-  {%- for feed in config.feed_filenames %}
-
-  {%- if feed is containing(pat='atom') %}
+{#- Rss / Atom Feed -#}
+{%- if config.generate_feeds -%}
+{%- for feed in config.feed_filenames -%}
+{%- if feed is containing(pat='atom') %}
   <link rel="alternate" type="application/atom+xml" title="{{ config.title }} Atom Feed" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" />
-  {%- endif %}
-
-  {%- if feed is containing(pat='rss') %}
+{%- endif -%}
+{%- if feed is containing(pat='rss') %}
   <link rel="alternate" type="application/rss+xml" title="{{ config.title }} RSS Feed" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" />
-  {%- endif %}
-
-  {%- endfor %}
-  {%- endif %}
-
-
-
-
-
-{#- Extra items #}
-  {%- if config.extra.head_extra %}
+{%- endif -%}
+{%- endfor -%}
+{%- endif -%}
+{#- Extra items -#}
+{%- if config.extra.head_extra %}
   {{ config.extra.head_extra | safe }}
-  {%- endif %}
-
-
-
+{%- endif -%}
 {#- End of head partial -#}

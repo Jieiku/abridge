@@ -1,3 +1,5 @@
+{# Former macro components #}
+
 {% component translate(key: string, i18n, default="") %}
 {{- i18n[key] | default(value=default) | safe -}}
 {% endcomponent translate %}
@@ -363,17 +365,15 @@
   {%- endif %}
 {% endcomponent numpagination %}
 
-{% component seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2023-05-15T07:07:00-07:00", updated_time="2023-05-15T07:07:00-07:00", page="" ) %}
-
-{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
-{%- set _lang = page.lang if page else config.default_language %}
-{%- set i18n = load_data(path="i18n/" ~ _lang ~ '.toml', required=false)  %}
-{%- if not i18n  %}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ _lang ~ ".toml", required=false)  %}{%- endif %}
-{%- set lang_locale %}{{<translate key='date_locale'  default='en_US'  i18n={i18n} />}}{% endset  %}
-
-{%- if is_404  %}
+{% component seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2023-05-15T07:07:00-07:00", updated_time="2023-05-15T07:07:00-07:00", page="" ) -%}
+{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
+{%- set _lang = page.lang if page else config.default_language -%}
+{%- set i18n = load_data(path="i18n/" ~ _lang ~ '.toml', required=false) -%}
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ _lang ~ ".toml", required=false) -%}{%- endif -%}
+{%- set lang_locale %}{{<translate key='date_locale'  default='en_US'  i18n={i18n} />}}{% endset -%}
+{%- if is_404 %}
   <meta name="robots" content="noindex, follow" />
-{%- else  %}
+{%- else %}
   <meta name="robots" content="index, follow" />
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />

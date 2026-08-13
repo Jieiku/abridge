@@ -1,9 +1,8 @@
-{# Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. #}
+{#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
 {%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
-{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif %}
-
+{%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif -%}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
 <!DOCTYPE html>
 <html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
 <head>

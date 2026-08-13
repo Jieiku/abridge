@@ -1,5 +1,3 @@
-{# Former macro components #}
-
 {% component translate(key: string, i18n, default="") %}
 {{- i18n[key] | default(value=default) | safe -}}
 {% endcomponent translate %}

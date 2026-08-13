@@ -110,6 +110,22 @@ Un poco de Matemáticas en modo visualización es suficiente:
 
 {% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 
+### Uso
+
+{% raw %}
+```rs
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+{% endraw %}
+
+### Salida
+
+```html
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+
 ### Auto Render Inline
 
 ```tex

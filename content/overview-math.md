@@ -78,7 +78,7 @@ This is the most beautiful equation I've ever seen:
 
 {% raw %}
 ```rs
-{% <katex block={false}> %}e^{i\pi}+1=0{% </katex> %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 ```
 {% endraw %}
 
@@ -98,7 +98,7 @@ Some Mathematics in display mode is fair enough:
 
 {% raw %}
 ```rs
-{% <katex block={true}> %}\int_0^1 x^2 dx{% </katex> %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 ```
 {% endraw %}
 
@@ -109,6 +109,22 @@ Some Mathematics in display mode is fair enough:
 ```
 
 {% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
+
+### Usage
+
+{% raw %}
+```rs
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+{% endraw %}
+
+### Output
+
+```html
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
 
 ### Auto Render Inline
 

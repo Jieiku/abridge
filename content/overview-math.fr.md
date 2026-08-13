@@ -110,6 +110,22 @@ Certaines mathématiques en mode affichage sont assez justes :
 
 {% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 
+### Usage
+
+{% raw %}
+```rs
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+{% endraw %}
+
+### Sortir
+
+```html
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+
 ### Rendu automatique en ligne
 
 ```tex

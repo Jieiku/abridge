@@ -10,7 +10,7 @@
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if page.lang != config.default_language %}
-        {%- set metapath = (pagepath ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
+        {%- set metapath = (pagepath ~ path ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
       {%- else %}
         {%- set metapath = pagepath ~ path ~ img %}
       {%- endif %}
@@ -59,7 +59,7 @@
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if page.lang != config.default_language %}
-        {%- set metapath = (pagepath ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
+        {%- set metapath = (pagepath ~ path ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
       {%- else %}
         {%- set metapath = pagepath ~ path ~ img %}
       {%- endif %}

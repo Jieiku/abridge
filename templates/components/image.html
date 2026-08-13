@@ -9,8 +9,7 @@
   {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
 
   {%- if src is starting_with(pat="./") and reldir %}{# Relative Path #}
-    {%- set _parts = src | trim_start(pat="./") | split(pat="/")  %}
-    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = (src | trim_start(pat="./") | split(pat="/"))[:-1] | join(sep="/") | trim_start(pat="/") -%}
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if lang != config.default_language %}
@@ -24,8 +23,7 @@
     {%- endif %}
 
   {%- elif src is starting_with(pat="/") %}{# Root Path #}
-    {%- set _parts = src | split(pat="/")  %}
-    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set rootpath = (src | split(pat="/"))[:-1] | join(sep="/") -%}
     {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
     {%- if not w or not h %}
       {%- set metapath = rootpath ~ "/" ~ video %}

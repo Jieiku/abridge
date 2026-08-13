@@ -6,8 +6,7 @@
   {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
 
   {%- if main_src is starting_with(pat="./") and reldir %} {# Relative Path #}
-    {%- set _parts = main_src | trim_start(pat="./") | split(pat="/")  %}
-    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = (main_src | trim_start(pat="./") | split(pat="/"))[:-1] | join(sep="/") | trim_start(pat="/") -%}
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if lang != config.default_language %}
@@ -21,8 +20,7 @@
     {%- endif %}
 
   {%- elif main_src is starting_with(pat="/") %} {# Root Path #}
-    {%- set _parts = main_src | split(pat="/")  %}
-    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set rootpath = (main_src | split(pat="/"))[:-1] | join(sep="/") -%}
     {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
     {%- if not w or not h %}
       {%- set metapath = rootpath ~ "/" ~ img %}
@@ -57,8 +55,7 @@
   {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
 
   {%- if swap_src is starting_with(pat="./") and reldir %} {# Relative Path #}
-    {%- set _parts = swap_src | trim_start(pat="./") | split(pat="/")  %}
-    {%- set path = _parts[:-1] | join(sep="/") | trim_start(pat="/") %}
+    {%- set path = (swap_src | trim_start(pat="./") | split(pat="/"))[:-1] | join(sep="/") | trim_start(pat="/") -%}
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
       {%- if lang != config.default_language %}
@@ -72,8 +69,7 @@
     {%- endif %}
 
   {%- elif swap_src is starting_with(pat="/") %} {# Root Path #}
-    {%- set _parts = swap_src | split(pat="/")  %}
-    {%- set rootpath = _parts[:-1] | join(sep="/") %}
+    {%- set rootpath = (swap_src | split(pat="/"))[:-1] | join(sep="/") -%}
     {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
     {%- if not w or not h %}
       {%- set metapath = rootpath ~ "/" ~ img %}

@@ -12,12 +12,12 @@
     {%- set path = (src | trim_start(pat="./") | split(pat="/"))[:-1] | join(sep="/") | trim_start(pat="/") -%}
     {%- set path = path ~ "/" %}
     {%- if not w or not h %}
-      {%- if lang != config.default_language %}
-        {%- set metapath = pagepath ~ path ~ video | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- if page.lang != config.default_language %}
+        {%- set metapath = (pagepath ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
       {%- else %}
         {%- set metapath = pagepath ~ path ~ video %}
       {%- endif %}
-      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set meta = get_image_metadata(path=metapath) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}
@@ -27,7 +27,7 @@
     {%- set path = (config.base_url if config else "") ~ rootpath ~ "/"  %}
     {%- if not w or not h %}
       {%- set metapath = rootpath ~ "/" ~ video %}
-      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set meta = get_image_metadata(path=metapath) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}
@@ -35,12 +35,12 @@
   {%- else %}{# Same Directory Path #}
     {%- set path = "" %}
     {%- if not w or not h %}
-      {%- if lang != config.default_language %}
-        {%- set metapath = pagepath ~ video | replace(from=pagepath | truncate(length=4, end=""), to="/") %}
+      {%- if page.lang != config.default_language %}
+        {%- set metapath = (pagepath ~ img) | replace(from="/" ~ page.lang ~ "/", to="/") %}
       {%- else %}
         {%- set metapath = pagepath ~ video %}
       {%- endif %}
-      {%- set meta = get_image_metadata(path=metapath, allow_missing=true) %}
+      {%- set meta = get_image_metadata(path=metapath) %}
       {%- set w = meta.width %}
       {%- set h = meta.height %}
     {%- endif %}

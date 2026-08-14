@@ -76,17 +76,19 @@ Esta es la ecuación más bonita que he visto nunca:
 
 ### Uso
 
+{% raw %}
 ```rs
-{%/* katex(block=false) */%} e^{i\pi}+1=0 {%/* end */%}
+{% <katex block={false}> %}e^{i\pi}+1=0{% </katex> %}
 ```
+{% endraw %}
 
 ### Salida
 
 ```html
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 ```
 
-{% katex(block=false) %} e^{i\pi}+1=0 {% end %}
+{% <katex block={false}> %} e^{i\pi}+1=0 {% </katex> %}
 
 ### Matemáticas en bloque
 
@@ -94,17 +96,35 @@ Un poco de Matemáticas en modo visualización es suficiente:
 
 ### Uso
 
+{% raw %}
 ```rs
-{%/* katex(block=true) */%} \int_0^1 x^2 dx {%/* end */%}
+{% <katex block={true}> %}\int_0^1 x^2 dx{% </katex> %}
 ```
+{% endraw %}
 
 ### Salida
 
 ```html
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
 ```
 
-{% katex(block=true) %} \int_0^1 x^2 dx {% end %}
+{% <katex block={true}> %} \int_0^1 x^2 dx {% </katex> %}
+
+### Uso
+
+{% raw %}
+```rs
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+{% endraw %}
+
+### Salida
+
+```html
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
+```
+
+{% <katex block={true}> %} f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi {% </katex> %}
 
 ### Auto Render Inline
 

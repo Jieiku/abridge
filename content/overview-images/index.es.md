@@ -42,45 +42,51 @@ Clases opcionales:
 
 ## Uso (misma ruta)
 
+{% raw %}
 ```rs
-{{/* img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") */}}
+{{<img src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{<img src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 ```
 
-{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{<img src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 
 ## Uso (ruta relativa ./)
 
+{% raw %}
 ```rs
-{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") */}}
+{{<img src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{<img src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 ```
 
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") }}
+{{<img src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/" page={page} config={config} />}}
 
 ## Uso (ruta raíz /)
 
+{% raw %}
 ```rs
-{{/* img(src="/images/ferris.svg" alt="Ferris the Rustacean") */}}
+{{<img src="/images/ferris.svg" alt="Ferris the Rustacean" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
+{{<img src="/images/ferris.svg" alt="Ferris the Rustacean" page={page} config={config} />}}
 ```
 
-{{ img(src="/images/ferris.svg" alt="Ferris the Rustacean") }}
+{{<img src="/images/ferris.svg" alt="Ferris the Rustacean" page={page} config={config} />}}
 
 # Imagen SVG directamente en el código
 
@@ -109,42 +115,48 @@ Al pasar el ratón sobre la imagen se mostrará la imagen a comparar.
 
 ## Uso (misma ruta)
 
+{% raw %}
 ```rs
-{{/* imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") */}}
+{{<imgswap main_src="ferris.svg" swap_src="ferris-happy.svg" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
+{{<imgswap main_src="ferris.svg" swap_src="ferris-happy.svg" page={page} config={config} />}}
 ```
 
-{{ imgswap(main_src="ferris.svg" swap_src="ferris-happy.svg") }}
+{{<imgswap main_src="ferris.svg" swap_src="ferris-happy.svg" page={page} config={config} />}}
 
 ## Uso (ruta relativa ./)
 
+{% raw %}
 ```rs
-{{/* imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") */}}
+{{<imgswap main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
+{{<imgswap main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" page={page} config={config} />}}
 ```
 
-{{ imgswap(main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg") }}
+{{<imgswap main_src="./img/ferris.svg" swap_src="./img/ferris-gesture.svg" page={page} config={config} />}}
 
 ## Uso (ruta raíz /)
 
+{% raw %}
 ```rs
-{{/* imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") */}}
+{{<imgswap main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg" page={page} config={config} />}}
 ```
+{% endraw %}
 
 **Salida**
 
 ```html
-{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}
+{{<imgswap main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg" page={page} config={config} />}}
 ```
 
-{{ imgswap(main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg") }}
+{{<imgswap main_src="/images/ferris.svg" swap_src="/images/ferris-gesture.svg" page={page} config={config} />}}

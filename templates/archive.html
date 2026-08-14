@@ -7,24 +7,21 @@ This Template can also be used as the rendering template for Sections, eg: examp
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
 
-{%- block seo %}
-  {{- super() }}
-  {%- set title = "Archive" %}
-
-  {%- if config.title %}
-    {%- set title_addition = title_separator ~ config.title %}
-  {%- else %}
-    {%- set title_addition = "" %}
-  {%- endif %}
-
-  {%- set description = config.description %}
-
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
-{%- endblock seo %}
+{%- block seo -%}
+  {{- super() -}}
+  {%- set title = "Archive" -%}
+  {%- if config.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- else -%}
+    {%- set title_addition = "" -%}
+  {%- endif -%}
+  {%- set description = config.description -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+{%- endblock seo -%}
 
 {%- block content %}
     {#- The following line is checking if the template is being used for the archive page or a section #}
-    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
+    {%- if current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
       {%- if section.extra.sec %}
         {%- set sec = section.extra.sec ~ "/" %}
       {%- else %}
@@ -36,7 +33,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
         {%- set langpath = "/" ~ lang ~ "/" %}
       {%- endif %}
 
-      {%- set sec = current_path | trim_start_matches(pat=langpath) | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+      {%- set sec = current_path | trim_start(pat=langpath) | split(pat="/page/") | first | trim_end(pat="/") %}
       {%- set sec = sec ~ "/" %}
     {%- endif %}
 

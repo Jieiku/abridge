@@ -8,10 +8,10 @@ const { exec } = require("child_process");
 const { exit } = require('process');
 const execPromise = util.promisify(exec);
 
-if (!(fs.existsSync('config.toml'))) {
-  throw new Error('ERROR: cannot find config.toml!');
+if (!(fs.existsSync('zola.toml'))) {
+  throw new Error('ERROR: cannot find zola.toml!');
 }
-const tomlString = String(fs.readFileSync('config.toml'));
+const tomlString = String(fs.readFileSync('zola.toml'));
 const data = TOML.parse(tomlString);
 const js_prestyle = data.extra.js_prestyle;
 const js_switcher = data.extra.js_switcher;
@@ -54,7 +54,7 @@ async function execWrapper(cmd) {
     console.log(stdout);
   }
   if (stderr) {
-    console.log('ERROR: ' + stderr);
+    console.log(stderr);
   }
 }
 
@@ -63,16 +63,16 @@ async function abridge() {
   const { replaceInFileSync } = await import('replace-in-file');
   // set index_format for chosen search_library accordingly.
   if (search_library === 'offline') {
-    replaceInFileSync({ files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
+    replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
     args = args + " -u \"" + __dirname + "\/public\""//set base_url to the path on disk for offline site.
   } else if (search_library === 'elasticlunrjava') {
-    replaceInFileSync({ files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
+    replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
   } else if (search_library === 'elasticlunr') {
-    replaceInFileSync({ files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_json\"" });
+    replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_json\"" });
   } else if (search_library === 'pagefind') {
-    replaceInFileSync({ files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
+    replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
   } else if (search_library === 'tinysearch') {
-    replaceInFileSync({ files: 'config.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
+    replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
   }
 
   console.log('Zola Build to generate files for minification:');
@@ -104,11 +104,36 @@ async function abridge() {
     var hash = Math.floor(new Date().getTime() / 1000);
     fs.renameSync(path.join(__dirname, "static/js/pagefind-entry.json"), path.join(__dirname, "static/js/pagefind-entry-" + hash + ".json"));
 
-    // original: var e=await(await fetch(this.basePath+"pagefind-entry.json?ts="+Date.now())).json();
-    //      new: var e=await(await fetch(this.basePath+"pagefind-entry-1723268715.json")).json();
-    // Tricky regex, so I split it into two replaceInFileSync() calls, pull requests welcome if you can improve this.
-    replaceInFileSync({ files: path.join(__dirname, "static/js/pagefind_search.js"), from: /pagefind-entry\.json\?ts=/g, to: "pagefind-entry-" + hash + "\.json" });
-    replaceInFileSync({ files: path.join(__dirname, "static/js/pagefind_search.js"), from: /Date.now\(\)/g, to: "\"\"" });
+    // Pagefind builds the entry URL in several forms across versions, e.g.:
+    //   this.basePath+"pagefind-entry.json?ts="+Date.now()
+    //   `${this.basePath}pagefind-entry.json?ts=${Date.now()}`
+    // Replace those with a build-time hashed filename (no cache-bust query).
+    // Also strip import.meta (ESM-only) so the classic <script defer> bundle parses.
+    const pagefindSearchPath = path.join(__dirname, "static/js/pagefind_search.js");
+    let pfSearch = fs.readFileSync(pagefindSearchPath, "utf8");
+    const hashedEntry = "pagefind-entry-" + hash + ".json";
+    const before = pfSearch;
+    pfSearch = pfSearch
+      // template literal: pagefind-entry.json?ts=${Date.now()}
+      .replace(/pagefind-entry\.json\?ts=\$\{Date\.now\(\)\}/g, hashedEntry)
+      // template literal with any expression: pagefind-entry.json?ts=${...}
+      .replace(/pagefind-entry\.json\?ts=\$\{[^}]+\}/g, hashedEntry)
+      // concat / plain: pagefind-entry.json?ts=
+      .replace(/pagefind-entry\.json\?ts=/g, hashedEntry)
+      // leftover bare filename (if ?ts= already stripped elsewhere)
+      .replace(/pagefind-entry\.json/g, hashedEntry)
+      // Date.now() used only for that cache-bust (safe after entry URL rewrite)
+      .replace(/Date\.now\(\)/g, '""')
+      .replace(/import\.meta\.url/g, "undefined")
+      .replace(/import\.meta/g, "undefined");
+    if (before === pfSearch) {
+      console.warn("WARNING: no pagefind-entry/import.meta substitutions applied to pagefind_search.js");
+    } else if (!pfSearch.includes(hashedEntry)) {
+      console.warn("WARNING: hashed entry name not found in pagefind_search.js after patch:", hashedEntry);
+    } else {
+      console.log("Patched pagefind_search.js to use", hashedEntry);
+    }
+    fs.writeFileSync(pagefindSearchPath, pfSearch);
 
     //copy to public so the files are included in the PWA cache list if necessary.
     fs.copyFileSync(path.join(__dirname, "static/js/pagefind-entry-" + hash + ".json"), path.join(__dirname, "public/js/pagefind-entry-" + hash + ".json"))
@@ -124,7 +149,7 @@ async function abridge() {
       // update from abridge theme.
       fs.copyFileSync(bpath + 'static/sw.js', 'static/sw.js');
       fs.copyFileSync(bpath + 'static/js/sw_load.js', 'static/js/sw_load.js');
-      // Update settings in PWA javascript file, using options parsed from config.toml.  sw.min.js?v=3.10.0",  "++"
+      // Update settings in PWA javascript file, using options parsed from zola.toml.  sw.min.js?v=3.10.0",  "++"
       if (fs.existsSync('static/js/sw_load.js')) {
         sw_load_min = '.js?v=';
         if (js_bundle) {
@@ -141,7 +166,7 @@ async function abridge() {
       }
 
       if (pwa_cache_all === true) {
-        console.log('info: pwa_cache_all = true in config.toml, so caching the entire site.\n');
+        console.log('info: pwa_cache_all = true in zola.toml, so caching the entire site.\n');
         // Generate array from the list of files, for the entire site.
 
         var dir = 'public';
@@ -189,7 +214,7 @@ async function abridge() {
         countMatches: true,
       });
     } else {
-      throw new Error('ERROR: pwa requires that pwa_VER, pwa_NORM_TTL, pwa_LONG_TTL, pwa_TTL_NORM, pwa_TTL_LONG, pwa_TTL_EXEMPT are set in config.toml.');
+      throw new Error('ERROR: pwa requires that pwa_VER, pwa_NORM_TTL, pwa_LONG_TTL, pwa_TTL_NORM, pwa_TTL_LONG, pwa_TTL_EXEMPT are set in zola.toml.');
     }
   }
 
@@ -357,7 +382,7 @@ function minify(fileA, outfile) {
 
 async function searchChange(searchOption) {
   const { replaceInFileSync } = await import('replace-in-file');
-  replaceInFileSync({ files: 'config.toml', from: /search_library.*=.*/g, to: 'search_library = \"' + searchOption + '\"' });
+  replaceInFileSync({ files: 'zola.toml', from: /^search_library\s*=.*/gm, to: 'search_library = \"' + searchOption + '\"' });
 }
 
 if (args === ' offline') {
@@ -429,13 +454,17 @@ async function createPagefindIndex() {
       // Edit the pagefind to convert from MJS to CJS
       const pagefindPath = path.join(__dirname, "static/js/pagefind.js");//source pagefind from node module
       let pagefindContent = fs.readFileSync(pagefindPath, "utf8");
-      // Remove 'import.meta.url' from the pagefind file and exports
+      // Pagefind uses import.meta.url (ESM-only). Abridge bundles into a classic
+      // <script defer> (not type=module), so strip import.meta or browsers throw
+      // "Cannot use import.meta outside a module". Fallback basePath still works.
       pagefindContent = pagefindContent
         .replace(
           /initPrimary\(\)\{([^{}]*\{[^{}]*\})*[^{}]*\}/g,
           `initPrimary(){}`
         ) // Remove annoying function
-        .replace(/;export\{[^}]*\}/g, "");
+        .replace(/;export\{[^}]*\}/g, "")
+        .replace(/import\.meta\.url/g, "undefined")
+        .replace(/import\.meta/g, "undefined");
       fs.writeFileSync(pagefindPath, pagefindContent);
 
       // now insert the CJS into the anonymous function within pagefind.search.js
@@ -461,7 +490,7 @@ async function sync() {
     return;
   }
 
-  // Checks for changes from local version in static, package.json and config.toml
+  // Checks for changes from local version in static, package.json and zola.toml
   // and if there are changes it sync from the submodule
 
   // Check for changes in static
@@ -522,8 +551,8 @@ async function sync() {
     exit(1);
   }
 
-  const configToml = path.join(__dirname, "config.toml");
-  const submoduleConfigToml = path.join(__dirname, "themes/abridge/config.toml");
+  const configToml = path.join(__dirname, "zola.toml");
+  const submoduleConfigToml = path.join(__dirname, "themes/abridge/zola.toml");
 
   let adjustTomlContent = function (content) {
     content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces
@@ -548,7 +577,7 @@ async function sync() {
     console.log(
       "\x1b[34m%s\x1b[0m",
       "info:",
-      "The config.toml file format may have changed, please update it manually."
+      "The zola.toml file format may have changed, please update it manually."
     );
   }
 }

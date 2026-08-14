@@ -1,26 +1,21 @@
-{% extends "base.html" %}
+{%- extends "base.html" -%}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
-
-{%- block seo %}
-  {{- super() }}
-  {%- set title = "Tags" %}
-
-  {%- if config.title %}
-    {%- set title_addition = title_separator ~ config.title %}
-  {%- else %}
-    {%- set title_addition = "" %}
-  {%- endif %}
-
-  {%- set description = config.description %}
-
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
-{%- endblock seo %}
-
+{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
+{%- block seo -%}
+  {{- super() -}}
+  {%- set title = "Tags" -%}
+  {%- if config.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- else -%}
+    {%- set title_addition = "" -%}
+  {%- endif -%}
+  {%- set description = config.description -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+{%- endblock seo -%}
 {%- block content %}
     <div>
       <div class="c">
-        <h1>{{ terms | length }} {{ macros::translate(key="Tags", default="Tags", i18n=i18n) }} </h1>
+        <h1>{{ terms | length }} {{<translate key="Tags"  default="Tags"  i18n={i18n} />}} </h1>
         <p>{% for term in terms %} #<a href="#{{ term.name }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup> {% endfor %}</p>
       </div>
       {%- for term in terms %}

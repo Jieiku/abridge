@@ -1450,122 +1450,32 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   }// center image, <center> does not pass validation, use: <img class="ci"></img>
 }
 @if $syntax {
-  // Unstyled Text Color, and background color
   .z-code {
-    color: var(--h1);//#ccc
     background-color: var(--h0);
-  }
-  // This is a comment
-  .z-comment {//, .z-punctuation.z-definition.z-comment
-    color: var(--h2);//#888
-    font-style: italic;
-  }
-  // a  (int a;)
-  .z-variable {
     color: var(--h1);
   }
-  // "This is a string"
-  .z-string {//, .z-constant.z-other.z-symbol
-    color: var(--h6);
+  .z-hl {
+    background-color: var(--h0);
+    filter: brightness(var(--ha));
   }
-  // 10  (a = 10;)
-  .z-constant.z-numeric {
-    color: var(--h4);
+
+  .giallo-ln {
+    color: var(--h2);
+    padding-right: 1em;
   }
-  // /n
-  .z-constant.z-character.z-escape {//, .z-string.z-regexp
-    color: var(--h7);
-  }
-  // false, true, etc...
-  .z-constant.z-language {
-    color: var(--h4);
-  }
-  // BUF  (const BUF: usize = 10 * 1024;)
-  .z-constant.z-other {//, .z-constant.z-character
-    color: var(--h4);
-  }
-  // use, crate, let, etc.
-  .z-keyword {//, .z-keyword.z-operator.z-word
-    color: var(--h8);
-  }
-  // = * - + /
-  .z-keyword.z-operator {
-    color: var(--h9);
-  }
-  // separators: commas, colons, etc.  terminator:  endline semicolon, etc.
-  .z-punctuation.z-separator, .z-punctuation.z-terminator {
-    color: var(--h1);
-  }
-  // () [] {}
-  .z-punctuation.z-section {
-    color: var(--h1);
-  }
-  //  .  ::
-  .z-punctuation.z-accessor {
-    color: var(--h4);
-  }
-  //  #  (#[cfg(test)])
-  .z-punctuation.z-definition.z-annotation {
-    color: var(--h1);
-  }
-  // const, pub, mut, Self, fn
-  .z-storage {
-    color: var(--h8);
-  }
-  // const, struct
-  .z-storage.z-type {
-    color: var(--h8);
-  }
-  // new, function names
-  .z-entity.z-name.z-function {
-    color: var(--h5);
-  }
-  // key in toml entries
-  .z-entity.z-name {//, .z-entity.z-name.z-label
-    color: var(--h5);
-  }
-  //  v1   (fn lookup(v1))
-  .z-variable.z-parameter {
-    color: var(--h4);
-  }
-  //  self  (self.html.push(c))
-  .z-variable.z-language {
-    color: var(--h5);
-    font-style: italic;
-  }
-  // html tag name, eg:  html, head, meta, title, body, etc.
-  .z-entity.z-name.z-tag {//, .z-meta.z-tag.z-sgml
-    color: var(--h8);
-  }
-  // html tag brackets <>
-  .z-punctuation.z-definition.z-tag.z-end, .z-punctuation.z-definition.z-tag.z-begin, .z-punctuation.z-definition.z-tag {
-    color: var(--h8);
-  }
-  // html attribute name, eg: lang, charset
-  .z-entity.z-other.z-attribute-name {
-    color: var(--h5);
-  }
-  // function name as variable value, and annotation:  derive  (#[derive(Debug)])
-  .z-variable.z-function, .z-variable.z-annotation {
-    color: var(--h5);
-  }
-  // support function, eg:   extend  (self.html.extend(b"<span");)
-  // macros, eg:  println!  print!  format!
-  .z-support.z-function, .z-support.z-macro {
-    color: var(--h3);
-  }
-  // type: Vec, Some, str, int
-  // class:  Config  ($CONF = Config::getInstance()->getAll();)
-  .z-support.z-type, .z-support.z-class {
-    color: var(--h8);
-    font-style: italic;
-  }
-  // property name, eg css: font-size, text-align, etc.
-  .z-support.z-type.z-property-name {
-    color: var(--h8);
-  }
-  //json
-  .z-key.z-json {
-    color: var(--h4);
-  }
+
+  .z-1 { color: var(--h4); }
+  .z-2 { color: var(--h2); }
+  .z-3 { color: var(--h7); }
+  .z-4 { color: var(--h6); }
+  .z-5 { color: var(--h8); }
+  .z-6, .z-9 { color: var(--h3); }
+  .z-7 { color: var(--h5); }
+  .z-8 { color: var(--h9); }
+
+  .z-b { font-weight: bold; }
+  .z-i { font-style: italic; }
+  .z-u { text-decoration: underline; }
+  .z-s { text-decoration: line-through; }
+  .z-us { text-decoration: underline line-through; }
 }

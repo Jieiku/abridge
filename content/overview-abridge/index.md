@@ -15,7 +15,7 @@ tags = [
     "Config",
 ]
 +++
-A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abridge.css](https://github.com/Jieiku/abridge.css) (a class-light semantic HTML CSS Framework). Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
+A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing class-light semantic HTML with modular CSS. Perfect [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), and [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) scores. Here is a [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md) Page.
 
 <!-- more -->
 
@@ -54,7 +54,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing [abr
 
 ## Quick Start
 
-This theme requires version {{ showdata(src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml") }} or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+This theme requires version {{<showdata src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml" page={page} config={config} />}} or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git
@@ -138,7 +138,7 @@ Zola will start the dev web server, accessible by default at `http://127.0.0.1:1
 
 Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `config.toml`)
 
-## Pagination {#pagination}
+## Pagination {% raw %}{#pagination}{% endraw %}
 
 You can set the number of home page items by editing `content\_index.md` file and adjusting `paginate_by`
 
@@ -241,7 +241,7 @@ menu_footer = [
 ]
 ```
 
-### SEO and Header Tags {#seo}
+### SEO and Header Tags {% raw %}{#seo}{% endraw %}
 
 You can review the SEO tags in the seo macro located at `templates/macros/seo.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
 
@@ -268,7 +268,7 @@ You can see a demo on [this page](https://abridge.netlify.app/overview-math/).
 
 For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main config.toml file.
 
-### PWA, Progressive Web App {#pwa}
+### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
 Abridge theme has PWA support. You can install the entire site as an app and have it work offline. To try it out simply use google chrome or your phone and go here: [abridge.netlify.app](https://abridge.netlify.app/)
 

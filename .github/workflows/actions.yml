@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - master
+permissions:
+  contents: write
 jobs:
   generate-sponsors:
     runs-on: ubuntu-latest

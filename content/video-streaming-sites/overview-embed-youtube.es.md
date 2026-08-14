@@ -24,9 +24,11 @@ Zola tiene muchos shortcodes, y nuevos son facilmente añadidos, este ejemplo mu
 
 ### Uso
 
+{% raw %}
 ```rs
-{{/* youtube(id="32gyFIWecuw") */}}
+{{<youtube id="32gyFIWecuw" />}}
 ```
+{% endraw %}
 
 - `id` - el id del video (obligatorio)
 - `playlist` - el id de la lista de reproducción (opcional)
@@ -38,7 +40,7 @@ Zola tiene muchos shortcodes, y nuevos son facilmente añadidos, este ejemplo mu
 ### Salida
 
 ```html
-{{ youtube(id="32gyFIWecuw") }}
+{{<youtube id="32gyFIWecuw" />}}
 ```
 
-{{ youtube(id="32gyFIWecuw") }}
+{{<youtube id="32gyFIWecuw" />}}

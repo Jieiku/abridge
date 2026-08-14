@@ -2,44 +2,40 @@
 This Template Shows a paginated page of the Posts of a section with a short summary.
 This Template can also be used directly for the index eg: example.com/ or as the rendering template for Sections, eg: example.com/blog/  example.com/software/
 #}
-
 {%- extends "base.html" %}
 {%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
 
 
-{%- block seo %}
-  {{- super() }}
-
-  {%- if config.title %}
-    {%- set title = config.title %}
-  {%- else %}
-    {%- set title = "" %}
-  {%- endif %}
-
-  {%- if config.extra.title_addition and title %}
-    {%- set title_addition = title_separator ~ config.extra.title_addition %}
-  {%- elif config.extra.title_addition %}
-    {%- set title_addition = config.extra.title_addition %}
-  {%- else %}
-    {%- set title_addition = "" %}
-  {%- endif %}
-
-  {%- set description = config.description %}
-
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, is_home=true) }}
-{%- endblock seo %}
+{%- block seo -%}
+  {{- super() -}}
+  {%- if config.title -%}
+    {%- set title = config.title -%}
+  {%- else -%}
+    {%- set title = "" -%}
+  {%- endif -%}
+  {%- if config.extra.title_addition and title -%}
+    {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+  {%- elif config.extra.title_addition -%}
+    {%- set title_addition = config.extra.title_addition -%}
+  {%- else -%}
+    {%- set title_addition = "" -%}
+  {%- endif -%}
+  {%- set description = config.description -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+{%- endblock seo -%}
 
 
 
 {%- block content %}
     <div>
-    {%- for page in paginator.pages %}
+    {%- set pages = paginator.pages if paginator else section.pages %}
+    {% for page in pages %}
       <article>
-        {{- macros::title_index(page=page, config=config) }}
-        {%- if config.extra.meta_index.position %}
-        {%- if config.extra.meta_index.position == "top" or config.extra.meta_index.position == "both" %}
-        {{- macros::meta_index(page=page, config=config) }}
+        {{<title_index page={page}  config={config} />}}
+        {%- if config.extra.meta_index?.position %}
+        {%- if config.extra.meta_index?.position == "top" or config.extra.meta_index?.position == "both" %}
+        {{<meta_index page={page}  config={config} />}}
         {%- endif %}{%- endif %}
         <div class="sum">
         <p>
@@ -52,33 +48,33 @@ This Template can also be used directly for the index eg: example.com/ or as the
         {%- elif page.extra.static_thumbnail %}
         {%- endif %}
           <a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">
-            ...{{ macros::translate(key="more", default="more", i18n=i18n) }}
+            ...{{<translate key="more"  default="more"  i18n={i18n} />}}
           </a>
         </p>
         </div>
-        {%- if config.extra.meta_index.position %}
-        {%- if config.extra.meta_index.position == "bottom" or config.extra.meta_index.position == "both" %}
-        {{- macros::meta_index(page=page, config=config) }}
+        {%- if config.extra.meta_index?.position %}
+        {%- if config.extra.meta_index?.position == "bottom" or config.extra.meta_index?.position == "both" %}
+        {{<meta_index page={page}  config={config} />}}
         {%- endif %}
         {%- endif %}
       </article>
     {%- endfor %}
     {%- if config.extra.arrow_pagination %}
-    {{- macros::pagination(paginator=paginator, config=config) }}
+    {%- if paginator %}{{<pagination paginator={paginator} config={config} />}}{% endif %}
     {%- else %}
-    {{- macros::numpagination(paginator=paginator, config=config) }}
+    {%- if paginator %}{{<numpagination paginator={paginator} config={config} />}}{% endif %}
     {%- endif %}
     </div>
   {%- if config.extra.recent | default(value=true) %}
     {#- The following line is checking if the template is being used for the root or a section #}
-    {%- if current_path is matching("^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") %}
+    {%- if current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") %}
       {%- set sec = "" %}
     {%- else %}
       {%- if lang == config.default_language %}
-        {%- set sec = current_path | trim_start_matches(pat="/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = current_path | trim_start(pat="/") | split(pat="/page/") | first | trim_end(pat="/") %}
         {%- set sec = sec ~ "/" %}
       {%- else %}
-        {%- set sec = current_path | trim_start_matches(pat="/" ~ lang ~ "/") | split(pat="/page/") | slice(end=1) | join(sep="") | trim_end_matches(pat="/") %}
+        {%- set sec = current_path | trim_start(pat="/" ~ lang ~ "/") | split(pat="/page/") | first | trim_end(pat="/") %}
         {%- set sec = sec ~ "/" %}
       {%- endif %}
     {%- endif %}
@@ -90,10 +86,10 @@ This Template can also be used directly for the index eg: example.com/ or as the
     {%- endif %}
     <div class="sblock">
       <div class="blockdiv sticky">
-        <span class="b s150">{{ macros::translate(key="Recent", default="Recent", i18n=i18n) }}</span>
+        <span class="b s150">{{<translate key="Recent"  default="Recent"  i18n={i18n} />}}</span>
         {%- set recent_items=config.extra.recent_items | default(value=9) -%}
-        {%- for page in section_item.pages | slice(end=recent_items) %}
-          {{- macros::page_listing(page=page, config=config) }}
+        {%- for page in section_item.pages[:recent_items] -%}
+          {{<page_listing page={page}  config={config} />}}
         {%- endfor %}
       </div>
     </div>

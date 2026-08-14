@@ -2,252 +2,258 @@ window.onload = function () {
     if (document.body.contains(document.goSearch)) {
         document.goSearch.onsubmit = function () { return goSearchNow() };
 
-        (function () {//anonymous function to keep from defining global variables.
-
+        (function () {
             var searchinput = document.getElementById("searchinput");
+            var suggestions = document.getElementById("suggestions");
+
+            function getBaseUrl() {
+                var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
+                if (baseUrl && baseUrl.slice(-1) == "/") {
+                    baseUrl = baseUrl.slice(0, -1);
+                }
+                return baseUrl || "";
+            }
+
+            // Permalinks in the WASM index were baked at build time (zola base_url).
+            // Rewrite to the live site from <meta name="base"> so links match the current host.
+            function resolveResultUrl(url) {
+                if (!url) return url;
+                var baseUrl = getBaseUrl();
+                if (!baseUrl) return url;
+                try {
+                    if (url.charAt(0) === "/") {
+                        return baseUrl + url;
+                    }
+                    var parsed = new URL(url, baseUrl);
+                    var base = new URL(baseUrl);
+                    return base.origin + parsed.pathname + parsed.search + parsed.hash;
+                } catch (e) {
+                    return url;
+                }
+            }
+
             function suggestionFocus(e) {
-            if (e.keyCode === 191//forward slash
-                && document.activeElement.tagName !== "INPUT"
-                && document.activeElement.tagName !== "TEXTAREA") {
-                e.preventDefault();
-                searchinput.focus();
-                suggestions.classList.remove('d-none');
-            }
+                if (e.keyCode === 191
+                    && document.activeElement.tagName !== "INPUT"
+                    && document.activeElement.tagName !== "TEXTAREA") {
+                    e.preventDefault();
+                    searchinput.focus();
+                    suggestions.classList.remove('d-none');
+                }
 
-            if (e.keyCode === 27 ) {//escape
-                searchinput.blur();
-                suggestions.classList.add('d-none');
-                closeAllLists();
-            }
+                if (e.keyCode === 27) {
+                    searchinput.blur();
+                    suggestions.classList.add('d-none');
+                    closeAllLists();
+                }
 
-            const focusableSuggestions= suggestions.querySelectorAll('a');
-            if (suggestions.classList.contains('d-none')
-                || focusableSuggestions.length === 0) {
-                return;
-            }
-            const focusable= [...focusableSuggestions];
-            const index = focusable.indexOf(document.activeElement);
+                const focusableSuggestions = suggestions.querySelectorAll('a');
+                if (suggestions.classList.contains('d-none')
+                    || focusableSuggestions.length === 0) {
+                    return;
+                }
+                const focusable = [...focusableSuggestions];
+                const index = focusable.indexOf(document.activeElement);
 
-            let nextIndex = 0;
+                let nextIndex = 0;
 
-            if (e.keyCode === 38) {//up arrow
-                e.preventDefault();
-                nextIndex= index > 0 ? index-1 : 0;
-                focusableSuggestions[nextIndex].focus();
-            }
-            else if (e.keyCode === 40) {//down arrow
-                e.preventDefault();
-                nextIndex= index+1 < focusable.length ? index+1 : index;
-                focusableSuggestions[nextIndex].focus();
-            }
-
+                if (e.keyCode === 38) {
+                    e.preventDefault();
+                    nextIndex = index > 0 ? index - 1 : 0;
+                    focusableSuggestions[nextIndex].focus();
+                }
+                else if (e.keyCode === 40) {
+                    e.preventDefault();
+                    nextIndex = index + 1 < focusable.length ? index + 1 : index;
+                    focusableSuggestions[nextIndex].focus();
+                }
             }
             document.addEventListener("keydown", suggestionFocus);
 
             var loaded = false;
-            document.getElementById('searchinput').onfocus = function() {
+            document.getElementById('searchinput').onfocus = function () {
                 if (!loaded) {
                     lazyLoad();
                     loaded = true;
                 }
                 document.getElementById('searchinput').onfocus = '';
-            }
+            };
+
             async function lazyLoad() {
-                var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
-                if (baseUrl.slice(-1) == "/") {
-                    baseUrl = baseUrl.slice(0, -1);
-                }
-                await init(baseUrl + "/tinysearch_engine_bg.wasm");
+                // Post-0.9 tinysearch (no wasm-pack): tinysearch_engine.wasm
+                await initWasm(getBaseUrl() + "/tinysearch_engine.wasm");
             }
 
-            // in page results when press enter or click search icon from search box
             function closeSearchNow() {
                 const main = document.querySelector("main");
-                main.innerHTML = window.main
+                main.innerHTML = window.main;
             }
+
             function goSearchNow() {
                 const main = document.querySelector("main");
                 if (!window.main) {
-                    window.main = main.innerHTML
-                };
-                var results = document.getElementById("suggestions");// suggestions div generated by search box
+                    window.main = main.innerHTML;
+                }
+                var results = document.getElementById("suggestions");
 
-                var ResultsClone = results.cloneNode(true);// make a clone of the results, so that we can alter it
-                ResultsClone.id = "results";// alter the id of our clone, so that we can apply different css style
+                var ResultsClone = results.cloneNode(true);
+                ResultsClone.id = "results";
 
-                var headerDiv = document.createElement("div");// create a div element
+                var headerDiv = document.createElement("div");
+                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");
+                headerDiv.innerHTML = headerContent;
+                ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);
 
-                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
-
-                headerDiv.innerHTML = headerContent;// document element div (headerDiv), set the inner contents to our header html (headerContent)
-
-                ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);//insert our header div at the top of the page
-
-                main.innerHTML = ResultsClone.outerHTML;//display ResultsClone.outerHTML as the page
-                results.innerHTML = "";// clear the suggestions div popup
-                document.getElementById("searchinput").value = "";// clear the search input box
-                document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function() { closeSearchNow() })
-                return false
+                main.innerHTML = ResultsClone.outerHTML;
+                results.innerHTML = "";
+                document.getElementById("searchinput").value = "";
+                document.body.contains(document.closeSearch) && (document.closeSearch.onsubmit = function () { closeSearchNow() });
+                return false;
             }
 
-            /* Close search suggestion popup list */
             function closeAllLists(elmnt) {
-                var suggestions = document.getElementById("suggestions");
                 while (suggestions.firstChild) {
                     suggestions.removeChild(suggestions.firstChild);
                 }
             }
 
             function markTerm(input, term) {
-                return input.replace(new RegExp('(^|)(' + term + ')(|$)','ig'), '$1<mark>$2</mark>$3');
+                if (!input) return "";
+                return String(input).replace(new RegExp('(^|)(' + term + ')(|$)', 'ig'), '$1<mark>$2</mark>$3');
+            }
+
+            function unwrapMeta(meta) {
+                if (!meta) return "";
+                if (typeof meta === "string" && meta.charAt(0) === "{") {
+                    try {
+                        var m = JSON.parse(meta);
+                        return m.meta || m.description || Object.values(m)[0] || "";
+                    } catch (e) {
+                        return meta;
+                    }
+                }
+                return meta;
             }
 
             function autocomplete(inp) {
-
                 inp.addEventListener("input", function (e) {
-                    var suggestions, entry, i, val = this.value;
+                    var entry, i, val = this.value;
 
-                    /*close any already open lists of autocompleted values*/
                     closeAllLists();
                     if (!val) {
                         return false;
                     }
+                    if (!wasmReady) {
+                        return false;
+                    }
 
-                    suggestions = document.getElementById("suggestions");// suggestions div, generated by search box
-
-                    let arr = search(val, 99);//limit results
+                    let arr = doSearch(val, 99);
 
                     for (i = 0; i < arr.length; i++) {
                         let elem = arr[i];
+                        var title, url, meta;
+                        if (Array.isArray(elem)) {
+                            title = elem[0];
+                            url = elem[1];
+                            meta = elem[2];
+                        } else {
+                            title = elem.title;
+                            url = elem.url;
+                            meta = unwrapMeta(elem.meta || elem.description || "");
+                        }
 
                         entry = document.createElement("DIV");
                         entry.innerHTML = '<a href><span></span><span></span></a>';
-                        var a, t, d;
-                        a = entry.querySelector('a'),
-                        t = entry.querySelector('span:first-child'),
-                        d = entry.querySelector('span:nth-child(2)');
-                        a.href = `${elem[1]}?q=${encodeURIComponent(val)}`;//a link
-                        //t.innerHTML = markTerm(elem[0], val);//title
-                        t.innerHTML = elem[0];//title
-                        d.innerHTML = markTerm(elem[2], val);//description
+                        var a = entry.querySelector('a'),
+                            t = entry.querySelector('span:first-child'),
+                            d = entry.querySelector('span:nth-child(2)');
+                        var resolved = resolveResultUrl(url);
+                        a.href = resolved + (resolved.indexOf('?') >= 0 ? '&' : '?') + 'q=' + encodeURIComponent(val);
+                        t.innerHTML = title || "";
+                        d.innerHTML = markTerm(meta || "", val);
 
                         suggestions.appendChild(entry);
                     }
-                })
+                });
             }
 
+            // ---- New tinysearch WASM API (vanilla cargo build, no wasm-pack) ----
+            var wasmModule = null;
+            var memory = null;
+            var searchFunction = null;
+            var freeFunction = null;
+            var wasmReady = false;
+            var textEncoder = new TextEncoder();
+            var textDecoder = new TextDecoder("utf-8");
 
-            let wasm, cachedTextDecoder = (autocomplete(document.getElementById("searchinput")), new TextDecoder("utf-8", {
-                    ignoreBOM: !0,
-                    fatal: !0
-                })),
-                cachegetUint8Memory0 = (cachedTextDecoder.decode(), null);
-
-            function getUint8Memory0() {
-                return cachegetUint8Memory0 = null !== cachegetUint8Memory0 && cachegetUint8Memory0.buffer === wasm.memory.buffer ? cachegetUint8Memory0 : new Uint8Array(wasm.memory.buffer)
-            }
-
-            function getStringFromWasm0(e, t) {
-                return cachedTextDecoder.decode(getUint8Memory0().subarray(e, e + t))
-            }
-            const heap = new Array(32).fill(void 0);
-            heap.push(void 0, null, !0, !1);
-            let heap_next = heap.length;
-
-            function addHeapObject(e) {
-                heap_next === heap.length && heap.push(heap.length + 1);
-                var t = heap_next;
-                return heap_next = heap[t], heap[t] = e, t
-            }
-            let WASM_VECTOR_LEN = 0,
-                cachedTextEncoder = new TextEncoder("utf-8");
-            const encodeString = "function" == typeof cachedTextEncoder.encodeInto ? function(e, t) {
-                return cachedTextEncoder.encodeInto(e, t)
-            } : function(e, t) {
-                var n = cachedTextEncoder.encode(e);
-                return t.set(n), {
-                    read: e.length,
-                    written: n.length
+            function stringToWasmPtr(str) {
+                var bytes = textEncoder.encode(str + "\0");
+                var ptr = 0;
+                if (wasmModule.exports.__wbindgen_malloc) {
+                    ptr = wasmModule.exports.__wbindgen_malloc(bytes.length);
                 }
-            };
-
-            function passStringToWasm0(e, t, n) {
-                if (void 0 === n) {
-                    const n = cachedTextEncoder.encode(e),
-                        a = t(n.length);
-                    return getUint8Memory0().subarray(a, a + n.length).set(n), WASM_VECTOR_LEN = n.length, a
+                if (!ptr) {
+                    ptr = 1024;
                 }
-                let a = e.length,
-                    o = t(a);
-                const i = getUint8Memory0();
-                let r = 0;
-                for (; r < a; r++) {
-                    const t = e.charCodeAt(r);
-                    if (127 < t) break;
-                    i[o + r] = t
+                new Uint8Array(memory.buffer, ptr, bytes.length).set(bytes);
+                return ptr;
+            }
+
+            function wasmPtrToString(ptr) {
+                if (!ptr) return null;
+                var memoryArray = new Uint8Array(memory.buffer);
+                var length = 0;
+                while (memoryArray[ptr + length] !== 0) {
+                    length++;
+                    if (length > 10 * 1024 * 1024) break;
                 }
-                if (r !== a) {
-                    0 !== r && (e = e.slice(r)), o = n(o, a, a = r + 3 * e.length);
-                    const t = getUint8Memory0().subarray(o + r, o + a);
-                    r += encodeString(e, t).written
-                }
-                return WASM_VECTOR_LEN = r, o
+                return textDecoder.decode(memoryArray.subarray(ptr, ptr + length));
             }
 
-            function getObject(e) {
-                return heap[e]
-            }
+            function doSearch(query, limit) {
+                if (!wasmReady || !query) return [];
+                limit = limit || 10;
+                try {
+                    var queryPtr = stringToWasmPtr(query);
+                    var resultPtr = searchFunction(queryPtr, limit);
 
-            function dropObject(e) {
-                e < 36 || (heap[e] = heap_next, heap_next = e)
-            }
-
-            function takeObject(e) {
-                var t = getObject(e);
-                return dropObject(e), t
-            }
-
-            function search(e, t) {
-                var e = passStringToWasm0(e, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc),
-                    n = WASM_VECTOR_LEN;
-                return takeObject(wasm.search(e, n, t))
-            }
-            async function load(e, t) {
-                if ("function" == typeof Response && e instanceof Response) {
-                    if ("function" == typeof WebAssembly.instantiateStreaming) try {
-                        return await WebAssembly.instantiateStreaming(e, t)
-                    } catch (t) {
-                        if ("application/wasm" == e.headers.get("Content-Type")) throw t;
-                        console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", t)
+                    if (wasmModule.exports.__wbindgen_free && queryPtr > 1024) {
+                        wasmModule.exports.__wbindgen_free(queryPtr, query.length + 1);
                     }
-                    var n = await e.arrayBuffer();
-                    return WebAssembly.instantiate(n, t)
+
+                    if (!resultPtr) return [];
+
+                    var resultString = wasmPtrToString(resultPtr);
+                    freeFunction(resultPtr);
+
+                    if (!resultString) return [];
+                    var results = JSON.parse(resultString);
+                    return Array.isArray(results) ? results : [];
+                } catch (err) {
+                    console.error("tinysearch error:", err);
+                    return [];
                 }
-                n = await WebAssembly.instantiate(e, t);
-                return n instanceof WebAssembly.Instance ? {
-                    instance: n,
-                    module: e
-                } : n
-            }
-            async function init(e) {
-                var baseUrl = document.querySelector("meta[name='base']").getAttribute("content");
-                if (baseUrl.slice(-1) == "/") {
-                    baseUrl = baseUrl.slice(0, -1);
-                }
-                void 0 === e && (e = new URL(baseUrl + "/tinysearch_engine_bg.wasm"));
-                const t = {
-                    wbg: {}
-                };
-                t.wbg.__wbindgen_json_parse = function(e, t) {
-                    return addHeapObject(JSON.parse(getStringFromWasm0(e, t)))
-                };
-                var {
-                    instance: e,
-                    module: n
-                } = await load(await (e = "string" == typeof e || "function" == typeof Request && e instanceof Request || "function" == typeof URL && e instanceof URL ? fetch(e) : e), t);
-                return wasm = e.exports, init.__wbindgen_wasm_module = n, wasm
             }
 
+            async function initWasm(url) {
+                var response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch WASM: " + response.status + " " + response.statusText + " (" + url + ")");
+                }
+                var wasmBytes = await response.arrayBuffer();
+                var module = await WebAssembly.instantiate(wasmBytes);
+                wasmModule = module.instance;
+                memory = wasmModule.exports.memory;
+                searchFunction = wasmModule.exports.search;
+                freeFunction = wasmModule.exports.free_search_result;
+
+                if (!searchFunction || !freeFunction || !memory) {
+                    throw new Error("Required WASM exports not found (need search, free_search_result, memory)");
+                }
+                wasmReady = true;
+            }
+
+            autocomplete(document.getElementById("searchinput"));
             document.goSearch.onsubmit = function () { return goSearchNow() };
         }());
     }

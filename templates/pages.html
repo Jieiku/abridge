@@ -6,34 +6,31 @@ Some people prefer a landing page for the index, and then use a separate paginat
 
 {% extends "base.html" %}
 
-{%- block seo %}
-  {{- super() }}
-  {%- set title_addition = "" %}
-
-  {%- if page.title and config.title %}
-    {%- set title = page.title %}
-    {%- set title_addition = title_separator ~ config.title %}
-  {%- elif section.title and config.title %}
-    {%- set title = section.title %}
-    {%- set title_addition = title_separator ~ config.title %}
-  {%- elif page.title %}
-    {%- set title = page.title %}
-  {%- elif section.title %}
-    {%- set title = section.title %}
-  {%- else %}
-    {%- set title = config.title %}
-  {%- endif %}
-
-  {%- if page.description %}
-    {%- set description = page.description %}
-  {%- elif section.description %}
-    {%- set description = section.description %}
-  {%- else %}
-    {%- set description = config.description %}
-  {%- endif %}
-
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description) }}
-{%- endblock seo %}
+{%- block seo -%}
+  {{- super() -}}
+  {%- set title_addition = "" -%}
+  {%- if page.title and config.title -%}
+    {%- set title = page.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- elif section.title and config.title -%}
+    {%- set title = section.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- elif page.title -%}
+    {%- set title = page.title -%}
+  {%- elif section.title -%}
+    {%- set title = section.title -%}
+  {%- else -%}
+    {%- set title = config.title -%}
+  {%- endif -%}
+  {%- if page.description -%}
+    {%- set description = page.description -%}
+  {%- elif section and section.description -%}
+    {%- set description = section.description -%}
+  {%- else -%}
+    {%- set description = config.description -%}
+  {%- endif -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""} />}}
+{%- endblock seo -%}
 
 {%- block content %}
     <div>

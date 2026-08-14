@@ -3,9 +3,9 @@
           {%- if config.generate_feeds and config.extra.feed -%}
           {%- for feed in config.feed_filenames -%}
 
-          {%- if feed is containing('atom') -%}
+          {%- if feed is containing(pat='atom') -%}
           <a type="application/atom+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} Atom Feed"><i type="Button" class="svg rss" title="{{ config.title }} Atom Feed"></i></a>{% endif -%}
-          {%- if feed is containing('rss') -%}
+          {%- if feed is containing(pat='rss') -%}
           <a type="application/rss+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} RSS Feed"><i type="Button" class="svg rss" title="{{ config.title }} RSS Feed"></i></a>{% endif -%}
 
           {%- endfor -%}

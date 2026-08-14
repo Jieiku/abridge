@@ -1,0 +1,30 @@
+{% component audio(page, config, sources, caption="", class="", autoplay=false, loop=false, muted=false, playsinline=false) %}
+{%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
+<audio controls{% if class %} class="{{class}}"{% endif %}{% if autoplay %} autoplay{% endif %}{% if loop %} loop{% endif %}{% if muted %} muted{% endif %}{% if playsinline %} playsinline{% endif %}>
+  {% for src in sources  %}
+
+  {%- set file = src | split(pat="/") | last %}
+  {%- set dirtest = src | trim_start(pat="./") %}
+  {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}
+  {%- if page and page.path %}{%- set pagepath = page.path %}{%- elif section and section.path %}{%- set pagepath = section.path %}{%- endif %}
+
+  {%- if src is starting_with(pat="./") and reldir %}{# Relative Path #}
+    {%- set path = (src | trim_start(pat="./") | split(pat="/"))[:-1] | join(sep="/") | trim_start(pat="/") -%}
+    {%- set path = path ~ "/" %}
+
+  {%- elif src is starting_with(pat="/") %}{# Root Path #}
+    {%- set rootpath = (src | split(pat="/"))[:-1] | join(sep="/") -%}
+    {%- set path = (config.base_url if config else "") ~ rootpath ~ "/" %}
+
+  {%- else %}{# Same Directory Path #}
+    {%- set path = "" %}
+
+  {%- endif %}
+
+  {%- set type = src | split(pat=".") | last %}
+  {%- if type is matching(pat="^mov$") %}{% set type = "quicktime" %}{% endif %}
+  <source src="{{ path | safe }}{{ file | safe }}" type="{{ 'audio/' ~ type }}" />
+  {%- endfor -%}Your browser doesn't support the audio tag and/or the audio formats in use here – sorry!</audio>
+{%- if caption %}<figcaption>{{caption}}</figcaption></figure>{% endif %}
+
+{% endcomponent audio %}

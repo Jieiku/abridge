@@ -1,43 +1,39 @@
-{# This Template Shows the Individual Blog Posts#}
-
-{% extends "base.html" %}
-
-{%- block seo %}
-  {{- super() }}
-  {%- set title_addition = "" %}
-  {%- if page.title and config.title %}
-    {%- set title = page.title %}
-    {%- set title_addition = title_separator ~ config.title %}
-  {%- elif page.title %}
-    {%- set title = page.title %}
-  {%- else %}
-    {%- set title = config.title %}
-  {%- endif %}
-
-  {%- if page.description %}
-    {%- set description = page.description %}
-  {%- else %}
-    {%- set description = config.description %}
-  {%- endif %}
-  {%- set created_time = page.date %}
-  {%- set updated_time = page.updated %}
-  {%- if current_section %}
-    {%- set page_section = current_section %}
-  {%- else %}
-    {%- set page_section = "" %}
-  {%- endif %}
-
-  {{- macros_seo::seo(config=config, title=title, title_addition=title_addition, description=description, type="article", is_page=true, created_time=created_time, updated_time=updated_time, page_section=page_section) }}
-{%- endblock seo %}
+{#- This Template Shows the Individual Blog Posts -#}
+{%- extends "base.html" -%}
+{%- block seo -%}
+  {{- super() -}}
+  {%- set title_addition = "" -%}
+  {%- if page.title and config.title -%}
+    {%- set title = page.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- elif page.title -%}
+    {%- set title = page.title -%}
+  {%- else -%}
+    {%- set title = config.title -%}
+  {%- endif -%}
+  {%- if page.description -%}
+    {%- set description = page.description -%}
+  {%- else -%}
+    {%- set description = config.description -%}
+  {%- endif -%}
+  {%- set created_time = page.date or "" -%}
+  {%- set updated_time = page.updated or page.date or "" -%}
+  {%- if current_section -%}
+    {%- set page_section = current_section -%}
+  {%- else -%}
+    {%- set page_section = "" -%}
+  {%- endif -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  type="article"  is_page={true}  created_time={created_time}  updated_time={updated_time}  page_section={page_section} />}}
+{%- endblock seo -%}
 
 {%- block comments_init %}
-  {%- if not config.extra.comment_system or config.extra.comment_system == "hyvor" and config.extra.comments.hyvor %}
+  {%- if config.extra.comment_system == "hyvor" and config.extra.comments?.hyvor %}
   <script defer src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-  {%- elif config.extra.comment_system == "remark42" and config.extra.comments.remark42 %}
+  {%- elif config.extra.comment_system == "remark42" and config.extra.comments?.remark42 %}
   <script>
 	var remark_config = {
-		host: "{{ config.extra.comments.remark42 | safe }}",
-		site_id: "{{ config.extra.comments.remark42_site_id }}",
+		host: "{{ config.extra.comments?.remark42 | safe }}",
+		site_id: "{{ config.extra.comments?.remark42_site_id }}",
 	}
   </script>
   <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
@@ -46,63 +42,59 @@
 
 {%- block content %}
     <article>
+    {%- block page_header -%}
+    {{<title_post page={page}  config={config} />}}
 
-    {%- block page_header %}
-    {{- macros::title_post(page=page, config=config) }}
-
-    {%- if config.extra.meta_post.position %}
-    {%- if config.extra.meta_post.position == "top" or config.extra.meta_post.position == "both" %}
-    {{- macros::meta_post(page=page, config=config) }}
+    {%- if config.extra.meta_post?.position %}
+    {%- if config.extra.meta_post?.position == "top" or config.extra.meta_post?.position == "both" %}
+    {{<meta_post page={page}  config={config} />}}
     {%- endif %}{%- endif %}
     {%- endblock page_header %}
 
-    {# In Page Series Navigation #}
+    {#- In Page Series Navigation #}
     {%- if config.extra.series | default(value=true) %}
     {%- if page.extra.series %}
 
       {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.series, lang=lang) %}
-      {%- set page_num = tag.page_count | as_str %}
+      {%- set page_num = tag.page_count | str %}
 
         {%- if lang != config.default_language %}
-          {%- set parts_string = macros::translate(key='Series_parts', default='Series', i18n=i18n) | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
-        {% else %}
+          {%- set parts_string %}{{<translate key="Series_parts" default="Series" i18n={i18n} />}}{%- endset %}
+          {%- set parts_string = parts_string | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
+        {%- else %}
           {%- set parts_string = config.extra.Series_parts | default(value="Series") | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
-        {% endif -%}
+        {%- endif %}
 
-    <div class="block">
-      <div class="blockdiv">
-        <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a><br>
-        {%- for inner in tag.pages | sort(attribute="date") %}
-          {%- if inner.content == page.content %}
-            <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
-            {%- set_global current_section_index = loop.index0 %} {# Finds the current section, needed for pagination logic later #}
-          {% else %}
-            <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
-          {%- endif %}
-        {%- endfor %}
+      <div class="block">
+        <div class="blockdiv">
+          <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ tag.name }} ({{ parts_string }})</a><br>
+      {%- for inner in tag.pages | sort(attribute="date") %}
+        {%- if inner.content == page.content %}
+          <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+          {%- set_global current_section_index = loop.index0 %} {# Finds the current section, needed for pagination logic later #}
+        {%- else %}
+          <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+        {%- endif %}
+      {%- endfor %}
+        </div>
       </div>
-    </div>
     {%- endif %}
     {%- endif %}
-
 
 {{ page.content | safe }}
-
-    {%- if config.extra.meta_post.position %}
-    {%- if config.extra.meta_post.position == "bottom" or config.extra.meta_post.position == "both" %}
-    {{- macros::meta_post(page=page, config=config) }}
+    {%- if config.extra.meta_post?.position %}
+    {%- if config.extra.meta_post?.position == "bottom" or config.extra.meta_post?.position == "both" %}
+    {{<meta_post page={page}  config={config} />}}
     {%- endif %}{%- endif %}
 
     {%- block page_footer %}
-    {{- macros::footer(page=page, config=config) }}
+    {{<footer page={page}  config={config} />}}
     {%- endblock page_footer %}
 
     {%- block comments_body %}
-    {%- if not config.extra.comment_system or config.extra.comment_system == "hyvor" %}
-    {%- if config.extra.comments.hyvor %}
-    <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments.hyvorcolor %} colors="{{ config.extra.comments.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
-    {%- endif %}
-    {%- elif config.extra.comment_system == "remark42" and config.extra.comments.remark42 %}
+    {%- if config.extra.comment_system == "hyvor" and config.extra.comments?.hyvor %}
+    <hyvor-talk-comments website-id={{ config.extra.comments?.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments?.hyvorcolor %} colors="{{ config.extra.comments?.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
+    {%- elif config.extra.comment_system == "remark42" and config.extra.comments?.remark42 %}
     <div id="remark42"></div>
     {%- endif %}
     {%- endblock comments_body %}
@@ -113,77 +105,75 @@
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc or page.extra.series %}
-
     <div class="sblock">
       {%- if page.extra.series %}
       {%- set num_extra_pages = config.extra.series_items | default(value=9) %}
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a><br>
         {%- if tag.page_count > num_extra_pages and num_extra_pages > 0 %}
-          {%- set sorted_array = tag.pages | sort(attribute="date") %}
-          {%- set num_pages = tag.page_count %}
+        {%- set sorted_array = tag.pages | sort(attribute="date") -%}
+        {%- set num_pages = tag.page_count %}
+        {#- Shows the first page -#}
+        {{<series_link inner={sorted_array[0]}  page={page}  config={config} />}}
 
-          {# Shows the first page #}
-          {{ macros::series_link(inner=sorted_array.0, page=page, config=config) }}
+        {#- Hides the next couple of pages if the current section is more than 3 away from start #}
+        {%- if current_section_index > 3 %}
+        <details>
+          <summary>{% set _m %}{{<translate key="more" default="more" i18n={i18n} />}}{% endset %}{{ _m | title }}...</summary>
+        </details>
+        <div class="hidden_li">
+          {%- for inner in sorted_array[1:(current_section_index - 2)] %}
+          <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+          {%- endfor %}
+        </div>
+        {%- endif %}
 
-          {# Hides the next couple of pages if the current section is more than 3 away from start #}
-          {%- if current_section_index > 3 %}
-            <details>
-              <summary>{{ macros::translate(key="more", default="more", i18n=i18n) | title }}...</summary>
-            </details>
-            <div class="hidden_li">
-              {%- for inner in sorted_array | slice(start=1, end=(current_section_index - 2)) %}
-                <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
-              {%- endfor %}
-            </div>
-          {%- endif %}
-
-          {# Max(current_section_index - 2, 1) #}
+          {#- Max(current_section_index - 2, 1) #}
           {%- if (current_section_index - 2 ) > 1 %}
             {%- set num = current_section_index - 2 %}
           {%- else %}
             {%- set num = 1 %}
           {%- endif %}
 
-          {# Shows two pages before current page #}
-          {%- for inner in sorted_array | slice(start=num, end=current_section_index) %}
-            <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
+          {#- Shows two pages before current page #}
+          {%- for inner in sorted_array[num:current_section_index] %}
+        <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
           {%- endfor %}
 
-          {# Shows the current page #}
+          {#- Shows the current page #}
           {%- if current_section_index != 0 and current_section_index != (num_pages - 1) %}
-            {{ macros::series_link(inner=sorted_array[current_section_index], page=page, config=config) }}
+            {{<series_link inner={sorted_array[current_section_index]}  page={page}  config={config} />}}
           {%- endif %}
 
-          {# Min(num_pages - 1, current_section_index + 3) #}
+          {#- Min(num_pages - 1, current_section_index + 3) #}
           {%- if (num_pages - 2 ) < (current_section_index + 3) %}
             {%- set num = num_pages - 1 %}
           {%- else %}
             {%- set num = current_section_index + 3 %}
           {%- endif %}
 
-          {%- for inner in sorted_array | slice(start=(current_section_index + 1), end=num ) %}
+          {%- for inner in sorted_array[(current_section_index + 1):num] %}
             <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
-          {% endfor %}
+          {%- endfor %}
 
           {%- if current_section_index < num_pages - 4 %}
             <details>
-              <summary>{{ macros::translate(key="more", default="more", i18n=i18n) | title }}...</summary>
+              <summary>{% set _m %}{{<translate key="more" default="more" i18n={i18n} />}}{% endset %}{{ _m | title }}...</summary>
             </details>
             <div class="hidden_li">
-              {%- for inner in sorted_array | slice(start=(current_section_index + 3), end=(num_pages - 1)) %}
+              {%- for inner in sorted_array[(current_section_index + 3):(num_pages - 1)] %}
                 <a href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
               {%- endfor %}
             </div>
           {%- endif %}
 
-        {%- set last = num_pages - 1%}
-        {{ macros::series_link(inner=sorted_array[last], page=page, config=config) }}
+        {%- set last = num_pages - 1 -%}
+        {{<series_link inner={sorted_array[last]}  page={page}  config={config} />}}
 
-        {# If there is not more than max pages render normally #}
+        {#- If there is not more than max pages render normally -#}
         {%- else %}
           {%- for inner in tag.pages | sort(attribute="date") %}
-            {{ macros::series_link(inner=inner, page=page, config=config) }}
+            {{<series_link inner={inner}  page={page}  config={config} />}}
           {%- endfor %}
         {%- endif %}
       </div>
@@ -191,7 +181,7 @@
 
       {%- if toc %}
       <div class="blockdiv sticky">
-        <a class="b s150" href="#">{{ macros::translate(key="Index", default="Index", i18n=i18n) }}</a>
+        <a class="b s150" href="#">{{<translate key="Index"  default="Index"  i18n={i18n} />}}</a>
         {%- for h in toc %}
         <div>
           <a href="#{{h.id | safe}}">{{ h.title }}</a>

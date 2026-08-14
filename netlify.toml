@@ -3,7 +3,7 @@ publish = "public"
 command = "npm run abridge -- '--base-url https://abridge.netlify.app'"
 
 [build.environment]
-ZOLA_VERSION = "0.19.1"
+ZOLA_VERSION = "0.23.3"
 
 [context.deploy-preview]
 command = "npm run abridge -- '--drafts --base-url https://abridge.netlify.app'"

@@ -15,7 +15,7 @@ tags = [
     "Config",
 ]
 +++
-Un thème rapide, léger et moderne [Zola](https://getzola.org) utilisant [abridge.css](https://github.com/Jieiku/abridge.css) (un cadre HTML CSS sémantique de classe légère). Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
+Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HTML sémantique épuré (peu de classes) et du CSS modulaire. Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
 
 <!-- more -->
 
@@ -54,7 +54,7 @@ Un thème rapide, léger et moderne [Zola](https://getzola.org) utilisant [abrid
 
 ## Démarrage rapide
 
-Ce thème nécessite la version {{ showdata(src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml") }} ou ultérieure de [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+Ce thème nécessite la version {{<showdata src="https://raw.githubusercontent.com/Jieiku/abridge/master/theme.toml" key="min_version" type="toml" page={page} config={config} />}} ou ultérieure de [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git
@@ -138,7 +138,7 @@ Zola va démarrer le serveur web dev, accessible par défaut à `http://127.0.0.
 
 Les changements sauvegardés seront rechargés en direct dans le navigateur. (appuyez sur `ctrl+f5`, ou pendant le développement mettez `pwa=false` dans `config.toml`)
 
-## Pagination {#pagination}
+## Pagination {% raw %}{#pagination}{% endraw %}
 
 Vous pouvez définir le nombre d'éléments de la page d'accueil en éditant le fichier `content_index.md` et en ajustant `paginate_by`
 
@@ -241,7 +241,7 @@ menu_footer = [
 ]
 ```
 
-### SEO et balises d'en-tête {#seo}
+### SEO et balises d'en-tête {% raw %}{#seo}{% endraw %}
 
 Vous pouvez revoir les balises SEO dans la macro seo située dans `templates/macros/seo.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers markdown du contenu.
 
@@ -268,7 +268,7 @@ Vous pouvez voir une démo sur [cette page] (https://abridge.netlify.app/overvie
 
 Pour de meilleures performances, je recommande de n'activer les mathématiques que [par base de page dans vos fichiers post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), plutôt que dans votre fichier config.toml principal.
 
-### PWA, Progressive Web App {#pwa}
+### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
 Le thème Abridge supporte les PWA. Vous pouvez installer le site entier en tant qu'application et le faire fonctionner hors ligne. Pour l'essayer, il suffit d'utiliser Google Chrome ou votre téléphone et d'aller ici : [abridge.netlify.app](https://abridge.netlify.app/)
 

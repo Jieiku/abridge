@@ -15,7 +15,7 @@ toc = true
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Mathematics",
 ]
 +++
@@ -28,7 +28,7 @@ Vous pouvez activer le $\KaTeX$ prise en charge globale, par section ou par page
 ## Activer globalement
 
 Pour activer le $\KaTeX$ prise en charge dans le monde entier, ajoutez `math = true` sous `[extra]` à la `config.toml`
-racine de votre site. Maintenant, le shortcode katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
+racine de votre site. Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
 et chaque section et page de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
 
 ```toml
@@ -40,7 +40,7 @@ math_auto_render = false
 ## Base par section
 
 Pour activer le $\KaTeX$ support dans une section particulière, ajoutez `math = true` sous `[extra]` dans le fichier `[SECTION_NAME]/_index.md`.
-Maintenant, le shortcode katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
+Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
 et la section de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
 
 ```toml
@@ -53,7 +53,7 @@ math = true
 ## Base par page
 
 Pour activer le $\KaTeX$ support dans une page particulière, ajouter `math = true` sous `[extra]` dans le frontmatter de la page.
-Maintenant, le shortcode katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
+Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
 et la page de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
 
 ```toml

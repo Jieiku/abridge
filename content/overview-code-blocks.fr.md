@@ -76,7 +76,7 @@ fn main() {
 ### TOML
 
 ```toml,linenos,hl_lines=3
-base_url = "https://abridge.netlify.app/"
+base_url = "https://abridge.pages.dev/"
 title = "Abridge"
 description = "Abridge is a fast and lightweight Zola theme using semantic html, abridge.css class-light CSS, and No Mandatory JS."
 default_language = "en"

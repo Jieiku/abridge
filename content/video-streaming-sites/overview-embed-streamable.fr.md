@@ -5,18 +5,18 @@ draft = false
 title = "Streamable intégrées"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Streamable"
+keywords = "Video, Components, Embed, Embedded, Streamable"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre streamable.
+Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre streamable.
 
 <!-- more -->
 

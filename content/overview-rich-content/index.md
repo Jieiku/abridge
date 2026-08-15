@@ -1,11 +1,11 @@
 +++
 date = 2021-05-15T15:00:00Z
-description = "A brief description of custom Shortcodes for Zola that implement modern html elements: video, image, gif, audio."
+description = "A brief description of custom Components for Zola that implement modern html elements: video, image, gif, audio."
 draft = false
 title = "Rich Content"
 
 [extra]
-keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
+keywords = "Images, Videos, Audio, Gif, Rich Content, Components"
 series = "Features"
 toc = true
 
@@ -15,10 +15,10 @@ tags = [
     "Video",
     "Audio",
     "Images",
-    "Shortcodes",
+    "Components",
 ]
 +++
-Several custom shortcodes are included to augment CommonMark. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
+Several custom components are included to augment CommonMark. `video`, `image`, `gif`, and `audio` were created to help you take advantage of modern HTML elements in your writing.
 
 <!-- more -->
 
@@ -34,7 +34,7 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 - `muted` when set, sets the audio muted initially.
 - `playsinline` when set, plays the video embeded instead of fullscreen on mobile browsers.
 
-*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*sources can be same path, relative path, or root path, like the [img component](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Optional Classes:**
 
@@ -77,7 +77,7 @@ Several custom shortcodes are included to augment CommonMark. `video`, `image`, 
 
 ## Image
 
-The `image` shortcode returns a `<picture>` tag with multiple sources.
+The `image` component returns a `<picture>` tag with multiple sources.
 
 Each string in the `sources` array should be a path to an image file of a different type (`avif`, `webp`, `png`, `jpg`, etc).
  The last image in the `sources` array is used to create an `<img>` tag for the browser to fall back on if the other formats are not yet supported.
@@ -88,7 +88,7 @@ Each string in the `sources` array should be a path to an image file of a differ
 - `w` sets the width of the image.
 - `h` sets the height of the image.
 
-*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*sources can be same path, relative path, or root path, like the [img component](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Optional Classes:**
 
@@ -115,7 +115,7 @@ Each string in the `sources` array should be a path to an image file of a differ
 
 ## GIF
 
-The `gif` shortcode is exactly the same as the [video shortcode](#video).
+The `gif` component is exactly the same as the [video component](#video).
  The only difference is it automatically has the additional properties: `autoplay`, `loop`, `muted`, `playsinline`.
 
 Using the `<video>` tag in place of gifs allows for reduced file sizes,
@@ -140,7 +140,7 @@ less reliable.
 
 ## Audio
 
-The `audio` shortcode takes a `sources` array of strings and returns an
+The `audio` component takes a `sources` array of strings and returns an
 `<audio>` tag. Each string in the `sources` array should be a path to an
 audio file of a different type (`ogg`, `mp3`, `flac`, `wav`, etc).
 The browser will play the first type it supports, so placing them in order of size smallest to largest will use the least bandwidth if that is your goal.
@@ -152,7 +152,7 @@ The browser will play the first type it supports, so placing them in order of si
 - `loop` when set, plays the audio on a loop.
 - `muted` when set, sets the audio muted initially.
 
-*sources can be same path, relative path, or root path, like the [img shortcode](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*sources can be same path, relative path, or root path, like the [img component](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Optional Classes:**
 

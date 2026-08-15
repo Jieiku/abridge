@@ -1,11 +1,11 @@
 +++
 date = 2021-05-15T15:00:00Z
-description = "Una breve descripción de Shortcodes personalizados para Zola que implementan elementos html modernos: video, imagen, gif, audio."
+description = "Una breve descripción de Components personalizados para Zola que implementan elementos html modernos: video, imagen, gif, audio."
 draft = false
 title = "Contenido enriquecido"
 
 [extra]
-keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
+keywords = "Images, Videos, Audio, Gif, Rich Content, Components"
 series = "Features"
 toc = true
 
@@ -15,10 +15,10 @@ tags = [
     "Video",
     "Audio",
     "Images",
-    "Shortcodes",
+    "Components",
 ]
 +++
-Se incluyen varios shortcodes personalizados para aumentar CommonMark. `video` los shortcodes `image`, `gif` y `audio` se crearon para ayudarle a aprovechar los elementos HTML modernos en sus escritos.
+Se incluyen varios components personalizados para aumentar CommonMark. `video` los components `image`, `gif` y `audio` se crearon para ayudarle a aprovechar los elementos HTML modernos en sus escritos.
 
 <!-- more -->
 
@@ -34,7 +34,7 @@ Se incluyen varios shortcodes personalizados para aumentar CommonMark. `video` l
 - `muted` cuando está activado, silencia el audio inicialmente.
 - `playsinline` si está configurado, reproduce el vídeo incrustado en lugar de a pantalla completa en navegadores móviles.
 
-*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Clases opcionales:**
 
@@ -77,7 +77,7 @@ Se incluyen varios shortcodes personalizados para aumentar CommonMark. `video` l
 
 ## Imagen
 
-El shortcode `image` devuelve una etiqueta `<picture>` con múltiples fuentes.
+El component `image` devuelve una etiqueta `<picture>` con múltiples fuentes.
 
 Cada cadena en la matriz `sources` debe ser una ruta a un archivo de imagen de un tipo diferente (`avif`, `webp`, `png`, `jpg`, etc).
 La última imagen en la matriz `sources` se utiliza para crear una etiqueta `<img>` para que el navegador recurra a ella si los otros formatos aún no son compatibles.
@@ -88,7 +88,7 @@ La última imagen en la matriz `sources` se utiliza para crear una etiqueta `<im
 - `w` establece el ancho de la imagen.
 - `h` establece la altura de la imagen.
 
-*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Clases opcionales:**
 
@@ -115,7 +115,7 @@ La última imagen en la matriz `sources` se utiliza para crear una etiqueta `<im
 
 ## GIF
 
-El shortcode `gif` es exactamente igual que el [shortcode video](#video).
+El component `gif` es exactamente igual que el [component video](#video).
 La única diferencia es que automáticamente tiene las propiedades adicionales: `autoplay`, `loop`, `muted`, `playsinline`.
 
 El uso de la etiqueta `<video>` en lugar de gifs permite reducir el tamaño de los archivos,
@@ -140,7 +140,7 @@ menos fiable.
 
 ## Audio
 
-El shortcode `audio` toma una matriz `sources` de cadenas y devuelve una etiqueta
+El component `audio` toma una matriz `sources` de cadenas y devuelve una etiqueta
 `<audio>`. Cada cadena de la matriz `sources` debe ser una ruta a un archivo de audio
 de un tipo diferente (`ogg`, `mp3`, `flac`, `wav`, etc).
 El navegador reproducirá el primer tipo que admita, por lo que colocarlos en orden de menor a mayor tamaño utilizará el menor ancho de banda si ese es su objetivo.
@@ -152,7 +152,7 @@ El navegador reproducirá el primer tipo que admita, por lo que colocarlos en or
 - `loop` cuando se establece, reproduce el audio en bucle.
 - `muted` cuando se establece, establece el audio silenciado inicialmente.
 
-*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*Las fuentes pueden ser la misma ruta, la ruta relativa o la ruta raíz, como el [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Clases opcionales:**
 

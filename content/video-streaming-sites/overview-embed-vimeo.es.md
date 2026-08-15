@@ -1,22 +1,22 @@
 +++
 date = 2021-05-07T15:00:00Z
-description = "Artículo de ejemplo que muestra un shortcode personalizado de Zola para incrustar vídeos de Vimeo en tus páginas."
+description = "Artículo de ejemplo que muestra un component personalizado de Zola para incrustar vídeos de Vimeo en tus páginas."
 draft = false
 title = "Incrustar Vimeo"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
+keywords = "Video, Components, Embed, Embedded, Vimeo"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola tiene muchos shortcodes, y los nuevos se añaden fácilmente, este ejemplo muestra vimeo.
+Zola tiene muchos components, y los nuevos se añaden fácilmente, este ejemplo muestra vimeo.
 
 <!-- more -->
 

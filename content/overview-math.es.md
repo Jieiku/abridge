@@ -15,7 +15,7 @@ toc = true
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Mathematics",
 ]
 +++
@@ -40,7 +40,7 @@ math_auto_render = false
 ## Base por sección
 
 Para habilitar el soporte $\\KaTeX$ en una sección en particular, añada `math = true` bajo `[extra]` en el `[SECTION_NAME]/_index.md`.
-Ahora el shortcode katex será renderizado, también puede añadir `math_auto_render = true`
+Ahora el component katex será renderizado, también puede añadir `math_auto_render = true`
 y la sección de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
 
 ```toml
@@ -53,7 +53,7 @@ math = true
 ## Por página
 
 Para habilitar el soporte $\\KaTeX$ en una página en particular, añada `math = true` bajo `[extra]` en el frontmatter
-de la página. Ahora el shortcode katex será renderizado, también puede añadir `math_auto_render = true`
+de la página. Ahora el component katex será renderizado, también puede añadir `math_auto_render = true`
 y la página de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
 
 ```toml

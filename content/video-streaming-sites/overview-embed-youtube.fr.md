@@ -5,18 +5,18 @@ draft = false
 title = "Youtube intégrées"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Youtube"
+keywords = "Video, Components, Embed, Embedded, Youtube"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre youtube.
+Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre youtube.
 
 <!-- more -->
 

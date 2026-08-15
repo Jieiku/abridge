@@ -5,18 +5,18 @@ draft = false
 title = "Vimeo intégrées"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
+keywords = "Video, Components, Embed, Embedded, Vimeo"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola a de nombreux shortcodes, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.
+Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.
 
 <!-- more -->
 

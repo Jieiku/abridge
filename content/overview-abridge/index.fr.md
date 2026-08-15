@@ -15,7 +15,7 @@ tags = [
     "Config",
 ]
 +++
-Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HTML sémantique épuré (peu de classes) et du CSS modulaire. Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
+Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HTML sémantique épuré (peu de classes) et du CSS modulaire. Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.pages.dev) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
 
 <!-- more -->
 
@@ -23,12 +23,12 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 
 ## Caractéristiques
 
-- Scores parfaits pour [Lighthouse](https://pagespeed.web.dev/report?url=abridge.netlify.app), [YellowLabTools](https://yellowlab.tools/), et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.netlify.app).
+- Scores parfaits pour [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/), et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.pages.dev).
 - [Prise en charge des PWA](#pwa) (Progressive Web Application).
-- Tout le JavaScript peut être [entièrement désactivé](https://abridge.netlify.app/overview-abridge/#javascript-files).
+- Tout le JavaScript peut être [entièrement désactivé](https://abridge.pages.dev/overview-abridge/#javascript-files).
 - Thèmes Dark, Light, Auto et Switcher. (les couleurs peuvent être personnalisées, variables css)
-- Code [coloration syntaxique](https://abridge.netlify.app/overview-code-blocks/). (couleurs personnalisables, variables css)
-- Blocs de code numérotés avec [mise en évidence des lignes](https://abridge.netlify.app/overview-code-blocks/#toml).
+- Code [coloration syntaxique](https://abridge.pages.dev/overview-code-blocks/). (couleurs personnalisables, variables css)
+- Blocs de code numérotés avec [mise en évidence des lignes](https://abridge.pages.dev/overview-code-blocks/#toml).
 - Site entièrement hors ligne en utilisant le PWA **ou** en mettant `search_library = "offline"` dans `config.toml`.
 - Support multi-langues.
 - Support de la recherche. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
@@ -43,14 +43,14 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 - Bouton de copie des blocs de code.
 - Lien e-mail dans le pied de page. (anti-spam)
 - Support [KaTeX](https://katex.org/).
-- Page d'archive](https://abridge.netlify.app/archive/).
-- Tags](https://abridge.netlify.app/tags/).
+- Page d'archive](https://abridge.pages.dev/archive/).
+- Tags](https://abridge.pages.dev/tags/).
 - Catégories. (similaire aux Tags, désactivé/commenté par défaut)
 - Liens vers les icônes sociales dans le pied de page.
 - Conception réactive. (mobile first)
-- Shortcodes vidéo : [Youtube](https://abridge.netlify.app/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.netlify.app/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.netlify.app/video-streaming-sites/overview-embed-streamable/).
-- Raccourcis pour les médias : [video](https://abridge.netlify.app/overview-rich-content/#video), [img](https://abridge.netlify.app/overview-images/#img-shortcode), [imgswap](https://abridge.netlify.app/overview-images/#imgswap-shortcode), [image](https://abridge.netlify.app/overview-rich-content/#image), [gif](https://abridge.netlify.app/overview-rich-content/#gif), [audio](https://abridge.netlify.app/overview-rich-content/#audio).
-- Autres codes courts : [showdata](https://abridge.netlify.app/overview-showdata/), [katex](https://abridge.netlify.app/overview-math/#usage-1).
+- Components vidéo : [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
+- Raccourcis pour les médias : [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
+- Autres codes courts : [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
 
 ## Démarrage rapide
 
@@ -243,7 +243,7 @@ menu_footer = [
 
 ### SEO et balises d'en-tête {% raw %}{#seo}{% endraw %}
 
-Vous pouvez revoir les balises SEO dans la macro seo située dans `templates/macros/seo.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers markdown du contenu.
+Vous pouvez revoir les balises SEO dans la component seo située dans `templates/components/seo.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers markdown du contenu.
 
 Dans votre fichier markdown, vous devez définir un titre de moins de 60 caractères et une description de 80 à 160 caractères. La description est ce qui est affiché dans les résultats de recherche sous le titre de la page. Partout où vous ne définissez pas de description de page, le fichier config.description du site principal sera utilisé à la place.
 
@@ -264,13 +264,13 @@ thumbnail = "ferris-gesture.png"
 
 KaTeX peut être utilisé pour afficher des mathématiques complexes. Il s'agit d'une "composition mathématique rapide pour le web".
 
-Vous pouvez voir une démo sur [cette page] (https://abridge.netlify.app/overview-math/).
+Vous pouvez voir une démo sur [cette page] (https://abridge.pages.dev/overview-math/).
 
 Pour de meilleures performances, je recommande de n'activer les mathématiques que [par base de page dans vos fichiers post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), plutôt que dans votre fichier config.toml principal.
 
 ### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
-Le thème Abridge supporte les PWA. Vous pouvez installer le site entier en tant qu'application et le faire fonctionner hors ligne. Pour l'essayer, il suffit d'utiliser Google Chrome ou votre téléphone et d'aller ici : [abridge.netlify.app](https://abridge.netlify.app/)
+Le thème Abridge supporte les PWA. Vous pouvez installer le site entier en tant qu'application et le faire fonctionner hors ligne. Pour l'essayer, il suffit d'utiliser Google Chrome ou votre téléphone et d'aller ici : [abridge.pages.dev](https://abridge.pages.dev/)
 
 Si vous utilisez Chrome sur un ordinateur de bureau, cherchez le bouton d'installation à la fin de la barre d'adresse. Sur Android, vous devriez obtenir un popup pour installer, vous pouvez également installer à partir du menu à 3 points dans le coin supérieur droit. Une fois la PWA installée, vous pouvez vous déconnecter complètement et continuer à naviguer ou à faire des recherches sur le site !
 

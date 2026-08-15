@@ -1,22 +1,22 @@
 +++
 date = 2021-05-08T15:00:00Z
-description = "Artículo de ejemplo que muestra un shortcode personalizado de Zola para incrustar vídeos de Youtube en tus páginas."
+description = "Artículo de ejemplo que muestra un component personalizado de Zola para incrustar vídeos de Youtube en tus páginas."
 draft = false
 title = "Incrustar Youtube"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Youtube"
+keywords = "Video, Components, Embed, Embedded, Youtube"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola tiene muchos shortcodes, y nuevos son facilmente añadidos, este ejemplo muestra youtube.
+Zola tiene muchos components, y nuevos son facilmente añadidos, este ejemplo muestra youtube.
 
 <!-- more -->
 

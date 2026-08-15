@@ -1,22 +1,22 @@
 +++
 date = 2021-05-07T15:00:00Z
-description = "Sample article showcasing a custom Zola shortcode for embedding Vimeo Videos into your pages."
+description = "Sample article showcasing a custom Zola component for embedding Vimeo Videos into your pages."
 draft = false
 title = "Embed Vimeo"
 
 [extra]
-keywords = "Video, Shortcodes, Embed, Embedded, Vimeo"
+keywords = "Video, Components, Embed, Embedded, Vimeo"
 series = "Features"
 toc = true
 
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Video",
 ]
 +++
-Zola has many shortcodes, and new are easily added, this example shows vimeo.
+Zola has many components, and new are easily added, this example shows vimeo.
 
 <!-- more -->
 

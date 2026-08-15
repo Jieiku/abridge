@@ -1,11 +1,11 @@
 +++
 date = 2021-05-09T15:00:00Z
-description = "A brief description of a custom Shortcode for Zola that implements loading and displaying external data."
+description = "A brief description of a custom Component for Zola that implements loading and displaying external data."
 draft = false
-title = "Showdata Shortcode"
+title = "Showdata Component"
 
 [extra]
-keywords = "Data, Load, External, Shortcodes"
+keywords = "Data, Load, External, Components"
 series = "Features"
 toc = true
 
@@ -13,10 +13,10 @@ toc = true
 tags = [
     "Features",
     "Data",
-    "Shortcodes",
+    "Components",
 ]
 +++
-The `showdata` shortcode can load and display data from an external source via Zola's [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) function.
+The `showdata` component can load and display data from an external source via Zola's [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) function.
 
 <!-- more -->
 

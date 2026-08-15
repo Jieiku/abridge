@@ -1,11 +1,11 @@
 +++
 date = 2021-05-19T15:00:00Z
-description = "Las imágenes pueden incrustarse directamente usando markdown `![Ferris](ferris.svg)`, pero usando un shortcode se evita CLS al establecer explícitamente la anchura y la altura."
+description = "Las imágenes pueden incrustarse directamente usando markdown `![Ferris](ferris.svg)`, pero usando un component se evita CLS al establecer explícitamente la anchura y la altura."
 draft = false
 title = "Códigos cortos de imagen"
 
 [extra]
-keywords = "Image, Markdown, Shortcodes, Swap"
+keywords = "Image, Markdown, Components, Swap"
 series = "Features"
 thumbnail = "ferris-gesture.png"
 toc = true
@@ -13,11 +13,11 @@ toc = true
 [taxonomies]
 tags = [
     "Features",
-    "Shortcodes",
+    "Components",
     "Images",
 ]
 +++
-Este post cubre los **shortcodes imgswap e img**. Las imágenes también se pueden incrustar directamente utilizando markdown `![Ferris](ferris.svg)`, pero es mejor utilizar un código corto para que pueda establecer explícitamente la anchura y la altura, esto ayudará a evitar el cambio de diseño de contenido que mejora la experiencia del usuario y la puntuación de Google Lighthouse.
+Este post cubre los **components imgswap e img**. Las imágenes también se pueden incrustar directamente utilizando markdown `![Ferris](ferris.svg)`, pero es mejor utilizar un código corto para que pueda establecer explícitamente la anchura y la altura, esto ayudará a evitar el cambio de diseño de contenido que mejora la experiencia del usuario y la puntuación de Google Lighthouse.
 
 <!-- more -->
 

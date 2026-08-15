@@ -1,11 +1,11 @@
 +++
 date = 2021-05-15T15:00:00Z
-description = "Une brève description des shortcodes personnalisés pour Zola qui mettent en œuvre des éléments html modernes : vidéo, image, gif, audio."
+description = "Une brève description des components personnalisés pour Zola qui mettent en œuvre des éléments html modernes : vidéo, image, gif, audio."
 draft = false
 title = "Un contenu riche"
 
 [extra]
-keywords = "Images, Videos, Audio, Gif, Rich Content, Shortcodes"
+keywords = "Images, Videos, Audio, Gif, Rich Content, Components"
 series = "Features"
 toc = true
 
@@ -15,10 +15,10 @@ tags = [
     "Video",
     "Audio",
     "Images",
-    "Shortcodes",
+    "Components",
 ]
 +++
-Plusieurs shortcodes personnalisés sont inclus pour améliorer CommonMark. `video` les shortcodes `image`, `gif` et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans vos écrits.
+Plusieurs components personnalisés sont inclus pour améliorer CommonMark. `video` les components `image`, `gif` et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans vos écrits.
 
 <!-- more -->
 
@@ -34,7 +34,7 @@ Plusieurs shortcodes personnalisés sont inclus pour améliorer CommonMark. `vid
 - `muted` lorsque cette option est activée, le son est initialement coupé.
 - `playsinline` lorsque cette option est activée, la vidéo est lue en mode intégré plutôt qu'en mode plein écran sur les navigateurs mobiles.
 
-*les sources peuvent être le même chemin, le chemin relatif ou le chemin racine, comme le [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*les sources peuvent être le même chemin, le chemin relatif ou le chemin racine, comme le [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Classes optionnelles :**
 
@@ -77,7 +77,7 @@ Plusieurs shortcodes personnalisés sont inclus pour améliorer CommonMark. `vid
 
 ## Image
 
-Le shortcode `image` renvoie une balise `<picture>` avec plusieurs sources.
+Le component `image` renvoie une balise `<picture>` avec plusieurs sources.
 
 Chaque chaîne du tableau `sources` doit être un chemin vers un fichier image d'un type différent (`avif`, `webp`, `png`, `jpg`, etc).
 La dernière image du tableau `sources` est utilisée pour créer une balise `<img>` sur laquelle le navigateur peut se rabattre si les autres formats ne sont pas encore pris en charge.
@@ -88,7 +88,7 @@ La dernière image du tableau `sources` est utilisée pour créer une balise `<i
 - `w` définit la largeur de l'image.
 - `h` définit la hauteur de l'image.
 
-*les sources peuvent être le même chemin, le chemin relatif ou le chemin racine, comme le [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*les sources peuvent être le même chemin, le chemin relatif ou le chemin racine, comme le [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Classes optionnelles :**
 
@@ -115,7 +115,7 @@ La dernière image du tableau `sources` est utilisée pour créer une balise `<i
 
 ## GIF
 
-Le shortcode `gif` est exactement le même que le [shortcode vidéo](#video).
+Le component `gif` est exactement le même que le [component vidéo](#video).
 La seule différence est qu'il possède automatiquement les propriétés supplémentaires : `autoplay`, `loop`, `muted`, `playsinline`.
 
 L'utilisation de la balise `<video>` à la place des gifs permet de réduire la taille des fichiers,
@@ -140,7 +140,7 @@ moins fiable.
 
 ## Audio
 
-Le shortcode `audio` prend un tableau de chaînes `sources` et renvoie une balise
+Le component `audio` prend un tableau de chaînes `sources` et renvoie une balise
 `<audio>`. Chaque chaîne du tableau `sources` doit être un chemin vers un fichier audio
 d'un type différent (`ogg`, `mp3`, `flac`, `wav`, etc).
 Le navigateur lira le premier type qu'il prend en charge, donc les placer dans l'ordre de la taille la plus petite à la plus grande utilisera le moins de bande passante si c'est votre objectif.
@@ -152,7 +152,7 @@ Le navigateur lira le premier type qu'il prend en charge, donc les placer dans l
 - `loop` lorsque cette option est activée, l'audio est lu en boucle.
 - `muted` lorsqu'il est défini, met l'audio en sourdine au départ.
 
-*les sources peuvent être le même chemin, un chemin relatif ou le chemin de la racine, comme le [shortcode img](https://abridge.pages.dev/overview-images/#img-shortcode)*
+*les sources peuvent être le même chemin, un chemin relatif ou le chemin de la racine, comme le [component img](https://abridge.pages.dev/overview-images/#img-component)*
 
 **Classes optionnelles :**
 

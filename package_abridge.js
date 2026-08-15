@@ -225,7 +225,7 @@ async function abridge() {
     minify(['static/js/theme_light.js']);
     // Something went wrong with minifying katexbundle, so commenting this out for now
     // minify(['static/js/katex.min.js','static/js/mathtex-script-type.min.js','static/js/katex-auto-render.min.js','static/js/katexoptions.js'],'static/js/katexbundle.min.js');
-    minify(['static/js/elasticlunr.min.js', 'static/js/search.js'], 'static/js/search_elasticlunr.min.js');
+    minify(['static/js/elasticlunr.min.js', 'static/js/elasticlunr_bridge.js', 'static/js/search.js'], 'static/js/search_elasticlunr.min.js');
     minify(['static/js/tinysearch.js'], 'static/js/search_tinysearch.min.js');
     minify(['static/js/prestyle.js', 'static/js/theme_button.js', 'static/js/email.js', 'static/js/codecopy.js', 'static/js/sw_load.js'], 'static/js/abridge_nosearch.min.js');
     minify(['static/js/prestyle.js', 'static/js/theme_button.js', 'static/js/email.js', 'static/js/codecopy.js'], 'static/js/abridge_nosearch_nopwa.min.js');
@@ -329,13 +329,16 @@ function bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, s
     if ((search_library === 'offline' || (search_library === 'elasticlunrjava' && uglyurls === true))) {
       minify_files.push('public/search_index.en.js');
       minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr_bridge.js'));// capture elasticlunr, drop window globals
       minify_files.push(path.join(bpath, 'static/js/searchjavaugly.js'));
     } else if (search_library === 'elasticlunrjava') {
       minify_files.push('public/search_index.en.js');
       minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr_bridge.js'));// capture elasticlunr, drop window globals
       minify_files.push(path.join(bpath, 'static/js/searchjava.js'));
     } else if (search_library === 'elasticlunr') {//abridge default
       minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
+      minify_files.push(path.join(bpath, 'static/js/elasticlunr_bridge.js'));// capture elasticlunr, drop window globals
       minify_files.push(path.join(bpath, 'static/js/search.js'));
     } else if (search_library === 'pagefind') {
       minify_files.push(path.join(__dirname, 'static/js/pagefind_search.js'));

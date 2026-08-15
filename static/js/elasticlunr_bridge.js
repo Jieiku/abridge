@@ -1,17 +1,11 @@
-// Include immediately after elasticlunr.min.js in the JS bundle.
-//
-// elasticlunr's UMD assigns window.elasticlunr. Keep a local binding for search.js
-// in this same bundle, and expose window.lunr only long enough for optional
-// on-demand language packs (lunr.stemmer.support.min.js, lunr.fr.min.js, …).
-// Those scripts mutate the same object; after they run we drop the global name.
+// Runs inside the IIFE opened by elasticlunr_scope_begin.js, after elasticlunr.min.js.
+// Capture the UMD export, drop window.elasticlunr, keep a temporary window.lunr for
+// on-demand language packs (stemmer.support, lunr.fr, …), then remove lunr after load.
 var elasticlunr = window.elasticlunr;
 try { delete window.elasticlunr; } catch (e) {}
 window.lunr = elasticlunr;
 
-// head_js loads language scripts with defer, after this bundle. Deferred scripts
-// run in document order before DOMContentLoaded, so stemmer/lang packs attach
-// first; then we remove the temporary global. Local `elasticlunr` still has
-// stemmerSupport / language plugins for search.
+// Language scripts use defer and run before DOMContentLoaded, in document order.
 document.addEventListener("DOMContentLoaded", function () {
   try { delete window.lunr; } catch (e) {}
 });

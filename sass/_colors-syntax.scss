@@ -27,7 +27,7 @@
 }
 
 @function color($color-syntax,$dark,$h0,$h1,$h2,$h3,$h4,$h5,$h6,$h7,$h8,$h9,$ha) {
-  @if $color-syntax == "charcoal" {//placeholder, this is actuall a copy of abridge syntax
+  @if $color-syntax == "charcoal" {//placeholder, this is actually a copy of abridge syntax
     @if $dark {/// Dark Syntax Colors
       $h0: #191919 !default;// background color
       $h1: #ddd !default;// unstyled text
@@ -57,7 +57,7 @@
       $result: $h0 $h1 $h2 $h3 $h4 $h5 $h6 $h7 $h8 $h9 $ha;
       @return $result;
     }
-  } @else if $color-syntax == "dracula" {//placeholder, this is actuall a copy of abridge syntax
+  } @else if $color-syntax == "dracula" {//placeholder, this is actually a copy of abridge syntax
     @if $dark {/// Dark Syntax Colors
       $h0: #191919 !default;// background color
       $h1: #ddd !default;// unstyled text

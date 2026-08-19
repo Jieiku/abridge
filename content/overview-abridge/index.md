@@ -29,7 +29,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing clas
 - Dark, Light, Auto, and Switcher themes. (colors can be customized, css variables)
 - Code [syntax highlighting](https://abridge.pages.dev/overview-code-blocks/). (colors can be customized, css variables)
 - Numbered code blocks with [line highlighting](https://abridge.pages.dev/overview-code-blocks/#toml).
-- Entirely Offline Site by using the PWA **or** by setting `search_library = "offline"` in `config.toml`.
+- Entirely Offline Site by using the PWA **or** by setting `search_library = "offline"` in `zola.toml`.
 - Multi-language support.
 - Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
 - Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
@@ -51,6 +51,17 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing clas
 - Video Components: [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
 - Media Components: [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
 - Other Components: [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
+
+## Windows Users
+
+Below I use some linux commands during setup, to have a similar environment you can install [Msys2](https://www.msys2.org/).
+With msys2 use shift insert to paste into the terminal, I prefer the UCRT64 launcher.
+
+```bash
+MSYS2
+pacman -Syu
+pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola rsync
+```
 
 ## Quick Start
 
@@ -97,7 +108,7 @@ Copy some files from the theme directory to your project's root directory:
 
 ```bash
 rsync themes/abridge/.gitignore .gitignore
-rsync themes/abridge/config.toml config.toml
+rsync themes/abridge/zola.toml zola.toml
 rsync themes/abridge/content/_index.md content/
 rsync -r themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
@@ -105,17 +116,17 @@ rsync themes/abridge/package_abridge.js package_abridge.js
 rsync themes/abridge/package.json package.json
 ```
 
-- `config.toml` base configuration with all config values.
+- `zola.toml` base configuration with all config values.
 - `content/_index.md` required to set pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
 - `netlify.toml` settings to deploy your repo with netlfiy.
 - `package_abridge.js` node script to: update cache files list in PWA, minify js, bundle js
 - `package.json` used by node, defines scripts and dependencies.
 
-Uncomment the theme line in your project's root config.toml:
+Uncomment the theme line in your project's root zola.toml:
 
 ```bash
-sed -i 's/^#theme = "abridge"/theme = "abridge"/' config.toml
+sed -i 's/^#theme = "abridge"/theme = "abridge"/' zola.toml
 ```
 
 ### 4: Add new content
@@ -136,7 +147,7 @@ zola serve
 
 Zola will start the dev web server, accessible by default at `http://127.0.0.1:1111`.
 
-Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `config.toml`)
+Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `zola.toml`)
 
 ## Pagination {% raw %}{#pagination}{% endraw %}
 
@@ -198,10 +209,10 @@ If you have abridge configured to use the switcher mode instead of auto/dark/lig
 
 If your visitor uses noscript or some other javascript blocking browser addon, then they will be stuck with whatever the configured default theme is for the switcher mode.
 
-To adjust this mode you would set the following two config values in `abridge.scss` **AND** `config.toml`:
+To adjust this mode you would set the following two config values in `abridge.scss` **AND** `zola.toml`:
 
 ```scss
-$switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in config.toml)
+$switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in zola.toml)
 ```
 
 ```toml
@@ -210,13 +221,13 @@ js_switcher_default = "dark" # default nojs switcher mode: dark, light (make sur
 
 By default abridge uses dark mode for the switcher, so unless you want to set the default mode to light for nojs/noscript visitors, then you do not need to worry about these settings.
 
-## Config.toml Configuration
+## Zola.toml Configuration
 
-Most Options in `config.toml` are self documenting. (obvious between name of config value and comments)
+Most Options in `zola.toml` are self documenting. (obvious between name of config value and comments)
 
-Abridge will work with a barebones `config.toml` because default values are provided in the template files.
+Abridge will work with a barebones `zola.toml` because default values are provided in the template files.
 
-I recommend copying the entire config.toml file as outlined in Step 3 as it provides all configurable values.
+I recommend copying the entire zola.toml file as outlined in Step 3 as it provides all configurable values.
 
 ### Top and Footer menus
 
@@ -243,13 +254,13 @@ menu_footer = [
 
 ### SEO and Header Tags {% raw %}{#seo}{% endraw %}
 
-You can review the SEO tags in the seo component located at `templates/components/seo.html`, all configurable values should be in `config.toml` under `config.extra` or in the content markdown files.
+You can review the SEO tags in the seo component located at `templates/components/seo.html`, all configurable values should be in `zola.toml` under `config.extra` or in the content markdown files.
 
 In your post markdown file you should set a title less than 60 characters and a description between 80 and 160 characters in length. The description is what is displayed in search results below the page title. Anywhere that you do not set a page description, the primary site config.description will be used instead.
 
-You should also set page specific keywords unless your keywords defined in config.toml suffice, any keywords that you add to the page are in addition to the ones defined in config.toml, so do not add those same keywords to your page keywords.
+You should also set page specific keywords unless your keywords defined in zola.toml suffice, any keywords that you add to the page are in addition to the ones defined in zola.toml, so do not add those same keywords to your page keywords.
 
-You can optionally also set a page specific image for search results by using page.extra.thumbnail. Facebook, Twitter, and OpenGraph Cards are supported (automatic image & description for posted links). OpenGraph recommends 1200 x 630 (1.9:1). Twitter recommends 2:1 for large and 1:1 for small. If you do not set a page specific thumbnail then the banner defined in config.toml will be used instead.
+You can optionally also set a page specific image for search results by using page.extra.thumbnail. Facebook, Twitter, and OpenGraph Cards are supported (automatic image & description for posted links). OpenGraph recommends 1200 x 630 (1.9:1). Twitter recommends 2:1 for large and 1:1 for small. If you do not set a page specific thumbnail then the banner defined in zola.toml will be used instead.
 
 Refer to [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) for an example.
 
@@ -266,7 +277,7 @@ KaTeX can be used to display complex mathematics, it is a "Fast math typesetting
 
 You can see a demo on [this page](https://abridge.pages.dev/overview-math/).
 
-For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main config.toml file.
+For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main zola.toml file.
 
 ### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
@@ -276,15 +287,15 @@ If using Chrome on desktop then look at the end of the address bar for the insta
 
 There is an npm script to generate the file cache list and minification `npm run abridge`. My [netlify.toml](https://github.com/Jieiku/abridge/blob/master/netlify.toml) file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
 
-To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `config.toml`. If even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
+To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `zola.toml`. If even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
 
-The PWA feature is also easy to disable by simply setting `pwa = false` in `config.toml`
+The PWA feature is also easy to disable by simply setting `pwa = false` in `zola.toml`
 
 ## Performance Optimization
 
 ### Javascript files
 
-All javascript can be disabled in `config.toml`:
+All javascript can be disabled in `zola.toml`:
 
 ```toml
 build_search_index = false
@@ -317,7 +328,7 @@ These are the javascript files used by Abridge:
 
 All necessary bundles are dynamically generated by the node script [package_abridge.js](https://github.com/Jieiku/abridge/blob/master/package_abridge.js)
 
-The node script will scan your config.toml for relevant config values, and then based on your config.tomnl generate your required bundles.
+The node script will scan your zola.toml for relevant config values, and then based on your zola.tomnl generate your required bundles.
 
 All that is necessary is `zola build && npm run abridge`.
 
@@ -335,7 +346,7 @@ To use tinysearch extra steps are required.
 
 ```bash
 npm install
-sed -i 's/^search_library =.*/search_library = "pagefind"/' config.toml
+sed -i 's/^search_library =.*/search_library = "pagefind"/' zola.toml
 npm run abridge
 # zola serve
 ```
@@ -343,14 +354,14 @@ npm run abridge
 **Switch to elasticlunr:**
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "elasticlunr"/' config.toml
+sed -i 's/^search_library =.*/search_library = "elasticlunr"/' zola.toml
 npm run abridge
 ```
 
 **Switch to nosearch:**
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "false"/' config.toml
+sed -i 's/^search_library =.*/search_library = "false"/' zola.toml
 npm run abridge
 ```
 
@@ -369,7 +380,7 @@ exit # reload shell environment
 Switch Abridge to tinysearch:
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
+sed -i 's/^search_library =.*/search_library = "tinysearch"/' zola.toml
 npm run abridge
 tinysearch --optimize --path static public/data_tinysearch/index.html
 # zola serve

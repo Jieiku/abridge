@@ -27,7 +27,7 @@ You can enable the $\KaTeX$ support globally, per-section or per-page basis.
 
 ## Enable Globally
 
-To enable the $\KaTeX$ support globally, add `math = true` under `[extra]` of the `config.toml`
+To enable the $\KaTeX$ support globally, add `math = true` under `[extra]` of the `zola.toml`
 at your site root. Now the katex component will be rendered, you can also add `math_auto_render = true`
 and every section and page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
 

@@ -29,7 +29,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 - Thèmes Dark, Light, Auto et Switcher. (les couleurs peuvent être personnalisées, variables css)
 - Code [coloration syntaxique](https://abridge.pages.dev/overview-code-blocks/). (couleurs personnalisables, variables css)
 - Blocs de code numérotés avec [mise en évidence des lignes](https://abridge.pages.dev/overview-code-blocks/#toml).
-- Site entièrement hors ligne en utilisant le PWA **ou** en mettant `search_library = "offline"` dans `config.toml`.
+- Site entièrement hors ligne en utilisant le PWA **ou** en mettant `search_library = "offline"` dans `zola.toml`.
 - Support multi-langues.
 - Support de la recherche. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
 - Touches de navigation pour les suggestions de recherche, `/` focus, `arrow` move, `enter` select, `escape` close.
@@ -51,6 +51,17 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 - Components vidéo : [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
 - Raccourcis pour les médias : [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
 - Autres codes courts : [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
+
+## Utilisateurs de Windows
+
+J'utilise ci-dessous quelques commandes Linux lors de la configuration ; pour disposer d'un environnement similaire, vous pouvez installer [Msys2](https://www.msys2.org/).
+Avec Msys2, utilisez les touches Maj + Inser pour coller du texte dans le terminal ; je privilégie le lanceur UCRT64.
+
+```bash
+MSYS2
+pacman -Syu
+pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola rsync
+```
 
 ## Démarrage rapide
 
@@ -97,7 +108,7 @@ Copiez quelques fichiers du répertoire theme vers le répertoire racine de votr
 
 ```bash
 rsync themes/abridge/.gitignore .gitignore
-rsync themes/abridge/config.toml config.toml
+rsync themes/abridge/zola.toml zola.toml
 rsync themes/abridge/content/_index.md content/
 rsync -r themes/abridge/COPY-TO-ROOT-SASS/* sass/
 rsync themes/abridge/netlify.toml netlify.toml
@@ -105,17 +116,17 @@ rsync themes/abridge/package_abridge.js package_abridge.js
 rsync themes/abridge/package.json package.json
 ```
 
-- `config.toml` configuration de base avec toutes les valeurs de configuration.
+- `zola.toml` configuration de base avec toutes les valeurs de configuration.
 - `content/_index.md` nécessaire pour définir la pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` pour personnaliser les variables d'Abridge.
 - `netlify.toml` pour déployer votre repo avec netlfiy.
 - `package_abridge.js` script node pour : mettre à jour la liste des fichiers cache dans PWA, minify js, bundle js
 - `package.json` utilisé par node, définit les scripts et les dépendances.
 
-Décommentez la ligne theme dans le fichier config.toml de la racine de votre projet :
+Décommentez la ligne theme dans le fichier zola.toml de la racine de votre projet :
 
 ```bash
-sed -i 's/^#theme = "abridge"/theme = "abridge"/' config.toml
+sed -i 's/^#theme = "abridge"/theme = "abridge"/' zola.toml
 ```
 
 ### 4 : Ajouter un nouveau contenu
@@ -136,7 +147,7 @@ zola serve
 
 Zola va démarrer le serveur web dev, accessible par défaut à `http://127.0.0.1:1111`.
 
-Les changements sauvegardés seront rechargés en direct dans le navigateur. (appuyez sur `ctrl+f5`, ou pendant le développement mettez `pwa=false` dans `config.toml`)
+Les changements sauvegardés seront rechargés en direct dans le navigateur. (appuyez sur `ctrl+f5`, ou pendant le développement mettez `pwa=false` dans `zola.toml`)
 
 ## Pagination {% raw %}{#pagination}{% endraw %}
 
@@ -198,10 +209,10 @@ Si vous avez configuré abridge pour utiliser le mode switcher au lieu de auto/d
 
 Si votre visiteur utilise noscript ou un autre module complémentaire de navigateur bloquant le javascript, il sera bloqué avec le thème par défaut configuré pour le mode de commutation.
 
-Pour ajuster ce mode, vous devez définir les deux valeurs de configuration suivantes dans `abridge.scss` **ET** `config.toml` :
+Pour ajuster ce mode, vous devez définir les deux valeurs de configuration suivantes dans `abridge.scss` **ET** `zola.toml` :
 
 ```scss
-$switcherDefault: "dark",// mode de commutation nojs par défaut : dark, light (assurez-vous de définir également js_switcher_default dans config.toml)
+$switcherDefault: "dark",// mode de commutation nojs par défaut : dark, light (assurez-vous de définir également js_switcher_default dans zola.toml)
 ```
 
 ```toml
@@ -210,13 +221,13 @@ js_switcher_default = "dark" # mode de commutation nojs par défaut : sombre, cl
 
 Par défaut, abridge utilise le mode sombre pour le sélecteur, donc à moins que vous ne souhaitiez mettre le mode par défaut à clair pour les visiteurs nojs/noscript, vous n'avez pas besoin de vous préoccuper de ces paramètres.
 
-## Config.toml Configuration
+## zola.toml Configuration
 
-La plupart des options de `config.toml` sont auto-documentées. (évident entre le nom de la valeur de configuration et les commentaires)
+La plupart des options de `zola.toml` sont auto-documentées. (évident entre le nom de la valeur de configuration et les commentaires)
 
-Abridge fonctionnera avec un `config.toml` dépouillé parce que les valeurs par défaut sont fournies dans les fichiers modèles.
+Abridge fonctionnera avec un `zola.toml` dépouillé parce que les valeurs par défaut sont fournies dans les fichiers modèles.
 
-Je recommande de copier l'intégralité du fichier config.toml comme indiqué à l'étape 3, car il contient toutes les valeurs configurables.
+Je recommande de copier l'intégralité du fichier zola.toml comme indiqué à l'étape 3, car il contient toutes les valeurs configurables.
 
 ### Menus du haut et du bas de page
 
@@ -243,13 +254,13 @@ menu_footer = [
 
 ### SEO et balises d'en-tête {% raw %}{#seo}{% endraw %}
 
-Vous pouvez revoir les balises SEO dans la component seo située dans `templates/components/seo.html`, toutes les valeurs configurables doivent être dans `config.toml` sous `config.extra` ou dans les fichiers markdown du contenu.
+Vous pouvez revoir les balises SEO dans la component seo située dans `templates/components/seo.html`, toutes les valeurs configurables doivent être dans `zola.toml` sous `config.extra` ou dans les fichiers markdown du contenu.
 
 Dans votre fichier markdown, vous devez définir un titre de moins de 60 caractères et une description de 80 à 160 caractères. La description est ce qui est affiché dans les résultats de recherche sous le titre de la page. Partout où vous ne définissez pas de description de page, le fichier config.description du site principal sera utilisé à la place.
 
-Vous devez également définir des mots-clés spécifiques à la page, à moins que les mots-clés définis dans config.toml ne suffisent. Tous les mots-clés que vous ajoutez à la page s'ajoutent à ceux définis dans config.toml ; n'ajoutez donc pas ces mêmes mots-clés aux mots-clés de votre page.
+Vous devez également définir des mots-clés spécifiques à la page, à moins que les mots-clés définis dans zola.toml ne suffisent. Tous les mots-clés que vous ajoutez à la page s'ajoutent à ceux définis dans zola.toml ; n'ajoutez donc pas ces mêmes mots-clés aux mots-clés de votre page.
 
-Vous pouvez également définir une image spécifique à la page pour les résultats de recherche en utilisant page.extra.thumbnail. Les cartes Facebook, Twitter et OpenGraph sont prises en charge (image et description automatiques pour les liens affichés). OpenGraph recommande une taille de 1200 x 630 (1,9:1). Twitter recommande 2:1 pour les grandes images et 1:1 pour les petites. Si vous ne définissez pas de vignette spécifique à une page, la bannière définie dans config.toml sera utilisée à la place.
+Vous pouvez également définir une image spécifique à la page pour les résultats de recherche en utilisant page.extra.thumbnail. Les cartes Facebook, Twitter et OpenGraph sont prises en charge (image et description automatiques pour les liens affichés). OpenGraph recommande une taille de 1200 x 630 (1,9:1). Twitter recommande 2:1 pour les grandes images et 1:1 pour les petites. Si vous ne définissez pas de vignette spécifique à une page, la bannière définie dans zola.toml sera utilisée à la place.
 
 Référez-vous à [overview-images](https://raw.githubusercontent.com/Jieiku/abridge/master/content/overview-images/index.md) pour un exemple :
 
@@ -266,7 +277,7 @@ KaTeX peut être utilisé pour afficher des mathématiques complexes. Il s'agit 
 
 Vous pouvez voir une démo sur [cette page] (https://abridge.pages.dev/overview-math/).
 
-Pour de meilleures performances, je recommande de n'activer les mathématiques que [par base de page dans vos fichiers post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), plutôt que dans votre fichier config.toml principal.
+Pour de meilleures performances, je recommande de n'activer les mathématiques que [par base de page dans vos fichiers post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), plutôt que dans votre fichier zola.toml principal.
 
 ### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
@@ -276,15 +287,15 @@ Si vous utilisez Chrome sur un ordinateur de bureau, cherchez le bouton d'instal
 
 Il y a un script npm pour générer la liste de cache des fichiers et la minification `npm run abridge`. Mon fichier [netlify.toml](https://github.com/Jieiku/abridge/blob/master/netlify.toml) exécute automatiquement ce script npm lors du déploiement du site, donc tout est automatique. Si Zola était capable de modéliser un fichier js, alors il serait possible de générer la liste des fichiers cache dynamiquement lors de la construction au lieu de s'appuyer sur node/npm.
 
-Pour utiliser une liste spécifique de fichiers au lieu de tous les fichiers, éditez l'entrée `pwa_BASE_CACHE_FILES` dans `config.toml`. Si un seul fichier de la liste de cache est manquant, alors la liste ne sera pas pré-cachée, et le cache ne se fera qu'au fur et à mesure que vous naviguerez. (Si vous vous installez pour la première fois, testez avec seulement quelques pages).
+Pour utiliser une liste spécifique de fichiers au lieu de tous les fichiers, éditez l'entrée `pwa_BASE_CACHE_FILES` dans `zola.toml`. Si un seul fichier de la liste de cache est manquant, alors la liste ne sera pas pré-cachée, et le cache ne se fera qu'au fur et à mesure que vous naviguerez. (Si vous vous installez pour la première fois, testez avec seulement quelques pages).
 
-La fonctionnalité PWA est également facile à désactiver en mettant simplement `pwa = false` dans `config.toml`
+La fonctionnalité PWA est également facile à désactiver en mettant simplement `pwa = false` dans `zola.toml`
 
 ## Optimisation des performances
 
 ### Fichiers Javascript
 
-Tout le javascript peut être désactivé dans `config.toml` :
+Tout le javascript peut être désactivé dans `zola.toml` :
 
 ```toml
 build_search_index = false
@@ -317,7 +328,7 @@ Voici les fichiers javascript utilisés par Abridge :
 
 Tous les bundles nécessaires sont générés dynamiquement par le script node [package_abridge.js](https://github.com/Jieiku/abridge/blob/master/package_abridge.js)
 
-Le script node va analyser votre config.toml pour trouver les valeurs de configuration pertinentes, et ensuite, en se basant sur votre config.tomnl, générer les bundles nécessaires.
+Le script node va analyser votre zola.toml pour trouver les valeurs de configuration pertinentes, et ensuite, en se basant sur votre config.tomnl, générer les bundles nécessaires.
 
 Tout ce qui est nécessaire est `zola build && npm run abridge`.
 
@@ -335,7 +346,7 @@ Pour utiliser tinysearch, des étapes supplémentaires sont nécessaires.
 
 ```bash
 npm install
-sed -i 's/^search_library =.*/search_library = "pagefind"/' config.toml
+sed -i 's/^search_library =.*/search_library = "pagefind"/' zola.toml
 npm run abridge
 # zola serve
 ```
@@ -343,14 +354,14 @@ npm run abridge
 **Switch to elasticlunr:**
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "elasticlunr"/' config.toml
+sed -i 's/^search_library =.*/search_library = "elasticlunr"/' zola.toml
 npm run abridge
 ```
 
 **Switch to nosearch:**
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "false"/' config.toml
+sed -i 's/^search_library =.*/search_library = "false"/' zola.toml
 npm run abridge
 ```
 
@@ -369,7 +380,7 @@ exit # reload shell environment
 Passer Abridge à tinysearch :
 
 ```bash
-sed -i 's/^search_library =.*/search_library = "tinysearch"/' config.toml
+sed -i 's/^search_library =.*/search_library = "tinysearch"/' zola.toml
 npm run abridge
 tinysearch --optimize --path static public/data_tinysearch/index.html
 # zola serve

@@ -27,7 +27,7 @@ Puede activar el soporte $\\KaTeX$ globalmente, por sección o por página.
 
 ## Habilitar globalmente
 
-Para habilitar el soporte $\\KaTeX$ globalmente, añada `math = true` bajo `[extra]` del `config.toml`
+Para habilitar el soporte $\\KaTeX$ globalmente, añada `math = true` bajo `[extra]` del `zola.toml`
 en la raíz de su sitio. También puede añadir `math_auto_render = true`
 y cada sección y página de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
 

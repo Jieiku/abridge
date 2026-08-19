@@ -27,7 +27,7 @@ Vous pouvez activer le $\KaTeX$ prise en charge globale, par section ou par page
 
 ## Activer globalement
 
-Pour activer le $\KaTeX$ prise en charge dans le monde entier, ajoutez `math = true` sous `[extra]` à la `config.toml`
+Pour activer le $\KaTeX$ prise en charge dans le monde entier, ajoutez `math = true` sous `[extra]` à la `zola.toml`
 racine de votre site. Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
 et chaque section et page de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
 

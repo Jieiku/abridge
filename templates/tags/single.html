@@ -1,6 +1,4 @@
 {%- extends "base.html" -%}
-{%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
 {%- block seo -%}
   {{- super() -}}
   {%- set title = term.name ~ " tag" -%}
@@ -13,6 +11,8 @@
   {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
 {%- endblock seo -%}
 {%- block content %}
+    {%- set uglyurls = (config.extra.uglyurls or false) -%}
+    {%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
     <div>
       <h2>{{ term.name }}</h2>
       {%- for year, posts in term.pages | group_by(attribute="year") %}

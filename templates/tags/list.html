@@ -1,6 +1,4 @@
 {%- extends "base.html" -%}
-{%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
 {%- block seo -%}
   {{- super() -}}
   {%- set title = "Tags" -%}
@@ -13,6 +11,8 @@
   {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
 {%- endblock seo -%}
 {%- block content %}
+    {%- set uglyurls = (config.extra.uglyurls or false) -%}
+    {%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
     <div>
       <div class="c">
         <h1>{{ terms | length }} {{<translate key="Tags"  default="Tags"  i18n={i18n} />}} </h1>

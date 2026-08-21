@@ -1,9 +1,9 @@
 
 {#- Theme Switcher Button to toggle between dark/light #}
-  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- set integrity = (config.extra.integrity if config.extra.integrity is defined else true) -%}
   {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
 
-  {%- if config.extra.js_switcher | default(value=true) %}
+  {%- if (config.extra.js_switcher if config.extra.js_switcher is defined else true) %}
   {%- set js_theme="js/theme.min.js" %}
   {%- if config.extra.js_switcher_default %}
     {%- if config.extra.js_switcher_default == "light" %}{% set js_theme="js/theme_light.min.js" %}{% endif %}
@@ -16,7 +16,7 @@
 
 
 {#- Style Sheets #}
-  {%- set stylesheets=config.extra.stylesheets | default(value=[ "abridge.css" ]) -%}
+  {%- set stylesheets=(config.extra.stylesheets if config.extra.stylesheets is defined else [ "abridge.css" ]) -%}
   {%- if stylesheets %}{%- for i in stylesheets %}
   <link rel="stylesheet" href="{{     get_url(path=i                               , trailing_slash=false, cachebust=true) | safe }}" />
   {%- endfor %}{%- endif %}
@@ -94,7 +94,7 @@
 
 
 {#- Style Sheets Preload #}
-  {%- set integrity = config.extra.integrity | default(value=true) -%}
+  {%- set integrity = (config.extra.integrity if config.extra.integrity is defined else true) -%}
   {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
 
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
@@ -111,7 +111,7 @@
 
 {%- if config.extra.math or page?.extra?.math %}
 
-  {%- set katex_css=config.extra.katex_css | default(value="katex.min.css") -%}
+  {%- set katex_css=(config.extra.katex_css if config.extra.katex_css else "katex.min.css") -%}
   {%- if katex_css %}{%- if katex_css is matching(pat="^http[s]?://") %}
   <link rel="preload" as="style" class="preStyle" href="{{ katex_css | safe }}"{%- if integrity and config.extra.katex_css_integrity %} integrity="{{ config.extra.katex_css_integrity | safe }}"{%- endif %} crossorigin="anonymous" />
   {%- else %}

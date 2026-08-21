@@ -3,7 +3,7 @@ This Template Shows a paginated page of the Posts of a section with a short summ
 This Template can also be used directly for the index eg: example.com/ or as the rendering template for Sections, eg: example.com/blog/  example.com/software/
 #}
 {%- extends "base.html" %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
 
 
@@ -65,7 +65,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
     {%- if paginator %}{{<numpagination paginator={paginator} config={config} />}}{% endif %}
     {%- endif %}
     </div>
-  {%- if config.extra.recent | default(value=true) %}
+  {%- if (config.extra.recent if config.extra.recent is defined else true) %}
     {#- The following line is checking if the template is being used for the root or a section #}
     {%- if current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") %}
       {%- set sec = "" %}
@@ -87,7 +87,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
     <div class="sblock">
       <div class="blockdiv sticky">
         <span class="b s150">{{<translate key="Recent"  default="Recent"  i18n={i18n} />}}</span>
-        {%- set recent_items=config.extra.recent_items | default(value=9) -%}
+        {%- set recent_items=(config.extra.recent_items if config.extra.recent_items is defined else 9) -%}
         {%- for page in section_item.pages[:recent_items] -%}
           {{<page_listing page={page}  config={config} />}}
         {%- endfor %}

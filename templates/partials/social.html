@@ -12,7 +12,7 @@
           {%- endif -%}
 
           {%- if config.extra.mail -%}
-          {%- if config.extra.mail_encode | default(value=true) -%}
+          {%- if (config.extra.mail_encode if config.extra.mail_encode is defined else true) -%}
           {%- set base64_email = config.extra.mail -%}
           <a class="js m-protected" href="#{{ base64_email | base64_encode }}" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a>
           {%- else -%}

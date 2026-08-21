@@ -1,9 +1,9 @@
 {% component translate(key: string, i18n, default="") %}
-{{- i18n[key] | default(value=default) | safe -}}
+{{- (i18n[key] if i18n[key] else default) | safe -}}
 {% endcomponent translate %}
 
 {%- component page_listing(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
         <div class="tpad">
           <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>
@@ -11,7 +11,7 @@
 {%- endcomponent page_listing %}
 
 {%- component series_link(inner, page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
   {%- if inner.content == page.content %}
         <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
@@ -21,7 +21,7 @@
 {%- endcomponent series_link %}
 
 {%- component title_post(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) %}
+{%- set uglyurls = (config.extra.uglyurls or false) %}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
       <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a></h1>
 {%- endcomponent title_post %}
@@ -31,7 +31,7 @@
 {%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false) -%}
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false) -%}{%- endif -%}
 
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif %}{%- endif %}
       <span{%- if config.extra.meta_post?.size %} class="{{ config.extra.meta_post?.size }}"{% endif %}>
 
@@ -60,7 +60,7 @@
           {%- endif %}
 
         {#- ReadTime #}
-          {%- if config.extra.meta_post?.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_post?.readstring | default(value="min") }}
+          {%- if config.extra.meta_post?.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ (config.extra.meta_post?.readstring if config.extra.meta_post?.readstring else "min") }}
           {#- divider #}
           {%- if config.extra.meta_post?.date or config.extra.meta_post?.updated or config.extra.meta_post?.categories_tags %}
           {%- if config.extra.meta_post?.divider %}<span class="hpad">{{ config.extra.meta_post?.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{%- endif %}
@@ -92,7 +92,7 @@
 {%- endcomponent meta_post %}
 
 {%- component title_index(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  -%}
+{%- set uglyurls = (config.extra.uglyurls or false)  -%}
 {%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
         <big>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</big>
 {%- endcomponent title_index -%}
@@ -101,7 +101,7 @@
 {#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
 {%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false)  -%}
 {%- if not i18n  %}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false)  %}{%- endif %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  -%}
+{%- set uglyurls = (config.extra.uglyurls or false)  -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
         <span{%- if config.extra.meta_index?.size %} class="{{ config.extra.meta_index?.size }}"{% endif %}>
 
@@ -130,7 +130,7 @@
           {%- endif %}
 
         {#- ReadTime #}
-          {%- if config.extra.meta_index?.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ config.extra.meta_index?.readstring | default(value="min") }}
+          {%- if config.extra.meta_index?.readtime %} {%- if config.extra.icon_read %}<i class="{{ config.extra.icon_read }}"></i> {% endif %} {{ page.reading_time }} {{ (config.extra.meta_index?.readstring if config.extra.meta_index?.readstring else "min") }}
           {#- divider #}
           {%- if config.extra.meta_index?.date or config.extra.meta_index?.updated or config.extra.meta_index?.categories_tags %}
           {%- if config.extra.meta_index?.divider %}<span class="hpad">{{ config.extra.meta_index?.divider | safe }}</span>{%- else %} <span class="rpad"></span> {%- endif %}{%- endif %}{%- endif %}
@@ -162,10 +162,10 @@
 {%- endcomponent meta_index -%}
 
 {%- component footer(page, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
       {#- prev/next content page nextprev title pagination -#}
-      {%- if not config.extra.hide_page_nextprev_titles | default(value=false) %}
+      {%- if not (config.extra.hide_page_nextprev_titles or false) %}
       {%- if page.lower or page.higher %}
       <nav>
         <div>
@@ -184,7 +184,7 @@
 {%- endcomponent footer %}
 
 {% component pagination(paginator, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
+{%- set uglyurls = (config.extra.uglyurls or false)  %}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
@@ -215,10 +215,10 @@
                 {%- endif %}
             {%- endif %}
       <nav class="vpad">
-        {%- set icon_first=config.extra.icon_first | default(value="svgs svgh angll")  %}
-        {%- set icon_prev=config.extra.icon_prev | default(value="svgs svgh angl")  %}
-        {%- set icon_next=config.extra.icon_next | default(value="svgs svgh angr")  %}
-        {%- set icon_last=config.extra.icon_last | default(value="svgs svgh angrr")  %}
+        {%- set icon_first=(config.extra.icon_first if config.extra.icon_first else "svgs svgh angll")  %}
+        {%- set icon_prev=(config.extra.icon_prev if config.extra.icon_prev else "svgs svgh angl")  %}
+        {%- set icon_next=(config.extra.icon_next if config.extra.icon_next else "svgs svgh angr")  %}
+        {%- set icon_last=(config.extra.icon_last if config.extra.icon_last else "svgs svgh angrr")  %}
         {%- if paginator.previous  %}
           <a class="on outp" href="{{ paginator.first | safe }}{%- if uglyurls %}index.html{%- endif %}" title="First Page">
           {%- if icon_first  %}<i class="{{ icon_first }}" alt="First Page"></i>
@@ -289,7 +289,7 @@
 {% endcomponent pagination %}
 
 {% component numpagination(paginator, config) %}
-{%- set uglyurls = config.extra.uglyurls | default(value=false)  %}
+{%- set uglyurls = (config.extra.uglyurls or false)  %}
 {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}

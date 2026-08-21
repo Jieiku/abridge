@@ -52,7 +52,7 @@
     {%- endblock page_header %}
 
     {#- In Page Series Navigation #}
-    {%- if config.extra.series | default(value=true) %}
+    {%- if (config.extra.series if config.extra.series is defined else true) %}
     {%- if page.extra.series %}
 
       {%- set tag = get_taxonomy_term(kind="tags", term=page.extra.series, lang=lang) %}
@@ -62,7 +62,7 @@
           {%- set parts_string %}{{<translate key="Series_parts" default="Series" i18n={i18n} />}}{%- endset %}
           {%- set parts_string = parts_string | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {%- else %}
-          {%- set parts_string = config.extra.Series_parts | default(value="Series") | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
+          {%- set parts_string = (config.extra.Series_parts if config.extra.Series_parts else "Series") | replace(from="$NUMBER_OF_PARTS", to=page_num) %}
         {%- endif %}
 
       <div class="block">
@@ -100,14 +100,14 @@
     {%- endblock comments_body %}
     </article>
     {%- block toc %}
-    {%- if config.extra.toc | default(value=true) %}
+    {%- if (config.extra.toc if config.extra.toc is defined else true) %}
     {%- if page.extra.toc %}
     {%- set toc = page.toc %}
     {%- endif %}
     {%- if toc or page.extra.series %}
     <div class="sblock">
       {%- if page.extra.series %}
-      {%- set num_extra_pages = config.extra.series_items | default(value=9) %}
+      {%- set num_extra_pages = (config.extra.series_items if config.extra.series_items is defined else 9) %}
       <div class="blockdiv">
         <a class="b s150" href="{{ tag.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ parts_string }}</a><br>
         {%- if tag.page_count > num_extra_pages and num_extra_pages > 0 %}
@@ -207,7 +207,7 @@
 
 {%- if page.reading_time %}
 {%- if page.reading_time > 2 %}
-{%- set icon_top=config.extra.icon_top | default(value="svgs svgh angu") -%}
+{%- set icon_top=(config.extra.icon_top if config.extra.icon_top else "svgs svgh angu") -%}
 <span class="topout">
 <span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if icon_top %}<i class="{{ icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
 </span>

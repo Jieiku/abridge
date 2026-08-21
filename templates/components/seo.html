@@ -44,7 +44,7 @@
 {%- endif %}
 
 {#- Extra SEO START #}
-{%- if config.extra?.seo | default(value=true) %}
+{%- if (config.extra?.seo if config.extra?.seo is defined else true) %}
 {%- if not is_404 %}
 
 {%- if config.extra?.google %}

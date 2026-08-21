@@ -1,10 +1,10 @@
 {#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
 {%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif -%}
-{%- set uglyurls = config.extra.uglyurls | default(value=false) -%}
+{%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
 <!DOCTYPE html>
-<html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ config.extra.language_code | default(value=lang) }}{% endif %}">
+<html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ (config.extra.language_code if config.extra.language_code else lang) }}{% endif %}">
 <head>
   {%- include "partials/head.html" -%}
   {#- SEO: title, description, etc -#}
@@ -45,7 +45,7 @@
         <div>
           <ul>
 
-            {%- set js_switcher=config.extra.js_switcher | default(value=true) %}
+            {%- set js_switcher=(config.extra.js_switcher if config.extra.js_switcher is defined else true) %}
             {%- if config.extra.menu %}
               {%- for i in config.extra.menu -%}
                 <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching(pat="^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
@@ -78,7 +78,7 @@
             {%- endif %}
 
             {%- if js_switcher -%}
-              {%- set icon_adjust=config.extra.icon_adjust | default(value="svgs adjust") -%}
+              {%- set icon_adjust=(config.extra.icon_adjust if config.extra.icon_adjust else "svgs adjust") -%}
               {%- if icon_adjust -%}<li><i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i></li>{%- endif -%}
             {%- endif -%}
 
@@ -87,7 +87,7 @@
 
         <div>
           {%- if config.build_search_index %}
-          {%- set icon_search=config.extra.icon_search | default(value="svgs svgm search") %}
+          {%- set icon_search=(config.extra.icon_search if config.extra.icon_search else "svgs svgm search") %}
           <div>
             <form autocomplete=off class="js" name="goSearch" id="searchbox">
               <div class="searchd">
@@ -142,7 +142,7 @@
       {%- endif %}
 
       {#- Copyright START #}
-      {%- if config.extra.copyright | default(value=true) -%}
+      {%- if (config.extra.copyright if config.extra.copyright is defined else true) -%}
       {%- set current_year = now() | date(format="%Y") %}
       {%- set current_year = '<span id="year">' ~ current_year ~ '</span>' %}
 
@@ -160,7 +160,7 @@
       {%- endif -%}
       {#- Copyright END #}
 
-      {%- if config.extra.footer_credit | default(value=true) %}
+      {%- if (config.extra.footer_credit if config.extra.footer_credit is defined else true) %}
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}

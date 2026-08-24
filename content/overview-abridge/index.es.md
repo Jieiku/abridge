@@ -60,7 +60,7 @@ En Msys2, utiliza Shift + Insert para pegar en la terminal; yo prefiero el lanza
 ```bash
 MSYS2
 pacman -Syu
-pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola rsync
+pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola mingw-w64-ucrt-x86_64-uutils-coreutils rsync
 ```
 
 ## Inicio rápido

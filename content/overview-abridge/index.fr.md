@@ -60,7 +60,7 @@ Avec Msys2, utilisez les touches Maj + Inser pour coller du texte dans le termin
 ```bash
 MSYS2
 pacman -Syu
-pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola rsync
+pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola mingw-w64-ucrt-x86_64-uutils-coreutils rsync
 ```
 
 ## Démarrage rapide

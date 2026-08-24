@@ -57,7 +57,7 @@ With msys2 use shift insert to paste into the terminal, I prefer the UCRT64 laun
 ```bash
 MSYS2
 pacman -Syu
-pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola rsync
+pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola mingw-w64-ucrt-x86_64-uutils-coreutils rsync
 ```
 
 ## Quick Start

@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+##
+## Cloudflare Workers & Pages build commands (Build system Version 3):
+## ./build-zola.sh npm run abridge -- "--base-url https://abridge.pages.dev"
+## ./build-zola.sh bash -c 'npm run tinysearch && npm run abridge -- "--base-url https://abridge-tinysearch.pages.dev"'
+## ./build-zola.sh bash -c 'npm run pagefind && npm run abridge -- "--base-url https://abridge-pagefind.pages.dev"'
+##
 set -euo pipefail
 
 ZOLA_VERSION="$(

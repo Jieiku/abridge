@@ -62,7 +62,7 @@ pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola mingw-w6
 
 ## Quick Start
 
-This theme requires version 0.23.3 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+This theme requires version 0.23.6 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git

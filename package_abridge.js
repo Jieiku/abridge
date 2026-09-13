@@ -34,6 +34,7 @@ const pwa_IGNORE_FILES = data.extra.pwa_IGNORE_FILES;
 
 // This is used to pass arguments to zola via npm, for example:
 // npm run abridge -- "--base-url https://abridge.pages.dev"
+if (process.argv[2] && /[;&|`$(){}<>\\\n]/.test(process.argv[2])) { throw new Error('ERROR: unsafe characters detected in CLI argument!'); }
 var args = process.argv[2] ? ' ' + process.argv[2] : '';
 
 // check if abridge is used directly or as a theme.

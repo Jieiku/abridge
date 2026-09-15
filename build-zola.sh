@@ -72,9 +72,16 @@ download_and_verify_zola() {
         -H "User-Agent: abridge-build-zola" \
         "$assets_url" -o "$assets_html"
 
-    expected_sha256="$(node - "$assets_html" "$asset_name" <<'NODE'
+    expected_sha256="$(node - "$assets_html" "$asset_name" "$TOOLS_DIR" <<'NODE'
 const fs = require('fs');
-const html = fs.readFileSync(process.argv[2], 'utf8');
+const path = require('path');
+const allowedDir = path.resolve(process.argv[4]);
+const filePath = path.resolve(process.argv[2]);
+if (filePath !== path.join(allowedDir, path.basename(filePath))) {
+  console.error('ERROR: refusing to read a file outside the expected build directory.');
+  process.exit(1);
+}
+const html = fs.readFileSync(filePath, 'utf8');
 const asset = process.argv[3];
 
 const pos = html.indexOf(asset);

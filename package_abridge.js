@@ -1,12 +1,13 @@
+'use strict';
+
 const fs = require('fs');
 const path = require("path");
 const TOML = require('fast-toml');
 const UglifyJS = require('uglify-js');
 const jsonminify = require("jsonminify");
-const util = require("util");
-const { exec } = require("child_process");
+const { parseArgs } = require("util");
+const { spawn } = require("child_process");
 const { exit } = require('process');
-const execPromise = util.promisify(exec);
 
 if (!(fs.existsSync('zola.toml'))) {
   throw new Error('ERROR: cannot find zola.toml!');
@@ -17,8 +18,8 @@ const js_prestyle = data.extra.js_prestyle;
 const js_switcher = data.extra.js_switcher;
 const js_email_encode = data.extra.js_email_encode;
 const js_copycode = data.extra.js_copycode;
-const search_library = data.extra.search_library;
-const index_format = data.search.index_format;
+let search_library = data.extra.search_library;
+let index_format = data.search.index_format;
 const uglyurls = data.extra.uglyurls;
 const js_bundle = data.extra.js_bundle;
 const pwa = data.extra.pwa;
@@ -32,15 +33,38 @@ const pwa_cache_all = data.extra.pwa_cache_all;
 const pwa_BASE_CACHE_FILES = data.extra.pwa_BASE_CACHE_FILES;
 const pwa_IGNORE_FILES = data.extra.pwa_IGNORE_FILES;
 
-// This is used to pass arguments to zola via npm, for example:
-// npm run abridge -- "--base-url https://abridge.pages.dev"
-var args = process.argv[2] ? ' ' + process.argv[2] : '';
-
-// check if abridge is used directly or as a theme.
-bpath = '';
-if (fs.existsSync('./themes')) {
-  bpath = 'themes/abridge/';
+// Parse Abridge build options explicitly. Zola is launched directly without a shell.
+const VALID_MODES = new Set(['offline', 'elasticlunrjava', 'elasticlunr', 'pagefind', 'tinysearch']);
+const { values: cli } = parseArgs({
+  args: process.argv.slice(2),
+  options: {
+    mode: { type: 'string' },
+    'base-url': { type: 'string' },
+    drafts: { type: 'boolean', default: false },
+  },
+  strict: true,
+  allowPositionals: false,
+});
+if (cli.mode && !VALID_MODES.has(cli.mode)) {
+  throw new Error(`ERROR: invalid --mode "${cli.mode}". Valid modes: ${[...VALID_MODES].join(', ')}`);
 }
+
+function zolaBuildArgs() {
+  const zolaArgs = ['build'];
+  if (cli.drafts) zolaArgs.push('--drafts');
+  if (search_library === 'offline') {
+    zolaArgs.push('-u', path.join(__dirname, 'public'));
+  } else if (cli['base-url']) {
+    zolaArgs.push('--base-url', cli['base-url']);
+  }
+  return zolaArgs;
+}
+
+// Check whether Abridge is the project itself or is installed as a theme.
+// When used as a theme, package_abridge.js is copied to the parent site's root,
+// so only the parent contains ./themes/abridge next to this script.
+const abridgeUsedAsTheme = fs.existsSync(path.join(__dirname, 'themes', 'abridge'));
+const bpath = abridgeUsedAsTheme ? 'themes/abridge/' : '';
 // cleanup pagefind files from old builds.
 _rmRegex(path.join(__dirname, "static/js/"), /^wasm.*pagefind$/);
 _rmRegex(path.join(__dirname, "static/js/"), /^pagefind.*pf_meta$/);
@@ -48,35 +72,126 @@ _rmRegex(path.join(__dirname, "static/js/"), /^pagefind-entry.*json$/);
 _rmRecursive(path.join(__dirname, "static/js/index"));
 _rmRecursive(path.join(__dirname, "static/js/fragment"));
 
-async function execWrapper(cmd) {
-  const { stdout, stderr } = await execPromise(cmd);
-  if (stdout) {
-    console.log(stdout);
+function syncKatexAssets() {
+  const katexDist = path.join(__dirname, 'node_modules', 'katex', 'dist');
+  if (!fs.existsSync(katexDist)) {
+    throw new Error('ERROR: KaTeX dependency is missing. Run `npm install` (or `npm ci`) before building Abridge.');
   }
-  if (stderr) {
-    console.log(stderr);
+
+  const staticDir = path.join(__dirname, 'static');
+  const staticJsDir = path.join(staticDir, 'js');
+  const staticFontsDir = path.join(staticDir, 'fonts');
+  fs.mkdirSync(staticJsDir, { recursive: true });
+  fs.mkdirSync(staticFontsDir, { recursive: true });
+
+  const copies = [
+    [path.join(katexDist, 'katex.min.js'), path.join(staticJsDir, 'katex.min.js')],
+    [path.join(katexDist, 'contrib', 'auto-render.min.js'), path.join(staticJsDir, 'katex-auto-render.min.js')],
+    [path.join(katexDist, 'contrib', 'mathtex-script-type.min.js'), path.join(staticJsDir, 'mathtex-script-type.min.js')],
+    [path.join(katexDist, 'katex.min.css'), path.join(staticDir, 'katex.min.css')],
+  ];
+  for (const [source, destination] of copies) {
+    if (!fs.existsSync(source)) {
+      throw new Error(`ERROR: expected KaTeX asset not found: ${source}`);
+    }
+    fs.copyFileSync(source, destination);
   }
+
+  fs.cpSync(path.join(katexDist, 'fonts'), staticFontsDir, { recursive: true });
+
+  // Keep the self-contained KaTeX bundle in sync with the individual assets.
+  // The upstream files are already minified, so concatenate them rather than
+  // running KaTeX through Abridge's aggressive Uglify settings.
+  const bundleParts = [
+    path.join(staticJsDir, 'katex.min.js'),
+    path.join(staticJsDir, 'mathtex-script-type.min.js'),
+    path.join(staticJsDir, 'katex-auto-render.min.js'),
+    path.join(staticJsDir, 'katexoptions.js'),
+  ];
+  const bundle = bundleParts.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+  fs.writeFileSync(path.join(staticJsDir, 'katexbundle.min.js'), bundle + '\n');
+  const katexPackage = JSON.parse(fs.readFileSync(path.join(__dirname, 'node_modules', 'katex', 'package.json'), 'utf8'));
+  console.log(`Synced KaTeX ${katexPackage.version} assets from locked npm dependency`);
+}
+
+function runCommand(command, args, missingCommandMessage) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, { stdio: 'inherit', shell: false });
+    child.on('error', (error) => {
+      if (error.code === 'ENOENT' && missingCommandMessage) {
+        reject(new Error(missingCommandMessage));
+      } else {
+        reject(error);
+      }
+    });
+    child.on('close', (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`${command} ${args.join(' ')} exited with code ${code}`));
+    });
+  });
+}
+
+function runZola() {
+  return runCommand(
+    'zola',
+    zolaBuildArgs(),
+    'ERROR: zola was not found in PATH.'
+  );
+}
+
+function runTinysearch() {
+  console.log('Creating Tinysearch index and WebAssembly...');
+  return runCommand(
+    'tinysearch',
+    ['--release', '-m', 'wasm', '-o', '-p', 'static', 'public/search_index.en.json'],
+    'ERROR: --mode tinysearch requires the tinysearch CLI to be installed and available in PATH.'
+  );
 }
 
 async function abridge() {
-  await sync();
   const { replaceInFileSync } = await import('replace-in-file');
+  // Only the Abridge repository itself refreshes vendored KaTeX assets. Parent
+  // sites use the vetted files shipped by the theme and must not rewrite them.
+  if (!abridgeUsedAsTheme) {
+    syncKatexAssets();
+  }
   // set index_format for chosen search_library accordingly.
   if (search_library === 'offline') {
     replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
-    args = args + " -u \"" + __dirname + "\/public\""//set base_url to the path on disk for offline site.
+    index_format = 'elasticlunr_javascript';
   } else if (search_library === 'elasticlunrjava') {
     replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_javascript\"" });
+    index_format = 'elasticlunr_javascript';
   } else if (search_library === 'elasticlunr') {
     replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"elasticlunr_json\"" });
+    index_format = 'elasticlunr_json';
   } else if (search_library === 'pagefind') {
     replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
+    index_format = 'fuse_json';
   } else if (search_library === 'tinysearch') {
     replaceInFileSync({ files: 'zola.toml', from: /index_format.*=.*/g, to: "index_format = \"fuse_json\"" });
+    index_format = 'fuse_json';
   }
 
   console.log('Zola Build to generate files for minification:');
-  await execWrapper('zola build' + args);
+  await runZola();
+
+  if (search_library === 'tinysearch') {
+    const siteTinysearchConfig = path.join('static', 'tinysearch.toml');
+    const themeTinysearchConfig = path.join(bpath, 'static', 'tinysearch.toml');
+    const tinysearchConfig = fs.existsSync(siteTinysearchConfig) ? siteTinysearchConfig : themeTinysearchConfig;
+    if (!fs.existsSync(tinysearchConfig)) {
+      throw new Error('ERROR: Tinysearch mode requires static/tinysearch.toml (or themes/abridge/static/tinysearch.toml when Abridge is used as a theme).');
+    }
+    fs.copyFileSync(tinysearchConfig, path.join('public', 'tinysearch.toml'));
+    console.log(`Using Tinysearch config: ${tinysearchConfig}`);
+    await runTinysearch();
+    const tinysearchWasm = path.join('static', 'tinysearch_engine.wasm');
+    if (!fs.existsSync(tinysearchWasm)) {
+      throw new Error('ERROR: Tinysearch did not generate static/tinysearch_engine.wasm.');
+    }
+    fs.copyFileSync(tinysearchWasm, path.join('public', 'tinysearch_engine.wasm'));
+  }
 
   //check that static/js exists, do this after zola build, it will handle creating static if missing.
   var jsdir = 'static/js';
@@ -86,7 +201,7 @@ async function abridge() {
     if (e.code != 'EEXIST') throw e;
   }
 
-  base_url = data.base_url;
+  let base_url = data.base_url;
   if (base_url.slice(-1) == "/") {
     base_url = base_url.slice(0, -1);
   }
@@ -127,12 +242,15 @@ async function abridge() {
       .replace(/import\.meta\.url/g, "undefined")
       .replace(/import\.meta/g, "undefined");
     if (before === pfSearch) {
-      console.warn("WARNING: no pagefind-entry/import.meta substitutions applied to pagefind_search.js");
-    } else if (!pfSearch.includes(hashedEntry)) {
-      console.warn("WARNING: hashed entry name not found in pagefind_search.js after patch:", hashedEntry);
-    } else {
-      console.log("Patched pagefind_search.js to use", hashedEntry);
+      throw new Error("ERROR: no pagefind-entry/import.meta substitutions applied to pagefind_search.js; Pagefind output may have changed.");
     }
+    if (!pfSearch.includes(hashedEntry) || pfSearch.includes("pagefind-entry.json")) {
+      throw new Error(`ERROR: Pagefind entry URL patch failed for ${hashedEntry}.`);
+    }
+    if (pfSearch.includes("import.meta")) {
+      throw new Error("ERROR: import.meta remains in pagefind_search.js after compatibility patch.");
+    }
+    console.log("Patched pagefind_search.js to use", hashedEntry);
     fs.writeFileSync(pagefindSearchPath, pfSearch);
 
     //copy to public so the files are included in the PWA cache list if necessary.
@@ -146,12 +264,21 @@ async function abridge() {
 
   if (pwa) {// Update pwa settings, file list, and hashes.
     if (typeof pwa_VER !== 'undefined' && typeof pwa_NORM_TTL !== 'undefined' && typeof pwa_LONG_TTL !== 'undefined' && typeof pwa_TTL_NORM !== 'undefined' && typeof pwa_TTL_LONG !== 'undefined' && typeof pwa_TTL_EXEMPT !== 'undefined') {
+      for (const [name, value] of [
+        ['pwa_TTL_NORM', pwa_TTL_NORM],
+        ['pwa_TTL_LONG', pwa_TTL_LONG],
+        ['pwa_TTL_EXEMPT', pwa_TTL_EXEMPT],
+        ['pwa_BASE_CACHE_FILES', pwa_BASE_CACHE_FILES],
+        ['pwa_IGNORE_FILES', pwa_IGNORE_FILES],
+      ]) {
+        if (!Array.isArray(value)) throw new Error(`ERROR: ${name} must be a TOML array in zola.toml.`);
+      }
       // update from abridge theme.
       fs.copyFileSync(bpath + 'static/sw.js', 'static/sw.js');
       fs.copyFileSync(bpath + 'static/js/sw_load.js', 'static/js/sw_load.js');
       // Update settings in PWA javascript file, using options parsed from zola.toml.  sw.min.js?v=3.10.0",  "++"
       if (fs.existsSync('static/js/sw_load.js')) {
-        sw_load_min = '.js?v=';
+        let sw_load_min = '.js?v=';
         if (js_bundle) {
           sw_load_min = '.min.js?v=';
         }
@@ -160,54 +287,34 @@ async function abridge() {
       if (fs.existsSync('static/sw.js')) {
         replaceInFileSync({ files: 'static/sw.js', from: /NORM_TTL.*=.*/g, to: "NORM_TTL = " + pwa_NORM_TTL + ";" });
         replaceInFileSync({ files: 'static/sw.js', from: /LONG_TTL.*=.*/g, to: "LONG_TTL = " + pwa_LONG_TTL + ";" });
-        replaceInFileSync({ files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = [" + pwa_TTL_NORM + "];" });
-        replaceInFileSync({ files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = [" + pwa_TTL_LONG + "];" });
-        replaceInFileSync({ files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = [" + pwa_TTL_EXEMPT + "];" });
+        replaceInFileSync({ files: 'static/sw.js', from: /TTL_NORM.*=.*/g, to: "TTL_NORM = " + JSON.stringify(pwa_TTL_NORM) + ";" });
+        replaceInFileSync({ files: 'static/sw.js', from: /TTL_LONG.*=.*/g, to: "TTL_LONG = " + JSON.stringify(pwa_TTL_LONG) + ";" });
+        replaceInFileSync({ files: 'static/sw.js', from: /TTL_EXEMPT.*=.*/g, to: "TTL_EXEMPT = " + JSON.stringify(pwa_TTL_EXEMPT) + ";" });
       }
 
+      let cacheFiles;
       if (pwa_cache_all === true) {
         console.log('info: pwa_cache_all = true in zola.toml, so caching the entire site.\n');
-        // Generate array from the list of files, for the entire site.
-
-        var dir = 'public';
-        try {
-          fs.mkdirSync(dir);
-        } catch (e) {
-          if (e.code != 'EEXIST') throw e;
-        }
-        const path = './public/';
-        cache = '';
-        files = fs.readdirSync(path, { recursive: true, withFileTypes: false })
-          .forEach(
-            (file) => {
-              // check if is directory, if not then add the path/file
-              if (!fs.lstatSync(path + file).isDirectory()) {
-                // format output
-                item = "/" + file.replace(/index\.html$/i, '');// strip index.html from path
-                item = item.replace(/\\/g, '/');// replace backslash with forward slash for Windows
-
-                var arrayLength = pwa_IGNORE_FILES.length;
-                for (var i = 0; i < arrayLength; i++) {
-                    regex = new RegExp(`^\/${pwa_IGNORE_FILES[i]}`, `i`);
-                    item = item.replace(regex, '');// dont cache files in the pwa_IGNORE_FILES array
-                }
-
-                // if formatted output is not empty line then append it to cache var
-                if (item != '') {// skip empty lines
-                  cache = cache + "'" + item + "',";
-                }
-              }
-            }
+        fs.mkdirSync('public', { recursive: true });
+        cacheFiles = [];
+        const publicDir = './public/';
+        for (const file of fs.readdirSync(publicDir, { recursive: true, withFileTypes: false })) {
+          if (fs.lstatSync(path.join(publicDir, file)).isDirectory()) continue;
+          let item = '/' + file.replace(/\\/g, '/').replace(/index\.html$/i, '');
+          const itemLower = item.toLowerCase();
+          const ignored = pwa_IGNORE_FILES.some((ignore) =>
+            itemLower.startsWith('/' + String(ignore).replace(/^\/+/, '').toLowerCase())
           );
-        cache = cache.slice(0, -1)// remove the last comma
-      } else if (pwa_BASE_CACHE_FILES) {
-        cache = pwa_BASE_CACHE_FILES;
+          if (!ignored && item !== '') cacheFiles.push(item);
+        }
+      } else {
+        cacheFiles = [...pwa_BASE_CACHE_FILES];
       }
 
-      cache = cache.split(",").sort().join(",")//sort the cache list, this should help keep the commit history cleaner.
-      cache = 'this.BASE_CACHE_FILES = [' + cache + '];';
+      cacheFiles.sort();
+      const cache = 'this.BASE_CACHE_FILES = ' + JSON.stringify(cacheFiles) + ';';
       // update the BASE_CACHE_FILES variable in the sw.js service worker file
-      results = replaceInFileSync({
+      replaceInFileSync({
         files: 'static/sw.js',
         from: /this\.BASE_CACHE_FILES =.*/g,
         to: cache,
@@ -238,16 +345,11 @@ async function abridge() {
 
   // if manifest.json is present, then minify it.
   if (fs.existsSync('static/manifest.json')) {
-    let out;
-    try {
-      out = JSON.minify(fs.readFileSync('static/manifest.json', { encoding: "utf-8" }));
-    } catch (err) {
-      console.log(err);
-    }
+    const out = JSON.minify(fs.readFileSync('static/manifest.json', { encoding: "utf-8" }));
     fs.writeFileSync('static/manifest.min.json', out);
   }
 
-  abridge_bundle = bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, search_library, index_format, uglyurls, false);
+  let abridge_bundle = bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, search_library, index_format, uglyurls, false);
   minify(abridge_bundle, 'static/js/abridge_nopwa.min.js');
 
   abridge_bundle = bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, search_library, index_format, uglyurls, pwa);
@@ -257,7 +359,7 @@ async function abridge() {
   _rmRegex(path.join(__dirname, "static/js/"), /^pagefind_search\.js$/);//pagefind intermediate file that is now in bundle.
 
   console.log('Zola Build to generate new integrity hashes for the previously minified files:');
-  await execWrapper('zola build' + args);
+  await runZola();
 }
 
 async function _headersWASM() {
@@ -285,11 +387,7 @@ function _rmRecursive(targetFiles) {
 }
 
 function _cpRecursive(source, dest) {
-  try {
-    fs.cpSync(source, dest, { recursive: true });
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fs.cpSync(source, dest, { recursive: true });
 }
 
 function _rmRegex(path, regex) {
@@ -303,15 +401,14 @@ function _rmRegex(path, regex) {
 }
 
 function _cpRegex(source, dest, regex) {
-  try {
-    fs.readdirSync(source).filter(f => regex.test(f)).forEach(f => fs.copyFileSync(source + f, dest + f));
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fs.mkdirSync(dest, { recursive: true });
+  const matches = fs.readdirSync(source).filter(f => regex.test(f));
+  matches.forEach(f => fs.copyFileSync(path.join(source, f), path.join(dest, f)));
+  return matches.length;
 }
 
 function bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, search_library, index_format, uglyurls, pwa) {
-  minify_files = [];
+  const minify_files = [];
 
   if (js_prestyle) {
     minify_files.push(path.join(bpath, 'static/js/prestyle.js'));
@@ -327,14 +424,12 @@ function bundle(bpath, js_prestyle, js_switcher, js_email_encode, js_copycode, s
   }
   if (search_library) {
     if ((search_library === 'offline' || (search_library === 'elasticlunrjava' && uglyurls === true))) {
-      minify_files.push('public/search_index.en.js');
       minify_files.push(path.join(bpath, 'static/js/elasticlunr_scope_begin.js'));
       minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
       minify_files.push(path.join(bpath, 'static/js/elasticlunr_bridge.js'));
       minify_files.push(path.join(bpath, 'static/js/searchjavaugly.js'));
       minify_files.push(path.join(bpath, 'static/js/elasticlunr_scope_end.js'));
     } else if (search_library === 'elasticlunrjava') {
-      minify_files.push('public/search_index.en.js');
       minify_files.push(path.join(bpath, 'static/js/elasticlunr_scope_begin.js'));
       minify_files.push(path.join(bpath, 'static/js/elasticlunr.min.js'));
       minify_files.push(path.join(bpath, 'static/js/elasticlunr_bridge.js'));
@@ -387,7 +482,7 @@ function minify(fileA, outfile) {
   // Join into one source unit. Uglify parses each array entry as a separate file, so an
   // IIFE split across elasticlunr_scope_begin.js / … / elasticlunr_scope_end.js would fail.
   var combined = filesContents.join('\n');
-  result = UglifyJS.minify(combined, options);
+  const result = UglifyJS.minify(combined, options);
   if (result.error) {
     throw new Error('UglifyJS failed for ' + outfile + ': ' + result.error);
   }
@@ -403,19 +498,19 @@ async function searchChange(searchOption) {
   replaceInFileSync({ files: 'zola.toml', from: /^search_library\s*=.*/gm, to: 'search_library = \"' + searchOption + '\"' });
 }
 
-if (args === ' offline') {
-  searchChange('offline');
-} else if (args === ' elasticlunrjava') {
-  searchChange('elasticlunrjava');
-} else if (args === ' elasticlunr') {
-  searchChange('elasticlunr');
-} else if (args === ' pagefind') {
-  searchChange('pagefind');
-} else if (args === ' tinysearch') {
-  searchChange('tinysearch');
-} else {
-  abridge();
+async function main() {
+  await sync();
+  if (cli.mode) {
+    await searchChange(cli.mode);
+    search_library = cli.mode;
+  }
+  await abridge();
 }
+
+main().catch((error) => {
+  console.error(error);
+  exit(1);
+});
 
 async function createPagefindIndex() {
   console.log("Creating Pagefind index...");
@@ -465,7 +560,7 @@ async function createPagefindIndex() {
         outputPath: path.join(__dirname, "./static/js/"),
       });
       if (errors.length > 0) {
-        console.log("Errors: ", errors);
+        throw new Error(`Pagefind index write failed: ${errors.join('; ')}`);
       }
     })
     .then(async () => {
@@ -499,6 +594,7 @@ async function createPagefindIndex() {
     })
     .catch((error) => {
       console.error("An error occurred:", error);
+      throw error;
     });
 }
 
@@ -544,23 +640,22 @@ async function sync() {
   const packageJsonContent = fs.readFileSync(packageJson, "utf-8");
   const submodulePackageJsonContent = fs.readFileSync(submodulePackageJson, "utf-8");
 
-  // Check for changes in dependencies - prompting an npm update
-  let checkPackageVersion = function (content) {
-    let matches = content.match(/"dependencies": \{([^}]+)\}/)[1]; // Look in the dependencies section
-    return [...matches.matchAll(/"(\w+-\w+|\w+)": "[^0-9]*([0-9])/g)].map(match => ({ // Extract all packages and their major version number (aka for breaking changes which need an update)
-      name: match[1],
-      majorVersion: match[2]
-    })).sort((a, b) => a.name.localeCompare(b.name));
+  // Any dependency-spec change requires reinstalling dependencies before the build.
+  // Parse JSON instead of scraping package.json with regexes so scoped names, multiple
+  // hyphens, and multi-digit versions are handled correctly.
+  const packageDependencies = (content) => {
+    const dependencies = JSON.parse(content).dependencies || {};
+    return Object.fromEntries(Object.entries(dependencies).sort(([a], [b]) => a.localeCompare(b)));
   };
+  const packageDependenciesLocal = packageDependencies(packageJsonContent);
+  const packageDependenciesSubmodule = packageDependencies(submodulePackageJsonContent);
 
   if (packageJsonContent !== submodulePackageJsonContent) {
     console.log("Updating package.json from submodule");
     fs.copyFileSync(submodulePackageJson, packageJson);
   }
 
-  const packageVersionLocal = checkPackageVersion(packageJsonContent);
-  const packageVersionSubmodule = checkPackageVersion(submodulePackageJsonContent);
-  if (JSON.stringify(packageVersionLocal) !== JSON.stringify(packageVersionSubmodule)) {
+  if (JSON.stringify(packageDependenciesLocal) !== JSON.stringify(packageDependenciesSubmodule)) {
     console.log(
       "\x1b[31m%s\x1b[0m",
       "warning:",
@@ -572,25 +667,124 @@ async function sync() {
   const configToml = path.join(__dirname, "zola.toml");
   const submoduleConfigToml = path.join(__dirname, "themes/abridge/zola.toml");
 
-  let adjustTomlContent = function (content) {
-    content = content.replace(/^\s+|\s+$|\s+(?=\s)/g, ""); // Remove all leading and trailing whitespaces and multiple whitespaces
-    content = content.replace(/(^#)(?=\s*\w+\s*=\s*)|[[:blank:]]*#.*$/gm, ""); // A regex to selectively remove all comments, and to uncomment all commented config lines
-    content = content.replace(/(\[([^]]*)\])|(\{([^}]*)\})/gs, ""); // A regex to remove all tables and arrays
-    content = content.replace(
-      /(^#.*$|(["']).*?\2|(?<=\s)#.*$|\btrue\b|\bfalse\b)/gm,
-      ""
-    ); // A regex to remove all user added content, (so you can tell if the .toml format has changed)
-    return content.trim(); // Finally remove any leading or trailing white spaces
+  // Compare the configuration schema rather than normalized TOML text.
+  // Commented example settings count as known settings, values do not matter,
+  // downstream-only settings are allowed, and language tables are intentionally
+  // ignored because sites may enable any subset of the example languages.
+  const extractTomlSchema = (content) => {
+    const keys = new Set();
+    let section = "";
+    let ignoreSection = false;
+
+    // Split an inline table into top-level comma-separated members without
+    // being confused by quoted strings or nested arrays/tables.
+    const getInlineTableMembers = (value) => {
+      const members = [];
+      let token = "";
+      let quote = null;
+      let escaped = false;
+      let depth = 0;
+
+      for (let i = 1; i < value.length; i++) {
+        const ch = value[i];
+
+        if (quote) {
+          token += ch;
+          if (escaped) {
+            escaped = false;
+          } else if (ch === "\\") {
+            escaped = true;
+          } else if (ch === quote) {
+            quote = null;
+          }
+          continue;
+        }
+
+        if (ch === '"' || ch === "'") {
+          quote = ch;
+          token += ch;
+        } else if (ch === "{" || ch === "[") {
+          depth++;
+          token += ch;
+        } else if (ch === "}" || ch === "]") {
+          if (ch === "}" && depth === 0) {
+            if (token.trim()) members.push(token.trim());
+            break;
+          }
+          depth--;
+          token += ch;
+        } else if (ch === "," && depth === 0) {
+          if (token.trim()) members.push(token.trim());
+          token = "";
+        } else {
+          token += ch;
+        }
+      }
+
+      return members;
+    };
+
+    for (const rawLine of content.split(/\r?\n/)) {
+      let line = rawLine.trim();
+      if (!line) continue;
+
+      // Treat commented configuration examples as part of the schema. Prose
+      // comments naturally fall through because they are not table/key syntax.
+      line = line.replace(/^(?:#\s*)+/, "").trim();
+      if (!line) continue;
+
+      const tableMatch = line.match(/^\[\[?\s*([^\]]+?)\s*\]\]?/);
+      if (tableMatch) {
+        section = tableMatch[1].replace(/\s+/g, "");
+        ignoreSection = section === "languages" || section.startsWith("languages.");
+        continue;
+      }
+
+      if (ignoreSection) continue;
+
+      const keyMatch = line.match(
+        /^([A-Za-z0-9_-]+(?:\s*\.\s*[A-Za-z0-9_-]+)*)\s*=\s*(.*)$/
+      );
+      if (!keyMatch) continue;
+
+      const key = keyMatch[1].replace(/\s+/g, "");
+      const fullKey = section ? `${section}.${key}` : key;
+      keys.add(fullKey);
+
+      // Inline tables have schema of their own. Record member names so adding
+      // a setting inside meta_post/meta_index/etc. is detected as a format change.
+      const value = keyMatch[2].trim();
+      if (value.startsWith("{")) {
+        for (const member of getInlineTableMembers(value)) {
+          const memberMatch = member.match(
+            /^([A-Za-z0-9_-]+(?:\s*\.\s*[A-Za-z0-9_-]+)*)\s*=/
+          );
+          if (memberMatch) {
+            const memberKey = memberMatch[1].replace(/\s+/g, "");
+            keys.add(`${fullKey}.${memberKey}`);
+          }
+        }
+      }
+    }
+
+    return keys;
   };
 
-  const configTomlContent = adjustTomlContent(
+  const configTomlSchema = extractTomlSchema(
     fs.readFileSync(configToml, "utf-8")
   );
-  const submoduleConfigTomlContent = adjustTomlContent(
+  const submoduleConfigTomlSchema = extractTomlSchema(
     fs.readFileSync(submoduleConfigToml, "utf-8")
   );
 
-  if (configTomlContent !== submoduleConfigTomlContent) {
+  // Parent sites may have extra/custom settings. Only warn when the current
+  // Abridge reference config contains a non-language setting that the parent
+  // zola.toml does not contain at all (active or commented).
+  const missingConfigKeys = [...submoduleConfigTomlSchema].filter(
+    (key) => !configTomlSchema.has(key)
+  );
+
+  if (missingConfigKeys.length > 0) {
     // This should say info: then the message in blue (which works in every terminal)
     console.log(
       "\x1b[34m%s\x1b[0m",

@@ -29,7 +29,13 @@ Some people prefer a landing page for the index, and then use a separate paginat
   {%- else -%}
     {%- set description = config.description -%}
   {%- endif -%}
+  {%- if page %}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page={page} />}}
+  {%- elif section %}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page={section} />}}
+  {%- else %}
   {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""} />}}
+  {%- endif %}
 {%- endblock seo -%}
 
 {%- block content %}

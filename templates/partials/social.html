@@ -4,9 +4,9 @@
           {%- for feed in config.feed_filenames -%}
 
           {%- if feed is containing(pat='atom') -%}
-          <a type="application/atom+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} Atom Feed"><i type="Button" class="svg rss" title="{{ config.title }} Atom Feed"></i></a>{% endif -%}
+          <a type="application/atom+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" rel="noopener" title="{{ config.title }} Atom Feed"><i type="Button" class="svg rss" title="{{ config.title }} Atom Feed"></i></a>{% endif -%}
           {%- if feed is containing(pat='rss') -%}
-          <a type="application/rss+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" title="{{ config.title }} RSS Feed"><i type="Button" class="svg rss" title="{{ config.title }} RSS Feed"></i></a>{% endif -%}
+          <a type="application/rss+xml" href="{{ get_url(path=feed, trailing_slash=false, lang=lang) | safe }}" target="_blank" rel="noopener" title="{{ config.title }} RSS Feed"><i type="Button" class="svg rss" title="{{ config.title }} RSS Feed"></i></a>{% endif -%}
 
           {%- endfor -%}
           {%- endif -%}
@@ -14,61 +14,61 @@
           {%- if config.extra.mail -%}
           {%- if (config.extra.mail_encode if config.extra.mail_encode is defined else true) -%}
           {%- set base64_email = config.extra.mail -%}
-          <a class="js m-protected" href="#{{ base64_email | base64_encode }}" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a>
+          <a class="js m-protected" href="#{{ base64_email | base64_encode }}" target="_blank" rel="noopener" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a>
           {%- else -%}
-          <a href="mailto:{{ config.extra.mail }}" target="_blank" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a>
+          <a href="mailto:{{ config.extra.mail }}" target="_blank" rel="noopener" title="Mail"><i type="Button" class="svg mail" title="Mail"></i></a>
           {%- endif -%}
           {% endif -%}
           {%- if config.extra.mastodon -%}
-          <a href="{{ config.extra.mastodon | safe }}" target="_blank" title="Mastodon" rel="me"><i type="Button" class="svg mastodon" title="Mastodon"></i></a>{% endif -%}
+          <a href="{{ config.extra.mastodon | safe }}" target="_blank" title="Mastodon" rel="me noopener"><i type="Button" class="svg mastodon" title="Mastodon"></i></a>{% endif -%}
           {%- if config.extra.element -%}
-          <a href="https://{{ config.extra.element }}/" target="_blank" title="Element"><i type="Button" class="svg element" title="Element"></i></a>{% endif -%}
+          <a href="https://{{ config.extra.element }}/" target="_blank" rel="noopener" title="Element"><i type="Button" class="svg element" title="Element"></i></a>{% endif -%}
           {%- if config.extra.matrix -%}
-          <a href="https://{{ config.extra.matrix }}/" target="_blank" title="Matrix"><i type="Button" class="svg matrix" title="Matrix"></i></a>{% endif -%}
+          <a href="https://{{ config.extra.matrix }}/" target="_blank" rel="noopener" title="Matrix"><i type="Button" class="svg matrix" title="Matrix"></i></a>{% endif -%}
           {%- if config.extra.discord -%}
-          <a href="{{ config.extra.discord | safe }}" target="_blank" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
+          <a href="{{ config.extra.discord | safe }}" target="_blank" rel="noopener" title="Discord"><i type="Button" class="svg discord" title="Discord"></i></a>{% endif -%}
           {%- if config.extra.twitter -%}
-          <a href="https://twitter.com/{{ config.extra.twitter }}/" target="_blank" title="Twitter"><i type="Button" class="svg twitter" title="Twitter"></i></a>{% endif -%}
+          <a href="https://twitter.com/{{ config.extra.twitter }}/" target="_blank" rel="noopener" title="Twitter"><i type="Button" class="svg twitter" title="Twitter"></i></a>{% endif -%}
           {%- if config.extra.facebook -%}
-          <a href="https://www.facebook.com/{{ config.extra.facebook }}/" target="_blank" title="Facebook"><i type="Button" class="svg facebook" title="Facebook"></i></a>{% endif -%}
+          <a href="https://www.facebook.com/{{ config.extra.facebook }}/" target="_blank" rel="noopener" title="Facebook"><i type="Button" class="svg facebook" title="Facebook"></i></a>{% endif -%}
           {%- if config.extra.linkedin -%}
-          <a href="https://www.linkedin.com/in/{{ config.extra.linkedin }}/" target="_blank" title="LinkedIn"><i type="Button" class="svg linkedin" title="LinkedIn"></i></a>{% endif -%}
+          <a href="https://www.linkedin.com/in/{{ config.extra.linkedin }}/" target="_blank" rel="noopener" title="LinkedIn"><i type="Button" class="svg linkedin" title="LinkedIn"></i></a>{% endif -%}
           {%- if config.extra.researchgate -%}
-          <a href="https://www.researchgate.net/profile/{{ config.extra.researchgate }}/" target="_blank" title="ResearchGate"><i type="Button" class="svg researchgate" title="ResearchGate"></i></a>{% endif -%}
+          <a href="https://www.researchgate.net/profile/{{ config.extra.researchgate }}/" target="_blank" rel="noopener" title="ResearchGate"><i type="Button" class="svg researchgate" title="ResearchGate"></i></a>{% endif -%}
           {%- if config.extra.codeberg -%}
-          <a href="https://codeberg.org/{{ config.extra.codeberg }}/" target="_blank" title="Codeberg"><i type="Button" class="svg codeberg" title="Codeberg"></i></a>{% endif -%}
+          <a href="https://codeberg.org/{{ config.extra.codeberg }}/" target="_blank" rel="noopener" title="Codeberg"><i type="Button" class="svg codeberg" title="Codeberg"></i></a>{% endif -%}
           {%- if config.extra.gitlab -%}
-          <a href="https://gitlab.com/{{ config.extra.gitlab }}/" target="_blank" title="Gitlab"><i type="Button" class="svg gitlab" title="Gitlab"></i></a>{% endif -%}
+          <a href="https://gitlab.com/{{ config.extra.gitlab }}/" target="_blank" rel="noopener" title="Gitlab"><i type="Button" class="svg gitlab" title="Gitlab"></i></a>{% endif -%}
           {%- if config.extra.github -%}
-          <a href="https://github.com/{{ config.extra.github }}/" target="_blank" title="Github"><i type="Button" class="svg github" title="Github"></i></a>{% endif -%}
+          <a href="https://github.com/{{ config.extra.github }}/" target="_blank" rel="noopener" title="Github"><i type="Button" class="svg github" title="Github"></i></a>{% endif -%}
           {%- if config.extra.bitbucket -%}
-          <a href="https://bitbucket.org/{{ config.extra.bitbucket }}/" target="_blank" title="Bitbucket"><i type="Button" class="svg bitbucket" title="Bitbucket"></i></a>{% endif -%}
+          <a href="https://bitbucket.org/{{ config.extra.bitbucket }}/" target="_blank" rel="noopener" title="Bitbucket"><i type="Button" class="svg bitbucket" title="Bitbucket"></i></a>{% endif -%}
           {%- if config.extra.python -%}
-          <a href="https://pypi.org/user/{{ config.extra.python }}/" target="_blank" title="Python"><i type="Button" class="svg python" title="Python"></i></a>{% endif -%}
+          <a href="https://pypi.org/user/{{ config.extra.python }}/" target="_blank" rel="noopener" title="Python"><i type="Button" class="svg python" title="Python"></i></a>{% endif -%}
           {%- if config.extra.docker -%}
-          <a href="https://hub.docker.com/u/{{ config.extra.docker }}/" target="_blank" title="Docker"><i type="Button" class="svg docker" title="Docker"></i></a>{% endif -%}
+          <a href="https://hub.docker.com/u/{{ config.extra.docker }}/" target="_blank" rel="noopener" title="Docker"><i type="Button" class="svg docker" title="Docker"></i></a>{% endif -%}
           {%- if config.extra.stack -%}
-          <a href="https://stackoverflow.com/users/{{ config.extra.stack }}/" target="_blank" title="Stack"><i type="Button" class="svg stack" title="Stack"></i></a>{% endif -%}
+          <a href="https://stackoverflow.com/users/{{ config.extra.stack }}/" target="_blank" rel="noopener" title="Stack"><i type="Button" class="svg stack" title="Stack"></i></a>{% endif -%}
           {%- if config.extra.instagram -%}
-          <a href="https://www.instagram.com/{{ config.extra.instagram }}/" target="_blank" title="Instagram"><i type="Button" class="svg instagram" title="Instagram"></i></a>{% endif -%}
+          <a href="https://www.instagram.com/{{ config.extra.instagram }}/" target="_blank" rel="noopener" title="Instagram"><i type="Button" class="svg instagram" title="Instagram"></i></a>{% endif -%}
           {%- if config.extra.pixelfed -%}
-          <a href="{{ config.extra.pixelfed | safe }}" target="_blank" title="Pixelfed"><i type="Button" class="svg pixelfed" title="Pixelfed"></i></a>{% endif -%}
+          <a href="{{ config.extra.pixelfed | safe }}" target="_blank" rel="noopener" title="Pixelfed"><i type="Button" class="svg pixelfed" title="Pixelfed"></i></a>{% endif -%}
           {%- if config.extra.pinterest -%}
-          <a href="https://www.pinterest.com/{{ config.extra.pinterest }}/" target="_blank" title="Pinterest"><i type="Button" class="svg pinterest" title="Pinterest"></i></a>{% endif -%}
+          <a href="https://www.pinterest.com/{{ config.extra.pinterest }}/" target="_blank" rel="noopener" title="Pinterest"><i type="Button" class="svg pinterest" title="Pinterest"></i></a>{% endif -%}
           {%- if config.extra.youtube -%}
-          <a href="https://www.youtube.com/{{ config.extra.youtube }}" target="_blank" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a>{% endif -%}
+          <a href="https://www.youtube.com/{{ config.extra.youtube }}" target="_blank" rel="noopener" title="YouTube"><i type="Button" class="svg youtube" title="YouTube"></i></a>{% endif -%}
           {%- if config.extra.twitch -%}
-          <a href="https://www.twitch.tv/{{ config.extra.twitch }}/" target="_blank" title="Twitch"><i type="Button" class="svg twitch" title="Twitch"></i></a>{% endif -%}
+          <a href="https://www.twitch.tv/{{ config.extra.twitch }}/" target="_blank" rel="noopener" title="Twitch"><i type="Button" class="svg twitch" title="Twitch"></i></a>{% endif -%}
           {%- if config.extra.peertube -%}
-          <a href="{{ config.extra.peertube | safe }}/" target="_blank" title="PeerTube"><i type="Button" class="svg peertube" title="PeerTube"></i></a>{% endif -%}
+          <a href="{{ config.extra.peertube | safe }}/" target="_blank" rel="noopener" title="PeerTube"><i type="Button" class="svg peertube" title="PeerTube"></i></a>{% endif -%}
           {%- if config.extra.kofi -%}
-          <a href="https://www.ko-fi.com/{{ config.extra.kofi }}/" target="_blank" title="Support me on Ko-fi"><i type="Button" class="svg kofi" title="Support me on Ko-fi"></i></a>{% endif -%}
+          <a href="https://www.ko-fi.com/{{ config.extra.kofi }}/" target="_blank" rel="noopener" title="Support me on Ko-fi"><i type="Button" class="svg kofi" title="Support me on Ko-fi"></i></a>{% endif -%}
           {%- if config.extra.buymeacoffee -%}
-          <a href="https://www.buymeacoffee.com/{{ config.extra.buymeacoffee }}/" target="_blank" title="Buy Me A Coffee"><i type="Button" class="svg buymeacoffee" title="Buy Me A Coffee"></i></a>{% endif -%}
+          <a href="https://www.buymeacoffee.com/{{ config.extra.buymeacoffee }}/" target="_blank" rel="noopener" title="Buy Me A Coffee"><i type="Button" class="svg buymeacoffee" title="Buy Me A Coffee"></i></a>{% endif -%}
           {%- if config.extra.github_sponsor -%}
-          <a href="https://github.com/sponsors/{{ config.extra.github_sponsor }}/" target="_blank" title="GitHub Sponsor"><i type="Button" class="svg github-sponsor" title="GitHub Sponsor"></i></a>{% endif -%}
+          <a href="https://github.com/sponsors/{{ config.extra.github_sponsor }}/" target="_blank" rel="noopener" title="GitHub Sponsor"><i type="Button" class="svg github-sponsor" title="GitHub Sponsor"></i></a>{% endif -%}
           {%- if config.extra.telegram -%}
-          <a href="https://t.me/{{ config.extra.telegram }}/" target="_blank" title="Telegram"><i type="Button" class="svg telegram" title="Telegram"></i></a>{% endif -%}
+          <a href="https://t.me/{{ config.extra.telegram }}/" target="_blank" rel="noopener" title="Telegram"><i type="Button" class="svg telegram" title="Telegram"></i></a>{% endif -%}
       </div></nav>
 
 

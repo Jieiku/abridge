@@ -48,7 +48,7 @@
             {%- set js_switcher=(config.extra.js_switcher if config.extra.js_switcher is defined else true) %}
             {%- if config.extra.menu %}
               {%- for i in config.extra.menu -%}
-                <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching(pat="^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+                <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching(pat="^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank" rel="noopener"{% endif %}>
                 {%- if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif -%}
                 </a></li>
               {%- endfor -%}
@@ -136,7 +136,7 @@
         {%- else %}
         {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
         {%- endif %}
-        <a class="rpad{%- if i.size %} {{ i.size }}{% endif %}" href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif %}</a>
+        <a class="rpad{%- if i.size %} {{ i.size }}{% endif %}" href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank" rel="noopener"{% endif %}>{% if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif %}</a>
         {%- endfor %}
       </nav>
       {%- endif %}
@@ -164,7 +164,7 @@
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{{<translate key="Powered_by"  default="Powered by"  i18n={i18n} />}} <a href="https://www.getzola.org/" target="_blank">Zola</a> {{<translate key="and"  default="and"  i18n={i18n} />}} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{{<translate key="Powered_by"  default="Powered by"  i18n={i18n} />}} <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a> {{<translate key="and"  default="and"  i18n={i18n} />}} <a href="https://github.com/jieiku/abridge/" target="_blank" rel="noopener">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

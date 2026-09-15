@@ -62,7 +62,7 @@ pacman -S --needed mingw-w64-ucrt-x86_64-git mingw-w64-ucrt-x86_64-zola mingw-w6
 
 ## Quick Start
 
-This theme requires version 0.23.3 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
+This theme requires version 0.23.6 or later of [Zola](https://www.getzola.org/documentation/getting-started/installation/)
 
 ```bash
 git clone https://github.com/jieiku/abridge.git
@@ -145,6 +145,27 @@ zola serve
 Zola will start the dev web server, accessible by default at `http://127.0.0.1:1111`.
 
 Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `zola.toml`)
+
+## Abridge build helper
+
+Install dependencies with `npm install`, then run a normal build with:
+
+```bash
+npm run abridge
+```
+
+The alternate search demos use an explicit build mode:
+
+```bash
+npm run abridge -- --mode elasticlunr --base-url https://abridge.pages.dev
+npm run abridge -- --mode pagefind --base-url https://abridge-pagefind.pages.dev
+npm run abridge -- --mode tinysearch --base-url https://abridge-tinysearch.pages.dev
+npm run abridge -- --mode offline --drafts
+```
+
+Valid modes are `elasticlunr`, `pagefind`, `tinysearch`, `offline`, and `elasticlunrjava`.
+
+There is a `build-zola.sh` that helps with deployment at cloudflare, netlify, etc. The helper works both from the Abridge repository itself and when called from a site as `./themes/abridge/build-zola.sh`; The script checks `theme.toml` for the proper version of Zola to use, this avoids having to set or update Zola Version variables.
 
 ## Customization
 

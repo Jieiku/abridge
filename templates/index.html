@@ -19,7 +19,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
     {%- set title_addition = "" -%}
   {%- endif -%}
   {%- set description = config.description -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""} />}}
 {%- endblock seo -%}
 
 

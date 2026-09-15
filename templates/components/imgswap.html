@@ -1,4 +1,4 @@
-{% component imgswap(page, config, main_src, swap_src, caption="", class="", alt="", w=0, h=0) %}
+{% component imgswap(page, config, main_src, swap_src, caption="", class="", alt="", link="", w=0, h=0) %}
 <div class="img-swap-div">
   {%- set img = main_src | split(pat="/") | last %}
   {%- set dirtest = main_src | trim_start(pat="./") %}

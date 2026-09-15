@@ -100,8 +100,9 @@ window.onload = function () {
                 ResultsClone.id = "results";
 
                 var headerDiv = document.createElement("div");
-                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");
+                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> <span class="search-query"></span></h2></form>';
                 headerDiv.innerHTML = headerContent;
+            headerDiv.querySelector(".search-query").textContent = document.getElementById("searchinput").value;
                 ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);
 
                 main.innerHTML = ResultsClone.outerHTML;
@@ -117,9 +118,26 @@ window.onload = function () {
                 }
             }
 
-            function markTerm(input, term) {
-                if (!input) return "";
-                return String(input).replace(new RegExp('(^|)(' + term + ')(|$)', 'ig'), '$1<mark>$2</mark>$3');
+            function markTerm(target, input, term) {
+                target.textContent = "";
+                var text = String(input || "");
+                var needle = String(term || "");
+                if (!needle) {
+                    target.textContent = text;
+                    return;
+                }
+                var lowerText = text.toLowerCase();
+                var lowerNeedle = needle.toLowerCase();
+                var start = 0;
+                var match;
+                while ((match = lowerText.indexOf(lowerNeedle, start)) !== -1) {
+                    target.appendChild(document.createTextNode(text.slice(start, match)));
+                    var mark = document.createElement("mark");
+                    mark.textContent = text.slice(match, match + needle.length);
+                    target.appendChild(mark);
+                    start = match + needle.length;
+                }
+                target.appendChild(document.createTextNode(text.slice(start)));
             }
 
             function unwrapMeta(meta) {
@@ -169,8 +187,8 @@ window.onload = function () {
                             d = entry.querySelector('span:nth-child(2)');
                         var resolved = resolveResultUrl(url);
                         a.href = resolved + (resolved.indexOf('?') >= 0 ? '&' : '?') + 'q=' + encodeURIComponent(val);
-                        t.innerHTML = title || "";
-                        d.innerHTML = markTerm(meta || "", val);
+                        t.textContent = title || "";
+                        markTerm(d, meta || "", val);
 
                         suggestions.appendChild(entry);
                     }
@@ -188,15 +206,15 @@ window.onload = function () {
 
             function stringToWasmPtr(str) {
                 var bytes = textEncoder.encode(str + "\0");
-                var ptr = 0;
-                if (wasmModule.exports.__wbindgen_malloc) {
-                    ptr = wasmModule.exports.__wbindgen_malloc(bytes.length);
+                if (!wasmModule.exports.__wbindgen_malloc) {
+                    throw new Error("Required WASM export __wbindgen_malloc not found");
                 }
+                var ptr = wasmModule.exports.__wbindgen_malloc(bytes.length);
                 if (!ptr) {
-                    ptr = 1024;
+                    throw new Error("WASM allocation failed");
                 }
                 new Uint8Array(memory.buffer, ptr, bytes.length).set(bytes);
-                return ptr;
+                return { ptr: ptr, length: bytes.length };
             }
 
             function wasmPtrToString(ptr) {
@@ -214,11 +232,11 @@ window.onload = function () {
                 if (!wasmReady || !query) return [];
                 limit = limit || 10;
                 try {
-                    var queryPtr = stringToWasmPtr(query);
-                    var resultPtr = searchFunction(queryPtr, limit);
+                    var queryAllocation = stringToWasmPtr(query);
+                    var resultPtr = searchFunction(queryAllocation.ptr, limit);
 
-                    if (wasmModule.exports.__wbindgen_free && queryPtr > 1024) {
-                        wasmModule.exports.__wbindgen_free(queryPtr, query.length + 1);
+                    if (wasmModule.exports.__wbindgen_free) {
+                        wasmModule.exports.__wbindgen_free(queryAllocation.ptr, queryAllocation.length);
                     }
 
                     if (!resultPtr) return [];
@@ -247,8 +265,8 @@ window.onload = function () {
                 searchFunction = wasmModule.exports.search;
                 freeFunction = wasmModule.exports.free_search_result;
 
-                if (!searchFunction || !freeFunction || !memory) {
-                    throw new Error("Required WASM exports not found (need search, free_search_result, memory)");
+                if (!searchFunction || !freeFunction || !memory || !wasmModule.exports.__wbindgen_malloc || !wasmModule.exports.__wbindgen_free) {
+                    throw new Error("Required WASM exports not found (need search, free_search_result, memory, __wbindgen_malloc, __wbindgen_free)");
                 }
                 wasmReady = true;
             }

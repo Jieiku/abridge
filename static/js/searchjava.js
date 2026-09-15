@@ -85,9 +85,10 @@ window.onload = function() {
 
             var headerDiv = document.createElement("div");// create a div element
 
-            var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
+            var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> <span class="search-query"></span></h2></form>';// header to use at top of results page
 
-            headerDiv.innerHTML = headerContent;// document element div (headerDiv), set the inner contents to our header html (headerContent)
+            headerDiv.innerHTML = headerContent;
+            headerDiv.querySelector(".search-query").textContent = document.getElementById("searchinput").value;// document element div (headerDiv), set the inner contents to our header html (headerContent)
 
             ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);//insert our header div at the top of the page
 
@@ -131,7 +132,7 @@ window.onload = function() {
 
               entry.innerHTML = '<a href><span></span><span></span></a>';
 
-              a = entry.querySelector('a'),
+              var a = entry.querySelector('a'),
               t = entry.querySelector('span:first-child'),
               d = entry.querySelector('span:nth-child(2)');
               a.href = page.ref;
@@ -237,6 +238,15 @@ window.onload = function() {
         // maximum sum. If there are multiple maximas, then get the last one.
         // Enclose the terms in <b>.
         */
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+
         function makeTeaser(body, terms) {
           var TERM_WEIGHT = 40;
           var NORMAL_WORD_WEIGHT = 2;
@@ -279,9 +289,9 @@ window.onload = function() {
 
           if (weighted.length === 0) {
             if (body.length !== undefined && body.length > TEASER_MAX_WORDS * 10) {
-              return body.substring(0, TEASER_MAX_WORDS * 10) + '...';
+              return escapeHtml(body.substring(0, TEASER_MAX_WORDS * 10)) + '...';
             } else {
-              return body;
+              return escapeHtml(body);
             }
           }
 
@@ -319,7 +329,7 @@ window.onload = function() {
             var word = weighted[i];
             if (startIndex < word[2]) {
               // missing text from index to start of `word`
-              teaser.push(body.substring(startIndex, word[2]));
+              teaser.push(escapeHtml(body.substring(startIndex, word[2])));
               startIndex = word[2];
             }
 
@@ -336,9 +346,9 @@ window.onload = function() {
               // if using substring method directly, it may occur error codes on emoji chars
               var strBefor = body.substring(word[2], startIndex);
               var strAfter = substringByByte(strBefor, 12);
-              teaser.push(strAfter);
+              teaser.push(escapeHtml(strAfter));
             } else {
-              teaser.push(body.substring(word[2], startIndex));
+              teaser.push(escapeHtml(body.substring(word[2], startIndex)));
             }
 
             if (word[1] === TERM_WEIGHT) {

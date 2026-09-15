@@ -26,6 +26,9 @@
 {%- if config.extra.js_bundle -%}
 
   {%- if config.build_search_index -%}
+  {%- if search_library == "offline" or search_library == "elasticlunrjava" %}
+  <script defer src="{{               get_url(path='search_index.' ~ lang ~ '.js', trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='search_index.' ~ lang ~ '.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
+  {%- endif %}
   {%- if notserve and (config.extra.pwa or false) %}
   <script defer src="{{               get_url(path='js/abridge.min.js'             , trailing_slash=false, cachebust=true) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/abridge.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   {%- else %}
@@ -41,7 +44,7 @@
   {%- endif %}
 
   {%- if config.build_search_index %}
-  {%- if search_library == "elasticlunr" %}
+  {%- if search_library == "elasticlunr" or search_library == "elasticlunrjava" or search_library == "offline" %}
   {%- if lang != "en" %}
   <script defer src="{{               get_url(path='js/lunr.stemmer.support.min.js', trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.stemmer.support.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>
   <script defer src="{{               get_url(path='js/lunr.' ~ lang ~ '.min.js'   , trailing_slash=false) | safe }}"{%- if integrity %} integrity="sha384-{{ get_hash(path='js/lunr.' ~ lang ~ '.min.js', sha_type=384, base64=true) | safe }}"{%- endif %}></script>

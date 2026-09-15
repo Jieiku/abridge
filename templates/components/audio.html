@@ -21,8 +21,11 @@
 
   {%- endif %}
 
-  {%- set type = src | split(pat=".") | last %}
-  {%- if type is matching(pat="^mov$") %}{% set type = "quicktime" %}{% endif %}
+  {%- set type = src | split(pat=".") | last | lower %}
+  {%- if type == "mp3" %}{%- set type = "mpeg" %}
+  {%- elif type == "m4a" %}{%- set type = "mp4" %}
+  {%- elif type == "oga" %}{%- set type = "ogg" %}
+  {%- endif %}
   <source src="{{ path | safe }}{{ file | safe }}" type="{{ 'audio/' ~ type }}" />
   {%- endfor -%}Your browser doesn't support the audio tag and/or the audio formats in use here – sorry!</audio>
 {%- if caption %}<figcaption>{{caption}}</figcaption></figure>{% endif %}

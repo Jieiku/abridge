@@ -99,9 +99,10 @@ window.onload = function () {
 
                 var headerDiv = document.createElement("div");// create a div element
 
-                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");// header to use at top of results page
+                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> <span class="search-query"></span></h2></form>';// header to use at top of results page
 
-                headerDiv.innerHTML = headerContent;// document element div (headerDiv), set the inner contents to our header html (headerContent)
+                headerDiv.innerHTML = headerContent;
+            headerDiv.querySelector(".search-query").textContent = document.getElementById("searchinput").value;// document element div (headerDiv), set the inner contents to our header html (headerContent)
 
                 ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);//insert our header div at the top of the page
 
@@ -139,12 +140,12 @@ window.onload = function () {
 
                         entry.innerHTML = '<a href><span></span><span></span></a>';
 
-                        a = entry.querySelector('a'),
+                        var a = entry.querySelector('a'),
                             t = entry.querySelector('span:first-child'),
                             d = entry.querySelector('span:nth-child(2)');
                         a.href = data.url;
                         t.textContent = data.meta.title;
-                        d.innerHTML = sanitise(data.excerpt);
+                        renderExcerpt(d, data.excerpt);
 
                         suggestions.appendChild(entry);
                     }
@@ -155,8 +156,27 @@ window.onload = function () {
                 }
             }
 
-            function sanitise(str) {
-                return str.replace(/\{\{.*?\}\}|—|<(?!\/?mark\b).*?>|&lt;.*?&gt;/g, '');
+            function renderExcerpt(target, excerpt) {
+                target.textContent = "";
+                var template = document.createElement("template");
+                template.innerHTML = String(excerpt || "");
+
+                function appendSafe(node, parent) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        parent.appendChild(document.createTextNode(node.textContent));
+                        return;
+                    }
+                    if (node.nodeType !== Node.ELEMENT_NODE) return;
+                    if (node.tagName === "MARK") {
+                        var mark = document.createElement("mark");
+                        for (const child of node.childNodes) appendSafe(child, mark);
+                        parent.appendChild(mark);
+                    } else {
+                        for (const child of node.childNodes) appendSafe(child, parent);
+                    }
+                }
+
+                for (const child of template.content.childNodes) appendSafe(child, target);
             }
 
 

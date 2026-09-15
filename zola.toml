@@ -129,7 +129,7 @@ hide_page_nextprev_titles = false # hides the next/previous titles for pages tha
 title_size_index = "s85"
 footer_size = "s80" # the size of the copyright and powered by text
 footer_credit = true
-#footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank">Abridge</a></p>'
+#footer_credit_override = '<p class="s90">Powered by <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a> &#38; <a href="https://github.com/Jieiku/abridge/" target="_blank" rel="noopener">Abridge</a></p>'
 #archive_reverse = true # Set to True to sort posts chronologically per year instead of newest first on the archive page: example.com/archive/
 
 ### Uncomment one of the below lines, or neither, depending on which type of logo you want to use:
@@ -158,9 +158,9 @@ title_addition = "Fast, Lightweight, and Modern Zola Theme" # a default value fo
 author = "Jake G" # Put Your Name here
 keywords = "Abridge, Abridge.css, Zola, Theme, Zola Theme, getzola, Semantic Html, Fast, lightweight" # used for the primary site index
 banner = "banner.png" # Used as default image for OpenGraph/Twitter if page specific image is undefined.
-twitter_meta = "your-user-name" # for SEO: twitter:site and twitter:creator
-google = "Your Google Site verification code."
-bing = "Your Bing Site verification code."
+#twitter_meta = "your-user-name" # for SEO: twitter:site and twitter:creator
+#google = "Your Google Site verification code."
+#bing = "Your Bing Site verification code."
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 #dev = false # development mode, if true then robots.txt should prevent search indexing.
 
@@ -174,27 +174,28 @@ seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twit
 
 feed = true # this adds the RSS feed icon in the footer.
 mail = "name@example.com"
-mastodon = "https://mastodon.example.com/@username"
-element = "matrix.example.com"
+#mastodon = "https://mastodon.example.com/@username"
+#element = "matrix.example.com"
+#matrix = "matrix.example.com"
 #buymeacoffee = "your-user-name"
-kofi = "your-user-name"
+#kofi = "your-user-name"
 #discord = "https://discord.com/invite/my-server" # https://discord.com/invite/my-server  *or*  https://discord.com/servers/my-server-id
 #twitter = "your-user-name"
 #facebook = "your-user-name"
 #linkedin = "your-user-name"
 #gitlab = "your-user-name"
-github = "your-user-name"
+#github = "your-user-name"
 #codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
 #github_sponsor = "your-user-name"
 #bitbucket = "your-user-name"
 #python = "your-user-name"
 #docker = "your-user-name"
 #stack = "your-user-name"
-instagram = "your-user-name"
+#instagram = "your-user-name"
 #pixelfed = "https://pixelfed.example.com/" # Heaviest icon, off by default
 #pinterest = "your-user-name"
-twitch = "your-user-name"
-youtube = "channel/your-channel-id"
+#twitch = "your-user-name"
+#youtube = "channel/your-channel-id"
 #peertube = "https://peertube.example.com/@username"
 #researchgate = "your-profile-id"
 #telegram = "your-user-name"
@@ -244,26 +245,26 @@ webmanifest = "manifest.min.json" # Required for PWAs
 ###############################################################################
 
 pwa = true # true to load the service worker
-pwa_VER = '3.12.1' # Service Worker cache version. (increment if you need to force a new cache)
+pwa_VER = '3.12.6' # Service Worker cache version. (increment if you need to force a new cache)
 
 ### 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
 pwa_NORM_TTL = 0 #  86400 is reasonable. html, json, xml, anything else undefined
 pwa_LONG_TTL = 0 # 604800 is reasonable.
 
 ### list of files that overrides TTL_LONG/TTL_EXEMPT to be a NORM TTL.
-pwa_TTL_NORM = '"sw.min.js", "sw_load.min.js"'
+pwa_TTL_NORM = ["sw.min.js", "sw_load.min.js"]
 
 ### TTL_LONG file extensions will be cached for the LONG_TTL duration.
-pwa_TTL_LONG = '"jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "xsl", "txt"'
+pwa_TTL_LONG = ["jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "xsl", "txt"]
 
 ### TTL_EXEMPT file extensions will be cached indefinitely unless sw_load version is incremented, which would invalidate any existing cache. (and a new cache would be started)
-pwa_TTL_EXEMPT = '"js", "css", "otf", "eot", "ttf", "woff", "woff2", "mp4", "webm", "mp3", "ogg"'
+pwa_TTL_EXEMPT = ["js", "css", "otf", "eot", "ttf", "woff", "woff2", "mp4", "webm", "mp3", "ogg"]
 
 ### If set to true then the entire site is cached. (useful for making an entire site usable while offline)
 pwa_cache_all = true
 
 ### List of Files for the PWA to initially Cache, used if pwa_cache_all = false
-pwa_BASE_CACHE_FILES = "'/js/theme.min.js','/js/theme_light.min.js','/abridge.css','/js/abridge.min.js','/','/404.html','/offline/','/manifest.min.json'"
+pwa_BASE_CACHE_FILES = ["/js/theme.min.js", "/js/theme_light.min.js", "/abridge.css", "/js/abridge.min.js", "/", "/404.html", "/offline/", "/manifest.min.json"]
 
 pwa_IGNORE_FILES = ["_headers","sw.min.js","sw.js"]
 #pwa_IGNORE_FILES = ["_headers","sw.min.js","sw.js","android-chrome-192x192.png","android-chrome-512x512.png","apple-touch-icon.png","favicon-16x16.png","favicon-32x32.png","favicon.ico","m48.png","m72.png","m96.png","m128.png","m192.png","m384.png","m512.png","m1024.png","mstile-150x150.png"]
@@ -293,7 +294,7 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 #comments.hyvor = "9366" # hyvor website id, comment out to disable.
 #comments.hyvorcolor = "os" # set the color property for hyvor
 
-#comments.remark42 = "https://comments.example.com" # remark42 server url, comment out to disable.
+#comments.remark42 = "https://comments.example.com" # remark42 server url, comment out to disable. If using Abridge's CSP, add this origin to script-src/connect-src as required by your Remark42 deployment.
 #comments.remark42_site_id = "remark" # remark42 site id
 
 ###############################################################################
@@ -339,7 +340,7 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 
 #security_header_referrer = "strict-origin-when-cross-origin"
 
-#security_header_csp = "default-src 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
+#security_header_csp = "default-src 'none'; object-src 'none'; base-uri 'self'; manifest-src 'self'; connect-src 'self'; form-action 'self'; script-src 'self'; img-src 'self' data: cdn.cloudflare.com; frame-src 'self' www.youtube-nocookie.com www.youtube.com player.vimeo.com; media-src 'self' data: cdn.cloudflare.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; font-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.gstatic.com; style-src 'self' cdn.cloudflare.com cdn.jsdelivr.net fonts.googleapis.com;"
 
 
 ###############################################################################
@@ -387,14 +388,14 @@ favicon16 = "favicon-16x16.png" # favicon-16x16.png
 #katex_autorender_js = "js/katex-auto-render.min.js"
 
 ### Load Katex External Resources
-#katex_css = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" # Fonts - use remote fonts
-#katex_css_integrity = "sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs"
-#katex_js = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"
-#katex_js_integrity = "sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4"
-#katex_autorender_js = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"
-#katex_autorender_js_integrity = "sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
-#mathtex_js = "https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/mathtex-script-type.min.js"
-#mathtex_js_integrity = "sha384-jiBVvJ8NGGj5n7kJaiWwWp9AjC+Yh8rhZY3GtAX8yU28azcLgoRo4oukO87g7zDT"
+#katex_css = "https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" # Fonts - use remote fonts
+#katex_css_integrity = "sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX"
+#katex_js = "https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"
+#katex_js_integrity = "sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj"
+#katex_autorender_js = "https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js"
+#katex_autorender_js_integrity = "sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz"
+#mathtex_js = "https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/mathtex-script-type.min.js"
+#mathtex_js_integrity = "sha384-W8gaN87yMtPe/iAcxlyIDA8OVOzZvVD4c/HEE6QHhIyo8yHnVSXLzzy+eNWwpivm"
 
 #math = false # Recommended setting false, and enable on per page bases instead.
 #math_auto_render = false # Recommended setting false, and enable on per page bases instead.

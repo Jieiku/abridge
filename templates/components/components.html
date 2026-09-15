@@ -38,15 +38,13 @@
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %}, {% endif %}
+          {%- if not loop.first %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', term=author) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
-          {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_post?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
           {%- for author in page.extra.authors %}
-          {%- if author_flag %}, {% endif %} {{ author }}
-          {%- set_global author_flag = true %}
+          {%- if not loop.first %}, {% endif %} {{ author }}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_post?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %} {{ config.extra.author }}
@@ -108,15 +106,13 @@
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %}, {% endif %}
+          {%- if not loop.first %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', term=author, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
-          {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_index?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
           {%- for author in page.extra.authors %}
-          {%- if author_flag %}, {% endif %} {{ author }}
-          {%- set_global author_flag = true %}
+          {%- if not loop.first %}, {% endif %} {{ author }}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_index?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %} {{ config.extra.author }}
@@ -249,7 +245,7 @@
 
         {%- for i in range(start=start, end=end+1)  %}
             {%- if i == paginator.current_index  %}
-            <a class="inp on cnav" href="#">{{i}}</a>
+            <a class="inp on cnav" href="#" aria-current="page">{{i}}</a>
             {%- elif i > 1  %}
             <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}">{{i}}</a>
             {%- else  %}
@@ -337,7 +333,7 @@
 
         {%- for i in range(start=start, end=end+1)  %}
             {%- if i == paginator.current_index  %}
-            <a class="inp on cnav" href="#">{{i}}</a>
+            <a class="inp on cnav" href="#" aria-current="page">{{i}}</a>
             {%- elif i > 1  %}
             <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{i}}">{{i}}</a>
             {%- else  %}

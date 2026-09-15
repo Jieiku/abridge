@@ -1,4 +1,4 @@
-{% component vimeo(id, class="", title="", autoplay=false, loop=false, noautopause=false, cookie=true) %}
+{% component vimeo(id, class="", title="", autoplay=false, loop=false, noautopause=false, cookie=false) %}
 <div class="yv{% if class %} {{class}}{% endif %}">
     <iframe src="https://player.vimeo.com/video/{{id}}?embedded=true{% if autoplay %}&autoplay=1{% endif %}{% if loop %}&loop=1{% endif %}{% if noautopause %}&autopause=0{% endif %}{% if not cookie %}&dnt=1{% endif %}" title="{{ title if title else 'Vimeo' }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>

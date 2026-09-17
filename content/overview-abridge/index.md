@@ -19,7 +19,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing clas
 
 <!-- more -->
 
-![lighthouse](lighthouse.png)
+{{<img src="lighthouse.png" class="ci" alt="Lighthouse" link="https://pagespeed.web.dev/report?url=abridge.pages.dev" />}}
 
 ## Features
 
@@ -31,7 +31,7 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing clas
 - Numbered code blocks with [line highlighting](https://abridge.pages.dev/overview-code-blocks/#toml).
 - Entirely Offline Site by using the PWA **or** by setting `search_library = "offline"` in `zola.toml`.
 - Multi-language support.
-- Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
+- Search support. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/), [flexsearch](https://abridge-flexsearch.pages.dev/))
 - Search Suggestions navigation keys, `/` focus, `arrow` move, `enter` select, `escape` close.
 - Search Results Page, type search query then hit `Enter Key` or `click` the search button icon.
 - [SEO](#seo) support. (Search Engine Optimization)
@@ -48,13 +48,13 @@ A fast, lightweight, and modern [Zola](https://getzola.org) theme utilizing clas
 - Categories. (similar to Tags, disabled/commented out by default)
 - Social icon links in footer.
 - Responsive design. (mobile first)
-- Video Components: [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
+- Video Components: [YouTube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
 - Media Components: [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
 - Other Components: [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
 
 ## Windows Users
 
-Below I use some linux commands during setup, to have a similar environment you can install [Msys2](https://www.msys2.org/).
+Below, I use some Linux commands during setup. To create a similar environment on Windows, you can install [MSYS2](https://www.msys2.org/).
 With msys2 use shift insert to paste into the terminal, I prefer the UCRT64 launcher.
 
 ```bash
@@ -119,7 +119,7 @@ rsync themes/abridge/package.json package.json
 - `zola.toml` base configuration with all config values.
 - `content/_index.md` required to set pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides to customize Abridge variables.
-- `netlify.toml` settings to deploy your repo with netlfiy.
+- `netlify.toml` settings to deploy your repo with Netlify.
 - `package_abridge.js` node script to: update cache files list in PWA, minify js, bundle js
 - `package.json` used by node, defines scripts and dependencies.
 
@@ -149,13 +149,36 @@ Zola will start the dev web server, accessible by default at `http://127.0.0.1:1
 
 Saved changes will live reload in the browser. (press `ctrl+f5`, or while developing set `pwa=false` in `zola.toml`)
 
+## Abridge build helper
+
+Install dependencies with `npm install`, then run a normal build with:
+
+```bash
+npm run abridge
+```
+
+The alternate search demos use an explicit build mode:
+
+```bash
+npm run abridge -- --mode elasticlunr --base-url https://abridge.pages.dev
+npm run abridge -- --mode pagefind --base-url https://abridge-pagefind.pages.dev
+npm run abridge -- --mode tinysearch --base-url https://abridge-tinysearch.pages.dev
+npm run abridge -- --mode flexsearch --base-url https://abridge-flexsearch.pages.dev
+npm run abridge -- --mode offline --drafts
+npm run abridge -- --mode offlineflexsearch --drafts
+```
+
+Valid modes are `elasticlunr`, `pagefind`, `tinysearch`, `flexsearch`, `offline`, `offlineflexsearch`, and `elasticlunrjava`.
+
+`build-zola.sh` helps with deployment to Cloudflare, Netlify, and similar services. It works from the Abridge repository or from a site as `./themes/abridge/build-zola.sh`. The script reads `theme.toml` to select the proper Zola version automatically.
+
 ## Pagination {% raw %}{#pagination}{% endraw %}
 
 You can set the number of home page items by editing `content\_index.md` file and adjusting `paginate_by`
 
 ## Sass Overrides
 
-Abridge SASS variables can be overrided by editing `sass\abridge.scss` file in your project's root sass folder.
+Abridge SASS variables can be overridden by editing `sass\abridge.scss` file in your project's root sass folder.
 
 ### Page Width
 
@@ -169,7 +192,7 @@ $mw:75%,// max-width
 $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
 ```
 
-- switcher: automatically displays a dark or light version depending on browser/OS settings, and has a javascript user clickable theme switcher.
+- switcher: automatically displays a dark or light version depending on browser/OS settings, and has a user-selectable JavaScript theme switcher.
 - auto: automatically displays a dark or light version depending on browser/OS settings.
 - dark: is the dark theme always.
 - light: is the light theme always.
@@ -207,7 +230,7 @@ You should then disable all the other icons that you do not use.
 
 If you have abridge configured to use the switcher mode instead of auto/dark/light, then your site will have a button that allows the visitor to toggle the theme.
 
-If your visitor uses noscript or some other javascript blocking browser addon, then they will be stuck with whatever the configured default theme is for the switcher mode.
+If your visitor uses noscript or some other JavaScript blocking browser addon, then they will be stuck with whatever the configured default theme is for the switcher mode.
 
 To adjust this mode you would set the following two config values in `abridge.scss` **AND** `zola.toml`:
 
@@ -223,7 +246,7 @@ By default abridge uses dark mode for the switcher, so unless you want to set th
 
 ## Zola.toml Configuration
 
-Most Options in `zola.toml` are self documenting. (obvious between name of config value and comments)
+Most options in `zola.toml` are self-documenting from their names and comments.
 
 Abridge will work with a barebones `zola.toml` because default values are provided in the template files.
 
@@ -235,7 +258,7 @@ Set a field in `extra` with a key of `menu` and `menu_footer`.
 If you want the link to open in a new tab/browser then set `blank = true`.
 size: s150, s140, s130, s120, s110, s95, s90, s85, s80, s75, s70, false(full size)
 If a link should have a trailing slash at the end of the url set `slash = true`.
-(generally all links should have a trailing slash unless its a file link such as `sitemap.xml`)
+(generally all links should have a trailing slash unless it's a file link such as `sitemap.xml`)
 
 ```toml
 menu = [
@@ -277,17 +300,17 @@ KaTeX can be used to display complex mathematics, it is a "Fast math typesetting
 
 You can see a demo on [this page](https://abridge.pages.dev/overview-math/).
 
-For better performance I recommend only enabling math on a [per page bases in your post.md files](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), instead of in your main zola.toml file.
+KaTeX is loaded automatically on pages or sections that use the `katex` component. No `math = true` setting is required. If you use raw `$...$` or `$$...$$` delimiters, enable `math_auto_render = true` for that page/section (or globally if desired).
 
 ### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
-Abridge theme has PWA support. You can install the entire site as an app and have it work offline. To try it out simply use google chrome or your phone and go here: [abridge.pages.dev](https://abridge.pages.dev/)
+Abridge theme has PWA support. You can install the entire site as an app and have it work offline. To try it out simply use Google Chrome or your phone and go here: [abridge.pages.dev](https://abridge.pages.dev/)
 
 If using Chrome on desktop then look at the end of the address bar for the install button. On Android you should get a popup to install, you can also install from the 3 dot menu in the top right corner. Once you have the PWA installed, you can go completely offline and you will still be able to browse or search the site!
 
 There is an npm script to generate the file cache list and minification `npm run abridge`. My [netlify.toml](https://github.com/Jieiku/abridge/blob/master/netlify.toml) file automatically runs this npm script during site deployment, so everything is automatic. If Zola was able to template a js file then it might be possible to generate the list of cache files dynamically at build instead of relying on node/npm.
 
-To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `zola.toml`. If even a single file in the cache list is missing then it wont pre cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
+To use a specific list of files instead of all files edit the `pwa_BASE_CACHE_FILES` entry in `zola.toml`. If even a single file in the cache list is missing then it won't pre-cache the list, so it will only cache as you browse. (If just initially setting up, test with only a couple pages.)
 
 The PWA feature is also easy to disable by simply setting `pwa = false` in `zola.toml`
 
@@ -295,7 +318,7 @@ The PWA feature is also easy to disable by simply setting `pwa = false` in `zola
 
 ### Javascript files
 
-All javascript can be disabled in `zola.toml`:
+All JavaScript can be disabled in `zola.toml`:
 
 ```toml
 build_search_index = false
@@ -309,12 +332,12 @@ js_switcher = false
 pwa = false
 ```
 
-These are the javascript files used by Abridge:
+These are the JavaScript files used by Abridge:
 
 - search_index.en.js: search index generated by zola at each build for elasticlunr.
 - elasticlunr.min.js: search library for client side searching.
 - search.js: to make use of elasticlunr from our sites search box for both suggestions and the results page.
-- email.js: uses javascript to obfuscate your real email address for the mail icon at the bottom of the page.
+- email.js: uses JavaScript to obfuscate your real email address for the mail icon at the bottom of the page.
 - codecopy.js: add a Copy Button to code blocks, to copy contents of the code block to clipboard.
 - theme.js: tiny script to facilitate local storage for the theme switcher. (never bundle, always separate)
 - theme_button.js: tiny script for the theme switcher function when you click the theme switch button.
@@ -328,87 +351,33 @@ These are the javascript files used by Abridge:
 
 All necessary bundles are dynamically generated by the node script [package_abridge.js](https://github.com/Jieiku/abridge/blob/master/package_abridge.js)
 
-The node script will scan your zola.toml for relevant config values, and then based on your zola.tomnl generate your required bundles.
+The node script will scan your zola.toml for relevant config values, and then based on your `zola.toml`, generate your required bundles.
 
 All that is necessary is `zola build && npm run abridge`.
 
-#### Switch Search Library
-
-In addition to elasticlunr abridge also supports pagefind and tinysearch.
-
-pagefind demo: https://abridge-pagefind.pages.dev/
-
-tinysearch demo: https://abridge-tinysearch.pages.dev/
-
-To use tinysearch extra steps are required.
-
-**Switch to pagefind:**
-
-```bash
-npm install
-sed -i 's/^search_library =.*/search_library = "pagefind"/' zola.toml
-npm run abridge
-# zola serve
-```
-
-**Switch to elasticlunr:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "elasticlunr"/' zola.toml
-npm run abridge
-```
-
-**Switch to nosearch:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "false"/' zola.toml
-npm run abridge
-```
-
-**Switch to tinysearch:**
-
-First you have to install tinysearch so that you can build the index:
-
-```bash
-git clone https://github.com/tinysearch/tinysearch
-cd tinysearch
-cargo build --release
-sudo cp ./target/release/tinysearch /usr/local/bin/tinysearch
-exit # reload shell environment
-```
-
-Switch Abridge to tinysearch:
-
-```bash
-sed -i 's/^search_library =.*/search_library = "tinysearch"/' zola.toml
-npm run abridge
-tinysearch --optimize --path static public/data_tinysearch/index.html
-# zola serve
-```
-
 #### Theme-Switcher
 
-The theme switcher relies on javascript to work, it applies the .light class to the root documentElement. The file that handles this (`theme.js`) is tiny and optimized and it is the first file loaded in the head, so the performance hit is minimal. Without the Theme switcher you can still use The automatic Theme which uses the Browser/OS preference settings. You can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two.
+The theme switcher uses JavaScript to apply the `.light` class to the root `documentElement`. The optimized `theme.js` file is loaded first in the head, so its performance impact is minimal. Without the theme switcher, the automatic theme can still follow the browser/OS preference. You can even install a [Firefox plugin](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) to quickly switch between the two.
 
 ### Optimize PNG/ICO files
 
 Good tool to generate maskable icons for `manifest.json`: [maskable.app](https://maskable.app/editor)
 
-All png files can be optimized using [oxipng](https://github.com/shssoichiro/oxipng):
+All PNG files can be optimized using [oxipng](https://github.com/shssoichiro/oxipng):
 
 ```bash
 cd static
 oxipng -o max --strip all -a -Z *.png
 ```
 
-With larger displays and greater pixel density becoming common it is probably a good idea to use atleast a littly bit of lossy compression. For example you can use pngquant with a 93% quality and you will often get images around 1/2 the size. Understand that pngquant is cumulative, so you should keep your original images somewhere, and only ever use pngquant once per image, if you use it again and again on the same image then you will lower the image quality each time. Always use oxipng afterwards, oxipng is lossless.
+With larger displays and greater pixel density becoming common it is probably a good idea to use at least a little bit of lossy compression. For example you can use pngquant with a 93% quality and you will often get images around 1/2 the size. Understand that pngquant is cumulative, so you should keep your original images somewhere, and only ever use pngquant once per image, if you use it again and again on the same image then you will lower the image quality each time. Always use oxipng afterwards, oxipng is lossless.
 
 ```bash
 pngquant --skip-if-larger --strip --quality=93-93 --speed 1 *.png
 oxipng -o max --strip all -a -Z *.png
 ```
 
-leanify can compress farther for both png and ico files:
+leanify can compress further for both PNG and ICO files:
 
 ```bash
 git clone https://github.com/JayXon/Leanify
@@ -424,7 +393,7 @@ leanify -i 7777 *.ico
 
 If you are serving your site with nginx, you can pre gzip your content.
 
-(Netlify brotli gzips your files automatically, no exta work required.)
+(Netlify brotli gzips your files automatically, no extra work required.)
 
 First configure nginx:
 

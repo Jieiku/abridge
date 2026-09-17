@@ -8,16 +8,20 @@
   {%- else -%}
     {%- set title_addition = "" -%}
   {%- endif -%}
-  {%- set description = config.description -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+  {%- set description %}{{<translate key="seo_category" default="Articles in the “$TERM” category on $SITE." i18n={i18n} />}}{% endset -%}
+  {%- set description = description | replace(from="$TERM", to=term.name) | replace(from="$SITE", to=config.title or "this site") -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  taxonomy_kind={taxonomy.name}  current_lang={lang}  taxonomy_term={term.name}  taxonomy_current_permalink={term.permalink}  paginator_index={paginator.current_index if paginator else 1} />}}
 {%- endblock seo -%}
 {%- block content %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
+{%- if config.extra.search_library -%}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
     <div>
-      <h2>{{ term.name }}</h2>
-      {%- for year, posts in term.pages | group_by(attribute="year") %}
-      <h3 class="tpad">{{ year }}</h3>
+      <h1>{{ term.name }}</h1>
+      {%- set grouped = term.pages | group_by(attribute="year") -%}
+      {%- set years = grouped | keys | sort | reverse -%}
+      {%- for year in years %}
+      {%- set posts = grouped[year] -%}
+      <h2 class="tpad">{{ year }}</h2>
       {%- for page in posts %}
       <p><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title }}</a> - <time datetime="{{ page.date }}">{{ page.date | date(format="%F") }}</time></p>
       {%- endfor %}

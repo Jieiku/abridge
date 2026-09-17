@@ -12,6 +12,7 @@ Contact = "Contact"
 Privacy = "Privacy"
 Sitemap = "Sitemap"
 
+Skip_to_content = "Naar inhoud springen"
 Search = "Zoeken"
 Updated = "Bijgewerkt"
 Index = "Index"
@@ -30,3 +31,11 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Website inhoud is gelicen
 404_try_search = "Probeer te zoeken of"
 ### go to homepage
 404_go_home = "ga naar homepage"
+
+# SEO descriptions for taxonomy and archive pages
+seo_tags = "Bekijk alle tags op $SITE."
+seo_tag = "Artikelen met de tag “$TERM” op $SITE."
+seo_categories = "Bekijk alle categorieën op $SITE."
+seo_category = "Artikelen in de categorie “$TERM” op $SITE."
+seo_archive = "Bekijk het artikelarchief op $SITE."
+seo_page = "Pagina $PAGE met artikelen en berichten op $SITE."

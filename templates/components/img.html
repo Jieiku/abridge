@@ -1,4 +1,4 @@
-{% component img(page, config, src, caption="", class="", alt="", w=0, h=0, link="") %}
+{% component img(@page, @config, src, caption="", class="", alt="", w=0, h=0, link="") %}
 {%- set img = src | split(pat="/") | last %}
 {%- set dirtest = src | trim_start(pat="./") %}
 {%- if dirtest is containing(pat="/") %} {%- set reldir = true %} {%- endif %}

@@ -1,6 +1,12 @@
-{% component seo( config, title="", title_addition="", description="", type="website", is_home=false, is_404=false, is_page=false, page_images="", page_section="", created_time="2023-05-15T07:07:00-07:00", updated_time="2023-05-15T07:07:00-07:00", page="" ) -%}
+{% component seo( config, title="", title_addition="", description="", type="website", is_404=false, created_time="", updated_time="", page_url="", page: map = {}, taxonomy_kind="", taxonomy_term="", taxonomy_current_permalink="", paginator_index=1, current_lang="" ) -%}
+{#- Resolve SEO values defensively: explicit caller value -> page/section value -> site-wide value. -#}
+{%- set seo_title = title or page?.title or config.title or "" -%}
+{%- set seo_description = description or page?.description or config.description or "" -%}
+{%- set seo_type = type or "website" -%}
+{%- set seo_created_time = page?.date or created_time or "" -%}
+{%- set seo_updated_time = page?.updated or page?.date or updated_time or "" -%}
 {#- Load current language i18n data from .toml files in user's '/i18n' folder, use theme as fallback. -#}
-{%- set _lang = page.lang if page else config.default_language -%}
+{%- set _lang = current_lang or page?.lang or config.default_language -%}
 {%- set i18n = load_data(path="i18n/" ~ _lang ~ '.toml', required=false) -%}
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ _lang ~ ".toml", required=false) -%}{%- endif -%}
 {%- set lang_locale %}{{<translate key='date_locale'  default='en_US'  i18n={i18n} />}}{% endset -%}
@@ -12,29 +18,108 @@
   <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 {%- endif  %}
 
-{%- if current_url %}
-  {%- set page_url = current_url %}
-{%- else %}
-  {%- set page_url = get_url(path="404.html", trailing_slash=true) %}
+{%- if not page_url %}
+  {%- if is_404 %}
+    {%- set page_url = get_url(path="404.html", trailing_slash=false) %}
+  {%- elif page?.permalink %}
+    {%- set page_url = page.permalink %}
+  {%- else %}
+    {%- set page_url = config.base_url %}
+  {%- endif %}
 {%- endif %}
-  <title>{{ title ~ title_addition }}</title>
+  <title>{{ seo_title ~ title_addition }}</title>
 
-{%- if config.extra?.author %}
+{%- if page?.authors %}
+  <meta name="author" content="{{ page?.authors | join(sep=', ') }}" />
+{%- elif config.extra?.author %}
   <meta name="author" content="{{ config.extra?.author }}" />
 {%- endif %}
 {%- if config.extra?.facebook_publisher %}
   <meta property="article:publisher" content="https://www.facebook.com/{{ config.extra?.facebook_publisher }}" />
 {%- endif %}
+{%- if config.title %}
   <meta name="copyright" content="{{ config.title }}" />
+{%- endif %}
 {%- if config.extra?.facebook_author %}
   <meta property="article:author" content="https://www.facebook.com/{{ config.extra?.facebook_author }}" />
 {%- endif %}
-{%- if page?.description %}
-  <meta name="description" content="{{ page?.description }}" />
-{%- else %}
-  <meta name="description" content="{{ config.description }}" />
+{%- if seo_description %}
+  <meta name="description" content="{{ seo_description }}" />
 {%- endif %}
   <link rel="canonical" href="{{ page_url | safe }}" />
+{#- Advertise only real translated equivalents. Paginated alternates are
+    emitted only when the translated section/term has that pager. -#}
+{%- if page?.translations %}
+  {%- for translation in page.translations %}
+    {%- set translation_lang = translation.lang or config.default_language %}
+    {%- set emit_translation = true %}
+    {%- if paginator_index > 1 and page?.paginate_by %}
+      {%- set translated_section = get_section(path=translation.path, lang=translation_lang, allow_missing=true) %}
+      {%- if not translated_section or translated_section.pages | length <= (paginator_index - 1) * page.paginate_by %}
+        {%- set emit_translation = false %}
+      {%- endif %}
+    {%- endif %}
+    {%- if emit_translation %}
+      {%- set translation_url = translation.permalink %}
+      {%- if paginator_index > 1 and page?.permalink and page_url != page.permalink %}
+        {%- set translation_url = page_url | replace(from=page.permalink, to=translation.permalink) %}
+      {%- endif %}
+  <link rel="alternate" hreflang="{{ translation_lang }}" href="{{ translation_url | safe }}" />
+      {%- if translation_lang == config.default_language %}
+  <link rel="alternate" hreflang="x-default" href="{{ translation_url | safe }}" />
+      {%- endif %}
+    {%- endif %}
+  {%- endfor %}
+{%- elif taxonomy_kind %}
+  {#- Taxonomy pages do not expose TranslatedContent. The current taxonomy
+      page is necessarily real, while alternates are resolved per language. -#}
+  {%- set taxonomy_lang = current_lang or config.default_language %}
+  <link rel="alternate" hreflang="{{ taxonomy_lang }}" href="{{ page_url | safe }}" />
+
+  {#- Resolve the default-language equivalent for x-default and, when needed,
+      the explicit default-language alternate. -#}
+  {%- if taxonomy_lang == config.default_language %}
+  <link rel="alternate" hreflang="x-default" href="{{ page_url | safe }}" />
+  {%- else %}
+    {%- set default_taxonomy = get_taxonomy(kind=taxonomy_kind, lang=config.default_language, required=false) %}
+    {%- if taxonomy_term %}
+      {%- set default_term = get_taxonomy_term(kind=taxonomy_kind, term=taxonomy_term, lang=config.default_language, required=false) %}
+      {%- if default_term and (paginator_index == 1 or not default_taxonomy?.kind?.paginate_by or default_term.page_count > (paginator_index - 1) * default_taxonomy.kind.paginate_by) %}
+        {%- set default_url = default_term.permalink %}
+        {%- if paginator_index > 1 and taxonomy_current_permalink and page_url != taxonomy_current_permalink %}
+          {%- set default_url = page_url | replace(from=taxonomy_current_permalink, to=default_term.permalink) %}
+        {%- endif %}
+  <link rel="alternate" hreflang="{{ config.default_language }}" href="{{ default_url | safe }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ default_url | safe }}" />
+      {%- endif %}
+    {%- elif default_taxonomy and default_taxonomy.items | length > 0 %}
+  <link rel="alternate" hreflang="{{ config.default_language }}" href="{{ default_taxonomy.permalink | safe }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ default_taxonomy.permalink | safe }}" />
+    {%- endif %}
+  {%- endif %}
+
+  {#- Emit other configured languages only when that taxonomy/term exists. -#}
+  {%- for language_code, language_config in config.languages %}
+    {%- if language_code != taxonomy_lang and language_code != config.default_language %}
+      {%- if taxonomy_term %}
+        {%- set translated_taxonomy = get_taxonomy(kind=taxonomy_kind, lang=language_code, required=false) %}
+        {%- set translated_term = get_taxonomy_term(kind=taxonomy_kind, term=taxonomy_term, lang=language_code, required=false) %}
+        {%- if translated_term and (paginator_index == 1 or not translated_taxonomy?.kind?.paginate_by or translated_term.page_count > (paginator_index - 1) * translated_taxonomy.kind.paginate_by) %}
+          {%- set translated_url = translated_term.permalink %}
+          {%- if paginator_index > 1 and taxonomy_current_permalink and page_url != taxonomy_current_permalink %}
+            {%- set translated_url = page_url | replace(from=taxonomy_current_permalink, to=translated_term.permalink) %}
+          {%- endif %}
+  <link rel="alternate" hreflang="{{ language_code }}" href="{{ translated_url | safe }}" />
+        {%- endif %}
+      {%- else %}
+        {%- set translated_taxonomy = get_taxonomy(kind=taxonomy_kind, lang=language_code, required=false) %}
+        {%- if translated_taxonomy and translated_taxonomy.items | length > 0 %}
+  <link rel="alternate" hreflang="{{ language_code }}" href="{{ translated_taxonomy.permalink | safe }}" />
+        {%- endif %}
+      {%- endif %}
+    {%- endif %}
+  {%- endfor %}
+{%- endif %}
 {%- if page?.extra?.keywords and config.extra?.keywords %}
   <meta name="keywords" content="{{ page?.extra?.keywords }}, {{ config.extra?.keywords }}" />
 {%- elif page?.extra?.keywords %}
@@ -57,21 +142,13 @@
   <meta property="og:url" content="{{ page_url | safe }}" />
   <meta name="twitter:url" content="{{ page_url | safe }}" />
 
-{%- if page?.description %}
-  <meta property="og:description" content="{{ page?.description }}" />
-  <meta name="twitter:description" content="{{ page?.description }}" />
-{%- else %}
-  <meta property="og:description" content="{{ config.description }}" />
-  <meta name="twitter:description" content="{{ config.description}}" />
+{%- if seo_description %}
+  <meta property="og:description" content="{{ seo_description }}" />
+  <meta name="twitter:description" content="{{ seo_description }}" />
 {%- endif %}
 
-{%- if page?.title %}
-  <meta property="og:title" content="{{ page?.title }} | {{ config.title }}" />
-  <meta name="twitter:title" content="{{ page?.title }} | {{ config.title }}" />
-{%- else %}
-  <meta property="og:title" content="{{ config.title }}" />
-  <meta name="twitter:title" content="{{ config.title }}" />
-{%- endif %}
+  <meta property="og:title" content="{{ seo_title ~ title_addition }}" />
+  <meta name="twitter:title" content="{{ seo_title ~ title_addition }}" />
 
 
 {#- SEO MEDIA START #}
@@ -104,8 +181,8 @@
   <meta property="og:audio" content="{{ config.extra?.open?.audio }}" />
 {%- endif %}
 
-{%- if config.extra?.open?.locale %}
-  <meta property="og:locale" content="{{ config.extra?.open?.locale }}" />
+{%- if config.extra?.open?.locale and config.extra?.open?.locale != lang_locale %}
+  <meta property="og:locale:alternate" content="{{ config.extra?.open?.locale }}" />
 {%- endif %}
 
 {%- if config.extra?.open?.videos %}
@@ -115,15 +192,19 @@
 {%- endif %}
 
 {#- SEO MEDIA END #}
+{%- if config.title %}
   <meta property="og:site_name" content="{{ config.title }}" />
+{%- endif %}
   <meta property="og:locale" content="{{ lang_locale }}" />
-  <meta property="og:type" content="website" />
-{%- if page?.updated %}
-  <meta property="og:updated_time" content="{{ page?.updated | date(format='%F') }}" />
-{%- elif page?.date %}
-  <meta property="og:updated_time" content="{{ page?.date | date(format='%F') }}" />
-{%- else %}
-  <meta property="og:updated_time" content="{{ updated_time }}" />
+  <meta property="og:type" content="{{ seo_type }}" />
+{%- if seo_type == "article" and seo_created_time %}
+  <meta property="article:published_time" content="{{ seo_created_time | date(format='%F') }}" />
+{%- endif %}
+{%- if seo_type == "article" and seo_updated_time %}
+  <meta property="article:modified_time" content="{{ seo_updated_time | date(format='%F') }}" />
+{%- endif %}
+{%- if seo_updated_time %}
+  <meta property="og:updated_time" content="{{ seo_updated_time | date(format='%F') }}" />
 {%- endif %}
 
 {%- if config.extra?.twitter_meta %}

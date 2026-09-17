@@ -1,11 +1,11 @@
 +++
 date = 2021-05-08T15:00:00Z
-description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos Youtube dans vos pages."
+description = "Exemple d'article présentant un code court Zola personnalisé pour intégrer des vidéos YouTube dans vos pages."
 draft = false
-title = "Youtube intégrées"
+title = "YouTube intégrées"
 
 [extra]
-keywords = "Video, Components, Embed, Embedded, Youtube"
+keywords = "Video, Components, Embed, Embedded, YouTube"
 series = "Features"
 toc = true
 
@@ -20,7 +20,7 @@ Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exem
 
 <!-- more -->
 
-## Youtube
+## YouTube
 
 ### Usage
 
@@ -34,7 +34,7 @@ Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exem
 - `playlist` - l'identifiant de la playlist (optionnel)
 - `class` - une classe à ajouter au &lt;div&gt; entourant l'iframe (optionnel)
 - `autoplay` - lorsqu'il est défini sur "true", la vidéo se lance automatiquement au chargement (facultatif)
-- `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Youtube")
+- `title` - définir le titre accessible de l'iframe (facultatif, par défaut sur "YouTube")
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
 ### Output

@@ -436,8 +436,30 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   //  tab-size: 4; // 6
   }
 }
+.sr-only,
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link:focus {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: .75rem 1.25rem;
+  overflow: visible;
+  clip-path: none;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: var(--c1);
+  color: var(--f1);
+}
 @if $typography {
-  big,
   h1,
   h2,
   h3,
@@ -451,8 +473,14 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     font-size: var(--fs);
     line-height: var(--lhh);
   }
-  big,h1 {
+  h1 {
     font-size: 2rem;
+  }
+  .site-title {
+    color: var(--f2);
+    font-size: 2rem;
+    font-weight: var(--fh);
+    line-height: var(--lhh);
   }
   h2 {
     font-size: 1.75rem;
@@ -481,7 +509,7 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   a:visited {
     color: var(--a4);
   }
-  big a, h1 a, h2 a, main nav a, header li > a {
+  .site-title, h1 a, h2 a, main nav a, header li > a {
     color: var(--f2);
     text-decoration: none;
     font-weight: var(--fh);
@@ -827,9 +855,26 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
   }
   .yv {//youtube and vimeo div
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
+  }
+  .yv > lite-youtube,
+  .yv > lite-vimeo,
+  .yv > lite-streamable {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  // Custom poster images are light-DOM children projected into the
+  // lite embed Shadow DOM. Keep Abridge's generic responsive img rule below
+  // from resetting their height to auto.
+  .yv > lite-youtube > img[slot="image"],
+  .yv > lite-vimeo > img[slot="image"],
+  .yv > lite-streamable > img[slot="image"] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   img,
   video,
@@ -857,6 +902,21 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     figcaption {
       padding-bottom: var(--s1);
       text-align: center;
+    }
+  }
+  .imgrow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+    align-items: flex-start;
+    > * {
+      flex: 1 1 0;
+      min-width: 0;
+      width: 100%;
+      margin: 0;
+    }
+    @media (min-width: map-get($breakpoints, "sm")) {
+      flex-direction: row;
     }
   }
 }

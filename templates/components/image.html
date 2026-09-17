@@ -47,8 +47,12 @@
 
   {%- endif %}
 
-  {%- set type = src | split(pat=".") | last  %}
-  {%- if type is matching(pat="^mov$") %}{%- set type = "quicktime"  %}{% endif  %}
+  {%- set type = src | split(pat=".") | last | lower %}
+  {%- if type == "jpg" or type == "jpeg" %}{%- set type = "jpeg" %}
+  {%- elif type == "svg" %}{%- set type = "svg+xml" %}
+  {%- elif type == "tif" or type == "tiff" %}{%- set type = "tiff" %}
+  {%- elif type == "ico" %}{%- set type = "x-icon" %}
+  {%- endif %}
   {%- if loop.last %}
   {%- if not alt %}
     {%- set alt = video | split(pat=".") | first %}

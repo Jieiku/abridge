@@ -2,7 +2,7 @@
 {%- set i18n = load_data(path="i18n/" ~ lang ~ '.toml', required=false) -%}
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ lang ~ ".toml", required=false) -%}{%- endif -%}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
+{%- if config.extra.search_library -%}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
 <!DOCTYPE html>
 <html lang="{%- if lang != config.default_language %}{{ lang }}{% else %}{{ (config.extra.language_code if config.extra.language_code else lang) }}{% endif %}">
 <head>
@@ -18,26 +18,27 @@
   {%- block comments_init -%}{%- endblock comments_init -%}
   {%- include "partials/head_js.html" -%}
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main">{{<translate key="Skip_to_content" default="Skip to content" i18n={i18n} />}}</a>
 {%- block header %}
   <header>
     <nav>
       <div>
         {%- if config.extra.logo -%}
 
-        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
+        <a class="site-title" href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">
         {%- if config.extra.logo?.file -%}
         <img src="{{ config.base_url | safe }}/{{ config.extra.logo?.file | safe }}"{%- if config.extra.logo?.alt %} alt="{{ config.extra.logo?.alt | safe }}"{%- else %} alt=""{%- endif %}{%- if config.extra.logo?.width %} width="{{ config.extra.logo?.width | safe }}"{%- endif %}{%- if config.extra.logo?.height %} height="{{ config.extra.logo?.height | safe }}"{%- endif %} />
         {%- endif -%}
         {%- if config.extra.logo?.text -%}{{ config.extra.logo?.text | safe }}{%- endif -%}
-        </a></big>
+        </a>
 
         {%- elif config.extra.textlogo -%}
-        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
+        <a class="site-title" href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls -%}
         {%- if lang == config.default_language -%}/{%- endif -%}
-        index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a></big>
+        index.html{%- endif -%}" title="{{config.title}}">{{ config.extra.textlogo | safe }}</a>
         {%- elif config.title -%}
-        <big><a href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a></big>
+        <a class="site-title" href="{{ get_url(path="/", lang=lang) }}{%- if uglyurls %}/index.html{%- endif %}" title="{{config.title}}">{{ config.title | safe }}</a>
         {%- endif -%}
       </div>
       <div>
@@ -48,7 +49,7 @@
             {%- set js_switcher=(config.extra.js_switcher if config.extra.js_switcher is defined else true) %}
             {%- if config.extra.menu %}
               {%- for i in config.extra.menu -%}
-                <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching(pat="^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>
+                <li><a{%- if i.size %} class="{{ i.size }}"{% endif %} href="{%- if i.url is matching(pat="^http[s]?://") %}{{ i.url }}{%- else -%}{{ get_url(path=i.url, lang=lang, trailing_slash=i.slash) }}{%- if i.slash and uglyurls %}index.html{%- endif %}{%- endif %}"{% if i.blank %} target="_blank" rel="noopener"{% endif %}>
                 {%- if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif -%}
                 </a></li>
               {%- endfor -%}
@@ -63,13 +64,51 @@
                   {%- set i18n_menu = load_data(path="i18n/" ~ lcode ~ '.toml', required=false) -%}
                   {%- if not i18n_menu -%}{%- set i18n_menu = load_data(path="themes/abridge/i18n/" ~ lcode ~ ".toml", required=false) -%}{%- endif %}
                   {%- if lang != lcode -%}
-                    {%- if lcode == config.default_language -%}
-                    <a href="{{ current_url | replace(from='/' ~ lang ~ '/', to = '/') | safe }}{%- if uglyurls %}index.html{%- endif %}">{{<translate key="language_name"  default="language_name"  i18n={i18n_menu} />}}</a>
-                    {%- elif lang == config.default_language -%}
-                    <a href="{{ current_url | replace(from=config.base_url, to=config.base_url ~ "/" ~ lcode) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{<translate key="language_name"  default="language_name"  i18n={i18n_menu} />}}</a>
-                    {%- else -%}
-                    <a href="{{ current_url | replace(from='/' ~ lang ~ '/', to = '/' ~ lcode ~ '/') | safe }}{%- if uglyurls %}index.html{%- endif %}">{{<translate key="language_name"  default="language_name"  i18n={i18n_menu} />}}</a>
+                    {#- Prefer the equivalent translation. If it does not exist,
+                        keep the language available and fall back to its homepage. -#}
+                    {%- set language_url = get_url(path="/", lang=lcode) -%}
+                    {%- if page is defined -%}
+                      {%- set translated_page = get_page(path=page.relative_path, lang=lcode, allow_missing=true) -%}
+                      {%- if translated_page -%}{%- set language_url = translated_page.permalink -%}{%- endif -%}
+                    {%- elif section is defined -%}
+                      {%- set translated_section = get_section(path=section.relative_path, lang=lcode, allow_missing=true) -%}
+                      {%- if translated_section -%}
+                        {%- set translation_exists = true -%}
+                        {%- if paginator is defined and paginator.current_index > 1 and translated_section.paginate_by -%}
+                          {%- if translated_section.pages | length <= (paginator.current_index - 1) * translated_section.paginate_by -%}
+                            {%- set translation_exists = false -%}
+                          {%- endif -%}
+                        {%- endif -%}
+                        {%- if translation_exists -%}
+                          {%- set language_url = translated_section.permalink -%}
+                          {%- if paginator is defined and paginator.current_index > 1 -%}
+                            {%- set language_url = current_url | replace(from=section.permalink, to=translated_section.permalink) -%}
+                          {%- endif -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- elif taxonomy is defined -%}
+                      {%- set translated_taxonomy = get_taxonomy(kind=taxonomy.name, lang=lcode, required=false) -%}
+                      {%- if term is defined -%}
+                        {%- set translated_term = get_taxonomy_term(kind=taxonomy.name, term=term.name, lang=lcode, required=false) -%}
+                        {%- if translated_term -%}
+                          {%- set translation_exists = true -%}
+                          {%- if paginator is defined and paginator.current_index > 1 and translated_taxonomy?.kind?.paginate_by -%}
+                            {%- if translated_term.page_count <= (paginator.current_index - 1) * translated_taxonomy.kind.paginate_by -%}
+                              {%- set translation_exists = false -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                          {%- if translation_exists -%}
+                            {%- set language_url = translated_term.permalink -%}
+                            {%- if paginator is defined and paginator.current_index > 1 -%}
+                              {%- set language_url = current_url | replace(from=term.permalink, to=translated_term.permalink) -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endif -%}
+                      {%- elif translated_taxonomy and translated_taxonomy.items | length > 0 -%}
+                        {%- set language_url = translated_taxonomy.permalink -%}
+                      {%- endif -%}
                     {%- endif -%}
+                    <a href="{{ language_url | safe }}{%- if uglyurls %}index.html{%- endif %}">{{<translate key="language_name"  default="language_name"  i18n={i18n_menu} />}}</a>
                   {%- endif -%}
                 {%- endfor -%}
                 </div>
@@ -91,8 +130,8 @@
           <div>
             <form autocomplete=off class="js" name="goSearch" id="searchbox">
               <div class="searchd">
-                <input id="searchinput" type="text" placeholder="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" title="Search" />
-                <button type="submit" title="Search" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
+                <input id="searchinput" type="text" placeholder="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" title="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" aria-label="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" />
+                <button type="submit" title="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" aria-label="{{<translate key="Search"  default="Search"  i18n={i18n} />}}" class="{%- if icon_search -%}{{ icon_search }}{%- else -%}si{%- endif -%}">{%- if not icon_search -%}&#8981;{%- endif -%}</button>
               </div>
               <div class="results"><div id="suggestions"></div></div>
             </form>
@@ -112,7 +151,7 @@
     {%- endif %}
   </header>
 {%- endblock header %}
-  <main>
+  <main id="main" tabindex="-1">
   {%- block content %}
   {%- endblock content %}
   </main>
@@ -136,7 +175,7 @@
         {%- else %}
         {%- set furl=get_url(path=i.url, trailing_slash=i.slash) %}
         {%- endif %}
-        <a class="rpad{%- if i.size %} {{ i.size }}{% endif %}" href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank"{% endif %}>{% if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif %}</a>
+        <a class="rpad{%- if i.size %} {{ i.size }}{% endif %}" href="{{ furl | safe }}{%- if i.slash and uglyurls %}index.html{%- endif %}"{% if i.blank %} target="_blank" rel="noopener"{% endif %}>{% if lang != config.default_language %} {{<translate key={i.name | safe}  default={i.name | safe}  i18n={i18n} />}} {% else %} {{ i.name | safe }} {% endif %}</a>
         {%- endfor %}
       </nav>
       {%- endif %}
@@ -164,7 +203,7 @@
       {%- if config.extra.footer_credit_override %}
       {{ config.extra.footer_credit_override | safe }}
       {%- else %}
-      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{{<translate key="Powered_by"  default="Powered by"  i18n={i18n} />}} <a href="https://www.getzola.org/" target="_blank">Zola</a> {{<translate key="and"  default="and"  i18n={i18n} />}} <a href="https://github.com/jieiku/abridge/" target="_blank">Abridge</a></p>
+      <p{%- if config.extra.footer_size %} class="{{ config.extra.footer_size }}"{% endif %}>{{<translate key="Powered_by"  default="Powered by"  i18n={i18n} />}} <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a> {{<translate key="and"  default="and"  i18n={i18n} />}} <a href="https://github.com/jieiku/abridge/" target="_blank" rel="noopener">Abridge</a></p>
       {%- endif %}
       {%- endif %}
     </div>

@@ -30,9 +30,11 @@ Zola tiene muchos components, y nuevos son facilmente añadidos, este ejemplo mu
 ```
 {% endraw %}
 
+El component utiliza una miniatura local y carga el reproductor de Streamable solamente al pulsar reproducir.
+
 - `id` - el id del vídeo (obligatorio)
 - `class` - una clase para añadir al &lt;div&gt; que rodea al iframe (opcional)
-- `title` - establecer el título alt para el iframe (opcional, por defecto "Streamable")
+- `title` - establecer el título accesible del iframe (opcional, por defecto "Streamable")
 
 ### Salida
 

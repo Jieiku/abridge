@@ -10,7 +10,7 @@
 
   $abridgeMode: "switcher",//valid values: switcher, auto, dark, light
   $syntax-mode: "auto",// Force syntax mode: auto, dark, light
-  $switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in config.toml)
+  $switcherDefault: "dark",// default nojs switcher mode: dark, light (make sure to also set js_switcher_default in zola.toml)
 
   $color: "orange",// color template to use/override: orange, blue, blueshade
 
@@ -73,7 +73,7 @@
   //$icon-moon: false,// dark moon
   //$icon-sun: false,// light sun
 
-  /// The colors below can be overrided individually as needed.
+  /// The colors below can be overridden individually as needed.
 
   /// Dark Colors
   //$f1d: #ccc,// Font Color Primary

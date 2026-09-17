@@ -264,7 +264,7 @@ Site primary menu is created by nesting the nav under a header tag. Refer to the
     </fieldset>
     <br>
     <!-- Search -->
-    <p><input type="search" id="search" name="search" placeholder="Search" title="Search"></p>
+    <p><input type="search" id="search" name="search" placeholder="Search" title="Search" aria-label="Search"></p>
     <!-- File browser -->
     <label for="file">File browser
     <input type="file" id="file" name="file">

@@ -100,8 +100,9 @@ window.onload = function () {
                 ResultsClone.id = "results";
 
                 var headerDiv = document.createElement("div");
-                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> '.concat(document.getElementById("searchinput").value, "</h2></form>");
+                var headerContent = '<form name="closeSearch"><h2><button type="submit" title="Close Search"><i class="svgs x"></i></button> <i class="svgs search"></i> <span class="search-query"></span></h2></form>';
                 headerDiv.innerHTML = headerContent;
+            headerDiv.querySelector(".search-query").textContent = document.getElementById("searchinput").value;
                 ResultsClone.insertBefore(headerDiv, ResultsClone.firstChild);
 
                 main.innerHTML = ResultsClone.outerHTML;
@@ -117,9 +118,26 @@ window.onload = function () {
                 }
             }
 
-            function markTerm(input, term) {
-                if (!input) return "";
-                return String(input).replace(new RegExp('(^|)(' + term + ')(|$)', 'ig'), '$1<mark>$2</mark>$3');
+            function markTerm(target, input, term) {
+                target.textContent = "";
+                var text = String(input || "");
+                var needle = String(term || "");
+                if (!needle) {
+                    target.textContent = text;
+                    return;
+                }
+                var lowerText = text.toLowerCase();
+                var lowerNeedle = needle.toLowerCase();
+                var start = 0;
+                var match;
+                while ((match = lowerText.indexOf(lowerNeedle, start)) !== -1) {
+                    target.appendChild(document.createTextNode(text.slice(start, match)));
+                    var mark = document.createElement("mark");
+                    mark.textContent = text.slice(match, match + needle.length);
+                    target.appendChild(mark);
+                    start = match + needle.length;
+                }
+                target.appendChild(document.createTextNode(text.slice(start)));
             }
 
             function unwrapMeta(meta) {
@@ -169,8 +187,8 @@ window.onload = function () {
                             d = entry.querySelector('span:nth-child(2)');
                         var resolved = resolveResultUrl(url);
                         a.href = resolved + (resolved.indexOf('?') >= 0 ? '&' : '?') + 'q=' + encodeURIComponent(val);
-                        t.innerHTML = title || "";
-                        d.innerHTML = markTerm(meta || "", val);
+                        t.textContent = title || "";
+                        markTerm(d, meta || "", val);
 
                         suggestions.appendChild(entry);
                     }
@@ -183,20 +201,28 @@ window.onload = function () {
             var searchFunction = null;
             var freeFunction = null;
             var wasmReady = false;
+            var queryPtr = 0;
+            var queryCapacity = 0;
             var textEncoder = new TextEncoder();
             var textDecoder = new TextDecoder("utf-8");
 
+            function reserveQueryMemory() {
+                // Tinysearch's dependency-free WASM API does not export an allocator
+                // for query strings. Reserve one private page at the end of linear
+                // memory and reuse it for every query. memory.grow() returns the old
+                // page count, which gives us the start address of the new page.
+                var oldPages = memory.grow(1);
+                queryPtr = oldPages * 65536;
+                queryCapacity = 65536;
+            }
+
             function stringToWasmPtr(str) {
-                var bytes = textEncoder.encode(str + "\0");
-                var ptr = 0;
-                if (wasmModule.exports.__wbindgen_malloc) {
-                    ptr = wasmModule.exports.__wbindgen_malloc(bytes.length);
+                var bytes = textEncoder.encode(str);
+                if (bytes.length > queryCapacity) {
+                    throw new Error("Search query is too long");
                 }
-                if (!ptr) {
-                    ptr = 1024;
-                }
-                new Uint8Array(memory.buffer, ptr, bytes.length).set(bytes);
-                return ptr;
+                new Uint8Array(memory.buffer, queryPtr, bytes.length).set(bytes);
+                return { ptr: queryPtr, length: bytes.length };
             }
 
             function wasmPtrToString(ptr) {
@@ -205,7 +231,9 @@ window.onload = function () {
                 var length = 0;
                 while (memoryArray[ptr + length] !== 0) {
                     length++;
-                    if (length > 10 * 1024 * 1024) break;
+                    if (ptr + length >= memoryArray.length || length > 10 * 1024 * 1024) {
+                        throw new Error("Invalid Tinysearch result string");
+                    }
                 }
                 return textDecoder.decode(memoryArray.subarray(ptr, ptr + length));
             }
@@ -213,25 +241,23 @@ window.onload = function () {
             function doSearch(query, limit) {
                 if (!wasmReady || !query) return [];
                 limit = limit || 10;
+                var resultPtr = 0;
                 try {
-                    var queryPtr = stringToWasmPtr(query);
-                    var resultPtr = searchFunction(queryPtr, limit);
-
-                    if (wasmModule.exports.__wbindgen_free && queryPtr > 1024) {
-                        wasmModule.exports.__wbindgen_free(queryPtr, query.length + 1);
-                    }
-
+                    var queryAllocation = stringToWasmPtr(query);
+                    resultPtr = searchFunction(queryAllocation.ptr, queryAllocation.length);
                     if (!resultPtr) return [];
 
                     var resultString = wasmPtrToString(resultPtr);
-                    freeFunction(resultPtr);
-
                     if (!resultString) return [];
                     var results = JSON.parse(resultString);
-                    return Array.isArray(results) ? results : [];
+                    return Array.isArray(results) ? results.slice(0, limit) : [];
                 } catch (err) {
                     console.error("tinysearch error:", err);
                     return [];
+                } finally {
+                    if (resultPtr) {
+                        freeFunction(resultPtr);
+                    }
                 }
             }
 
@@ -250,6 +276,7 @@ window.onload = function () {
                 if (!searchFunction || !freeFunction || !memory) {
                     throw new Error("Required WASM exports not found (need search, free_search_result, memory)");
                 }
+                reserveQueryMemory();
                 wasmReady = true;
             }
 

@@ -1,5 +1,11 @@
 {% component youtube(id, class="", title="", playlist="", autoplay=false, cookie=false) %}
-<div class="yv{% if class %} {{class}}{% endif %}">
-    <iframe src="https://www.youtube{% if not cookie %}-nocookie{% endif %}.com/embed/{{id}}{% if playlist %}?list={{playlist}}{% endif %}{% if autoplay %}?autoplay=1{% endif %}" title="{{ title if title else 'Youtube' }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div class="yv yv-youtube{% if class %} {{class}}{% endif %}">
+{%- if autoplay %}
+    <iframe src="https://www.youtube{% if not cookie %}-nocookie{% endif %}.com/embed/{{id}}{% if playlist or autoplay %}?{% endif %}{% if playlist %}list={{playlist}}{% endif %}{% if playlist and autoplay %}&{% endif %}{% if autoplay %}autoplay=1{% endif %}" title="{{ title if title else 'YouTube' }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+{%- else %}
+    <lite-youtube videoid="{{ id }}" videotitle="{{ title if title else 'YouTube' }}"{% if playlist %} playlistid="{{ playlist }}"{% endif %}{% if not cookie %} nocookie{% endif %} disablenoscript>
+        <img slot="image" src="{{ get_url(path='img/embed/youtube/' ~ id ~ '-1280.webp', trailing_slash=false, cachebust=true) | safe }}" alt="" loading="lazy">
+    </lite-youtube>
+{%- endif %}
 </div>
 {% endcomponent youtube %}

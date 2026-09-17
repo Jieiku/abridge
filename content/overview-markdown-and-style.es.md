@@ -264,7 +264,7 @@ Menú principal del sitio se crea mediante la anidación de la nav bajo una etiq
     </fieldset>
     <br>
     <!-- Search -->
-    <p><input type="search" id="search" name="search" placeholder="Search" title="Search"></p>
+    <p><input type="search" id="search" name="search" placeholder="Search" title="Search" aria-label="Search"></p>
     <!-- File browser -->
     <label for="file">File browser
     <input type="file" id="file" name="file">

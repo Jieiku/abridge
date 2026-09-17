@@ -1,7 +1,7 @@
 
 {#- Theme Switcher Button to toggle between dark/light #}
   {%- set integrity = (config.extra.integrity if config.extra.integrity is defined else true) -%}
-  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
+  {%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set integrity = false %}{% endif %}{% endif %}
 
   {%- if (config.extra.js_switcher if config.extra.js_switcher is defined else true) %}
   {%- set js_theme="js/theme.min.js" %}
@@ -95,7 +95,7 @@
 
 {#- Style Sheets Preload #}
   {%- set integrity = (config.extra.integrity if config.extra.integrity is defined else true) -%}
-  {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set integrity = false %}{% endif %}{% endif %}
+  {%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set integrity = false %}{% endif %}{% endif %}
 
 {%- if config.extra.fonts %}{%- for i in config.extra.fonts %}
   {%- if i.url is matching(pat="^http[s]?://") %}
@@ -109,7 +109,12 @@
   <link rel="preload" as="style" class="preStyle" href="{{ config.extra.fontawesome | safe }}" crossorigin="anonymous" />
 {%- endif %}
 
-{%- if config.extra.math or page?.extra?.math %}
+{%- set rendered_content = page?.content or section?.content or "" -%}
+{%- set math_component = rendered_content is containing(pat='type="math/tex') -%}
+{%- set math_auto_render = config.extra.math_auto_render or page?.extra?.math_auto_render or section?.extra?.math_auto_render -%}
+{%- set math_enabled = math_component or math_auto_render or config.extra.math or page?.extra?.math or section?.extra?.math -%}
+
+{%- if math_enabled %}
 
   {%- set katex_css=(config.extra.katex_css if config.extra.katex_css else "katex.min.css") -%}
   {%- if katex_css %}{%- if katex_css is matching(pat="^http[s]?://") %}

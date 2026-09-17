@@ -7,7 +7,6 @@ updated = 2022-01-01T15:00:00Z
 
 [extra]
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
-math = true
 math_auto_render = true
 series = "Features"
 toc = true
@@ -19,52 +18,30 @@ tags = [
     "Mathematics",
 ]
 +++
-Puede utilizar [KaTeX](https://katex.org) para representar notaciones matemáticas.
+Puede utilizar [KaTeX](https://katex.org) para representar notación matemática.
 
-Puede activar el soporte $\\KaTeX$ globalmente, por sección o por página.
+Abridge detecta automáticamente el component `katex` en el contenido renderizado de una página o sección y carga los archivos de KaTeX sólo donde son necesarios.
+
+Si prefiere los delimitadores `$...$` y `$$...$$`, active la [extensión auto-render](https://katex.org/docs/autorender.html) con `math_auto_render = true`. Esta opción también activa los archivos necesarios de KaTeX.
+
+Es preferible utilizar el componente en lugar de los delimitadores sin procesar `$...$` y `$$...$$` debido al procesamiento de Markdown en Zola. Si observas los ejemplos hacia el final de la página, notarás que la versión que utiliza los delimitadores sin procesar termina con comas adicionales que no aparecen cuando se renderiza la misma fórmula utilizando el componente.
 
 <!-- more -->
 
-## Habilitar globalmente
+## Matemáticas con component: automático
 
-Para habilitar el soporte $\\KaTeX$ globalmente, añada `math = true` bajo `[extra]` del `zola.toml`
-en la raíz de su sitio. También puede añadir `math_auto_render = true`
-y cada sección y página de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
+Usar el component `katex` es suficiente para activar KaTeX en esa página o sección. Las páginas sin un component KaTeX no cargan su CSS ni JavaScript.
+
+## Auto Render
+
+Los delimitadores matemáticos sin component son opcionales de forma intencionada, ya que el texto normal puede contener signos de dólar. Active auto-render globalmente en `zola.toml` o en el front matter de la página/sección que lo necesite:
 
 ```toml
 [extra]
-math = true
-math_auto_render = false
-```
-
-## Base por sección
-
-Para habilitar el soporte $\\KaTeX$ en una sección en particular, añada `math = true` bajo `[extra]` en el `[SECTION_NAME]/_index.md`.
-Ahora el component katex será renderizado, también puede añadir `math_auto_render = true`
-y la sección de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
-+++
-```
-
-## Por página
-
-Para habilitar el soporte $\\KaTeX$ en una página en particular, añada `math = true` bajo `[extra]` en el frontmatter
-de la página. Ahora el component katex será renderizado, también puede añadir `math_auto_render = true`
-y la página de su sitio cargará la [extensión](https://katex.org/docs/autorender.html) KaTeX [autorender](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
 math_auto_render = true
-+++
 ```
 
-Es una buena práctica habilitar el soporte $\\KaTeX$ por página, ya que esto sólo cargará los archivos requeridos en esa página en particular, sin afectar la velocidad de carga de otras páginas. Si su sitio no es muy matemático, por favor NO habilite esta característica globalmente o por sección.
+La opción antigua `math = true` sigue siendo reconocida por compatibilidad, pero ya no es necesaria para las matemáticas mediante component.
 
 ## Uso
 

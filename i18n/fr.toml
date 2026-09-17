@@ -12,6 +12,7 @@ Contact = "Contact"
 Privacy = "Confidentialité"
 Sitemap = "Plan du site"
 
+Skip_to_content = "Aller au contenu"
 Search = "Recherche"
 Updated = "Modifié"
 Index = "Indice"
@@ -30,3 +31,11 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web es
 404_try_search = "Essayez de rechercher ou"
 ### go to homepage
 404_go_home = "allez à la page d'accueil"
+
+# SEO descriptions for taxonomy and archive pages
+seo_tags = "Parcourez toutes les étiquettes de $SITE."
+seo_tag = "Articles avec l’étiquette « $TERM » sur $SITE."
+seo_categories = "Parcourez toutes les catégories de $SITE."
+seo_category = "Articles de la catégorie « $TERM » sur $SITE."
+seo_archive = "Parcourez les archives des articles de $SITE."
+seo_page = "Page $PAGE des articles et publications sur $SITE."

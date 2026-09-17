@@ -12,6 +12,7 @@ Contact = "联系方式"
 Privacy = "隐私"
 Sitemap = "导航"
 
+Skip_to_content = "跳到内容"
 Search = "搜索"
 Updated = "更新"
 Index = "索引"
@@ -30,3 +31,5 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Website content is licens
 404_try_search = "尝试搜索"
 ### go to homepage
 404_go_home = "返回主页"
+
+seo_page = "$SITE 的文章和帖子第 $PAGE 页。"

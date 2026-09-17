@@ -19,7 +19,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 
 <!-- more -->
 
-![lighthouse](lighthouse.png)
+{{<img src="lighthouse.png" class="ci" alt="Lighthouse" link="https://pagespeed.web.dev/report?url=abridge.pages.dev" />}}
 
 ## Caractéristiques
 
@@ -31,7 +31,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 - Blocs de code numérotés avec [mise en évidence des lignes](https://abridge.pages.dev/overview-code-blocks/#toml).
 - Site entièrement hors ligne en utilisant le PWA **ou** en mettant `search_library = "offline"` dans `zola.toml`.
 - Support multi-langues.
-- Support de la recherche. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
+- Support de la recherche. ([elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/), [flexsearch](https://abridge-flexsearch.pages.dev/))
 - Touches de navigation pour les suggestions de recherche, `/` focus, `arrow` move, `enter` select, `escape` close.
 - Page des résultats de recherche, tapez la requête puis appuyez sur la touche Entrée ou cliquez sur l'icône du bouton de recherche.
 - Support [SEO](#seo). (Optimisation des moteurs de recherche)
@@ -48,7 +48,7 @@ Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HT
 - Catégories. (similaire aux Tags, désactivé/commenté par défaut)
 - Liens vers les icônes sociales dans le pied de page.
 - Conception réactive. (mobile first)
-- Components vidéo : [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
+- Components vidéo : [YouTube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
 - Raccourcis pour les médias : [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
 - Autres codes courts : [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
 
@@ -119,7 +119,7 @@ rsync themes/abridge/package.json package.json
 - `zola.toml` configuration de base avec toutes les valeurs de configuration.
 - `content/_index.md` nécessaire pour définir la pagination.
 - `COPY-TO-ROOT-SASS/abridge.scss` pour personnaliser les variables d'Abridge.
-- `netlify.toml` pour déployer votre repo avec netlfiy.
+- `netlify.toml` pour déployer votre repo avec netlify.
 - `package_abridge.js` script node pour : mettre à jour la liste des fichiers cache dans PWA, minify js, bundle js
 - `package.json` utilisé par node, définit les scripts et les dépendances.
 
@@ -148,6 +148,29 @@ zola serve
 Zola va démarrer le serveur web dev, accessible par défaut à `http://127.0.0.1:1111`.
 
 Les changements sauvegardés seront rechargés en direct dans le navigateur. (appuyez sur `ctrl+f5`, ou pendant le développement mettez `pwa=false` dans `zola.toml`)
+
+## Assistant de compilation d’Abridge
+
+Installez les dépendances avec `npm install`, puis lancez une compilation normale avec :
+
+```bash
+npm run abridge
+```
+
+Les démonstrations utilisant d’autres moteurs de recherche emploient un mode de compilation explicite :
+
+```bash
+npm run abridge -- --mode elasticlunr --base-url https://abridge.pages.dev
+npm run abridge -- --mode pagefind --base-url https://abridge-pagefind.pages.dev
+npm run abridge -- --mode tinysearch --base-url https://abridge-tinysearch.pages.dev
+npm run abridge -- --mode flexsearch --base-url https://abridge-flexsearch.pages.dev
+npm run abridge -- --mode offline --drafts
+npm run abridge -- --mode offlineflexsearch --drafts
+```
+
+Les modes valides sont `elasticlunr`, `pagefind`, `tinysearch`, `flexsearch`, `offline`, `offlineflexsearch` et `elasticlunrjava`.
+
+Un script `build-zola.sh` facilite le déploiement sur Cloudflare, Netlify, etc. Cet assistant fonctionne aussi bien depuis le dépôt Abridge lui-même que lorsqu’il est appelé depuis un site avec `./themes/abridge/build-zola.sh`. Le script vérifie `theme.toml` afin de déterminer la version appropriée de Zola à utiliser, ce qui évite d’avoir à définir ou à mettre à jour des variables de version de Zola.
 
 ## Pagination {% raw %}{#pagination}{% endraw %}
 
@@ -277,7 +300,7 @@ KaTeX peut être utilisé pour afficher des mathématiques complexes. Il s'agit 
 
 Vous pouvez voir une démo sur [cette page] (https://abridge.pages.dev/overview-math/).
 
-Pour de meilleures performances, je recommande de n'activer les mathématiques que [par base de page dans vos fichiers post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), plutôt que dans votre fichier zola.toml principal.
+KaTeX est chargé automatiquement sur les pages ou sections qui utilisent le component `katex` ; `math = true` n'est plus nécessaire. Pour les délimiteurs `$...$` ou `$$...$$`, activez `math_auto_render = true` là où c'est nécessaire.
 
 ### PWA, Progressive Web App {% raw %}{#pwa}{% endraw %}
 
@@ -331,60 +354,6 @@ Tous les bundles nécessaires sont générés dynamiquement par le script node [
 Le script node va analyser votre zola.toml pour trouver les valeurs de configuration pertinentes, et ensuite, en se basant sur votre config.tomnl, générer les bundles nécessaires.
 
 Tout ce qui est nécessaire est `zola build && npm run abridge`.
-
-#### Bibliothèque de recherche de commutateurs
-
-En plus d'elasticlunr, abridge supporte également pagefind et tinysearch.
-
-Démonstration de pagefind : https://abridge-pagefind.pages.dev/
-
-démo tinysearch : https://abridge-tinysearch.pages.dev/
-
-Pour utiliser tinysearch, des étapes supplémentaires sont nécessaires.
-
-**Passer à pagefind:**
-
-```bash
-npm install
-sed -i 's/^search_library =.*/search_library = "pagefind"/' zola.toml
-npm run abridge
-# zola serve
-```
-
-**Switch to elasticlunr:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "elasticlunr"/' zola.toml
-npm run abridge
-```
-
-**Switch to nosearch:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "false"/' zola.toml
-npm run abridge
-```
-
-**Switch to tinysearch:**
-
-Il faut d'abord installer tinysearch pour pouvoir construire l'index :
-
-```bash
-git clone https://github.com/tinysearch/tinysearch
-cd tinysearch
-cargo build --release
-sudo cp ./target/release/tinysearch /usr/local/bin/tinysearch
-exit # reload shell environment
-```
-
-Passer Abridge à tinysearch :
-
-```bash
-sed -i 's/^search_library =.*/search_library = "tinysearch"/' zola.toml
-npm run abridge
-tinysearch --optimize --path static public/data_tinysearch/index.html
-# zola serve
-```
 
 #### Theme-Switcher
 

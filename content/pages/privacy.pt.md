@@ -5,7 +5,6 @@ path = "pt/privacy"
 template = "pages.html"
 title = "Política de Privacidade"
 +++
-## Privacidade
 
 - Este site não instala nem usa cookies.
 - Este site não armazena dados no navegador para serem compartilhados, enviados ou vendidos a terceiros.

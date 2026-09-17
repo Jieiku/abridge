@@ -5,7 +5,6 @@ path = "fr/privacy"
 template = "pages.html"
 title = "politique de confidentialité"
 +++
-## Confidentialité
 
 - Ce site ne crée ni n'utilise de cookies.
 - Ce site ne stocke pas de données dans le navigateur pour être partagées, envoyées ou vendues à des tiers.

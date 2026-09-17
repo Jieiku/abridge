@@ -7,7 +7,6 @@ updated = 2022-01-01T15:00:00Z
 
 [extra]
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
-math = true
 math_auto_render = true
 series = "Features"
 toc = true
@@ -19,52 +18,30 @@ tags = [
     "Mathematics",
 ]
 +++
-You can use [KaTeX](https://katex.org) to render mathematical notations.
+You can use [KaTeX](https://katex.org) to render mathematical notation.
 
-You can enable the $\KaTeX$ support globally, per-section or per-page basis.
+Abridge automatically detects the `katex` component in rendered page or section content and loads the KaTeX files only where they are needed.
+
+If you prefer raw `$...$` and `$$...$$` delimiters, enable the KaTeX [auto-render extension](https://katex.org/docs/autorender.html) with `math_auto_render = true`. This setting also enables the required KaTeX files.
+
+You are better off using the component rather than the raw `$...$` and `$$...$$` delimiters because of Markdown processing in Zola. If you look at the examples toward the bottom of the page, notice that the raw-delimiter version ends up with extra commas that do not appear when the same formula is rendered using the component.
 
 <!-- more -->
 
-## Enable Globally
+## Component Math: Automatic
 
-To enable the $\KaTeX$ support globally, add `math = true` under `[extra]` of the `zola.toml`
-at your site root. Now the katex component will be rendered, you can also add `math_auto_render = true`
-and every section and page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
+Using the `katex` component is enough to enable KaTeX for that page or section. Pages without a KaTeX component do not load the KaTeX CSS or JavaScript.
+
+## Auto Render
+
+Raw math delimiters are intentionally opt-in because ordinary prose can contain dollar signs. Enable auto-render globally in `zola.toml`, or in the front matter of a page/section where raw delimiters are used:
 
 ```toml
 [extra]
-math = true
-math_auto_render = false
-```
-
-## Per-section Basis
-
-To enable the $\KaTeX$ support in a particular section, add `math = true` under `[extra]` in the `[SECTION_NAME]/_index.md`.
-Now the katex component will be rendered, you can also add `math_auto_render = true`
-and the section of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
-+++
-```
-
-## Per-page Basis
-
-To enable the $\KaTeX$ support in a particular page, add `math = true` under `[extra]` in the page's
-frontmatter. Now the katex component will be rendered, you can also add `math_auto_render = true`
-and the page of your site will load the KaTeX [autorender extension](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
 math_auto_render = true
-+++
 ```
 
-It is a good practice to enable $\KaTeX$ support on a per-page basis, since this will only load the required files on that particular page, without affecting the page load speed of other pages. If your site is not math-heavy, please do NOT enable this feature globally or per-section basis.
+The legacy `math = true` setting is still recognized for compatibility, but is no longer required for component-based math.
 
 ## Usage
 

@@ -264,7 +264,7 @@ Le menu principal du site est créé en imbriquant la navigation sous une balise
     </fieldset>
     <br>
     <!-- Search -->
-    <p><input type="search" id="search" name="search" placeholder="Search" title="Search"></p>
+    <p><input type="search" id="search" name="search" placeholder="Search" title="Search" aria-label="Search"></p>
     <!-- File browser -->
     <label for="file">Navigateur de fichiers
     <input type="file" id="file" name="file">

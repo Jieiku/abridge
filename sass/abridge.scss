@@ -752,6 +752,12 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     font-weight: var(--fh);
     font-size: var(--fs);
   }
+  .icon-button {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    line-height: inherit;
+  }
   .dropdown-content {
     display: none;
     position: absolute;
@@ -768,7 +774,8 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
       text-decoration: none;
     }
   }
-  .dropdown:hover .dropdown-content {
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
     display: block;
   }
   article nav {//prev/next page title
@@ -1046,6 +1053,13 @@ $coderoundhighlight: false !default;//round corners on highlighted code blocks
     tbody tr:nth-child(even), thead tr {
       background-color: unset;
     }
+  }
+  // Code-copy button retains the compact appearance of the icon it replaced.
+  .cc {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    line-height: inherit;
   }
   // code copy button
   .cc {

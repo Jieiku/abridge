@@ -56,7 +56,7 @@
             {%- endif -%}
 
             {%- if config.languages | length > 0 %}
-            <li><div class="dropdown"><i class="svgs world" type="reset"></i>
+            <li><div class="dropdown"><button type="button" class="icon-button svgs world" aria-label="{{<translate key="select_language" default="Select language" i18n={i18n} />}}" title="{{<translate key="select_language" default="Select language" i18n={i18n} />}}"></button>
               {%- if current_url %}
                 <div class="dropdown-content">
                 <span>{{<translate key="language_name"  default="lang_name"  i18n={i18n} />}}</span>
@@ -118,7 +118,7 @@
 
             {%- if js_switcher -%}
               {%- set icon_adjust=(config.extra.icon_adjust if config.extra.icon_adjust else "svgs adjust") -%}
-              {%- if icon_adjust -%}<li><i type="reset" id="mode" class="js {{ icon_adjust }}"></i>{%- else -%}<i type="reset" id="mode" class="js mode">&#9728;</i></li>{%- endif -%}
+              {%- if icon_adjust -%}<li><button type="button" id="mode" class="js icon-button {{ icon_adjust }}" aria-label="{{<translate key="toggle_theme" default="Toggle theme" i18n={i18n} />}}" title="{{<translate key="toggle_theme" default="Toggle theme" i18n={i18n} />}}"></button></li>{%- else -%}<li><button type="button" id="mode" class="js icon-button mode" aria-label="{{<translate key="toggle_theme" default="Toggle theme" i18n={i18n} />}}" title="{{<translate key="toggle_theme" default="Toggle theme" i18n={i18n} />}}">&#9728;</button></li>{%- endif -%}
             {%- endif -%}
 
           </ul>

@@ -1,4 +1,6 @@
 language_name = "Nederlands" # Shown in language picker for multi-language sites.
+select_language = "Taal selecteren"
+toggle_theme = "Thema wisselen"
 date_locale = "nl_NL"
 full_stop = "."  # Used at the end of a sentence.
 

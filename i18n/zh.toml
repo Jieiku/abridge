@@ -1,4 +1,6 @@
 language_name = "中文" # Shown in language picker for multi-language sites.
+select_language = "选择语言"
+toggle_theme = "切换主题"
 date_locale = "zh_CN"
 full_stop = "."  # Used at the end of a sentence.
 

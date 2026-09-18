@@ -25,7 +25,10 @@ const getCodeContent = (block) => {
 };
 
 document.querySelectorAll("pre").forEach((block) => {
-    const copyDiv = document.createElement("div");
+    const copyDiv = document.createElement("button");
+    copyDiv.type = "button";
+    copyDiv.setAttribute("aria-label", "Copy code");
+    copyDiv.title = "Copy code";
     copyDiv.className = "cc svgs svgh copy";
     copyDiv.innerHTML = " ";
     block.prepend(copyDiv);

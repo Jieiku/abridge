@@ -1,4 +1,6 @@
 language_name = "Português" # Shown in language picker for multi-language sites.
+select_language = "Selecionar idioma"
+toggle_theme = "Alternar tema"
 date_locale = "pt_BR"
 full_stop = "."  # Used at the end of a sentence.
 

@@ -6,15 +6,15 @@ title = "Códigos cortos de imagen"
 
 [extra]
 keywords = "Image, Markdown, Components, Swap"
-series = "Features"
+series = "Características"
 thumbnail = "ferris-gesture.png"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Images",
+    "Características",
+    "Componentes",
+    "Imágenes",
 ]
 +++
 Este post cubre los **components imgswap e img**. Las imágenes también se pueden incrustar directamente utilizando markdown `![Ferris](ferris.svg)`, pero es mejor utilizar un código corto para que pueda establecer explícitamente la anchura y la altura, esto ayudará a evitar el cambio de diseño de contenido que mejora la experiencia del usuario y la puntuación de Google Lighthouse.

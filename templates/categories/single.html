@@ -2,7 +2,8 @@
 
 {%- block seo -%}
   {{- super() -}}
-  {%- set title = term.name ~ " category" -%}
+  {%- set category_label %}{{<translate key="category_label" default="category" i18n={i18n} />}}{% endset -%}
+  {%- set title = term.name ~ " " ~ category_label -%}
   {%- if config.title -%}
     {%- set title_addition = title_separator ~ config.title -%}
   {%- else -%}

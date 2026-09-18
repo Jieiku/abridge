@@ -8,14 +8,14 @@ updated = 2022-01-01T15:00:00Z
 [extra]
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
 math_auto_render = true
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Mathematics",
+    "Fonctionnalités",
+    "Composants",
+    "Mathématiques",
 ]
 +++
 Vous pouvez utiliser [KaTeX](https://katex.org) pour afficher des notations mathématiques.

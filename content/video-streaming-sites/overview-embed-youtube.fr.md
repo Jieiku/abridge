@@ -6,14 +6,14 @@ title = "YouTube intégrées"
 
 [extra]
 keywords = "Video, Components, Embed, Embedded, YouTube"
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Video",
+    "Fonctionnalités",
+    "Composants",
+    "Vidéo",
 ]
 +++
 Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre youtube.

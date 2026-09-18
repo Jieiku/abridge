@@ -6,12 +6,12 @@ title = "Tema Code Blocks"
 
 [extra]
 keywords = "Code, Code Blocks, Syntax, Syntax Highlighting, Theme"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
+    "Características",
     "Markdown",
 ]
 +++

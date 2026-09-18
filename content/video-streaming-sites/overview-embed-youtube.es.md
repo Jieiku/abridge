@@ -6,14 +6,14 @@ title = "Incrustar YouTube"
 
 [extra]
 keywords = "Video, Components, Embed, Embedded, YouTube"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Video",
+    "Características",
+    "Componentes",
+    "Vídeo",
 ]
 +++
 Zola tiene muchos components, y nuevos son facilmente añadidos, este ejemplo muestra youtube.

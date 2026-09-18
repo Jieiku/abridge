@@ -11,6 +11,7 @@ Categories = "Categorias"
 Contact = "Contato"
 Privacy = "Privacidade"
 Sitemap = "Mapa do site"
+Archive = "Arquivo"
 
 Skip_to_content = "Pular para o conteúdo"
 Search = "Pesquisa"
@@ -22,6 +23,9 @@ and = "e"
 more = "mais" # "...more" read more links
 latest_posts = "Publicações mais recentes"
 homepage_title_addition = "Tema Zola rápido, leve e moderno"
+page_label = "Página"
+tag_label = "tag"
+category_label = "categoria"
 series_parts = "Série" # $NUMBER_OF_PARTS Serie de piezas : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.

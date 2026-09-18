@@ -6,13 +6,13 @@ title = "Thème Zola Abridge"
 updated = 2023-07-21T15:00:00Z
 
 [extra]
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Config",
+    "Fonctionnalités",
+    "Configuration",
 ]
 +++
 Un thème [Zola](https://getzola.org) rapide, léger et moderne, utilisant un HTML sémantique épuré (peu de classes) et du CSS modulaire. Les scores de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/) et [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.pages.dev) sont parfaits. Voici une page [Zola Themes Benchmarks](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).

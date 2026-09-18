@@ -11,6 +11,7 @@ Categories = "Categories"
 Contact = "Contact"
 Privacy = "Privacy"
 Sitemap = "Sitemap"
+Archive = "Archive"
 
 Skip_to_content = "Skip to content"
 Search = "Search"
@@ -22,6 +23,9 @@ and = "&"
 more = "more" # "...more" read more links
 latest_posts = "Latest posts"
 homepage_title_addition = "Fast, Lightweight, and Modern Zola Theme"
+page_label = "Page"
+tag_label = "tag"
+category_label = "category"
 series_parts = "Series" # $NUMBER_OF_PARTS Part Series : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.

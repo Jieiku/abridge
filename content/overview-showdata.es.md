@@ -6,14 +6,14 @@ title = "Código corto Showdata"
 
 [extra]
 keywords = "Data, Load, External, Components"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Data",
-    "Components",
+    "Características",
+    "Datos",
+    "Componentes",
 ]
 +++
 El component `showdata` puede cargar y mostrar datos de una fuente externa a través de la función [load_data()](https://www.getzola.org/documentation/templates/overview/#load-data) de Zola.

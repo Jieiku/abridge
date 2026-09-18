@@ -6,12 +6,12 @@ title = "Markdown y estilo"
 
 [extra]
 keywords = "Markdown, Style, Syntax, Syntax Highlighting"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
+    "Características",
     "Markdown",
 ]
 +++

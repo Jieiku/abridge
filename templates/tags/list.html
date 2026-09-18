@@ -1,7 +1,7 @@
 {%- extends "base.html" -%}
 {%- block seo -%}
   {{- super() -}}
-  {%- set title = "Tags" -%}
+  {%- set title %}{{<translate key="Tags" default="Tags" i18n={i18n} />}}{% endset -%}
   {%- if config.title -%}
     {%- set title_addition = title_separator ~ config.title -%}
   {%- else -%}

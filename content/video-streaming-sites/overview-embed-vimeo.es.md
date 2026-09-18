@@ -6,14 +6,14 @@ title = "Incrustar Vimeo"
 
 [extra]
 keywords = "Video, Components, Embed, Embedded, Vimeo"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Video",
+    "Características",
+    "Componentes",
+    "Vídeo",
 ]
 +++
 Zola tiene muchos components, y los nuevos se añaden fácilmente, este ejemplo muestra vimeo.

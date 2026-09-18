@@ -6,16 +6,16 @@ title = "Contenido enriquecido"
 
 [extra]
 keywords = "Images, Videos, Audio, Gif, Rich Content, Components"
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Video",
+    "Características",
+    "Vídeo",
     "Audio",
-    "Images",
-    "Components",
+    "Imágenes",
+    "Componentes",
 ]
 +++
 Se incluyen varios components personalizados para aumentar CommonMark. `video` los components `image`, `gif` y `audio` se crearon para ayudarle a aprovechar los elementos HTML modernos en sus escritos.

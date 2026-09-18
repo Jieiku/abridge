@@ -6,14 +6,14 @@ title = "Codes courts d'image"
 
 [extra]
 keywords = "Image, Markdown, Components, Swap"
-series = "Features"
+series = "Fonctionnalités"
 thumbnail = "ferris-gesture.png"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
+    "Fonctionnalités",
+    "Composants",
     "Images",
 ]
 +++

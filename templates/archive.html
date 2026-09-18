@@ -7,7 +7,7 @@ This Template can also be used as the rendering template for Sections, eg: examp
 
 {%- block seo -%}
   {{- super() -}}
-  {%- set title = "Archive" -%}
+  {%- set title %}{{<translate key="Archive" default="Archive" i18n={i18n} />}}{% endset -%}
   {%- if config.title -%}
     {%- set title_addition = title_separator ~ config.title -%}
   {%- else -%}

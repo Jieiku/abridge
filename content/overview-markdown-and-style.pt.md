@@ -199,13 +199,13 @@ O menu principal do site é criado colocando o nav dentro de uma tag header. Vej
 
 <form name="contact" method="POST" >
     <p><label for="name">Nome</label>
-        <input type="text" placeholder="Nome" id="name" required data-validation-required-message="Digite seu nome." />
+        <input type="text" placeholder="Nome" id="name" name="name" required data-validation-required-message="Digite seu nome." />
     </p>
     <p><label for="email">Endereço de e-mail</label>
-        <input type="email" placeholder="name@example.com" id="email" required data-validation-required-message="Digite seu endereço de e-mail." />
+        <input type="email" placeholder="name@example.com" id="email" name="email" required data-validation-required-message="Digite seu endereço de e-mail." />
     </p>
     <p><label for="message">Mensagem</label>
-        <textarea rows="5" placeholder="Mensagem" id="message" required data-validation-required-message="Digite uma mensagem."></textarea>
+        <textarea rows="5" placeholder="Mensagem" id="message" name="message" required data-validation-required-message="Digite uma mensagem."></textarea>
     </p>
     <div id="success"></div>
     <p><button type="submit" id="sendMessageButton">Enviar</button></p>

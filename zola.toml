@@ -8,6 +8,8 @@ title = "Abridge"
 description = "Abridge is a fast, lightweight, and modern Zola theme (class-light, semantic HTML). Perfect Lighthouse, YellowLabTools, and Observatory scores."#for SEO aim for 140-180 Characters
 #theme = "abridge"
 
+author = "Jake G" # Default author used by Zola feeds when page front matter does not specify authors.
+
 default_language = "en"
 compile_sass = true
 minify_html = false

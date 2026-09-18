@@ -20,6 +20,8 @@ Recent = "Recent"
 Powered_by = "Powered by"
 and = "&"
 more = "more" # "...more" read more links
+latest_posts = "Latest posts"
+homepage_title_addition = "Fast, Lightweight, and Modern Zola Theme"
 series_parts = "Series" # $NUMBER_OF_PARTS Part Series : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.

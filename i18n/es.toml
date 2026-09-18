@@ -20,6 +20,8 @@ Recent = "Reciente"
 Powered_by = "Impulsado por"
 and = "y"
 more = "más" # "...more" read more links
+latest_posts = "Últimas publicaciones"
+homepage_title_addition = "Tema Zola rápido, ligero y moderno"
 series_parts = "Serie" # $NUMBER_OF_PARTS Serie de piezas : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.

@@ -11,7 +11,12 @@ This Template can also be used directly for the index eg: example.com/ or as the
   {%- if section.title and config.title -%}
     {%- set title_addition = title_separator ~ config.title -%}
   {%- elif config.extra.title_addition and title -%}
-    {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+    {%- if current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") -%}
+      {%- set homepage_title_addition %}{{<translate key="homepage_title_addition" default={config.extra.title_addition} i18n={i18n} />}}{% endset -%}
+      {%- set title_addition = title_separator ~ homepage_title_addition -%}
+    {%- else -%}
+      {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+    {%- endif -%}
   {%- elif config.extra.title_addition -%}
     {%- set title_addition = config.extra.title_addition -%}
   {%- else -%}
@@ -34,7 +39,7 @@ This Template can also be used directly for the index eg: example.com/ or as the
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
 {%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
     <div>
-    <h1 class="sr-only">Abridge – Latest posts</h1>
+    <h1 class="sr-only">{{ config.title }} – {{<translate key="latest_posts" default="Latest posts" i18n={i18n} />}}</h1>
     {%- set pages = paginator.pages if paginator else section.pages %}
     {% for page in pages %}
       <article>

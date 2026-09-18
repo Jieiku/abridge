@@ -199,13 +199,13 @@ Le menu principal du site est créé en imbriquant la navigation sous une balise
 
 <form name="contact" method="POST" >
     <p><label for="name">Nom</label>
-        <input type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name." />
+        <input type="text" placeholder="Name" id="name" name="name" required data-validation-required-message="Please enter your name." />
     </p>
     <p><label for="email">Adresse e-mail</label>
-        <input type="email" placeholder="name@example.com" id="email" required data-validation-required-message="Please enter your email address." />
+        <input type="email" placeholder="name@example.com" id="email" name="email" required data-validation-required-message="Please enter your email address." />
     </p>
     <p><label for="message">Message</label>
-        <textarea rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+        <textarea rows="5" placeholder="Message" id="message" name="message" required data-validation-required-message="Please enter a message."></textarea>
     </p>
     <div id="success"></div>
     <p><button type="submit" id="sendMessageButton">Envoyer</button></p>

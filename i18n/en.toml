@@ -1,4 +1,6 @@
 language_name = "English" # Shown in language picker for multi-language sites.
+select_language = "Select language"
+toggle_theme = "Toggle theme"
 date_locale = "en_US"
 full_stop = "."  # Used at the end of a sentence.
 
@@ -11,7 +13,9 @@ Categories = "Categories"
 Contact = "Contact"
 Privacy = "Privacy"
 Sitemap = "Sitemap"
+Archive = "Archive"
 
+Skip_to_content = "Skip to content"
 Search = "Search"
 Updated = "Updated"
 Index = "Index"
@@ -19,6 +23,11 @@ Recent = "Recent"
 Powered_by = "Powered by"
 and = "&"
 more = "more" # "...more" read more links
+latest_posts = "Latest posts"
+homepage_title_addition = "Fast, Lightweight, and Modern Zola Theme"
+page_label = "Page"
+tag_label = "tag"
+category_label = "category"
 series_parts = "Series" # $NUMBER_OF_PARTS Part Series : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
@@ -30,3 +39,11 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Website content is licens
 404_try_search = "Try searching or"
 ### go to homepage
 404_go_home = "go to homepage"
+
+# SEO descriptions for taxonomy and archive pages
+seo_tags = "Browse all tags on $SITE."
+seo_tag = "Articles tagged “$TERM” on $SITE."
+seo_categories = "Browse all categories on $SITE."
+seo_category = "Articles in the “$TERM” category on $SITE."
+seo_archive = "Browse the article archive on $SITE."
+seo_page = "Page $PAGE of articles and posts on $SITE."

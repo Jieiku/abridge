@@ -6,28 +6,45 @@ This Template can also be used directly for the index eg: example.com/ or as the
 
 {%- block seo -%}
   {{- super() -}}
-  {%- if config.title -%}
-    {%- set title = config.title -%}
-  {%- else -%}
-    {%- set title = "" -%}
-  {%- endif -%}
-  {%- if config.extra.title_addition and title -%}
-    {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+  {#- Prefer section metadata, falling back to the site-wide metadata. -#}
+  {%- set title = section.title or config.title or "" -%}
+  {%- if section.title and config.title -%}
+    {%- set title_addition = title_separator ~ config.title -%}
+  {%- elif config.extra.title_addition and title -%}
+    {#- Localize the site-wide title addition on language home/list sections. -#}
+    {%- if not section.title -%}
+      {%- set homepage_title_addition %}{{<translate key="homepage_title_addition" default={config.extra.title_addition} i18n={i18n} />}}{% endset -%}
+      {%- set title_addition = title_separator ~ homepage_title_addition -%}
+    {%- elif current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?(/page/[[:digit:]]+)?/$") -%}
+      {%- set homepage_title_addition %}{{<translate key="homepage_title_addition" default={config.extra.title_addition} i18n={i18n} />}}{% endset -%}
+      {%- set title_addition = title_separator ~ homepage_title_addition -%}
+    {%- else -%}
+      {%- set title_addition = title_separator ~ config.extra.title_addition -%}
+    {%- endif -%}
   {%- elif config.extra.title_addition -%}
     {%- set title_addition = config.extra.title_addition -%}
   {%- else -%}
     {%- set title_addition = "" -%}
   {%- endif -%}
-  {%- set description = config.description -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+  {%- if paginator and paginator.current_index > 1 -%}
+    {%- set page_label %}{{<translate key="page_label" default="Page" i18n={i18n} />}}{% endset -%}
+    {%- set title = title ~ " — " ~ page_label ~ " " ~ paginator.current_index -%}
+  {%- endif -%}
+  {%- set description = section.description or config.description -%}
+  {%- if paginator and paginator.current_index > 1 -%}
+    {%- set description %}{{<translate key="seo_page" default="Page $PAGE of articles and posts on $SITE." i18n={i18n} />}}{% endset -%}
+    {%- set description = description | replace(from="$PAGE", to=paginator.current_index | str) | replace(from="$SITE", to=section.title or config.title or "this site") -%}
+  {%- endif -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  page={section}  paginator_index={paginator.current_index if paginator else 1} />}}
 {%- endblock seo -%}
 
 
 
 {%- block content %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
     <div>
+    <h1 class="sr-only">{{ config.title }} – {{<translate key="latest_posts" default="Latest posts" i18n={i18n} />}}</h1>
     {%- set pages = paginator.pages if paginator else section.pages %}
     {% for page in pages %}
       <article>

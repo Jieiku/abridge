@@ -4,7 +4,7 @@
 
 {%- component page_listing(page, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
         <div class="tpad">
           <a href="{{ page.permalink | safe}}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>
         </div>
@@ -12,7 +12,7 @@
 
 {%- component series_link(inner, page, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
   {%- if inner.content == page.content %}
         <a class="scur" href="{{ inner.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ inner.title }}</a><br>
     {%- else %}
@@ -22,7 +22,7 @@
 
 {%- component title_post(page, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false) %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
       <h1><a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a></h1>
 {%- endcomponent title_post %}
 
@@ -32,21 +32,19 @@
 {%- if not i18n -%}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false) -%}{%- endif -%}
 
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif %}{%- endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true -%}{%- endif %}{%- endif %}
       <span{%- if config.extra.meta_post?.size %} class="{{ config.extra.meta_post?.size }}"{% endif %}>
 
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %}, {% endif %}
+          {%- if not loop.first %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', term=author) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
-          {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_post?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
           {%- for author in page.extra.authors %}
-          {%- if author_flag %}, {% endif %} {{ author }}
-          {%- set_global author_flag = true %}
+          {%- if not loop.first %}, {% endif %} {{ author }}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_post?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %} {{ config.extra.author }}
@@ -93,8 +91,8 @@
 
 {%- component title_index(page, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false)  -%}
-{%- if config.extra.search_library -%}{%- if config.extra.search_library == "offline" -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
-        <big>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</big>
+{%- if config.extra.search_library -%}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") -%}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
+        <h2>{% if config.extra.title_size_index %}<span class="{{ config.extra.title_size_index }}">{% endif %}<a href="{{ page.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ page.title | markdown(inline=true) | safe }}</a>{% if config.extra.title_size_index %}</span>{% endif %}</h2>
 {%- endcomponent title_index -%}
 
 {%- component meta_index(page, config) %}
@@ -102,21 +100,19 @@
 {%- set i18n = load_data(path="i18n/" ~ page.lang ~ '.toml', required=false)  -%}
 {%- if not i18n  %}{%- set i18n = load_data(path="themes/abridge/i18n/" ~ page.lang ~ ".toml", required=false)  %}{%- endif %}
 {%- set uglyurls = (config.extra.uglyurls or false)  -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true -%}{%- endif -%}{%- endif -%}
         <span{%- if config.extra.meta_index?.size %} class="{{ config.extra.meta_index?.size }}"{% endif %}>
 
         {#- Author #}
         {%- if page.taxonomies.authors and config.taxonomies %}
           {%- for author in page.taxonomies.authors %}
-          {%- if author_flag %}, {% endif %}
+          {%- if not loop.first %}, {% endif %}
           <a href="{{ get_taxonomy_url(kind='authors', term=author, lang=page.lang) | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ author }}</a>
-          {%- set_global author_flag = true %}
           {%- endfor %}
         {%- elif page.extra.authors and config.extra.meta_index?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %}
           {%- for author in page.extra.authors %}
-          {%- if author_flag %}, {% endif %} {{ author }}
-          {%- set_global author_flag = true %}
+          {%- if not loop.first %}, {% endif %} {{ author }}
           {%- endfor %}
         {%- elif config.extra.author and config.extra.meta_index?.author %}
           {%- if config.extra.icon_author %}<i class="{{ config.extra.icon_author }}"></i> {% endif %} {{ config.extra.author }}
@@ -163,7 +159,7 @@
 
 {%- component footer(page, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{%- set uglyurls = true %}{%- endif %}{%- endif %}
       {#- prev/next content page nextprev title pagination -#}
       {%- if not (config.extra.hide_page_nextprev_titles or false) %}
       {%- if page.lower or page.higher %}
@@ -185,7 +181,7 @@
 
 {% component pagination(paginator, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}
@@ -249,7 +245,7 @@
 
         {%- for i in range(start=start, end=end+1)  %}
             {%- if i == paginator.current_index  %}
-            <a class="inp on cnav" href="#">{{i}}</a>
+            <span class="inp on cnav" aria-current="page">{{i}}</span>
             {%- elif i > 1  %}
             <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}">{{i}}</a>
             {%- else  %}
@@ -290,7 +286,7 @@
 
 {% component numpagination(paginator, config) %}
 {%- set uglyurls = (config.extra.uglyurls or false)  %}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
   {%- if paginator.number_pagers > 1 %}
             {%- if paginator.number_pagers <= 5 %}  {# 5 or less pager is simple, just display all 5 #}
                 {%- set start = 1 %}
@@ -337,7 +333,7 @@
 
         {%- for i in range(start=start, end=end+1)  %}
             {%- if i == paginator.current_index  %}
-            <a class="inp on cnav" href="#">{{i}}</a>
+            <span class="inp on cnav" aria-current="page">{{i}}</span>
             {%- elif i > 1  %}
             <a class="inp on" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}{%- if uglyurls %}index.html{%- endif %}" aria-label="Page {{i}}">{{i}}</a>
             {%- else  %}

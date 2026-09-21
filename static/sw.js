@@ -5,21 +5,22 @@ class Pwa {
         const Version = new URL(location).searchParams.get("v");
         this.CACHE_VERSION = Version;
         //this.BASE_CACHE_FILES=['/js/theme.min.js','/js/theme_light.min.js','/abridge.css','/js/abridge.min.js','/','/404.html','/offline/','/manifest.json'];
-        this.BASE_CACHE_FILES = ['/','/404.html','/about/','/abridge.css','/android-chrome-192x192.png','/android-chrome-512x512.png','/apple-touch-icon.png','/archive/','/atom.xml','/banner.png','/blog/','/blog/page/1/','/browserconfig.xml','/contact/','/elasticlunr.min.js','/es/','/es/about/','/es/archive/','/es/atom.xml','/es/blog/','/es/blog/page/1/','/es/contact/','/es/offline/','/es/overview-abridge/','/es/overview-abridge/lighthouse.png','/es/overview-code-blocks/','/es/overview-images/','/es/overview-images/corro.svg','/es/overview-images/ferris-gesture.png','/es/overview-images/ferris-gesture.svg','/es/overview-images/ferris-happy.svg','/es/overview-images/ferris.svg','/es/overview-images/img/ferris-gesture.svg','/es/overview-images/img/ferris.svg','/es/overview-markdown-and-style/','/es/overview-math/','/es/overview-rich-content/','/es/overview-rich-content/over9000-400.avif','/es/overview-rich-content/over9000-640.avif','/es/overview-rich-content/over9000-640.webp','/es/overview-rich-content/over9000-960.avif','/es/overview-rich-content/over9000.mp3','/es/overview-rich-content/over9000.ogg','/es/overview-rich-content/over9000_av1.mp4','/es/overview-rich-content/over9000_vp9.webm','/es/overview-showdata/','/es/page/1/','/es/page/2/','/es/page/3/','/es/page/4/','/es/privacy/','/es/tags/','/es/tags/audio/','/es/tags/audio/atom.xml','/es/tags/components/','/es/tags/components/atom.xml','/es/tags/config/','/es/tags/config/atom.xml','/es/tags/data/','/es/tags/data/atom.xml','/es/tags/features/','/es/tags/features/atom.xml','/es/tags/images/','/es/tags/images/atom.xml','/es/tags/markdown/','/es/tags/markdown/atom.xml','/es/tags/mathematics/','/es/tags/mathematics/atom.xml','/es/tags/video/','/es/tags/video/atom.xml','/es/video-streaming-sites/overview-embed-streamable/','/es/video-streaming-sites/overview-embed-vimeo/','/es/video-streaming-sites/overview-embed-youtube/','/favicon-16x16.png','/favicon-32x32.png','/favicon.ico','/favicon.svg','/fonts/KaTeX_AMS-Regular.woff2','/fonts/KaTeX_Caligraphic-Bold.woff2','/fonts/KaTeX_Caligraphic-Regular.woff2','/fonts/KaTeX_Fraktur-Bold.woff2','/fonts/KaTeX_Fraktur-Regular.woff2','/fonts/KaTeX_Main-Bold.woff2','/fonts/KaTeX_Main-BoldItalic.woff2','/fonts/KaTeX_Main-Italic.woff2','/fonts/KaTeX_Main-Regular.woff2','/fonts/KaTeX_Math-BoldItalic.woff2','/fonts/KaTeX_Math-Italic.woff2','/fonts/KaTeX_SansSerif-Bold.woff2','/fonts/KaTeX_SansSerif-Italic.woff2','/fonts/KaTeX_SansSerif-Regular.woff2','/fonts/KaTeX_Script-Regular.woff2','/fonts/KaTeX_Size1-Regular.woff2','/fonts/KaTeX_Size2-Regular.woff2','/fonts/KaTeX_Size3-Regular.woff2','/fonts/KaTeX_Size4-Regular.woff2','/fonts/KaTeX_Typewriter-Regular.woff2','/fonts/Roboto-Bold.woff2','/fonts/Roboto-Italic.woff2','/fonts/Roboto-Mono-Italic.woff2','/fonts/Roboto-Mono.woff2','/fonts/Roboto.woff2','/fr/','/fr/about/','/fr/archive/','/fr/atom.xml','/fr/blog/','/fr/blog/page/1/','/fr/contact/','/fr/offline/','/fr/overview-abridge/','/fr/overview-abridge/lighthouse.png','/fr/overview-code-blocks/','/fr/overview-images/','/fr/overview-images/corro.svg','/fr/overview-images/ferris-gesture.png','/fr/overview-images/ferris-gesture.svg','/fr/overview-images/ferris-happy.svg','/fr/overview-images/ferris.svg','/fr/overview-images/img/ferris-gesture.svg','/fr/overview-images/img/ferris.svg','/fr/overview-markdown-and-style/','/fr/overview-math/','/fr/overview-rich-content/','/fr/overview-rich-content/over9000-400.avif','/fr/overview-rich-content/over9000-640.avif','/fr/overview-rich-content/over9000-640.webp','/fr/overview-rich-content/over9000-960.avif','/fr/overview-rich-content/over9000.mp3','/fr/overview-rich-content/over9000.ogg','/fr/overview-rich-content/over9000_av1.mp4','/fr/overview-rich-content/over9000_vp9.webm','/fr/overview-showdata/','/fr/page/1/','/fr/page/2/','/fr/page/3/','/fr/page/4/','/fr/privacy/','/fr/tags/','/fr/tags/audio/','/fr/tags/audio/atom.xml','/fr/tags/components/','/fr/tags/components/atom.xml','/fr/tags/config/','/fr/tags/config/atom.xml','/fr/tags/data/','/fr/tags/data/atom.xml','/fr/tags/features/','/fr/tags/features/atom.xml','/fr/tags/images/','/fr/tags/images/atom.xml','/fr/tags/markdown/','/fr/tags/markdown/atom.xml','/fr/tags/mathematics/','/fr/tags/mathematics/atom.xml','/fr/tags/video/','/fr/tags/video/atom.xml','/fr/video-streaming-sites/overview-embed-streamable/','/fr/video-streaming-sites/overview-embed-vimeo/','/fr/video-streaming-sites/overview-embed-youtube/','/giallo.css','/images/ferris-gesture.svg','/images/ferris.svg','/js/abridge.min.js','/js/abridge_nopwa.min.js','/js/abridge_nosearch.min.js','/js/abridge_nosearch_nopwa.min.js','/js/codecopy.js','/js/elasticlunr.min.js','/js/elasticlunr_bridge.js','/js/elasticlunr_scope_begin.js','/js/elasticlunr_scope_end.js','/js/email.js','/js/katex-auto-render.min.js','/js/katex.min.js','/js/katexbundle.min.js','/js/katexoptions.js','/js/lunr.da.js','/js/lunr.da.min.js','/js/lunr.de.js','/js/lunr.de.min.js','/js/lunr.du.js','/js/lunr.du.min.js','/js/lunr.es.js','/js/lunr.es.min.js','/js/lunr.fi.js','/js/lunr.fi.min.js','/js/lunr.fr.js','/js/lunr.fr.min.js','/js/lunr.hu.js','/js/lunr.hu.min.js','/js/lunr.it.js','/js/lunr.it.min.js','/js/lunr.jp.js','/js/lunr.jp.min.js','/js/lunr.no.js','/js/lunr.no.min.js','/js/lunr.pt.js','/js/lunr.pt.min.js','/js/lunr.ro.js','/js/lunr.ro.min.js','/js/lunr.ru.js','/js/lunr.ru.min.js','/js/lunr.stemmer.support.js','/js/lunr.stemmer.support.min.js','/js/lunr.sv.js','/js/lunr.sv.min.js','/js/lunr.tr.js','/js/lunr.tr.min.js','/js/lunr.zh.js','/js/lunr.zh.min.js','/js/mathtex-script-type.min.js','/js/pagefind.search.js','/js/prestyle.js','/js/search.js','/js/search_elasticlunr.min.js','/js/search_tinysearch.min.js','/js/searchjava.js','/js/searchjavaugly.js','/js/sw_load.js','/js/sw_load.min.js','/js/theme.js','/js/theme.min.js','/js/theme_button.js','/js/theme_light.js','/js/theme_light.min.js','/js/tinysearch.js','/katex.min.css','/m1024.png','/m128.png','/m192.png','/m384.png','/m48.png','/m512.png','/m72.png','/m96.png','/manifest.json','/manifest.min.json','/mstile-150x150.png','/nojs.css','/offline/','/overview-abridge/','/overview-abridge/lighthouse.png','/overview-code-blocks/','/overview-images/','/overview-images/corro.svg','/overview-images/ferris-gesture.png','/overview-images/ferris-gesture.svg','/overview-images/ferris-happy.svg','/overview-images/ferris.svg','/overview-images/img/ferris-gesture.svg','/overview-images/img/ferris.svg','/overview-markdown-and-style/','/overview-math/','/overview-rich-content/','/overview-rich-content/over9000-400.avif','/overview-rich-content/over9000-640.avif','/overview-rich-content/over9000-640.webp','/overview-rich-content/over9000-960.avif','/overview-rich-content/over9000.mp3','/overview-rich-content/over9000.ogg','/overview-rich-content/over9000_av1.mp4','/overview-rich-content/over9000_vp9.webm','/overview-showdata/','/page/1/','/page/2/','/page/3/','/page/4/','/privacy/','/pt/','/pt/about/','/pt/atom.xml','/pt/contact/','/pt/offline/','/pt/page/1/','/pt/privacy/','/robots.txt','/safari-pinned-tab.svg','/search_index.en.json','/search_index.es.json','/search_index.fr.json','/search_index.pt.json','/sitemap.xml','/tags/','/tags/audio/','/tags/audio/atom.xml','/tags/components/','/tags/components/atom.xml','/tags/config/','/tags/config/atom.xml','/tags/data/','/tags/data/atom.xml','/tags/features/','/tags/features/atom.xml','/tags/images/','/tags/images/atom.xml','/tags/markdown/','/tags/markdown/atom.xml','/tags/mathematics/','/tags/mathematics/atom.xml','/tags/video/','/tags/video/atom.xml','/tinysearch.toml','/tinysearch_engine.wasm','/video-streaming-sites/overview-embed-streamable/','/video-streaming-sites/overview-embed-vimeo/','/video-streaming-sites/overview-embed-youtube/'];
+        this.BASE_CACHE_FILES = ["/","/404.html","/about/","/abridge.css","/android-chrome-192x192.png","/android-chrome-512x512.png","/apple-touch-icon.png","/archive/","/atom.xml","/banner.png","/blog/","/blog/page/1/","/browserconfig.xml","/contact/","/es/","/es/about/","/es/archive/","/es/atom.xml","/es/blog/","/es/blog/page/1/","/es/contact/","/es/offline/","/es/overview-abridge/","/es/overview-abridge/lighthouse.png","/es/overview-code-blocks/","/es/overview-images/","/es/overview-images/corro.svg","/es/overview-images/ferris-gesture.png","/es/overview-images/ferris-gesture.svg","/es/overview-images/ferris-happy.svg","/es/overview-images/ferris.svg","/es/overview-images/img/ferris-gesture.svg","/es/overview-images/img/ferris.svg","/es/overview-markdown-and-style/","/es/overview-math/","/es/overview-rich-content/","/es/overview-rich-content/over9000-400.avif","/es/overview-rich-content/over9000-640.avif","/es/overview-rich-content/over9000-640.webp","/es/overview-rich-content/over9000-960.avif","/es/overview-rich-content/over9000.mp3","/es/overview-rich-content/over9000.ogg","/es/overview-rich-content/over9000_av1.mp4","/es/overview-rich-content/over9000_vp9.webm","/es/overview-showdata/","/es/page/1/","/es/page/2/","/es/page/3/","/es/page/4/","/es/privacy/","/es/tags/","/es/tags/audio/","/es/tags/audio/atom.xml","/es/tags/caracteristicas/","/es/tags/caracteristicas/atom.xml","/es/tags/componentes/","/es/tags/componentes/atom.xml","/es/tags/configuracion/","/es/tags/configuracion/atom.xml","/es/tags/datos/","/es/tags/datos/atom.xml","/es/tags/imagenes/","/es/tags/imagenes/atom.xml","/es/tags/markdown/","/es/tags/markdown/atom.xml","/es/tags/matematicas/","/es/tags/matematicas/atom.xml","/es/tags/video/","/es/tags/video/atom.xml","/es/video-streaming-sites/overview-embed-streamable/","/es/video-streaming-sites/overview-embed-vimeo/","/es/video-streaming-sites/overview-embed-youtube/","/favicon-16x16.png","/favicon-32x32.png","/favicon.ico","/favicon.svg","/fonts/KaTeX_AMS-Regular.ttf","/fonts/KaTeX_AMS-Regular.woff","/fonts/KaTeX_AMS-Regular.woff2","/fonts/KaTeX_Caligraphic-Bold.ttf","/fonts/KaTeX_Caligraphic-Bold.woff","/fonts/KaTeX_Caligraphic-Bold.woff2","/fonts/KaTeX_Caligraphic-Regular.ttf","/fonts/KaTeX_Caligraphic-Regular.woff","/fonts/KaTeX_Caligraphic-Regular.woff2","/fonts/KaTeX_Fraktur-Bold.ttf","/fonts/KaTeX_Fraktur-Bold.woff","/fonts/KaTeX_Fraktur-Bold.woff2","/fonts/KaTeX_Fraktur-Regular.ttf","/fonts/KaTeX_Fraktur-Regular.woff","/fonts/KaTeX_Fraktur-Regular.woff2","/fonts/KaTeX_Main-Bold.ttf","/fonts/KaTeX_Main-Bold.woff","/fonts/KaTeX_Main-Bold.woff2","/fonts/KaTeX_Main-BoldItalic.ttf","/fonts/KaTeX_Main-BoldItalic.woff","/fonts/KaTeX_Main-BoldItalic.woff2","/fonts/KaTeX_Main-Italic.ttf","/fonts/KaTeX_Main-Italic.woff","/fonts/KaTeX_Main-Italic.woff2","/fonts/KaTeX_Main-Regular.ttf","/fonts/KaTeX_Main-Regular.woff","/fonts/KaTeX_Main-Regular.woff2","/fonts/KaTeX_Math-BoldItalic.ttf","/fonts/KaTeX_Math-BoldItalic.woff","/fonts/KaTeX_Math-BoldItalic.woff2","/fonts/KaTeX_Math-Italic.ttf","/fonts/KaTeX_Math-Italic.woff","/fonts/KaTeX_Math-Italic.woff2","/fonts/KaTeX_SansSerif-Bold.ttf","/fonts/KaTeX_SansSerif-Bold.woff","/fonts/KaTeX_SansSerif-Bold.woff2","/fonts/KaTeX_SansSerif-Italic.ttf","/fonts/KaTeX_SansSerif-Italic.woff","/fonts/KaTeX_SansSerif-Italic.woff2","/fonts/KaTeX_SansSerif-Regular.ttf","/fonts/KaTeX_SansSerif-Regular.woff","/fonts/KaTeX_SansSerif-Regular.woff2","/fonts/KaTeX_Script-Regular.ttf","/fonts/KaTeX_Script-Regular.woff","/fonts/KaTeX_Script-Regular.woff2","/fonts/KaTeX_Size1-Regular.ttf","/fonts/KaTeX_Size1-Regular.woff","/fonts/KaTeX_Size1-Regular.woff2","/fonts/KaTeX_Size2-Regular.ttf","/fonts/KaTeX_Size2-Regular.woff","/fonts/KaTeX_Size2-Regular.woff2","/fonts/KaTeX_Size3-Regular.ttf","/fonts/KaTeX_Size3-Regular.woff","/fonts/KaTeX_Size3-Regular.woff2","/fonts/KaTeX_Size4-Regular.ttf","/fonts/KaTeX_Size4-Regular.woff","/fonts/KaTeX_Size4-Regular.woff2","/fonts/KaTeX_Typewriter-Regular.ttf","/fonts/KaTeX_Typewriter-Regular.woff","/fonts/KaTeX_Typewriter-Regular.woff2","/fr/","/fr/about/","/fr/archive/","/fr/atom.xml","/fr/blog/","/fr/blog/page/1/","/fr/contact/","/fr/offline/","/fr/overview-abridge/","/fr/overview-abridge/lighthouse.png","/fr/overview-code-blocks/","/fr/overview-images/","/fr/overview-images/corro.svg","/fr/overview-images/ferris-gesture.png","/fr/overview-images/ferris-gesture.svg","/fr/overview-images/ferris-happy.svg","/fr/overview-images/ferris.svg","/fr/overview-images/img/ferris-gesture.svg","/fr/overview-images/img/ferris.svg","/fr/overview-markdown-and-style/","/fr/overview-math/","/fr/overview-rich-content/","/fr/overview-rich-content/over9000-400.avif","/fr/overview-rich-content/over9000-640.avif","/fr/overview-rich-content/over9000-640.webp","/fr/overview-rich-content/over9000-960.avif","/fr/overview-rich-content/over9000.mp3","/fr/overview-rich-content/over9000.ogg","/fr/overview-rich-content/over9000_av1.mp4","/fr/overview-rich-content/over9000_vp9.webm","/fr/overview-showdata/","/fr/page/1/","/fr/page/2/","/fr/page/3/","/fr/page/4/","/fr/privacy/","/fr/tags/","/fr/tags/audio/","/fr/tags/audio/atom.xml","/fr/tags/composants/","/fr/tags/composants/atom.xml","/fr/tags/configuration/","/fr/tags/configuration/atom.xml","/fr/tags/donnees/","/fr/tags/donnees/atom.xml","/fr/tags/fonctionnalites/","/fr/tags/fonctionnalites/atom.xml","/fr/tags/images/","/fr/tags/images/atom.xml","/fr/tags/markdown/","/fr/tags/markdown/atom.xml","/fr/tags/mathematiques/","/fr/tags/mathematiques/atom.xml","/fr/tags/video/","/fr/tags/video/atom.xml","/fr/video-streaming-sites/overview-embed-streamable/","/fr/video-streaming-sites/overview-embed-vimeo/","/fr/video-streaming-sites/overview-embed-youtube/","/images/ferris-gesture.svg","/images/ferris.svg","/img/embed/streamable/92ok4-1280.jpg","/img/embed/vimeo/514402648-1280.jpg","/img/embed/youtube/32gyFIWecuw-1280.webp","/js/abridge.min.js","/js/katexbundle.min.js","/js/lite-streamable.js","/js/lite-vimeo.js","/js/lite-youtube.js","/js/lunr.es.min.js","/js/lunr.fr.min.js","/js/lunr.pt.min.js","/js/lunr.stemmer.support.min.js","/js/theme.min.js","/katex.min.css","/m1024.png","/m128.png","/m192.png","/m384.png","/m48.png","/m512.png","/m72.png","/m96.png","/manifest.min.json","/mstile-150x150.png","/nojs.css","/offline/","/overview-abridge/","/overview-abridge/lighthouse.png","/overview-code-blocks/","/overview-images/","/overview-images/corro.svg","/overview-images/ferris-gesture.png","/overview-images/ferris-gesture.svg","/overview-images/ferris-happy.svg","/overview-images/ferris.svg","/overview-images/img/ferris-gesture.svg","/overview-images/img/ferris.svg","/overview-markdown-and-style/","/overview-math/","/overview-rich-content/","/overview-rich-content/over9000-400.avif","/overview-rich-content/over9000-640.avif","/overview-rich-content/over9000-640.webp","/overview-rich-content/over9000-960.avif","/overview-rich-content/over9000.mp3","/overview-rich-content/over9000.ogg","/overview-rich-content/over9000_av1.mp4","/overview-rich-content/over9000_vp9.webm","/overview-showdata/","/page/1/","/page/2/","/page/3/","/page/4/","/privacy/","/pt/","/pt/about/","/pt/archive/","/pt/atom.xml","/pt/blog/","/pt/blog/page/1/","/pt/contact/","/pt/offline/","/pt/overview-abridge/","/pt/overview-abridge/lighthouse.png","/pt/overview-code-blocks/","/pt/overview-images/","/pt/overview-images/corro.svg","/pt/overview-images/ferris-gesture.png","/pt/overview-images/ferris-gesture.svg","/pt/overview-images/ferris-happy.svg","/pt/overview-images/ferris.svg","/pt/overview-images/img/ferris-gesture.svg","/pt/overview-images/img/ferris.svg","/pt/overview-markdown-and-style/","/pt/overview-math/","/pt/overview-rich-content/","/pt/overview-rich-content/over9000-400.avif","/pt/overview-rich-content/over9000-640.avif","/pt/overview-rich-content/over9000-640.webp","/pt/overview-rich-content/over9000-960.avif","/pt/overview-rich-content/over9000.mp3","/pt/overview-rich-content/over9000.ogg","/pt/overview-rich-content/over9000_av1.mp4","/pt/overview-rich-content/over9000_vp9.webm","/pt/overview-showdata/","/pt/page/1/","/pt/page/2/","/pt/page/3/","/pt/page/4/","/pt/privacy/","/pt/tags/","/pt/tags/audio/","/pt/tags/audio/atom.xml","/pt/tags/componentes/","/pt/tags/componentes/atom.xml","/pt/tags/config/","/pt/tags/config/atom.xml","/pt/tags/data/","/pt/tags/data/atom.xml","/pt/tags/imagens/","/pt/tags/imagens/atom.xml","/pt/tags/markdown/","/pt/tags/markdown/atom.xml","/pt/tags/matematica/","/pt/tags/matematica/atom.xml","/pt/tags/recursos/","/pt/tags/recursos/atom.xml","/pt/tags/video/","/pt/tags/video/atom.xml","/pt/video-streaming-sites/overview-embed-streamable/","/pt/video-streaming-sites/overview-embed-vimeo/","/pt/video-streaming-sites/overview-embed-youtube/","/robots.txt","/safari-pinned-tab.svg","/search_index.en.json","/search_index.es.json","/search_index.fr.json","/search_index.pt.json","/sitemap.xml","/tags/","/tags/audio/","/tags/audio/atom.xml","/tags/components/","/tags/components/atom.xml","/tags/config/","/tags/config/atom.xml","/tags/data/","/tags/data/atom.xml","/tags/features/","/tags/features/atom.xml","/tags/images/","/tags/images/atom.xml","/tags/markdown/","/tags/markdown/atom.xml","/tags/mathematics/","/tags/mathematics/atom.xml","/tags/video/","/tags/video/atom.xml","/video-streaming-sites/overview-embed-streamable/","/video-streaming-sites/overview-embed-vimeo/","/video-streaming-sites/overview-embed-youtube/"];
         this.host = `${self.location.protocol}//${self.location.host}`;
         console.info(`Host: ${this.host}`);
         this.OFFLINE_PAGE = '/offline/';
         this.NOT_FOUND_PAGE = '/404.html';
-        this.CACHE_NAME = `content-v${this.CACHE_VERSION}`;
+        this.CACHE_PREFIX = "abridge-content-v";
+        this.CACHE_NAME = `${this.CACHE_PREFIX}${this.CACHE_VERSION}`;
         // 3600=1hour, 28800=8hours, 86400=1day, 604800=1week, 1209600=2weeks
         this.NORM_TTL = 0;
         this.LONG_TTL = 0;
         // keep the ttl on these lower:
-        this.TTL_NORM = ["sw.min.js", "sw_load.min.js"];
+        this.TTL_NORM = ["sw.min.js","sw_load.min.js"];
         // rarely change, may be a good idea to periodically refresh, incase I change these and forget to increment service worker version:
-        this.TTL_LONG = ["jpg", "jpeg", "png", "gif", "webp", "avif", "ico", "svg", "xsl", "txt"];
+        this.TTL_LONG = ["jpg","jpeg","png","gif","webp","avif","ico","svg","xsl","txt"];
         // never change, cache forever unless service worker version is incremented:
-        this.TTL_EXEMPT = ["js", "css", "otf", "eot", "ttf", "woff", "woff2", "mp4", "webm", "mp3", "ogg"];
+        this.TTL_EXEMPT = ["js","css","otf","eot","ttf","woff","woff2","mp4","webm","mp3","ogg"];
         // skip these extensions so they expire same time as html: st,wasm,json(search), xml(sitemap,atom,rss)
     }
 
@@ -27,8 +28,7 @@ class Pwa {
         if (url.startsWith("http://localhost")) {
             return false;
         }
-        const result = url.toString().startsWith(this.host);
-        return result;
+        return new URL(url).origin === this.host;
     }
 
     getFileExtension(url) {
@@ -65,13 +65,13 @@ class Pwa {
 
     async installServiceWorker() {
         try {
-            await caches.open(this.CACHE_NAME).then((cache) => {
-                return cache.addAll(this.BASE_CACHE_FILES);
-            }, err => console.error(`Error with ${this.CACHE_NAME}`, err));
+            const cache = await caches.open(this.CACHE_NAME);
+            await cache.addAll(this.BASE_CACHE_FILES);
             return this.scope.skipWaiting();
         }
         catch (err) {
-            return console.error("Error with installation: ", err);
+            console.error("Error with installation: ", err);
+            throw err;
         }
     }
 
@@ -82,7 +82,7 @@ class Pwa {
         return new Promise(
             (resolve, reject) => {
                 caches.keys()
-                    .then((keys) => keys.filter((key) => !~currentCaches.indexOf(key)))
+                    .then((keys) => keys.filter((key) => key.startsWith(this.CACHE_PREFIX) && !currentCaches.includes(key)))
                     .then((legacy) => {
                         if (legacy.length) {
                             Promise.all(legacy.map((legacyKey) => caches.delete(legacyKey))
@@ -100,14 +100,6 @@ class Pwa {
             });
     }
 
-    async preCacheUrl(url) {
-        const cache = await caches.open(this.CACHE_NAME);
-        const response = await cache.match(url);
-        if (!response) {
-            return fetch(url).then(resp => cache.put(url, resp.clone()));
-        }
-        return null;
-    }
 
     register() {
         this.scope.addEventListener('install', event => {
@@ -125,11 +117,16 @@ class Pwa {
                 this.scope.clients.claim(),
                 this.scope.skipWaiting()]).catch((err) => {
                     console.error("Activation error: ", err);
-                    event.skipWaiting();
                 }));
         });
 
         this.scope.addEventListener('fetch', event => {
+            // Cache Storage only supports GET requests. Let forms/API writes pass through
+            // untouched while keeping every same-origin GET page/asset available offline.
+            if (event.request.method !== 'GET') {
+                return;
+            }
+            const isNavigation = event.request.mode === 'navigate';
             event.respondWith(
                 caches.open(this.CACHE_NAME).then(async cache => {
                     // check if this is NOT a resource we allow cacheing (some other domain), if so fetch it instead of cache.
@@ -159,17 +156,18 @@ class Pwa {
                         }
                     }
                     // if we made it here then we either did not have the cache, or the TTL was expired.
-                    return fetch(event.request.clone()).then(resp => {
+                    return fetch(event.request.clone()).then(async resp => {
                         if (resp.status < 400) {
                             if (this.canCache(event.request.url)) {
                                 cache.put(event.request, resp.clone());
                             }
                             return resp;
                         }
-                        else {
-                            return cache.match(this.NOT_FOUND_PAGE);
+                        else if (isNavigation) {
+                            return (await cache.match(this.NOT_FOUND_PAGE)) || resp;
                         }
-                    }).catch(err => {
+                        return resp;
+                    }).catch(async err => {
                         // if we made it here then we were unable to fetch the resource.
                         // maybe we were only fetching because of expired TTL, so use the cache regardless of TTL:
                         if (typeof event.request.url === 'string') {
@@ -179,8 +177,12 @@ class Pwa {
                             return response;
                         }
                         // if we made it here then we were unable to fetch the resource and do not have it cached.
-                        console.error(`Error fetching ${event.request.url} resulted in offline`, err);
-                        return cache.match(this.OFFLINE_PAGE);
+                        console.error(`Error fetching ${event.request.url} while offline`, err);
+                        if (isNavigation) {
+                            const offline = await cache.match(this.OFFLINE_PAGE);
+                            if (offline) return offline;
+                        }
+                        throw err;
                     })
                 }));
         });

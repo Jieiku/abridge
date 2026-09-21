@@ -7,19 +7,20 @@ This Template can also be used as the rendering template for Sections, eg: examp
 
 {%- block seo -%}
   {{- super() -}}
-  {%- set title = "Archive" -%}
+  {%- set title %}{{<translate key="Archive" default="Archive" i18n={i18n} />}}{% endset -%}
   {%- if config.title -%}
     {%- set title_addition = title_separator ~ config.title -%}
   {%- else -%}
     {%- set title_addition = "" -%}
   {%- endif -%}
-  {%- set description = config.description -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  is_home={true} />}}
+  {%- set description %}{{<translate key="seo_archive" default="Browse the article archive on $SITE." i18n={i18n} />}}{% endset -%}
+  {%- set description = description | replace(from="$SITE", to=config.title or "this site") -%}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  page={section} />}}
 {%- endblock seo -%}
 
 {%- block content %}
     {%- set uglyurls = (config.extra.uglyurls or false) -%}
-    {%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+    {%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
     {#- The following line is checking if the template is being used for the archive page or a section #}
     {%- if current_path is matching(pat="^(/[[:alpha:]][[:alpha:]])?/archive/$") %}
       {%- if section.extra.sec %}
@@ -52,35 +53,29 @@ This Template can also be used as the rendering template for Sections, eg: examp
     {%- endif %}
     <div>
       {%- if section_item.title %}
-      <h2>{{ section_item.title }}</h2>
+      <h1>{{ section_item.title }}</h1>
+      {%- else %}
+      <h1>{{<translate key="Archive" default="Archive" i18n={i18n} />}}</h1>
       {%- endif %}
       {{- section_item.content | safe }}
       {% set grouped = section_item.pages | group_by(attribute="year") %}
       {%- if config.extra.archive_reverse %}
-      {% set years = grouped | keys | sort | reverse %}
+      {% set years = grouped | keys | sort %}
       {% for year in years %}
       {% set posts = grouped[year] %}
       {%- if not hide_section_dates %}
-      {%- if section_item.title %}
-      <h3 class="tpad">{{ year }}</h3>
-      {%- else %}
       <h2 class="tpad">{{ year }}</h2>
-      {%- endif %}
       {%- endif %}
       {%- for post in posts %}
       <p><a href="{{ post.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>
       {%- endfor %}
       {%- endfor %}
       {%- else %}
-      {% set years = grouped | keys | sort %}
+      {% set years = grouped | keys | sort | reverse %}
       {% for year in years %}
       {% set posts = grouped[year] %}
       {%- if not hide_section_dates %}
-      {%- if section_item.title %}
-      <h3 class="tpad">{{ year }}</h3>
-      {%- else %}
       <h2 class="tpad">{{ year }}</h2>
-      {%- endif %}
       {%- endif %}
       {%- for post in posts %}
       <p><a href="{{ post.permalink | safe }}{%- if uglyurls %}index.html{%- endif %}">{{ post.title }}</a>{%- if not hide_section_dates %} - <time datetime="{{ post.date }}">{{ post.date | date(format="%F") }}</time>{%- endif %}</p>

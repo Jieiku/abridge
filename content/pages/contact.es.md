@@ -9,15 +9,15 @@ title = "Contacto"
 <form name="contact" method="POST">
   <p>
     <label for="name">Nombre</label>
-    <input type="text" placeholder="Nombre" id="name" required data-validation-required-message="Por favor ingrese su nombre." />
+    <input type="text" placeholder="Nombre" id="name" name="name" required data-validation-required-message="Por favor ingrese su nombre." />
   </p>
   <p>
     <label for="email">Dirección de Email</label>
-    <input type="email" placeholder="nombre@ejemplo.com" id="email" required data-validation-required-message="Por favor ingrese su dirección de email." />
+    <input type="email" placeholder="nombre@ejemplo.com" id="email" name="email" required data-validation-required-message="Por favor ingrese su dirección de email." />
   </p>
   <p>
     <label for="message">Mensaje</label>
-    <textarea rows="5" placeholder="Mensaje" id="message" required data-validation-required-message="Por favor ingrese un mensaje."></textarea>
+    <textarea rows="5" placeholder="Mensaje" id="message" name="message" required data-validation-required-message="Por favor ingrese un mensaje."></textarea>
   </p>
   <div id="success"></div>
   <p>

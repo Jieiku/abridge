@@ -29,11 +29,22 @@ Some people prefer a landing page for the index, and then use a separate paginat
   {%- else -%}
     {%- set description = config.description -%}
   {%- endif -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""} />}}
+  {%- if page %}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  page={page} />}}
+  {%- elif section %}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  page={section} />}}
+  {%- else %}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url} />}}
+  {%- endif %}
 {%- endblock seo -%}
 
 {%- block content %}
     <div>
+{%- if page and page.title %}
+      <h1>{{ page.title }}</h1>
+{%- elif section and section.title %}
+      <h1>{{ section.title }}</h1>
+{%- endif %}
 
 {%- if page.content %}
 {{ page.content | safe }}

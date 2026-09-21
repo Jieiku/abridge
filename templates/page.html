@@ -19,24 +19,16 @@
   {%- set created_time = page.date or "" -%}
   {%- set updated_time = page.updated or page.date or "" -%}
   {%- if current_section -%}
-    {%- set page_section = current_section -%}
   {%- else -%}
-    {%- set page_section = "" -%}
   {%- endif -%}
-  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  type="article"  is_page={true}  created_time={created_time}  updated_time={updated_time}  page_section={page_section} />}}
+  {{<seo config={config}  title={title}  title_addition={title_addition}  description={description or ""}  page_url={current_url}  type="article"  created_time={created_time}  updated_time={updated_time}  page={page} />}}
 {%- endblock seo -%}
 
 {%- block comments_init %}
   {%- if config.extra.comment_system == "hyvor" and config.extra.comments?.hyvor %}
   <script defer src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
   {%- elif config.extra.comment_system == "remark42" and config.extra.comments?.remark42 %}
-  <script>
-	var remark_config = {
-		host: "{{ config.extra.comments?.remark42 | safe }}",
-		site_id: "{{ config.extra.comments?.remark42_site_id }}",
-	}
-  </script>
-  <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
+  <script defer src="{{ get_url(path='js/remark42.js', trailing_slash=false) }}"></script>
   {%- endif %}
 {%- endblock comments_init %}
 
@@ -95,7 +87,7 @@
     {%- if config.extra.comment_system == "hyvor" and config.extra.comments?.hyvor %}
     <hyvor-talk-comments website-id={{ config.extra.comments?.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments?.hyvorcolor %} colors="{{ config.extra.comments?.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
     {%- elif config.extra.comment_system == "remark42" and config.extra.comments?.remark42 %}
-    <div id="remark42"></div>
+    <div id="remark42" data-remark42-host="{{ config.extra.comments?.remark42 }}" data-remark42-site-id="{{ config.extra.comments?.remark42_site_id }}"></div>
     {%- endif %}
     {%- endblock comments_body %}
     </article>
@@ -181,7 +173,7 @@
 
       {%- if toc %}
       <div class="blockdiv sticky">
-        <a class="b s150" href="#">{{<translate key="Index"  default="Index"  i18n={i18n} />}}</a>
+        <a class="b s150" href="#top">{{<translate key="Index"  default="Index"  i18n={i18n} />}}</a>
         {%- for h in toc %}
         <div>
           <a href="#{{h.id | safe}}">{{ h.title }}</a>
@@ -209,7 +201,7 @@
 {%- if page.reading_time > 2 %}
 {%- set icon_top=(config.extra.icon_top if config.extra.icon_top else "svgs svgh angu") -%}
 <span class="topout">
-<span class="topleft"> </span><a href="#" class="top" title="Back to Top">{%- if icon_top %}<i class="{{ icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
+<span class="topleft"> </span><a href="#top" class="top" title="Back to Top">{%- if icon_top %}<i class="{{ icon_top }}"></i>{%- else %}&cuwed;{%- endif %}</a>
 </span>
 {%- endif %}
 {%- endif %}

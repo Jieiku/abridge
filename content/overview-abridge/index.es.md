@@ -6,20 +6,20 @@ title = "Abridge Tema Zola"
 updated = 2023-07-21T15:00:00Z
 
 [extra]
-series = "Features"
+series = "Características"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Config",
+    "Características",
+    "Configuración",
 ]
 +++
 Un tema para [Zola](https://getzola.org) rápido, ligero y moderno que utiliza HTML semántico con pocas clases y CSS modular.. Puntuaciones perfectas de [Lighthouse](https://pagespeed.web.dev/report?url=abridge.pages.dev), [YellowLabTools](https://yellowlab.tools/) y [Observatory](https://developer.mozilla.org/en-US/observatory/analyze?host=abridge.pages.dev). Aquí hay una página de [Benchmarks de Zola Themes](https://github.com/Jieiku/zola-themes-benchmarks/blob/main/README.md).
 
 <!-- more -->
 
-![lighthouse](lighthouse.png)
+{{<img src="lighthouse.png" class="ci" alt="Lighthouse" link="https://pagespeed.web.dev/report?url=abridge.pages.dev" />}}
 
 ## Características
 
@@ -31,7 +31,7 @@ Un tema para [Zola](https://getzola.org) rápido, ligero y moderno que utiliza H
 - Bloques de código numerados con [resaltado de línea](https://abridge.pages.dev/overview-code-blocks/#toml).
 - Sitio completamente Offline usando el PWA **o** configurando `search_library = "offline"` en `zola.toml`.
 - Soporte multi-idioma.
-- Soporte para búsquedas.[(elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/))
+- Soporte para búsquedas.[(elasticlunr](https://abridge.pages.dev/), [pagefind](https://abridge-pagefind.pages.dev/), [tinysearch](https://abridge-tinysearch.pages.dev/), [flexsearch](https://abridge-flexsearch.pages.dev/))
 - Sugerencias de búsqueda teclas de navegación, `/` focus, `arrow` move, `enter` select, `escape` close.
 - Página de resultados de búsqueda, escriba la consulta de búsqueda y luego pulse `Enter Key` o `click` el icono del botón de búsqueda.
 - Soporte[SEO](#seo). (Optimización para motores de búsqueda)
@@ -48,7 +48,7 @@ Un tema para [Zola](https://getzola.org) rápido, ligero y moderno que utiliza H
 - Categorías. (similar a Etiquetas, desactivado/comentado por defecto)
 - Enlaces a iconos sociales en el pie de página.
 - Diseño responsivo. (mobile first)
-- Códigos cortos de vídeo: [Youtube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
+- Códigos cortos de vídeo: [YouTube](https://abridge.pages.dev/video-streaming-sites/overview-embed-youtube/), [Vimeo](https://abridge.pages.dev/video-streaming-sites/overview-embed-vimeo/), [Streamable](https://abridge.pages.dev/video-streaming-sites/overview-embed-streamable/).
 - Media Components: [video](https://abridge.pages.dev/overview-rich-content/#video), [img](https://abridge.pages.dev/overview-images/#img-component), [imgswap](https://abridge.pages.dev/overview-images/#imgswap-component), [image](https://abridge.pages.dev/overview-rich-content/#image), [gif](https://abridge.pages.dev/overview-rich-content/#gif), [audio](https://abridge.pages.dev/overview-rich-content/#audio).
 - Otros Components: [showdata](https://abridge.pages.dev/overview-showdata/), [katex](https://abridge.pages.dev/overview-math/#usage-1).
 
@@ -119,7 +119,7 @@ rsync themes/abridge/package.json package.json
 - `zola.toml` configuración base con todos los valores de configuración.
 - `content/_index.md` requerido para establecer la paginación.
 - `COPY-TO-ROOT-SASS/abridge.scss` overrides para personalizar las variables de Abridge.
-- `netlify.toml` configuración para desplegar su repo con netlfiy.
+- `netlify.toml` configuración para desplegar su repo con netlify.
 - `package_abridge.js` node script para: actualizar la lista de archivos de caché en PWA, minify js, bundle js
 - `package.json` utilizado por node, define scripts y dependencias.
 
@@ -148,6 +148,29 @@ zola serve
 Zola iniciará el servidor web dev, accesible por defecto en `http://127.0.0.1:1111`.
 
 Los cambios guardados se recargarán en vivo en el navegador. (pulse `ctrl+f5`, o mientras desarrolla configure `pwa=false` en `zola.toml`)
+
+## Asistente de compilación de Abridge
+
+Instala las dependencias con `npm install` y, a continuación, ejecuta una compilación normal con:
+
+```bash
+npm run abridge
+```
+
+Las demostraciones con motores de búsqueda alternativos utilizan un modo de compilación explícito:
+
+```bash
+npm run abridge -- --mode elasticlunr --base-url https://abridge.pages.dev
+npm run abridge -- --mode pagefind --base-url https://abridge-pagefind.pages.dev
+npm run abridge -- --mode tinysearch --base-url https://abridge-tinysearch.pages.dev
+npm run abridge -- --mode flexsearch --base-url https://abridge-flexsearch.pages.dev
+npm run abridge -- --mode offline --drafts
+npm run abridge -- --mode offlineflexsearch --drafts
+```
+
+Los modos válidos son `elasticlunr`, `pagefind`, `tinysearch`, `flexsearch`, `offline`, `offlineflexsearch` y `elasticlunrjava`.
+
+Hay un script `build-zola.sh` que facilita el despliegue en Cloudflare, Netlify, etc. El asistente funciona tanto desde el propio repositorio de Abridge como cuando se ejecuta desde un sitio mediante `./themes/abridge/build-zola.sh`. El script comprueba `theme.toml` para determinar la versión correcta de Zola que debe utilizarse, lo que evita tener que establecer o actualizar variables de versión de Zola.
 
 ## Paginación {% raw %}{#pagination}{% endraw %}
 
@@ -277,7 +300,7 @@ KaTeX se puede utilizar para mostrar matemáticas complejas, es una "Rápida com
 
 Puedes ver una demo en [esta página](https://abridge.pages.dev/overview-math/).
 
-Para un mejor rendimiento, recomiendo sólo habilitar las matemáticas en una [base por página en sus archivos post.md](https://github.com/Jieiku/abridge/blob/master/content/overview-math.md?plain=1#L11-L13), en lugar de en su archivo zola.toml principal.
+KaTeX se carga automáticamente en las páginas o secciones que usan el component `katex`; no es necesario definir `math = true`. Para delimitadores `$...$` o `$$...$$`, active `math_auto_render = true` donde sea necesario.
 
 ### PWA, Aplicación Web Progresiva {% raw %}{#pwa}{% endraw %}
 
@@ -332,60 +355,6 @@ El script node escaneará su zola.toml en busca de los valores de configuración
 
 Todo lo que se necesita es `zola build && npm run abridge`.
 
-#### Biblioteca de búsqueda de switch
-
-Además de elasticlunr abridge también soporta pagefind y tinysearch.
-
-pagefind demo: https://abridge-pagefind.pages.dev/
-
-tinysearch demo: https://abridge-tinysearch.pages.dev/
-
-Para utilizar tinysearch se requieren pasos adicionales.
-
-**Cambia a pagefind:**
-
-```bash
-npm install
-sed -i 's/^search_library =.*/search_library = "pagefind"/' zola.toml
-npm run abridge
-# zola serve
-```
-
-**Cambiar a elasticlunr:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "elasticlunr"/' zola.toml
-npm run abridge
-```
-
-**Cambiar a nosearch:**
-
-```bash
-sed -i 's/^search_library =.*/search_library = "false"/' zola.toml
-npm run abridge
-```
-
-**Cambia a tinysearch:**
-
-Primero hay que instalar tinysearch para poder construir el índice:
-
-```bash
-git clone https://github.com/tinysearch/tinysearch
-cd tinysearch
-cargo build --release
-sudo cp ./target/release/tinysearch /usr/local/bin/tinysearch
-exit # reload shell environment
-```
-
-Cambiar Abridge a tinysearch
-
-```bash
-sed -i 's/^search_library =.*/search_library = "tinysearch"/' zola.toml
-npm run abridge
-tinysearch --optimize --path static public/data_tinysearch/index.html
-# zola serve
-```
-
 #### Cambiador de temas
 
 El cambiador de tema depende de javascript para funcionar, aplica la clase .light al documentElement raíz. El archivo que maneja esto (`theme.js`) es pequeño y optimizado y es el primer archivo cargado en la cabeza, por lo que el impacto en el rendimiento es mínimo. Sin el conmutador de temas puede seguir utilizando el tema automático que utiliza la configuración de preferencias del navegador/OS. Incluso puede instalar un [plugin de Firefox](https://addons.mozilla.org/en-US/firefox/addon/theme-switcher-for-firefox/) para cambiar rápidamente entre los dos.
@@ -424,7 +393,7 @@ leanify -i 7777 *.ico
 
 Si usted está sirviendo su sitio con nginx, puede pre gzip su contenido.
 
-(Netlify brotli gzips sus archivos automáticamente, no exta trabajo requerido)
+(Netlify brotli gzips sus archivos automáticamente, no extra trabajo requerido)
 
 Primero configura nginx:
 

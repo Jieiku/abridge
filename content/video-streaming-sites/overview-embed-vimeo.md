@@ -16,7 +16,7 @@ tags = [
     "Video",
 ]
 +++
-Zola has many components, and new are easily added, this example shows vimeo.
+Zola supports custom components that are easy to add. This example demonstrates a Vimeo embed.
 
 <!-- more -->
 
@@ -35,7 +35,7 @@ Zola has many components, and new are easily added, this example shows vimeo.
 - `autoplay` - when set to "true", the video autoplays on load (optional)
 - `loop` - when set to "true", the video plays on a loop (optional)
 - `noautopause` - when set to "true", the video will not autopause (optional)
-- `title` - set alt title for the iframe (optional, defaults to "Vimeo")
+- `title` - set the accessible title for the iframe (optional, defaults to "Vimeo")
 - `cookie` - set to "true" if you want tracking cookies, otherwise it defaults to false.
 
 ### Output

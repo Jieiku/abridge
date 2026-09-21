@@ -1,4 +1,6 @@
 language_name = "Русский" # Shown in language picker for multi-language sites.
+select_language = "Выбрать язык"
+toggle_theme = "Переключить тему"
 date_locale = "ru_RU"
 full_stop = "."  # Used at the end of a sentence.
 
@@ -11,7 +13,9 @@ Categories = "Категории"
 Contact = "Контакты"
 Privacy = "Конфиденциальность"
 Sitemap = "Карта сайта"
+Archive = "Архив"
 
+Skip_to_content = "Перейти к содержимому"
 Search = "Поиск"
 Updated = "Изменено"
 Index = "Содержание"
@@ -30,3 +34,11 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Контент разме
 404_try_search = "Попробуйте поиск или"
 ### go to homepage
 404_go_home = "перейти на главную"
+
+# SEO descriptions for taxonomy and archive pages
+seo_tags = "Просмотрите все теги на $SITE."
+seo_tag = "Статьи с тегом «$TERM» на $SITE."
+seo_categories = "Просмотрите все категории на $SITE."
+seo_category = "Статьи в категории «$TERM» на $SITE."
+seo_archive = "Просмотрите архив статей на $SITE."
+seo_page = "Страница $PAGE со статьями и публикациями на $SITE."

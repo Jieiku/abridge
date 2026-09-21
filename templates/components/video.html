@@ -1,6 +1,6 @@
 {% component video(page, config, sources, caption="", class="", w=0, h=0, autoplay=false, loop=false, muted=false, playsinline=false) %}
 {%- if caption %}<figure class="fi{% if class %} {{class}}{% endif %}">{% endif  %}
-<video controls{% if class %} class="{{class}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %}{% if autoplay %} autoplay{% endif %}{% if loop %} loop{% endif %}{% if muted %} muted{% endif %}{% if playsinline %} playsinline{% endif %}>
+<video controls preload="auto"{% if class %} class="{{class}}"{% endif %}{% if w %} width="{{w}}"{% endif %}{% if h %} height="{{h}}"{% endif %}{% if autoplay %} autoplay{% endif %}{% if loop %} loop{% endif %}{% if muted %} muted{% endif %}{% if playsinline %} playsinline{% endif %}>
   {% for src in sources  %}
 
   {%- set video = src | split(pat="/") | last %}

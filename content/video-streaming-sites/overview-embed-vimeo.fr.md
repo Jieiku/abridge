@@ -6,14 +6,14 @@ title = "Vimeo intégrées"
 
 [extra]
 keywords = "Video, Components, Embed, Embedded, Vimeo"
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Video",
+    "Fonctionnalités",
+    "Composants",
+    "Vidéo",
 ]
 +++
 Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre vimeo.
@@ -35,7 +35,7 @@ Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exem
 - `autoplay` - lorsqu'il est défini sur "true", la vidéo se lance automatiquement au chargement (facultatif)
 - `loop` - lorsqu'il est défini sur "true", la vidéo est lue en boucle (optionnel)
 - `noautopause` - lorsqu'il est défini sur "true", la vidéo ne s'arrêtera pas automatiquement (optionnel)
-- `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Vimeo")
+- `title` - définir le titre accessible de l'iframe (facultatif, par défaut sur "Vimeo")
 - `cookie` - défini sur "true" si vous voulez des cookies de suivi, sinon il est par défaut sur false.
 
 ### Output

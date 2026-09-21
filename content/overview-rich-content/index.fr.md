@@ -6,16 +6,16 @@ title = "Un contenu riche"
 
 [extra]
 keywords = "Images, Videos, Audio, Gif, Rich Content, Components"
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Video",
+    "Fonctionnalités",
+    "Vidéo",
     "Audio",
     "Images",
-    "Components",
+    "Composants",
 ]
 +++
 Plusieurs components personnalisés sont inclus pour améliorer CommonMark. `video` les components `image`, `gif` et `audio` ont été créés pour vous aider à tirer parti des éléments HTML modernes dans vos écrits.

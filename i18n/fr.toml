@@ -1,4 +1,6 @@
 language_name = "Français" # Shown in language picker for multi-language sites.
+select_language = "Sélectionner la langue"
+toggle_theme = "Changer de thème"
 date_locale = "fr_FR"
 full_stop = "."  # Used at the end of a sentence.
 
@@ -11,7 +13,9 @@ Categories = "Catégories"
 Contact = "Contact"
 Privacy = "Confidentialité"
 Sitemap = "Plan du site"
+Archive = "Archives"
 
+Skip_to_content = "Aller au contenu"
 Search = "Recherche"
 Updated = "Modifié"
 Index = "Indice"
@@ -19,6 +23,11 @@ Recent = "Récent"
 Powered_by = "Propulsé"
 and = "et"
 more = "plus" # "...more" read more links
+latest_posts = "Derniers articles"
+homepage_title_addition = "Thème Zola rapide, léger et moderne"
+page_label = "Page"
+tag_label = "mot-clé"
+category_label = "catégorie"
 series_parts = "Série" # Série de $NUMBER_OF_PARTS parties : 10 Part Series
 
 ### © $CURRENT_YEAR $SITE_TITLE • Website content is licensed <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
@@ -30,3 +39,11 @@ copyright_override = '© $CURRENT_YEAR $SITE_TITLE • Le contenu du site Web es
 404_try_search = "Essayez de rechercher ou"
 ### go to homepage
 404_go_home = "allez à la page d'accueil"
+
+# SEO descriptions for taxonomy and archive pages
+seo_tags = "Parcourez toutes les étiquettes de $SITE."
+seo_tag = "Articles avec l’étiquette « $TERM » sur $SITE."
+seo_categories = "Parcourez toutes les catégories de $SITE."
+seo_category = "Articles de la catégorie « $TERM » sur $SITE."
+seo_archive = "Parcourez les archives des articles de $SITE."
+seo_page = "Page $PAGE des articles et publications sur $SITE."

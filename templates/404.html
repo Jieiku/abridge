@@ -14,7 +14,7 @@
 
 {%- block content %}
 {%- set uglyurls = (config.extra.uglyurls or false) -%}
-{%- if config.extra.search_library %}{%- if config.extra.search_library == "offline" %}{% set uglyurls = true %}{% endif %}{% endif %}
+{%- if config.extra.search_library %}{%- if (config.extra.search_library == "offline" or config.extra.search_library == "offlineflexsearch") %}{% set uglyurls = true %}{% endif %}{% endif %}
     <div>
       <h1>404 :(</h1>
       {#- Default English message #}

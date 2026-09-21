@@ -16,7 +16,7 @@ tags = [
     "Video",
 ]
 +++
-Zola has many components, and new are easily added, this example shows streamable.
+Zola supports custom components that are easy to add. This example demonstrates a Streamable embed.
 
 <!-- more -->
 
@@ -30,9 +30,11 @@ Zola has many components, and new are easily added, this example shows streamabl
 ```
 {% endraw %}
 
+The component uses a local thumbnail and loads the Streamable player only after play is clicked.
+
 - `id` - the video id (mandatory)
 - `class` - a class to add to the &lt;div&gt; surrounding the iframe (optional)
-- `title` - set alt title for the iframe (optional, defaults to "Streamable")
+- `title` - set the accessible title for the iframe (optional, defaults to "Streamable")
 
 ### Output
 

@@ -6,14 +6,14 @@ title = "Streamable intégrées"
 
 [extra]
 keywords = "Video, Components, Embed, Embedded, Streamable"
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Video",
+    "Fonctionnalités",
+    "Composants",
+    "Vidéo",
 ]
 +++
 Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exemple montre streamable.
@@ -30,9 +30,11 @@ Zola a de nombreux components, et de nouveaux sont facilement ajoutés, cet exem
 ```
 {% endraw %}
 
+Le component utilise une miniature locale et ne charge le lecteur Streamable qu’après un clic sur lecture.
+
 - `id` - l'identifiant de la vidéo (obligatoire)
 - `class` - une classe à ajouter au &lt;div&gt; entourant l'iframe (optionnel)
-- `title` - définir le titre alt pour l'iframe (facultatif, par défaut sur "Streamable")
+- `title` - définir le titre accessible de l'iframe (facultatif, par défaut sur "Streamable")
 
 ### Output
 

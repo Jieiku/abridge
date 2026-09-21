@@ -1,0 +1,4 @@
+[schema]
+indexed_fields = ["title", "body"]
+metadata_fields = ["description"]
+url_field = "url"

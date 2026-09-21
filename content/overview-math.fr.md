@@ -7,64 +7,41 @@ updated = 2022-01-01T15:00:00Z
 
 [extra]
 keywords = "Math, Matematics, Notation, KaTeX, Mathematical Notation"
-math = true
 math_auto_render = true
-series = "Features"
+series = "Fonctionnalités"
 toc = true
 
 [taxonomies]
 tags = [
-    "Features",
-    "Components",
-    "Mathematics",
+    "Fonctionnalités",
+    "Composants",
+    "Mathématiques",
 ]
 +++
-Vous pouvez utiliser [KaTeX](https://katex.org) pour rendre des notations mathématiques.
+Vous pouvez utiliser [KaTeX](https://katex.org) pour afficher des notations mathématiques.
 
-Vous pouvez activer le $\KaTeX$ prise en charge globale, par section ou par page.
+Abridge détecte automatiquement le component `katex` dans le contenu rendu d'une page ou d'une section et ne charge les fichiers KaTeX que lorsqu'ils sont nécessaires.
+
+Si vous préférez les délimiteurs `$...$` et `$$...$$`, activez l'[extension auto-render](https://katex.org/docs/autorender.html) avec `math_auto_render = true`. Cette option active également les fichiers KaTeX nécessaires.
+
+Il est préférable d’utiliser le composant plutôt que les délimiteurs bruts `$...$` et `$$...$$` en raison du traitement Markdown effectué par Zola. Si vous regardez les exemples vers le bas de la page, vous remarquerez que la version utilisant les délimiteurs bruts se retrouve avec des virgules supplémentaires qui n’apparaissent pas lorsque la même formule est rendue à l’aide du composant.
 
 <!-- more -->
 
-## Activer globalement
+## Mathématiques avec component : automatique
 
-Pour activer le $\KaTeX$ prise en charge dans le monde entier, ajoutez `math = true` sous `[extra]` à la `zola.toml`
-racine de votre site. Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
-et chaque section et page de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
+L'utilisation du component `katex` suffit pour activer KaTeX sur cette page ou section. Les pages sans component KaTeX ne chargent ni son CSS ni son JavaScript.
+
+## Auto Render
+
+Les délimiteurs mathématiques bruts restent volontairement optionnels, car du texte ordinaire peut contenir des signes dollar. Activez auto-render globalement dans `zola.toml`, ou dans le front matter de la page/section concernée :
 
 ```toml
 [extra]
-math = true
-math_auto_render = false
-```
-
-## Base par section
-
-Pour activer le $\KaTeX$ support dans une section particulière, ajoutez `math = true` sous `[extra]` dans le fichier `[SECTION_NAME]/_index.md`.
-Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
-et la section de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
-+++
-```
-
-## Base par page
-
-Pour activer le $\KaTeX$ support dans une page particulière, ajouter `math = true` sous `[extra]` dans le frontmatter de la page.
-Maintenant, le component katex sera rendu, vous pouvez également ajouter `math_auto_render = true`
-et la page de votre site chargera l' [extension KaTeX autorender](https://katex.org/docs/autorender.html).
-
-```toml
-+++
-[extra]
-math = true
 math_auto_render = true
-+++
 ```
 
-C'est une bonne pratique de permettre $\KaTeX$ prise en charge par page, car cela ne chargera que les fichiers requis sur cette page particulière, sans affecter la vitesse de chargement des autres pages. Si votre site n'est pas lourd en mathématiques, veuillez ne PAS activer cette fonctionnalité globalement ou par section.
+L'ancien réglage `math = true` reste reconnu pour compatibilité, mais n'est plus nécessaire pour les mathématiques utilisant le component.
 
 ## Usage
 

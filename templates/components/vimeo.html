@@ -1,5 +1,11 @@
-{% component vimeo(id, class="", title="", autoplay=false, loop=false, noautopause=false, cookie=true) %}
+{% component vimeo(id, class="", title="", autoplay=false, loop=false, noautopause=false, cookie=false) %}
 <div class="yv{% if class %} {{class}}{% endif %}">
+{%- if autoplay or loop or noautopause or cookie %}
     <iframe src="https://player.vimeo.com/video/{{id}}?embedded=true{% if autoplay %}&autoplay=1{% endif %}{% if loop %}&loop=1{% endif %}{% if noautopause %}&autopause=0{% endif %}{% if not cookie %}&dnt=1{% endif %}" title="{{ title if title else 'Vimeo' }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+{%- else %}
+    <lite-vimeo videoid="{{ id }}" videotitle="{{ title if title else 'Vimeo' }}">
+        <img slot="image" src="{{ get_url(path='img/embed/vimeo/' ~ id ~ '-1280.jpg', trailing_slash=false, cachebust=true) | safe }}" alt="" loading="lazy">
+    </lite-vimeo>
+{%- endif %}
 </div>
 {% endcomponent vimeo %}

@@ -1,5 +1,7 @@
 {% component streamable(id, class="", title="") %}
 <div class="yv{% if class %} {{class}}{% endif %}">
-    <iframe src="https://www.streamable.com/e/{{id}}" title="{{ title if title else 'Streamable' }}" class="yvi" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <lite-streamable videoid="{{ id }}" videotitle="{{ title if title else 'Streamable' }}">
+        <img slot="image" src="{{ get_url(path='img/embed/streamable/' ~ id ~ '-1280.jpg', trailing_slash=false, cachebust=true) | safe }}" alt="" loading="lazy">
+    </lite-streamable>
 </div>
 {% endcomponent streamable %}

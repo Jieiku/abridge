@@ -179,7 +179,7 @@ seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twit
 ###############################################################################
 
 feed = true # this adds the RSS feed icon in the footer.
-#mail = "name@example.com"
+mail = "name@example.com"
 #mastodon = "https://mastodon.example.com/@username"
 #element = "matrix.example.com"
 #matrix = "matrix.example.com"
@@ -190,7 +190,7 @@ feed = true # this adds the RSS feed icon in the footer.
 #facebook = "your-user-name"
 #linkedin = "your-user-name"
 #gitlab = "your-user-name"
-#github = "your-user-name"
+github = "your-user-name"
 #codeberg = "your-user-name" # Everything after https://codeberg.org/   eg: username  *or*  username/repository
 #github_sponsor = "your-user-name"
 #bitbucket = "your-user-name"
